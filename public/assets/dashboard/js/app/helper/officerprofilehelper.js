@@ -3,6 +3,23 @@ import * as Expert from './expert.js'
 import * as Geo from './location.js'
 var globaldata = [];
 $("#btn_modal_add_expertfield").on('click', function() {
+
+    // var array = [];
+    // $("#expertfield_wrapper tr.item span").each(function() {
+    //     array.push($(this).text());
+    // });
+    
+    // console.log(array.length);
+    // if(array.length == 0){
+    //     if(parseInt($('#expertfieldnum').val()) > 0){
+    //         $('#expertfieldnum').val('1') ;
+    //     }
+    // }else{
+
+    // }
+
+    // return ;
+
     if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -30,8 +47,8 @@ $("#btn_modal_add_expertfield").on('click', function() {
            
             var html ='';
             data.forEach(function (expertdoc,index) {
-             html += `<tr >                                        
-                 <td> ${expertdoc.order} </td>                                            
+             html += `<tr class="item">                                        
+                 <td> <span>${expertdoc.order}</span>  </td>                                            
                  <td> ${expertdoc.detail} </td> 
                  <td style="width:1%;white-space: nowrap"> 
                  <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
@@ -54,6 +71,16 @@ $("#btn_modal_add_expertfield").on('click', function() {
 });
 
 
+function isSequential(data) {
+  for (var i = 1, len = data.length; i < len; i++) {
+    if (data[i] < data[i - 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
 $("#btn_modal_edit_expertfield").on('click', function() {
     if($('#expertfieldnum_edit').val() == '' || $('#expertfielddetail_edit').val() == ''){
         Swal.fire({
@@ -73,8 +100,8 @@ $("#btn_modal_edit_expertfield").on('click', function() {
            
             var html ='';
             data.forEach(function (expertdoc,index) {
-             html += `<tr >                                        
-                 <td> ${expertdoc.order} </td>                                            
+             html += `<tr class="item">                                        
+                 <td> <span>${expertdoc.order}</span> </td>                                            
                  <td> ${expertdoc.detail} </td> 
                  <td style="width:1%;white-space: nowrap"> 
                      <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
@@ -110,8 +137,8 @@ $(document).on("click",".deleteexpertfield",function(e){
             Expert.deleteExpertfield($(this).data('id')).then(data => {
                 var html = ``;
                 data.forEach(function (expertdoc,index) {
-                    html += `<tr >                                        
-                        <td> ${expertdoc.order} </td>                                            
+                    html += `<tr class="item">                                        
+                        <td> <span>${expertdoc.order}</span> </td>                                            
                         <td> ${expertdoc.detail} </td> 
                         <td style="width:1%;white-space: nowrap"> 
                         <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal" ">ลบ</a>
@@ -154,6 +181,20 @@ $(document).on("click",".editexpertfield",function(e){
 
 }); 
 
+
+
+$(document).on("change","#expertbranch",function(e){
+    // console.log($(this).val());
+    if($(this).val() == 19){
+        $("#other_branch_wrapper").attr("hidden",false);
+    }else{
+        $("#other_branch_wrapper").attr("hidden",true);   
+    }
+}); 
+
+
+
+//
 
 
 $("#expertdoc").on('change', function() {
@@ -323,27 +364,6 @@ $("#sameaddress").on('change', function() {
         $("#address1").val($('#address').val());
         $("#postalcode1").val($('#postalcode').val());
         
-        // Geo.province().then(data => {
-        //     let  html = "<option value='0'>===เลือกจังหวัด===</option>";           
-        //     var i;
-        //     for (i = 0; i < data.length; i++) {
-        //         var n = data[i]['name'].includes("*");
-        //         if(n == false){
-        //             html += `<option value='${data[i]['id']}'>${data[i]['name']}</option>`
-        //         }
-        //     }
-
-        //     $("#province1").html(html);
-        //     // if(($("#province1").val() !== '' || $("#province1").val() !== 0)  &&  $('#sameaddress').is(":checked") == true){
-        //     //     $("#province1 option:contains("+$('#province').find("option:selected").text()+")").attr('selected', true).trigger('change');
-        //     // }
-        //     // else{
-        //     //     $("#province1 option:contains("+$('#province1').find("option:selected").text()+")").attr('selected', true).trigger('change');
-        //     // }
-        // })
-        // .catch(error => {
-           
-        // })
     }else{
          $("#contact_address_wrapper").attr("hidden",false);
     }

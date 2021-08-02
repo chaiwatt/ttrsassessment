@@ -18,7 +18,7 @@ use App\Model\EducationLevel;
 class DashboardAdminSearchOfficerProfileController extends Controller
 {
     public function Index($id){
-        
+   
         $user = User::find($id);
         $prefixes = Prefix::get();
         $provinces = Province::get();

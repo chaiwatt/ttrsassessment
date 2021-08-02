@@ -22,6 +22,7 @@ class CreateExpertDetailsTable extends Migration
             $table->unsignedBigInteger('education_level_id')->default(1);
             $table->unsignedBigInteger('expert_branch_id')->default(1);
             $table->unsignedBigInteger('expert_type_id')->default(1);
+            $table->string('other_branch')->nullable();
             $table->char('expereinceyear',2)->nullable();
             $table->char('expereincemonth',2)->nullable();
             $table->timestamps();

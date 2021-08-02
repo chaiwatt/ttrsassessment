@@ -90,7 +90,7 @@
 					<div class="card-body">
                         <form method="POST" action="{{route('dashboard.admin.project.projectassignment.editsave',['id' => $projectassignment->id])}}" enctype="multipart/form-data">
                             @csrf
-                            @if (Empty($projectassignment->leader_id))
+                            {{-- @if (Empty($projectassignment->leader_id))
                                 <div  class="col-md-12" id="toast">
                                     <div class="mb-4">
                                         <div class="toast bg-slate border-transparent" style="opacity: 1; max-width: none;">
@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            @endif --}}
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="table-responsive">
@@ -141,8 +141,13 @@
                                                             disabled
                                                         @endif
                                                         ></td>      
-                                                    <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
-                                                    <td class="text-center">{{$user->projecthandle->count()}}</td>      
+                                                    <td><a href="{{route('dashboard.admin.project.projectassignment.personalinfo',['id' => $user->id])}}" class="text-info" target="_blank">{{$userprefix}}{{$user->name}} {{$user->lastname}} </a>  </td>
+                                                    <td class="text-center">{{$user->projecthandle->count()}}
+                                                        {{-- @if ($user->projecthandle->count() != 0)
+                                                        <a href="#" data-toggle="modal" data-id="{{$user->id}}" class="text-info projectinfo" > (รายละเอียด)</a> 
+                                                        @endif --}}
+                                                       
+                                                    </td>      
                                                     <td class="text-center">{{$user->projecthandle->count()-$user->projecthandle->where('ststus',3)->count()}}</td>  
                                                     <td class="text-center">{{$user->projecthandle->where('ststus',3)->count()}}</td> 
                                                 </tr>

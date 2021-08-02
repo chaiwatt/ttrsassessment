@@ -4,18 +4,27 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Carbon\Carbon;
+use App\Model\Amphur;
+use App\Model\Prefix;
+use App\Model\Tambol;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
+use App\Model\Province;
 use App\Helper\EmailBox;
+use App\Model\ExpertDoc;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
+use App\Model\ExpertField;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\ExpertBranch;
+use App\Model\OfficerDetail;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
+use App\Model\EducationLevel;
 use App\Helper\DateConversion;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
@@ -52,6 +61,35 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
                                                             ->withMinitbp($minitbp)
                                                             ->withProjectstatus($projectstatus)
                                                             ->withProjectstatuses($projectstatuses);
+    }
+
+    public function Personalinfo($id){
+        $user = User::find($id);
+        $prefixes = Prefix::get();
+        $provinces = Province::get();
+        $amphurs = Amphur::where('province_id',$user->province_id)->get();
+        $tambols = Tambol::where('amphur_id',$user->amphur_id)->get();
+        $amphurs1 = Amphur::where('province_id',$user->province1_id)->get();
+        $tambols1 = Tambol::where('amphur_id',$user->amphur1_id)->get();
+        $officerbanches = ExpertBranch::get();
+        $educationlevels = EducationLevel::get();
+        $officer = OfficerDetail::where('user_id',$user->id)->first();
+        $officerfields = ExpertField::where('user_id',$user->id)->orderBy('order','asc')->get();
+        $officerdocs = ExpertDoc::where('user_id',$user->id)->get();
+        
+        return view('dashboard.admin.project.projectassignment.personalinfo')->withUser($user)
+                                            ->withPrefixes($prefixes)
+                                            ->withProvinces($provinces)
+                                            ->withAmphurs($amphurs)
+                                            ->withTambols($tambols)
+                                            ->withAmphurs1($amphurs1)
+                                            ->withTambols1($tambols1)
+                                            ->withOfficerbanches($officerbanches)
+                                            ->withEducationlevels($educationlevels)
+                                            ->withOfficer($officer)
+                                            ->withOfficerfields($officerfields)
+                                            ->withOfficerdocs($officerdocs);
+        return $id;
     }
     public function EditSave(EditProjectAssignementRequest $request,$id){
         $auth = Auth::user();

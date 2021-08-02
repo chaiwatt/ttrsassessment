@@ -132,7 +132,7 @@
                                                         @endphp
                                                         <li>
                                                             <i class="icon-primitive-dot mr-2"></i>
-                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                             <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span>
                                                         </li>
                                                     @endforeach

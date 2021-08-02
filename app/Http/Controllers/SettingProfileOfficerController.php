@@ -130,12 +130,12 @@ class SettingProfileOfficerController extends Controller
             ]);
         }
 
-
         OfficerDetail::where('user_id',$auth->id)->first()->update([
             'position' => $request->position,
             'organization' => $request->organization,
             'education_level_id' => $request->educationlevel,
             'officer_branch_id' => $request->expertbranch,
+            'other_branch' => $request->other_branch,
             'expereinceyear' => $request->expereinceyear,
             'expereincemonth' => $request->expereincemonth
         ]);

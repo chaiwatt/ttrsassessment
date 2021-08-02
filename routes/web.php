@@ -759,6 +759,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','DashboardAdminProjectProjectAssignmentController@EditSave')->name('dashboard.admin.project.projectassignment.editsave');    
                     Route::post('getworkloadleader','DashboardAdminProjectProjectAssignmentController@GetWorkLoadLeader')->name('dashboard.admin.project.projectassignment.getworkloadleader');    
                     Route::post('getworkloadcoleader','DashboardAdminProjectProjectAssignmentController@GetWorkLoadCoLeader')->name('dashboard.admin.project.projectassignment.getworkloadcoleader');                       
+                    Route::get('personalinfo/{id}','DashboardAdminProjectProjectAssignmentController@Personalinfo')->name('dashboard.admin.project.projectassignment.personalinfo');    
                 }); 
                 Route::group(['prefix' => 'evweight'], function(){
                     Route::get('','DashboardAdminProjectEvWeightController@Index')->name('dashboard.admin.project.evweight');           
