@@ -108,7 +108,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการโครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

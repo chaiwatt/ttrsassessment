@@ -896,8 +896,9 @@
                             <table class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr>
-                                        <th>ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap">วันนัดประชุมก่อนลงพื้นที่</th>
+                                        <th style="width:1%;white-space: nowrap">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap">ระยะเวลา</th>
+                                        <th style="width:1%;white-space: nowrap">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap">วันที่ประเมิน</th>
                                         <th style="width:1%;white-space: nowrap">วันที่สรุปผลประเมิน</th>
                                         <th style="width:1%;white-space: nowrap">เข้าร่วม(เฉพาะผู้เชี่ยวชาญ)</th>
@@ -912,7 +913,7 @@
                                                 $check = Auth::user()->IsExpert($fulltbp->id);
                                             @endphp
                                             <tr> 
-                                                <td>
+                                                <td style="width:1%;white-space: nowrap">
                                                     @if (Empty($fulltbp->expertassignment))
                                                             <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                             <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
@@ -931,9 +932,11 @@
                                                             @endif
                                                     @endif          
                                                 </td>   
+                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->minitbp->projectdatediff}}  </td>  
                                                 <td style="white-space: nowrap"> {{$fulltbp->briefingdate}} </td>  
                                                 <td style="white-space: nowrap"> {{$fulltbp->assessmentdate}} </td>  
                                                 <td style="white-space: nowrap"> {{$fulltbp->finalassessmentdate}} </td>  
+                                                
                                                 <td style="white-space: nowrap"> 
                                                     @if (!Empty($check))
                                                         @if ($fulltbp->expertassignment->accepted == 0)
@@ -981,7 +984,7 @@
                                 <table class="table table-bordered table-striped mb-2" id="fulltbptable" >
                                     <thead>
                                         <tr>
-                                            <th>ชื่อโครงการ</th> 
+                                            <th style="width:1%;white-space: nowrap">ชื่อโครงการ</th> 
                                             <th style="width:1%;white-space: nowrap">Full TBP</th> 
                                             <th style="width:1%;white-space: nowrap">ผู้เชี่ยวชาญ</th> 
                                             <th style="width:1%;white-space: nowrap">EV</th> 
@@ -993,7 +996,7 @@
                                         @foreach ($fulltbps as $key => $fulltbp)
                                             @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
                                                 <tr>    
-                                                    <td > 
+                                                    <td style="width:1%;white-space: nowrap"> 
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                     </td>  
@@ -1276,7 +1279,7 @@
                                 <table class="table text-nowrap" id="reporttable">
                                     <thead>
                                         <tr>
-                                            <th>ชื่อโครงการ</th> 
+                                            <th style="width:1%;white-space: nowrap">ชื่อโครงการ</th> 
                                             <th>คะแนน</th>
                                             <th>เกรด</th>     
                                             <th style="width:1%;white-space: nowrap">รายงานผล</th>    
@@ -1290,7 +1293,7 @@
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                     <tr>    
-                                                        <td> {{$fulltbp->minitbp->project}} </td> 
+                                                        <td style="width:1%;white-space: nowrap"> {{$fulltbp->minitbp->project}} </td> 
                                                         <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                         <td> {{@$fulltbp->projectgrade->grade}} </td> 
                                                         <td style="white-space: nowrap"> 

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Model\Ev;
+use Carbon\Carbon;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\ProjectFlow;
@@ -22,6 +23,24 @@ class ProjectStatus extends Model
     public function getEnddatethAttribute(){
         return DateConversion::engToThaiDate($this->enddate);
     } 
+
+    public function getProjectdatediffAttribute(){
+        if(!Empty($this->actual_startdate)){
+            $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
+            $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
+            $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
+            if($check > 0){
+                return '+' . $check;
+            }else if($check == 0){
+                return  $check;
+            }else{
+                return  $check;
+            }
+        }else{
+            return '';
+        }
+    } 
+
     public function getActualdatethAttribute(){
         if(Empty($this->actual_startdate)){
             return '';
@@ -55,7 +74,6 @@ class ProjectStatus extends Model
         $fulltbpapprove = $businessplan->business_plan_status_id;
         $expertapprove = $fulltbp->assignexpert;
         $evapprove = $ev->status;
-        // dd($evapprove);
         $controlflowstage3 = array($fulltbpapprove, $expertapprove,$evapprove);
         return $controlflowstage3;
     } 

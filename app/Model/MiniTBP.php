@@ -90,6 +90,20 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
         }
     } 
 
+    public function getProjectdatediffAttribute(){
+        if(!Empty($this->submitdate)){
+            $businessplan = BusinessPlan::find($this->business_plan_id);
+            if($businessplan->business_plan_status_id < 10){
+                $datefiff = Carbon::parse(Carbon::createFromFormat('Y-m-d', $this->submitdate))->DiffInDays(Carbon::now(), false);
+                return $datefiff ;
+            }else{
+
+            }
+        }else{
+           return "" ;
+        }
+    } 
+
     public function getSubmitdateyearthAttribute(){
         if(!Empty($this->submitdate)){
             $check = DateConversion::engToThaiDate($this->submitdate);

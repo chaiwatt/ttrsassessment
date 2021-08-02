@@ -8,7 +8,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">โครงการ: {{$minitbp->project}}</span></h4>
+                <h4> <span class="font-weight-semibold">รายละเอียดโครงการ: {{$minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -66,20 +66,43 @@
                                         <th >รายการ</th> 
                                         <th >วันที่กำหนด</th>
                                         <th >วันที่ Action</th>
+                                        <th >ภาพรวม</th>
                                         <th>สถานภาพ</th> 
                                     </tr>
                                 </thead>
                                 <tbody >
+                                    @php
+                                        $sum = 0;
+                                    @endphp
                                     @foreach ($projectstatuses as $projectstatus)
+                                    
+                                        @php
+                                            if(!Empty($projectstatus->projectdatediff)){
+                                                $sum += intVal($projectstatus->projectdatediff);
+                                            }
+                                        @endphp
                                         <tr>
                                             <td>{{$projectstatus->projectflow}}</td>
                                             <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
                                             <td>{{$projectstatus->actualdateth}}</td>
+                                            <td style="text-align:center">{{$projectstatus->projectdatediff}}</td>
                                             <td>
                                                {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$minitbp->id)!!}
                                             </td>
+                                            
                                         </tr>
                                     @endforeach
+                                    <td colspan="3">
+                                        รวม
+                                    </td>
+                                    <td style="text-align:center;border-right: 0px solid !important">
+                                        @if ($sum > 0)
+                                           +{{$sum}}
+                                            @else
+                                            {{$sum}}
+                                        @endif
+                                       
+                                    </td>
                                 </tbody>
                             </table>      
                         </div>
