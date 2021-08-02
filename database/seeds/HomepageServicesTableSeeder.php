@@ -47,8 +47,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Assessment',
                 'icon' => '/assets/landing/img/register/4.png',
                 'link' => 'servicepage',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/04.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/04.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/5.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/5.png',
                 'cardcolor_id' => 4,
             ],
             [
@@ -69,8 +69,8 @@ class HomepageServicesTableSeeder extends Seeder
                 'descriptioneng' => 'English description for Rating',
                 'icon' => '/assets/landing/img/register/6.png',
                 'link' => 'servicepage',
-                'iconnormal' => '/assets/landing2/images/services/style2/main-img/06.png',
-                'iconhover' => '/assets/landing2/images/services/style2/hover-img/06.png',
+                'iconnormal' => '/assets/landing2/images/services/style2/main-img/7.png',
+                'iconhover' => '/assets/landing2/images/services/style2/hover-img/7.png',
                 'cardcolor_id' => 6,
             ] 
         ]);
