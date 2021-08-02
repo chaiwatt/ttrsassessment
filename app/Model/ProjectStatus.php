@@ -27,9 +27,8 @@ class ProjectStatus extends Model
     public function getProjectdatediffAttribute(){
         
         if(!Empty($this->actual_startdate)){
-            if($this->project_flow_id == 5){
-                $minitbp = MiniTBP::find($this->mini_tbp_id);
-                if($minitbp->flowstagefour == true){
+                $projectflowtransaction = ProjectStatusTransaction::find($this->project_flow_id);
+                if($projectflowtransaction->status == 2){
                     $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
                     $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
                     $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
@@ -43,18 +42,36 @@ class ProjectStatus extends Model
                 }else{
                     return '';
                 }
-            }else{
-                $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
-                $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
-                $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
-                if($check > 0){
-                    return '+' . $check;
-                }else if($check == 0){
-                    return  $check;
-                }else{
-                    return  $check;
-                }
-            }
+     
+
+            // if($this->project_flow_id == 5){
+            //     $minitbp = MiniTBP::find($this->mini_tbp_id);
+            //     if($minitbp->flowstagefour == true){
+            //         $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
+            //         $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
+            //         $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
+            //         if($check > 0){
+            //             return '+' . $check;
+            //         }else if($check == 0){
+            //             return  $check;
+            //         }else{
+            //             return  $check;
+            //         }
+            //     }else{
+            //         return '';
+            //     }
+            // }else{
+            //     $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
+            //     $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
+            //     $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
+            //     if($check > 0){
+            //         return '+' . $check;
+            //     }else if($check == 0){
+            //         return  $check;
+            //     }else{
+            //         return  $check;
+            //     }
+            // }
 
         }else{
             return '';
