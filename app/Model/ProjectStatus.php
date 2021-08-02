@@ -25,7 +25,7 @@ class ProjectStatus extends Model
     } 
 
     public function getProjectdatediffAttribute(){
-        if(!Empty($this->actual_startdate) && $this->project_flow_id != 5){
+        if(!Empty($this->actual_startdate) ){
             $plandate = Carbon::createFromFormat('Y-m-d', $this->enddate);
             $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
             $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
