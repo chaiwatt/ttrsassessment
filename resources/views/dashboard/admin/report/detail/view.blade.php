@@ -71,16 +71,16 @@
                                     </tr>
                                 </thead>
                                 <tbody >
-                                    @php
+                                    {{-- @php
                                         $sum = 0;
-                                    @endphp
+                                    @endphp --}}
                                     @foreach ($projectstatuses as $projectstatus)
                                     
-                                        @php
+                                        {{-- @php
                                             if(!Empty($projectstatus->projectdatediff)){
                                                 $sum += intVal($projectstatus->projectdatediff);
                                             }
-                                        @endphp
+                                        @endphp --}}
                                         <tr>
                                             <td>{{$projectstatus->projectflow}}</td>
                                             <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
@@ -92,17 +92,17 @@
                                             
                                         </tr>
                                     @endforeach
-                                    <td colspan="3">
+                                    {{-- <td colspan="3">
                                         รวม
-                                    </td>
-                                    <td style="text-align:center;border-right: 0px solid !important">
+                                    </td> --}}
+                                    {{-- <td style="text-align:center;border-right: 0px solid !important">
                                         @if ($sum > 0)
                                            +{{$sum}}
                                             @else
                                             {{$sum}}
                                         @endif
                                        
-                                    </td>
+                                    </td> --}}
                                 </tbody>
                             </table>      
                         </div>
