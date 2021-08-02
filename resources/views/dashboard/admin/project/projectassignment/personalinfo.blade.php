@@ -620,7 +620,7 @@
                                                                 @endphp
                                                                 <tr class="item">                                        
                                                                     <td> <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>   </td>                                            
-                                                                    <td> {{$status}}</td>    
+                                                                    <td> <span class="badge badge-pill {{$color}} ml-20 ml-md-0">{{$status}}</span></td>    
                                                                 </tr>
                                                             @endforeach
                                                         @endif
