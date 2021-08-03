@@ -71,7 +71,7 @@ class SettingProfileExpertController extends Controller
         $filelocation = $auth->company->logo;
         if(!Empty($file)){         
             if(!Empty($auth->company->logo)){
-                if(strpos($auth->company->logo, 'assets\dashboard\images') !== true){
+                if(strpos($auth->company->logo, 'assets/dashboard/images/user.png') != false){
                     @unlink($auth->company->logo);
                 }
             }

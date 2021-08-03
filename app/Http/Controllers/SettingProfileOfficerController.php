@@ -66,13 +66,9 @@ class SettingProfileOfficerController extends Controller
         if(!Empty($file)){         
             if(!Empty($auth->company->logo)){
                 if(strpos($auth->company->logo, 'assets/dashboard/images/user.png') != false){
-                //     return $auth->company->logo; 
                     @unlink($auth->company->logo);
-                // }else{
-          
                 }
             }
-        
             $name = $file->getClientOriginalName();
             $file = $request->picture;
             $img = Image::make($file);  

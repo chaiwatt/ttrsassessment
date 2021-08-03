@@ -520,7 +520,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>สาขาความเชี่ยวชาญ<span class="text-danger">*</span></label>
-													<select name="expertbranch" id="tambol" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
+													<select name="expertbranch" id="expertbranch" data-placeholder="สาขาความเชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
 														@foreach ($expertbranches as $expertbranch)                                                                
 															<option value="{{$expertbranch->id}}" 
 																@if ($expertbranch->id == $expert->expert_branch_id) 
@@ -530,6 +530,16 @@
 																@endif> {{$expertbranch->name}} </option>
 														@endforeach      
 													</select>
+												</div>
+											</div>
+											<div class="col-md-6" id="other_branch_wrapper"
+											@if ($expert->expert_branch_id != 19)
+												hidden
+											@endif
+											> 
+												<div class="form-group">
+													<label>โปรดระบุ<span class="text-danger">*</span></label>
+													<input type="text" id="other_branch" name="other_branch" value="{{old('other_branch') ?? $expert->other_branch}}"  class="form-control form-control-lg ">
 												</div>
 											</div>
 											<hr>
@@ -549,8 +559,8 @@
 																</thead>
 																<tbody id="expertfield_wrapper_tr"> 
 																	@foreach ($expertfields as $expertfield)
-																		<tr >                                        
-																			<td> {{$expertfield->order}}</td>                                            
+																		<tr class="item">                                        
+																			<td> <span>{{$expertfield->order}}</span> </td>                                            
 																			<td> {{$expertfield->detail}}</td>    
 																			<td style="width:1%;white-space: nowrap"> 
 																				<a href="#" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>  
@@ -592,6 +602,22 @@
 															</table>
 														</div>
 													</div>
+											</div>
+											<div class="col-md-12">  
+												<div class="form-group">
+													<label>รูป Avatar (ขนาด 500x500) พิกเซล</label>
+													<div class="input-group">													
+														<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
+														<span class="input-group-append">
+															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																																						
+														</span>
+													</div>
+													<input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
+													@if (!Empty($user->company->logo))
+													<br>
+														<img src="{{asset($user->company->logo)}}" width="300" height="300" alt="">
+													@endif
+												</div>
 											</div>
 										<div class="col-md-12 text-right">
 											<button type="submit" name="action" value="personal" onclick="confirmsubmit(event);" class="btn bg-teal">บันทึก<i class="icon-paperplane ml-2"></i></button>

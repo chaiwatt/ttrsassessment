@@ -4,82 +4,190 @@ import * as Geo from './location.js'
 var globaldata = [];
 $("#btn_modal_add_expertfield").on('click', function() {
 
-    // var array = [];
-    // $("#expertfield_wrapper tr.item span").each(function() {
-    //     array.push($(this).text());
-    // });
-    
-    // console.log(array.length);
-    // if(array.length == 0){
-    //     if(parseInt($('#expertfieldnum').val()) > 0){
-    //         $('#expertfieldnum').val('1') ;
-    //     }
-    // }else{
-
-    // }
-
-    // return ;
-
-    if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
-        });
-        return;
-    }
-    var cellIndexMapping = { 0: true };
-    var data = [];
-    
-    $("#expertfield_wrapper tr").each(function(rowIndex) {
-        $(this).find("td").each(function(cellIndex) {
-            if (cellIndexMapping[cellIndex])
-                data.push(parseInt($(this).text()));
-        });
+    var array = [];
+    $("#expertfield_wrapper tr.item span").each(function() {
+        array.push($(this).text());
     });
-    if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
-        });
-        return;
+    
+    if(array.length == 0){
+        if(parseInt($('#expertfieldnum').val()) > 0){
+            $('#expertfieldnum').val('1') ;
+            if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'กรุณากรอกข้อมูลให้ครบ!',
+                });
+                return;
+            }
+            var cellIndexMapping = { 0: true };
+            var data = [];
+            
+            $("#expertfield_wrapper tr").each(function(rowIndex) {
+                $(this).find("td").each(function(cellIndex) {
+                    if (cellIndexMapping[cellIndex])
+                        data.push(parseInt($(this).text()));
+                });
+            });
+            if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
+                });
+                return;
+            }else{
+                Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
+                    var html ='';
+                    data.forEach(function (expertdoc,index) {
+                     html += `<tr class="item">                                        
+                         <td> <span>${expertdoc.order}</span>  </td>                                            
+                         <td> ${expertdoc.detail} </td> 
+                         <td style="width:1%;white-space: nowrap"> 
+                         <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
+                         <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                                                             
+                         </td>
+                     </tr>`
+                     });
+                  $("#expertfield_wrapper_tr").html(html);
+                  if(data.length > 0){
+                     $("#inpexpertfield").val(data.length);
+                  }else{
+                     $("#inpexpertfield").val('');
+                  }
+                  $("#expertfieldnum").val("");
+                  $("#expertfielddetail").val("");
+                  $('#modal_add_expertfield').modal('hide');
+                 }).catch(error => {})
+            }
+        }
     }else{
-        Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
-           
-            var html ='';
-            data.forEach(function (expertdoc,index) {
-             html += `<tr class="item">                                        
-                 <td> <span>${expertdoc.order}</span>  </td>                                            
-                 <td> ${expertdoc.detail} </td> 
-                 <td style="width:1%;white-space: nowrap"> 
-                 <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
-                 <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                                                             
-                 </td>
-             </tr>`
-             });
-          $("#expertfield_wrapper_tr").html(html);
-          if(data.length > 0){
-             $("#inpexpertfield").val(data.length);
-          }else{
-             $("#inpexpertfield").val('');
-          }
-          $("#expertfieldnum").val("");
-          $("#expertfielddetail").val("");
-          $('#modal_add_expertfield').modal('hide');
-         }).catch(error => {})
+        array.push($('#expertfieldnum').val());
+        if(isSequentials(array) == false){
+            Swal.fire({
+                title: 'คำเตือน!',
+                text: `ลำดับไม่ถูกต้อง ต้องการดำเนินการต่อไปหรือไม่`,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง',
+                cancelButtonText: 'ยกเลิก',
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                
+                }).then((result) => {
+                if (result.value) {
+                    if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
+                        Swal.fire({
+                            title: 'ผิดพลาด...',
+                            text: 'กรุณากรอกข้อมูลให้ครบ!',
+                        });
+                        return;
+                    }
+                    var cellIndexMapping = { 0: true };
+                    var data = [];
+                    
+                    $("#expertfield_wrapper tr").each(function(rowIndex) {
+                        $(this).find("td").each(function(cellIndex) {
+                            if (cellIndexMapping[cellIndex])
+                                data.push(parseInt($(this).text()));
+                        });
+                    });
+                    if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
+                        Swal.fire({
+                            title: 'ผิดพลาด...',
+                            text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
+                        });
+                        return;
+                    }else{
+                        Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
+                           
+                            var html ='';
+                            data.forEach(function (expertdoc,index) {
+                             html += `<tr class="item">                                        
+                                 <td> <span>${expertdoc.order}</span>  </td>                                            
+                                 <td> ${expertdoc.detail} </td> 
+                                 <td style="width:1%;white-space: nowrap"> 
+                                 <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
+                                 <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                                                             
+                                 </td>
+                             </tr>`
+                             });
+                          $("#expertfield_wrapper_tr").html(html);
+                          if(data.length > 0){
+                             $("#inpexpertfield").val(data.length);
+                          }else{
+                             $("#inpexpertfield").val('');
+                          }
+                          $("#expertfieldnum").val("");
+                          $("#expertfielddetail").val("");
+                          $('#modal_add_expertfield').modal('hide');
+                         }).catch(error => {})
+                    }
+                }
+            });
+        }else{
+            if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'กรุณากรอกข้อมูลให้ครบ!',
+                });
+                return;
+            }
+            var cellIndexMapping = { 0: true };
+            var data = [];
+            $("#expertfield_wrapper tr").each(function(rowIndex) {
+                $(this).find("td").each(function(cellIndex) {
+                    if (cellIndexMapping[cellIndex])
+                        data.push(parseInt($(this).text()));
+                });
+            });
+            if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
+                Swal.fire({
+                    title: 'ผิดพลาด...',
+                    text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
+                });
+                return;
+            }else{
+                Expert.addExpertfield($('#expertfieldnum').val(),$('#expertfielddetail').val()).then(data => {
+                   
+                    var html ='';
+                    data.forEach(function (expertdoc,index) {
+                     html += `<tr class="item">                                        
+                         <td> <span>${expertdoc.order}</span>  </td>                                            
+                         <td> ${expertdoc.detail} </td> 
+                         <td style="width:1%;white-space: nowrap"> 
+                         <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
+                         <a href="#" data-id="${expertdoc.id}" class="btn btn-sm bg-info editexpertfield" data-toggle="modal" >แก้ไข</a>                                                                             
+                         </td>
+                     </tr>`
+                     });
+                  $("#expertfield_wrapper_tr").html(html);
+                  if(data.length > 0){
+                     $("#inpexpertfield").val(data.length);
+                  }else{
+                     $("#inpexpertfield").val('');
+                  }
+                  $("#expertfieldnum").val("");
+                  $("#expertfielddetail").val("");
+                  $('#modal_add_expertfield').modal('hide');
+                 }).catch(error => {})
+            }
+        }
     }
 
 });
 
-
-function isSequential(data) {
-  for (var i = 1, len = data.length; i < len; i++) {
-    if (data[i] < data[i - 1]) {
-      return false;
+function isSequentials(data) {
+    for (var i = 1, len = data.length; i < len; i++) {
+        var check = parseInt(data[i]) - parseInt(data[i - 1]);
+      // check if current value smaller than previous value
+      if (check > 1) {
+         
+        return false;
+      }
     }
+    
+    return true;
   }
-  return true;
-}
-
 
 $("#btn_modal_edit_expertfield").on('click', function() {
     if($('#expertfieldnum_edit').val() == '' || $('#expertfielddetail_edit').val() == ''){
