@@ -102,7 +102,17 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการมอบหมาย</h6>
+                        @php
+                            $tbdelaymsg = '';
+                            foreach ($projectassignments->reverse() as $key => $_item) {
+                                if (@$_item->businessplan->minitbp->isintime($_item->businessplan->minitbp->id) < 0 ) {
+                                    $tbdelaymsg = '<span class="text-danger">(พบโครงการเกินกำหนด Control flow)</span>';
+                                break ;
+                                }
+                            }
+                        @endphp
+
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการมอบหมาย {!!$tbdelaymsg!!}</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -111,8 +121,8 @@
                             <table class="table table-bordered mb-2" id="maintable">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap">ชื่อโครงการ</th> 
+                                        <th >บริษัท</th>
                                         <th style="width:1%;white-space: nowrap">ความเห็น Manager</th>
                                         <th style="width:1%;white-space: nowrap">Leader</th>
                                         <th style="width:1%;white-space: nowrap">สถานะ</th>
@@ -125,11 +135,20 @@
                                     @foreach ($projectassignments->reverse() as $key => $projectassignment)
                                     @if ($projectassignment->businessplan->minitbp->fulltbp->canceldate == null)
                                     <tr>    
-                                        <td> 
-                                            <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="text-info" target="_blank">{{$projectassignment->businessplan->minitbp->project}} </a>
+                                        <td style="width:1%;white-space: nowrap"> 
+                                            @php
+                                                $cogcolor = 'text-info';
+                                                $latetext = '';
+                                                if (@$projectassignment->businessplan->minitbp->isintime($projectassignment->businessplan->minitbp->id) < 0) {
+                                                    $cogcolor = 'text-danger';
+                                                    
+                                                    $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$projectassignment->businessplan->minitbp->isintime($projectassignment->businessplan->minitbp->id)*(-1) .' วัน</span>';
+                                                }
+                                            @endphp   
+                                            <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="{{$cogcolor}}" target="_blank">{{$projectassignment->businessplan->minitbp->project}} {!!$latetext!!}</a>
                                         </td> 
-                                        <td style="white-space: nowrap"> 
+                                        <td > 
                                             @php
                                                 $company = $projectassignment->businessplan->company;
                                                 $company_name = (!Empty($company->name))?$company->name:'';

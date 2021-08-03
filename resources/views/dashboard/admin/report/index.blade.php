@@ -890,7 +890,16 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
+                        @php
+                            $tbdelaymsg = '';
+                             foreach ($fulltbps as $key => $_item) {
+                                if (@$_item->minitbp->isintime($_item->minitbp->id) < 0) {
+                                    $tbdelaymsg = '<span class="text-danger">(พบโครงการเกินกำหนด Control flow)</span>';
+                                   break ;
+                                }
+                             }
+                        @endphp
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ {!!$tbdelaymsg!!}</h6>
                         <div class="header-elements">
                         </div>
                     </div>
@@ -986,7 +995,16 @@
                 <div class="col-md-12">
                     <div class="card" >
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)</h6>
+                            @php
+                                $tbdelaymsg = '';
+                                foreach ($fulltbps as $key => $_item) {
+                                    if (@$_item->minitbp->isintime($_item->minitbp->id) < 0 && $_item->minitbp->businessplan->business_plan_status_id > 4) {
+                                        $tbdelaymsg = '<span class="text-danger">(พบโครงการเกินกำหนด Control flow)</span>';
+                                    break ;
+                                    }
+                                }
+                            @endphp
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) {!!$tbdelaymsg!!}</h6>
                             <div class="header-elements">
                             </div>
                         </div>
