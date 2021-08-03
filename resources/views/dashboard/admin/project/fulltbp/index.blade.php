@@ -286,8 +286,17 @@
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>    
                                                 <td > 
-                                                    <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                    @php
+                                                        $cogcolor = 'text-info';
+                                                        $latetext = '';
+                                                        if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
+                                                            $cogcolor = 'text-danger';
+                                                        
+                                                            $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน</span>';
+                                                        }
+                                                    @endphp  
+                                                    <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                 </td>  
                                                 <td style="white-space: nowrap">    
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )

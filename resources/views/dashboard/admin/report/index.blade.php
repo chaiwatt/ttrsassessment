@@ -917,17 +917,26 @@
                                             @endphp
                                             <tr> 
                                                 <td style="width:1%;white-space: nowrap">
+                                                    @php
+                                                        $cogcolor = 'text-info';
+                                                        $latetext = '';
+                                                        if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
+                                                            $cogcolor = 'text-danger';
+                                                           
+                                                            $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน</span>';
+                                                        }
+                                                    @endphp                                           
                                                     @if (Empty($fulltbp->expertassignment))
-                                                            <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                            <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                         @else
                                                             @if ($fulltbp->expertassignment->accepted == 1)
-                                                                <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                                <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                                                <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                             @else
                                                             @if (Auth::user()->isColeader($fulltbp->id) > 0 )
-                                                                    <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                                    <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                                                    <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                                 @else
                                                                     {{$fulltbp->minitbp->project}}
                                                             @endif
@@ -1000,8 +1009,17 @@
                                             @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
                                                 <tr>    
                                                     <td style="width:1%;white-space: nowrap"> 
-                                                        <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
-                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                                        @php
+                                                            $cogcolor = 'text-info';
+                                                            $latetext = '';
+                                                            if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
+                                                                $cogcolor = 'text-danger';
+                                                            
+                                                                $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน</span>';
+                                                            }
+                                                        @endphp  
+                                                        <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!} </a>  
                                                     </td>  
                                                     <td style="white-space: nowrap">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )

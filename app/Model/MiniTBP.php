@@ -9,6 +9,7 @@ use App\Model\ThaiBank;
 use App\Model\ReviseLog;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
+use App\Model\ProjectStatus;
 use App\Helper\DateConversion;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ProjectStatusTransaction;
@@ -23,7 +24,7 @@ class MiniTBP extends Model
     protected $guarded = [];
     protected $appends = ['businessplan','prefix','bank'];
 
-protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance2', 'finance3', 'finance4', 'nonefinance1', 'nonefinance2', 'nonefinance3', 'nonefinance4', 'nonefinance5', 'nonefinance6',
+protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance2', 'nonefinance1', 'nonefinance2', 'nonefinance3', 'nonefinance4', 'nonefinance5', 'nonefinance6',
 'contactname','contactlastname','contactphone','contactemail','contactposition','website'];
     protected static $logName = 'Mini TBP';
 
@@ -139,12 +140,37 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
         return $year+543;
     }
 
-    public function getFlowstagefourAttribute(){
-       $check =  ProjectStatusTransaction::where('mini_tbp_id',$this->id)->where('project_flow_id','>=',4)->count();
-       if($check == 0){
-        return false;
+    public function isintime($id){
+       $businessplans = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+       $minitbps = MiniTbp::whereIn('business_plan_id',$businessplans)->pluck('id')->toArray();
+       $check =  ProjectStatusTransaction::where('mini_tbp_id',$id)->whereIn('mini_tbp_id',$minitbps)->where('status',1)->first();
+       if(!Empty($check)){
+            $projectstatus =  ProjectStatus::where('mini_tbp_id',$id)->where('project_flow_id',$check->project_flow_id)->whereNull('actual_startdate')->first();
+            if(!Empty($projectstatus)){
+                
+                $datefiff = Carbon::parse(Carbon::now())->DiffInDays(Carbon::createFromFormat('Y-m-d', $projectstatus->enddate), false);
+                return $datefiff;
+            }else{
+                return 'yy';
+            }
+            
        }else{
-        return true;
+        return 'xx';
        }
+     
+    //    if($check == 0){
+    //     return false;
+    //    }else{
+    //     return true;
+    //    }
     }
+
+    public function getFlowstagefourAttribute(){
+        $check =  ProjectStatusTransaction::where('mini_tbp_id',$this->id)->where('project_flow_id','>=',4)->count();
+        if($check == 0){
+         return false;
+        }else{
+         return true;
+        }
+     }
 }
