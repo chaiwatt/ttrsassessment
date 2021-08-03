@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\SoundDexApi;
 use App\Model\BusinessPlan;
 use App\Model\ProjectGrade;
 use Illuminate\Http\Request;
@@ -20,18 +21,127 @@ class SearchProjectController extends Controller
     }
 
     public function ProjectName(Request $request){
-        $minitbpids = MiniTBP::where('project', 'like', '%' . $request->projectname . '%')
-                    ->orWhere('projecteng', 'like', '%' . $request->projectname . '%')->pluck('id')->toArray();
+        if($request->issounddex == 'false'){
+            $minitbpids = MiniTBP::where('project', 'like', '%' . $request->projectname . '%')
+                                ->orWhere('projecteng', 'like', '%' . $request->projectname . '%')->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        return response()->json($fulltbps); 
+            return response()->json(array(
+                "fulltbps" => $fulltbps,
+                "soundex" => []
+            ));
+        }else{
+            $wordtype = 'royin';
+            if($request->sounddextype == 2){
+                $wordtype = 'personname';
+            }
+            $randomapi = SoundDexApi::inRandomOrder()->first();
+            $curl = curl_init();
+            $search = $request->projectname;
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.aiforthai.in.th/soundex?word=".$search."&model=".$wordtype,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => array(
+                    "Apikey: $randomapi->api"
+                )
+            ));
+            
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            if ($err) {
+                return response()->json(array(
+                    "fulltbps" => [],
+                    "soundex" => []
+                ));
+            } else {
+                $objs = json_decode($response);
+                $appendtext = $request->projectname;
+                $minitbparray = MiniTBP::where(function($query) use($objs,$appendtext){
+                        foreach($objs->words as $obj){
+                            $query->orWhere('project', 'LIKE', '%'.$obj->word.'%');
+                        }
+                        $query->orWhere('project', 'LIKE', '%'.$appendtext.'%');
+                    })->pluck('id')->toArray();
+            }
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+
+        return response()->json(array(
+            "fulltbps" => $fulltbps,
+            "soundex" => $objs->words
+        ));
+
+    }
+
+        // return response()->json($fulltbps); 
     }
 
     public function CompanyName(Request $request){
-        $companyids = Company::where('name', 'like', '%' . $request->companyname . '%')->pluck('id')->toArray();
-        $businessplanids = BusinessPlan::whereIn('company_id', $companyids)->pluck('id')->toArray();
-        $minitbpids = MiniTBP::whereIn('business_plan_id', $businessplanids)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        return response()->json($fulltbps); 
+        if($request->issounddex == 'false'){
+            $companyids = Company::where('name', 'like', '%' . $request->companyname . '%')->pluck('id')->toArray();
+            $businessplanids = BusinessPlan::whereIn('company_id', $companyids)->pluck('id')->toArray();
+            $minitbpids = MiniTBP::whereIn('business_plan_id', $businessplanids)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+            return response()->json(array(
+                "fulltbps" => $fulltbps,
+                "soundex" => []
+            ));
+        }else{
+            
+                $wordtype = 'royin';
+                if($request->sounddextype == 2){
+                    $wordtype = 'personname';
+                }
+                $randomapi = SoundDexApi::inRandomOrder()->first();
+                $curl = curl_init();
+                $search = $request->companyname;
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://api.aiforthai.in.th/soundex?word=".$search."&model=".$wordtype,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => array(
+                        "Apikey: $randomapi->api"
+                    )
+                ));
+                
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+                curl_close($curl);
+                if ($err) {
+                    return response()->json(array(
+                        "fulltbps" => [],
+                        "soundex" => []
+                    ));
+                } else {
+                    $objs = json_decode($response);
+                    $appendtext = $request->companyname;
+                    $companyidarray = Company::where(function($query) use($objs,$appendtext){
+                            foreach($objs->words as $obj){
+                                $query->orWhere('name', 'LIKE', '%'.$obj->word.'%');
+                            }
+                            $query->orWhere('name', 'LIKE', '%'.$appendtext.'%');
+                        })->pluck('id')->toArray();
+                }
+
+                // $companyids = Company::where('name', 'like', '%' . $request->companyname . '%')->pluck('id')->toArray();
+                $businessplanids = BusinessPlan::whereIn('company_id', $companyidarray)->pluck('id')->toArray();
+                $minitbpids = MiniTBP::whereIn('business_plan_id', $businessplanids)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+
+            return response()->json(array(
+                "fulltbps" => $fulltbps,
+                "soundex" => $objs->words
+            ));
+        }
+
     }
 
     public function DocNo(Request $request){

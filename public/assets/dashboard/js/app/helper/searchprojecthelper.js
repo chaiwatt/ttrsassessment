@@ -2,9 +2,8 @@
 
 import * as SearchProject from './searchproject.js';
 import * as Company from './company.js'
-
+var sounddextype = 1;
 $(document).on('change', '#searchgroup', function(e) {
-    // if($(this).val() < 12){
         var selectedtedtext = $(this).find("option:selected").text();
         if(selectedtedtext == 'ปีของโครงการ'){
             $("#registeredcapital_wrapper").attr("hidden",true);
@@ -17,8 +16,10 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#grage_wrapper").attr("hidden",true);
             $("#searchyear_wrapper").attr("hidden",false);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchdate").val('');
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'เลขที่โครงการ/Mini TBP/Full TBP'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -32,6 +33,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'ชื่อโครงการ'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -45,6 +48,9 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",false);
+            $("#soundex_res").html('');
+            sounddextype = 1;
         }else if(selectedtedtext == 'รหัส ISIC'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",false);
@@ -58,6 +64,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'กลุ่มอุตสาหกรรม'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -71,6 +79,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",false);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'เกรด'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -84,6 +94,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'Leader'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -97,6 +109,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'ผู้เชี่ยวชาญ'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -110,6 +124,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }else if(selectedtedtext == 'ชื่อบริษัท'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#searchdocno_wrapper").attr("hidden",true);
@@ -122,6 +138,9 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",false);
+            $("#soundex_res").html('');
+            sounddextype = 1;
         }else if(selectedtedtext == 'ทุนจดทะเบียน'){
             $("#registeredcapital_wrapper").attr("hidden",false);
             $("#searchdocno_wrapper").attr("hidden",true);
@@ -134,6 +153,8 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
         }
         // else{
         //     $("#searchdocno_wrapper").attr("hidden",true);
@@ -167,74 +188,74 @@ $(document).on('change', '#searchgroup', function(e) {
 //     clearText: "เคลียร์",
 //     time: false
 // });
-$(document).on('change', '#searchyear', function(e) {
-    SearchProject.searchYear($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchyear', function(e) {
+//     SearchProject.searchYear($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('keyup', '#searchprojectname', function(e) {
-    SearchProject.searchProjectname($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('keyup', '#searchprojectname', function(e) {
+//     SearchProject.searchProjectname($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('keyup', '#searchcompanyname', function(e) {
-    SearchProject.searchCompanyName($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('keyup', '#searchcompanyname', function(e) {
+//     SearchProject.searchCompanyName($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('keyup', '#searchdocno', function(e) {
-    SearchProject.searchDocno($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('keyup', '#searchdocno', function(e) {
+//     SearchProject.searchDocno($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchisic', function(e) {
-    SearchProject.searchIsic($('#isic').val(),$(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchisic', function(e) {
+//     SearchProject.searchIsic($('#isic').val(),$(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchindustrygroup', function(e) {
-    SearchProject.searchIndustrygroup($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchindustrygroup', function(e) {
+//     SearchProject.searchIndustrygroup($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchleader', function(e) {
-    SearchProject.searchLeader($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchleader', function(e) {
+//     SearchProject.searchLeader($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchexpert', function(e) {
-    SearchProject.searchExpert($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchexpert', function(e) {
+//     SearchProject.searchExpert($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchgrade', function(e) {
-    SearchProject.searchGrade($(this).find("option:selected").text()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
-$(document).on('change', '#searchregisteredcapital', function(e) {
-    SearchProject.searchRegisteredCapital($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchgrade', function(e) {
+//     SearchProject.searchGrade($(this).find("option:selected").text()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
+// $(document).on('change', '#searchregisteredcapital', function(e) {
+//     SearchProject.searchRegisteredCapital($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
 function search(searchid,value){
     return new Promise((resolve, reject) => {
@@ -266,9 +287,6 @@ function createTable(data){
             <td> 
                 <a href="${route.url}/dashboard/admin/search/company/profile/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp.businessplan.company['name']} </a> 
             </td> 
-            <td>
-                <span class="badge badge-flat border-success text-success-600">${fulltbp.minitbp.businessplan.businessplanstatus['name']}</span> 
-            </td> 
         </tr>`
         });
      $("#reportsearch_wrapper").html(html);
@@ -285,4 +303,104 @@ $(document).on('change', '#isic', function(e) {
     .catch(error => {})
 });
 
+$(document).on('click', '#btnsearch', function(e) {
+    var selectedtedtext = $('#searchgroup').find("option:selected").text();
+    console.log(selectedtedtext);
+    if(selectedtedtext == 'ปีของโครงการ'){
+        $("#soundex_res").html('');
+        SearchProject.searchYear($('#searchyear').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    }
+
+    if(selectedtedtext == 'เลขที่โครงการ/Mini TBP/Full TBP'){
+        $("#soundex_res").html('');
+        SearchProject.searchDocno($('#searchdocno').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    }    
+
+    if(selectedtedtext == 'ชื่อโครงการ'){
+        $("#soundex_res").html('');
+        var issounddex = $('#sounddex').is(':checked');
+        SearchProject.searchProjectname($('#searchprojectname').val(),issounddex,sounddextype).then(data => {
+            createTable(data.fulltbps);
+            if(data.soundex.length > 0){
+                var text = "ค้นหาจากคำใกล้เคียง ";
+                data.soundex.forEach(function (_soundex,index) {
+                    text += _soundex['word'] + " ";
+                });
+                $("#soundex_res").append(text);
+            }
+        })
+        .catch(error => {})
+    }  
+
+    
+    if(selectedtedtext == 'รหัส ISIC'){
+        $("#soundex_res").html('');
+        SearchProject.searchIsic($('#isic').val(),$('#searchisic').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    } 
+
+    if(selectedtedtext == 'กลุ่มอุตสาหกรรม'){
+        $("#soundex_res").html('');
+        SearchProject.searchIndustrygroup($('#searchindustrygroup').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    } 
+    if(selectedtedtext == 'เกรด'){
+        $("#soundex_res").html('');
+        SearchProject.searchGrade($('#searchgrade').find("option:selected").text()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    } 
+
+    if(selectedtedtext == 'Leader'){
+        $("#soundex_res").html('');
+        SearchProject.searchLeader($('#searchleader').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    } 
+
+    if(selectedtedtext == 'ผู้เชี่ยวชาญ'){
+        $("#soundex_res").html('');
+        SearchProject.searchExpert($('#searchexpert').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    } 
+
+    if(selectedtedtext == 'ชื่อบริษัท'){
+        $("#soundex_res").html('');
+        var issounddex = $('#sounddex').is(':checked');
+        SearchProject.searchCompanyName($('#searchcompanyname').val(),issounddex,sounddextype).then(data => {
+            createTable(data.fulltbps);
+            if(data.soundex.length > 0){
+                var text = "ค้นหาจากคำใกล้เคียง ";
+                data.soundex.forEach(function (_soundex,index) {
+                    text += _soundex['word'] + " ";
+                });
+                $("#soundex_res").append(text);
+            }
+        })
+        .catch(error => {})
+    }  
+
+    if(selectedtedtext == 'ทุนจดทะเบียน'){
+        $("#soundex_res").html('');
+        SearchProject.searchRegisteredCapital($('#searchregisteredcapital').val()).then(data => {
+            createTable(data);
+        })
+        .catch(error => {})
+    } 
+
+});
 

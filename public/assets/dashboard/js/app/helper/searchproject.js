@@ -36,14 +36,16 @@ function searchDocno(docno){
       })
 }
 
-function searchProjectname(projectname){
+function searchProjectname(projectname,issounddex,sounddextype){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/search/project/projectname`,
           type: 'POST',
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
-            projectname : projectname
+            projectname : projectname,
+            issounddex : issounddex,
+            sounddextype : sounddextype
           },
           success: function(data) {
             resolve(data)
@@ -151,14 +153,16 @@ function searchExpert(expert){
       })
 }
 
-function searchCompanyName(companyname){
+function searchCompanyName(companyname,issounddex,sounddextype){
     return new Promise((resolve, reject) => {
         $.ajax({
           url: `${route.url}/api/search/project/companyname`,
           type: 'POST',
           headers: {"X-CSRF-TOKEN":route.token},
           data: {
-            companyname : companyname
+            companyname : companyname,
+            issounddex : issounddex,
+            sounddextype : sounddextype
           },
           success: function(data) {
             resolve(data)

@@ -14,6 +14,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchprojectname_wrapper").attr("hidden",false);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",false);
         }else if(selectedtedtext == 'รหัส ISIC'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",false);
@@ -21,6 +22,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
         }else if(selectedtedtext == 'กลุ่มอุตสาหกรรม'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -28,6 +30,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",false);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
         }else if(selectedtedtext == 'ชื่อบริษัท'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
@@ -35,6 +38,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",false);
         }else if(selectedtedtext == 'ทุนจดทะเบียน'){
             $("#isic_wrapper").attr("hidden",true);
             $("#registeredcapital_wrapper").attr("hidden",false);
@@ -42,6 +46,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchprojectname_wrapper").attr("hidden",true);
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
         }
         // else{
         //     $("#searchdocno_wrapper").attr("hidden",true);

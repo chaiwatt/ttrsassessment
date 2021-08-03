@@ -104,6 +104,21 @@
                                     <label>คำค้น</label>
                                     <input type="text"  name="searchword" id="searchword" value=""  placeholder="คำค้น" class="form-control form-control-lg" >
                                 </div>
+
+                                <div id="soundex_wrapper" class="col-md-12"  >
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" name="sounddex" id="sounddex" class="form-check-input-styled-primary"  data-fouc>
+                                            ค้นหาคำพ้องเสียง <small><span id="soundex_res"></span></small>
+                                        </label>
+                                    </div>
+                                
+                                </div>  
+                                <div class="col-md-12" >
+                                    <div class="text-right">
+                                        <button type="button" id="btnsearch" class="btn bg-teal">ค้นหา <i class="icon-search4 ml-2"></i></button>
+                                    </div>
+                                </div>  
                             </div>
                     </div>
                 </div>
@@ -153,6 +168,7 @@
     </div>
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/searchcompanyhelper.js')}}"></script>
     <script>
         var route = {
