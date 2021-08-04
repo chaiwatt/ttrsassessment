@@ -33,7 +33,6 @@
                                     </div>
                                 </div>
                             </fieldset>
-    
                             <h6>Sub Pillar</h6>
                             <fieldset>
                                 <div class="row">
@@ -72,7 +71,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด A</label>
-                                                        <input type="text" min="0"  id="gradea" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2" >
+                                                        <input type="text" min="0"  id="gradea" value="" placeholder="ข้อ" class="form-control form-control-lg numeralformat2" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +79,7 @@
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <label>เกรด B</label>
-                                                        <input type="text" min="0"  id="gradeb" value=""  placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
+                                                        <input type="text" min="0"  id="gradeb" value="" placeholder="ข้อ" class="form-control form-control-lg numeralformat2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,6 +174,14 @@
                                             </div>
                                         </div>
                                     </div> --}}
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <span style="font-size:18px  !important; margin-left:-5px; "><strong>เลือกทั้งหมด</strong></span> <input style="vertical-align:middle !important" type="checkbox" id="toggleselect" >  
+                                            
+                                            
+                                        </div>
+                                        <div style="margin-top:-15px; "><hr></div>
+                                    </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="row" id="chklist">
                                         </div>
@@ -723,6 +730,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+
+
 
     <script>
         var route = {

@@ -1,6 +1,8 @@
 
 
 $(function() {
+
+    
     $('.timeformat').toArray().forEach(function(field){
         new Cleave(field, {
             time: true,

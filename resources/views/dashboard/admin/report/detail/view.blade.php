@@ -532,7 +532,7 @@
                                         <tr>
                                             <td> {{$projectlog->createdatth}} </td>                            
                                             <td> {{html_entity_decode(strip_tags($projectlog->action))}} </td>  
-                                            <td> คุณ{{$projectlog->user->name}} คุณ{{$projectlog->user->lastname}}</td>  
+                                            <td> คุณ{{$projectlog->user->name}} {{$projectlog->user->lastname}}</td>  
                                         </tr>
                                     @endforeach
                                 </tbody>  

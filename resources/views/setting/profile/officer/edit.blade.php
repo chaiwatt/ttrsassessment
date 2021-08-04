@@ -456,13 +456,13 @@
 								<div class="col-md-6"> 
 									<div class="form-group">
 										<label>โทรศัพท์<span class="text-danger">*</span></label>
-										<input type="text"  name="phone" value="{{old('phone') ?? $user->phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+										<input type="text" id="phone"  name="phone" value="{{old('phone') ?? $user->phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
 									</div>
 								</div>
 								<div class="col-md-6"> 
 									<div class="form-group">
 										<label>อีเมล<span class="text-danger">*</span></label>
-										<input type="text"  name="email" value="{{$user->email ?? $user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60" readonly>
+										<input type="text" id="email" name="email" value="{{$user->email ?? $user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60" readonly>
 									</div>
 								</div>
 								<div class="col-md-6"> 

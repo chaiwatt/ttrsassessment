@@ -300,6 +300,16 @@ $(document).on("change","#expertbranch",function(e){
     }
 }); 
 
+$(document).on("change","#phone",function(e){
+    if($("#phone").val().length != 10 || $("#phone").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#phone').val('')
+        return;
+    }
+}); 
 
 
 //
@@ -480,8 +490,8 @@ $("#sameaddress").on('change', function() {
 $(document).on('change', '#province1', function(e) {
 
     if($('#sameaddress').is(":checked") == false){
-        $('#postalcode1').val('');
-        $("#tambol1").html('');
+        // $('#postalcode1').val('');
+        // $("#tambol1").html('');
     }
 
     Geo.amphur($('#province1').val()).then(data => {

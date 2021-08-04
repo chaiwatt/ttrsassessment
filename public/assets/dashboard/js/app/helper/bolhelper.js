@@ -43,6 +43,11 @@ $(document).on('change', '#boldoc', function(e) {
                      $("#fulltbp_bol_wrapper_tr").html(html);
                      $('#docname').val("");
                      $('#modal_add_bol').modal('hide');
+                     Swal.fire({
+                        title: 'สำเร็จ...',
+                        text: 'เพิ่มไฟล์ BOL สำเร็จ',
+                        });
+                    return ;
             }
         });
     });

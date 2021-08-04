@@ -3,6 +3,8 @@ import * as Pillar from './pillar.js';
 import * as SubPillar from './subpillar.js';
 import * as PillaIndexWeigth from './pillaindexweigth.js';
 import * as Extra from './extra.js';
+
+
 var countchecklist = 0;
 var globalNewIndex = 0;
 var readonly = "";
@@ -29,12 +31,44 @@ $(function() {
 
         callDataTable();
         callDataTableExtra();
+
+       var cookieval = getCookie("forcedownload");
+        if(cookieval == '1'){
+            $('#evexporttable').DataTable().buttons(0,0).trigger();
+        }else if(cookieval == '2'){
+            $('#evexporttable').DataTable().buttons(0,1).trigger();
+        }else if(cookieval == '3'){
+            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+        }else if(cookieval == '4'){
+            $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+        }
+        setCookie("forcedownload", "")
+
     }).catch(error => {})
 
 
 });
 
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
 
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
 
 
 function callDataTable(){
@@ -193,10 +227,12 @@ function callDataTableExtra(){
 
 $("#btnOnExcel").on('click', function() {
     if (!$('#evexporttable').DataTable().data().any() ) {
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        });
+        // Swal.fire({
+        //     title: 'ผิดพลาด...',
+        //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        // });
+        setCookie("forcedownload", "1");
+        window.location.reload();
     }else{
         $('#evexporttable').DataTable().buttons(0,0).trigger();
     }
@@ -205,10 +241,12 @@ $("#btnOnExcel").on('click', function() {
 
 $("#btnOnPdf").on('click', function() {
     if (!$('#evexporttable').DataTable().data().any() ) {
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        });
+        // Swal.fire({
+        //     title: 'ผิดพลาด...',
+        //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        // });
+        setCookie("forcedownload", "2");
+        window.location.reload();
     }else{
         $('#evexporttable').DataTable().buttons(0,1).trigger();
     }
@@ -218,10 +256,12 @@ $("#btnOnPdf").on('click', function() {
 $("#btnOnExcelExtra").on('click', function() {
 
     if (!$('#evextraexporttable').DataTable().data().any() ) {
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        });
+        // Swal.fire({
+        //     title: 'ผิดพลาด...',
+        //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+        // });
+        setCookie("forcedownload", "3");
+        window.location.reload();
     }else{
         $('#evextraexporttable').DataTable().buttons(0,0).trigger();
     }
@@ -231,10 +271,8 @@ $("#btnOnExcelExtra").on('click', function() {
 
 $("#btnOnPdfExtra").on('click', function() {
     if (!$('#evextraexporttable').DataTable().data().any() ) {
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        });
+        setCookie("forcedownload", "4");
+        window.location.reload();
     }else{
         $('#evextraexporttable').DataTable().buttons(0,1).trigger();
     }
@@ -308,6 +346,7 @@ $(document).on('change', '#subpillarindex', function(e) {
     SubPillar.getCriteria($('#evid').val(),$(this).val()).then(data => {
         $("#chklist").html('');
         countchecklist = data.criterias.length;
+
         data.criterias.forEach(function (subpillarindex,index) {
             var check = '';
             var _check = data.criteriatransactions.find(x => x.criteria_id === subpillarindex['id']);
@@ -317,7 +356,7 @@ $(document).on('change', '#subpillarindex', function(e) {
             
             $("#chklist").append(`<div class="col-md-6">
                                     <div class="form-check">
-                                        <input style="vertical-align:middle !important;" type="checkbox" id="${subpillarindex['id']}" value="${subpillarindex['id']}" ${check} > ${subpillarindex['name']}
+                                        <input class="subpillarindexcheckbox" style="vertical-align:middle !important" type="checkbox" id="${subpillarindex['id']}" value="${subpillarindex['id']}" ${check} ><span style="font-size:18px  !important; margin-left:5px; margin-top:5px">${subpillarindex['name']}</span>  
                                     </div>
                                 </div>`);
             });
@@ -352,6 +391,13 @@ $(document).on('change', '#indextype', function(e) {
     }).catch(error => {})
   }
 });
+
+$(document).on('change', '#toggleselect', function(e) {
+    var status = this.checked; // "select all" checked status
+	$('.subpillarindexcheckbox').each(function(){ //iterate all listed checkbox items
+		this.checked = status; //change ".checkbox" checked status
+	});
+  });
 
 $('.steps-basic').steps({
     headerTag: 'h6',
@@ -645,6 +691,10 @@ function AddCheckList(criterias){
                     title: 'สำเร็จ...',
                     text: 'เพิ่มรายการสำเร็จ!',
                     });
+            $("#toggleselect")[0].checked = false;     
+            $('.subpillarindexcheckbox').each(function(){ 
+                this.checked = false; 
+            });
             }).catch(error => {})
          }else{
             $("#spiniconcriteria").attr("hidden",true);
@@ -671,6 +721,10 @@ function AddGrading(){
                title: 'สำเร็จ...',
                text: 'เพิ่มรายการสำเร็จ!',
                });
+               $("#toggleselect")[0].checked = false;
+               $('.subpillarindexcheckbox').each(function(){ 
+                    this.checked = false; 
+                });
         }else{
             Swal.fire({
                 title: 'ผิดพลาด...',
