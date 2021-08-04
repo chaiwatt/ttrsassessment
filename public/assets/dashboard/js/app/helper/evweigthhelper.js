@@ -1,8 +1,20 @@
 import * as Ev from './ev.js';
 import * as Extra from './extra.js';
 var commentreadonly =``;
+var evdata = [];
+var evextradata = [];
 
 $(function() {
+
+    pdfMake.fonts = {
+        THSarabun: {
+            normal: 'THSarabun.ttf',
+            bold: 'THSarabun-Bold.ttf',
+            italics: 'THSarabun-Italic.ttf',
+            bolditalics: 'THSarabun-BoldItalic.ttf'
+        }
+    }
+
     getEv($('#evid').val()).then(data => {
         // console.log(data.pillaindexweigths);
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
@@ -13,10 +25,167 @@ $(function() {
         RowSpanWeight("subpillarindex");
         RowSpanExtra("extra_subpillarindex");
      
-  
+        callDataTable();
+        callDataTableExtra();
         
     }).catch(error => {})
 });
+
+
+
+function callDataTable(){
+   console.log(evdata);
+    $('#evexporttable').DataTable( {
+        dom: 'Bfrtip',
+        data: evdata,
+        columns : [
+            { "data" : "pillar" },
+            { "data" : "subpillar" },
+            { "data" : "weight" }
+        ],
+
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val()     
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2 ]
+                },
+            },
+            { 
+                extend: 'pdfHtml5',
+                pageSize: 'A4',
+                // orentation: 'landscape',
+                customize: function(doc) {
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:14                                 
+                    };
+                    doc.styles.title.alignment = 'left';
+                    doc.pageMargins = [30, 30, 30, 30];
+                    doc.content[1].table.widths = ['*','*', '*']
+                    var rowCount = doc.content[1].table.body.length;
+                    for (var i = 1; i < rowCount; i++) {
+                        doc.content[1].table.body[i][0].alignment = 'left';
+                    }
+                },
+                exportOptions: {
+                    columns: [ 0, 1,2]
+                },
+                title: function () { 
+                    return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val() ; 
+                },
+                filename: function() {
+                    return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val()       
+                }, 
+            }
+            
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden'
+            $('.buttons-pdf')[0].style.visibility = 'hidden'
+        }
+    } );
+}
+
+function callDataTableExtra(){
+console.log(evextradata);
+$('#evextraexporttable').DataTable( {
+    dom: 'Bfrtip',
+    data: evextradata,
+    columns : [
+        { "data" : "category" },
+        { "data" : "criteria" },
+        { "data" : "weight" }
+    ],
+    
+    searching: false,
+    paging:   false,
+    ordering: false,
+    info:     false,
+    pageLength : 10,
+    language: {
+        zeroRecords: " ",
+        search: "ค้นหา: ",  
+        sLengthMenu: "จำนวน _MENU_ รายการ",
+        info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+        paginate: {
+            previous: 'ก่อนหน้า',
+            next: 'ถัดไป'
+        }
+    },
+    buttons: [
+        { 
+            extend: 'excelHtml5',
+            className: 'btn-primary',
+            text: 'Excel',
+            title: function () { 
+                return null; 
+            },
+            filename: function() {
+                return "รายการ EV Weight(Extra) โครงการ" + $('#projectname') .val()       
+            }, 
+            exportOptions: {
+                columns: [ 0, 1,2]
+            },
+        },
+        { 
+            extend: 'pdfHtml5',
+            pageSize: 'A4',
+            // orentation: 'landscape',
+            customize: function(doc) {
+                doc.defaultStyle = {
+                    font:'THSarabun',
+                    fontSize:14                                 
+                };
+                doc.styles.title.alignment = 'left';
+                doc.pageMargins = [30, 30, 30, 30];
+                doc.content[1].table.widths = ['*','*','*']
+                var rowCount = doc.content[1].table.body.length;
+                for (var i = 1; i < rowCount; i++) {
+                doc.content[1].table.body[i][0].alignment = 'left';
+                }
+            },
+            exportOptions: {
+                columns: [ 0, 1,2]
+            },
+            title: function () { 
+                return "รายการ EV Weight(Extra) โครงการ" + $('#projectname') .val(); 
+            },
+            filename: function() {
+                return "รายการ EV Weight(Extra) โครงการ" + $('#projectname') .val() 
+            }, 
+        }
+        
+    ],
+    drawCallback: function() {
+        $('.buttons-excel')[1].style.visibility = 'hidden'
+        $('.buttons-pdf')[1].style.visibility = 'hidden'
+    }
+} );
+}
 
 function getEv(evid){
     return new Promise((resolve, reject) => {
@@ -153,6 +322,7 @@ function editWeight(id,value,evtypeid){
 
 function RenderWeightTable(data,evtypeid){
     var html =``;
+    evdata = [];
     var readonly =`readonly`;
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
         readonly =``;
@@ -168,6 +338,10 @@ function RenderWeightTable(data,evtypeid){
         if(pillaindex.comment){
             comment = pillaindex.comment;
         }
+
+
+        evdata.push({"pillar":  pillaindex.pillar['name'] , "subpillar": pillaindex.subpillarindex['name'], "weight": pillaindex.weigth});
+
         if(pillaindex.ev_type_id == evtypeid){
             html += `<tr > 
                 <td> ${pillaindex.pillar['name']}</td>                                            
@@ -198,6 +372,7 @@ function RenderWeightTable(data,evtypeid){
 
 function RenderExtraTable(data){
     var html =``;
+    evextradata = [];
     var readonly =`readonly`;
    
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
@@ -214,6 +389,7 @@ function RenderExtraTable(data){
         if(criteria.weightcomment){
             comment = criteria.weightcomment;
         }
+        evextradata.push({"category":  criteria.extracategory['name'] , "criteria": criteria.extracriteria['name'], "weight": criteria.weight});
             html += `<tr > 
             <td> ${criteria.extracategory['name']} <a href="#" data-categoryid="${criteria.extra_category_id}" class="text-grey-300"></a></td>                
             <td> ${criteria.extracriteria['name']} <a href="#" data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 "></a></td>                                            
@@ -605,3 +781,53 @@ function updateEvAdminStatus(id,value){
      });
     
      
+     $("#btnOnExcel").on('click', function() {
+        if (!$('#evexporttable').DataTable().data().any() ) {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            });
+        }else{
+            $('#evexporttable').DataTable().buttons(0,0).trigger();
+        }
+    
+    });
+
+    $("#btnOnPdf").on('click', function() {
+        if (!$('#evexporttable').DataTable().data().any() ) {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            });
+        }else{
+            $('#evexporttable').DataTable().buttons(0,1).trigger();
+        }
+       
+    });
+    
+    $("#btnOnExcelExtra").on('click', function() {
+    
+        if (!$('#evextraexporttable').DataTable().data().any() ) {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            });
+        }else{
+            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+        }
+        
+    
+    });
+    
+    $("#btnOnPdfExtra").on('click', function() {
+        if (!$('#evextraexporttable').DataTable().data().any() ) {
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            });
+        }else{
+            $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+        }
+        
+    });
+    

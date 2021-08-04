@@ -71,17 +71,24 @@
                                     </select>
                                 </div>        
                                 <div id="isic_wrapper" class="col-md-6" hidden>
-                                    <label>ISIC</label><span class="text-danger">*</span>
-                                    <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก ISIC===</option>
-                                        @foreach ($isics as $isic)
-                                            <option value="{{$isic->id}}">{{$isic->name}}</option> 
-                                        @endforeach
-                                    </select>
-                                    <label class="mt-3">หมวดหมู่ย่อย</label><span class="text-danger">*</span>
-                                    <select name="searchisic" id="searchisic" data-placeholder="หมวดหมู่ย่อย" class="form-control form-control-lg form-control-select2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>ISIC</label><span class="text-danger">*</span>
+                                            <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-lg form-control-select2">
+                                                <option value="0000">===เลือก ISIC===</option>
+                                                @foreach ($isics as $isic)
+                                                    <option value="{{$isic->id}}">{{$isic->name}}</option> 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <label class="mt-3">หมวดหมู่ย่อย</label><span class="text-danger">*</span>
+                                            <select name="searchisic" id="searchisic" data-placeholder="หมวดหมู่ย่อย" class="form-control form-control-lg form-control-select2 ">
 
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
+                              
                                 </div>                    
                                 <div id="searchcompanyname_wrapper" class="col-md-6" hidden>
                                     <label>ชื่อบริษัท</label>
@@ -109,7 +116,7 @@
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input type="checkbox" name="sounddex" id="sounddex" class="form-check-input-styled-primary"  data-fouc>
-                                            ค้นหาคำพ้องเสียง <small><span id="soundex_res"></span></small>
+                                            ค้นหา soundex <small><span id="soundex_res"></span></small>
                                         </label>
                                     </div>
                                 

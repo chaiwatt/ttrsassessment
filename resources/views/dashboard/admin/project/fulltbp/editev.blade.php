@@ -18,6 +18,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body context-menu-one " id="criteriamodal">
+                    
                     <input type="text" id="evid" value="{{$ev->id}}" hidden>
                     <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden>
                         <form class="wizard-form steps-basic " action="#" data-fouc>
@@ -469,6 +470,7 @@
                 <div class="card">
 					<div class="card-body">
                         {{-- {{$ev->refixstatus}} --}}
+                        <input type="text" id="projectname" value="{{$ev->fulltbp->minitbp->project}}" hidden>
                         <input type="text" id="evstatus" value="{{$ev->status}}" hidden >
                         {{-- {{$ev->refixstatus}} --}}
                         {{-- <div class="text-right">
@@ -705,14 +707,12 @@
 @section('pageScript')
 
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> --}}
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> --}}
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
-{{-- <script src="{{asset('assets/dashboard/js/plugins/datatables/dataTables.rowsGroup.js')}}"></script> --}}
+
 
 <script src="{{asset('assets/dashboard/js/vfs_fonts.js')}}"></script>
 

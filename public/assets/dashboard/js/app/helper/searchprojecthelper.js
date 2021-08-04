@@ -305,7 +305,6 @@ $(document).on('change', '#isic', function(e) {
 
 $(document).on('click', '#btnsearch', function(e) {
     var selectedtedtext = $('#searchgroup').find("option:selected").text();
-    console.log(selectedtedtext);
     if(selectedtedtext == 'ปีของโครงการ'){
         $("#soundex_res").html('');
         SearchProject.searchYear($('#searchyear').val()).then(data => {

@@ -73,7 +73,7 @@ function callDataTable(){
                         return null; 
                     },
                     filename: function() {
-                        return "รายการ EV (Index Criteria)"      
+                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname') .val() ;      
                     }, 
                     exportOptions: {
                         columns: [ 0, 1,2,3 ]
@@ -100,10 +100,10 @@ function callDataTable(){
                         columns: [ 0, 1,2,3 ]
                     },
                     title: function () { 
-                        return "รายการ EV (Index Criteria)"; 
+                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname') .val() ; ; 
                     },
                     filename: function() {
-                        return "รายการ EV (Index Criteria)"      
+                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname') .val() ;       
                     }, 
                 }
                 
@@ -149,7 +149,7 @@ function callDataTableExtra(){
                     return null; 
                 },
                 filename: function() {
-                    return "รายการ EV (Extra)"      
+                    return "รายการ EV (Extra) โครงการ" + $('#projectname') .val() ;       
                 }, 
                 exportOptions: {
                     columns: [ 0, 1,]
@@ -176,10 +176,10 @@ function callDataTableExtra(){
                     columns: [ 0, 1]
                 },
                 title: function () { 
-                    return "รายการ EV (Extra)"; 
+                    return "รายการ EV (Extra) โครงการ" + $('#projectname') .val() ; ; 
                 },
                 filename: function() {
-                    return "รายการ EV (Extra)"      
+                    return "รายการ EV (Extra) โครงการ" + $('#projectname') .val() ;     
                 }, 
             }
             

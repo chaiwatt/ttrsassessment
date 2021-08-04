@@ -157,7 +157,7 @@
                                 <div class="form-check">
                                     <label class="form-check-label">
                                         <input type="checkbox" name="sounddex" id="sounddex" class="form-check-input-styled-primary"  data-fouc>
-                                        ค้นหาคำพ้องเสียง <small><span id="soundex_res"></span></small>
+                                        ค้นหา soundex <small><span id="soundex_res"></span></small>
                                     </label>
                                 </div>
                             
