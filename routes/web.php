@@ -778,7 +778,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editcomment','DashboardAdminProjectAssessmentController@EditComment')->name('dashboard.admin.project.assessment.editcomment');
                     Route::post('updatescoringstatus','DashboardAdminProjectAssessmentController@UpdateScoringStatus')->name('dashboard.admin.project.assessment.updatescoringstatus');
                     Route::get('expertcommentpdf/{id}','DashboardAdminProjectAssessmentController@ExpertCommentPDF')->name('dashboard.admin.project.assessment.expertcommentpdf');
-
+                    Route::get('expertcomment/{id}','DashboardAdminProjectAssessmentController@ExpertComment')->name('dashboard.admin.project.assessment.expertcomment');
                 }); 
                 Route::group(['prefix' => 'projectcancel'], function(){
                     Route::get('','DashboardAdminProjectCancelController@Index')->name('dashboard.admin.project.projectcancel');  

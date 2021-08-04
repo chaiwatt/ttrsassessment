@@ -619,5 +619,12 @@ class DashboardAdminProjectAssessmentController extends Controller
         // $pdf->save($path.$randname.'.pdf');
         return $pdf->stream('expertcomment.pdf',array('Attachment'=>0));
     }
+
+    public function ExpertComment($id){
+        $expertcomments = ExpertComment::where('full_tbp_id',$id)->get();
+        $fulltbp = FullTbp::find($id);
+        return view('dashboard.admin.project.assessment.expertcomment')->withExpertcomments($expertcomments)->withFulltbp($fulltbp);
+    }
+    
     
 }
