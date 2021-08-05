@@ -79,7 +79,8 @@ $(document).on('click', '.projectmember', function(e) {
             $("#selectothermember").attr("hidden",true);
             $("#thother").attr("hidden",true);
           }
-          // console.log(data.users);
+          //console.log(data.iserror);
+
           data.users.forEach(function (user,index) {
               html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
           });
@@ -159,6 +160,12 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
             $("#selectothermember").attr("hidden",true);
             $("#thother").attr("hidden",true);
           }
+          // if(typeof(data.iserror) != "undefined"){
+          //   Swal.fire({
+          //     title: 'ผิดพลาด...',
+          //     text: 'ไฟล์ขนาดมากกว่า 5 MB!',
+          //     });
+          // }
           data.users.forEach(function (user,index) {
               html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
           });

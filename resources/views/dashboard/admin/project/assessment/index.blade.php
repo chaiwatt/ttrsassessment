@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="row" id="selectothermember">
                         <div class="col-md-12" >
-                            <label>เลือกผู้ใช้</label>
+                            <label>เลือกผู้เชี่ยวชาญ</label>
                             <div class="form-group header-elements-md-inline">
                                 <select name="usermember" id="usermember" data-placeholder="เลือกผู้ใช้" class="form-control form-control-select2">
                                 </select> 

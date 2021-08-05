@@ -719,9 +719,14 @@ class DashboardAdminProjectFullTbpController extends Controller
     public function GetUsers(Request $request){
         $userarray1 = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->pluck('id')->toArray();
         $userarray2 = ExpertAssignment::where('full_tbp_id',$request->id)->where('accepted',1)->pluck('user_id')->toArray();
-        $userarray = array_unique(array_merge($userarray1,$userarray2));
-        $users = User::whereIn('id',$userarray)->get();
+        $userarray3 = array_unique(array_merge($userarray1,$userarray2));
+      
         $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
+
+        $projectmemberarray = ProjectMember::where('full_tbp_id',$request->id)->pluck('user_id')->toArray();
+        $userarray = array_diff($userarray3,$projectmemberarray);
+        $users = User::whereIn('id',$userarray)->get();
+
         $ev = Ev::where('full_tbp_id',$request->id)->first();
         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();
         return response()->json(array(
@@ -733,17 +738,22 @@ class DashboardAdminProjectFullTbpController extends Controller
 
     public function AddProjectMember(Request $request){
         $projectmember = ProjectMember::where('user_id',$request->userid)->where('full_tbp_id',$request->fulltbpid)->first();
+        $iserror = null;
         if(Empty($projectmember)){
             $projectmember = new ProjectMember();
             $projectmember->full_tbp_id = $request->fulltbpid;
             $projectmember->user_id = $request->userid;
             $projectmember->save();
+            $iserror = null;
+        }else{
+            $iserror = '1';
         }
-        // $users = User::where('user_type_id','>=',3)->get();
-        // $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
         $userarray1 = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->pluck('id')->toArray();
-        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->id)->where('accepted',1)->pluck('user_id')->toArray();
-        $userarray = array_unique(array_merge($userarray1,$userarray2));
+        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted',1)->pluck('user_id')->toArray();
+        $userarray3 = array_unique(array_merge($userarray1,$userarray2));
+
+        $projectmemberarray = ProjectMember::where('full_tbp_id',$request->fulltbpid)->pluck('user_id')->toArray();
+        $userarray = array_diff($userarray3,$projectmemberarray);
         $users = User::whereIn('id',$userarray)->get();
 
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
@@ -752,7 +762,8 @@ class DashboardAdminProjectFullTbpController extends Controller
         return response()->json(array(
             "users" => $users,
             "scoringstatuses" => $scoringstatuses,
-            "projectmembers" => $projectmembers
+            "projectmembers" => $projectmembers,
+            "iserror" => $iserror
         ));
     }
 
@@ -761,8 +772,11 @@ class DashboardAdminProjectFullTbpController extends Controller
         // $users = User::where('user_type_id','>=',3)->get();
         // $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
         $userarray1 = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->pluck('id')->toArray();
-        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->id)->where('accepted',1)->pluck('user_id')->toArray();
-        $userarray = array_unique(array_merge($userarray1,$userarray2));
+        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted',1)->pluck('user_id')->toArray();
+        $userarray3 = array_unique(array_merge($userarray1,$userarray2));
+        
+        $projectmemberarray = ProjectMember::where('full_tbp_id',$request->fulltbpid)->pluck('user_id')->toArray();
+        $userarray = array_diff($userarray3,$projectmemberarray);
         $users = User::whereIn('id',$userarray)->get();
         
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
@@ -771,7 +785,8 @@ class DashboardAdminProjectFullTbpController extends Controller
         return response()->json(array(
             "users" => $users,
             "scoringstatuses" => $scoringstatuses,
-            "projectmembers" => $projectmembers
+            "projectmembers" => $projectmembers,
+            "iserror" => null
         ));
     }
 
