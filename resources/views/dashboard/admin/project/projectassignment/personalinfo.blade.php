@@ -295,7 +295,7 @@
 								<div class="col-md-6">  
 									<div class="form-group">
 										<label>ที่อยู่</label>
-										<input type="text"  name="address" id="address"  value="{{old('address') ?? $user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control form-control-lg stringformat60" disabled>
+										<input type="text"  name="address" id="address"  value="{{old('address') ?? $user->address}}"  placeholder="ที่อยู่ตามบัตรประจำตัวประชาชน" class="form-control form-control-lg stringformat60" disabled>
 									</div>
 								</div>
 								<div class="col-md-6">

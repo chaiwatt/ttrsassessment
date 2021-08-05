@@ -85,7 +85,7 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>ที่อยู่</label><span class="text-danger">*</span>
-													<input type="text"  name="address" id="address"  value="{{$user->address}}"  placeholder="ที่อยู่บริษัท" class="form-control form-control-lg">
+													<input type="text"  name="address" id="address"  value="{{$user->address}}"  placeholder="ที่อยู่ตามบัตรประจำตัวประชาชน" class="form-control form-control-lg">
 												</div>
 											</div>
 											<div class="col-md-6">
