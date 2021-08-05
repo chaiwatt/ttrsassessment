@@ -187,6 +187,9 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             usertypeid: "{{$user->user_type_id}}",
             userid: "{{$user->id}}",
+            user: "{{$user->name . ' ' . $user->lastname}}",
+            projectname: "{{$ev->fulltbp->minitbp->project}}",
+            
         };
     </script>
     

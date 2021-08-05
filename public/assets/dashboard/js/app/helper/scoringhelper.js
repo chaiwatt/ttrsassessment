@@ -74,7 +74,7 @@ function callDataTable(){
                     return null; 
                 },
                 filename: function() {
-                    return "รายการ EV (Index Criteria)"      
+                    return "รายการ EV (Index Criteria) โครงการ" + route.projectname + ' (' + route.user + ')';
                 }, 
                 exportOptions: {
                     columns: [ 0, 1,2,3,4,5 ]
@@ -102,10 +102,10 @@ function callDataTable(){
                     columns: [ 0, 1,2,3,4,5 ]
                 },
                 title: function () { 
-                    return "รายการ EV (Index Criteria)"; 
+                    return "รายการ EV (Index Criteria โครงการ" + route.projectname + ' (' + route.user + ')';
                 },
                 filename: function() {
-                    return "รายการ EV (Index Criteria)"      
+                    return "รายการ EV (Index Criteria) โครงการ" + route.projectname + ' (' + route.user + ')';      
                 }, 
             }
             
@@ -156,7 +156,7 @@ function callDataTableExtra(){
                     return null; 
                 },
                 filename: function() {
-                    return "รายการ EV (Extra)"      
+                    return "รายการ EV (Extra) โครงการ" + route.projectname + ' (' + route.user + ')';     
                 }, 
                 exportOptions: {
                     columns: [ 0, 1,2,3]
@@ -183,10 +183,10 @@ function callDataTableExtra(){
                     columns: [ 0, 1,2,3]
                 },
                 title: function () { 
-                    return "รายการ EV (Extra)"; 
+                    return "รายการ EV (Extra) โครงการ" + route.projectname + ' (' + route.user + ')';
                 },
                 filename: function() {
-                    return "รายการ EV (Extra)"      
+                    return "รายการ EV (Extra) โครงการ" + route.projectname + ' (' + route.user + ')';    
                 }, 
             }     
         ],
@@ -199,7 +199,7 @@ function callDataTableExtra(){
 }
 $(document).on('click', '#btnOnExcel', function(e) {
     getEv($('#evid').val(),route.userid).then(data => {
-         RenderTable2(data,1);
+        RenderTable2(data,1);
         callDataTable();
        $('#evexporttable').DataTable().buttons(0,0).trigger();
     }).catch(error => {})

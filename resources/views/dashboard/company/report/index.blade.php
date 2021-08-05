@@ -665,7 +665,10 @@
             grade = "";
         }
         var percent = parseInt(_percent);
-        console.log(percent);
+        var percenlabel = percent + ' / ' + grade;
+        if(percent == 0){
+            percenlabel = "";
+        }
         var dom = document.getElementById('myChart');
         var echart = echarts.init(dom);
         echart.clear();
@@ -697,7 +700,7 @@
                     },
                     data: [
                         {value: 100-percent, name: '',},
-                        {value: percent, name:   percent + ' / ' + grade},
+                        {value: percent, name:   percenlabel},
         
                     ],
                     color: ['#bbbbbb', '#4688ce'],
