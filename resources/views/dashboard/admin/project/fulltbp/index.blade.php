@@ -282,7 +282,7 @@
                             <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr>
-                                        <th>ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap">ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap">Full TBP</th> 
                                         <th style="width:1%;white-space: nowrap">ผู้เชี่ยวชาญ</th> 
                                         <th style="width:1%;white-space: nowrap">EV</th> 
@@ -294,7 +294,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>    
-                                                <td > 
+                                                <td style="width:1%;white-space: nowrap"> 
                                                     @php
                                                         $cogcolor = 'text-info';
                                                         $latetext = '';
