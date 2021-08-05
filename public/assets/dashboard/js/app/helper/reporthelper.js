@@ -1161,11 +1161,14 @@ function callGenPolarStackByIsic(data){
 function topLeftChart(_percent,grade){
     if(isNaN(_percent)) {
         _percent = 0;
+    }else{
+        _percent = _percent.toFixed(2);
     }
     if( typeof grade === 'undefined' ) {
         grade = "";
     }
     var percent = _percent.toFixed(2); //parseInt(_percent);
+
     var dom = document.getElementById('myChart');
     var echart = echarts.init(dom);
     echart.clear();
