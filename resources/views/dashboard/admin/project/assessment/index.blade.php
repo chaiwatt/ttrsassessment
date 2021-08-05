@@ -130,7 +130,7 @@
                                                         
                                                         </td>
                                                         <td style="white-space: nowrap"> 
-                                                            <button type="button" id="projectmember{{$fulltbp->id}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
+                                                            <button type="button" id="projectmember{{$fulltbp->id}}" data-projectleaderid="{{$fulltbp->projectleader}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                         </td>  
                                                         
                                                         <td style="white-space: nowrap"> 

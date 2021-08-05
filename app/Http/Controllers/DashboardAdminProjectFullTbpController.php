@@ -717,7 +717,10 @@ class DashboardAdminProjectFullTbpController extends Controller
     }
 
     public function GetUsers(Request $request){
-        $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
+        $userarray1 = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->pluck('id')->toArray();
+        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->id)->where('accepted',1)->pluck('user_id')->toArray();
+        $userarray = array_unique(array_merge($userarray1,$userarray2));
+        $users = User::whereIn('id',$userarray)->get();
         $projectmembers = ProjectMember::where('full_tbp_id',$request->id)->get();
         $ev = Ev::where('full_tbp_id',$request->id)->first();
         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();
@@ -737,7 +740,12 @@ class DashboardAdminProjectFullTbpController extends Controller
             $projectmember->save();
         }
         // $users = User::where('user_type_id','>=',3)->get();
-        $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
+        // $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
+        $userarray1 = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->pluck('id')->toArray();
+        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->id)->where('accepted',1)->pluck('user_id')->toArray();
+        $userarray = array_unique(array_merge($userarray1,$userarray2));
+        $users = User::whereIn('id',$userarray)->get();
+
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
         $ev = Ev::where('full_tbp_id',$request->fulltbpid)->first();
         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();
@@ -751,7 +759,12 @@ class DashboardAdminProjectFullTbpController extends Controller
     public function DeleteProjectMember(Request $request){
         ProjectMember::find($request->id)->delete();
         // $users = User::where('user_type_id','>=',3)->get();
-        $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
+        // $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
+        $userarray1 = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->pluck('id')->toArray();
+        $userarray2 = ExpertAssignment::where('full_tbp_id',$request->id)->where('accepted',1)->pluck('user_id')->toArray();
+        $userarray = array_unique(array_merge($userarray1,$userarray2));
+        $users = User::whereIn('id',$userarray)->get();
+        
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
         $ev = Ev::where('full_tbp_id',$request->fulltbpid)->first();
         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();

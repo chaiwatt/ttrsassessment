@@ -137,6 +137,10 @@ class FullTbp extends Model
         return Ev::where('full_tbp_id',$this->id)->first();
     } 
 
+    public function getProjectleaderAttribute(){
+        return ProjectAssignment::where('full_tbp_id',$this->id)->first()->leader_id;
+    } 
+
     public function getExpertCommentAttribute(){
         return ExpertComment::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->first();
     } 

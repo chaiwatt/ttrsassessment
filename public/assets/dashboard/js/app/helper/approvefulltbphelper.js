@@ -68,6 +68,8 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
 $(document).on('click', '.projectmember', function(e) {
 
  var isleader =$(this).data('isprojectleader');
+ var leaderid = $(this).data('projectleaderid');
+ console.log(isleader);
     $('#fulltbpid').val($(this).data('id'));
       getUsers($(this).data('id')).then(data => {
           var html =``;
@@ -92,7 +94,12 @@ $(document).on('click', '.projectmember', function(e) {
               if (isleader == 0) {
                 moreinfo = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ลงคะแนน</span>`;
               }else{
-                moreinfo = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember" >ลบ</button>`;
+                if(projectmember.user_id != leaderid){
+                  moreinfo = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember" >ลบ</button>`;
+                }else{
+                  moreinfo = `<span class="badge badge-flat border-grey text-grey-600">Leader</span>`;
+                }
+                
               }
             }
               html1 += `<tr >                                        
