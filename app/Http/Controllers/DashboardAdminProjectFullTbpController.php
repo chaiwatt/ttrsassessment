@@ -736,20 +736,28 @@ class DashboardAdminProjectFullTbpController extends Controller
             $projectmember->user_id = $request->userid;
             $projectmember->save();
         }
-        $users = User::where('user_type_id','>=',3)->get();
+        // $users = User::where('user_type_id','>=',3)->get();
+        $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
+        $ev = Ev::where('full_tbp_id',$request->fulltbpid)->first();
+        $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();
         return response()->json(array(
             "users" => $users,
+            "scoringstatuses" => $scoringstatuses,
             "projectmembers" => $projectmembers
         ));
     }
 
     public function DeleteProjectMember(Request $request){
         ProjectMember::find($request->id)->delete();
-        $users = User::where('user_type_id','>=',3)->get();
+        // $users = User::where('user_type_id','>=',3)->get();
+        $users = User::where('user_type_id','>=',5)->where('name','!=', 'superadmin')->get();
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
+        $ev = Ev::where('full_tbp_id',$request->fulltbpid)->first();
+        $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();
         return response()->json(array(
             "users" => $users,
+            "scoringstatuses" => $scoringstatuses,
             "projectmembers" => $projectmembers
         ));
     }

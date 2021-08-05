@@ -76,13 +76,14 @@ $(document).on('click', '.projectmember', function(e) {
           if (isleader == 0) {
             $("#selectothermember").attr("hidden",true);
             $("#thother").attr("hidden",true);
-            // hiddenbtn = 'hidden';
           }
+          // console.log(data.users);
           data.users.forEach(function (user,index) {
               html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
           });
+         
           data.projectmembers.forEach(function (projectmember,index) {
-
+           
             var check = data.scoringstatuses.filter(x => x.user_id == projectmember.user_id)[0]; 
             var moreinfo = ``;
             if(typeof(check) != "undefined"){
@@ -142,21 +143,52 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
     closeOnCancel: false
     }).then((result) => {
     if (result.value) {
+      var isleader =$(this).data('isprojectleader');
       addProjectMember($('#fulltbpid').val(),$('#usermember').val()).then(data => {
           var html =``;
           var html1 =``;
+          var hiddenbtn = `-`;
+          if (isleader == 0) {
+            $("#selectothermember").attr("hidden",true);
+            $("#thother").attr("hidden",true);
+          }
           data.users.forEach(function (user,index) {
               html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
           });
+          // data.projectmembers.forEach(function (projectmember,index) {
+          //     html1 += `<tr >                                        
+          //                 <td> ${projectmember.user['name']}</td>                            
+          //                 <td> ${projectmember.user['lastname']} </td>     
+          //                 <td>   
+          //                     <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
+          //                 </td>
+          //             </tr>`
+          //     });
+
           data.projectmembers.forEach(function (projectmember,index) {
+           
+            var check = data.scoringstatuses.filter(x => x.user_id == projectmember.user_id)[0]; 
+
+            // console.log(check);
+            var moreinfo = ``;
+            if(typeof(check) != "undefined"){
+              moreinfo = `<span class="badge badge-flat border-success text-success-600">ลงคะแนนแล้ว</span>`;
+            }else{
+              if (isleader == 0) {
+                moreinfo = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ลงคะแนน</span>`;
+              }else{
+                moreinfo = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember" >ลบ</button>`;
+              }
+            }
               html1 += `<tr >                                        
                           <td> ${projectmember.user['name']}</td>                            
                           <td> ${projectmember.user['lastname']} </td>     
-                          <td>   
-                              <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
+                          <td ${hiddenbtn}>   
+                              ${moreinfo}
                           </td>
                       </tr>`
               });
+              
           $("#projectmember"+$('#fulltbpid').val()).html(data.projectmembers.length + ' คน');
           $("#usermember_wrapper_tr").html(html1);
           $("#usermember").html(html);
@@ -190,18 +222,45 @@ function addProjectMember(fulltbpid,userid){
 }
 
 $(document).on('click', '.deleteprojectmember', function(e) {
+  var isleader =$(this).data('isprojectleader');
     deleteProjectMember($(this).data('id'),$('#fulltbpid').val()).then(data => {
         var html =``;
         var html1 =``;
+        var hiddenbtn = `-`;
+        if (isleader == 0) {
+          $("#selectothermember").attr("hidden",true);
+          $("#thother").attr("hidden",true);
+        }
         data.users.forEach(function (user,index) {
             html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
         });
+        // data.projectmembers.forEach(function (projectmember,index) {
+        //     html1 += `<tr >                                        
+        //                 <td> ${projectmember.user['name']}</td>                            
+        //                 <td> ${projectmember.user['lastname']} </td>     
+        //                 <td>   
+        //                     <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
+        //                 </td>
+        //             </tr>`
+        //     });
         data.projectmembers.forEach(function (projectmember,index) {
+           
+          var check = data.scoringstatuses.filter(x => x.user_id == projectmember.user_id)[0]; 
+          var moreinfo = ``;
+          if(typeof(check) != "undefined"){
+            moreinfo = `<span class="badge badge-flat border-success text-success-600">ลงคะแนนแล้ว</span>`;
+          }else{
+            if (isleader == 0) {
+              moreinfo = `<span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ลงคะแนน</span>`;
+            }else{
+              moreinfo = `<button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember" >ลบ</button>`;
+            }
+          }
             html1 += `<tr >                                        
                         <td> ${projectmember.user['name']}</td>                            
                         <td> ${projectmember.user['lastname']} </td>     
-                        <td>   
-                            <button type="button" data-id="${projectmember.id}" class="btn btn-sm bg-danger deleteprojectmember">ลบ</button>
+                        <td ${hiddenbtn}>   
+                            ${moreinfo}
                         </td>
                     </tr>`
             });
