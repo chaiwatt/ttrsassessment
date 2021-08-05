@@ -754,7 +754,7 @@
             grade = "";
         }
         var percent = parseInt(_percent);
-        console.log(percent);
+        // console.log(percent);
         var dom = document.getElementById('myChart');
         var echart = echarts.init(dom);
         echart.clear();
@@ -786,7 +786,7 @@
                     },
                     data: [
                         {value: 100-percent, name: '',},
-                        {value: percent, name:   _percent + ' / ' + grade},
+                        {value: percent, name:   percent + ' / ' + grade},
         
                     ],
                     color: ['#bbbbbb', '#4688ce'],
