@@ -84,10 +84,10 @@
                                         <table class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
                                                 <tr class="bg-info">
-                                                    <th>Pillar</th>  
-                                                    <th>Sub Pillar</th>   
-                                                    <th>Index</th>                                                                                
-                                                    <th>Criteria <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                    <th style="width:25%">Pillar</th>  
+                                                    <th style="width:25%">Sub Pillar</th>   
+                                                    <th style="width:25%">Index</th>                                                                                
+                                                    <th style="width:25%">Criteria <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
                                                     @if ($projectgrade->count() !=0)
                                                         <th>Final</th>
                                                     @endif

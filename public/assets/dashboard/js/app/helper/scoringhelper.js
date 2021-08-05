@@ -346,11 +346,11 @@ function RenderTable(data,evtype){
                                     </div>
                                     `; 
                     html += `<tr > 
-                    <td> ${criteria.pillar['name']}</td>                                            
-                    <td> ${criteria.subpillar['name']}</td>    
-                    <td> ${criteria.subpillarindex['name']}</td>   
-                    <td> ${criterianame} </td>       
-                    <td ${hiddenfinal}> ${finalcriterianame} </td>                                      
+                    <td style="font-size:18px"> ${criteria.pillar['name']}</td>                                            
+                    <td style="font-size:18px"> ${criteria.subpillar['name']}</td>    
+                    <td style="font-size:18px"> ${criteria.subpillarindex['name']}</td>   
+                    <td style="font-size:18px"> ${criterianame} </td>       
+                    <td style="font-size:18px" ${hiddenfinal}> ${finalcriterianame} </td>                                      
                 </tr>`
                 }
             });

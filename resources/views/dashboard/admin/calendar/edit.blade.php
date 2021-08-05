@@ -69,7 +69,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>(วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg dmyformat" >
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg" >
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-4">
@@ -203,14 +203,14 @@
             branchid: "{{Auth::user()->branch_id}}"
         };
 
-        // $('#eventdate').bootstrapMaterialDatePicker({
-        //     format: 'DD/MM/YYYY HH:mm',
-        //     clearButton: true,
-        //     cancelText: "ยกเลิก",
-        //     okText: "ตกลง",
-        //     clearText: "เคลียร์",
-        //     time: false
-        // });
+        $('#eventdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY HH:mm',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
 
         // $('#eventtimestart').bootstrapMaterialDatePicker({
         //     format: 'HH:mm',

@@ -16,25 +16,63 @@ $(function() {
     }
 
     getEv($('#evid').val()).then(data => {
-        // console.log(data.pillaindexweigths);
+
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
         $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
         RenderWeightTable(data.pillaindexweigths,1);
-        RenderExtraTable(data.extracriteriatransactions);
+        if (data.extracriteriatransactions.length != 0) {
+            RenderExtraTable(data.extracriteriatransactions);
+        }
+        
         $(".loadprogress").attr("hidden",true);
         RowSpanWeight("subpillarindex");
-        RowSpanExtra("extra_subpillarindex");
-     
+        if (data.extracriteriatransactions.length != 0) {
+            RowSpanExtra("extra_subpillarindex");
+        }
+        
         callDataTable();
-        callDataTableExtra();
+        if (data.extracriteriatransactions.length != 0) {
+            callDataTableExtra();
+        }
+       
+        var cookieval = getCookie("forcedownload");
+        if(cookieval == '1'){
+            $('#evexporttable').DataTable().buttons(0,0).trigger();
+        }else if(cookieval == '2'){
+            $('#evexporttable').DataTable().buttons(0,1).trigger();
+        }else if(cookieval == '3'){
+            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+        }else if(cookieval == '4'){
+            $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+        }
+        setCookie("forcedownload", "")
         
     }).catch(error => {})
 });
 
-
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+  
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  
 
 function callDataTable(){
-   console.log(evdata);
     $('#evexporttable').DataTable( {
         dom: 'Bfrtip',
         data: evdata,
@@ -783,10 +821,12 @@ function updateEvAdminStatus(id,value){
      
      $("#btnOnExcel").on('click', function() {
         if (!$('#evexporttable').DataTable().data().any() ) {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            });
+            // Swal.fire({
+            //     title: 'ผิดพลาด...',
+            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            // });
+            setCookie("forcedownload", "1");
+            window.location.reload();
         }else{
             $('#evexporttable').DataTable().buttons(0,0).trigger();
         }
@@ -795,10 +835,12 @@ function updateEvAdminStatus(id,value){
 
     $("#btnOnPdf").on('click', function() {
         if (!$('#evexporttable').DataTable().data().any() ) {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            });
+            // Swal.fire({
+            //     title: 'ผิดพลาด...',
+            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            // });
+            setCookie("forcedownload", "2");
+            window.location.reload();
         }else{
             $('#evexporttable').DataTable().buttons(0,1).trigger();
         }
@@ -808,10 +850,12 @@ function updateEvAdminStatus(id,value){
     $("#btnOnExcelExtra").on('click', function() {
     
         if (!$('#evextraexporttable').DataTable().data().any() ) {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            });
+            // Swal.fire({
+            //     title: 'ผิดพลาด...',
+            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            // });
+            setCookie("forcedownload", "3");
+            window.location.reload();
         }else{
             $('#evextraexporttable').DataTable().buttons(0,0).trigger();
         }
@@ -821,10 +865,12 @@ function updateEvAdminStatus(id,value){
     
     $("#btnOnPdfExtra").on('click', function() {
         if (!$('#evextraexporttable').DataTable().data().any() ) {
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            });
+            // Swal.fire({
+            //     title: 'ผิดพลาด...',
+            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
+            // });
+            setCookie("forcedownload", "4");
+            window.location.reload();
         }else{
             $('#evextraexporttable').DataTable().buttons(0,1).trigger();
         }

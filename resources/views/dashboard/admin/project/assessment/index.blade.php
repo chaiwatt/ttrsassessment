@@ -113,10 +113,12 @@
                                 </thead>
                                 <tbody>
                                     <input type="text" id="fulltbpid" hidden>
-                                   
+                                   {{-- {{$fulltbps}} --}}
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if (Empty($fulltbp->canceldate))
+                                        {{-- {{$fulltbp->id}} --}}
                                             @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
+                                           {{-- sdfsfdvvv --}}
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                     <tr>    
                                                         <td> {{$fulltbp->minitbp->project}} </td>  
@@ -148,7 +150,7 @@
                                                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 0)
                                                                                     <span class="badge badge-flat border-warning text-warning-600">รอ Leader นัดหมายการสรุปคะแนน</span>
                                                                                     @else
-                                                                                        <a href="{{route('dashboard.admin.calendar.create')}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
+                                                                                        <a href="{{route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มปฏิทินนัดหมายสรุปคะแนน</a>
                                                                                 @endif
                                                                                 
                                                                             @endif

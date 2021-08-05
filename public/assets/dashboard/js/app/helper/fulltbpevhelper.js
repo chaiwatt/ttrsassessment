@@ -25,12 +25,24 @@ $(function() {
         RenderTable(data.criteriatransactions,data.pillaindexweigths);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
-        RenderExtraTable(data.extracriteriatransactions);
+        
+
+        if (data.extracriteriatransactions.length != 0) {
+            RenderExtraTable(data.extracriteriatransactions); 
+        }
+
         $(".loadprogress").attr("hidden",true);
-        RowSpanExtra("extracriteriatable");
+        
+
+        if (data.extracriteriatransactions.length != 0) {
+            RowSpanExtra("extracriteriatable");
+        }
 
         callDataTable();
-        callDataTableExtra();
+       
+        if (data.extracriteriatransactions.length != 0) {
+            callDataTableExtra();
+        }
 
        var cookieval = getCookie("forcedownload");
         if(cookieval == '1'){

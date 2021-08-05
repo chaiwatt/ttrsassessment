@@ -46,6 +46,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                         ->where('notification_sub_category_id',7) // notification_sub_category_id 7 = การลงคะแนน
                         ->where('status',0)->delete();
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+        // return $auth->name ;
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
     }

@@ -140,11 +140,11 @@ class DashboardAdminCalendarController extends Controller
       }
       ProjectMember::where('full_tbp_id',$id)->whereIn('id',$tmpmember)->delete();
       $eventcalendar = EventCalendar::where('full_tbp_id',$fulltbp->id)
-        ->whereNull('starttime')
-        ->whereNull('endtime')
-        ->whereNull('place')
-        ->whereNull('summary')
-        ->orderBy('id', 'desc')->first();
+                                ->whereNull('starttime')
+                                ->whereNull('endtime')
+                                ->whereNull('place')
+                                ->whereNull('summary')
+                                ->orderBy('id', 'desc')->first();
       if(Empty($eventcalendar)){
         $eventcalendar = new EventCalendar();
         $eventcalendar->full_tbp_id = $fulltbp->id;

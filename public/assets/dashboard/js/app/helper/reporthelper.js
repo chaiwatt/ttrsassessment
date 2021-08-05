@@ -1165,7 +1165,7 @@ function topLeftChart(_percent,grade){
     if( typeof grade === 'undefined' ) {
         grade = "";
     }
-    var percent = parseInt(_percent);
+    var percent = _percent.toFixed(2); //parseInt(_percent);
     var dom = document.getElementById('myChart');
     var echart = echarts.init(dom);
     echart.clear();

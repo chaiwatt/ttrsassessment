@@ -60,7 +60,7 @@
             </div>
         @endif
         <div class="row">
-            @foreach ($expertcomments as $expertcomment)
+            @foreach ($expertcomments as $key => $expertcomment)
             <div class="col-md-12">
                 
                 <div class="card">
@@ -69,35 +69,35 @@
                       <div class="mb-3"> <strong >ความเห็น: คุณ{{$expertcomment->user->name}} {{$expertcomment->user->lastname}}</strong> </div>
                         <ul class="nav nav-tabs nav-tabs-highlight">
                            
-                            <li class="nav-item"><a href="#left-icon-overview" class="nav-link active" data-toggle="tab"><i class="icon-magic-wand2 mr-2"></i>Overview</a></li>
-                            <li class="nav-item"><a href="#left-icon-management" class="nav-link" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
-                            <li class="nav-item"><a href="#left-icon-technology" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>
-                            <li class="nav-item"><a href="#left-icon-marketing" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i>Marketability</a></li>
-                            <li class="nav-item"><a href="#left-icon-businessprospect" class="nav-link" data-toggle="tab"><i class="icon-pie-chart5 mr-2"></i>Business Prospect</a></li>
+                            <li class="nav-item"><a href="#left-icon-overview{{$key}}" class="nav-link active" data-toggle="tab"><i class="icon-magic-wand2 mr-2"></i>Overview</a></li>
+                            <li class="nav-item"><a href="#left-icon-management{{$key}}" class="nav-link" data-toggle="tab"><i class="icon-stamp mr-2"></i>Management</a></li>
+                            <li class="nav-item"><a href="#left-icon-technology{{$key}}" class="nav-link" data-toggle="tab"><i class="icon-atom2 mr-2"></i>Technology</a></li>
+                            <li class="nav-item"><a href="#left-icon-marketing{{$key}}" class="nav-link" data-toggle="tab"><i class="icon-stats-growth mr-2"></i>Marketability</a></li>
+                            <li class="nav-item"><a href="#left-icon-businessprospect{{$key}}" class="nav-link" data-toggle="tab"><i class="icon-pie-chart5 mr-2"></i>Business Prospect</a></li>
                          
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="left-icon-overview">
+                            <div class="tab-pane fade show active" id="left-icon-overview{{$key}}">
                                 <div class="form-group">
                                     <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:200px;width:100%;overflow:auto;">{{@$expertcomment->overview}}</div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="left-icon-management">
+                            <div class="tab-pane fade" id="left-icon-management{{$key}}">
                                 <div class="form-group">
                                     <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:200px;width:100%;overflow:auto;">{{@$expertcomment->management}}</div>    
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="left-icon-technology">
+                            <div class="tab-pane fade" id="left-icon-technology{{$key}}">
                                 <div class="form-group">
                                     <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:200px;width:100%;overflow:auto;">{{@$expertcomment->technology}}</div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="left-icon-marketing">
+                            <div class="tab-pane fade" id="left-icon-marketing{{$key}}">
                                 <div class="form-group">
                                     <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:200px;width:100%;overflow:auto;">{{@$expertcomment->marketing}}</div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="left-icon-businessprospect">
+                            <div class="tab-pane fade" id="left-icon-businessprospect{{$key}}">
                                 <div class="form-group">
                                     <div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:200px;width:100%;overflow:auto;">{{@$expertcomment->businessprospect}}</div>
                                 </div>
