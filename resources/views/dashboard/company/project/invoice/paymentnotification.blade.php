@@ -80,7 +80,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})<span class="text-danger">*</span></label>
-                                        <input type="text"  name="paymentdate" id="paymentdate" value="{{old('paymentdate')}}"  placeholder="วันที่" class="form-control form-control-lg dmyformat">
+                                        <input type="text"  name="paymentdate" id="paymentdate" value="{{old('paymentdate')}}"  placeholder="วันที่" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -124,14 +124,14 @@
 @section('pageScript')
     <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
     <script>
-        // $('#paymentdate').bootstrapMaterialDatePicker({
-        //     format: 'DD/MM/YYYY',
-        //     clearButton: true,
-        //     cancelText: "ยกเลิก",
-        //     okText: "ตกลง",
-        //     clearText: "เคลียร์",
-        //     time: false
-        // });
+        $('#paymentdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
         $("#file").on('change', function() {
             $("#filename").val(this.value);
         });

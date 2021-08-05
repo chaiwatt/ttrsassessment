@@ -624,7 +624,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label><span class="text-danger">*</span>
-							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control form-control-lg dmyformat">
+							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control form-control-lg">
 						</div>
 
 						<div class="form-group">
@@ -3534,6 +3534,15 @@ th {
 	$(document).on('keyup', '#ganttnummonth', function(e) {
 	
 	});
+
+	$('#employtrainingdate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY HH:mm',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            time: false
+        });
 </script>
 @stop
 

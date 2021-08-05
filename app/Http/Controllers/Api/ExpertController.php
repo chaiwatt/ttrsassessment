@@ -143,7 +143,7 @@ class ExpertController extends Controller
                 $routename = route('dashboard.admin.report');
             }
 
-            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>ดำเนินการ</a>',Auth::user()->id,$request->id);
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>ดำเนินการ</a>',Auth::user()->id,$request->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -164,7 +164,7 @@ class ExpertController extends Controller
             $projectlog->action = 'Manager มอบหมายผูเชี่ยวชาญ (รายละเอียด: คุณ' . $expert->name . ' ' .$expert->lastname . ')';
             $projectlog->save();
 
-            EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname,'เรียนคุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname,'เรียนคุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     }
 
     public function ExpertReject(Request $request){
@@ -294,12 +294,12 @@ class ExpertController extends Controller
                 $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
             }
             
-            $messagebox =  Message::sendMessage('Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project.$fullcompanyname,'Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' =>  $request->fulltbpid]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
+            $messagebox =  Message::sendMessage('Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project.' (' .$fullcompanyname.')','Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' =>  $request->fulltbpid]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id =  $projectassignment->leader_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project.$fullcompanyname;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project.' (' .$fullcompanyname.')';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -326,7 +326,7 @@ class ExpertController extends Controller
                    $alertmessage->user_id = $auth->id;
                    $alertmessage->target_user_id =  $projectassignment->leader_id;
                    $alertmessage->messagebox_id = $messagebox->id;
-                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' โครงการ' . $minitbp->project.$fullcompanyname . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a>' ;
+                   $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' โครงการ' . $minitbp->project.' (' .$fullcompanyname . ') ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a>' ;
                    $alertmessage->save();
 
                    MessageBox::find($messagebox->id)->update([

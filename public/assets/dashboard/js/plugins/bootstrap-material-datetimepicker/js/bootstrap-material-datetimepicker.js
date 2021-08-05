@@ -677,7 +677,7 @@
                      return "มี.ค.";
                   }
                   else if(month == "APR"){
-                     return "เม.ษ.";
+                     return "เม.ย.";
                   }
                   else if(month == "MAY"){
                      return "พ.ค.";

@@ -104,7 +104,7 @@ class DashboardExpertProjectCommentController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
         
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญ (คุณ'.$auth->name .' '. $auth->lastname .') ได้แสดงความเห็น โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็น โครงการ' . $minitbp->project.$fullcompanyname . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.assessment.expertcomment',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญ (คุณ'.$auth->name .' '. $auth->lastname .') ได้แสดงความเห็น โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็น โครงการ' . $minitbp->project.' (' .$fullcompanyname . ') โปรดตรวจสอบ <a href='.route('dashboard.admin.project.assessment.expertcomment',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

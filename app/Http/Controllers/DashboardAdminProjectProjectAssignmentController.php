@@ -145,7 +145,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         ]);
 
         if(!Empty($request->coleader)){
-            $messagebox = Message::sendMessage('มอบหมาย Co-Leader โครงการ'. $minitbp->project,'ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.$fullcompanyname,Auth::user()->id,User::find($request->coleader)->id) ;
+            $messagebox = Message::sendMessage('มอบหมาย Co-Leader โครงการ'. $minitbp->project,'ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.')',Auth::user()->id,User::find($request->coleader)->id) ;
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->messagebox_id = $messagebox->id;
@@ -157,10 +157,10 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
     
-            EmailBox::send(User::find($request->coleader)->email,'TTRS:มอบหมาย Co-Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียนคุณ'.User::find($request->coleader)->name. ' ' .User::find($request->coleader)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.$fullcompanyname.'</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());    
+            EmailBox::send(User::find($request->coleader)->email,'TTRS:มอบหมาย Co-Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียนคุณ'.User::find($request->coleader)->name. ' ' .User::find($request->coleader)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.')</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());    
         }
 
-        EmailBox::send(User::find($request->leader)->email,'TTRS:มอบหมาย Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียนคุณ'.User::find($request->leader)->name. ' ' .User::find($request->leader)->lastname. '<br><br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.$fullcompanyname.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($request->leader)->email,'TTRS:มอบหมาย Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียนคุณ'.User::find($request->leader)->name. ' ' .User::find($request->leader)->lastname. '<br><br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
 
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',1)->first();

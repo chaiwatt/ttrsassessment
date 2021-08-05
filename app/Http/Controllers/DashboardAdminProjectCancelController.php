@@ -68,13 +68,13 @@ class DashboardAdminProjectCancelController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $projectmember->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ยกเลิกโครงการ โครงการ'.$minitbp->project.$fullcompanyname .' เสร็จเรียบร้อยแล้ว';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ยกเลิกโครงการ โครงการ'.$minitbp->project.' (' .$fullcompanyname .') เสร็จเรียบร้อยแล้ว';
             $alertmessage->save();
     
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project   . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.$fullcompanyname .' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project   . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.' (' .$fullcompanyname .') เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         $timeLinehistory = new TimeLineHistory();
