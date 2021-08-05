@@ -1165,7 +1165,7 @@ function topLeftChart(_percent,grade){
     if( typeof grade === 'undefined' ) {
         grade = "";
     }
-    var percent = _percent.toFixed(2); //parseInt(_percent);
+    var percent = parseInt(_percent);
     
     var dom = document.getElementById('myChart');
     var echart = echarts.init(dom);
@@ -1198,7 +1198,7 @@ function topLeftChart(_percent,grade){
                 },
                 data: [
                     {value: 100-percent, name: '',},
-                    {value: percent, name:   _percent + ' / ' + grade},
+                    {value: percent, name:   percent + ' / ' + grade},
     
                 ],
                  color: ['#bbbbbb', '#4688ce'],
