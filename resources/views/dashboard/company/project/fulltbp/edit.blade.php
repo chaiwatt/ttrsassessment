@@ -216,6 +216,12 @@ th {
 							<div id="employ_position_research_wrapper"></div>
 						</div>
 					</div>
+					<div class="col-md-6" id="employ_position_other_research_wrapper" hidden>
+						<div class="form-group">
+							<label>ตำแหน่ง โปรดระบุ</label><span class="text-danger">*</span>
+							<input type="text" id="otherresearchposition" placeholder="ตำแหน่ง โปรดระบุ" class="form-control form-control-lg">
+						</div>
+					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
@@ -2027,7 +2033,17 @@ th {
 																			@foreach ($companyemploys->where('employ_position_id','>=',6) as $companyemploy)
 																				<tr >                                        
 																					<td style="width:350px"> {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</td> 
-																					<td style="width:1%;white-space: nowrap"> {{$companyemploy->employposition->name}} </td> 
+																					<td style="width:1%;white-space: nowrap"> 
+
+																							{{-- {{$companyemploy->employposition}}		 --}}
+																						@if ($companyemploy->employposition->name == 'อื่น ๆ (ระบุ)')
+																							{{$companyemploy->otherposition}} 
+																							@else
+																							{{$companyemploy->employposition->name}} 
+																						@endif
+
+																						
+																					</td> 
 																					<td> {{$companyemploy->phone}} </td>                                            
 																					<td> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
@@ -2656,7 +2672,6 @@ th {
 																					@if ($minmonth != 0 && $maxmonth !=0)
 																						<tr >
 																							@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																								{{-- <th class="text-center" > --}}
 																								<th class="text-center" style="max-width: 50px !important;font-size:12px">
 																									@php
 																										$full = 12;

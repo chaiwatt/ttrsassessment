@@ -631,25 +631,25 @@
 									>
 										<div class="form-group">
 											<label>คำนำหน้า อื่น</label>
-											<input type="text" name="alter_prefix" id="alter_prefix" value="{{$user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
+											<input type="text" name="alter_prefix" id="alter_prefix" value="{{old('alter_prefix') ?? $user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class=" form-control form-control-lg stringformat60 ">
+											<input type="text" name="name" value="{{old('name') ?? $user->name}}" data-placeholder="ชื่อ"class=" form-control form-control-lg stringformat60 ">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+											<input type="text" name="lastname" value="{{old('lastname') ?? $user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>เลขบัตรประจำตัวประชาชน</label><span class="text-danger">*</span></span>
-											<input type="text" name="hid" id="hid" value="{{$user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg numeralformath13" 
+											<input type="text" name="hid" id="hid" value="{{old('hid') ?? $user->hid}}" data-placeholder="เลขบัตรประจำตัวประชาชน" class="form-control form-control-lg numeralformath13" 
 											@if (!Empty($user->hid))
 												readonly
 											@endif
@@ -660,14 +660,14 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>ตำแหน่ง</label>
-											<input type="text" name="userposition" value="{{$user->position}}" data-placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat60">
+											<input type="text" name="userposition" value="{{old('userposition') ?? $user->position}}" data-placeholder="ตำแหน่ง" class="form-control form-control-lg stringformat60">
 										</div>
 									</div>
 								@endif
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label></span>
-										<input type="text" name="company" value="{{$user->company->name}}" class="form-control form-control-lg stringformat60">
+										<input type="text" name="company" value="{{old('company') ?? $user->company->name}}" class="form-control form-control-lg stringformat60">
 									</div>
 								</div>
 
@@ -892,13 +892,13 @@
 									>
 									<div class="form-group">
 										<label>คำนำหน้า อื่น</label>
-										<input type="text" name="alter_prefix" id="alter_prefix" value="{{$user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
+										<input type="text" name="alter_prefix" id="alter_prefix" value="{{old('name') ?? $user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>ชื่อผู้ประสานงาน<span class="text-danger">*</span></label>
-										<input type="text" name="name" value="{{$user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60 inputfield40">
+										<input type="text" name="name" value="{{old('name') ?? $user->name}}" data-placeholder="ชื่อ"class="form-control form-control-lg stringformat60 inputfield40">
 									</div>
 								</div>
 									{{-- <div class="col-md-6">
@@ -910,7 +910,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>นามสกุลผู้ประสานงาน<span class="text-danger">*</span></label>
-										<input type="text" name="lastname" value="{{$user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+										<input type="text" name="lastname" value="{{old('lastname') ?? $user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
 									</div>
 								</div>
 								@endif
@@ -978,19 +978,19 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											<input type="text"  name="postalcode" id="postal" value="{{$companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+											<input type="text"  name="postalcode" id="postal"  value="{{old('postal') ?? $companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
 										</div>
 									</div>
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>พิกัดละติจูด (เช่น 14.076868486942407)<a href="https://google.com/maps/place/{{$companyaddress->lat}},{{$companyaddress->lng}}" target="_blank" rel="noopener noreferrer"> เปิดแผนที่</a> </label>
-											<input type="text"  name="lat" value="{{$companyaddress->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg allownumericwithdecimal">
+											<input type="text"  name="lat" value="{{old('lat') ?? $companyaddress->lat}}"  placeholder="ละติจูด" class="form-control form-control-lg allownumericwithdecimal">
 										</div>
 									</div>
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>พิกัดลองจิจูด (เช่น 100.60153839991285)</label>
-											<input type="text"  name="lng" value="{{$companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg allownumericwithdecimal">
+											<input type="text"  name="lng" value="{{old('lng') ?? $companyaddress->lng}}"  placeholder="ลองจิจูด" class="form-control form-control-lg allownumericwithdecimal">
 										</div>
 									</div>
 									<div class="col-md-12" id="other_address_wrapper" @if ($user->company->companyaddress->count() == 1) hidden @endif>

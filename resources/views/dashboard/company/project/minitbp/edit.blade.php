@@ -929,11 +929,11 @@
 					return $('#finance1').is(':checked') === true;
 				}
 			},
-			// finance4joint: {
-			// 	required: function(element){
-			// 		return $('#finance4').is(':checked') === true;
-			// 	}
-			// },
+			finance3_other_detail: {
+				required: function(element){
+					return $('#finance3_other').is(':checked') === true;
+				}
+			},
 			// finance4jointmin: {
 			// 	required: function(element){
 			// 		return $('#finance4').is(':checked') === true;
@@ -962,9 +962,9 @@
 			finance1loan: {
 				required: 'กรุณากรอกมูลค่าเงินลงทุนที่ต้องการ'
 			},			
-			// finance4joint: {
-			// 	required: 'กรุณากรอกมูลค่าเงินลงทุนที่ต้องการ'
-			// },			
+			finance3_other_detail: {
+				required: 'กรุณาระบุรายละเอียด'
+			},			
 			// finance4jointmin: {
 			// 	required: 'กรุณากรอกสัดส่วนลงทุน บริษัท %'
 			// },			

@@ -1781,7 +1781,13 @@
 														
 														
 														<div class="col-md-12 @if ($key > 0) mt-3 @endif">	
-															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$companyemploy->employposition->name}}</label>
+															@php
+																$position = $companyemploy->employposition->name;
+																if ($position == 'อื่น ๆ (ระบุ)') {
+																	$position = $companyemploy->otherposition ;
+																}
+															@endphp
+															<label><u>คนที่ {{$count}}</u> : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}} ตำแหน่ง: {{$position}}</label>
 														</div>
 														
 														<div class="col-md-12">	

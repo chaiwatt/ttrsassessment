@@ -10,15 +10,21 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header pb-3">
-                    <h5 class="modal-title">นโยบายและข้อกำหนด</h5>
+                    <h5 class="modal-title">นโยบายและข้อกำหนด (กรุณาเลื่อนอ่านเพื่อยอมรับ)</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body py-0">
-                    {!!$generalinfo->consent!!}
+                    <div class="form-group"  >
+                        {!!$generalinfo->consent!!}
+                    </div>
+                    <div class="form-group float-right"  >
+                        <button type="button" id="btnaccept2" class="btn bg-primary" data-dismiss="modal">ยอมรับ</button>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer pt-3">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">ปิด</button>
-                    <button type="button" id="btnaccept" class="btn bg-primary" data-dismiss="modal" disabled>ยอมรับ</button>
+                    {{-- <button type="button" class="btn btn-link" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="btnaccept" class="btn bg-primary" data-dismiss="modal" disabled>ยอมรับ</button> --}}
                 </div>
             </div>
         </div>
@@ -110,6 +116,7 @@
                         @error('email')
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                         @enderror
+                        <span id="email_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> รูปแบบอีเมลไม่ถูกต้อง</span>
                     </div>
     
                     <div class="form-group form-group-feedback form-group-feedback-left">
@@ -121,6 +128,7 @@
                         @error('phone')
                             <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                         @enderror
+                        
                     </div>
 
                     <div id="pwd-container">
@@ -229,21 +237,34 @@
                     $('#password-confirm').attr("type", "password");
                 }
             });
-
-            $(document).on('change', '#password', function(e) {
-                var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
-                if(re.test($(this).val()) == false){
-                    $(this).val('')
-                    $("#password_input_error").attr("hidden",false);
+            $(document).on('change', '#email', function(e) {
+                if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(\w)+(?:\.[a-zA-Z0-9-]+)*$/.test($('#email').val())== false)
+                {
+                    $("#email_input_error").attr("hidden",false);
+                    $('#email').val('') ;
+                    return;
                 }else{
-                    
-                    $("#password_input_error").attr("hidden",true);
+                    $("#email_input_error").attr("hidden",true);
                 }
+            });
 
-                if($(this).val() == ''){
-                    $(".pwstrength_viewport_progress").attr("hidden",true);
-                }else{
-                    $(".pwstrength_viewport_progress").attr("hidden",false);
+            $(document).on('keyup', '#password', function(e) {
+                this.selectionStart = this.selectionEnd = this.value.length;
+                var patt = /[ก-๙]/g;
+                var res = patt.test($(this).val());
+                if(res == true &&  $(this).val() != ''){
+                   $(this).val().substring(0, $(this).val().length - 1);
+                   $(this).val(($(this).val().substring(0, $(this).val().length - 1)));
+                }
+            });
+
+            $(document).on('keyup', '#password-confirm', function(e) {
+                this.selectionStart = this.selectionEnd = this.value.length;
+                var patt = /[ก-๙]/g;
+                var res = patt.test($(this).val());
+                if(res == true &&  $(this).val() != ''){
+                   $(this).val().substring(0, $(this).val().length - 1);
+                   $(this).val(($(this).val().substring(0, $(this).val().length - 1)));
                 }
             });
 

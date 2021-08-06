@@ -261,7 +261,7 @@
 										>
 										<div class="form-group">
 											<label>คำนำหน้า อื่น</label>
-											<input type="text" name="alter_prefix" id="alter_prefix" value="{{$user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
+											<input type="text" name="alter_prefix" id="alter_prefix" value="{{old('alter_prefix') ?? $user->alter_prefix}}" data-placeholder="คำนำหน้า อื่น"class="form-control form-control-lg stringformat60">
 										</div>
 									</div>
 									<div class="col-md-6">

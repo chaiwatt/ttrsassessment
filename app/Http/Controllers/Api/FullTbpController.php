@@ -81,8 +81,11 @@ class FullTbpController extends Controller
             $year3 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
                 return $n >= 25 && $n <= 36;
             });
+
+            //=====new method check year one
+
             if(count($year1) != 0){
-                if(count($year2) != 0){
+                if(count($year2) != 0 || count($year3) != 0 ){
                     $year1 = range(min($year1),12);
                 }else{
                     $year1 = range(min($year1),max($year1));
@@ -90,25 +93,86 @@ class FullTbpController extends Controller
             }else{
                 $year1 = [];
             }
-            
-            if(count($year2) != 0){
-                if(count($year1) != 0){
-                    $year2 = range(13,max($year2));
+
+            //===== new method check year two
+
+            if(count($year1) != 0){
+                if(count($year3) != 0){
+                    if(count($year2) != 0){
+                        $year2 = range(13,24);
+                    }
+                    else{
+                        $year2 = range(13,24);
+                    }
+                    
                 }else{
-                    $year2 = range(min($year2),max($year2));
+                    if(count($year2) != 0){
+                        $year2 = range(13,max($year2));
+                    }else{
+                        $year2 = [];
+                    }
                 }
             }else{
-                $year2 = [];
+                if(count($year3) != 0){
+                    if(count($year2) != 0){
+                        $year2 = range(min($year2),24);
+                    }else{
+                        $year2 = [];
+                    }
+                }else{
+                    if(count($year2) != 0){
+                        $year2 = range(min($year2),max($year2));
+                    }else{
+                        $year2 = [];
+                    }
+                }
             }
-            if(count($year3) != 0){
-                if(count($year2) != 0){
+            //===== new method check year three
+            if(count($year1) != 0 || count($year2) != 0){
+                if(count($year3) != 0){
                     $year3 = range(25,max($year3));
                 }else{
-                    $year3 = range(min($year3),max($year3));
+                    $year3 = [];
                 }
             }else{
-                $year3 = [];
+                if(count($year3) != 0){
+                    $year3 = range(min($year3),max($year3));
+                }else{
+                    $year3 = [];
+                }
             }
+
+            //=====
+                    
+            // if(count($year1) != 0){
+            //     if(count($year2) != 0){
+            //         $year1 = range(min($year1),12);
+            //     }else{
+            //         $year1 = range(min($year1),max($year1));
+            //     }
+            // }else{
+            //     $year1 = [];
+            // }
+            
+            // if(count($year2) != 0){
+            //     if(count($year1) != 0){
+            //         $year2 = range(13,max($year2));
+            //     }else{
+            //         $year2 = range(min($year2),max($year2));
+            //     }
+            // }else{
+            //     $year2 = [];
+            // }
+            // if(count($year3) != 0){
+            //     if(count($year2) != 0){
+            //         $year3 = range(25,max($year3));
+            //     }else{
+            //         $year3 = range(min($year3),max($year3));
+            //     }
+            // }else{
+            //     $year3 = [];
+            // }
+
             $allyears = array(count($year1), count($year2), count($year3));
         }
         $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();

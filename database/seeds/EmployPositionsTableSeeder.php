@@ -38,6 +38,9 @@ class EmployPositionsTableSeeder extends Seeder
             ],
             [
                 'name' => 'นักการผลิต'
+            ],
+            [
+                'name' => 'อื่น ๆ (ระบุ)'
             ]
         ]);
     }

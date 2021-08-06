@@ -459,11 +459,18 @@
                         @if ($companyemploys->count() > 0)
                             @foreach ($companyemploys as $key => $companyemploy)
                                 <div style="page-break-inside: avoid;">
+                                    @php
+                                        $position = $companyemploy->employposition->name;
+                                        if ($position == 'อื่น ๆ (ระบุ)') {
+                                            $position = $companyemploy->otherposition ;
+                                        }
+                                    @endphp
+
                                     @if ($companyemploys->count() > 1)
                                     <div class="ml30 mt10" style="font-size:13px"><strong><u>ลำดับที่ {{$key +1}}</u></strong></div>
                                     @endif
                                     <div class="ml30 mt0" style="font-size:13px"> ชื่อ-นามสกุล : {{$companyemploy->prefix->name}}{{$companyemploy->name}} {{$companyemploy->lastname}}</div>
-                                    <div class="ml30 mt0" style="font-size:13px"> ตำแหน่ง : {{$companyemploy->employposition->name}}</div>
+                                    <div class="ml30 mt0" style="font-size:13px"> ตำแหน่ง : {{$position}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> โทรศัพท์ : {{$companyemploy->workphone}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> โทรศัพท์มือถือ : {{$companyemploy->phone}}</div>
                                     <div class="ml30 mt0" style="font-size:13px"> อีเมล : {{$companyemploy->email}}</div>

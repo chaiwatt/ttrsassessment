@@ -1,14 +1,14 @@
 
- $(".modal-body").on( 'scroll', function(){
-    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight){
-        $('#btnaccept').prop('disabled', false);
-        $('#term').prop('disabled', false);
-      }
- });
+//  $(".modal-body").on( 'scroll', function(){
+//     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight){
+//         $('#btnaccept').prop('disabled', false);
+//         $('#term').prop('disabled', false);
+//       }
+//  });
 
-$(document).on("click","#btnaccept",function(e){
-    // $(".chkterm").attr("checked",true);
-    $(".chkterm").attr('checked',true);
+$(document).on("click","#btnaccept2",function(e){
+    // $(".term").attr('checked',true);
+    $('#term').prop('disabled', false);
  });
 
 
@@ -22,6 +22,10 @@ $("#usergroup").on('change', function() {
     //     $("#vatwrapper").attr("hidden",true);
     // }
 });
+
+
+
+
 
 $("#vatno").on( 'change', function(){
     var vatid = $(this).val();

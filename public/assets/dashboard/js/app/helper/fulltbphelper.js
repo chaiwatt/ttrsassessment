@@ -139,7 +139,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
             if(prefix == 'อื่นๆ'){
                 prefix = employ.otherprefix;
             }	
-            if(position == 'อื่นๆ'){
+            if(position == 'อื่นๆ' || position == 'อื่น ๆ (ระบุ)'){
                 position = employ.otherposition;
             }	
 
@@ -3099,6 +3099,7 @@ $(document).on('click', '#btn_modal_add_researcher', function(e) {
     FullTbp.addResearcher(1,$('#fulltbpid').val(),$('#researcherfix').val(),$('#researchername').val(),$('#researcherlastname').val(),$('#researchereducation').val(),$('#researcherexperience').val(),$('#researchertraining').val()).then(data => {
         var html = ``;
         data.forEach(function (researcher,index) {
+
             html += `<tr >                                        
                 <td> ${researcher.prefix['name']}${researcher.name} ${researcher.lastname}</td>                                            
                 <td> ${researcher.education} </td>     
@@ -4136,7 +4137,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 
     //;
     $("#spinicon_add_employ_research").attr("hidden",false);
-    Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),"",$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
+    Employ.saveEmploy($('#employprefix_research').val(),$('#otherprefix_research').val(),$('#employname_research').val(),$('#employlastname_research').val(),$('#employposition_research').val(),$('#otherresearchposition').val(),$('#employphone_research').val(),$('#employworkphone_research').val(),$('#employemail_research').val()).then(data => {
+
         var dataid = 0;
         var html = ``;
         console.log(data);
@@ -4148,7 +4150,7 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                     if(prefix == 'อื่นๆ'){
                         prefix = employ.otherprefix;
                     }
-                    if(position == 'อื่นๆ'){
+                    if(position == 'อื่น ๆ (ระบุ)'){
                         position = employ.otherposition;
                     }	
 
@@ -4176,7 +4178,7 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                     </tr>`
                 }
             });
-           
+            $("#spinicon_add_employ_research").attr("hidden",true);
             $('#modal_add_employ_research').modal('hide')
          $("#fulltbp_researcher_wrapper_tr").html(html);
          if(data.length > 0){
@@ -4212,7 +4214,7 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                         if(prefix == 'อื่นๆ'){
                             prefix = employ.otherprefix;
                         }
-                        if(position == 'อื่นๆ'){
+                        if(position == 'อื่น ๆ (ระบุ)'){
                             position = employ.otherposition;
                         }	
 
@@ -4566,6 +4568,14 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             $("#employ_otherposition_wrapper").attr("hidden",false);
         } else{
             $("#employ_otherposition_wrapper").attr("hidden",true);
+        }
+    });
+
+    $(document).on('change', '#employposition_research', function(e) {
+        if($("#employposition_research option:selected").text() == 'อื่น ๆ (ระบุ)'){
+            $("#employ_position_other_research_wrapper").attr("hidden",false);
+        } else{
+            $("#employ_position_other_research_wrapper").attr("hidden",true);
         }
     });
 
