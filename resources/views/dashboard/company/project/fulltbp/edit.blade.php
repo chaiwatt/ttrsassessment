@@ -7,6 +7,11 @@
 th {
   text-align: center !important;
 }
+
+    textarea {
+        font-size: 16px !important;
+    }
+
 </style>
 @stop
 @section('content')
@@ -1135,7 +1140,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-								<input type="text" id="numproject" placeholder="" class="form-control form-control-lg numeralformat3">
+								<input type="text" id="numproject" placeholder="" class="form-control form-control-lg numeralformath13">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1153,7 +1158,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
-								<input type="text" id="debtpercenttosale" placeholder="" class="form-control form-control-lg numeralformat2">
+								<input type="text" id="debtpercenttosale" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1193,7 +1198,7 @@ th {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>จำนวนผลิตภัณฑ์หรือโครงการ</label><span class="text-danger">*</span>
-									<input type="text" id="numprojectedit" placeholder="" class="form-control form-control-lg numeralformat3">
+									<input type="text" id="numprojectedit" placeholder="" class="form-control form-control-lg numeralformat13">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -1211,7 +1216,7 @@ th {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>เปรียบเทียบกับยอดขาย (%)</label><span class="text-danger">*</span>
-									<input type="text" id="debtpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat2">
+									<input type="text" id="debtpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat3">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -1261,7 +1266,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpercenttosale" placeholder="" class="form-control form-control-lg numeralformat2">
+								<input type="text" id="creditpercenttosale" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1312,7 +1317,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="text" id="creditpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat2">
+								<input type="text" id="creditpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1334,7 +1339,7 @@ th {
 	
 	{{-- modal_edit_asset --}}
 	<div id="modal_edit_asset" class="modal fade" style="overflow:hidden;">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เงินลงทุนในสินทรัพย์ถาวรของโครงการ</h5>
@@ -1362,7 +1367,7 @@ th {
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
-								<input type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" class="form-control form-control-lg">
+								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg"></textarea>
 							</div>
 						</div>
 					</div>

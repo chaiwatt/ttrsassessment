@@ -504,7 +504,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียนคุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send(User::find($expertassignment->user_id)->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียน คุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
    
         }else{
             FullTbp::find($request->fulltbpid)->update([
@@ -552,19 +552,19 @@ class DashboardAdminProjectFullTbpController extends Controller
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
             $timeLinehistory->mini_tbp_id = $minitbp->id;
-            $timeLinehistory->details = 'TTRS: แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติ';
+            $timeLinehistory->details = 'TTRS: แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติแล้ว';
             $timeLinehistory->message_type = 2;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
 
-            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ',$auth->id,$_user->id);
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติแล้วแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ',$auth->id,$_user->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_company->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ของท่านได้รับอนุมัติ';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติแล้ว';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -587,7 +587,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
 
             EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name .' จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านได้รับอนุมัติแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ได้ผ่านการอนุมัติแล้วแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
             $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first();
             if($projectstatustransaction->status == 1){

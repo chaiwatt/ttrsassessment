@@ -18,6 +18,7 @@ class CreateProjectLogsTable extends Migration
             $table->unsignedBigInteger('mini_tbp_id');
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
+            $table->longText('viewer')->nullable();
             $table->string('action',250)->nullable();
             $table->timestamps();
         });

@@ -62,12 +62,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <th >รายการ</th> 
-                                        <th >วันที่กำหนด</th>
-                                        <th >วันที่ Action</th>
-                                        <th >ภาพรวม</th>
-                                        <th>สถานภาพ</th> 
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">รายการ</th> 
+                                        <th style="text-align: center">วันที่กำหนด</th>
+                                        <th style="text-align: center">วันที่ Action</th>
+                                        <th style="text-align: center">ภาพรวม</th>
+                                        <th style="text-align: center">สถานภาพ</th> 
                                     </tr>
                                 </thead>
                                 <tbody >
@@ -83,8 +83,8 @@
                                         @endphp --}}
                                         <tr>
                                             <td>{{$projectstatus->projectflow}}</td>
-                                            <td>{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
-                                            <td>{{$projectstatus->actualdateth}}</td>
+                                            <td style="text-align: center">{{$projectstatus->startdateth}} - {{$projectstatus->enddateth}}</td>
+                                            <td style="text-align: center">{{$projectstatus->actualdateth}}</td>
                                             <td style="text-align:center">
                                                 {{-- @if ()
                                                     
@@ -127,15 +127,15 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>วันที่</th> 
-                                        <th>รายละเอียด</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">วันที่</th> 
+                                        <th style="text-align: center">รายละเอียด</th>
                                     </tr>
                                 </thead>
                                 <tbody id="timeline_wrapper_tr">
                                     @foreach ($timelinehistories as $timelinehistory)
                                         <tr>
-                                            <td> {{$timelinehistory->createdatth}} </td>                            
+                                            <td style="text-align: center"> {{$timelinehistory->createdatth}} </td>                            
                                             <td> {{html_entity_decode(strip_tags($timelinehistory->details))}} </td>  
                                         </tr>
                                     @endforeach
@@ -158,8 +158,8 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-info">
-                                        <th style="width:150px">Mini TBP</th> 
-                                        <th >วันที่ส่งเอกสาร</th>
+                                        <th style="width:150px;text-align: center">Mini TBP</th> 
+                                        <th style="text-align: center" >วันที่ส่งเอกสาร</th>
                                         {{-- <th style="width:1%">เอกสารแนบ</th>  --}}
                                         <th style="width:1%;white-space: nowrap">PDF</th>
                                        
@@ -179,7 +179,7 @@
                                             @endif
                                             
                                         </td> 
-                                        <td>{{$minitbp->submitdateth}}</td> 
+                                        <td >{{$minitbp->submitdateth}}</td> 
                                        
                                         <td style="white-space: nowrap"> 
                                             <a href="{{asset($minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
@@ -192,11 +192,11 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
-                                            <th style="width:150px">Full TBP</th> 
-                                            <th style="width:1%; white-space: nowrap">วันที่ส่งเอกสาร</th>
-                                            <th >รายละเอียดการแก้ไข</th>
-                                            <th style="width:1%; white-space: nowrap">PDF</th>
-                                            <th style="width:1% ;white-space: nowrap">เอกสารแนบ</th> 
+                                            <th style="width:150px;text-align: center">Full TBP</th> 
+                                            <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
+                                            <th style="text-align: center">รายละเอียดการแก้ไข</th>
+                                            <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
+                                            <th style="width:1% ;white-space: nowrap;text-align: center">เอกสารแนบ</th> 
                                           
                                            
                                         </tr>
@@ -221,7 +221,7 @@
                                                     </td> 
                                                     @endif
  
-                                                    <td>{{$fulltbphistory->submitdateth}}</td> 
+                                                    <td style="text-align: center">{{$fulltbphistory->submitdateth}}</td> 
                                                     <td>{{$fulltbphistory->message}}</td> 
 
                                                     <td style="white-space: nowrap"> 
@@ -262,8 +262,8 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th style="width:600px">ตำแหน่งรับผิดชอบ</th> 
-                                                <th>ชื่อ-นามสกุล</th> 
+                                                <th style="width:600px;text-align: center">ตำแหน่งรับผิดชอบ</th> 
+                                                <th style="text-align: center">ชื่อ-นามสกุล</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -309,9 +309,9 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
-                                                    <th style="width:600px">ชื่อ EV</th> 
-                                                    <th>เวอร์ชั่น</th> 
-                                                    <th style="width:1%">เพิ่มเติม</th> 
+                                                    <th style="width:600px;text-align: center">ชื่อ EV</th> 
+                                                    <th style="text-align: center">เวอร์ชั่น</th> 
+                                                    <th style="width:1%;text-align: center">เพิ่มเติม</th> 
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -354,8 +354,8 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
-                                                    <th >ชื่อเอกสาร</th> 
-                                                    <th style="width:1%;white-space: nowrap">เพิ่มเติม</th> 
+                                                    <th style="text-align: center">ชื่อเอกสาร</th> 
+                                                    <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th> 
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -388,9 +388,9 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
-                                            <th style="width:600px">ชื่อ-นามสกุล</th> 
+                                            <th style="width:600px;text-align: center">ชื่อ-นามสกุล</th> 
                                             <th style="text-align: center">ความแม่นยำ</th> 
-                                            <th style="width:1%;white-space: nowrap">การลงคะแนน</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align: center">การลงคะแนน</th> 
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -436,11 +436,11 @@
                             <table class="table table-bordered table-striped"  >
                                 <thead>
                                     <tr class="bg-info">
-                                        <th >คะแนน</th> 
-                                        <th >เกรด</th>
-                                        <th >จดหมายแจ้งผล</th>
-                                        <th >Certificate</th>
-                                        <th style="width:1%;white-space: nowrap">รายงานผล</th> 
+                                        <th style="text-align: center">คะแนน</th> 
+                                        <th style="text-align: center">เกรด</th>
+                                        <th style="text-align: center">จดหมายแจ้งผล</th>
+                                        <th style="text-align: center">Certificate</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">รายงานผล</th> 
                                     </tr>
                                 </thead>
                                 <tbody >
@@ -522,15 +522,15 @@
                             <table class="table table-bordered table-striped">
                                 <thead >
                                     <tr class="bg-info">
-                                        <th>วันที่</th> 
-                                        <th style="width:70%">รายละเอียด</th>
+                                        <th style="text-align: center">วันที่</th> 
+                                        <th style="width:70%;text-align: center">รายละเอียด</th>
                                         <th>โดย</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="timeline_wrapper_tr">
                                     @foreach ($projectlogs as $projectlog)
                                         <tr>
-                                            <td> {{$projectlog->createdatth}} </td>                            
+                                            <td style="text-align: center"> {{$projectlog->createdatth}} </td>                            
                                             <td> {{html_entity_decode(strip_tags($projectlog->action))}} </td>  
                                             <td> คุณ{{$projectlog->user->name}} {{$projectlog->user->lastname}}</td>  
                                         </tr>

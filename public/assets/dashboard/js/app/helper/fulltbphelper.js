@@ -715,6 +715,20 @@ $(document).on('click', '#btnstckholder', function(e) {
     $('#modal_add_stockholder').modal('show');
 });
 
+$(document).on('change', '#debtpercenttosale', function(e) {
+  if ($(this).val() > 100 );{
+    $(this).val(100)
+  }
+});
+
+$(document).on('change', '#creditpercenttosale', function(e) {
+    if ($(this).val() > 100 );{
+      $(this).val(100)
+    }
+  });
+
+
+
 $(document).on('click', '#add_debtpartner', function(e) {
     $('#debtpartner').val('');
     $('#numproject').val('');

@@ -306,7 +306,11 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->save();
         }
 
-        $messagebox =  Message::sendMessage('นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project ,'นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project,$auth->id,$company->user_id);
+        $messagebox =  Message::sendMessage('นัดหมายการประเมิน ณ สถานประกอบการ' , 'แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียดดังนี้
+        <br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+        '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+        '<br><strong>&nbsp;สถานที่:</strong> '.$request->place,$auth->id,$company->user_id);
+
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -329,7 +333,7 @@ class DashboardAdminCalendarController extends Controller
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
         $timeLinehistory->mini_tbp_id = $minitbp->id;
-        $timeLinehistory->details = 'TTRS: นัดหมายการประเมิน ณ สถานประกอบการ';
+        $timeLinehistory->details = 'TTRS: นัดหมายการประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project. ' วันที่ ' . $request->eventdate . ' เวลา ' . $request->eventtimestart. ' - ' . $request->eventtimeend . ' สถานที่ ' . $request->place;
         $timeLinehistory->message_type = 2;
         $timeLinehistory->owner_id = $company->user_id;
         $timeLinehistory->user_id = $auth->id;
