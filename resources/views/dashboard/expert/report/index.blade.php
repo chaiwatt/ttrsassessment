@@ -230,7 +230,7 @@
                                         @if ($fulltbp->canceldate == null)    
                                             <tr>
                                                 <td>  
-                                                    {{-- <a class="text-info" href="{{route('dashboard.expert.project.fulltbp.view',['id' => $fulltbp->id])}}" >{{$fulltbp->minitbp->project}}</a> --}}
+                                                    
                                                     @if ($fulltbp->expertassignment->accepted == 1)
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                                     @else

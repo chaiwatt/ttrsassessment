@@ -5,6 +5,13 @@
 	th {
 	  text-align: center !important;
 	}
+	
+	.tbwrapper { overflow-x: auto; }
+	
+
+
+	.tbwrapper table { white-space: nowrap }
+	
 	</style>
 @stop
 @section('content')
@@ -2313,13 +2320,13 @@
 											
 										{{-- </div> --}}
 									</div>
-									<div class="col-md-12">			
+									<div class="col-md-12" >			
 										<table class="table table-bordered table-striped" style="width: 100%">
 											<thead>
 												<tr>
 				
 													<tr>
-														<th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+														<th rowspan="2" style="padding:5px;width:1%;white-space: nowrap">รายละเอียดการดำเนินงาน</th> 
 														@foreach ($allyears as $key => $item)
 															@if ($item != 0)
 																<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
@@ -2351,7 +2358,7 @@
 												@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
 										
 													<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-														<td style="width: 450px;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
+														<td style="width: 350px;word-wrap: break-word;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
 														@php
 															$_count = 1;
 														@endphp
@@ -2633,7 +2640,7 @@
 															<td class="text-right"> {{number_format($fulltbpasset->cost, 2)}} </td> 
 															<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 															<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
-															<td> {{$fulltbpasset->specification}} </td> 
+															<td style="max-width: 350px;word-wrap: break-word;"> {{$fulltbpasset->specification}} </td> 
 														</tr>
 													@endforeach              
 												</tbody>

@@ -3076,7 +3076,7 @@ th {
 																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
 																			<td> {{$fulltbpasset->specification}} </td> 
-																			<td style="width:1%;white-space: nowrap" class="hiddenelement_fulltbp"> 
+																			<td style="max-width: 350px;word-wrap: break-word;" class="hiddenelement_fulltbp"> 
 																				<a  data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 
 																		</tr>

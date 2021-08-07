@@ -225,12 +225,6 @@
 											</div>
 										</div>
 									@endif
-									{{-- <div class="col-md-12">  
-										<legend>
-											<label for=""><strong>ที่อยู่</strong> <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_add_address">คลิกเพิ่มที่อยู่อื่นๆ</a></label>
-										</legend>
-									</div> --}}
-
 
 									@php
 										$companyaddress = $user->company->companyaddress->first();
@@ -371,7 +365,7 @@
 														<thead>
 															<tr class="bg-info">
 																<th style="width:80%">ไฟล์</th> 
-																<th style="width:20%">เพิ่มเติม</th>                                                                                   
+																<th style="width:20%">สถานะ</th>                                                                                   
 															</tr>
 														</thead>
 														<tbody id="fulltbp_companydoc_wrapper_tr"> 
@@ -388,7 +382,41 @@
 													</table>
 												</div>
 											</div>
-										{{-- </div> --}}
+										</div>
+									</div>
+									
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="">โครงการที่ขอรับการประเมิน  </label>
+											<div class="table-responsive">
+												<table class="table table-bordered table-striped">
+													<thead>
+														<tr class="bg-info">
+															<th style="width:80%">ชื่อโครงการ</th> 
+															<th style="width:20%">สถานะ</th>
+														</tr>
+													</thead>
+													<tbody id="reportsearch_wrapper">
+														@foreach ($fulltbps as $fulltbp)
+														<tr>
+															<td>  
+																<a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+															</td>  
+															<td>  
+																@if ($fulltbp->minitbp->businessplan->business_plan_status_id < 10)
+																		
+																		<span class="badge bg-warning badge-pill ml-2" >อยู่ระหว่างการประเมิน</span>
+																	@else
+																		
+																		<span class="badge bg-success badge-pill ml-2" >ประเมินเสร็จสิ้น</span>
+																@endif
+															</td>  
+														</tr>  
+														@endforeach
+													</tbody>
+												</table>      
+											</div>
+										<div class="form-group">
 									</div>
 									{{-- <div class="col-md-6">  
 										<div class="form-group">

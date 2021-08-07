@@ -12,6 +12,7 @@ use App\Model\RegisteredCapitalType;
 class DashboardAdminSearchCompanyController extends Controller
 {
     public function Index(){
+        
         $fulltbbs = FullTbp::get();
         $industrygroups = IndustryGroup::get();
         $isics = Isic::get();

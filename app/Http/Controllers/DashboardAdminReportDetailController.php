@@ -44,6 +44,22 @@ class DashboardAdminReportDetailController extends Controller
         $bols = Bol::where('full_tbp_id',$fulltbp->id)->get();
         $timelinehistories = TimeLineHistory::where('business_plan_id',$businessplan->id)->orderBy('id','desc')->paginate(5);
         $projectlogs = ProjectLog::where('mini_tbp_id',$minitbp->id)->orderBy('id','desc')->paginate(7);
+
+      
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
         if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
             return view('dashboard.admin.report.detail.view')->withCompany($company)
                 ->withProjectmembers($projectmembers)
@@ -56,7 +72,8 @@ class DashboardAdminReportDetailController extends Controller
                 ->withProjectlogs($projectlogs)
                 ->withMinitbp($minitbp)
                 ->withBusinessplan($businessplan)
-                ->withFulltbp($fulltbp);
+                ->withFulltbp($fulltbp)
+                ->withFullcompanyname($fullcompanyname);
         }else{
             Auth::logout();
             Session::flush();

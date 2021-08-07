@@ -142,26 +142,19 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th>บริษัท</th>
                                         <th>ชื่อโครงการ</th> 
-                                        {{-- <th>ทุนจดทะเบียน</th>  --}}
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">
                                     @foreach ($fulltbps as $fulltbp)
                                     <tr>
-                                        {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td>
                                             <a  href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->name}} </a>
                                         </td> 
                                         <td>
-                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                         </td>  
-                                        {{-- <td> {{number_format(@$fulltbp->minitbp->businessplan->company->registeredcapital, 2, '.', '')}}</td>   --}}
-                                        {{-- <td>
-                                            <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span> 
-                                        </td>                                        --}}
                                     </tr>  
                                     @endforeach
                                 </tbody>
