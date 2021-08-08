@@ -6,6 +6,7 @@ use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
+use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +17,8 @@ class UserArray
         $arr = ProjectAssignment::where('business_plan_id',$businessplanid)->pluck('leader_id')->toArray();
         return $arr;
     } 
-    public static function coleader($minitbpid){
-        $arr = ProjectAssignment::where('business_plan_id',$businessplanid)->first()->pluck('coleader_id')->toArray();
+    public static function coleader($businessplanid){
+        $arr = ProjectAssignment::where('business_plan_id',$businessplanid)->pluck('coleader_id')->toArray();
         return $arr;
     } 
     public static function adminandjd(){
@@ -27,10 +28,16 @@ class UserArray
     } 
     public static function expert($businessplanid){
         $businessplan = BusinessPlan::find($businessplanid);
-        $company = Company::find($businessplan->company_id);
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
         $arr = ExpertAssignment::where('full_tbp_id',$fulltbp->id)->pluck('user_id')->toArray();
+        return $arr;
+    } 
+    public static function projectmember($businessplanid){
+        $businessplan = BusinessPlan::find($businessplanid);
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        $arr = ProjectMember::where('full_tbp_id',$fulltbp->id)->pluck('user_id')->toArray();
         return $arr;
     } 
 }
