@@ -14,6 +14,7 @@ use App\Model\Scoring;
 use App\Model\Criteria;
 use App\Model\Province;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
 use App\Model\FinalGrade;
 use App\Model\ProjectLog;
 use App\Model\BusinessPlan;
@@ -594,9 +595,15 @@ class DashboardAdminProjectAssessmentController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);  
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         
+        $arr1 = User::where('id',$auth->id)->pluck('id')->toArray();
+        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr3 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'นำส่งคะแนน';
         $projectlog->save();
         

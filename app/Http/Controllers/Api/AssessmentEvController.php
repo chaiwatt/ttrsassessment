@@ -12,6 +12,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\SubPillar;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\AlertMessage;
@@ -430,9 +431,14 @@ class AssessmentEvController extends Controller
 
         EmailBox::send(User::find($jd->id)->email,'TTRS:' . $message,'เรียน Manager<br><br> ' . $message.' โปรดตรวจสอบ <a href="'.route('dashboard.admin.project.fulltbp.editev',['id' => $request->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'สร้าง/แก้ไขรายการ EV';
         $projectlog->save();
 
@@ -494,10 +500,14 @@ class AssessmentEvController extends Controller
 
             CreateUserLog::createLog('อนุมัติรายการ EV โครงการ' . $minitbp->project);
 
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2));
             
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $userarray;
             $projectlog->action = 'อนุมัติรายการ EV';
             $projectlog->save();
 
@@ -733,9 +743,11 @@ class AssessmentEvController extends Controller
 
         EmailBox::send($jd->email,'TTRS:'. $message,'เรียน Manager<br><br> ' .$message.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
        
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $arr1;
         $projectlog->action = 'กำหนดค่า EV Weight';
         $projectlog->save();
 
@@ -826,9 +838,14 @@ class AssessmentEvController extends Controller
 
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:มีรายการแก้ไข EV โครงการ'.$minitbp->project.' (' .$fullcompanyname.')','เรียน Leader<br><br> Manager ได้ตรวจสอบ EV โครงการ' . $minitbp->project .$fullcompanyname. ' มีรายการแก้ไข โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.editev',['id' => $ev->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
  
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'ส่งคืนแก้ไขรายการ EV (รายละเอียด: ' .$request->comment. ')';
         $projectlog->save();
 
@@ -913,10 +930,12 @@ class AssessmentEvController extends Controller
             ]);
 
             EmailBox::send($admin->email,'TTRS:แก้ไขค่า Weight EV โครงการ'.$minitbp->project. $fullcompanyname,'เรียน Admin<br> Manager แจ้งแก้ไขค่า Weight EV โครงการ '.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบที่นี่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-
+            
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $arr1;
             $projectlog->action = 'ส่งคืนแก้ไข Weight ของ EV (รายละเอียด: ' .$request->comment. ')';
             $projectlog->save();
 
@@ -979,10 +998,12 @@ class AssessmentEvController extends Controller
             ]);
 
             EmailBox::send($admin->email,'TTRS:EV โครงการ' . $minitbp->project.' บริษัท' . $company->name .' ผ่านการอนุมัติ','เรียน Admin<br> Manager ได้อนุมัติ EV สำหรับโครงการ '.$minitbp->project.' ตรวจสอบได้ที่ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.evweight.edit',['id' => $request->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
 
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $arr1;
             $projectlog->action = 'อนุมัติ EV Weight';
             $projectlog->save();
 

@@ -9,6 +9,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\AlertMessage;
@@ -86,9 +87,14 @@ class DashboardAdminProjectCancelController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'ยกเลิกโครงการ'.$minitbp->project  . $fullcompanyname. ' (รายละเอียด: ' .$request->cancelreason. ')';
         $projectlog->save();
 

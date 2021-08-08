@@ -1043,10 +1043,10 @@
 											<table class="table table-bordered table-striped">
 												<thead>
 													<tr class="bg-info">
-														<th style="width:35%">ชื่อ นามสกุล</th> 
-														<th style="width:25%">ตำแหน่ง</th>   
-														<th style="width:15%">ลายมือชื่อ</th>
-														<th style="width:1%;white-space: nowrap" class="text-center">เพิ่มเติม</th>                                                                                   
+														<th style="width:35%;text-align:center">ชื่อ นามสกุล</th> 
+														<th style="width:25%;text-align:center">ตำแหน่ง</th>   
+														<th style="width:15%;text-align:center">ลายมือชื่อ</th>
+														<th style="width:1%;white-space: nowrap;text-align:center" class="text-center">เพิ่มเติม</th>                                                                                   
 													</tr>
 												</thead>
 												<tbody id="authorized_director_wrapper_tr"> 

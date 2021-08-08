@@ -195,15 +195,15 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="maintable">
                                 <thead>
-                                    <tr>
-                                        <th>ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap">บริษัท</th>
-                                        <th style="width:1%;white-space: nowrap">ความเห็น Manager</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align:center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
                                         @if (Auth::user()->user_type_id >= 4)
-                                            <th style="width:1%;white-space: nowrap">การอนุมัติ</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align:center">การอนุมัติ</th> 
                                         @endif
                                         
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                  
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เพิ่มเติม</th>                                  
                                     </tr>
                                 </thead>
                                 <tbody>

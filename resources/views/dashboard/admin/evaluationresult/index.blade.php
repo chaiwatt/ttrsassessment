@@ -61,14 +61,14 @@
                         <div class="table-responsive">
                             <table class="table text-nowrap" id="maintable">
                                 <thead>
-                                    <tr>
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>คะแนน</th>
-                                        <th>เกรด</th>     
-                                        <th style="width:1%;white-space: nowrap">รายงานผล</th>    
-                                        <th style="width:1%;white-space: nowrap">แจ้งผล</th> 
-                                        <th style="width:1%;white-space: nowrap">แจ้งผลทางจดหมาย</th>  
-                                        <th style="width:1%;white-space: nowrap">สิ้นสุดโครงการ</th>              
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="text-align: center">คะแนน</th>
+                                        <th style="text-align: center">เกรด</th>     
+                                        <th style="width:1%;white-space: nowrap;text-align: center">รายงานผล</th>    
+                                        <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผล</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผลทางจดหมาย</th>  
+                                        <th style="width:1%;white-space: nowrap;text-align: center">สิ้นสุดโครงการ</th>              
                                     </tr>
                                 </thead>
                                 <tbody style="min-height:300px">
@@ -77,8 +77,8 @@
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                 <tr>    
                                                     <td> {{$fulltbp->minitbp->project}} </td> 
-                                                    <td> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
-                                                    <td> {{@$fulltbp->projectgrade->grade}} </td> 
+                                                    <td style="text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
+                                                    <td style="text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
                                                     <td style="white-space: nowrap"> 
                                                         @if(@$fulltbp->projectstatustransaction(8)->status != 2)
                                                             <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>

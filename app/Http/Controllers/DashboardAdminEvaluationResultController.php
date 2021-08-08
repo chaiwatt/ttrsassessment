@@ -18,17 +18,18 @@ use App\Helper\Message;
 use App\Model\Province;
 use App\Model\ThaiBank;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
+
+
 use App\Model\ProjectLog;
-
-
 use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
+
 use App\Model\EvaluationDay;
 
 use Illuminate\Http\Request;
-
 use App\Helper\CreateUserLog;
 use App\Model\CompanyAddress;
 use App\Helper\DateConversion;
@@ -38,8 +39,8 @@ use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Helper\ThaiNumericConverter;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 use setasign\Fpdi\PdfParser\StreamReader;
@@ -101,9 +102,14 @@ class DashboardAdminEvaluationResultController extends Controller
         $fulltbp = FullTbp::find(EvaluationResult::find($id)->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = Auth::user()->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'เพิ่ม/แก้ไขบทวิเคราะห์';
         $projectlog->save();
         

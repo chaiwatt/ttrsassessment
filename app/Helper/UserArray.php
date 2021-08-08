@@ -15,11 +15,20 @@ class UserArray
 {
     public static function leader($businessplanid){
         $arr = ProjectAssignment::where('business_plan_id',$businessplanid)->pluck('leader_id')->toArray();
-        return $arr;
+        if(in_array(null, $arr, true) == false){
+            return $arr;
+        }else{
+            return [];
+        }
+       
     } 
     public static function coleader($businessplanid){
-        $arr = ProjectAssignment::where('business_plan_id',$businessplanid)->pluck('coleader_id')->toArray();
-        return $arr;
+        $arr = ProjectAssignment::where('business_plan_id',$businessplanid)->pluck('leader_id')->toArray();
+        if(in_array(null, $arr, true) == false){
+            return $arr;
+        }else{
+            return [];
+        }
     } 
     public static function adminandjd(){
         $arr=array();

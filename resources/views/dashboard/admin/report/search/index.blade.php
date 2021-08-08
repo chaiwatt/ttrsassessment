@@ -114,12 +114,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th>สถานภาพ</th> 
-                                        <th>เพิ่มเติม</th> 
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="text-align: center">บริษัท</th>
+                                        <th style="text-align: center">สถานภาพ</th> 
+                                        <th style="text-align: center">เพิ่มเติม</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">

@@ -64,12 +64,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="maintable">
                                 <thead>
-                                    <tr>
-                                        <th>เลขที่โครงการ</th>
-                                        <th>ชื่อโครงการ</th>    
-                                        <th>บริษัท</th>  
-                                        <th>สถานภาพ</th>                             
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">เลขที่โครงการ</th>
+                                        <th style="text-align: center">ชื่อโครงการ</th>    
+                                        <th style="text-align: center">บริษัท</th>  
+                                        <th style="text-align: center">สถานภาพ</th>                             
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>

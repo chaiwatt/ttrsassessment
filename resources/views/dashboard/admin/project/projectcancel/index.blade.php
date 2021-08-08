@@ -63,11 +63,11 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="maintable">
                                 <thead>
-                                    <tr>
-                                        <th  style="width:20%;">เลขที่โครงการ</th>
-                                        <th>ชื่อโครงการ</th>    
-                                        <th>วันที่ยกเลิก</th>                             
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th  style="width:20%;text-align: center">เลขที่โครงการ</th>
+                                        <th style="text-align: center">ชื่อโครงการ</th>    
+                                        <th style="text-align: center">วันที่ยกเลิก</th>                             
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +76,7 @@
                                     <tr>    
                                         <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                         <td> <a class="text-info" href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}">{{$fulltbp->minitbp->project}} </a> </td> 
-                                        <td> {{$fulltbp->canceldateth}} </td> 
+                                        <td style="text-align: center"> {{$fulltbp->canceldateth}} </td> 
                                         {{-- <td>
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)
                                                     <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
@@ -94,7 +94,7 @@
                                                     @endif
                                             @endif
                                         </td>                                         --}}
-                                        <td style="white-space: nowrap"> 
+                                        <td style="white-space: nowrap;text-align: center"> 
                                             @if (!Empty($fulltbp->canceldate))
                                                     
                                                     <a href="{{route('dashboard.admin.project.cancel',['id' => $fulltbp->id])}}" class="badge badge-flat border-danger text-danger-600">ยกเลิกโครงการแล้ว</a>

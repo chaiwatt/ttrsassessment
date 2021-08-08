@@ -101,14 +101,14 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="maintable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th style="width:1%;white-space: nowrap">ความเห็นผู้เชี่ยวชาญ</th> 
-                                        <th style="width:1%;white-space: nowrap">ทีมลงคะแนน</th> 
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="text-align: center">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">ความเห็นผู้เชี่ยวชาญ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">ทีมลงคะแนน</th> 
 
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                       
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>
                                 <tbody>

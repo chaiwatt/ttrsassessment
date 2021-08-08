@@ -8,6 +8,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\AlertMessage;
@@ -106,9 +107,15 @@ class DashboardExpertProjectCommentController extends Controller
         
         EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญ (คุณ'.$auth->name .' '. $auth->lastname .') ได้แสดงความเห็น โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name .' '. $auth->lastname .' ได้แสดงความเห็น โครงการ' . $minitbp->project.' (' .$fullcompanyname . ') โปรดตรวจสอบ <a href='.route('dashboard.admin.project.assessment.expertcomment',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
+        $arr1 = User::where('id',$auth->id)->pluck('id')->toArray();
+        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr3 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'ผู้เชี่ยวชาญได้แสดงความเห็นโครงการ'. $minitbp->project .$fullcompanyname;
         $projectlog->save();
 

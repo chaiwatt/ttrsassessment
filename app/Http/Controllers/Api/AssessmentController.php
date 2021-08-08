@@ -10,6 +10,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\FullTbpCost;
@@ -224,9 +225,14 @@ class AssessmentController extends Controller
             EmailBox::send($_user->email,'TTRS:ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project  .$fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> LEADER ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project. $fullcompanyname.' <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = Auth::user()->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'ยืนยันส่งจดหมายแจ้งผล';
         $projectlog->save();
 
@@ -319,6 +325,10 @@ class AssessmentController extends Controller
         $timeLinehistory->owner_id = $company->user_id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
+
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

@@ -11,6 +11,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\GeneralInfo;
@@ -474,9 +475,15 @@ class FullTbpController extends Controller
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 
+        $arr1 = UserArray::expert($minitbp->business_plan_id);
+        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr3 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3)); 
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'ยืนยันการลงพื้นที่';
         $projectlog->save();
 

@@ -13,6 +13,7 @@ use App\Helper\Message;
 use App\Model\Province;
 use App\Helper\EmailBox;
 use App\Model\ExpertDoc;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\ExpertField;
@@ -92,6 +93,18 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         return $id;
     }
     public function EditSave(EditProjectAssignementRequest $request,$id){
+        // $businessplan = BusinessPlan::find(ProjectAssignment::find($id)->business_plan_id);
+        // $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        // $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+
+        // $arr1 = UserArray::projectmember($minitbp->business_plan_id);
+        // $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+        // $arr3 = UserArray::leader($minitbp->business_plan_id);
+        // $arr4 = UserArray::coleader($minitbp->business_plan_id);
+        // $userarray = array_unique(array_merge($arr1,$arr2,$arr3,$arr4));
+
+        // return $arr1;
+
         $auth = Auth::user();
         ProjectAssignment::find($id)->update([
             'leader_id' => $request->leader,
@@ -181,9 +194,16 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
             'actual_startdate' =>  Carbon::now()->toDateString()
         ]);
 
+        $arr1 = UserArray::projectmember($minitbp->business_plan_id);
+        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr3 = UserArray::leader($minitbp->business_plan_id);
+        $arr4 = UserArray::coleader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3,$arr4));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'มอบหมาย Leader และ Co-Leader';
         $projectlog->save();
 

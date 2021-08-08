@@ -78,9 +78,14 @@ class DashboardAdminFollowUpController extends Controller
             $result = 'ไม่บรรลุตามจุดประสงค์';
         }
 
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'เพิ่มผลการติดตามโครงการ (รายละเอียด: ' .$result. ')';
         $projectlog->save();
 

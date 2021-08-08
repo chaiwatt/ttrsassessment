@@ -59,12 +59,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th style="width:50px">#</th>
-                                        <th>วันที่ขอ</th> 
-                                        <th>เลขที่โครงการ</th> 
-                                        <th>บริษัท</th>
-                                        <th>เพิ่มเติม</th>                                                                 
+                                    <tr class="bg-info">
+                                        <th style="width:50px;text-align:center">#</th>
+                                        <th style="text-align:center">วันที่ขอ</th> 
+                                        <th style="text-align:center">เลขที่โครงการ</th> 
+                                        <th style="text-align:center">บริษัท</th>
+                                        <th style="text-align:center">เพิ่มเติม</th>                                                                 
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -260,15 +260,15 @@
                                 <table class="mt5  tbwrap" >
                                     <thead>
                                         <tr>
-                                            <th style="font-size:13px;" colspan="2">ช่วงเวลาการทำงาน</th>
-                                            <th style="width:30%;font-size:13px;" rowspan="2">บริษัท</th>
-                                            <th style="width:20%;font-size:13px;" rowspan="2">ประเภทธุรกิจ</th>
-                                            <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
-                                            <th style="font-size:13px" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
+                                            <th style="font-size:13px;text-align: center" colspan="2">ช่วงเวลาการทำงาน</th>
+                                            <th style="width:30%;font-size:13px;text-align: center" rowspan="2">บริษัท</th>
+                                            <th style="width:20%;font-size:13px;text-align: center" rowspan="2">ประเภทธุรกิจ</th>
+                                            <th style="font-size:13px;text-align: center" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">แรกเข้า</pre></th>
+                                            <th style="font-size:13px;text-align: center" rowspan="2">ตำแหน่ง<pre style="font-family: THSarabunNew">ล่าสุด</pre></th>
                                         </tr>
                                         <tr>
-                                            <th style="font-size:13px;width:10%" >เริ่มต้น</th>
-                                            <th style="font-size:13px;width:10%">สิ้นสุด</th>
+                                            <th style="font-size:13px;width:10%;text-align: center" >เริ่มต้น</th>
+                                            <th style="font-size:13px;width:10%;text-align: center">สิ้นสุด</th>
                                          
                                         <tr>
                                     </thead>
@@ -276,8 +276,8 @@
                                         @if ($fulltbp->employexperience->count() > 0)
                                             @foreach ($fulltbp->employexperience as $employexperience)
                                                 <tr>
-                                                    <td style="font-size:13px">{{$employexperience->startdate}}</td>
-                                                    <td style="font-size:13px">{{$employexperience->enddate}}</td>
+                                                    <td style="font-size:13px;text-align: center">{{$employexperience->startdate}}</td>
+                                                    <td style="font-size:13px;text-align: center">{{$employexperience->enddate}}</td>
                                                     <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->company),20)!!}</td>
                                                     <td style="font-size:13px;">{!!splitText($provider::FixBreak2($employexperience->businesstype),10)!!}</td>
                                                     <td style="font-size:13px">{!!splitText($provider::FixBreak2($employexperience->startposition),7)!!}</td>

@@ -89,11 +89,11 @@
                         <div class="table-responsive">
                             <table class="table text-nowrap" id="maintable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}
-                                        <th>ชื่อโครงการ</th>
+                                        <th style="text-align: center">ชื่อโครงการ</th>
                                         
-                                        <th>บริษัท</th>
+                                        <th style="text-align: center">บริษัท</th>
                                         
                                         <th style="width:1%;white-space: nowrap">สถานะ</th>                   
                                     </tr>

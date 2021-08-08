@@ -64,17 +64,17 @@
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>วันที่</th>
-                                        <th>เลขที่เอกสาร</th>    
-                                        <th>รายละเอียด</th>   
-                                        <th>สถานภาพ</th>                             
-                                        <th style="text-align: right">เพิ่มเติม</th>
+                                        <th style="text-align:center">วันที่</th>
+                                        <th style="text-align:center">เลขที่เอกสาร</th>    
+                                        <th style="text-align:center">รายละเอียด</th>   
+                                        <th style="text-align:center">สถานภาพ</th>                             
+                                        <th style="text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($invoicetransactions as $key => $invoicetransaction)
                                     <tr>    
-                                        <td> {{$invoicetransaction->issuedate}} </td> 
+                                        <td style="text-align:center"> {{$invoicetransaction->issuedate}} </td> 
                                         <td> {{$invoicetransaction->docno}} </td> 
                                         <td> {{$invoicetransaction->description}} </td>                                      
                                         <td> 

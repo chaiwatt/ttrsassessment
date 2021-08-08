@@ -13,6 +13,7 @@ use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\ReviseLog;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\FullTbpCost;
@@ -422,9 +423,15 @@ class DashboardAdminProjectFullTbpController extends Controller
         EmailBox::send($jduser->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project  .' บริษัท' . $_company->name,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้มอบหมายให้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$experts.'</div><br><br>เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .' บริษัท' . $_company->name.' โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         $_experts = str_replace("<br>",", ",$experts);
         
+        // $arr1 = UserArray::expert($minitbp->business_plan_id);
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));       
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'มอบหมายผู้เชี่ยวชาญ (รายละเอียด: ' . $_experts . ')';
         $projectlog->save();
 
@@ -623,9 +630,15 @@ class DashboardAdminProjectFullTbpController extends Controller
 
                 }
             }
+
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2));
+
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $userarray;
             $projectlog->action = 'อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP)';
             $projectlog->save();
             CreateUserLog::createLog('อนุมัติ Full TBP โครงการ' . $minitbp->project);
@@ -675,9 +688,14 @@ class DashboardAdminProjectFullTbpController extends Controller
 
             EmailBox::send($_user->email,'TTRS:แก้ไขข้อมูลแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
           
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2));
+
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $userarray;
             $projectlog->action = 'ส่งคืน Full TBP (รายละเอียด: ' . $request->note . ')';
             $projectlog->save();
 
@@ -1061,10 +1079,14 @@ class DashboardAdminProjectFullTbpController extends Controller
 
             DateConversion::addExtraDay($minitbp->id,8);
         }
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'แจ้งสิ้นสุดโครงการ'.$minitbp->project. $fullcompanyname;
         $projectlog->save();
 

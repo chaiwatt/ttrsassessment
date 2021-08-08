@@ -281,13 +281,13 @@
                         <div class="table-responsive" style="min-height: 230px">
                             <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
-                                    <tr>
-                                        <th style="width:1%;white-space: nowrap">ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap">Full TBP</th> 
-                                        <th style="width:1%;white-space: nowrap">ผู้เชี่ยวชาญ</th> 
-                                        <th style="width:1%;white-space: nowrap">EV</th> 
-                                        <th style="width:1%;white-space: nowrap">BOL</th> 
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                               
+                                    <tr class="bg-info">
+                                        <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">Full TBP</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">EV</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">BOL</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>                               
                                     </tr>
                                 </thead>
                                 <tbody>

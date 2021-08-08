@@ -65,12 +65,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>ชื่อโครงการ</th> 
-                                        <th>บริษัท</th> 
-                                        <th>ประเภทกิจกรรม</th>  
-                                        <th>วัน-เวลา</th>
-                                        <th>สถานภาพ</th> 
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="text-align: center">บริษัท</th> 
+                                        <th style="text-align: center">ประเภทกิจกรรม</th>  
+                                        <th style="text-align: center">วัน-เวลา</th>
+                                        <th style="text-align: center">สถานภาพ</th> 
                                                                   
                                     </tr>
                                 </thead>
@@ -80,7 +80,7 @@
                                         <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
                                         <td> {{$eventcalendar->fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                         <td> {{$eventcalendar->calendartype->name}}</td> 
-                                        <td> {{$eventcalendar->eventdateth}} {{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} </td> 
+                                        <td style="text-align: center"> {{$eventcalendar->eventdateth}} {{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} </td> 
                                         <td>
                                             @if ($eventcalendar->fulltbp->minitbp->businessplan->business_plan_status_id <8 || !Empty($fulltbp->canceldate))
                                                 <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>

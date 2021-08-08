@@ -18,6 +18,7 @@ use App\Helper\CreateUserLog;
 use App\Helper\DateConversion;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Helper\UserArray;
 
 class FullTbpBolController extends Controller
 {
@@ -68,9 +69,14 @@ class FullTbpBolController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'เพิ่มเอกสาร BOL (รายละเอียด: ' .$bol->name.')';
         $projectlog->save();
 
@@ -119,9 +125,14 @@ class FullTbpBolController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
+        $projectlog->viewer = $userarray;
         $projectlog->action = 'ลบเอกสาร BOL (รายละเอียด: ' .$fname.')';
         $projectlog->save();
 

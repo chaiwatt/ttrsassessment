@@ -669,8 +669,8 @@
                                             <table class="table table-bordered table-striped" id="criteriatable">
                                                 <thead>
                                                     <tr class="bg-info">
-                                                        <th>วันที่</th>  
-                                                        <th>รายละเอียด</th>   
+                                                        <th style="text-align: center">วันที่</th>  
+                                                        <th style="text-align: center">รายละเอียด</th>   
                                                         {{-- @if (Auth::user()->user_type_id == 6)
                                                             <th>เพิ่มเติม</th>
                                                         @endif --}}
@@ -679,7 +679,7 @@
                                                 <tbody id="ev_edit_history_wrapper_tr"> 
                                                     @foreach ($evedithistories->reverse() as $evedithistory)
                                                     <tr>
-                                                        <td>{{$evedithistory->thaidate}}</td>
+                                                        <td style="text-align: center">{{$evedithistory->thaidate}}</td>
                                                         <td>{{$evedithistory->detail}}</td>
                                                         @if (Auth::user()->user_type_id == 6 )
                                                         {{-- @if ($ev->status < 4)

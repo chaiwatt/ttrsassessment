@@ -103,7 +103,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
                         <div class="header-elements">
                             @if (@$businessplans->first()->business_plan_status_id > 2)
                                 <button class="btn bg-primary" data-toggle="modal" data-target="#modal_add_project">เพิ่มโครงการใหม่</button>
@@ -119,13 +119,13 @@
                             @if (@$businessplans->first()->business_plan_status_id > 2)
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th >ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap">เลขที่โครงการ</th> 
-                                        <th >ความก้าวหน้าการประเมิน</th>   
-                                        <th style="width:1%;white-space: nowrap">Mini TBP</th>  
-                                        <th style="width:1%;white-space: nowrap">Full TBP</th>  
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                                                                  
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เลขที่โครงการ</th> 
+                                        <th style="text-align: center">ความก้าวหน้าการประเมิน</th>   
+                                        <th style="width:1%;white-space: nowrap;text-align: center">Mini TBP</th>  
+                                        <th style="width:1%;white-space: nowrap;text-align: center">Full TBP</th>  
+                                        <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>                                                                  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -219,7 +219,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">TimeLine</h6>
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">TimeLine ของโครงการ</h6>
                             <div class="header-elements">
 
                             </div>
@@ -228,15 +228,15 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th>วันที่</th> 
-                                            <th>รายละเอียด</th>
+                                        <tr class="bg-info">
+                                            <th style="text-align: center">วันที่</th> 
+                                            <th style="text-align: center">รายละเอียด</th>
                                         </tr>
                                     </thead>
                                     <tbody id="timeline_wrapper_tr">
                                         @foreach ($timelinehistories as $timelinehistory)
                                             <tr>
-                                                <td> {{$timelinehistory->createdatth}} </td>                            
+                                                <td style="text-align: center"> {{$timelinehistory->createdatth}} </td>                            
                                                 <td> {{html_entity_decode(strip_tags($timelinehistory->details))}}</td>  
                                             </tr>
                                         @endforeach

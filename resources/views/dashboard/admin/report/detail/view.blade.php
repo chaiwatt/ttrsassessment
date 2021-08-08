@@ -524,7 +524,7 @@
                                     <tr class="bg-info">
                                         <th style="text-align: center">วันที่</th> 
                                         <th style="width:70%;text-align: center">รายละเอียด</th>
-                                        <th>โดย</th> 
+                                        <th style="text-align: center">โดย</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="timeline_wrapper_tr">

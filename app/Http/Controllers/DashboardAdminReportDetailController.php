@@ -30,6 +30,7 @@ class DashboardAdminReportDetailController extends Controller
         $this->middleware('role:3,4,5,6'); 
     }
     public function View($id){
+  
         $auth = Auth::user();
         $check = ProjectMember::where('user_id',$auth->id)->first();
         
@@ -46,9 +47,8 @@ class DashboardAdminReportDetailController extends Controller
         $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->get();
         $bols = Bol::where('full_tbp_id',$fulltbp->id)->get();
         $timelinehistories = TimeLineHistory::where('business_plan_id',$businessplan->id)->orderBy('id','desc')->paginate(5);
-        $projectlogs = ProjectLog::where('mini_tbp_id',$minitbp->id)->orderBy('id','desc')->paginate(7);
+        $projectlogs = ProjectLog::where('mini_tbp_id',$minitbp->id)->whereJsonContains('viewer', $auth->id)->orderBy('id','desc')->paginate(7);
 
-      
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
         $fullcompanyname = $company_name;
@@ -104,6 +104,8 @@ class DashboardAdminReportDetailController extends Controller
         return ;
     }
     public function Getarray($id){
+//   return UserArray::projectmember($id);
+
        $minitbp = MiniTBP::where('business_plan_id',$id)->first();
        $projectlog =  TimeLineHistory::where('mini_tbp_id',$minitbp->id)->first();
        foreach ($projectlog->viewer as $key => $viewer) {

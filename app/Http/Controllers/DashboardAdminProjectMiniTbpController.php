@@ -15,6 +15,7 @@ use App\Model\Province;
 use App\Model\ThaiBank;
 use App\Helper\EmailBox;
 use App\Model\ReviseLog;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\AlertMessage;
@@ -305,9 +306,14 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 'actual_startdate' =>  Carbon::now()->toDateString()
             ]);
 
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2));
+
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $userarray;
             $projectlog->action = 'อนุมัติ Mini TBP';
             $projectlog->save();
             
@@ -364,9 +370,14 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2));
+
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;
+            $projectlog->viewer = $userarray;
             $projectlog->action = 'ส่งคืน Mini TBP (รายละเอียด: ' . $request->note . ')';
             $projectlog->save();
 

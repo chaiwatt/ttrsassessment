@@ -1521,17 +1521,17 @@
 																	<table class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
-																				<th>เริ่มต้น-สิ้นสุด</th>  
-																				<th style="width:20%">บริษัท</th>                                                                                    
-																				<th style="width:25%">ประเภทธุรกิจ</th>       
-																				<th style="width:20%">ตำแหน่งแรกเข้า</th>  
-																				<th style="width:15%">ตำแหน่งล่าสุด</th> 
+																				<th style="text-align: center">เริ่มต้น-สิ้นสุด</th>  
+																				<th style="width:20%;text-align: center">บริษัท</th>                                                                                    
+																				<th style="width:25%;text-align: center">ประเภทธุรกิจ</th>       
+																				<th style="width:20%;text-align: center">ตำแหน่งแรกเข้า</th>  
+																				<th style="width:15%;text-align: center">ตำแหน่งล่าสุด</th> 
 																			</tr>
 																		</thead>
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
+																					<td style="text-align: center"> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 
@@ -1673,17 +1673,17 @@
 																	<table class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
-																				<th>เริ่มต้น-สิ้นสุด</th>  
-																				<th style="width:20%">บริษัท</th>                                                                                    
-																				<th style="width:25%">ประเภทธุรกิจ</th>       
-																				<th style="width:20%">ตำแหน่งแรกเข้า</th>  
-																				<th style="width:15%">ตำแหน่งล่าสุด</th> 
+																				<th style="text-align: center">เริ่มต้น-สิ้นสุด</th>  
+																				<th style="width:20%;text-align: center">บริษัท</th>                                                                                    
+																				<th style="width:25%;text-align: center">ประเภทธุรกิจ</th>       
+																				<th style="width:20%;text-align: center">ตำแหน่งแรกเข้า</th>  
+																				<th style="width:15%;text-align: center">ตำแหน่งล่าสุด</th> 
 																			</tr>
 																		</thead>
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
+																					<td style="text-align: center"> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 
@@ -1837,17 +1837,17 @@
 																	<table class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
-																				<th>เริ่มต้น-สิ้นสุด</th>  
-																				<th style="width:20%">บริษัท</th>                                                                                    
-																				<th style="width:25%">ประเภทธุรกิจ</th>       
-																				<th style="width:20%">ตำแหน่งแรกเข้า</th>  
-																				<th style="width:15%">ตำแหน่งล่าสุด</th> 
+																				<th style="text-align: center">เริ่มต้น-สิ้นสุด</th>  
+																				<th style="width:20%;text-align: center">บริษัท</th>                                                                                    
+																				<th style="width:25%;text-align: center">ประเภทธุรกิจ</th>       
+																				<th style="width:20%;text-align: center">ตำแหน่งแรกเข้า</th>  
+																				<th style="width:15%;text-align: center">ตำแหน่งล่าสุด</th> 
 																			</tr>
 																		</thead>
 																		<tbody>  
 																			@foreach ($companyemploy->employexperience as $experience)
 																				<tr>
-																					<td> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
+																					<td style="text-align: center"> {{$experience->startdate}} - {{$experience->enddate}}</td>                                            
 																					<td> {{$experience->company}} </td> 
 																					<td> {{$experience->businesstype}} </td>                                            
 																					<td> {{$experience->startposition}} </td> 

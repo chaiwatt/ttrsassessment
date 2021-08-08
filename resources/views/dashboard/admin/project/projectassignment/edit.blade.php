@@ -211,11 +211,11 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th>เลขที่โครงการ</th> 
-                                            <th>ชื่อโครงการ</th> 
-                                            <th>บริษัท</th>
-                                            <th>สถานภาพ</th>
+                                        <tr class="bg-info">
+                                            <th style="text-align: center">เลขที่โครงการ</th> 
+                                            <th style="text-align: center">ชื่อโครงการ</th> 
+                                            <th style="text-align: center">บริษัท</th>
+                                            <th style="text-align: center">สถานภาพ</th>
                                         </tr>
                                     </thead>
                                     <tbody id="fulltbp_wrapper_tr">

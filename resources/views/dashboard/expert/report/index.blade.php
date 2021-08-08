@@ -216,13 +216,13 @@
                                     <tr>
                                         {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
-                                        <th>โครงการ</th>
-                                        <th style="width:1%;white-space: nowrap">แสดงความเห็น</th>
-                                        <th style="width:1%;white-space: nowrap">วันนัดประชุมก่อนลงพื้นที่</th>
-                                        <th style="width:1%;white-space: nowrap">วันที่ประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap">วันที่สรุปผลประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th> 
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
+                                        <th style="text-align:center">โครงการ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">แสดงความเห็น</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">วันนัดประชุมก่อนลงพื้นที่</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">วันที่ประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">วันที่สรุปผลประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เพิ่มเติม</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -250,9 +250,9 @@
                                                         -
                                                     @endif
                                                 </td> 
-                                                <td style="white-space: nowrap"> {{$fulltbp->briefingdate}} </td>  
-                                                <td style="white-space: nowrap"> {{$fulltbp->assessmentdate}} </td>  
-                                                <td style="white-space: nowrap"> {{$fulltbp->finalassessmentdate}} </td> 
+                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->briefingdate}} </td>  
+                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->assessmentdate}} </td>  
+                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->finalassessmentdate}} </td> 
                                                 <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->expertassignment->accepted == 0)
                                                             <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
