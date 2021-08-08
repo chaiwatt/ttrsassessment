@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Bol;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Helper\UserArray;
 use App\Model\ProjectLog;
 use App\Model\BusinessPlan;
 use App\Model\ProjectMember;
@@ -13,6 +15,7 @@ use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Model\FullTbpHistory;
 use App\Model\TimeLineHistory;
+use App\Model\ExpertAssignment;
 use App\Helper\OnlyBelongPerson;
 use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
@@ -82,4 +85,30 @@ class DashboardAdminReportDetailController extends Controller
 
     }
 
+    public function AddExistingDemo(){
+        $businessplans = BusinessPlan::get();
+        foreach ($businessplans as $key => $businessplan) {
+            $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+            $arr1 = UserArray::expert($businessplan->id);
+            $arr2 = UserArray::adminandjd($businessplan->id);
+            $arr3 = UserArray::leader($businessplan->id);
+            $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+            ProjectLog::where('mini_tbp_id',$minitbp->id)->update([
+                'viewer' => $userarray
+            ]);
+
+            TimeLineHistory::where('mini_tbp_id',$minitbp->id)->update([
+                'viewer' => $userarray
+            ]);
+        }
+        return ;
+    }
+    public function Getarray($id){
+       $minitbp = MiniTBP::where('business_plan_id',$id)->first();
+       $projectlog =  TimeLineHistory::where('mini_tbp_id',$minitbp->id)->first();
+       foreach ($projectlog->viewer as $key => $viewer) {
+           echo($viewer) . '<br>';
+       }
+       return ;
+    }
 }

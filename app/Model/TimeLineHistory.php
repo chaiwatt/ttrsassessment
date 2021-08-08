@@ -12,6 +12,10 @@ class TimeLineHistory extends Model
     protected $guarded = [];
     protected $appends = ['user','createdatth'];
 
+    protected $casts = [
+        'viewer' => 'array'
+    ];
+
     public function getUserAttribute(){
         return User::find($this->user_id);
     }

@@ -21,6 +21,7 @@ class CreateTimeLineHistoriesTable extends Migration
             $table->text('details')->nullable();
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('user_id');
+            $table->longText('viewer')->nullable();
             // $table->char('status',1)->default('0');
             $table->char('message_type',1)->default('1')->comment('1 = mini 2 = full 3 = อื่นๆ');;
             $table->timestamps();

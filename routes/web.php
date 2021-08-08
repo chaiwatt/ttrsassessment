@@ -679,7 +679,9 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('excel/{id}','DashboardAdminReportSearchExcelController@Excel')->name('dashboard.admin.report.search.excel');          
                 });
                 Route::group(['prefix' => 'detail'], function(){
-                    Route::get('view/{id}','DashboardAdminReportDetailController@View')->name('dashboard.admin.report.detail.view');       
+                    Route::get('view/{id}','DashboardAdminReportDetailController@View')->name('dashboard.admin.report.detail.view');     
+                    Route::get('addexistingdemo','DashboardAdminReportDetailController@AddExistingDemo')->name('dashboard.admin.report.detail.addexistingdemo');    
+                    Route::get('getarray/{id}','DashboardAdminReportDetailController@Getarray')->name('dashboard.admin.report.detail.getarray'); 
                 });
                 Route::group(['prefix' => 'expert'], function(){
                     Route::get('accept/{id}','DashboardAdminReportExpertController@Accept')->name('dashboard.admin.report.expert.accept');       

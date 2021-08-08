@@ -11,6 +11,10 @@ class ProjectLog extends Model
     protected $fillable = [];
     protected $guarded = [];
 
+    protected $casts = [
+        'viewer' => 'array'
+    ];
+
     public function getUserAttribute()
     {
         return User::find($this->user_id);
