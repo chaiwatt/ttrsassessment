@@ -82,31 +82,25 @@ import * as Attendee from './eventcalendarattendee.js';
                         droppable: false,
                         disableDragging: false,
                         eventRender: function(info) {
+
                             if(!info.event.startEditable) {
                                 $(info.el).css('cursor','pointer');
                                 return;
                             }
+                       
                         },
                         eventClick: function(e) {
                             getEvent(e.event.id).then(data => {
                                 $('#title').val('นัดหมายการประชุม โครงการ' + data.eventcalendar.fulltbp.minitbp['project']);
                                 $('#eventdate').html(data.eventcalendar.eventdateth + ' เวลา ' + data.eventcalendar.starttime + ' น. - ' + data.eventcalendar.endtime + ' น.');
                                 $('#place').html(data.eventcalendar.place);
-                                $('#eventtype').html(data.eventcalendar.calendartype['name']);
+                                $('#eventtype').html(data.eventcalendar.calendartype['name'] + 'โครงการ' + data.eventcalendar.fulltbp.minitbp['project'] + ' ' +  data.fullcompanyname);
                                 $('#subject').html(data.eventcalendar.subject);
                                 $('#detail').html(data.eventcalendar.summary);
                                 $('#attendeventid').val(data.attendeecalendar.id);
 
                                 var html =``;
                                
-                                // data.eventcalendarattendeestatuses.forEach(function (status,index) {
-                                //     var chk = ``;
-                                //     if(status['id'] == data.attendeecalendar.eventcalendarattendeestatus['id']){
-                                //         chk = `selected`;
-                                //     }
-                                //     html += `<option value="${status['id']}" ${chk} >${status['name']}</option>`
-                                // });
-
                                 data.eventcalendarattendeestatuses.forEach(function (status,index) {
                                     var chk = ``;
                                     $('#jointype').val(data.attendeecalendar.eventcalendarattendeestatus['id']);
@@ -121,10 +115,6 @@ import * as Attendee from './eventcalendarattendee.js';
 
                                 $("#attendevent").html(html);
                                 $('#modal_get_calendar').modal('show');
-
-
-
-
 
                                 var html =``;
                                 data.eventcalendarattendees.forEach(function (attendee,index) {

@@ -2680,6 +2680,7 @@ $('.steps-basic').steps({
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
     enableFinishButton: false,
+    enableKeyNavigation: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> ย้อนกลับ',

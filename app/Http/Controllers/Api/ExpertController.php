@@ -356,10 +356,10 @@ class ExpertController extends Controller
             }
             CreateUserLog::createLog('ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
 
-            $arr1 = UserArray::expert($minitbp->business_plan_id);
-            $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
-            $arr3 = UserArray::leader($minitbp->business_plan_id);
-            $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+            // $arr1 = UserArray::expert($minitbp->business_plan_id);
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2));
 
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;

@@ -8,6 +8,7 @@ use App\Model\MiniTBP;
 use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\CalendarType;
 use App\Model\ProjectGrade;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
@@ -174,9 +175,30 @@ class DashboardAdminReportController extends Controller
                                     ->whereNotNull('summary')
                                     ->whereIn('id',$eventcalendarattendees)->get();                         
         $_events = array();
+
         foreach ($eventcalendars as $event) {
             $eventcalendarattendee = EventCalendarAttendee::where('user_id',$auth->id)->where('event_calendar_id',$event->id)->first();
-            $_events[] = array('id' => $event->id,'color' => $eventcalendarattendee->color,'start' => $event->eventdate, 'summary' => $event->summary);
+            $eventcalendar = EventCalendar::find($event->id);
+            $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
+            $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+            $company = Company::find($businessplan->company_id);
+    
+            $company_name = (!Empty($company->name))?$company->name:'';
+            $bussinesstype = $company->business_type_id;
+            $fullcompanyname = $company_name;
+    
+            if($bussinesstype == 1){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
+            $_events[] = array('id' => $event->id,'color' => $eventcalendarattendee->color,'start' => $event->eventdate, 'summary' => $calendartype->name . ' ' . $fullcompanyname);
         }
         return collect($_events);
     }

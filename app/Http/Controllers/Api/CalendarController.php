@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Model\Ev;
 use Carbon\Carbon;
+use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\BusinessPlan;
@@ -119,12 +120,33 @@ class CalendarController extends Controller
         $eventcalendarattendeestatuses = EventCalendarAttendeeStatus::get();
         $attendeecalendar = EventCalendarAttendee::where('event_calendar_id',$request->id)->where('user_id',Auth::user()->id)->first();
         $calendarattachments = CalendarAttachement::where('event_calendar_id',$request->id)->get();
+
+        $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+        $fullcompanyname = $company_name;
+
+        if($bussinesstype == 1){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
         return response()->json(array(
             "eventcalendar" => $eventcalendar,
             "eventcalendarattendees" => $eventcalendarattendees,
             "eventcalendarattendeestatuses" => $eventcalendarattendeestatuses,
             "attendeecalendar" => $attendeecalendar,
-            "calendarattachments" => $calendarattachments
+            "calendarattachments" => $calendarattachments,
+            "fullcompanyname" => $fullcompanyname
         ));
     }
 

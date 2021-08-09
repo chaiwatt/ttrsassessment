@@ -27,6 +27,7 @@
                     <div class="tab-pane fade show active" id="left-icon-tab1">
                         <div class="row">
                             <div class="col-md-12">
+                                
                                 <div class="form-group">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="attendee_modal">
@@ -61,8 +62,11 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>การเข้าร่วม<span class="text-danger">*</span></label>
-                                    <select id="attendevent" class="form-control form-control-lg form-control-select2">
-                                    </select>
+                                    {{-- <select id="attendevent" class="form-control form-control-lg form-control-select2">
+                                    </select> --}}
+                                    <div class="col-md-12" class="confirm" id="attendevent">
+    
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12" id="rej_meeting_note_wrapper" hidden>

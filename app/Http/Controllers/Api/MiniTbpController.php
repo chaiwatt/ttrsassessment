@@ -264,10 +264,10 @@ class MiniTbpController extends Controller
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 92, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectnameeng.'</span>', 69, 98.5, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML($finance1_text, 20.8, 122.4, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:155px;heigh:100px;text-align:center;">'.$finance1_bank.'</div>', 35, 130, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_bank.'</div>', 35, 130, 350, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_loan.'</div>', 52, 136.5, 150, 90, 'auto');
 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:155px;heigh:100px;text-align:center;">'.$finance1_1_bank.'</div>', 35, 143.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_1_bank.'</div>', 35, 143.3, 350, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_1_loan.'</div>', 52, 149.8, 150, 90, 'auto');
 
             $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_2_bank.'</div>', 35, 156.5, 350, 90, 'auto');

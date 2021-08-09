@@ -57,10 +57,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <th >รายการ</th> 
-                                        <th >วันที่กำหนด</th>
-                                        <th>สถานภาพ</th> 
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">รายการ</th> 
+                                        <th style="text-align: center">วันที่กำหนด</th>
+                                        <th style="text-align: center">สถานภาพ</th> 
                                     </tr>
                                 </thead>
                                 <tbody >
