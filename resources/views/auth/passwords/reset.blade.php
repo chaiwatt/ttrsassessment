@@ -28,7 +28,8 @@
                             </div>
                         
                             <div class="input-group form-group form-group-feedback form-group-feedback-left" >
-                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
+                                <label>รหัสผ่าน:</label>
+                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน" autocomplete="new-password">
                                 
                                 <div class="form-control-feedback">
                                     <i class="icon-eye-blocked text-muted toggle_password"></i>
@@ -54,20 +55,6 @@
                         </div>
     
 
-
-
-                        <div class="form-group form-group-feedback form-group-feedback-left">
-                            <label>รหัสผ่าน:</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                            <div class="form-control-feedback">
-                                <i class="icon-eye-blocked text-muted toggle_password"></i>
-                            </div>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
 
                         <div class="form-group form-group-feedback form-group-feedback-left">
                             <label>ยืนยันรหัสผ่าน:</label>
