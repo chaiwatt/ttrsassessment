@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h6 class="card-title" style="font-size:16px;font-weight: bold">{{ __('เปลี่ยนรหัสผ่าน') }}</h6>
+                    <h6 class="card-title" style="font-size:16px;font-weight: bold">เปลี่ยนรหัสผ่าน</h6>
                 </div>
 
                 <div class="card-body">
