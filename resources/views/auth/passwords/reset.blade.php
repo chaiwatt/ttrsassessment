@@ -12,6 +12,40 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
+
+
+                        <div id="pwd-container">
+                        
+                            <div class="input-group form-group form-group-feedback form-group-feedback-left" >
+                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
+                                
+                                <div class="form-control-feedback">
+                                    <i class="icon-eye-blocked text-muted toggle_password"></i>
+                                </div>
+                                
+                                @error('password')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                                {{-- <small class="form-text text-right pwstrength_viewport_verdict"></small> --}}
+                                <span class="input-group-append">
+                                    <button class="btn btn-light" type="button" id="genpassword" >สุ่มรหัสผ่าน</button>
+                                </span>
+                                <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
+                            </div>
+            
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
+                                <div class="form-control-feedback ">
+                                    <i class="icon-eye-blocked text-muted toggle_password"></i>
+                                </div>
+                                {{-- <div class="col-sm-12" style="padding-top: 5px;"> --}}
+                                <div class="pwstrength_viewport_progress" style="padding-top: 10px;"></div>
+                                {{-- </div> --}}
+                            </div>
+    
+                        </div>
+    
+
                         <input type="hidden" name="token" value="{{ $token }}">
                         <div class="form-group">
                             <label>อีเมล:</label>
