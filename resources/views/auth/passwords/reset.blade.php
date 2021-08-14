@@ -59,13 +59,13 @@
     
 
 
-                        <div class="form-group form-group-feedback form-group-feedback-left">
+                        {{-- <div class="form-group form-group-feedback form-group-feedback-left">
                             <label>ยืนยันรหัสผ่าน:</label>
                             <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password">
                             <div class="form-control-feedback ">
                                 <i class="icon-eye-blocked text-muted toggle_password"></i>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="d-flex justify-content-end align-items-center">
                             <button type="submit" class="btn bg-blue ml-3">รีเซตรหัสผ่าน</button>
