@@ -35,4 +35,11 @@ class ResetPasswordController extends Controller
     //     Session::flush();
     //     return redirect()->route('login')->withSuccess('รีเซตรหัสผ่านสำเร็จ กรุณาเข้าสู่ระบบ');
     // }
+
+    protected function resetPassword($user, $password)
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('login')->withSuccess('รีเซตรหัสผ่านสำเร็จ กรุณาเข้าสู่ระบบ');
+    }
 }
