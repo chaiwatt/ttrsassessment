@@ -15,6 +15,17 @@
 
 
                         <div id="pwd-container">
+
+                            <input type="hidden" name="token" value="{{ $token }}">
+                            <div class="form-group">
+                                <label>อีเมล:</label>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         
                             <div class="input-group form-group form-group-feedback form-group-feedback-left" >
                                 <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
@@ -26,11 +37,8 @@
                                 @error('password')
                                     <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                                 @enderror
-                                {{-- <small class="form-text text-right pwstrength_viewport_verdict"></small> --}}
-                                <span class="input-group-append">
-                                    <button class="btn btn-light" type="button" id="genpassword" >สุ่มรหัสผ่าน</button>
-                                </span>
-                                <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
+
+                                {{-- <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span> --}}
                             </div>
             
                             <div class="form-group form-group-feedback form-group-feedback-left">
@@ -46,16 +54,7 @@
                         </div>
     
 
-                        <input type="hidden" name="token" value="{{ $token }}">
-                        <div class="form-group">
-                            <label>อีเมล:</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+
 
                         <div class="form-group form-group-feedback form-group-feedback-left">
                             <label>รหัสผ่าน:</label>
