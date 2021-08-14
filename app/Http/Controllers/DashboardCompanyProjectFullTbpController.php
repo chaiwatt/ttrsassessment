@@ -65,7 +65,7 @@ use App\Model\FullTbpProjectAwardAttachment;
 use App\Model\FullTbpProjectPlanTransaction;
 use App\Model\FullTbpCompanyProfileAttachment;
 use App\Model\FullTbpProjectCertifyAttachment;
-
+use App\Model\FullTbpSignature;
 class DashboardCompanyProjectFullTbpController extends Controller
 {
     public function Index(){
@@ -119,7 +119,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         
         $minmonth = 0;
         $maxmonth = 0;
-        $allyears = array(0, 0, 0);
+        $allyears = array(0, 0, 0,0);
         if(count($fulltbpprojectplantransactionarray) != 0){
             $minmonth = min($fulltbpprojectplantransactionarray);
             $maxmonth = max($fulltbpprojectplantransactionarray);
@@ -132,11 +132,13 @@ class DashboardCompanyProjectFullTbpController extends Controller
             $year3 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
                 return $n >= 25 && $n <= 36;
             });
+            $year4 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
+                return $n >= 37 && $n <= 48;
+            });
 
             //=====new method check year one
-
             if(count($year1) != 0){
-                if(count($year2) != 0 || count($year3) != 0 ){
+                if(count($year2) != 0 || count($year3) != 0 || count($year4) != 0){
                     $year1 = range(min($year1),12);
                 }else{
                     $year1 = range(min($year1),max($year1));
@@ -146,16 +148,9 @@ class DashboardCompanyProjectFullTbpController extends Controller
             }
 
             //===== new method check year two
-
             if(count($year1) != 0){
-                if(count($year3) != 0){
-                    if(count($year2) != 0){
+                if(count($year3) != 0 || count($year4) != 0){
                         $year2 = range(13,24);
-                    }
-                    else{
-                        $year2 = range(13,24);
-                    }
-                    
                 }else{
                     if(count($year2) != 0){
                         $year2 = range(13,max($year2));
@@ -164,12 +159,8 @@ class DashboardCompanyProjectFullTbpController extends Controller
                     }
                 }
             }else{
-                if(count($year3) != 0){
-                    if(count($year2) != 0){
-                        $year2 = range(min($year2),24);
-                    }else{
-                        $year2 = [];
-                    }
+                if(count($year3) != 0 || count($year4) != 0){
+                    $year2 = range(min($year2),24);
                 }else{
                     if(count($year2) != 0){
                         $year2 = range(min($year2),max($year2));
@@ -178,56 +169,49 @@ class DashboardCompanyProjectFullTbpController extends Controller
                     }
                 }
             }
-            //===== new method check year three
+
+            
+            //==== year three
+
             if(count($year1) != 0 || count($year2) != 0){
-                if(count($year3) != 0){
-                    $year3 = range(25,max($year3));
+                if(count($year4) != 0){
+                    $year3 = range(25,36);
                 }else{
-                    $year3 = [];
+                    if(count($year3) != 0){
+                        $year3 = range(25,max($year3));
+                    }else{
+                        $year3 = [];
+                    }
                 }
+
             }else{
-                if(count($year3) != 0){
-                    $year3 = range(min($year3),max($year3));
+                if(count($year4) != 0){
+                    $year3 = range(min($year3),36);
                 }else{
-                    $year3 = [];
+                    if(count($year3) != 0){
+                        $year3 = range(min($year3),max($year3));
+                    }else{
+                        $year3 = [];
+                    }
                 }
+
             }
 
-            //=====
-
-
-            // if(count($year1) != 0){
-            //     if(count($year2) != 0){
-            //         $year1 = range(min($year1),12);
-            //     }else{
-            //         $year1 = range(min($year1),max($year1));
-            //     }
-            // }else{
-            //     $year1 = [];
-            // }
-            
-            // if(count($year2) != 0){
-            //     if(count($year1) != 0){
-            //         $year2 = range(13,max($year2));
-            //     }else{
-            //         $year2 = range(min($year2),max($year2));
-            //     }
-            // }else{
-            //     $year2 = [];
-            // }
-
-            // if(count($year3) != 0){
-            //     if(count($year2) != 0){
-            //         $year3 = range(25,max($year3));
-            //     }else{
-            //         $year3 = range(min($year3),max($year3));
-            //     }
-            // }else{
-            //     $year3 = [];
-            // }
-            $allyears = array(count($year1), count($year2), count($year3));
-
-            // return  $allyears;
+            //===== new method check year foure
+            if(count($year1) != 0 || count($year2) != 0 || count($year3) != 0){
+                if(count($year4) != 0){
+                    $year4 = range(37,max($year4));
+                }else{
+                    $year4 = [];
+                }
+            }else{
+                if(count($year4) != 0){
+                    $year4 = range(min($year4),max($year4));
+                }else{
+                    $year4 = [];
+                }
+            }
+            $allyears = array(count($year1), count($year2), count($year3), count($year4));
         }
 
 
@@ -251,7 +235,50 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $fulltbpresearchers = FullTbpResearcher::where('full_tbp_id',$fulltbp->id)->get(); 
         $signaturestatuses = SignatureStatus::get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
+        $fulltbpsignatures = FullTbpSignature::where('full_tbp_id',$fulltbp->id)->get();
+
         $educationlevels = EducationLevel::get();
+        $arr = array();
+       foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan) {
+        $_count = 1;
+           for($i = $minmonth; $i <= $maxmonth; $i++){
+            $_count++;	
+                $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+                if (!Empty($check)) {
+                    $color = 'grey';
+                     $arr[] = array('fulltbpid' => $check->full_tbp_id,'planid' => $fulltbpprojectplan->id ,'row' => $key + 1 , 'month' => intVal($i) ); 
+                }
+               
+           }
+       }
+
+       $ganttarr = array();
+
+       if(count($arr) > 0){
+            usort($arr, array( $this, 'invenDescSort' ));
+        
+            $count = 1;
+            $flag = false;
+            foreach ($arr as $key => $value){
+                $check = FullTbpProjectPlanTransaction::where('full_tbp_id',$arr[$key]['fulltbpid'])->where('project_plan_id',$arr[$key]['planid'])->where('month',$arr[$key]['month'])->first();
+                if(!Empty($check)){
+                    $check->update([
+                        'mindex' => $count
+                    ]);
+                }
+                $ganttarr[] = array('fulltbpid' => $arr[$key]['fulltbpid'],'planid' => $arr[$key]['planid'],'key' => $count , 'row' => $arr[$key]['row'] , 'month' => $arr[$key]['month'] ); 
+    
+                $count ++;
+                if($key < count($arr)-1){
+                    if($arr[$key]['month'] == $arr[$key+1]['month']){
+                        $count --;
+                    }
+                }
+            }
+       }
+
+
+       $ganttcollections = collect($ganttarr);
         return view('dashboard.company.project.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -300,9 +327,15 @@ class DashboardCompanyProjectFullTbpController extends Controller
                                                 ->withMaxmonth($maxmonth)
                                                 ->withAllyears($allyears)
                                                 ->withAuthorizeddirectors($authorizeddirectors)
-                                                ->withEducationlevels($educationlevels);
+                                                ->withEducationlevels($educationlevels)
+                                                ->withFulltbpsignatures($fulltbpsignatures)
+                                                ->withGanttcollections($ganttcollections);
     }
-
+    public  function invenDescSort($item1,$item2)
+    {
+        if ($item1['month'] == $item2['month']) return 0;
+        return ($item1['month'] > $item2['month']) ? 1 : -1;
+    }
     public function EditSave(Request $request,$id){
         FullTbpEmployee::find($id)->update([
             'department1_qty' => $request->department1_qty,
@@ -342,7 +375,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         
         $minmonth = 0;
         $maxmonth = 0;
-        $allyears = array(0, 0, 0);
+        $allyears = array(0, 0, 0,0);
         if(count($fulltbpprojectplantransactionarray) != 0){
             $minmonth = min($fulltbpprojectplantransactionarray);
             $maxmonth = max($fulltbpprojectplantransactionarray);
@@ -355,10 +388,13 @@ class DashboardCompanyProjectFullTbpController extends Controller
             $year3 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
                 return $n >= 25 && $n <= 36;
             });
-            //=====new method check year one
+            $year4 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
+                return $n >= 37 && $n <= 48;
+            });
 
+            //=====new method check year one
             if(count($year1) != 0){
-                if(count($year2) != 0 || count($year3) != 0 ){
+                if(count($year2) != 0 || count($year3) != 0 || count($year4) != 0){
                     $year1 = range(min($year1),12);
                 }else{
                     $year1 = range(min($year1),max($year1));
@@ -368,16 +404,9 @@ class DashboardCompanyProjectFullTbpController extends Controller
             }
 
             //===== new method check year two
-
             if(count($year1) != 0){
-                if(count($year3) != 0){
-                    if(count($year2) != 0){
+                if(count($year3) != 0 || count($year4) != 0){
                         $year2 = range(13,24);
-                    }
-                    else{
-                        $year2 = range(13,24);
-                    }
-                    
                 }else{
                     if(count($year2) != 0){
                         $year2 = range(13,max($year2));
@@ -386,12 +415,8 @@ class DashboardCompanyProjectFullTbpController extends Controller
                     }
                 }
             }else{
-                if(count($year3) != 0){
-                    if(count($year2) != 0){
-                        $year2 = range(min($year2),24);
-                    }else{
-                        $year2 = [];
-                    }
+                if(count($year3) != 0 || count($year4) != 0){
+                    $year2 = range(min($year2),24);
                 }else{
                     if(count($year2) != 0){
                         $year2 = range(min($year2),max($year2));
@@ -400,52 +425,49 @@ class DashboardCompanyProjectFullTbpController extends Controller
                     }
                 }
             }
-            //===== new method check year three
+
+            
+            //==== year three
+
             if(count($year1) != 0 || count($year2) != 0){
-                if(count($year3) != 0){
-                    $year3 = range(25,max($year3));
+                if(count($year4) != 0){
+                    $year3 = range(25,36);
                 }else{
-                    $year3 = [];
+                    if(count($year3) != 0){
+                        $year3 = range(25,max($year3));
+                    }else{
+                        $year3 = [];
+                    }
                 }
+
             }else{
-                if(count($year3) != 0){
-                    $year3 = range(min($year3),max($year3));
+                if(count($year4) != 0){
+                    $year3 = range(min($year3),36);
                 }else{
-                    $year3 = [];
+                    if(count($year3) != 0){
+                        $year3 = range(min($year3),max($year3));
+                    }else{
+                        $year3 = [];
+                    }
                 }
+
             }
 
-            //=====
-            // if(count($year1) != 0){
-            //     if(count($year2) != 0){
-            //         $year1 = range(min($year1),12);
-            //     }else{
-            //         $year1 = range(min($year1),max($year1));
-            //     }
-            // }else{
-            //     $year1 = [];
-            // }
-            
-            // if(count($year2) != 0){
-            //     if(count($year1) != 0){
-            //         $year2 = range(13,max($year2));
-            //     }else{
-            //         $year2 = range(min($year2),max($year2));
-            //     }
-            // }else{
-            //     $year2 = [];
-            // }
-            // if(count($year3) != 0){
-            //     if(count($year2) != 0){
-            //         $year3 = range(25,max($year3));
-            //     }else{
-            //         $year3 = range(min($year3),max($year3));
-            //     }
-            // }else{
-            //     $year3 = [];
-            // }
-
-            $allyears = array(count($year1), count($year2), count($year3));
+            //===== new method check year foure
+            if(count($year1) != 0 || count($year2) != 0 || count($year3) != 0){
+                if(count($year4) != 0){
+                    $year4 = range(37,max($year4));
+                }else{
+                    $year4 = [];
+                }
+            }else{
+                if(count($year4) != 0){
+                    $year4 = range(min($year4),max($year4));
+                }else{
+                    $year4 = [];
+                }
+            }
+            $allyears = array(count($year1), count($year2), count($year3), count($year4));
         }
         $companystockholders = StockHolderEmploy::where('company_id',$company->id)->get();
         // $companystockholders = CompanyStockHolder::where('company_id',$company->id)->get();

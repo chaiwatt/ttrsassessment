@@ -22,6 +22,7 @@ use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
+use App\Model\EmployPosition;
 use App\Helper\DateConversion;
 use App\Model\SignatureStatus;
 use App\Model\ProjectAssignment;
@@ -45,6 +46,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         return view('dashboard.company.project.minitbp.index')->withMinitbps($minitbps);
     }
     public function Edit($id){
+        $prefixes = Prefix::get();
         $user = Auth::user();
         NotificationBubble::where('target_user_id',$user->id)
                         ->where('notification_category_id',1)       // notification_category_id 1 = โครงการ
@@ -61,7 +63,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $amphurs = Amphur::where('province_id',$companyaddress->province_id)->get();
         $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
-
+        $employpositions = EmployPosition::where('id', '<=',5)->get();
         return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)
@@ -72,6 +74,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
                                                 ->withAmphurs($amphurs)
                                                 ->withUser($user)
                                                 ->withAuthorizeddirectors($authorizeddirectors)
+                                                ->withPrefixes($prefixes)
+                                                ->withEmploypositions($employpositions)
                                                 ->withTambols($tambols);
     }
     public function Pdf(){

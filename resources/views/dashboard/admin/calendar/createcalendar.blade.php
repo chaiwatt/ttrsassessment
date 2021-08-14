@@ -60,6 +60,24 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @php
+                            $eventstartdate = '';
+                        @endphp
+                        
+                        @php
+                            $typeid = 0;
+                            if($calendartypes->count() != 0){
+                                $typeid = $calendartypes[0]->id;
+                            }
+                            if($typeid == 1){
+                                $eventstartdate = '';
+                            }else if($typeid == 2){
+                                $eventstartdate = $eventcalendar->previoustype1;
+                            }else if($typeid == 3){
+                                $eventstartdate = $eventcalendar->previoustype2;
+                            }
+                        @endphp
+                        <input type="text" id="eventstartdate" value="{{$eventstartdate}}" hidden>
                         <form method="POST" action="{{route('dashboard.admin.calendar.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
@@ -200,17 +218,21 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        var startdate = moment();
+        if($('#eventstartdate').val() != ''){
+            
+            startdate = moment($('#eventstartdate').val(), 'YYYY-MM-DD');
+        }
 
-        // $('#eventdate').bind("paste",function(e) {
-        //     e.preventDefault();
-        // });
-
+        var m = moment();
         $('#eventdate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY HH:mm',
             clearButton: true,
             cancelText: "ยกเลิก",
             okText: "ตกลง",
             clearText: "เคลียร์",
+            minDate : startdate,
+            // maxDate: moment().add(60, 'days'),
             time: false
         });
 

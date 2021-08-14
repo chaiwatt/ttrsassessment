@@ -74,6 +74,15 @@ class CompanyEmploy extends Model
         }
         return $signature;
     } 
+
+    public function isUseSigner($fulltbpid){
+        $signature = '1';
+        $check = FulltbpSignature::where('company_employee_id',$this->id)->where('full_tbp_id',$fulltbpid)->first();
+        if(!Empty($check)){
+            $signature = '2';
+        }
+        return $signature;
+    } 
  
     public function IsSelectDirector($minitbpid)
     {

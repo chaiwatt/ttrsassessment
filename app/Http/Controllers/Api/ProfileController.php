@@ -6,6 +6,7 @@ use Image;
 use App\User;
 use App\Model\Signature;
 use App\Model\UserPosition;
+use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
 use App\Http\Controllers\Controller;
@@ -21,13 +22,11 @@ class ProfileController extends Controller
             mkdir($imgpath, 0777, true);
         }
         Image::make($base64)->save($imgpath.$new_name);
-        // User::find(Auth::user()->id)->update([
-        //     'signature' => 'storage/uploads/profile/signature/' .$new_name
-        // ]);
+
         $signature = new Signature();
         $signature->path = 'storage/uploads/profile/signature/' .$new_name;
         $signature->save();
-        // $user = User::find(Auth::user()->id);
+
         return response()->json($signature);  
     }
     public function UploadSignature(Request $request){
@@ -74,5 +73,25 @@ class ProfileController extends Controller
         $check = CompanyAddress::where('company_id',$companyid)->first();
         $companyaddresses = CompanyAddress::where('id','!=',$check->id)->where('company_id',$check->company_id)->get();
         return response()->json($companyaddresses); 
+    }
+
+    public function UpdateSignature(Request $request){
+        $base64 = $request->signaturebase64;   
+        $new_name = time().'.'.explode('/',explode(':',substr($base64,0,strpos($base64,';')))[1])[1];
+        $imgpath = public_path("storage/uploads/profile/signature/");
+        if (!file_exists($imgpath)) {
+            mkdir($imgpath, 0777, true);
+        }
+        Image::make($base64)->save($imgpath.$new_name);
+
+        $signature = new Signature();
+        $signature->path = 'storage/uploads/profile/signature/' .$new_name;
+        $signature->save();
+
+        CompanyEmploy::find($request->directorid)->update([
+            'signature_id' => $signature->id
+        ]);
+        $companyemploy = CompanyEmploy::find($request->directorid);
+        return response()->json($companyemploy); 
     }
 }

@@ -519,8 +519,10 @@
 							<div class="card-header bg-transparent header-elements-inline">
 								<h6 class="card-title" style="font-size:16px;font-weight: bold">กล่องข้อความ</h6>
 								<div class="header-elements">
-									@if ($messagereceives->count()>0)
-									<span class="badge bg-teal" id="newmessagecount2">{{$unreadmessages->count()}} ข้อความใหม่</span>
+									@if ($messagereceives->count()>0 && $unreadmessages->count() > 0)
+									<span class="badge bg-teal" id="newmessagecount2">
+										{{$unreadmessages->count()}} ข้อความใหม่
+									</span>
 									@endif
 								</div>
 							</div>
@@ -548,7 +550,7 @@
 											}
 										@endphp
 											<tr class="{{$status}} messagelink" data-id="{{$messagereceive->id}}">
-												<td class="table-inbox-checkbox ">
+												{{-- <td class="table-inbox-checkbox ">
 													<a href="#">
 														@if ($messagereceive->message_priority_id == 2 )
 																<i class="icon-star-full2 text-warning-300"></i>
@@ -556,7 +558,7 @@
 																<i class="icon-star-empty3 text-muted"></i>
 														@endif
 													</a>
-												</td>
+												</td> --}}
 												<td class="table-inbox-image">
 													<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
 														<span class="letter-icon">J</span>
@@ -564,7 +566,7 @@
 												</td>
 												<td class="table-inbox-name">
 													<a href="#" data-id="{{$messagereceive->id}} ">
-														<div class="letter-icon-title text-default">{{$messagereceive->sender->name}} {{$messagereceive->sender->lastname}}</div>
+														<div class="letter-icon-title text-default">&nbsp; {{$messagereceive->sender->name}} {{$messagereceive->sender->lastname}}</div>
 													</a>
 												</td>
 												<td class="table-inbox-message">

@@ -26,7 +26,9 @@ class DashboardCompanyReportController extends Controller
         $auth = Auth::user();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$auth->id)->first()->id)->get();
-        $timelinehistories = TimeLineHistory::where('owner_id',$auth->id)->orderBy('id','desc')->paginate(5);
+        
+        $timelinehistories = TimeLineHistory::where('owner_id',$auth->id)->whereJsonContains('viewer', $auth->id)->orderBy('id','desc')->paginate(5);
+        // $projectlogs = ProjectLog::where('mini_tbp_id',$minitbp->id)->whereJsonContains('viewer', $auth->id)->orderBy('id','desc')->paginate(7);
         return view('dashboard.company.report.index')->withBusinessplans($businessplans)
                                                 ->withAlertmessages($alertmessages)
                                                 ->withTimelinehistories($timelinehistories);

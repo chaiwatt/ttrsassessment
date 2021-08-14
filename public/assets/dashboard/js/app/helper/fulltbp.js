@@ -20,7 +20,7 @@ function editApprove(id,val,note){
 }
 
 function editGeneral(id,businesstype,department_qty,department1_qty,department2_qty,department3_qty,department4_qty,department5_qty,
-  companyhistory,responsibleprefix,responsiblename,responsiblelastname,responsibleposition,responsibleemail,responsiblephone,responsibleworkphone,responsibleeducationhistory,
+  companyhistory,responsibleprefix,otherresponsibleprefix,responsiblename,responsiblelastname,responsibleposition,responsibleemail,responsiblephone,responsibleworkphone,responsibleeducationhistory,
   responsibleexperiencehistory,responsibletraininghistory){
   return new Promise((resolve, reject) => {
       $.ajax({
@@ -38,6 +38,7 @@ function editGeneral(id,businesstype,department_qty,department1_qty,department2_
           department5_qty : department5_qty,
           companyhistory : companyhistory,
           responsibleprefix : responsibleprefix,
+          otherresponsibleprefix : otherresponsibleprefix,
           responsiblename : responsiblename,
           responsiblelastname : responsiblelastname,
           responsibleposition : responsibleposition,

@@ -1,3 +1,4 @@
+
 @inject('provider', 'App\Http\Controllers\DashboardAdminEvaluationResultController')
 @extends('layouts.dashboard.main')
 @section('pageCss')
@@ -12,6 +13,22 @@ th {
         font-size: 16px !important;
     }
 
+	.table-res {
+		/* max-height: 150px; */
+		overflow: scroll-x;
+	}
+
+	td>.boxmonth{
+		max-width:20px;
+		min-width:20px;
+		width:20px;
+		text-align:center;
+		overflow:hidden;
+		font-size: 12px;
+	}
+	.gray{
+		background-color:gray;
+	}
 </style>
 @stop
 @section('content')
@@ -2126,6 +2143,16 @@ th {
 																	</select>
 																</div>
 															</div>
+															<div class="col-md-6" id="otherresponsibleprefix_wrapper" 
+															@if (@$fulltbp->fulltbpresponsibleperson->prefix_id != 5)
+																hidden
+															@endif	
+															>
+																<div class="form-group">
+																	<label>ระบุคำนำหน้าชื่อ</label>
+																	<input type="text" id="otherresponsibleprefix" placeholder="ระบุ" value="{{@$fulltbp->fulltbpresponsibleperson->otherprefix}}" class="form-control form-control-lg stringformat60" >
+																</div>
+															</div>
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>ชื่อ</label><span class="text-danger">*</span>
@@ -2147,6 +2174,7 @@ th {
 																<div class="form-group">
 																	<label>อีเมล</label><span class="text-danger">*</span>
 																	<input type="text" name="responsibleemail" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat60" required>
+																	<span id="responsibleemail_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>รูปแบบอีเมลไม่ถูกต้อง</span>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -2159,13 +2187,17 @@ th {
 																<div class="form-group">
 																	<label>โทรศัพท์</label><span class="text-danger">*</span>
 																	<input type="text" name="responsiblephone" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1 ?? Auth::user()->phone}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone" required>
+																	<span id="responsiblephone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง</span>
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
+														
 																	<input type="text" name="responsibleworkphone" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
+																	<span id="responsibleworkphone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง</span>
 																</div>
+																
 															</div>
 															<div class="col-md-12" hidden>
 																<div class="form-group">
@@ -2615,12 +2647,77 @@ th {
 																	</div>
 																</div> 
 															</div>
+									
+															{{-- <div class="col-md-12 mt-3">
+																<div class="row">
+																	<div class="col-md-12">
+																		
+																		<table class="table-bordered" style="table-layout: auto;width: 100%;display: block;overflow: auto;">
+																			<tr>
+																				<th rowspan="2" style="min-width:400px;text-align: center">รายละเอียดการดำเนินโครงการ</th>
+																				@foreach ($allyears as $key => $item)
+																					@if ($item != 0)
+																						<th colspan="{{$item}}" style="min-width:20px;width:20px;text-align: center">{{$fulltbpgantt->startyear + $key}}</th>
+																					@endif
+																				@endforeach
+																			</tr>
+																			<tr>
+																				@for ($i = $minmonth; $i <= $maxmonth; $i++)
+																					<th style="min-width:20px;width:20px;text-align: center;font-size:12px">
+																						@php
+																							$full = 12;
+																							if($i%12 == 0){
+																								echo (12);
+																							}else{
+																								echo($i%12);
+																							}
+																						@endphp
+																					</th>
+																				@endfor
+																			</tr>
+
+																			@foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan)	
+																				<tr id= "{{$fulltbpprojectplan->id}}" >                                        
+																					<td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a></td> 
+																					@php
+																						$_count = 1;
+																					@endphp
+																					@for ($i = $minmonth; $i <= $maxmonth; $i++)
+																						@php
+																							$color = 'white';
+																							$check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+																							if (!Empty($check)) {
+																								$color = 'grey';
+																							}
+																						@endphp
+
+																						@php
+																						    $m = '';
+																							//$check = @$ganttcollections->where('row',$key +1)->where('month',$i)->first();
+																							$_c = $fulltbpprojectplan->planIndex($i);
+																							if(!Empty($check)){
+																								$m = $_c ;//$check['key'];
+																							}
+																						@endphp
+
+																						<td style="background-color:{{$color}}" ><div class="boxmonth">{{$m}}</div></td>
+																						@php
+																						$_count++;	
+																						@endphp 
+																						
+																					@endfor															
+																				</tr>
+																			@endforeach  
+																		</table>
+																	</div>
+																</div>
+															</div> --}}
 
 
 															<div class="col-md-12 mt-3">	
 																<label for=""><strong>2.7) แผนการดำเนินงาน (Gantt Chart)</strong> </label><span class="text-primary" id="projectechdevproblemtextlength"></span>
 																<span id="ganttchart_wrapper_error" class="form-text text-danger mb-2"  hidden ><i class="icon-cancel-circle2 text-danger"></i>  กรุณากรอกรายละเอียดแผนการดำเนินงาน (Gantt Chart)</span>
-																<span id="notmatch_wrapper_error" class="form-text text-danger mb-2"  hidden > <i class="icon-cancel-circle2 text-danger"></i> จำนวนเดือนที่ดำเนินงานไม่เท่ากับจำนวนเดือนในแผนงาน</span>
+																<span id="notmatch_wrapper_error" class="form-text text-danger mb-2"  hidden > <i class="icon-cancel-circle2 text-danger"></i> จำนวนเดือนที่ดำเนินงานไม่เท่ากับจำนวนเดือนในแผนงาน<span id="month_added"></span></span>
 																<div class="row">
 																	<div class="col-md-12">
 																		<label for="">
@@ -2661,23 +2758,25 @@ th {
 																		<label for=""><strong>ถ้าต้องการเปลี่ยนลำดับรายละเอียดการดำเนินงานให้คลิกที่รายการแล้วลากขึ้นหรือลง</strong></label>
 																		
 																	</div>
-																	<div class="col-md-12">			
-																		<table class="table-bordered" style="width: 100%;" id="table_gantt_wrapper">
+																	
+																	<div class="col-md-12">	
+																		<div style="max-width:1800px">
+																			<table class="table-bordered" style="table-layout: auto;width: 100%;display: block;overflow: auto;" id="table_gantt_wrapper">
 																			<thead>
 																				<tr>
 																					<tr>
-																						<th rowspan="2" style="width:1%;white-space: nowrap;padding:5px">รายละเอียดการดำเนินงาน</th> 
+																						<th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:600px">รายละเอียดการดำเนินงานของโครงการ </th> 
 																							@foreach ($allyears as $key => $item)
 																								@if ($item != 0)
-																									<th colspan="{{$item}}" class="text-center" style="width:1%;white-space: nowrap; !important;font-size:12px">{{$fulltbpgantt->startyear + $key}}</th> 
+																									<th colspan="{{$item}}" class="text-center" style="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">{{$fulltbpgantt->startyear + $key}}</th> 
 																								@endif
 																							@endforeach
-																						<th rowspan="2" class="text-center hiddenelement_fulltbp" style="width:1%;white-space: nowrap; !important">เพิ่มเติม</th> 
+																						{{-- <th rowspan="2" class="text-center hiddenelement_fulltbp" style="width:1%;white-space: nowrap;">แก้ไข/ลบรายการ</th>  --}}
 																					</tr>
 																					@if ($minmonth != 0 && $maxmonth !=0)
 																						<tr >
 																							@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																								<th class="text-center" style="max-width: 50px !important;font-size:12px">
+																								<th class="text-center" style="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">
 																									@php
 																										$full = 12;
 																										if($i%12 == 0){
@@ -2694,10 +2793,11 @@ th {
 																			</thead>
 																			
 																			<tbody id="ganttchart_wrapper_tr">  
-																				@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+																				@foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan)
 																				
 																					<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-																						<td style="width:5%;white-space: nowrap;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
+																						<td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a>
+																							 </td> 
 																						@php
 																							$_count = 1;
 																						@endphp
@@ -2709,23 +2809,36 @@ th {
 																									$color = 'grey';
 																								}
 																							@endphp
-																							<td style="background-color:{{$color}};width: 30px !important;font-size:12px;padding:5px;text-align:center">
+																								@php
+																									$m = '';
+																									$_c = $fulltbpprojectplan->planIndex($i);
+																									//$check = @$ganttcollections->where('row',$key +1)->where('month',$i)->first();
+																									if(!Empty($_c)){
+																										//$m = $check['key'];
+																										$m = $_c ;
+																									}
+																								@endphp
+																							<td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
 																								@if ($color == 'grey')
-																								 {{$_count}}
+																								{{$m}}
 																								@endif
 																							</td> 
 																							@php
 																								$_count++;
 																							@endphp
 																						@endfor															
-																						<td class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap !"> 
+																						{{-- <td class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap"> 
 																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
 																							<a  data-id="{{$fulltbpprojectplan->id}}" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a> 
-																						</td> 
+																						</td>  --}}
 																					</tr>
-																				@endforeach                            
+																				@endforeach    
+																				 
+																				<input type="text" id="max_m" value="{{@$_c}}" hidden>                      
 																			</tbody>
 																		</table>
+																		</div>		
+																		
 																		<input type="text" id="maxrow" value="{{@$_count-1}}" hidden>
 																	</div>
 																</div>
@@ -3186,21 +3299,22 @@ th {
 													</tr>
 												</thead>
 												<tbody id="authorized_director_wrapper_tr"> 
+													{{-- {{$authorizeddirectors}} --}}
 													@foreach ($authorizeddirectors as $authorizeddirector)
 													<tr >      
 														<td>
+															{{-- {{$authorizeddirector->isUseSigner($fulltbp->id)}} --}}
 															<div class="form-check">
 																<label class="form-check-label">
-
 																	@if (Empty($authorizeddirector->signature_id))
 																			<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
-																			@if ($authorizeddirector->usesignature == 2)
+																			@if ($authorizeddirector->isUseSigner($fulltbp->id) == 2)
 																				checked
 																			@endif
 																			>
 																		@else
 																			<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
-																			@if ($authorizeddirector->usesignature == 2)
+																			@if ($authorizeddirector->isUseSigner($fulltbp->id) == 2)
 																				checked
 																			@endif
 																			>
@@ -3211,8 +3325,6 @@ th {
 																		@else
 																			{{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}}
 																	@endif
-
-																	{{-- {{$authorizeddirector->prefix->name}}{{$authorizeddirector->name}} {{$authorizeddirector->lastname}} --}}
 																</label>
 															</div>
 														</td>  
@@ -3551,9 +3663,9 @@ th {
 		}
 
 	});
-	$(document).on('keyup', '#ganttnummonth', function(e) {
+	// $(document).on('keyup', '#ganttnummonth', function(e) {
 	
-	});
+	// });
 
 	$('#employtrainingdate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY HH:mm',

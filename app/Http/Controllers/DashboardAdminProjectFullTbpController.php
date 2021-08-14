@@ -159,7 +159,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $fulltbpprojectplantransactionarray =  FullTbpProjectPlanTransaction::where('full_tbp_id',$fulltbp->id)->distinct('month')->pluck('month')->toArray();
         $minmonth = 0;
         $maxmonth = 0;
-        $allyears = array(0, 0, 0);
+        $allyears = array(0, 0, 0,0);
         if(count($fulltbpprojectplantransactionarray) != 0){
             $minmonth = min($fulltbpprojectplantransactionarray);
             $maxmonth = max($fulltbpprojectplantransactionarray);
@@ -172,11 +172,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             $year3 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
                 return $n >= 25 && $n <= 36;
             });
+            $year4 = array_filter($fulltbpprojectplantransactionarray, function($n){ 
+                return $n >= 37 && $n <= 48;
+            });
 
             //=====new method check year one
-
             if(count($year1) != 0){
-                if(count($year2) != 0 || count($year3) != 0 ){
+                if(count($year2) != 0 || count($year3) != 0 || count($year4) != 0){
                     $year1 = range(min($year1),12);
                 }else{
                     $year1 = range(min($year1),max($year1));
@@ -186,16 +188,9 @@ class DashboardAdminProjectFullTbpController extends Controller
             }
 
             //===== new method check year two
-
             if(count($year1) != 0){
-                if(count($year3) != 0){
-                    if(count($year2) != 0){
+                if(count($year3) != 0 || count($year4) != 0){
                         $year2 = range(13,24);
-                    }
-                    else{
-                        $year2 = range(13,24);
-                    }
-                    
                 }else{
                     if(count($year2) != 0){
                         $year2 = range(13,max($year2));
@@ -204,12 +199,8 @@ class DashboardAdminProjectFullTbpController extends Controller
                     }
                 }
             }else{
-                if(count($year3) != 0){
-                    if(count($year2) != 0){
-                        $year2 = range(min($year2),24);
-                    }else{
-                        $year2 = [];
-                    }
+                if(count($year3) != 0 || count($year4) != 0){
+                    $year2 = range(min($year2),24);
                 }else{
                     if(count($year2) != 0){
                         $year2 = range(min($year2),max($year2));
@@ -218,53 +209,49 @@ class DashboardAdminProjectFullTbpController extends Controller
                     }
                 }
             }
-            //===== new method check year three
+
+            
+            //==== year three
+
             if(count($year1) != 0 || count($year2) != 0){
-                if(count($year3) != 0){
-                    $year3 = range(25,max($year3));
+                if(count($year4) != 0){
+                    $year3 = range(25,36);
                 }else{
-                    $year3 = [];
+                    if(count($year3) != 0){
+                        $year3 = range(25,max($year3));
+                    }else{
+                        $year3 = [];
+                    }
                 }
+
             }else{
-                if(count($year3) != 0){
-                    $year3 = range(min($year3),max($year3));
+                if(count($year4) != 0){
+                    $year3 = range(min($year3),36);
                 }else{
-                    $year3 = [];
+                    if(count($year3) != 0){
+                        $year3 = range(min($year3),max($year3));
+                    }else{
+                        $year3 = [];
+                    }
                 }
+
             }
 
-            //=====
-
-            // if(count($year1) != 0){
-            //     if(count($year2) != 0){
-            //         $year1 = range(min($year1),12);
-            //     }else{
-            //         $year1 = range(min($year1),max($year1));
-            //     }
-            // }else{
-            //     $year1 = [];
-            // }
-            
-            // if(count($year2) != 0){
-            //     if(count($year1) != 0){
-            //         $year2 = range(13,max($year2));
-            //     }else{
-            //         $year2 = range(min($year2),max($year2));
-            //     }
-            // }else{
-            //     $year2 = [];
-            // }
-            // if(count($year3) != 0){
-            //     if(count($year2) != 0){
-            //         $year3 = range(25,max($year3));
-            //     }else{
-            //         $year3 = range(min($year3),max($year3));
-            //     }
-            // }else{
-            //     $year3 = [];
-            // }
-
-            $allyears = array(count($year1), count($year2), count($year3));
+            //===== new method check year foure
+            if(count($year1) != 0 || count($year2) != 0 || count($year3) != 0){
+                if(count($year4) != 0){
+                    $year4 = range(37,max($year4));
+                }else{
+                    $year4 = [];
+                }
+            }else{
+                if(count($year4) != 0){
+                    $year4 = range(min($year4),max($year4));
+                }else{
+                    $year4 = [];
+                }
+            }
+            $allyears = array(count($year1), count($year2), count($year3), count($year4));
         }
 
         // $fulltbp_employ_activitylogs = Activity::causedBy($user)->where('log_name','Full TBP Employ')->orderBy('id','desc')->get();
@@ -556,22 +543,28 @@ class DashboardAdminProjectFullTbpController extends Controller
                 );
             }
            
+            // $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            // $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $arr1 = User::where('id',$_company->user_id)->pluck('id')->toArray();
+            // $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
             $timeLinehistory->mini_tbp_id = $minitbp->id;
-            $timeLinehistory->details = 'TTRS: แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติแล้ว';
+            $timeLinehistory->details = 'TTRS: แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ';
             $timeLinehistory->message_type = 2;
             $timeLinehistory->owner_id = $_company->user_id;
+            $timeLinehistory->viewer = $arr1;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
 
-            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติแล้วแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ',$auth->id,$_user->id);
+            $messagebox = Message::sendMessage('อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project ,'แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ',$auth->id,$_user->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_company->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติแล้ว';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' แผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -594,7 +587,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             ]);
 
             EmailBox::send($jduser->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name .' จึงแจ้งมาเพื่อทราบ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ได้ผ่านการอนุมัติแล้วแล้ว กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:อนุมัติแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ' . $minitbp->project .' บริษัท' . $_company->name,'เรียนผู้ขอรับการประเมิน<br><br> แผนธุรกิจเทคโนโลยี (Full TBP) ได้ผ่านการอนุมัติ กรุณาเตรียมพร้อมสำหรับการประเมิน ณ สถานประกอบการ <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
             $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first();
             if($projectstatustransaction->status == 1){
@@ -650,11 +643,14 @@ class DashboardAdminProjectFullTbpController extends Controller
                 ]
             );
 
+            $arr1 = User::where('id',$_company->user_id)->pluck('id')->toArray();
+
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
             $timeLinehistory->mini_tbp_id = $minitbp->id;
             $timeLinehistory->details = 'TTRS: ' .$request->note;
             $timeLinehistory->user_id = $auth->id;
+            $timeLinehistory->viewer = $arr1;
             $timeLinehistory->message_type = 2;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->save();
@@ -1052,6 +1048,9 @@ class DashboardAdminProjectFullTbpController extends Controller
 
         // EmailBox::send(User::find($company->user_id)->email,'TTRS:สิ้นสุดโครงการ'.$minitbp->project,'เรียนผู้ขอรับการประเมิน<br><br>แจ้งสิ้นสุดโครงการ '.$minitbp->project.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
@@ -1059,6 +1058,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $timeLinehistory->details = 'TTRS: สิ้นสุดโครงการ'.$minitbp->project. $fullcompanyname;
         $timeLinehistory->message_type = 3;
         $timeLinehistory->owner_id = $auth->id;
+        $timeLinehistory->viewer = $userarray;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
 

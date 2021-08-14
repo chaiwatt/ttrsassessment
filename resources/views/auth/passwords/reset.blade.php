@@ -23,10 +23,12 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-feedback form-group-feedback-left">
                             <label>รหัสผ่าน:</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                            <div class="form-control-feedback">
+                                <i class="icon-eye-blocked text-muted toggle_password"></i>
+                            </div>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -34,9 +36,12 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-feedback form-group-feedback-left">
                             <label>ยืนยันรหัสผ่าน:</label>
                             <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password">
+                            <div class="form-control-feedback ">
+                                <i class="icon-eye-blocked text-muted toggle_password"></i>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-end align-items-center">
@@ -48,4 +53,26 @@
         </div>
     </div>
 </div>
+@section('pageScript')
+<script>
+        $(".toggle_password").click(function() {
+            var check = $('#password').attr("type");
+            if (check == "password") {
+                $('.toggle_password').removeClass("icon-eye-blocked");
+                $('.toggle_password').addClass("icon-eye");
+                $('#password').attr("type", "text");
+                $('#password-confirm').attr("type", "text");
+            } else {
+                $('.toggle_password').addClass("icon-eye-blocked");
+                $('.toggle_password').removeClass("icon-eye");
+                $('#password').attr("type", "password");
+                $('#password-confirm').attr("type", "password");
+            }
+        });
+</script>
+@stop
+{{--  --}}
+
 @endsection
+
+

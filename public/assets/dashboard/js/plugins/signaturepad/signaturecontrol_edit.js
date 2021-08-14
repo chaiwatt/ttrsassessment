@@ -8,11 +8,12 @@ var saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
 var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
 var canvas = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {
-  // It's Necessary to use an opaque color when saving image as JPEG;
-  // this option can be omitted if only saving as PNG or SVG
+
   backgroundColor: 'rgb(255, 255, 255)',
   penColor: "rgb(81, 0, 234)"
 });
+
+signaturePad.clear();
 
 function download(dataURL, filename) {
   if (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("Chrome") === -1) {
@@ -63,29 +64,48 @@ undoButton.addEventListener("click", function (event) {
   }
 });
 
-// changeColorButton.addEventListener("click", function (event) {
-//   var r = Math.round(Math.random() * 255);
-//   var g = Math.round(Math.random() * 255);
-//   var b = Math.round(Math.random() * 255);
-//   var color = "rgb(" + r + "," + g + "," + b +")";
-
-//   signaturePad.penColor = color;
-// });
-
 savePNGButton.addEventListener("click", function (event) {
   if (signaturePad.isEmpty()) {
     alert("ยังไม่ได้เซนต์ลายมือชื่อ");
-  } else {
+  } 
+  else 
+  {
+    // console.log($('#authorizeddirectorid').val());
     var dataURL = signaturePad.toDataURL();
     $("#dataurl").val(dataURL);
     $("#imgdivedit").attr("src", dataURL);
-    // $('#btnaddsig').html('<i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ(+)</a>');
 
-
-    $('#modal_signature').modal('hide');
-
+    updateSignature(dataURL,$('#authorizeddirectorid').val()).then(data => {
+        $(`#edit${$('#authorizeddirectorid').val()}`).html('<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>');
+       
+        $(`#auth${$('#authorizeddirectorid').val()}`).data('id',2);
+        $('#modal_signature').modal('hide');
+       
+      })
+    .catch(error => {})
   }
 });
+
+function updateSignature(dataURL,directorid){
+  var url = `${route.url}/api/profile/updatesignature`;
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: url,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          signaturebase64 : dataURL,
+          directorid : directorid
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
 
 function uploadSignature(dataURL){
   var url = `${route.url}/api/profile/uploadcanvassignature`;
@@ -117,10 +137,16 @@ if(file){
         $("#imgdivedit").attr("src", reader.result);
         //console.log(reader.result);
         $("#dataurl").val(reader.result);
+        updateSignature(reader.result,$('#authorizeddirectorid').val()).then(data => {
+          $('#modal_signature').modal('hide');
+        })  .catch(error => {})
     }
 
+
+
+
     reader.readAsDataURL(file);
-    $('#modal_signature').modal('hide');
+    // $('#modal_signature').modal('hide');
 }
 
 });

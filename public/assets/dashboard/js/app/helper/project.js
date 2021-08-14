@@ -320,6 +320,26 @@ function getPlan(id){
     })
 }
 
+function addMonthPlan(id,ganttnummonth){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/fulltbp/project/plan/addmonth`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id,
+          'numofmonth': ganttnummonth
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
 function editPlan(id,detail,month){
   return new Promise((resolve, reject) => {
       $.ajax({
@@ -399,4 +419,4 @@ function getMonth(fulltbpid){
 }
 
 export {addAbtract,addProduct,addProductDetail,getTechDevLevel,addTechDev,addTechDevLevel,editTechDevLevel,deleteTechDevLevel,addTechDevProblem,
-  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc,getMonth}
+  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc,getMonth,addMonthPlan}

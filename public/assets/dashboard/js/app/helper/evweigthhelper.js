@@ -111,6 +111,10 @@ function callDataTable(){
                 exportOptions: {
                     columns: [ 0, 1,2 ]
                 },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','โครงการ' + $('#projectname').val());
+                }, 
             },
             { 
                 extend: 'pdfHtml5',
@@ -188,6 +192,10 @@ $('#evextraexporttable').DataTable( {
             exportOptions: {
                 columns: [ 0, 1,2]
             },
+            customize: function( xlsx ) {
+                var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                source.setAttribute('name','โครงการ' + $('#projectname').val());
+            }, 
         },
         { 
             extend: 'pdfHtml5',
@@ -359,18 +367,22 @@ function editWeight(id,value,evtypeid){
 }
 
 function RenderWeightTable(data,evtypeid){
+  
     var html =``;
     evdata = [];
     var readonly =`readonly`;
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
-        readonly =``;
+        if(route.usertypeid != 6){
+            readonly =``;
+        }
     }
-   if($('#evstatus').val() >= 4 || route.usertypeid != 6){
+   if($('#evstatus').val() >= 4 ){
         commentreadonly =`readonly`;
     }
     if($('#evstatus').val() == 2 || route.refixstatus == 1){
         commentreadonly =``;
     }
+    console.log(readonly);
     data.forEach(function (pillaindex,index) {
         var comment = '';
         if(pillaindex.comment){
@@ -414,7 +426,9 @@ function RenderExtraTable(data){
     var readonly =`readonly`;
    
     if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
-        readonly =``;
+        if(route.usertypeid != 6){
+            readonly =``;
+        }
     }
     if($('#evstatus').val() >= 4 || route.usertypeid != 6){
         commentreadonly =`readonly`;

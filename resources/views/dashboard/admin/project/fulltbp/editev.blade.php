@@ -669,7 +669,7 @@
                                             <table class="table table-bordered table-striped" id="criteriatable">
                                                 <thead>
                                                     <tr class="bg-info">
-                                                        <th style="text-align: center">วันที่</th>  
+                                                        <th style="text-align: center;width:250px">วันที่</th>  
                                                         <th style="text-align: center">รายละเอียด</th>   
                                                         {{-- @if (Auth::user()->user_type_id == 6)
                                                             <th>เพิ่มเติม</th>

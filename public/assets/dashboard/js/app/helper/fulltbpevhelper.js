@@ -84,7 +84,6 @@ function getCookie(name) {
 
 
 function callDataTable(){
-   
         $('#evexporttable').DataTable( {
             dom: 'Bfrtip',
             data: evdata,
@@ -119,11 +118,15 @@ function callDataTable(){
                         return null; 
                     },
                     filename: function() {
-                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname') .val() ;      
+                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname').val() ;      
                     }, 
                     exportOptions: {
                         columns: [ 0, 1,2,3 ]
                     },
+                    customize: function( xlsx ) {
+                        var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                        source.setAttribute('name','โครงการ' + $('#projectname').val());
+                    }, 
                 },
                 { 
                     extend: 'pdfHtml5',
@@ -146,10 +149,10 @@ function callDataTable(){
                         columns: [ 0, 1,2,3 ]
                     },
                     title: function () { 
-                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname') .val() ; ; 
+                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname').val() ; ; 
                     },
                     filename: function() {
-                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname') .val() ;       
+                        return "รายการ EV (Index Criteria) โครงการ" + $('#projectname').val() ;       
                     }, 
                 }
                 
@@ -195,11 +198,15 @@ function callDataTableExtra(){
                     return null; 
                 },
                 filename: function() {
-                    return "รายการ EV (Extra) โครงการ" + $('#projectname') .val() ;       
+                    return "รายการ EV (Extra) โครงการ" + $('#projectname').val() ;       
                 }, 
                 exportOptions: {
                     columns: [ 0, 1,]
                 },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','โครงการ' + $('#projectname').val());
+                }, 
             },
             { 
                 extend: 'pdfHtml5',
@@ -222,10 +229,10 @@ function callDataTableExtra(){
                     columns: [ 0, 1]
                 },
                 title: function () { 
-                    return "รายการ EV (Extra) โครงการ" + $('#projectname') .val() ; ; 
+                    return "รายการ EV (Extra) โครงการ" + $('#projectname').val() ; ; 
                 },
                 filename: function() {
-                    return "รายการ EV (Extra) โครงการ" + $('#projectname') .val() ;     
+                    return "รายการ EV (Extra) โครงการ" + $('#projectname').val() ;     
                 }, 
             }
             

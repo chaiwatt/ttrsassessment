@@ -18,6 +18,7 @@ class CreateFullTbpResponsiblePeopleTable extends Migration
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
             $table->unsignedBigInteger('prefix_id')->default(1);
+            $table->string('otherprefix',250)->nullable();
             $table->string('name')->nullable();
             $table->string('lastname',250)->nullable();
             $table->string('email',250)->nullable();

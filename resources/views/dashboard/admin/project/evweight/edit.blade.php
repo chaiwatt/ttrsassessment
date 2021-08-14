@@ -161,7 +161,7 @@
                                                 <tr class="bg-info">
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
-                                                    <th>Weight <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>                                                                                
+                                                    <th>Weight<a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>                                                                                
                                                 </tr>
                                             </thead>
                                             <tbody id="subpillar_index_transaction_wrapper_tr"> 
@@ -191,7 +191,7 @@
                                             <table class="table table-bordered table-striped"  >
                                                 <thead>
                                                     <tr class="bg-info">
-                                                        <th style="text-align: center">วันที่</th>  
+                                                        <th style="text-align: center;width:250px">วันที่</th>  
                                                         <th style="text-align: center">รายละเอียด</th>   
                                                         {{-- @if (Auth::user()->user_type_id == 6)
                                                             <th>เพิ่มเติม</th>
@@ -203,13 +203,7 @@
                                                     <tr>
                                                         <td style="text-align: center">{{$evedithistory->thaidate}}</td>
                                                         <td>{{$evedithistory->detail}}</td>
-                                                        {{-- @if (Auth::user()->user_type_id == 6)
-                                                        <td>
-                                                            @if ($ev->status < 4)
-                                                                <a href="#" type="button" data-id="{{$evedithistory->id}}" class="btn btn-sm bg-danger deletecomment">ลบ</a>
-                                                            @endif
-                                                        </td>
-                                                        @endif --}}
+
                                                     </tr>
                                                     @endforeach
                                                 </tbody>

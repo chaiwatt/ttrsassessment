@@ -65,4 +65,53 @@ class TestController extends Controller
             EmailBox::send($leader->email,'TTRS:แจ้งเตือนใกล้ถึงการระบุโครงการประเมินแล้วเสร็จสิ้น สำหรับโครงการ'. $minitbp->project . ' บริษัท ' . $company->name,'เรียน Leader <br><br> แจ้งเตือนใกล้ถึงการระบุโครงการประเมินแล้วเสร็จสิ้น ของโครงการ'.$minitbp->project. ' บริษัท'.$company->name. ' ซึ่งจะครบกำหนดตาม Control Flow วันที่ '.$enddate.' <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
     }
+
+    public function DemoJson(Request $request){
+        $ganttdata = [
+            ['key' => 1,'full_tbp_id' => 1, 'month' => 6],
+            ['key' => 2,'full_tbp_id' => 1, 'month' => 7],
+            ['key' => 3,'full_tbp_id' => 2, 'month' => 7],
+            ['key' => 4,'full_tbp_id' => 2, 'month' => 8],
+            ['key' => 5,'full_tbp_id' => 3, 'month' => 2],
+            ['key' => 6,'full_tbp_id' => 3, 'month' => 4],
+            ['key' => 7,'full_tbp_id' => 4, 'month' => 13],
+            ['key' => 8,'full_tbp_id' => 4, 'month' => 14],
+            ['key' => 9,'full_tbp_id' => 4, 'month' => 15],
+            ['key' => 10,'full_tbp_id' => 4, 'month' => 16],
+            ['key' => 11,'full_tbp_id' => 4, 'month' => 25],
+            ['key' => 12,'full_tbp_id' => 5, 'month' => 26],
+            ['key' => 13,'full_tbp_id' => 5, 'month' => 27],
+            ['key' => 14,'full_tbp_id' => 5, 'month' => 28],
+            ['key' => 15,'full_tbp_id' => 5, 'month' => 13],
+            ['key' => 16,'full_tbp_id' => 5, 'month' => 14],
+            ['key' => 17,'full_tbp_id' => 5, 'month' => 31],
+          ];
+          
+        usort($ganttdata, array( $this, 'invenDescSort' ));
+
+        $count = 1;
+        $flag = false;
+        foreach ($ganttdata as $key => $value){
+            // echo  ('ลำดับ: '. $count . ' row: ' .  $ganttdata[$key]['full_tbp_id'] . ' month: ' . $ganttdata[$key]['month']) . '<br>';
+            $count ++;
+            if($key < count($ganttdata)-1){
+                if($ganttdata[$key]['month'] == $ganttdata[$key+1]['month']){
+                    $count --;
+                }
+            }
+        }
+        
+        $arr = array();
+        for ($k=0 ; $k<10 ; $k++){
+            $arr[] = array('key' => $k , 'full_tbp_id' => $k*2 , 'month' => $k*3 ); 
+        }
+        $arrcollection = collect($arr);
+        return $arrcollection;
+    }
+
+    public  function invenDescSort($item1,$item2)
+    {
+        if ($item1['month'] == $item2['month']) return 0;
+        return ($item1['month'] > $item2['month']) ? 1 : -1;
+    }
 }

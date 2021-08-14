@@ -19,6 +19,7 @@ class CreateFullTbpProjectPlanTransactionsTable extends Migration
             $table->foreign('project_plan_id')->references('id')->on('full_tbp_project_plans')->onDelete('cascade');
             $table->unsignedBigInteger('full_tbp_id');
             $table->char('month',2);
+            $table->char('mindex',2)->nullable();
             $table->timestamps();
         });
     }

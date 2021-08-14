@@ -62,7 +62,7 @@ class BusinessPlanController extends Controller
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
-            $messagebox =  Message::sendMessage('กรอกข้อมูล Mini TBP','คำขอประเมินธุรกิจได้ผ่านการอนุมัติแล้วให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a>',User::where('user_type_id',6)->first()->id,$_user->id);
+            $messagebox =  Message::sendMessage('กรอกข้อมูล Mini TBP','คำขอประเมินธุรกิจได้ผ่านการอนุมัติ สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a>',User::where('user_type_id',6)->first()->id,$_user->id);
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $_user->id;           
@@ -74,7 +74,7 @@ class BusinessPlanController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
             
-            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini TBP โครงการ' . $minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจได้ผ่านการอนุมัติแล้วให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'TTRS:กรอกข้อมูล Mini TBP โครงการ' . $minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจได้ผ่านการอนุมัติ ให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
 
         }

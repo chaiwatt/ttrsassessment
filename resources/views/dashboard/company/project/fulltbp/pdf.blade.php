@@ -581,9 +581,15 @@
                         @endif
 
                     </div>
-
+                    @php
+                        $respprefix = $fulltbp->fulltbpresponsibleperson->prefix->name;
+                        if ($fulltbp->fulltbpresponsibleperson->prefix_id == 5) {
+                            $respprefix = $fulltbp->fulltbpresponsibleperson->otherprefix;
+                        }
+                    @endphp
+                   
                     <div class="ml20 mt20" style="font-size:13px"><strong>1.14 ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong>
-                        <div class="ml30 mt0" style="font-size:13px"> ชื่อ-นามสกุล : {{$fulltbp->fulltbpresponsibleperson->prefix->name}}{{$fulltbp->fulltbpresponsibleperson->name}} {{$fulltbp->fulltbpresponsibleperson->lastname}}</div>
+                        <div class="ml30 mt0" style="font-size:13px"> ชื่อ-นามสกุล : {{$respprefix}}{{$fulltbp->fulltbpresponsibleperson->name}} {{$fulltbp->fulltbpresponsibleperson->lastname}}</div>
                         <div class="ml30 mt0" style="font-size:13px"> ตำแหน่ง : {{$fulltbp->fulltbpresponsibleperson->position}}</div>
                         <div class="ml30 mt0" style="font-size:13px"> โทรศัพท์ : {{$fulltbp->fulltbpresponsibleperson->phone1}} ต่อ {{$generalinfo->phone1_ext}}</div>
                         <div class="ml30 mt0" style="font-size:13px"> โทรศัพท์มือถือ : {{$fulltbp->fulltbpresponsibleperson->phone2}}</div>

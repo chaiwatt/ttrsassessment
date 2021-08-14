@@ -576,20 +576,20 @@ class DashboardAdminAssessmentController extends Controller
             'actual_startdate' =>  Carbon::now()->toDateString()
         ]);
 
+        $arr1 = UserArray::projectmember($minitbp->business_plan_id);
+        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr3 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
         
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
         $timeLinehistory->mini_tbp_id = $minitbp->id;
         $timeLinehistory->details = 'TTRS: สรุปผลการประเมินสำเร็จ';
         $timeLinehistory->message_type = 3;
+        $timeLinehistory->viewer = $userarray;
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
-
-        $arr1 = UserArray::projectmember($minitbp->business_plan_id);
-        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
-        $arr3 = UserArray::leader($minitbp->business_plan_id);
-        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

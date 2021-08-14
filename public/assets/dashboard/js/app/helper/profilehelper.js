@@ -153,10 +153,14 @@ $(document).on("click",".messagelink",function(e){
                     html +=`</tbody></table></div>`
         }
 
-        if(data.unreadmessages.length >= 0){
+        if(data.unreadmessages.length > 0){
+            $("#_newmessagecount_wrapper").attr("hidden",false);
             $("#_newmessagecount").html(data.unreadmessages.length);
             $("#newmessagecount1").html(data.unreadmessages.length);
             $("#newmessagecount2").html(data.unreadmessages.length + ' ข้อความใหม่');
+        }else{
+            $("#newmessagecount2").html('');
+            $("#_newmessagecount_wrapper").attr("hidden",true);
         }
 
         data.unreadmessages.forEach((unreadmsg,index) => 
@@ -1157,12 +1161,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 selectprefix = 'selected';
             }
             html1 += `<option value="${prefix['id']}" ${selectprefix}>${prefix['name']}</option>`
-
-
-
-
         });
-        //console.log(data.companyemploy.signature_id);
          $('#signatureid').val(data.companyemploy.signature_id)
         if(data.$signature != ''){            
             $("#sigdiv_edit").html(`<img id="imgdivedit" src="${route.url}/${data.$signature}" style="width: 180px;height:45px" alt=""></img>`);

@@ -49,6 +49,7 @@ class FullTbpGeneralController extends Controller
         }else{
             FullTbpResponsiblePerson::where('full_tbp_id',$request->id)->first()->update([
                 'prefix_id' => $request->responsibleprefix,
+                'otherprefix' => $request->otherresponsibleprefix,
                 'name' => $request->responsiblename,
                 'lastname' => $request->responsiblelastname,
                 'email' => $request->responsibleemail,

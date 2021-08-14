@@ -42,7 +42,7 @@ class DashboardExpertProjectCommentController extends Controller
                                                         ->withUsers($users)
                                                         ->withBusinessplan($businessplan);
     }
-    public function EditSave(ExpertCommentRequest $request,$id){
+    public function EditSave(Request $request,$id){
         $auth = Auth::user(); 
         $expertcomment = ExpertComment::where('full_tbp_id',$id)->where('user_id',$auth->id)->first();
         if(Empty($expertcomment)){
@@ -120,6 +120,6 @@ class DashboardExpertProjectCommentController extends Controller
         $projectlog->save();
 
         CreateUserLog::createLog('เพิ่มความเห็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project );
-        return redirect()->route('dashboard.expert.report')->withSuccess('เพิ่มรายการสำเร็จ');
+        return redirect()->route('dashboard.expert.report')->withSuccess('เพิ่มความเห็นผู้เชี่ยวชาญสำเร็จ');
     }
 }

@@ -79,6 +79,10 @@ function callDataTable(){
                 exportOptions: {
                     columns: [ 0, 1,2,3,4,5 ]
                 },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','โครงการ' + route.projectname);
+                }, 
             },
             { 
                 extend: 'pdfHtml5',
@@ -161,6 +165,10 @@ function callDataTableExtra(){
                 exportOptions: {
                     columns: [ 0, 1,2,3]
                 },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','โครงการ' + route.projectname);
+                }, 
             },
             { 
                 extend: 'pdfHtml5',

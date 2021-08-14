@@ -2,17 +2,18 @@
 
 namespace App\Model;
 
-use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
 
-class FullTbpHistory extends Model
+class MiniTbpHistory extends Model
 {
+    //
     protected $fillable = [];
     protected $guarded = [];
 
-    public function getFulltbpAttribute(){
-        return FullTbp::find($this->full_tbp_id);
+    public function getMinitbpAttribute(){
+        return MiniTBP::find($this->mini_tbp_id);
     } 
 
     public function getSubmitdateThAttribute(){

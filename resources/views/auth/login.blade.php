@@ -86,6 +86,16 @@
                  $('#password').attr("type", "password");
              }
          });
+
+         $(document).on('keyup', '#password', function(e) {
+                this.selectionStart = this.selectionEnd = this.value.length;
+                var patt = /[ก-๙]/g;
+                var res = patt.test($(this).val());
+                if(res == true &&  $(this).val() != ''){
+                   $(this).val().substring(0, $(this).val().length - 1);
+                   $(this).val(($(this).val().substring(0, $(this).val().length - 1)));
+                }
+            });
 </script>
 @stop
 {{--  --}}

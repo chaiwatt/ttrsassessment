@@ -78,18 +78,19 @@ class DashboardAdminProjectCancelController extends Controller
             EmailBox::send($_user->email,'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project   . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.' (' .$fullcompanyname .') เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
+        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+        $arr2 = UserArray::leader($minitbp->business_plan_id);
+        $userarray = array_unique(array_merge($arr1,$arr2));
+
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
         $timeLinehistory->mini_tbp_id = $minitbp->id;
         $timeLinehistory->details = 'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project  . $fullcompanyname;
         $timeLinehistory->message_type = 3;
+        $timeLinehistory->viewer = $userarray;
         $timeLinehistory->owner_id = $auth->id;
         $timeLinehistory->user_id = $auth->id;
         $timeLinehistory->save();
-
-        $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
-        $arr2 = UserArray::leader($minitbp->business_plan_id);
-        $userarray = array_unique(array_merge($arr1,$arr2));
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

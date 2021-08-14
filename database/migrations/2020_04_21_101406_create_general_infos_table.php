@@ -17,6 +17,7 @@ class CreateGeneralInfosTable extends Migration
             $table->id();
             $table->string('company',150)->default('สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)')->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
             $table->string('company_default',150)->default('สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)')->comment('ชื่อหน่วยงาน เช่น สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ');
+            $table->string('company_titlebar',150)->default('nstda');
             $table->string('logo',250)->nullable();
             $table->string('logo2',250)->nullable();
             $table->string('phone1',50)->default('0-2564-7000');

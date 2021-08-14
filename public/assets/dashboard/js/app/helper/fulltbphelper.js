@@ -129,7 +129,32 @@ $(document).on('click', '#btn_edit_employ', function(e) {
             text: 'กรุณากรอกข้อมูลให้ครบ!',
         });
         return;
+    }else if(($("#employphone_edit").val().length < 9 || $("#employphone_edit").val().length > 10) || $("#employphone_edit").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+        });
+        $('#employphone_edit').val('')
+        return;
+    }else if(($("#employworkphone_edit").val().length < 9 || $("#employworkphone_edit").val().length > 10) || $("#employworkphone_edit").val().charAt(0) != '0'){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง!',
+        });
+        $('#employworkphone_edit').val('')
+        return;
     }
+
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_edit').val())== false)
+    {
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+            });
+        $('#employemail_edit').val('') ;
+        return;
+    }
+
     $("#spinicon_edit_employ").attr("hidden",false);
     Employ.editEmploy($('#employid').val(),$('#employprefix_edit').val(),$('#getotherprefix').val(),$('#employname_edit').val(),$('#employlastname_edit').val(),$('#employphone_edit').val(),$('#employworkphone_edit').val(),$('#employemail_edit').val()).then(data => {   
         var html = ``;
@@ -1429,13 +1454,15 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
   
          var min = Math.min.apply(Math, unique.map(i=>Number(i)));
          var max = Math.max.apply(Math, unique.map(i=>Number(i)));
-         if((max-min+1) <= parseInt($("#ganttnummonth").val())){
+        //  if((max-min+1) <= parseInt($("#ganttnummonth").val())){
+        //  if((max-min+1) <= parseInt($("#max_m").val())){
+        // if(parseInt($("#max_m").val()) < parseInt($("#ganttnummonth").val())){
             Project.addPlan($(this).data('id'),$('#plandetail').val(),data,$('#ganttnummonth').val(),$('#ganttyear').val()).then(data => {
                 var html = ``;
                 var th = ``;
                 data.allyears.forEach(function (year,i) {      
                     if(year != 0){
-                        th += `<th colspan="${year}" class="text-center" style="width:50px !important;font-size:12px">${parseInt($('#ganttyear').val()) + i} </th>`;
+                        th += `<th colspan="${year}" class="text-center" style="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">${parseInt($('#ganttyear').val()) + i} </th>`;
                     }
                 });
                 var tr = ``;
@@ -1448,7 +1475,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                         if(full == 0){
                             full = 12;
                         }
-                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${full}</th>`;
+                        tr += `<th class="text-center" style="width:30px !important;font-size:12px;padding:5px;text-align:center">${full}</th>`;
                     }
                     tr += `</tr>`;
                 }
@@ -1456,9 +1483,9 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                 html += `<thead>
                             <tr>
                                 <tr>
-                                    <th rowspan="2" style="padding:5px;width:1%;white-space: nowrap">รายละเอียดการดำเนินงาน</th> 
+                                    <th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:600px">รายละเอียดการดำเนินงานของโครงการ</th> 
                                      ${th}
-                                    <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
+                                    
                                 </tr>
                                     ${tr}
                             </tr>
@@ -1468,22 +1495,23 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                     var tdbody =``;
                     var _count = 1;
                     for (var k = minmonth; k <= maxmonth; k++) {
-                        if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
-                            tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${_count}</td>`;
+                        var _check = data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id);
+                        if(_check != -1){
+                            var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
+                            var x =JSON.parse(JSON.stringify(_plan));
+                            $("#max_m").val(x.mindex);
+                            tdbody += `<td style="background-color:grey ;width:30px;max-width:30px !important;font-size:12px;text-align:center">${x.mindex}</td>`;
                         }else{
-                            tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
+                            tdbody += `<td style="background-color:white ;width:30px;max-width:30px !important;font-size:12px;text-align:center"></td>`;
                         } 
                         maxrow = _count;
                         _count ++;
                         
                     }
                     html += `<tr >                                        
-                        <td style="padding:5px"> ${plan.name} </td>                                            
+                    <td style="max-width:350px;padding:5px"> ${plan.name} <a href="#" data-toggle="modal" data-id="${plan.id}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="${plan.id}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a></td>                                              
                             ${tdbody}
-                        <td style="width:1%;white-space: nowrap"> 
-                        <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
-                        </td>
+                      
                     </tr>`
                     });
                     $("#spinicon_add_projectplan").attr("hidden",true);
@@ -1491,13 +1519,14 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
            })
-         }else{
-            $("#spinicon_add_projectplan").attr("hidden",true);
-                Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
-            });
-         }
+        //  }
+        //  else{
+        //     $("#spinicon_add_projectplan").attr("hidden",true);
+        //         Swal.fire({
+        //         title: 'ผิดพลาด...',
+        //         text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
+        //     });
+        //  }
     })
    .catch(error => {})
 
@@ -1509,7 +1538,16 @@ $(document).on('click', '.editprojectplan', function(e) {
         $('#plandetail_edit').val(data.fulltbpprojecplan['name']);  
          var html = ``;
          var chkindex = 0;
-         for (let item = 0; item < 3; item++) {
+         var y = 3;
+            if($('#ganttnummonth').val() <= 12){
+                y = 2;
+            }else if($('#ganttnummonth').val() > 12 && $('#ganttnummonth').val() <= 24){
+                y = 3;
+            }else if($('#ganttnummonth').val() > 24){
+                y = 4;
+            }
+            for (let item = 0; item < y; item++) {
+        //  for (let item = 0; item < 3; item++) {
              html += `<div class="col-md-12">`
              html += `<label ><u><strong>ปี ${parseInt($('#ganttyear').val())+item}</strong></u></label>
                  <div class="form-group">`;
@@ -1546,28 +1584,29 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
   
          var min = Math.min.apply(Math, unique.map(i=>Number(i)));
          var max = Math.max.apply(Math, unique.map(i=>Number(i)));
+         
 
-         if((max-min+1) <= parseInt($("#ganttnummonth").val())){
+        // if(parseInt($("#max_m").val()) <= parseInt($("#ganttnummonth").val())){
+        //  if((max-min+1) <= parseInt($("#max_m").val())){
             Project.editPlan($('#projectplan').val(),$('#plandetail_edit').val(),data).then(data => {
                 var html = ``;
                 var th = ``;
                 data.allyears.forEach(function (year,i) {      
                     if(year != 0){
-                        th += `<th colspan="${year}" class="text-center">ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                        th += `<th colspan="${year}" class="text-center" style="width:1%;white-space: nowrap; !important;font-size:12px">${parseInt($('#ganttyear').val()) + i} </th>`;
                     }
                 });
                 var tr = ``;
                 var minmonth = parseInt(data.minmonth);
                 var maxmonth = parseInt(data.maxmonth);
                 if(minmonth != 0  && maxmonth !=0){
-                    
                     tr = `<tr>`;
                     for (let j = minmonth; j <= maxmonth; j++) {
                         var full = j % 12;
                         if(full == 0){
                             full = 12;
                         }
-                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${full}</th>`;
+                        tr += `<th class="text-center" style="width:30px !important;font-size:12px;padding:5px;text-align:center">${full}</th>`;
                     }
                     tr += `</tr>`;
                 }
@@ -1575,34 +1614,35 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                 html += `<thead>
                             <tr>
                                 <tr>
-                                    <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                    <th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:600px">รายละเอียดการดำเนินงานของโครงการ</th> 
                                      ${th}
-                                    <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
+                                    
                                 </tr>
                                     ${tr}
                             </tr>
                         </thead>`
-                var maxrow = 0;
+                 var maxrow = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
                     for (var k = minmonth; k <= maxmonth; k++) {
-                        if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
-                            tdbody += `<td style="background-color:grey;width: 30px !important;font-size:12px;padding:5px;text-align:center">${_count}</td>`;
+                        var _check = data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id);
+                        if(_check != -1){
+                            var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
+                            var x =JSON.parse(JSON.stringify(_plan));
+                            $("#max_m").val(x.mindex);
+                            tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${x.mindex}</td>`;
                         }else{
-                            tdbody += `<td style="background-color:white;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
+                            tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
                         maxrow = _count;
                         _count ++;
-                       
+                        
                     }
                     html += `<tr >                                        
-                        <td style="padding:5px"> ${plan.name} </td>                                            
+                    <td style="max-width:350px;padding:5px"> ${plan.name} <a href="#" data-toggle="modal" data-id="${plan.id}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="${plan.id}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a></td>                                             
                             ${tdbody}
-                        <td style="width:1%;white-space: nowrap"> 
-                            <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
-                        </td>
+                      
                     </tr>`
                     });
                     $("#spinicon_edit_projectplan").attr("hidden",true);
@@ -1611,13 +1651,14 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                  $("#table_gantt_wrapper").tableDnD();
             })
             .catch(error => {})
-         }else{
-            $("#spinicon_edit_projectplan").attr("hidden",true);
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
-            });
-         }
+        //  }
+        //  else{
+        //     $("#spinicon_edit_projectplan").attr("hidden",true);
+        //     Swal.fire({
+        //         title: 'ผิดพลาด...',
+        //         text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
+        //     });
+        //  }
       });
 
 
@@ -1643,21 +1684,20 @@ $(document).on("click",".deleteprojectplan",function(e){
                 var th = ``;
                 data.allyears.forEach(function (year,i) {      
                     if(year != 0){
-                        th += `<th colspan="${year}" class="text-center" >ปี ${parseInt($('#ganttyear').val()) + i} </th>`;
+                        th += `<th colspan="${year}" class="text-center" style="width:1%;white-space: nowrap; !important;font-size:12px">${parseInt($('#ganttyear').val()) + i} </th>`;
                     }
                 });
                 var tr = ``;
                 var minmonth = parseInt(data.minmonth);
                 var maxmonth = parseInt(data.maxmonth);
                 if(minmonth != 0  && maxmonth !=0){
-                    
                     tr = `<tr>`;
                     for (let j = minmonth; j <= maxmonth; j++) {
                         var full = j % 12;
                         if(full == 0){
                             full = 12;
                         }
-                        tr += `<th class="text-center" style="width:40px !important;font-size:12px">${full}</th>`;
+                        tr += `<th class="text-center" style="width:30px !important;font-size:12px;padding:5px;text-align:center">${full}</th>`;
                     }
                     tr += `</tr>`;
                 }
@@ -1665,34 +1705,35 @@ $(document).on("click",".deleteprojectplan",function(e){
                 html += `<thead>
                             <tr>
                                 <tr>
-                                    <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                    <th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:600px">รายละเอียดการดำเนินงานของโครงการ</th> 
                                      ${th}
-                                    <th rowspan="2" class="text-center" style="width: 140px">เพิ่มเติม</th> 
+                                    
                                 </tr>
                                     ${tr}
                             </tr>
                         </thead>`
-                var maxrow = 0;
+                 var maxrow = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
                     for (var k = minmonth; k <= maxmonth; k++) {
-                        if(data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id) != -1){
-                            tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${_count}</td>`;
+                        var _check = data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id);
+                        if(_check != -1){
+                            var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
+                            var x =JSON.parse(JSON.stringify(_plan));
+                            $("#max_m").val(x.mindex);
+                            tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${x.mindex}</td>`;
                         }else{
-                            tdbody += `<td style="background-color:white;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
+                            tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
                         maxrow = _count;
                         _count ++;
                         
                     }
                     html += `<tr >                                        
-                        <td style="padding:5px"> ${plan.name} </td>                                            
+                        <td style="max-width:350px;padding:5px"> ${plan.name} <a href="#" data-toggle="modal" data-id="${plan.id}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="${plan.id}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a></td>                                            
                             ${tdbody}
-                        <td style="width:1%;white-space: nowrap"> 
-                        <a  data-id="${plan.id}" class="btn btn-sm bg-info editprojectplan">แก้ไข</a>
-                            <a  data-id="${plan.id}" data-name="" class="btn btn-sm bg-danger deleteprojectplan">ลบ</a>                                       
-                        </td>
+                    
                     </tr>`
                     });
                  $("#maxrow").val(maxrow);
@@ -2689,10 +2730,9 @@ $('.steps-basic').steps({
     },
     onStepChanged:function (event, currentIndex, newIndex) {
         if(currentIndex == 1){
-            // console.log($('#department_qty').val());
             $(".actions").find(".libtn").remove();
             FullTbp.editGeneral($('#fulltbpid').val(),$('#businesstype').val(),$('#department_qty').val(),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val(),
-            $('#companyhistory').val(),$('#responsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
+            $('#companyhistory').val(),$('#responsibleprefix').val(),$('#otherresponsibleprefix').val(),$('#responsiblename').val(),$('#responsiblelastname').val(),$('#responsibleposition').val(),$('#responsibleemail').val(),$('#responsiblephone').val(),$('#responsibleworkphone').val(),$('#responsibleeducationhistory').val(),$('#responsibleexperiencehistory').val(),$('#responsibletraininghistory').val()).then(data => {
             })
             .catch(error => {})
         }else if(currentIndex == 2){
@@ -2766,9 +2806,6 @@ $('.steps-basic').steps({
             if ($('#companyhistory').summernote('isEmpty'))
             {
                 $("#companyhistoryerror").attr("hidden",false);
-                // $('html, body').animate({
-                //     scrollTop: $("#companyhistoryerror").offset().top
-                // }, 2000);
                 return;
             }else{
                 
@@ -2799,6 +2836,28 @@ $('.steps-basic').steps({
             }else{
                 $("#fulltbp_researcher_wrapper_error").attr("hidden",true);
             }
+
+            if($('#responsiblephone').val() != '' && ($("#responsiblephone").val().length < 9 || $("#responsiblephone").val().length > 10)){
+                $("#responsiblephone_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#responsiblephone_error").attr("hidden",true);
+            }
+
+            if($('#responsibleworkphone').val() != '' && ($("#responsibleworkphone").val().length < 9 || $("#responsibleworkphone").val().length > 10)){
+                $("#responsibleworkphone_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#responsibleworkphone_error").attr("hidden",true);
+            }
+
+            if($('#responsibleemail').val() != '' && (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#responsibleemail').val())== false)){
+                $("#responsibleemail_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#responsibleemail_error").attr("hidden",true);
+            }
+
        }else if(newIndex == 2){
             if ($('#projectabtract_input').summernote('isEmpty'))
             {
@@ -2959,10 +3018,13 @@ $('.steps-basic').steps({
                 $("#ganttchart_wrapper_error").attr("hidden",true);
             }
 
-            if(parseInt($("#maxrow").val()) != parseInt($("#ganttnummonth").val())){
+            // if(parseInt($("#maxrow").val()) != parseInt($("#ganttnummonth").val())){
+            if(parseInt($("#ganttnummonth").val()) != parseInt($("#max_m").val())){
                 $("#notmatch_wrapper_error").attr("hidden",false);
+                // $("#month_added").html(`(เพิ่มแล้ว ${})`);
                 return false;
             }else{
+                // $("#month_added").html('');
                 $("#notmatch_wrapper_error").attr("hidden",true);
             }
        }else if(newIndex == 3){
@@ -3029,11 +3091,11 @@ $('.steps-basic').steps({
 });
 
 $(".chkauthorizeddirector").on('change', function() {
-    if($('.chkauthorizeddirector').filter(':checked').length > 3){
+    if($('.chkauthorizeddirector').filter(':checked').length > 6){
         $(this).prop('checked', false);
         Swal.fire({
             title: 'ผิดพลาด!',
-            text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
+            text: 'เลือกผู้ลงนามได้ไม่เกิน 6 คน',
         });
     }
 });
@@ -3940,7 +4002,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
         return;
     }
 
-    if($("#employphone").val().length != 10 || $("#employphone").val().charAt(0) != '0'){
+    if(($("#employphone").val().length < 9 || $("#employphone").val().length > 10) || $("#employphone").val().charAt(0) != '0'){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
@@ -3949,7 +4011,7 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
         return;
     }
 
-    if( $("#employworkphone").val().length != 10 || $("#employworkphone").val().charAt(0) != '0'){
+    if(($("#employworkphone").val().length < 9 || $("#employworkphone").val().length > 10) || $("#employworkphone").val().charAt(0) != '0'){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
@@ -4031,7 +4093,7 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
         return;
     }
 
-    if($("#employphone_ceo").val().length != 10 || $("#employphone_ceo").val().charAt(0) != '0'){
+    if(($("#employphone_ceo").val().length < 9 || $("#employphone_ceo").val().length > 10) || $("#employphone_ceo").val().charAt(0) != '0'){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
@@ -4040,7 +4102,7 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
         return;
     }
 
-    if( $("#employworkphone_ceo").val().length != 10 || $("#employworkphone_ceo").val().charAt(0) != '0'){
+    if(($("#employworkphone_ceo").val().length < 9 || $("#employworkphone_ceo").val().length > 10) || $("#employworkphone_ceo").val().charAt(0) != '0'){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
@@ -4125,14 +4187,14 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
         return;
     }
 
-    if($("#employphone_research").val().length != 10 || $("#employphone_research").val().charAt(0) != '0'){
+    if(($("#employphone_research").val().length < 9 || $("#employphone_research").val().length > 10) || $("#employphone_research").val().charAt(0) != '0'){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
         });
         $('#employphone_research').val('')
         return;
-    }else if( $("#employworkphone_research").val().length != 10 || $("#employworkphone_research").val().charAt(0) != '0' ){
+    }else if(($("#employworkphone_research").val().length < 9 || $("#employworkphone_research").val().length > 10) || $("#employworkphone_research").val().charAt(0) != '0' ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
@@ -4156,7 +4218,6 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 
         var dataid = 0;
         var html = ``;
-        console.log(data);
         data.forEach(function (employ,index) {
                 if(employ.employ_position_id >= 6){
                     dataid = employ.id;
@@ -4428,6 +4489,9 @@ $("#ganttnummonth").on('change', function() {
     if($(this).val() > 36){
         $(this).val(36) ;
     }
+    Project.addMonthPlan($('#fulltbpid').val(),$(this).val()).then(data => {
+    })
+    .catch(error => {})
 });
 
 $(document).on('click', '#btn_add_projectplan', function(e) {
@@ -4440,7 +4504,15 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
     }
     var html = ``;
     var chkindex = 0;
-    for (let item = 0; item < 3; item++) {
+    var y = 3;
+    if($('#ganttnummonth').val() <= 12){
+        y = 2;
+    }else if($('#ganttnummonth').val() > 12 && $('#ganttnummonth').val() <= 24){
+        y = 3;
+    }else if($('#ganttnummonth').val() > 24){
+        y = 4;
+    }
+    for (let item = 0; item < y; item++) {
         
         html += `<div class="col-md-12">`
         html += `<label ><u><strong>ปี ${parseInt($('#ganttyear').val())+item}</strong></u></label>
@@ -4559,6 +4631,14 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             $("#otherprefix_wrapper").attr("hidden",false);
         } else{
             $("#otherprefix_wrapper").attr("hidden",true);
+        }
+    });
+
+    $("#responsibleprefix").on('change', function() {
+        if($("#responsibleprefix option:selected").text() == 'อื่นๆ'){
+            $("#otherresponsibleprefix_wrapper").attr("hidden",false);
+        } else{
+            $("#otherresponsibleprefix_wrapper").attr("hidden",true);
         }
     });
 

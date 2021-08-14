@@ -278,93 +278,93 @@
 
 	   {{-- modal_edit_authorized_director --}}
 	   <div id="modal_edit_authorized_director" class="modal fade" style="overflow:hidden;">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้มีอำนาจลงนาม</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        {{-- <div class="col-md-12"> --}}
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้มีอำนาจลงนาม</h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							{{-- <div class="col-md-12"> --}}
 
-							<div class="col-md-6" >
-								<input type="text" id="authorized_director_id" hidden>
-								<div class="form-group">
-									<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
-									<select id="directorprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
-									</select>
+								<div class="col-md-6" >
+									<input type="text" id="authorized_director_id" hidden>
+									<div class="form-group">
+										<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+										<select id="directorprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
+										</select>
+									</div>
 								</div>
-							</div>
 
-							<div class="col-md-6" id="otherprefix_edit_wrapper" hidden>
-								<div class="form-group" >
-									<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
-									<input type="text" id="otherprefix_edit" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+								<div class="col-md-6" id="otherprefix_edit_wrapper" hidden>
+									<div class="form-group" >
+										<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+										<input type="text" id="otherprefix_edit" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+									</div>
 								</div>
-							</div>
-							
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>ชื่อ</label><span class="text-danger">*</span>
-									<input type="text" id="directorname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+								
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>ชื่อ</label><span class="text-danger">*</span>
+										<input type="text" id="directorname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+									</div>
 								</div>
-							</div>
 
 
 
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>นามสกุล</label><span class="text-danger">*</span>
-									<input type="text" id="directorlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>นามสกุล</label><span class="text-danger">*</span>
+										<input type="text" id="directorlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+									</div>
 								</div>
-							</div>
-
-                    
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>ตำแหน่ง</label><span class="text-danger">*</span>
-									<select id="directorposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
-									</select>
-								</div>
-							</div>
 
 						
 
-							<div class="col-md-6" id="otherposition_edit_wrapper" hidden>
-
-								<div class="form-group" >
-									<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
-									<input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>ตำแหน่ง</label><span class="text-danger">*</span>
+										<select id="directorposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
+										</select>
+									</div>
 								</div>
-							</div>
+
+							
+
+								<div class="col-md-6" id="otherposition_edit_wrapper" hidden>
+
+									<div class="form-group" >
+										<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+										<input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+									</div>
+								</div>
 
 
-							<div class="col-md-12">
-								<div class="form-group">
-									<a href="" class="btn btn-sm bg-teal" data-toggle="modal" id="call_model_edit" ><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
-									<div class="col-md-12 mt-2">
-										<div id='sigdiv_edit'>
-											
+								<div class="col-md-12">
+									<div class="form-group">
+										<a href="" class="btn btn-sm bg-teal" data-toggle="modal" id="call_model_edit" ><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
+										<div class="col-md-12 mt-2">
+											<div id='sigdiv_edit'>
+												
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
 
 
 
-                        {{-- </div> --}}
-                    </div>
-                </div>           
-                <div class="modal-footer">
-                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_director_edit" hidden></i><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
-                </div>
-            </div>
-        </div>
-	</div>
+							{{-- </div> --}}
+						</div>
+					</div>           
+					<div class="modal-footer">
+						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+						<button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_director_edit" hidden></i><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	<div id="modal_signature" class="modal fade" tabindex="-1">
 		<div class="modal-dialog">

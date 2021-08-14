@@ -14,6 +14,7 @@ use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Model\FullTbpHistory;
+use App\Model\MiniTbpHistory;
 use App\Model\TimeLineHistory;
 use App\Model\ExpertAssignment;
 use App\Helper\OnlyBelongPerson;
@@ -30,7 +31,7 @@ class DashboardAdminReportDetailController extends Controller
         $this->middleware('role:3,4,5,6'); 
     }
     public function View($id){
-  
+
         $auth = Auth::user();
         $check = ProjectMember::where('user_id',$auth->id)->first();
         
@@ -41,12 +42,14 @@ class DashboardAdminReportDetailController extends Controller
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
         $fulltbphistories = FullTbpHistory::where('full_tbp_id',$fulltbp->id)->orderBy('id','desc')->get();
+        $minitbphistories = MiniTbpHistory::where('mini_tbp_id',$minitbp->id)->orderBy('id','desc')->get();
         $projectmembers = ProjectMember::where('full_tbp_id',$fulltbp->id)->get();
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
         $projectstatuses = ProjectStatus::where('mini_tbp_id',$minitbp->id)->get();
         $projectstatustransactions = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->get();
         $bols = Bol::where('full_tbp_id',$fulltbp->id)->get();
-        $timelinehistories = TimeLineHistory::where('business_plan_id',$businessplan->id)->orderBy('id','desc')->paginate(5);
+        $timelinehistories = TimeLineHistory::where('business_plan_id',$businessplan->id)->whereJsonContains('viewer', $auth->id)->orderBy('id','desc')->paginate(5);
+        // $timelinehistories = TimeLineHistory::where('owner_id',$auth->id)->whereJsonContains('viewer', $auth->id)->orderBy('id','desc')->paginate(5);
         $projectlogs = ProjectLog::where('mini_tbp_id',$minitbp->id)->whereJsonContains('viewer', $auth->id)->orderBy('id','desc')->paginate(7);
 
         $company_name = (!Empty($company->name))?$company->name:'';
@@ -58,9 +61,9 @@ class DashboardAdminReportDetailController extends Controller
         }else if($bussinesstype == 2){
             $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
         if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
@@ -76,7 +79,8 @@ class DashboardAdminReportDetailController extends Controller
                 ->withMinitbp($minitbp)
                 ->withBusinessplan($businessplan)
                 ->withFulltbp($fulltbp)
-                ->withFullcompanyname($fullcompanyname);
+                ->withFullcompanyname($fullcompanyname)
+                ->withMinitbphistories($minitbphistories);
         }else{
             Auth::logout();
             Session::flush();

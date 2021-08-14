@@ -27,6 +27,7 @@ use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Model\DocumentEditor;
+use App\Model\MiniTbpHistory;
 use App\Helper\DateConversion;
 use App\Model\TimeLineHistory;
 use App\Model\MinitbpSignature;
@@ -92,7 +93,7 @@ class MiniTbpController extends Controller
             'finance1_1_loan' => $request->finance1_1_loan,
             'finance1_2_loan' => $request->finance1_2_loan,
 
-            // 'finance2' => $request->finance2,
+            'finance2' => $request->finance2,
             'finance3_other' => $request->finance3_other,
             'finance3_other_detail' => $request->finance3_other_detail,
 
@@ -240,9 +241,9 @@ class MiniTbpController extends Controller
         }else if($bussinesstype == 2){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
         $projectname = $minitbp->project;
@@ -277,7 +278,7 @@ class MiniTbpController extends Controller
             $mpdf->WriteFixedPosHTML($finance2_text, 20.8, 168.5, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML($finance3_other_text, 20.8, 181.5, 150, 90, 'auto');
 
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance3_other_detail.'</span>', 48, 183, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance3_other_detail.'</span>', 48, 183, 50, 90, 'auto');
 
             $mpdf->WriteFixedPosHTML($nonefinance_head_text, 108.5, 122.5, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML($nonefinance1_text, 115.8, 129, 150, 90, 'auto');
@@ -285,9 +286,9 @@ class MiniTbpController extends Controller
             $mpdf->WriteFixedPosHTML($nonefinance3_text, 115.8, 142.5, 150, 90, 'auto');
             
             $mpdf->WriteFixedPosHTML($nonefinance5_text, 108.5, 148.8, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 114, 156.5, 100, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 114, 156.5, 70, 90, 'auto');
             $mpdf->WriteFixedPosHTML($nonefinance6_text, 108.5, 181.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 136, 183, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 136, 183, 50, 90, 'auto');
             if($minitbpsignatures->count() == 1){
                 $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -666,6 +667,7 @@ class MiniTbpController extends Controller
         if(!Empty($minitbp->attachment)){
             @unlink($minitbp->attachment);
         }
+
         $file = $request->attachment;
         $new_name = $file->getClientOriginalName().'_'.$minitbp->id.$file->getClientOriginalExtension();
         $file->move("storage/uploads/company/attachment" , $new_name);
@@ -680,6 +682,13 @@ class MiniTbpController extends Controller
                 'refixstatus' => 2  
             ]);
         }
+
+        $minitbphistory = new MiniTbpHistory();
+        $minitbphistory->mini_tbp_id = $request->id;
+        $minitbphistory->path = $filelocation;
+        $minitbphistory->message = $request->message;
+        $minitbphistory->save();
+
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
@@ -695,9 +704,9 @@ class MiniTbpController extends Controller
         }else if($bussinesstype == 2){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
         if($projectassignments->count() == 0){
@@ -750,11 +759,17 @@ class MiniTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+            $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $businessplan->id;
             $timeLinehistory->mini_tbp_id = $minitbp->id;
             $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project;
             $timeLinehistory->message_type = 1;
+            $timeLinehistory->viewer = $userarray;
             $timeLinehistory->owner_id = $auth->id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
@@ -796,11 +811,17 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $leader->leader_id;
                 $notificationbubble->save();
 
+                $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+                $arr2 = UserArray::leader($minitbp->business_plan_id);
+                $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+                $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
                 $timeLinehistory = new TimeLineHistory();
                 $timeLinehistory->business_plan_id = $businessplan->id;
                 $timeLinehistory->mini_tbp_id = $minitbp->id;
                 $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' ฉบับแก้ไข';
                 $timeLinehistory->message_type = 1;
+                $timeLinehistory->viewer = $userarray;
                 $timeLinehistory->owner_id = $auth->id;
                 $timeLinehistory->user_id = $auth->id;
                 $timeLinehistory->save();
@@ -831,11 +852,17 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $documenteditor->user_id;
                 $notificationbubble->save();
 
+                $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+                $arr2 = UserArray::leader($minitbp->business_plan_id);
+                $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+                $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
                 $timeLinehistory = new TimeLineHistory();
                 $timeLinehistory->business_plan_id = $businessplan->id;
                 $timeLinehistory->mini_tbp_id = $minitbp->id;
                 $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' ฉบับแก้ไข';
                 $timeLinehistory->message_type = 1;
+                $timeLinehistory->viewer = $userarray;
                 $timeLinehistory->owner_id = $auth->id;
                 $timeLinehistory->user_id = $auth->id;
                 $timeLinehistory->save();
@@ -874,6 +901,13 @@ class MiniTbpController extends Controller
                 'refixstatus' => 2  
             ]);
         }
+
+        $minitbphistory = new MiniTbpHistory();
+        $minitbphistory->mini_tbp_id = $request->id;
+        $minitbphistory->path = $filelocation;
+        $minitbphistory->message = $request->message;
+        $minitbphistory->save();
+
         BusinessPlan::find(MiniTBP::find($id)->business_plan_id)->update([
             'business_plan_status_id' => 3
         ]);
@@ -889,9 +923,9 @@ class MiniTbpController extends Controller
         }else if($bussinesstype == 2){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
         if($projectassignments->count() == 0){
@@ -947,12 +981,18 @@ class MiniTbpController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
+
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+            $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
             
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $businessplan->id;
             $timeLinehistory->mini_tbp_id = $minitbp->id;
             $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project ;
             $timeLinehistory->message_type = 1;
+            $timeLinehistory->viewer = $userarray;
             $timeLinehistory->owner_id = $auth->id;
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
@@ -994,11 +1034,17 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $projectassignments->first()->leader_id;
                 $notificationbubble->save();
 
+                $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+                $arr2 = UserArray::leader($minitbp->business_plan_id);
+                $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+                $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
                 $timeLinehistory = new TimeLineHistory();
                 $timeLinehistory->business_plan_id = $businessplan->id;
                 $timeLinehistory->mini_tbp_id = $minitbp->id;
                 $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' ฉบับแก้ไข';
                 $timeLinehistory->message_type = 1;
+                $timeLinehistory->viewer = $userarray;
                 $timeLinehistory->owner_id = $auth->id;
                 $timeLinehistory->user_id = $auth->id;
                 $timeLinehistory->save();
@@ -1028,11 +1074,17 @@ class MiniTbpController extends Controller
                 $notificationbubble->target_user_id = $documenteditor->user_id;
                 $notificationbubble->save();
 
+                $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+                $arr2 = UserArray::leader($minitbp->business_plan_id);
+                $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+                $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
                 $timeLinehistory = new TimeLineHistory();
                 $timeLinehistory->business_plan_id = $businessplan->id;
                 $timeLinehistory->mini_tbp_id = $minitbp->id;
                 $timeLinehistory->details = 'ผู้ประกอบการ: ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' ฉบับแก้ไข';
                 $timeLinehistory->message_type = 1;
+                $timeLinehistory->viewer = $userarray;
                 $timeLinehistory->owner_id = $auth->id;
                 $timeLinehistory->user_id = $auth->id;
                 $timeLinehistory->save();

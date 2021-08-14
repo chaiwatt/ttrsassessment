@@ -155,39 +155,88 @@
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารของโครงการ</h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th style="width:150px;text-align: center">Mini TBP</th> 
-                                        <th style="text-align: center" >วันที่ส่งเอกสาร</th>
-                                        {{-- <th style="width:1%">เอกสารแนบ</th>  --}}
-                                        <th style="width:1%;white-space: nowrap">PDF</th>
-                                       
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    <tr>
-                                        <td>
-                                            @if (Auth::user()->user_type_id == 3)
-                                                   @if (Auth::user()->experttype == "(ภายนอก)")
-                                                            Mini TBP
-                                                       @else
-                                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
-                                                   @endif
-                                                @else
-                                                    <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
-                                            @endif
+                            @if ($minitbphistories->count() == 0)
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr class="bg-info">
+                                                <th style="width:150px;text-align: center">Mini TBP</th> 
+                                                <th style="text-align: center" >วันที่ส่งเอกสาร</th>
+                                                <th style="width:1%;white-space: nowrap">PDF</th>
                                             
-                                        </td> 
-                                        <td >{{$minitbp->submitdateth}}</td> 
-                                       
-                                        <td style="white-space: nowrap"> 
-                                            <a href="{{asset($minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
-                                        </td>  
-                                                                            
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr>
+                                                <td>
+                                                    @if (Auth::user()->user_type_id == 3)
+                                                        @if (Auth::user()->experttype == "(ภายนอก)")
+                                                                    Mini TBP
+                                                            @else
+                                                                    <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                        @endif
+                                                        @else
+                                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                    @endif
+                                                    
+                                                </td> 
+                                                <td >{{$minitbp->submitdateth}}</td> 
+                                            
+                                                <td style="white-space: nowrap"> 
+                                                    <a href="{{asset($minitbp->attachment)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
+                                                </td>  
+                                                                                    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr class="bg-info">
+                                                    <th style="width:150px;text-align: center">Mini TBP</th> 
+                                                    <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
+                                                    <th style="text-align: center">รายละเอียดการแก้ไข</th>
+                                                    <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                            
+                                                @if ($businessplan->business_plan_status_id >=2)
+                                                    @foreach ($minitbphistories as $key => $minitbphistory)
+                                                        <tr>
+                                                            @if ($key == 0)
+                                                                <td rowspan="{{$minitbphistories->count()}}">
+                                                                    @if (Auth::user()->user_type_id == 3)
+                                                                            @if (Auth::user()->experttype == "(ภายนอก)")
+                                                                                    Mini TBP
+                                                                                @else
+                                                                                    <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                                            @endif
+                                                                        @else
+                                                                            <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
+                                                                    @endif
+                                                                </td> 
+                                                            @endif
+        
+                                                            <td style="width:1%; white-space: nowrap">{{$minitbphistory->submitdateth}}</td> 
+                                                            <td>{{$minitbphistory->message}}</td> 
+        
+                                                            <td style="white-space: nowrap"> 
+                                                                <a href="{{asset($minitbphistory->path)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
+                                                            </td>  
+                                                        </tr> 
+                                                    @endforeach
+        
+                                                @endif 
+                                            </tbody>
+                                        </table>      
+                                    </div>
+    
+                            @endif
+
+
+
+                          
                             <div class="table-responsive mt-4">
                                 <table class="table table-bordered table-striped">
                                     <thead>
@@ -197,8 +246,6 @@
                                             <th style="text-align: center">รายละเอียดการแก้ไข</th>
                                             <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
                                             <th style="width:1% ;white-space: nowrap;text-align: center">เอกสารแนบ</th> 
-                                          
-                                           
                                         </tr>
                                     </thead>
                                     <tbody >
@@ -221,7 +268,7 @@
                                                     </td> 
                                                     @endif
  
-                                                    <td style="text-align: center">{{$fulltbphistory->submitdateth}}</td> 
+                                                    <td style="width:1%; white-space: nowrap">{{$fulltbphistory->submitdateth}}</td> 
                                                     <td>{{$fulltbphistory->message}}</td> 
 
                                                     <td style="white-space: nowrap"> 

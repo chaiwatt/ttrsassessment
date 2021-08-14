@@ -1344,9 +1344,9 @@
 											}else if($bussinesstype == 2){
 												$fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
 											}else if($bussinesstype == 3){
-												$fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+												$fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
 											}else if($bussinesstype == 4){
-												$fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
+												$fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
 											}else{
 												$fullcompanyname = $company->name; 
 											}
@@ -1920,10 +1920,16 @@
 														<th >รายละเอียด</th>
 													</tr>
 												</thead>
-												<tbody >    
+												<tbody >   
+													@php
+													$respprefix = @$fulltbp->fulltbpresponsibleperson->prefix->name;
+														if (@$fulltbp->fulltbpresponsibleperson->prefix_id == 5) {
+															$respprefix = @$fulltbp->fulltbpresponsibleperson->otherprefix;
+														}
+													@endphp 
 													<tr >                                        
 														<td>ชื่อ-นามสกุล</td>
-														<td>{{@$fulltbp->fulltbpresponsibleperson->prefix->name}}{{@$fulltbp->fulltbpresponsibleperson->name}} {{@$fulltbp->fulltbpresponsibleperson->lastname}}</td>
+														<td>{{$respprefix}}{{@$fulltbp->fulltbpresponsibleperson->name}} {{@$fulltbp->fulltbpresponsibleperson->lastname}}</td>
 													</tr>  
 													<tr >                                        
 														<td>ตำแหน่ง</td>

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('temp');
 // });
 
+Route::get('demojson', 'TestController@DemoJson')->name('demojson');
+
 Auth::routes(['verify' => true]);
 Route::get('ttrssitemap.xml','SitemapController@Index')->name('sitemap');     
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
@@ -159,6 +161,7 @@ Route::group(['prefix' => 'api'], function(){
     }); 
     Route::group(['prefix' => 'profile'], function(){
         Route::post('uploadcanvassignature','Api\ProfileController@UploadCanvasSignature')->name('api.profile.uploadcanvassignature');           
+        Route::post('updatesignature','Api\ProfileController@UpdateSignature')->name('api.profile.updatesignature');
         Route::post('uploadsignature','Api\ProfileController@UploadSignature')->name('api.profile.uploadsignature');           
         Route::post('adduserposition','Api\ProfileController@AddUserPosition')->name('api.profile.adduserposition');           
         Route::post('addaddress','Api\ProfileController@AddAddress')->name('api.profile.addaddress'); 
@@ -420,6 +423,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('delete','Api\FullTbpProjectPlanController@Delete')->name('api.fulltbp.project.plan.delete');
                     Route::post('updateganttorder','Api\FullTbpProjectPlanController@updateGanttOrder')->name('api.fulltbp.project.plan.updateganttorder');
                     Route::post('getmonth','Api\FullTbpProjectPlanController@GetMonth')->name('api.fulltbp.project.plan.getmonth');
+                    Route::post('addmonth','Api\FullTbpProjectPlanController@AddMonth')->name('api.fulltbp.project.plan.addmonth');
                 });
             }); 
             Route::group(['prefix' => 'market'], function(){

@@ -23,6 +23,23 @@ class EventCalendar extends Model
         return DateConversion::engToThaiDate($this->eventdate);
     } 
 
+    public function getPrevioustype1Attribute(){
+        return EventCalendar::where('full_tbp_id',$this->full_tbp_id)
+        ->where('calendar_type_id',1)
+        ->whereNotNull('subject')
+        ->orderBy('id','asc')
+        ->first()
+        ->eventdate;
+    } 
+    public function getPrevioustype2Attribute(){
+        return EventCalendar::where('full_tbp_id',$this->full_tbp_id)
+        ->where('calendar_type_id',2)
+        ->whereNotNull('subject')
+        ->orderBy('id','asc')
+        ->first()
+        ->eventdate;
+    } 
+
     public function getCalendartypeAttribute(){
         return CalendarType::find($this->calendar_type_id);
     } 

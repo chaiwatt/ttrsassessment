@@ -8,4 +8,7 @@ class FullTbpProjectPlanTransaction extends Model
 {
     protected $fillable = [];
     protected $guarded = [];
+
+
+
 }

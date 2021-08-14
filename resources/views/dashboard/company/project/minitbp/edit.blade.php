@@ -9,6 +9,225 @@
 	</style>
 @stop
 @section('content')
+
+<div id="modal_signature" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="messagetitle">ลายมือชื่อ</h5>		
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-body">
+								<div id="signature-pad" class="signature-pad" style="text-align: center">
+									<canvas width="400" height="100" style="border: dashed 1px"></canvas>
+									<div class="signature-pad--footer">
+									<p>ลงลายมือชื่อ ที่นี่</p>
+									  <div class="signature-pad--actions">
+										<div>
+										  <button type="button" class="btn bg-teal save" data-action="save-png"><i class="icon-floppy-disk mr-2"></i>เพิ่ม</button>
+										  <button type="button" class="btn bg-primary" data-action="undo" hidden>ยกเลิก</button>
+										  <button type="button" class="btn bg-primary clear" data-action="clear" id="clearpad"><i class="icon-trash-alt mr-2"></i>ล้างข้อมูล</button>
+										  
+											  
+										  <div class="form-group text-center text-muted content-divider mb-2 mt-2">
+											<span class="px-2">หรืออัปโหลดลายมือชื่อจากไฟล์</span>
+										  </div>
+										   <button type="button" class="btn btn-light clear" onclick="document.getElementById('signature').click();"><i class="icon-folder-upload mr-2"></i>อัปโหลด</button>							
+										</div>
+										<input type="file" style="display:none;" id="signature" name="picture" accept="image/*"/>
+									  </div>
+									</div>
+								  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+    {{-- modal_add_authorized_director --}}
+    <div id="modal_add_authorized_director" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้มีอำนาจลงนาม</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        {{-- <div class="col-md-12"> --}}
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+									<select id="directorprefix" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
+										@foreach ($prefixes as $prefix)
+											<option value="{{$prefix->id}}" >{{$prefix->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6" id="otherprefix_wrapper" hidden>
+								<div class="form-group" >
+									<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+									<input type="text" id="otherprefix" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ชื่อ</label><span class="text-danger">*</span>
+									<input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+						
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>นามสกุล</label><span class="text-danger">*</span>
+									<input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+             
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ตำแหน่ง</label><span class="text-danger">*</span>
+									<select id="directorposition" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
+										<option value=""></option>
+										@foreach ($employpositions as $employposition)
+											<option value="{{$employposition->id}}" >{{$employposition->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+							</div>
+						
+							<div class="col-md-6" id="otherposition_wrapper" hidden>
+								<div class="form-group" >
+									<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+									<input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+								</div>
+							</div>
+						
+							<div class="col-md-12">
+								
+								<div class="form-group">
+									<a href="" class="btn btn-sm bg-teal" id="btnaddsig" data-toggle="modal" ><i class="icon-pen2 mr-2"></i>เพิ่มลายมือชื่อ</a>
+									<div class="col-md-12">
+										<div id='sigdiv'>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+                        </div>
+                    {{-- </div> --}}
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    <button id="btn_modal_add_authorized_director" class="btn bg-primary" data-id="{{$user->company->id}}" ><i class="icon-spinner spinner mr-2" id="spinicon_director_add" hidden></i><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
+                </div>
+            </div>
+        </div>
+	</div>
+
+
+<div id="modal_edit_authorized_director" class="modal fade" style="overflow:hidden;">
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ผู้มีอำนาจลงนาม</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					{{-- <div class="col-md-12"> --}}
+
+						<div class="col-md-6" >
+							<input type="text" id="authorized_director_id" hidden>
+							<div class="form-group">
+								<label>คำนำหน้าชื่อ<span class="text-danger">*</span></label>
+								<select id="directorprefix_edit" data-placeholder="คำนำหน้าชื่อ" class="form-control form-control-lg form-control-select2">
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-6" id="otherprefix_edit_wrapper" hidden>
+							<div class="form-group" >
+								<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
+								<input type="text" id="otherprefix_edit" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ชื่อ</label><span class="text-danger">*</span>
+								<input type="text" id="directorname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+							</div>
+						</div>
+
+
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>นามสกุล</label><span class="text-danger">*</span>
+								<input type="text" id="directorlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+							</div>
+						</div>
+
+				
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>ตำแหน่ง</label><span class="text-danger">*</span>
+								<select id="directorposition_edit" data-placeholder="ตำแหน่ง" class="form-control form-control-lg form-control-select2">
+								</select>
+							</div>
+						</div>
+
+					
+
+						<div class="col-md-6" id="otherposition_edit_wrapper" hidden>
+
+							<div class="form-group" >
+								<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
+								<input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+							</div>
+						</div>
+
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<a href="" class="btn btn-sm bg-teal" data-toggle="modal" id="call_model_edit" ><i class="icon-pen2 mr-2"></i>ลายมือชื่อ</a>
+								<div class="col-md-12 mt-2">
+									<div id='sigdiv_edit'>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					{{-- </div> --}}
+				</div>
+			</div>           
+			<div class="modal-footer">
+				<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+				<button id="btn_modal_edit_authorized_director" class="btn bg-primary" data-dismiss="modal"><i class="icon-spinner spinner mr-2" id="spinicon_director_edit" hidden></i><i class="icon-floppy-disk mr-2"></i> บันทึก</button>
+			</div>
+		</div>
+	</div>
+</div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
@@ -526,13 +745,14 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											{{-- <div class="col-md-12" > --}}
+												<input type="text" id="authorizeddirectorid" hidden>
 												<div class="table-responsive">
 													<table class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
 																<th style="width:50%">เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน TTRS (Mini TBP)</th>
 																<th style="width:15%">ลายมือชื่อ</th> 
-																<th style="width:35%">ตำแหน่ง</th>
+																<th style="width:30%">ตำแหน่ง</th>
 															</tr>
 														</thead>
 														<tbody id="authorized_director_wrapper_tr"> 
@@ -541,31 +761,17 @@
 																	<td>
 																		<div class="form-check">
 																			<label class="form-check-label">
-																				{{-- @if (Empty($authorizeddirector->signature_id))
-																						<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc 
-																						@if ($authorizeddirector->usesignature == 2)
-																							checked
-																						@endif
-																						>
-																					@else
-																						<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc
-																						@if ($authorizeddirector->usesignature == 2)
-																							checked
-																						@endif
-																						>
-																				@endif --}}
-
 																				@if (Empty($authorizeddirector->signature_id))
 																						@if ($authorizeddirector->IsSelectDirector($minitbp->id) == 1)
-																							<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
+																							<input type="checkbox" id="auth{{$authorizeddirector->id}}" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
 																							@else
-																							<input type="checkbox" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
+																							<input type="checkbox" id="auth{{$authorizeddirector->id}}" data-id="1" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
 																						@endif
 																					@else
 																						@if ($authorizeddirector->IsSelectDirector($minitbp->id) == 1)
-																							<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
+																							<input type="checkbox" id="auth{{$authorizeddirector->id}}" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc checked>
 																							@else
-																							<input type="checkbox" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
+																							<input type="checkbox" id="auth{{$authorizeddirector->id}}" data-id="2" value="{{$authorizeddirector->id}}" class="form-check-input-styled chkauthorizeddirector" data-fouc >
 																						@endif
 																				@endif
 
@@ -586,7 +792,8 @@
 																	</td>  
 																	<td>
 																	@if (Empty($authorizeddirector->signature_id))
-																			<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>
+																			<span id="edit{{$authorizeddirector->id}}"><button type="button" data-id="{{$authorizeddirector->id}}" class="btn btn-sm bg-warning btnaddsig">ไม่พบลายมือชื่อ</button></span>
+																			{{-- <span id="sig{{$authorizeddirector->id}}" class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span> --}}
 																		@else
 																			<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>
 																	@endif
@@ -660,7 +867,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol_edit.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.min.js')}}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.5/pdfobject.min.js"></script> --}}
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
@@ -674,7 +881,7 @@
 	};
 	var submitstatus = "{{$minitbp->businessplan->business_plan_status_id}}";
 	var refixstatus = "{{$minitbp->refixstatus}}";
-
+	var usermessage = '';
 
 	if(submitstatus == 2 || refixstatus == 1 ){ 
 			$('.form-control-lg').prop("disabled", false);  
@@ -720,7 +927,7 @@
 				}
 			}
 			if(newIndex == 1){
-				if($("#contactphone").val().length != 10){
+				if($("#contactphone").val().length < 9 || $("#contactphone").val().length > 10){
 					$("#contactphone_error").attr("hidden",false);
 					return false;
 				}else{
@@ -768,7 +975,8 @@
 									title: 'ผิดพลาด!',
 									text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
 								})
-								return false;
+
+							return false;
 						}
 					}
 				}
@@ -781,9 +989,6 @@
 			return form.valid();
 		},
 		onStepChanged:function (event, currentIndex, newIndex) {
-			// console.log( $('#finance1loan').val() + ' ' + $('#finance1_1_loan').val() + ' ' + $('#finance1_2_loan').val());
-			
-			// return ;
 
 			if(currentIndex == 3){
 				var hidden = '';
@@ -806,6 +1011,7 @@
 					formData.append('project',$('#project').val());
 					formData.append('projecteng',$('#projecteng').val());
 					formData.append('finance1',$('#finance1').is(':checked') === true ? '1' : '');
+					
 					formData.append('bank',$('#bank').val());
 					formData.append('bank1',$('#bank1').val());
 					formData.append('bank2',$('#bank2').val());
@@ -998,6 +1204,13 @@
 		}
 	});
 
+	
+	$(".btnaddsig").on('click', function() {
+		signaturePad.clear();
+		$('#authorizeddirectorid').val($(this).data('id'));
+		$('#modal_signature').modal('show');
+	});
+
 	// $(".chkauthorizeddirector").on('change', function() {
 	// 	if($('.chkauthorizeddirector').filter(':checked').length > 3){
 	// 		$(this).prop('checked', false);
@@ -1044,38 +1257,101 @@
 		if($('#usersignature').val() == 1){
 			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
-		Swal.fire({
-			title: 'โปรดยืนยัน',
-			text: text,
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			confirmButtonText: 'ตกลง',
-			cancelButtonText: 'ยกเลิก',
-			closeOnConfirm: false,
-			closeOnCancel: false
-			}).then((result) => {
-			if (result.value) {
-				if($('#usersignature').val() == 1){
-					$("#minitbppdf").trigger('click');
-				}else{
-					$("#spinicon").attr("hidden",false);
-					submitNoAttachement($('#minitbpid').val(),$('#pdfname').val()).then(data => {
-						$("#submitminitbp").attr("hidden",true);
-						$("#spinicon").attr("hidden",true);
-						$("#appceptagreement_wrapper").attr("hidden",true);
-							var html = ``;
-							Swal.fire({
-								title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
-								text: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทางอีเมลที่ท่านแจ้งไว้',
-							}).then((result) => {
-								window.location.replace(`${route.url}/dashboard/company/report`);
-							});
-						})
-					.catch(error => {})
+		if(refixstatus == 0){
+			Swal.fire({
+				title: 'โปรดยืนยัน',
+				text: text,
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'ตกลง',
+				cancelButtonText: 'ยกเลิก',
+				closeOnConfirm: false,
+				closeOnCancel: false
+				}).then((result) => {
+				if (result.value) {
+					if($('#usersignature').val() == 1){
+						$("#minitbppdf").trigger('click');
+					}else{
+						$("#spinicon").attr("hidden",false);
+						submitNoAttachement($('#minitbpid').val(),$('#pdfname').val(),usermessage).then(data => {
+							$("#submitminitbp").attr("hidden",true);
+							$("#spinicon").attr("hidden",true);
+							$("#appceptagreement_wrapper").attr("hidden",true);
+								var html = ``;
+								Swal.fire({
+									title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
+									text: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทางอีเมลที่ท่านแจ้งไว้',
+								}).then((result) => {
+									window.location.replace(`${route.url}/dashboard/company/report`);
+								});
+							})
+						.catch(error => {})
+					}
 				}
-			}
-		});
+			});
+		}else{
+			Swal.fire({
+				title: 'ข้อมูลแก้ไข',
+				text: 'กรุณากรอกรายการ/รายละเอียดที่ท่านได้แก้เอกสาร Mini TBP',
+				input: 'textarea',
+				inputAttributes: {
+				autocapitalize: 'off'
+				},
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: 'ตกลง',
+				cancelButtonText: 'ยกเลิก',
+				closeOnConfirm: false,
+				closeOnCancel: false
+		
+				}).then((result) => {
+					if(typeof(result.dismiss) != "undefined"){
+						return;
+					}else{
+					if (result.value) {
+						usermessage = result.value;
+						Swal.fire({
+							title: 'โปรดยืนยัน',
+							text: text,
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							confirmButtonText: 'ตกลง',
+							cancelButtonText: 'ยกเลิก',
+							}).then((result) => {
+							if (result.value) {
+								if($('#usersignature').val() == 1){
+									$("#minitbppdf").trigger('click');
+								}else{
+									$("#spinicon").attr("hidden",false);
+									submitNoAttachement($('#minitbpid').val(),$('#pdfname').val(),usermessage).then(data => {
+										$("#submitminitbp").attr("hidden",true);
+										$("#spinicon").attr("hidden",true);
+										$("#appceptagreement_wrapper").attr("hidden",true);
+											var html = ``;
+											Swal.fire({
+												title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
+												text: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทางอีเมลที่ท่านแจ้งไว้',
+											}).then((result) => {
+												window.location.replace(`${route.url}/dashboard/company/report`);
+											});
+										})
+									.catch(error => {})
+								}
+							}
+						});
+					}else{
+						if(refixstatus != 0 & usermessage == ''){
+							Swal.fire({
+								title: 'ผิดพลาด...',
+								text: 'กรุณาระบุข้อมูลที่แก้ไขใน Mini TBP',
+								});
+						}
+					}
+				}
+			});
+		}	
+		return;
 	});
 
 	$(document).on('change', '#minitbppdf', function(e) {
@@ -1103,6 +1379,7 @@
 		var formData = new FormData();
 		formData.append('attachment',file);
 		formData.append('id',$('#minitbpid').val());
+		formData.append('message',usermessage);
 
 		$.ajax({
 			url: `${route.url}/api/minitbp/submitwithattachement`,  //Server script to process data
@@ -1128,7 +1405,7 @@
 		});
 	});
 
-	function submitNoAttachement(id,pdfname){
+	function submitNoAttachement(id,pdfname,message){
 		return new Promise((resolve, reject) => {
 			$.ajax({
 				url: `${route.url}/api/minitbp/submitnoattachement`,
@@ -1136,7 +1413,8 @@
 				headers: {"X-CSRF-TOKEN":route.token},
 				data: {
 				id : id,
-				pdfname : pdfname
+				pdfname : pdfname,
+				message : message
 				},
 				success: function(data) {
 				resolve(data)
@@ -1159,6 +1437,74 @@
 		}
 
 	});
+
+	$(document).on('click', '#btn_add_authorized_director', function(e) {
+		$("#clearpad").trigger("click");
+		$('select#directorprefix').val(1).select2();
+		$('select#directorposition').val(1).select2();
+		$('#directorname').val('');
+		$('#directorlastname').val('');
+		$('#signature_type').val('1');
+		$('#signatureid').val('');
+		$("#sigdiv").html('');
+		$("#otherprefix_wrapper").attr("hidden",true);
+		$("#otherposition_wrapper").attr("hidden",true);
+		$('#modal_add_authorized_director').modal('show');
+	});
+
+
+	
+$(document).on('click', '#btn_modal_add_authorized_director', function(e) {
+    if($('#directorname').val() =='' || $('#directorlastname').val() =='' || $('#directorposition').val() == ''){
+        return ;
+    }
+    if($('#directorposition').val() == 5){
+        if($('#otherposition').val() == ''){
+            return ;
+        }
+    }
+    if($("#directorprefix option:selected").text() == 'อื่นๆ'){
+        if($('#otherprefix').val() == ''){
+            return ;
+        }
+    } 
+    $("#spinicon_director_add").attr("hidden",false);
+    addAuthorizedDirector($(this).data('id'),$('#directorprefix').val(),$('#otherprefix').val(),$('#directorname').val(),$('#directorlastname').val(),$('#directorposition').val(),$('#otherposition').val(),$('#dataurl').val()).then(data => {
+        var html = ``;
+        data.forEach(function (director,index) {
+            console.log(director);
+            var check = '<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>';
+            if(director.signature_id != null){
+                check =  '<span class="badge badge-flat border-success text-success">มีลายมือชื่อแล้ว</span>'
+            }
+            var otherposition = director.employposition['name'];
+            if(director.employ_position_id == 5){
+                otherposition = director.otherposition;
+            }
+            var prefix = director.prefix['name'];
+            if(prefix == 'อื่นๆ'){
+                prefix = director.otherprefix;
+            }
+            html += `<tr >                                        
+               <td> ${prefix}${director.name}  ${director.lastname}</td>                                          
+                <td> ${otherposition} </td>  
+                <td>
+                    ${check}
+                </td>   
+                <td style="width:1%;white-space: nowrap" class="text-center">
+                    <a  data-id="${director.id}" class="btn btn-sm bg-info editauthorizeddirector">แก้ไข</a>  
+                    <a  data-id="${director.id}" class="btn btn-sm bg-danger deleteauthorizeddirector">ลบ</a>  
+                </td> 
+            </tr>`
+            });
+            $('#dataurl').val('');
+            $("#spinicon_director_add").attr("hidden",true);
+         $('#authorizeddirector').val(data.length);
+         $("#authorized_director_wrapper_tr").html(html);
+         $('#modal_add_authorized_director').modal('hide');
+    })
+    .catch(error => {})
+});
 
 </script>
 @stop
