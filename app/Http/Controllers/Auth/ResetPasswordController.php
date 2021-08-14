@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-     protected $redirectTo = 'dashboard/company/report'; // RouteServiceProvider::HOME;
+     //protected $redirectTo = 'dashboard/company/report'; // RouteServiceProvider::HOME;
 
     // protected function redirectTo()
     // {
@@ -39,8 +39,8 @@ class ResetPasswordController extends Controller
 
     protected function resetPassword($user, $password)
     {
-        Auth::logout();
-        Session::flush();
+        // Auth::logout();
+        // Session::flush();
         return redirect()->route('login')->withSuccess('รีเซตรหัสผ่านสำเร็จ กรุณาเข้าสู่ระบบ');
         // return redirect()->route('login')->withSuccess('โปรดตรวจสอบอีเมลเพื่อรีเซตรหัสผ่านใหม่');
     }
