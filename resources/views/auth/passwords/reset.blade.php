@@ -19,9 +19,9 @@
                             <input type="hidden" name="token" value="{{ $token }}">
                             <div class="input-group form-group form-group-feedback form-group-feedback-left">
                                 {{-- <label>อีเมล:</label> --}}
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus readonly>
                                 <div class="form-control-feedback">
-                                    <i class="icon-eye-blocked"></i>
+                                    <i class="icon-user text-muted"></i>
                                 </div>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
