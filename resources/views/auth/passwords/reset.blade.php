@@ -17,9 +17,12 @@
                         <div id="pwd-container">
 
                             <input type="hidden" name="token" value="{{ $token }}">
-                            <div class="form-group">
-                                <label>อีเมล:</label>
+                            <div class="input-group form-group form-group-feedback form-group-feedback-left">
+                                {{-- <label>อีเมล:</label> --}}
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                <div class="form-control-feedback">
+                                    <i class="icon-eye-blocked"></i>
+                                </div>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +31,7 @@
                             </div>
                         
                             <div class="input-group form-group form-group-feedback form-group-feedback-left" >
-                                <label>รหัสผ่าน:</label>
+                                {{-- <label>รหัสผ่าน:</label> --}}
                                 <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน" autocomplete="new-password">
                                 
                                 <div class="form-control-feedback">
