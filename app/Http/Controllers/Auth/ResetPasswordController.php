@@ -42,5 +42,6 @@ class ResetPasswordController extends Controller
         Auth::logout();
         Session::flush();
         return redirect()->route('login')->withSuccess('รีเซตรหัสผ่านสำเร็จ กรุณาเข้าสู่ระบบ');
+        // return redirect()->route('login')->withSuccess('โปรดตรวจสอบอีเมลเพื่อรีเซตรหัสผ่านใหม่');
     }
 }
