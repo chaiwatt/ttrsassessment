@@ -271,7 +271,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                            <h6 class="color-04" style="font-weight: bold">Business Prospect</h6>
                                             <h5><span id="pillar4"></span></h5>
                                             <h4 class="color-04"><span id="gradepillar4"></span></h4>
                                            
@@ -325,7 +325,7 @@
                                         <td style="text-align: center"><span id="market_grade"></span></td>          
                                     </tr>
                                     <tr>    
-                                        <td>Business Prospet</td>
+                                        <td>Business Prospect</td>
                                         <td style="text-align: center"><span id="business_percent"></span></td>
                                         <td style="text-align: center"><span id="business_grade"></span></td>          
                                     </tr> --}}
@@ -623,7 +623,7 @@
                             basepillar = `Marketability`;
                         }
                         if(grade.pillar_id == 4){
-                            basepillar = `Business Prospet`;
+                            basepillar = `Business Prospect`;
                         }
                         html1 += `<tr>
                         <td>${basepillar}</td>
@@ -642,7 +642,7 @@
                             basepillar = `Marketability`;
                         }
                         if(grade.pillar_id == 8){
-                            basepillar = `Business Prospet`;
+                            basepillar = `Business Prospect`;
                         }
                         html2 += `<tr>
                         <td>${basepillar}</td>

@@ -267,7 +267,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                                    <h6 class="color-04" style="font-weight: bold">Business Prospect</h6>
                                                     <h5><span id="pillar4"></span></h5>
                                                     <h4 class="color-04"><span id="gradepillar4"></span></h4>
                                                    
@@ -440,7 +440,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                                    <h6 class="color-04" style="font-weight: bold">Business Prospect</h6>
                                                     <h5><span id="pillar4"></span></h5>
                                                     <h4 class="color-04"><span id="gradepillar4"></span></h4>
                                                    

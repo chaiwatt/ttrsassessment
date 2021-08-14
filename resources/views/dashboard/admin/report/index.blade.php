@@ -821,7 +821,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h6 class="color-04" style="font-weight: bold">Business Prospet</h6>
+                                    <h6 class="color-04" style="font-weight: bold">Business Prospect</h6>
                                     <h5><span id="pillar_bp"></span></h5>
                                     <h4 class="color-04"><span id="gradepillar_bp"></span></h4>
                                    

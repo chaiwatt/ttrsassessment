@@ -287,7 +287,7 @@ function getSummaryEv(evid){
                 basepillar = `Marketability`;
             }
             if(grade.pillar_id == 4){
-                basepillar = `Business Prospet`;
+                basepillar = `Business Prospect`;
             }
             html1 += `<tr>
             <td>${basepillar}</td>
