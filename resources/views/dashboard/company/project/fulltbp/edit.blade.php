@@ -1786,11 +1786,25 @@ th {
 																	
 																	@if (!Empty($fulltbp->minitbp->businessplan->company->organizeimg))
 																		<br>
-																		<img id="organizeimgholder" src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" width="500" height="300" alt="">
+																		<div class="mb-1">
+																			<img id="organizeimgholder" src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" width="500" height="300" alt="">
+																		</div>
+																	
+																			
 																		@else
 																		<br>
-																		<img id="organizeimgholder" src="{{asset('assets/dashboard/images/orgimg.png')}}" width="500" height="300" alt="">
+																		<div class="mb-1">
+																			
+																			<img id="organizeimgholder" src="{{asset('assets/dashboard/images/orgimg.png')}}" width="500" height="300" alt="">
+																		</div>
+																		
+																			
 																	@endif
+																	<div id="btndeleteorgchart_wrapper"
+																		@if (Empty($fulltbp->minitbp->businessplan->company->organizeimg)) hidden @endif
+																	>
+																		<button type="button"  data-id="{{$fulltbp->minitbp->businessplan->company->id}}" id="delete_org_chart" class="btn btn-danger btn-icon ml-2 btn-sm hiddenelement_fulltbp"><i class="icon-add mr-2"></i>ลบรูป</button>
+																	</div>
 																</div>
 
 															</div>
@@ -2290,9 +2304,9 @@ th {
 																</div>
 															</div>
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label for=""><strong><u>2.6) ข้อมูลเทคโนโลยี</u></strong></label>
-																</div>
+																{{-- <div class="form-group"> --}}
+																	<label for=""><strong>2.6) ข้อมูลเทคโนโลยี</strong></label>
+																{{-- </div> --}}
 															</div>
 
 															<div class="col-md-12" >
@@ -2305,13 +2319,14 @@ th {
 															</div>
 															<div class="col-md-12">
 																{{-- <div class="form-group">	 --}}
-																	<label for="">ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์<button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong><button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<span id="fulltbp_projectechdevlevel_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</span>
 																	
 																{{-- </div> --}}
 																
 																<div class="table-responsive" id="fulltbp_projectechdevlevel_wrapper" @if ($fulltbpprojecttechdevlevels->count() == 0) hidden @endif >
 																	
-																	<table class="table table-bordered table-striped">
+																	<table class="table table-bordered table-striped" id="fulltbp_projectechdevlevel_table_wrapper">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="width:1%;white-space: nowrap">รายการ</th>  
@@ -2323,7 +2338,7 @@ th {
 																		<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
 																			@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
 																				<tr >                                        
-																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+																					<td style="text-align: center"> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
 																					<td style="white-space: nowrap"> 
@@ -2504,6 +2519,14 @@ th {
 																				<input type="checkbox" id="cer10" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer10)) checked @endif data-fouc >
 																				ซื้อหรือต่อยอดทรัพย์สินทางปัญญา
 																			</label>
+																			<span id="cer10qty_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
+																			<div class="row" id="cer10qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer10) || Empty(@$fulltbpprojectcertify->cer10_qty) ) hidden @endif>
+																				<div class="col-md-9">
+																					<div class="form-group">
+																						<input type="text" id="cer10qty" placeholder="จำนวน" class="form-control form-control-lg numeralformat3" value="{{$fulltbpprojectcertify->cer10_qty ?? 0}}">
+																					</div>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
 																	
@@ -2565,12 +2588,12 @@ th {
 															<div class="col-md-12 mt-3">
 																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label>
 																<div class="form-group">
-																	<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label><span class="text-danger">*<span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span></label>
+																	{{-- <label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label><span class="text-danger">*<span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span></label> --}}
 																	
 																	<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
 																</div>	
 																{{-- <div class="form-group">												 --}}
-																	<label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ขนาดไม่เกิน 2 MB)
+																	<label for="">ระบุเอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ขนาดไม่เกิน 2 MB)
 																		<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal"  onclick="document.getElementById('award').click();"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																		<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																{{-- </div> --}}
@@ -2887,7 +2910,7 @@ th {
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas / Lean Canvas / อื่นๆ</u></label><span class="text-danger">*</span>
-															<p><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i></p>
+															<p><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์ / การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i></p>
 															<span id="modelcanvas_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
 															<textarea name="modelcanvas" id="modelcanvas" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</textarea>
 														</div>
@@ -3193,8 +3216,8 @@ th {
 																			<td class="text-right"> {{number_format($fulltbpasset->cost, 2)}} </td> 
 																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
-																			<td> {{$fulltbpasset->specification}} </td> 
-																			<td style="max-width: 350px;word-wrap: break-word;" class="hiddenelement_fulltbp"> 
+																			<td style="max-width: 350px;word-wrap: break-word;"> {{$fulltbpasset->specification}} </td> 
+																			<td  class="hiddenelement_fulltbp"> 
 																				<a  data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 
 																		</tr>

@@ -2189,7 +2189,7 @@
 														<div class="form-check">
 															<label class="form-check-label">
 																<input type="checkbox" id="cer10" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer10)) checked @endif data-fouc disabled>
-																ซื้อหรือต่อยอดทรัพย์สินทางปัญญา
+																ซื้อหรือต่อยอดทรัพย์สินทางปัญญา @if (!Empty($fulltbpprojectcertify->cer10)) (จำนวน {{$fulltbpprojectcertify->cer10_qty}}) @endif
 															</label>
 														</div>
 													</div>

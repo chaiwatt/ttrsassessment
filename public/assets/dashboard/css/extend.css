@@ -44,6 +44,9 @@ select, a , button ,input, h1,h2,h3,h4,h5,p,textarea,form,span,i {
   font-size:14px; 
 }
 
+
+navbar-brand{min-width:10.625rem}
+
 .blink {
   animation: blinker 2s linear infinite;
   color: #f5f8fa;

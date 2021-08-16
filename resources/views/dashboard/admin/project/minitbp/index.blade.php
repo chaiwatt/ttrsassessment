@@ -121,9 +121,9 @@
                                 <table class="table table-bordered table-striped" >
                                     <thead>
                                         <tr>
-                                            <th>รายละเอียด</th> 
-                                            <th>ให้แก้ไขโดย</th>
-                                            <th>วันที่</th>
+                                            <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
+                                            <th style="white-space: nowrap;text-align: center">ให้แก้ไขโดย</th>
+                                            <th style="white-space: nowrap;text-align: center">วันที่</th>
                                             
                                         </tr>
                                     </thead>
@@ -141,6 +141,45 @@
             </div>
         </div>
     </div>
+
+    <div id="modal_show_approvelog" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ<span id="showapprovelogminitbp"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
+                                            <th style="white-space: nowrap;text-align: center">อนุมัติโดย</th>
+                                            <th style="white-space: nowrap;text-align: center">วันที่</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <td id="approvelog_detail"></td>
+                                        <td id="approvelog_info"></td>
+                                        <td style="text-align: center;width:1%;white-space: nowrap" id="approvelog_date"></td>
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page header -->
     <div class="page-header page-header-light">  
         <div class="page-header-content header-elements-md-inline">
@@ -244,11 +283,14 @@
                                                     @endif
                                                 </td>  
                                                 @if (Auth::user()->user_type_id >= 4)
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="white-space: nowrap;text-align:center"> 
                                                         @if ($minitbp->businessplan->business_plan_status_id > 3)
-                                                                <a href="#"  data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" ><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
+                                                            <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+                                                                @if (!Empty($minitbp->approvelog))
+                                                                    
+                                                                        <a href="#" data-id="{{$minitbp->id}}" data-doctype="1" data-project="{{$minitbp->project}}" class="btn btn-sm bg-success showapprovelog">รายการอนุมัติ</a>
+                                                                @endif
 
-                                                                
                                                                 @if ($minitbp->reviselog(1)->count() > 0)
                                                                     <a href="#" data-id="{{$minitbp->id}}" data-doctype="1" data-project="{{$minitbp->project}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</a>
                                                                 @endif
@@ -256,8 +298,8 @@
                                                                 @if ($minitbp->refixstatus == 0)
                                                                         <a href="#" data-id="{{$minitbp->id}}" id="editapprove" data-project="{{$minitbp->project}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                                     @elseif($minitbp->refixstatus == 1)
-                                                                    
-                                                                            <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a>
+                                                                            <span class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</span>
+                                                                            {{-- <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a> --}}
                                                                         @if ($minitbp->reviselog(1)->count() > 0)
                                                                             <a href="#" data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" data-doctype="1" class="btn btn-sm bg-pink showlog" ><i class="icon-spinner spinner mr-2" id="spinicon_showlog{{$minitbp->id}}" hidden></i>รายการแก้ไข</a>
                                                                         @endif

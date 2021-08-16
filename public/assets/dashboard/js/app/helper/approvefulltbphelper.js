@@ -404,7 +404,7 @@ $(document).on('click', '.showlog', function(e) {
           html += `<tr >                                        
               <td> ${log.message} </td>    
               <td> ${log.user} </td>                                         
-              <td> ${log.createdatth} </td>                                          
+              <td style="width:1%;white-space: nowrap"> ${log.createdatth} </td>                                          
               
           </tr>`
           });
@@ -414,6 +414,20 @@ $(document).on('click', '.showlog', function(e) {
       $('#modal_show_reviselog').modal('show');
   }).catch(error => {})
   
+});
+
+$(document).on('click', '.showapprovelog', function(e) {
+  var html ='';
+  getApproveLog($(this).data('id')).then(data => {  
+    // console.log(data);
+      $("#approvelog_detail").html(data[0].approvelog);
+      $("#approvelog_info").html(data[0].approveby);
+      $("#approvelog_date").html(data[0].createdatth);
+      $("#showapprovelogminitbp").html(data[0].project);
+      $('#modal_show_approvelog').modal('show');
+  }).catch(error => {})
+
+  $('#modal_show_approvelog').modal('show');
 });
 
 function getReviseLog(minitbpid,doctype){
@@ -435,3 +449,24 @@ function getReviseLog(minitbpid,doctype){
       })
   })
 }
+
+
+function getApproveLog(fulltbpid){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/api/fulltbp/getapprovelog`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+        fulltbpid : fulltbpid
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+

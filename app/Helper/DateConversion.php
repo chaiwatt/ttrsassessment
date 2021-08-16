@@ -69,6 +69,15 @@ class DateConversion
         $strDay= date("j",strtotime($date->toDateString()));
         return $strDay.'/'.$strMonth.'/'.$strYear . ' ' . $date->format('H:i:s');
     }
+
+    public static function thaiDateTime2($date)
+	{
+        $strYear = date("Y",strtotime($date->toDateString()))+543;
+		$strMonth= date("n",strtotime($date->toDateString()));
+        $strDay= date("j",strtotime($date->toDateString()));
+        return $strDay.'/'.$strMonth.'/'.$strYear . ' เวลา ' . $date->format('H:i:s');
+    }
+
     public static function thaiMonthNow()
 	{
 		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");

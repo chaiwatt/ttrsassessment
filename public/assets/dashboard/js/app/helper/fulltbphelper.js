@@ -961,6 +961,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
             </tr>`
             });
             $("#spinicon_add_tectdevlevel").attr("hidden",true);
+            $("#fulltbp_projectechdevlevel_error").attr("hidden",true);
          $("#fulltbp_projectechdevlevel_wrapper").attr("hidden",false);
          $("#fulltbp_projectechdevlevel_wrapper_tr").html(html);
          $('#modal_add_tectdevlevel').modal('hide');
@@ -1164,6 +1165,7 @@ $(document).on('change', '#cer8', function(e) {
         $("#cer8qtydiv").attr("hidden",true);
     }
 });
+
 $(document).on('change', '#cer9', function(e) {
     if($(this).is(":checked")){
         $("#cer9qtydiv").attr("hidden",false);
@@ -1172,6 +1174,16 @@ $(document).on('change', '#cer9', function(e) {
         $("#cer9qtydiv").attr("hidden",true);
     }
 });
+
+$(document).on('change', '#cer10', function(e) {
+    if($(this).is(":checked")){
+        $("#cer10qtydiv").attr("hidden",false);
+        $("#cer10qty").val(1);
+    }else{
+        $("#cer10qtydiv").attr("hidden",true);
+    }
+});
+
 $(document).on('change', '#cer11', function(e) {
     if($(this).is(":checked")){
         $("#cer11qtydiv").attr("hidden",false);
@@ -1184,7 +1196,7 @@ $(document).on('change', '#cer11', function(e) {
 
 
 $(document).on('click', '#btnaddprojectcertify', function(e) {
-    Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
+    Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer10qty').val(),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
             text: 'อัพเดทสำเร็จ!',
@@ -2662,6 +2674,30 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
     });
 });
 
+$(document).on("click","#delete_org_chart",function(e){
+    Swal.fire({
+        title: 'คำเตือน!',
+        text: `ต้องการลบรูปแผนผังองค์กร หรือไม่`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'ยืนยันลบ',
+        cancelButtonText: 'ยกเลิก',
+        closeOnConfirm: false,
+        closeOnCancel: false
+        }).then((result) => {
+        if (result.value) {
+            Project.deleteOrgChart($(this).data('id')).then(data => {
+                var html = ``;
+                var imgpath = route.url + '/assets/dashboard/images/orgimg.png';
+                $("#organizeimgholder").attr("src", imgpath);
+                $("#btndeleteorgchart_wrapper").attr("hidden",true);
+           })
+           .catch(error => {})
+        }
+    });
+});
+
 $(document).on('click', '#btneditquantityemploy', function(e) {
     Employ.editEmployQuantity($(this).data('id'),$('#department1_qty').val(),$('#department2_qty').val(),$('#department3_qty').val(),$('#department4_qty').val(),$('#department5_qty').val()).then(data => {
         $('#department1_qty').val(data.department1_qty);
@@ -2710,6 +2746,7 @@ $(document).on('change', '#organizeimg', function(e) {
                 var imgpath = route.url + '/'+ data.organizeimg;
                 $("#organizeimgholder").attr("src", imgpath);
                 $("#organizationcharterror").attr("hidden",true);
+                $("#btndeleteorgchart_wrapper").attr("hidden",false);
         }
     });
 });
@@ -2738,7 +2775,7 @@ $('.steps-basic').steps({
         }else if(currentIndex == 2){
             $(".actions").find(".libtn").remove();
             FullTbp.editOverAll($('#fulltbpid').val(),$('#projectabtract_input').val(),$('#productdetails_input').val(),$('#projectechdev_input').val(),$('#projectechdevproblem_input').val(),$('#mainproduct_input').val(),$('#projectinnovation_input').val(),$('#projectstandard_input').val()).then(data => {
-                Project.editProjectCertify($('#fulltbpid').val(),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
+                Project.editProjectCertify($('#fulltbpid').val(),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer10qty').val(),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
                 })
                 .catch(error => {})
             })  
@@ -2859,6 +2896,16 @@ $('.steps-basic').steps({
             }
 
        }else if(newIndex == 2){
+
+            var fulltbp_projectechdevlevel_table_wrapper = $('#fulltbp_projectechdevlevel_table_wrapper tr').length;
+            console.log(fulltbp_projectechdevlevel_table_wrapper);
+            if(fulltbp_projectechdevlevel_table_wrapper == 1){
+                $("#fulltbp_projectechdevlevel_error").attr("hidden",false);
+                return false;
+            }else{
+                $("#fulltbp_projectechdevlevel_error").attr("hidden",true);
+            }
+
             if ($('#projectabtract_input').summernote('isEmpty'))
             {
                 $("#projectabtract_input_error").attr("hidden",false);

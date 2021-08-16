@@ -485,7 +485,7 @@
 								</div>
 								<div class="col-md-6">  
 									<div class="form-group">
-										<label>ประเภทผู้เชี่ยวชาญ<span class="text-danger">*</span></label>
+										<label>ประเภทผู้เชี่ยวชาญ</label>
 										{{$officer->user_group_id}}
 										<input type="text"  name="experttype" value="{{$user->usergroup->name}}"  placeholder="ประเภทผู้เชี่ยวชาญ" class="form-control form-control-lg" readonly>
 									</div>
@@ -571,9 +571,9 @@
 												<table class="table table-bordered table-striped" id="expertfield_wrapper">
 													<thead>
 														<tr class="bg-info">
-															<th style="width:10%">ลำดับ</th> 
-															<th style="width:70%">รายละเอียด</th> 
-															<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                                                                                   
+															<th style="width:10%;text-align:center">ลำดับ</th> 
+															<th style="width:70%;text-align:center">รายละเอียด</th> 
+															<th style="width:1%;white-space: nowrap;text-align:center">เพิ่มเติม</th>                                                                                  
 														</tr>
 													</thead>
 													<tbody id="expertfield_wrapper_tr"> 

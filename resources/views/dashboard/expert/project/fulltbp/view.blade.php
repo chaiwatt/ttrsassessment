@@ -2124,6 +2124,13 @@
 																				<input type="checkbox" id="cer10" class="form-check-input-styled-primary" @if (!Empty($fulltbpprojectcertify->cer10)) checked @endif data-fouc disabled>
 																				ซื้อหรือต่อยอดทรัพย์สินทางปัญญา
 																			</label>
+																			<div class="row" id="cer10qtydiv" style="margin-top: 5px"  @if (Empty(@$fulltbpprojectcertify->cer10) || Empty(@$fulltbpprojectcertify->cer10_qty) ) hidden @endif>
+																				<div class="col-md-9">
+																					<div class="form-group">
+																						<input type="text" id="cer10qty" placeholder="จำนวน" class="form-control form-control-lg" value="{{$fulltbpprojectcertify->cer10_qty}}" readonly>
+																					</div>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
 			
@@ -2386,7 +2393,7 @@
 													<div class="col-md-12">	
 														<div class="form-group">
 															<label for=""><u>Business Model Canvas</u></label>
-															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์/ การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
+															<p><small><i>แผนที่ได้วางไว้เพื่อนำไปสู่เชิงพาณิชย์ / การประยุกต์ใช้และวิธีการที่จะบรรลุผลเหล่านั้น</i> </small></p>
 															<textarea name="" id="modelcanvas" class="form-control form-control-lg" cols="3" rows="5">{{@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail}}</textarea>
 														</div>
 														<div class="col-md-12">	

@@ -75,6 +75,7 @@ class FullTbpProjectCertifyController extends Controller
             'cer9' => $cer9,
             'cer9_qty' => $request->cer9qty,
             'cer10' => $cer10,
+            'cer10_qty' => $request->cer10qty,
             'cer11' => $cer11,
             'cer11_qty' => $request->cer11qty,
         ]);

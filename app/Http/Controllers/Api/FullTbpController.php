@@ -493,4 +493,9 @@ class FullTbpController extends Controller
         CreateUserLog::createLog('ยืนยันการลงพื้นที่ โครงการ' . $minitbp->project);
     }
 
+    public function GetApproveLog(Request $request){
+        $fulltbp = FullTbp::where('id',$request->fulltbpid)->get()->each->append('createdatth');
+        return response()->json($fulltbp);
+    }
+
 }

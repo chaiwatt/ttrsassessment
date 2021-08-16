@@ -137,6 +137,8 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('editauthorizeddirector','Api\CompanyController@EditAuthorizedDirector')->name('api.company.editauthorizeddirector');
         Route::post('deleteauthorizeddirector','Api\CompanyController@DeleteAuthorizedDirector')->name('api.company.deleteauthorizeddirector');
         Route::post('uploadorganizeimg','Api\CompanyController@UploadOrganizeImg')->name('api.company.uploadorganizeimg');  
+        Route::post('deleteorganizeimg','Api\CompanyController@DeleteOrganizeImg')->name('api.company.deleteorganizeimg'); 
+        Route::post('updatecompanyaddress','Api\CompanyController@UpdateCompanyAddress')->name('api.company.updatecompanyaddress'); 
     }); 
     Route::group(['prefix' => 'alert'], function(){
         Route::post('delete','Api\AlertController@Delete')->name('api.alert.delete');     
@@ -323,6 +325,9 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('submitwithattachement','Api\FullTbpController@SubmitWithattAchement')->name('api.fulltbp.submitwithattachement');
             Route::post('submitwithnoattachement','Api\FullTbpController@SubmitWithNoattAchement')->name('api.fulltbp.submitwithnoattachement'); 
             Route::post('finishonsite','Api\FullTbpController@FinishOnsite')->name('api.fulltbp.finishonsite'); 
+            Route::post('getapprovelog','Api\FullTbpController@GetApproveLog')->name('api.fulltbp.getapprovelog'); 
+
+
             Route::group(['prefix' => 'general'], function(){
                 Route::post('edit','Api\FullTbpGeneralController@Edit')->name('api.fulltbp.general.edit');           
                 Route::post('addresearcher','Api\FullTbpGeneralController@AddResearcher')->name('api.fulltbp.general.addresearcher');
@@ -484,6 +489,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'companydoc'], function(){
                 Route::post('add','Api\FullTbpCompanyDocController@Add')->name('api.fulltbp.companydoc.add');
                 Route::post('delete','Api\FullTbpCompanyDocController@Delete')->name('api.fulltbp.companydoc.delete');
+                
             });
             Route::group(['prefix' => 'bol'], function(){
                 Route::post('add','Api\FullTbpBolController@Add')->name('api.fulltbp.bol.add');                    
@@ -502,6 +508,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('addjdmessage','Api\MiniTbpController@AddJdMessage')->name('api.minitbp.addjdmessage');
             Route::post('getjdmessage','Api\MiniTbpController@GetJdMessage')->name('api.minitbp.getjdmessage');
             Route::post('getreviselog','Api\MiniTbpController@GetReviseLog')->name('api.minitbp.getreviselog');
+            Route::post('getapprovelog','Api\MiniTbpController@GetApproveLog')->name('api.minitbp.getapprovelog');
         });
     }); 
     Route::group(['prefix' => 'dashboard'], function(){

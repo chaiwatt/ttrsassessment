@@ -8,6 +8,7 @@ use App\Model\IsicSub;
 use App\Model\Signature;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
+use App\Model\CompanyAddress;
 use App\Model\EmployPosition;
 use App\Model\AuthorizedDirector;
 use App\Http\Controllers\Controller;
@@ -166,6 +167,34 @@ class CompanyController extends Controller
         $companyid = CompanyEmploy::find($request->id)->company_id;
         $companyemploys = CompanyEmploy::where('company_id',$companyid)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();
         return response()->json($companyemploys);
+    }
+
+    public function DeleteOrganizeImg(Request $request){
+        $company = Company::find($request->id);
+        if(!Empty($company->organizeimg)){
+            @unlink($company->organizeimg);
+        }
+        Company::find($request->id)->update([
+            'organizeimg' => null
+        ]);
+    }
+
+    public function UpdateCompanyAddress(Request $request){
+        // $company = Company::find($request->id);
+        // if(!Empty($company->organizeimg)){
+        //     @unlink($company->organizeimg);
+        // }
+        Company::find($request->id)->update([
+            'name' => $request->name
+        ]);
+
+        CompanyAddress::where('company_id',$request->id)->first()->update([
+            'address' => $request->address,
+            'province_id' => $request->province,
+            'amphur_id' => $request->amphur,
+            'tambol_id' => $request->tambol,
+            'postalcode' => $request->postal
+        ]);
     }
 }
 

@@ -230,6 +230,44 @@
         </div>
     </div>
 
+    <div id="modal_show_approvelog" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ<span id="showapprovelogminitbp"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
+                                            <th style="white-space: nowrap;text-align: center">อนุมัติโดย</th>
+                                            <th style="white-space: nowrap;text-align: center">วันที่</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <td id="approvelog_detail"></td>
+                                        <td id="approvelog_info"></td>
+                                        <td style="text-align: center;width:1%;white-space: nowrap" id="approvelog_date"></td>
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
         {{-- modal_mailto_member --}}
         <div id="modal_mailto_member" class="modal fade" style="overflow:hidden;">
             <div class="modal-dialog">
@@ -379,9 +417,9 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>รายละเอียด</th> 
-                                            <th>ให้แก้ไขโดย</th>
-                                            <th>วันที่</th>
+                                            <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
+                                            <th style="white-space: nowrap;text-align: center">ให้แก้ไขโดย</th>
+                                            <th style="white-space: nowrap;text-align: center">วันที่</th>
                                             
                                         </tr>
                                     </thead>
@@ -1007,6 +1045,7 @@
                             <table class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align: center">ระยะเวลา</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
@@ -1024,6 +1063,7 @@
                                                 $check = Auth::user()->IsExpert($fulltbp->id);
                                             @endphp
                                             <tr> 
+                                                <td hidden>{{$fulltbp->minitbp->updated_at}}</td>
                                                 <td style="width:1%;white-space: nowrap">
                                                     @php
                                                         $cogcolor = 'text-info';
@@ -1057,7 +1097,7 @@
                                                 <td style="white-space: nowrap;text-align:center"> {{$fulltbp->assessmentdate}} </td>  
                                                 <td style="white-space: nowrap;text-align:center"> {{$fulltbp->finalassessmentdate}} </td>  
                                                 
-                                                <td style="white-space: nowrap"> 
+                                                <td style="white-space: nowrap;text-align: center"> 
                                                     @if (!Empty($check))
                                                         @if ($fulltbp->expertassignment->accepted == 0)
                                                                 <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
@@ -1067,7 +1107,7 @@
                                                         @endif
                                                     @endif
                                                 </td> 
-                                                <td style="white-space: nowrap"> 
+                                                <td style="white-space: nowrap;text-align: center"> 
                                                     @if ($fulltbp->status == 3)
                                                             <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                         @else
@@ -1113,6 +1153,7 @@
                                 <table class="table table-bordered table-striped mb-2" id="fulltbptable" >
                                     <thead>
                                         <tr class="bg-info">
+                                            <th hidden>date</th>
                                             <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">Full TBP</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
@@ -1124,8 +1165,9 @@
                                     <tbody>
                                         @foreach ($fulltbps as $key => $fulltbp)
                                             @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
-                                                <tr>    
-                                                    <td style="width:1%;white-space: nowrap"> 
+                                                <tr>  
+                                                    <td hidden >{{$fulltbp->updated_at}}</td>  
+                                                    <td style="width:1%;white-space: nowrap;"> 
                                                         @php
                                                             $cogcolor = 'text-info';
                                                             $latetext = '';
@@ -1138,9 +1180,16 @@
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!} </a>  
                                                     </td>  
-                                                    <td style="white-space: nowrap">    
+                                                    <td style="white-space: nowrap;text-align: center">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
-                                                                <a href="#"  data-id="{{$fulltbp->id}}" ><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
+                                                                <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+                                                                @if (!Empty($fulltbp->approvelog))
+                                                                    <button  data-toggle="modal" data-id="{{$fulltbp->id}}" data-doctype="2" class="btn btn-sm bg-success showapprovelog mr-1">รายการอนุมัติ</a>
+                                                                @endif
+
+                                                                @if ($fulltbp->reviselog->count() > 0)
+                                                                    <button data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" data-doctype="2" data-project="{{$fulltbp->minitbp->project}}" class="btn btn-sm bg-pink showlog">รายการแก้ไข</button>
+                                                                @endif
                                                             @else
                                                                 @if ($fulltbp->refixstatus == 0)
                                                                         <a href="#" data-id="{{$fulltbp->id}}" id="editapprove" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$fulltbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
@@ -1157,7 +1206,7 @@
                                                                 @endif       
                                                         @endif
                                                     </td>
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="white-space: nowrap;text-align: center"> 
                                                         @if ($fulltbp->expertassignments->count() > 0)
                                                         {{-- {{$fulltbp->expertassignments->where('expert_assignment_status_id',1)->count()}} --}}
                                                                 {{-- @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
@@ -1216,12 +1265,16 @@
                                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 0)
                                                                     <span class="badge badge-flat border-danger text-danger-600">ยังไม่ได้มอบหมาย</span>
                                                                 @else
-                                                                <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id <=5 )
+                                                                        <span class="badge badge-flat border-danger text-danger-600">ยังไม่ได้มอบหมาย</span>
+                                                                    @else
+                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้มอบหมาย</a>
+                                                                    @endif
                                                             @endif
                                                             
                                                         @endif
                                                     </td>  
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="white-space: nowrap;text-align: center"> 
                                                         @if (!Empty($fulltbp->ev))
                                                             @php
                                                                 $evstatus = 'ผ่านการอนุมัติ';
@@ -1258,24 +1311,27 @@
                                                             @if ($fulltbp->ev->status >= 4)
                                                                     <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" ><span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span></a>
                                                                 @else
-                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                    @if ($fulltbp->assignexpert !=2 )
+                                                                        <span class="badge badge-flat border-warning text-warning-600">{{$evstatus}}</span>
+                                                                    @else
+                                                                        <a  href="{{route('dashboard.admin.project.fulltbp.editev',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
+                                                                    @endif
                                                             @endif
                                                                     
                                                                     
                                                                 @elseif(Auth::user()->user_type_id == 5)
                                                                     @if ($fulltbp->ev->status < 2)
-                                                                            <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
+                                                                            <span class="badge badge-flat border-warning text-warning-600" style="text-align: center">{{$evstatus}}</span>
                                                                         @else
                                                                             @if ($fulltbp->ev->status >= 4)
                                                                             <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" ><span class="badge badge-flat border-success text-success-600">{{$evstatus}}</span></a>
                                                                             @else
                                                                             <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                             @endif
-                                                                        
                                                                     @endif
                                                                 @elseif(Auth::user()->user_type_id == 6)
                                                                     @if ($fulltbp->ev->status == 0)
-                                                                            <span class="badge badge-flat border-info text-info-600">{{$evstatus}}</span>
+                                                                            <span class="badge badge-flat border-warning text-warning-600" style="text-align: center">{{$evstatus}}</span>
                                                                         @elseif($fulltbp->ev->status == 3)
                                                                             <a  href="{{route('dashboard.admin.project.evweight.edit',['id' => $fulltbp->ev->id])}}" class="{{$style}}">{{$evstatus}}</a>
                                                                         @else   
@@ -1291,20 +1347,25 @@
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                         @endif
                                                     </td> 
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="white-space: nowrap;text-align: center"> 
                                                         @if ( $fulltbp->bol->count() != 0)
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" >
-                                                                    <span class="badge badge-flat border-success text-success-600">เอกสาร BOL</span>
+                                                                    <span class="badge badge-flat border-success text-success-600" style="text-align: center">เอกสาร BOL</span>
                                                                 </a> 
                                                             @else
                                                                 @if (Auth::user()->user_type_id == 4)
-                                                                        <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a> 
+                                                                        {{-- <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a>  --}}
+                                                                        @if ($fulltbp->ev->status >= 4)
+                                                                                <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">เพิ่มเอกสาร BOL</a> 
+                                                                            @else
+                                                                                <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้เพิ่ม</span>
+                                                                        @endif 
                                                                     @else
-                                                                        <span class="badge badge-flat border-info text-info-600">ยังไม่ได้เพิ่ม</span>
+                                                                        <span class="badge badge-flat border-warning text-warning-600" style="text-align: center">ยังไม่ได้เพิ่ม</span>
                                                                 @endif
                                                         @endif
                                                     </td>  
-                                                    <td style="white-space: nowrap">
+                                                    <td style="white-space: nowrap;text-align: center">
                                                         @if (!Empty($fulltbp->canceldate))
                                                             <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
                                                         @else
@@ -1417,6 +1478,7 @@
                                 <table class="table text-nowrap" id="reporttable">
                                     <thead>
                                         <tr class="bg-info">
+                                            <th hidden>date</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
                                             <th style="text-align: center">คะแนน</th>
                                             <th style="text-align: center">เกรด</th>     
@@ -1430,7 +1492,8 @@
                                         @foreach ($fulltbps as $key => $fulltbp)
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                                    <tr>    
+                                                    <tr>   
+                                                        <td hidden>{{$fulltbp->updated_at}}</td> 
                                                         <td style="width:1%;white-space: nowrap"> {{$fulltbp->minitbp->project}} </td> 
                                                         <td style="text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                         <td style="text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
@@ -1851,10 +1914,11 @@
     };
 
     var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 7) {
+        if (countitemtable >= 5) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 7,
                 "language": {
@@ -1869,10 +1933,11 @@
             });
         }
 
-        if (countitemtable >= 7) {
+        if (countitemtable >= 5) {
             $('#fulltbptable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 7,
                 "language": {
@@ -1891,6 +1956,7 @@
             $('#reporttable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 5,
                 "language": {

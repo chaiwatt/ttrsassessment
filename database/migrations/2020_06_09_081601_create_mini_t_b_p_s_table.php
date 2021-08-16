@@ -73,6 +73,8 @@ class CreateMiniTBPSTable extends Migration
             $table->string('otherbank2')->nullable();
             $table->char('refixstatus',1)->default('0');
             $table->char('cancel',1)->default('0');
+            $table->longText('approvelog')->nullable();
+            $table->string('approveby',250)->nullable();
             $table->timestamps();
         });
     }

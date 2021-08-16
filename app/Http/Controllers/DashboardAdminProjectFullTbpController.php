@@ -628,6 +628,13 @@ class DashboardAdminProjectFullTbpController extends Controller
             $arr2 = UserArray::leader($minitbp->business_plan_id);
             $userarray = array_unique(array_merge($arr1,$arr2));
 
+            // 'approvelog' => $request->note,
+
+            FullTbp::find($request->id)->update([
+                'approvelog' => $request->note,
+                'approveby' => $auth->name . ' ' . $auth->lastname
+            ]);
+
             $projectlog = new ProjectLog();
             $projectlog->mini_tbp_id = $minitbp->id;
             $projectlog->user_id = $auth->id;

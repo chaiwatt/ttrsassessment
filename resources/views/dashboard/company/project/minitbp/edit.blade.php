@@ -330,6 +330,7 @@
 							<h6>ผู้ยื่นแบบคำขอ</h6>
 							<fieldset>
 								<div class="row">
+									<input type="text" id="companyid" value="{{$user->company->id}}" hidden>
 									<input type="text" id="pdfname" hidden>
 									<legend>
 										<label style="font-size: 16px"><strong>ข้อมูลบริษัท</strong></label>
@@ -380,7 +381,7 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required">
+											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required numeralformatpostal" >
 										</div>
 									</div>
 									<legend>
@@ -454,7 +455,7 @@
 													$phone = Auth::user()->phone;
 												}
 											@endphp
-											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $phone}}" class="form-control form-control-lg required">
+											<input type="text" name ="contactphone" id ="contactphone" value="{{old('contactphone') ?? $phone}}" class="form-control form-control-lg required numeralformathphone">
 											<span id="contactphone_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> เบอร์โทรศัพท์ไม่ถูกต้อง</span>
 										</div>
 									</div>
@@ -468,6 +469,7 @@
 												}
 											@endphp
 											<input type="email" name ="contactemail" id ="contactemail" value="{{old('contactemail') ?? $email}}" class="form-control form-control-lg required">
+											<span id="contactemail_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> รูปแบบอีเมลไม่ถูกต้อง</span>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -916,7 +918,6 @@
 				form.find('.body:eq(' + newIndex + ') label.error').remove();
 				form.find('.body:eq(' + newIndex + ') .error').removeClass('error');
 			}
-			// console.log(newIndex);
 			if(newIndex == 3){
 				if($('#usersignature').val() == 0){
 					Swal.fire({
@@ -936,7 +937,8 @@
 			}	
 
 			if(newIndex == 2){
-				if($("#finance1").is(":checked") == false && $("#finance2").is(":checked") == false 
+				//finance3_other_div
+				if($("#finance1").is(":checked") == false && $("#finance2").is(":checked") == false && $("#finance3_other").is(":checked") == false
 				&& $("#nonefinance1").is(":checked") == false && $("#nonefinance2").is(":checked") == false && $("#nonefinance3").is(":checked") == false 
 				&& $("#nonefinance5").is(":checked") == false && $("#nonefinance6").is(":checked") == false){
 					$("#noneselect").attr("hidden",false);
@@ -989,6 +991,12 @@
 			return form.valid();
 		},
 		onStepChanged:function (event, currentIndex, newIndex) {
+			if(currentIndex == 1){
+				updateCompanyAddress($('#companyid').val(),$('#companyname').val(),$('#address').val(),$('#province').val(),$('#amphur').val(),$('#tambol').val(),$('#postalcode').val()).then(data => {
+
+					})
+				.catch(error => {})
+			}
 
 			if(currentIndex == 3){
 				var hidden = '';
@@ -1255,12 +1263,12 @@
 		}
 		var text = 'ยืนยันการส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
 		if($('#usersignature').val() == 1){
-			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF <br>ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
 		if(refixstatus == 0){
 			Swal.fire({
 				title: 'โปรดยืนยัน',
-				text: text,
+				html: text,
 				type: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -1281,7 +1289,7 @@
 								var html = ``;
 								Swal.fire({
 									title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
-									text: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทางอีเมลที่ท่านแจ้งไว้',
+									html: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทาง<br>อีเมลที่ท่านแจ้งไว้',
 								}).then((result) => {
 									window.location.replace(`${route.url}/dashboard/company/report`);
 								});
@@ -1313,7 +1321,7 @@
 						usermessage = result.value;
 						Swal.fire({
 							title: 'โปรดยืนยัน',
-							text: text,
+							html: text,
 							showCancelButton: true,
 							confirmButtonColor: '#3085d6',
 							confirmButtonText: 'ตกลง',
@@ -1331,7 +1339,7 @@
 											var html = ``;
 											Swal.fire({
 												title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
-												text: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทางอีเมลที่ท่านแจ้งไว้',
+												html: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบ<br>ทางอีเมลที่ท่านแจ้งไว้',
 											}).then((result) => {
 												window.location.replace(`${route.url}/dashboard/company/report`);
 											});
@@ -1426,13 +1434,39 @@
 		})
 	}
 
+	
+	function updateCompanyAddress(id,name,address,province,amphur,tambol,postal){
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				url: `${route.url}/api/company/updatecompanyaddress`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+				id : id,
+				name : name,
+				address : address,
+				province : province,
+				amphur : amphur,
+				tambol : tambol,
+				postal : postal
+				},
+				success: function(data) {
+				resolve(data)
+				},
+				error: function(error) {
+				reject(error)
+				},
+			})
+		})
+	}
+
 	$(document).on('change', '#projecteng', function(e) {
 		var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
 		if(re.test($(this).val()) == false){
 			$(this).val('')
 			Swal.fire({
 				title: 'ผิดพลาด...',
-				text: 'ไม่อนุญาตให้ใช้ภาษาไทย!',
+				text: 'กรุณากรอกเป็นภาษาอังกฤษ!',
 			});
 		}
 
@@ -1506,5 +1540,31 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
     .catch(error => {})
 });
 
+$(document).on('change', '#contactphone', function(e) {
+	if($(this).val().length < 9 || $(this).val().length > 10 ){
+		$(this).val('')
+		$("#contactphone_error").attr("hidden",false);
+	}else{
+		
+		$("#contactphone_error").attr("hidden",true);
+	}
+});
+
+$(document).on('change', '#contactemail', function(e) {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#contactemail').val())== false)
+    {
+		$(this).val('')
+		$("#contactemail_error").attr("hidden",false);
+    }else{
+		$("#contactemail_error").attr("hidden",true);
+	}
+});
+
+$(document).on('change', '#tambol', function(e) {
+	// console.log($(this).find(':selected').data('id'));
+	$('#postalcode').val($(this).find(':selected').data('id'));
+});
+
 </script>
 @stop
+

@@ -113,6 +113,25 @@
 
                         <div class="card">
                             <div class="card-header header-elements-sm-inline">
+                                <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนนการประเมิน</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="chart-container" >
+                                            <div class="chart has-fixed-height" style="margin-top:-40px; " id="progress_chart"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @php
+                            $showdetail = false;
+                        @endphp
+                       
+                        <div class="card"   @if ($showdetail == false) hidden @endif>
+                            <div class="card-header header-elements-sm-inline">
                                 <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
                             </div>
                             <div class="card-body">
@@ -281,6 +300,8 @@
                                 </div>
                             </div>
                         </div>
+                        
+                       
                     </div>
                 </div>
             @endif
@@ -827,6 +848,147 @@
             },
             })
         })
+    }
+
+    var dom = document.getElementById("progress_chart");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    // var check = "{{@$businessplans[0]->businessplanstatus->progress}}";
+    // var datavalue = '0';
+    // if(check.length!=0){
+    //     datavalue = check
+    // }
+
+    option = {
+        textStyle: {
+                    fontFamily: 'Kanit',
+                },
+                
+         series: [
+             {
+                 type: "gauge",
+                 center: ["50%", "50%"], 
+                 radius: "100%", 
+                 startAngle: 200, 
+                 endAngle: -20, 
+                 axisLine: {
+                     show: false,
+                     lineStyle: { 
+                         color: [
+                             [ 0.5,  new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                 offset: 1,
+                                 color: "#E75F25" // 50% 
+                             }, {
+                                 offset: 0.8,
+                                 color: "#D9452C" // 40% 
+                             }], false) ], // 100% 
+                              [ 0.7,  new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                 offset: 1,
+                                 color: "#FFC539" // 70% 
+                             }, {
+                                 offset: 0.8,
+                                 color: "#FE951E" // 66% 
+                             }, {
+                                 offset: 0,
+                                 color: "#E75F25" // 50% 
+                             }], false) ],
+                              [ 0.9,  new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                 offset: 1,
+                                 color: "#C7DD6B" // 90% 
+                             }, {
+                                 offset: 0.8,
+                                 color: "#FEEC49" // 86% 
+                             }, {
+                                 offset: 0,
+                                 color: "#FFC539" // 70% 
+                             }], false) ],
+                             [1,  new echarts.graphic.LinearGradient(0, 0, 0, 1, [ {
+                                 offset: 0.2,
+                                 color: "#1CAD52" // 92% 
+                             }, {
+                                 offset: 0,
+                                 color: "#C7DD6B" // 90% 
+                             }], false) ]
+                         ],
+                         width: 10
+                     }
+                 },
+
+                 splitLine: {
+                     show: false
+                 },
+                 axisTick: {
+                     show: false
+                 },
+                 axisLabel: {
+                     show: false
+                 },
+                 pointer : { 
+                     length: '45%'
+                 },
+                 detail: {
+                     show: false
+                 }
+             },
+             {
+                 type : "gauge",
+                 center: ["50%", "60%"], 
+                 radius : "100%",
+                 startAngle: 200,
+                 endAngle: -20,
+                 axisLine : {
+                     show : true,
+                     lineStyle : { 
+                         color : [ 
+                             [ 0.3, "#DA462C" ],//0-50%
+                             [ 0.7, "#FF9618" ],//51%-70%
+                             [ 0.9, "#FFED44" ],//70%-90%
+                             [ 1,"#20AE51" ]//90%-100%
+                         ],
+                         width : 30
+                     }
+                 },
+                 splitLine : { 
+                     length : 30,
+                     lineStyle : { 
+                         width : 2
+                     }
+                 },
+                 axisTick : { 
+                      length : 20
+                 },
+                 axisLabel : { 
+                     color : "black",
+                     distance : 10 ,
+                     fontSize: 18
+                 },
+                 detail: {
+                     formatter : "{score|{value}}",
+                     offsetCenter: [0, "40%"],
+                    //  backgroundColor: '#FFEC45',
+                     height:90,
+                     rich : {
+                         score : {
+                             color : "black",
+                             fontFamily : "Kanit",
+                             fontSize : 50
+                         }
+                     }
+                 },
+                data: [
+                    {
+                        value: "{{@$businessplan->minitbp->fulltbp->projectgrade->percent}}", 
+                        // name: "{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}",
+                        // fontSize: '18' 
+                    }
+                ]
+             }
+         ]
+     };
+
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
     }
 
 </script>

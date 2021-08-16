@@ -653,11 +653,11 @@
 		}
 		var text = 'ส่งแบบคำขอรับการประเมิน TTRS หรือไม่'
 		if($('#usersignature').val() == 1){
-			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF <br>ที่ลงลายมือชื่อเรียบร้อยแล้ว'
 		}
 		Swal.fire({
 			title: 'โปรดยืนยัน',
-			text: text,
+			html: text,
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',

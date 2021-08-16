@@ -173,4 +173,8 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
          return true;
         }
      }
+
+     public function getCreatedAtThAttribute(){
+        return DateConversion::thaiDateTime2($this->created_at,'full');
+    } 
 }

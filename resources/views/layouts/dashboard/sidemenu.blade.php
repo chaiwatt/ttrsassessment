@@ -219,9 +219,9 @@
     @if (Auth::user()->user_type_id <=2 && !Empty(Auth::user()->company))
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'nav-item-expanded nav-item-open':''}}">
             <a href="{{route('dashboard.company.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
-            {{-- <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
+            <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
                 <li class="nav-item"><a href="{{route('dashboard.company.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'active':''}}">หน้าแรก</a></li>     
-            </ul> --}}
+            </ul>
         </li>
         @if ($generalinfo->use_invoice_status_id != 2)
             @if (!Empty(Auth::user()->company->businessplan))

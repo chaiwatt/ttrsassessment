@@ -6,7 +6,9 @@ use App\User;
 use App\Model\Ev;
 use App\Model\Bol;
 use App\Model\Prefix;
+use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\ReviseLog;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
 use App\Model\BusinessPlan;
@@ -342,6 +344,14 @@ class FullTbp extends Model
         // return ExpertComment::where('full_tbp_id',$fulltbpid)->count();
     }
 
+    public function getReviselogAttribute(){
+        $fulltbp = FullTbp::find($this->id);
+        return ReviseLog::where('mini_tbp_id',$fulltbp->mini_tbp_id)->where('doctype',2)->get();
+    }
+
+    public function getCreatedAtThAttribute(){
+        return DateConversion::thaiDateTime2($this->created_at,'full');
+    } 
 }
 
 

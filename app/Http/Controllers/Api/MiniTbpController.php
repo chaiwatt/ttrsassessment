@@ -1141,4 +1141,9 @@ class MiniTbpController extends Controller
        $revisedocs =  ReviseLog::where('mini_tbp_id',$request->minitbpid)->where('doctype',$request->doctype)->orderBy('id','desc')->get()->each->append('createdatth')->each->append('user');
        return response()->json($revisedocs);
     }
+
+    public function GetApproveLog(Request $request){
+       $minitbp = MiniTBP::where('id',$request->minitbpid)->get()->each->append('createdatth');
+       return response()->json($minitbp);
+    }
 }

@@ -12,7 +12,7 @@ class ReviseLog extends Model
     protected $guarded = [];
 
     public function getCreatedAtThAttribute(){
-        return DateConversion::thaiDateTime($this->created_at,'full');
+        return DateConversion::thaiDateTime2($this->created_at,'full');
     } 
     public function getUserAttribute(){
         $user = User::find($this->user_id);

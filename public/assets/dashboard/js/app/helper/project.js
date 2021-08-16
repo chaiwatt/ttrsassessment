@@ -181,7 +181,7 @@ function addTechDevProblem(lines,id){
     })
 }
 
-function editProjectCertify(id,cer1,cer1qty,cer2,cer2qty,cer3,cer3qty,cer4,cer4qty,cer5,cer5qty,cer6,cer6qty,cer7,cer7qty,cer8,cer8qty,cer9,cer9qty,cer10,cer11,cer11qty){
+function editProjectCertify(id,cer1,cer1qty,cer2,cer2qty,cer3,cer3qty,cer4,cer4qty,cer5,cer5qty,cer6,cer6qty,cer7,cer7qty,cer8,cer8qty,cer9,cer9qty,cer10,cer10qty,cer11,cer11qty){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/projectcertify/edit`,
@@ -208,6 +208,7 @@ function editProjectCertify(id,cer1,cer1qty,cer2,cer2qty,cer3,cer3qty,cer4,cer4q
           'cer9' : cer9,
           'cer9qty' : cer9qty,
           'cer10' : cer10,
+          'cer10qty' : cer10qty,
           'cer11' : cer11,
           'cer11qty' : cer11qty
         },
@@ -418,5 +419,25 @@ function getMonth(fulltbpid){
     })
 }
 
+function deleteOrgChart(id){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/company/deleteorganizeimg`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          'id': id
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+
 export {addAbtract,addProduct,addProductDetail,getTechDevLevel,addTechDev,addTechDevLevel,editTechDevLevel,deleteTechDevLevel,addTechDevProblem,
-  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc,getMonth,addMonthPlan}
+  editProjectCertify,deleteCertifyAttachement,deleteAwardAttachement,deleteStandardAttachement,addPlan,getPlan,editPlan,deletePlan,deleteCompanydoc,getMonth,addMonthPlan,deleteOrgChart}

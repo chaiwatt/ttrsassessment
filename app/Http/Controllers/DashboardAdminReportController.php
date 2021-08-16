@@ -31,7 +31,7 @@ class DashboardAdminReportController extends Controller
         $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();
         $minitbparr = MiniTBP::whereIn('business_plan_id',$businessplanarr)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbparr)->get();
-
+        // $fulltbparray = FullTbp::whereIn('mini_tbp_id',$minitbparr)->pluck('id')->toArray();
         if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
@@ -42,12 +42,21 @@ class DashboardAdminReportController extends Controller
             $expertarr = ExpertAssignment::where('user_id',$auth->id)->where('expert_assignment_status_id',2)->pluck('full_tbp_id')->toArray();
             $uniquefulltbparr = array_unique(array_merge($expertarr,$fulltbparr));
             $fulltbps = FullTbp::whereIn('id',$uniquefulltbparr)->get();
+            // $fulltbparray = FullTbp::whereIn('id',$uniquefulltbparr)->pluck('id')->toArray();
 
         }
+
+        // return $fulltbparray;
+        // $posts = Post::join('comments', 'posts.id', '=', 'comments.post_id')
+        //     ->orderBy('comments.some_field', 'DESC')
+        //     ->get();
+
         // else if($auth->user_type_id == 5){
         //     $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
         //     $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
         // }
+
+        // return $fulltbps;
         
         $businessplans = BusinessPlan::get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
