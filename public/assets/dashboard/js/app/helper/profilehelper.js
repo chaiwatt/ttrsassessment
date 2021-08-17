@@ -1022,8 +1022,8 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
                 <td> ${address.tambol['name']} </td> 
                 <td> ${address.amphur['name']} </td> 
                 <td> ${address.province['name']} </td> 
-                <td> ${address.postalcode} </td> 
-                <td><a  data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
+                <td style="text-align:center"> ${address.postalcode} </td> 
+                <td style="text-align:center"><a  data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
             </tr>`
             });
             if (data.length >= 1) {
@@ -1034,6 +1034,11 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
             $('#modal_add_address').modal('hide');
          $("#authorized_address_wrapper_tr").html(html);
     }).catch(error => {})
+});
+
+$(document).on('change', '#tambolmodal', function(e) {
+    console.log($(this).find(':selected').data('id'));
+    $('#postalcode').val($(this).find(':selected').data('id'));
 });
 
 $(document).on('click', '.deleteaddress', function(e) {
@@ -1058,8 +1063,8 @@ $(document).on('click', '.deleteaddress', function(e) {
                         <td> ${address.tambol['name']} </td> 
                         <td> ${address.amphur['name']} </td> 
                         <td> ${address.province['name']} </td> 
-                        <td> ${address.postalcode} </td> 
-                        <td><a  data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
+                        <td style="text-align:center"> ${address.postalcode} </td> 
+                        <td style="text-align:center"><a  data-id="${address.id}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>  </td> 
                     </tr>`
                     });
                     if (data.length >= 1) {

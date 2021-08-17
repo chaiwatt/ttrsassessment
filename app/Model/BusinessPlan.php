@@ -43,7 +43,7 @@ class BusinessPlan extends Model
     } 
 
     public function getMinitbpapprovedateAttribute(){
-        $check = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',1)->where('details', 'LIKE', '%ได้รับอนุมัติ%')->first();
+        $check = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',1)->where('details', 'LIKE', '%ผ่านการอนุมัติ%')->first();
         if(!Empty($check)){
             return DateConversion::engToThaiDate($check->created_at->toDateString());
         }else{
@@ -52,7 +52,7 @@ class BusinessPlan extends Model
     } 
 
     public function getFulltbpapprovedateAttribute(){
-        $check = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ได้รับอนุมัติ%')->first();
+        $check = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ผ่านการอนุมัติ%')->first();
         if(!Empty($check)){
             return DateConversion::engToThaiDate($check->created_at->toDateString());
         }else{
@@ -62,7 +62,7 @@ class BusinessPlan extends Model
 
     public function getMinitbpdurationAttribute(){
         $check0 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',1)->where('details', 'LIKE', '%ส่งแบบคำขอรับการประเมิน%')->first();
-        $check1 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',1)->where('details', 'LIKE', '%ได้รับอนุมัติ%')->first();
+        $check1 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',1)->where('details', 'LIKE', '%ผ่านการอนุมัติ%')->first();
         if(!Empty($check1)){
             $from = Carbon::parse($check0->created_at);
             $to = Carbon::parse($check1->created_at);
@@ -74,7 +74,7 @@ class BusinessPlan extends Model
     } 
     public function getFulltbpdurationAttribute(){
         $check0 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ส่งแผนธุรกิจเทคโนโลยี%')->first();
-        $check1 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ได้รับอนุมัติ%')->first();
+        $check1 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ผ่านการอนุมัติ%')->first();
         if(!Empty($check1)){
             $from = Carbon::parse($check0->created_at);
             $to = Carbon::parse($check1->created_at);
@@ -86,7 +86,7 @@ class BusinessPlan extends Model
     } 
 
     public function getAssessmentdurationAttribute(){
-        $check0 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ได้รับอนุมัติ%')->first();
+        $check0 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ผ่านการอนุมัติ%')->first();
         $check1 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',3)->where('details', 'LIKE', '%สรุปผลการประเมินสำเร็จ%')->first();
         if(!Empty($check1)){
             $from = Carbon::parse($check0->created_at);

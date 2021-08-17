@@ -1112,19 +1112,19 @@ th {
 								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control form-control-lg" readonly>
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<label>วงเงินปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<label>วงเงิน ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit1" placeholder="ปี {{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<label>วงเงิน ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit2" placeholder="ปี {{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<label>วงเงิน ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit3" placeholder="ปี {{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
@@ -2284,8 +2284,8 @@ th {
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span></label>
-																	<p><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i></p>
+																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span></label>
+																	<p><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
 																	<span id="mainproduct_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
 																	<textarea name="mainproduct_input" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
 																
@@ -2297,7 +2297,7 @@ th {
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span></label>
-																	<p><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า/บริการ) ภายในโครงการ</i></p>
+																	<p><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
 																	<span id="productdetails_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
 																	<textarea name="productdetails_input" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																	
@@ -2961,7 +2961,7 @@ th {
 															<div class="col-md-12">	
 																<div class="input-group">													
 																	
-																	<label for="">SWOT Analysis, Five Forces Analysis (ไฟล์ขนาดไม่เกิน 2 MB)
+																	<label for="">เอกสารแนบ SWOT Analysis, Five Forces Analysis (ไฟล์ขนาดไม่เกิน 2 MB)
 																		<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" onclick="document.getElementById('swotfile').click();"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																		<input type="file" style="display:none;"  data-id="{{$fulltbpprojectcertify->id}}" id="swotfile" name="swotfile" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																</div>
@@ -3003,8 +3003,8 @@ th {
 															
 															<div class="col-md-12">	
 																<div class="form-group">	
-																	<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" id="add_sell" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-																	{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
+																	<label for=""><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง)</u><button type="button" id="add_sell" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
 																</div>
 																<div class="table-responsive" id="fulltbp_sell_wrapper"
 																@if ($fulltbpsells->count() == 0)
@@ -3046,7 +3046,7 @@ th {
 															
 															<div class="col-md-12 mt-4">
 																<label for=""><u>(สถานะยอดขาย 3 ปีย้อนหลัง)</u> </label>
-																<small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small>
+																{{-- <small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small> --}}
 																<div class="table-responsive">
 																	<table class="table table-bordered table-striped">
 																		<thead>
@@ -3698,6 +3698,23 @@ th {
             clearText: "เคลียร์",
             time: false
         });
+
+		
+$(document).on("change","#employtrainingdate",function(e){
+// console.log($(this).val());
+const myArr = $(this).val().split("/");
+var newstr = myArr[0]+'/'+myArr[1]+'/'+(myArr[2]-543);
+
+
+// var dateString = '07-15-2016';
+// var trainingdate = moment(newstr, 'DD/MM/YYYY');
+
+// var today = moment().format('MM/DD/YYYY');
+
+// var diffdate = today.diff(trainingdate, 'days') ;
+// console.log(today);
+}); 
+
 </script>
 @stop
 

@@ -109,8 +109,8 @@
                     
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.2 ชื่อโครงการ (ภาษาอังกฤษ) :</strong> {{$fulltbp->minitbp->projecteng}}</div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.3 บทคัดย่อโครงการ :</strong> <span >{!!$provider::FixBreak($fulltbp->abtract)!!}</span></div>
-                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
-                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.6 ข้อมูลเทคโนโลยี
                         <div class="ml30 mt0" style="font-size:13px"> <strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
                         <div class="mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
@@ -289,12 +289,12 @@
                     <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
                     <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     <div class="ml30" style="font-size:13px" ><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
-                    <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
+                    <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
                     @if ($fulltbp->fulltbpsell->count() > 0)
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
-                                <th style="width:40%;font-size:13px">ยอดขายแยกตามประเภทผลิตภัณฑ์/บริการ</th>
+                                <th style="width:40%;font-size:13px">ยอดขายแยกตามประเภทผลิตภัณฑ์ / บริการ</th>
                                 <th style="width:15%;font-size:13px">{{$fulltbp->past3}}</th> 
                                 <th style="width:15%;font-size:13px">{{$fulltbp->past2}}</th> 
                                 <th style="width:15%;font-size:13px">{{$fulltbp->past1}}</th>  

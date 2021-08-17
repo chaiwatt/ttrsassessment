@@ -28,6 +28,7 @@
                     <div>{{$thainumeric::toThaiNumeric($evaluationresult->headercode)}}</div>
                     <div class="bw400 text-right">{{$evaluationresult->evaluation_day_id}} {{$evaluationresult->month->name}} {{$thainumeric::toThaiNumeric($dateconversion::thaiYearNow())}}</div>
                 </div>
+
                 <div class="box mt20 ml30">
                     <div>เรื่อง  แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model</div>
                     <div>เรียน  คุณ{{$fulltbp->fulltbpresponsibleperson->name}}  {{$fulltbp->fulltbpresponsibleperson->lastname}}</div>

@@ -131,6 +131,7 @@ class MiniTbpController extends Controller
     }
 
     public function CreatePdf(Request $request){
+
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -254,8 +255,9 @@ class MiniTbpController extends Controller
             if($userprefixname== 'อื่นๆ'){
                 $userprefixname = Auth::user()->alter_prefix ;
             }
+            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->minitbp_code .'</span>', 45, 33.5, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$userprefixname . $minitbp->contactname . ' ' .$minitbp->contactlastname .'</span>', 69, 59, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.DateConversion::shortThaiDate($minitbp->created_at,'d').'</div>',174, 27.3, 150, 90, 'auto');
+            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.sprintf('%02d', DateConversion::shortThaiDate($minitbp->created_at,'d')).'</div>',174, 27.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'m').'</span>',182, 27.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'y').'</span>',188, 27.3, 150, 90, 'auto');
             $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$fullcompanyname.'</span>', 69, 66, 150, 90, 'auto');

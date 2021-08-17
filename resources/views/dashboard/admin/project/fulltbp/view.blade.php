@@ -1974,7 +1974,7 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<label><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า/บริการ) ของโครงการ</strong></label>
+										<label><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong></label>
 
 										<div class="form-group">
 											<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->mainproduct!!}</div>
@@ -2474,8 +2474,8 @@
 										</div>
 										<div class="col-md-12 mt-2">	
 											{{-- <div class="form-group">	 --}}
-												<label for=""><strong><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</u></strong></label>
-												{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์/บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
+												<label for=""><strong><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง)</u></strong></label>
+												{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
 											{{-- </div> --}}
 											<div class="table-responsive">
 												<table class="table table-bordered table-striped">

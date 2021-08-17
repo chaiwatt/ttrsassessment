@@ -447,9 +447,9 @@
 							<div class="form-group">
 								<label>อำเภอ/เขต</label><span class="text-danger">*</span>
 								<select id="amphurmodal" data-placeholder="อำเภอ" class="form-control form-control-lg form-control-select2">
-									@foreach ($amphurs as $amphur)                                                                
+									{{-- @foreach ($amphurs as $amphur)                                                                
 										<option value="{{$amphur->id}}"> {{$amphur->name}} </option>
-									@endforeach   
+									@endforeach    --}}
 								</select>
 							</div>
 						</div>
@@ -458,16 +458,16 @@
 							<div class="form-group">
 								<label>ตำบล/แขวง</label><span class="text-danger">*</span>
 								<select id="tambolmodal" data-placeholder="ตำบล" class="form-control form-control-lg form-control-select2">
-									@foreach ($tambols as $tambol)                                                                
+									{{-- @foreach ($tambols as $tambol)                                                                
 										<option value="{{$tambol->id}}"> {{$tambol->name}} </option>
-									@endforeach    
+									@endforeach     --}}
 								</select>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>รหัสไปรษณีย์</label><span class="text-danger">*</span>
-								<input type="number" id="postalcode" placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal" >
+								<input type="text" id="postalcode" placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal" >
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -515,7 +515,7 @@
 										</thead>
 										<tbody > 
 											<tr >                                        
-												<td>micro</td>                                            
+												<td>Micro</td>                                            
 												<td>0 - 1.8 ล้านบาท</td>     
 											</tr>	
 											<tr >                                        
@@ -549,7 +549,7 @@
 										</thead>
 										<tbody > 
 											<tr >                                        
-												<td>micro</td>                                            
+												<td>Micro</td>                                            
 												<td>0 - 1.8 ล้านบาท</td>     
 											</tr>	
 											<tr >                                        
@@ -1001,13 +1001,13 @@
 												<table class="table table-bordered table-striped">
 													<thead>
 														<tr class="bg-info">
-															<th >ประเภท</th> 
-															<th >ที่อยู่</th> 
-															<th >ตำบล</th> 
-															<th >อำเภอ</th> 
-															<th >จังหวัด</th> 
-															<th >รหัสไปรษณีย์</th> 
-															<th >เพิ่มเติม</th>                                                                                   
+															<th style="text-align: center">ประเภท</th> 
+															<th style="text-align: center">ที่อยู่</th> 
+															<th style="text-align: center">ตำบล</th> 
+															<th style="text-align: center">อำเภอ</th> 
+															<th style="text-align: center">จังหวัด</th> 
+															<th style="text-align: center">รหัสไปรษณีย์</th> 
+															<th style="text-align: center">เพิ่มเติม</th>                                                                                   
 														</tr>
 													</thead>
 													<tbody id="authorized_address_wrapper_tr"> 
@@ -1019,8 +1019,8 @@
 																	<td> {{$companyaddress->tambol->name}}</td>   
 																	<td> {{$companyaddress->amphur->name}}</td>   
 																	<td> {{$companyaddress->province->name}}</td>   
-																	<td> {{$companyaddress->postalcode}}</td>   
-																	<td> 
+																	<td style="text-align: center"> {{$companyaddress->postalcode}}</td>   
+																	<td style="text-align: center"> 
 																		<a  data-id="{{$companyaddress->id}}" class="btn btn-sm bg-danger deleteaddress">ลบ</a>
 																	</td>   
 																</tr>	
@@ -1068,7 +1068,7 @@
 															@endif
 																
 														</td> 
-														<td>
+														<td style="text-align: center">
 															@if (Empty($authorizeddirector->signature_id))
 																	<span class="badge badge-flat border-warning text-warning">ไม่พบลายมือชื่อ</span>
 																@else

@@ -241,7 +241,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 );
             }
 
-            $messagebox = Message::sendMessage('กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ กรุณากรอกแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ในขั้นตอนต่อไป <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$_user->id);
+            $messagebox = Message::sendMessage('กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) โครงการ'.$minitbp->project,'แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ กรุณากรอกแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ในขั้นตอนต่อไป <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$_user->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -280,7 +280,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $timeLinehistory = new TimeLineHistory();
             $timeLinehistory->business_plan_id = $minitbp->business_plan_id;
             $timeLinehistory->mini_tbp_id = $minitbp->id;
-            $timeLinehistory->details = 'TTRS: แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ได้ผ่านการอนุมัติ';
+            $timeLinehistory->details = 'TTRS: แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ';
             $timeLinehistory->message_type = 1;
             $timeLinehistory->owner_id = $_company->user_id;
             $timeLinehistory->viewer = $userarray;
