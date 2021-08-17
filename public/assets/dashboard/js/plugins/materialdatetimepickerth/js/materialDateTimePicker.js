@@ -1196,8 +1196,9 @@
                 maxYear = moment(this.maxDate).year();
             }
 
-            this.$dtpElement.find(".dtp-picker-year .invisible").removeClass("invisible");
+            this.$dtpElement.find(".dtp-picker-year .invisible").removeClass('invisible');
             this.$dtpElement.find(".year-picker-item").each(function (i, el) {
+  
                 // var newYear = midYear - 3 + i;
                 var newYear = midYear - 3 + i + yearconst;
                 $(el).attr("data-year", newYear).text(newYear).data("year", newYear);
@@ -1208,7 +1209,7 @@
                     $(el).removeClass("active");
                 }
                 if (newYear < minYear || newYear > maxYear) {
-                    $(el).addClass("invisible")
+                    // $(el).addClass('invisible')
                 }
             });
             if (minYear >= midYear - 3) {

@@ -3696,25 +3696,13 @@ th {
             cancelText: "ยกเลิก",
             okText: "ตกลง",
             clearText: "เคลียร์",
+			maxDate : moment(),
             time: false
-        });
-
-		
-$(document).on("change","#employtrainingdate",function(e){
-// console.log($(this).val());
-const myArr = $(this).val().split("/");
-var newstr = myArr[0]+'/'+myArr[1]+'/'+(myArr[2]-543);
-
-
-// var dateString = '07-15-2016';
-// var trainingdate = moment(newstr, 'DD/MM/YYYY');
-
-// var today = moment().format('MM/DD/YYYY');
-
-// var diffdate = today.diff(trainingdate, 'days') ;
-// console.log(today);
-}); 
-
+        }).on('change', function(e, date) {
+			if(typeof date !== "undefined"){
+				// console.log(date.format('MM/DD/YYYY'));
+			}
+		}); 
 </script>
 @stop
 

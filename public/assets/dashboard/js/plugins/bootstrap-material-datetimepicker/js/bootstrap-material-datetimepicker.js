@@ -1187,6 +1187,7 @@
                            $(el).removeClass("active");
                        }
                        if(newYear<minYear || newYear>maxYear){
+                          console.log('hello');
                            $(el).addClass("invisible")
                        }
                    });
