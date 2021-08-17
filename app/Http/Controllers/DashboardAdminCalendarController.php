@@ -246,13 +246,22 @@ class DashboardAdminCalendarController extends Controller
       if ($request->calendartype == 1) {
         $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
         $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . $fullcompanyname;
+        FullTbp::find($request->fulltbp)->update([
+          'brieftdate' => DateConversion::thaiToEngDate($request->eventdate)
+        ]);
       }
       else if ($request->calendartype == 2){
         $logname = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ";
          $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project .$fullcompanyname;
+         FullTbp::find($request->fulltbp)->update([
+          'fielddate' => DateConversion::thaiToEngDate($request->eventdate)
+        ]);
        }else if($request->calendartype == 3){
         $messageheader = "ประชุมและสรุปผลการประเมิน และลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
         $logname = "ประชุมและสรุปผลการประเมิน";
+        FullTbp::find($request->fulltbp)->update([
+          'scoringdate' => DateConversion::thaiToEngDate($request->eventdate)
+        ]);
        }
       
        EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. ' มีรายละเอียดดังนี้' .
@@ -273,7 +282,9 @@ class DashboardAdminCalendarController extends Controller
             '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-            $attachmentfiles,Auth::user()->id,$_user->id);
+            $attachmentfiles.
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+            ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -303,7 +314,9 @@ class DashboardAdminCalendarController extends Controller
             '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-            $attachmentfiles,Auth::user()->id,$_user->id);
+            $attachmentfiles.
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+            ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -376,14 +389,17 @@ class DashboardAdminCalendarController extends Controller
 
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbp)->get();
         
-        foreach ($projectmembers as $key => $projectmember) {
+        // foreach ($projectmembers as $key => $projectmember) {
+          foreach($request->users as $user){
+            $_user = User::find($user);
 
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $minitbp->business_plan_id;
             $notificationbubble->notification_category_id = 1;
             $notificationbubble->notification_sub_category_id = 7;
             $notificationbubble->user_id = $auth->id;
-            $notificationbubble->target_user_id = $projectmember->user_id;
+            // $notificationbubble->target_user_id = $projectmember->user_id;
+            $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
             $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
@@ -392,11 +408,13 @@ class DashboardAdminCalendarController extends Controller
             '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
-            $attachmentfiles,Auth::user()->id,$projectmember->user_id);
+            $attachmentfiles.
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+            ,Auth::user()->id,$_user->id);
           
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
-            $alertmessage->target_user_id =  $projectmember->user_id;
+            $alertmessage->target_user_id =  $_user->id;
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' ประชุมและสรุปผลการประเมิน โครงการ' . $minitbp->project . $fullcompanyname ;
             $alertmessage->save();
@@ -452,6 +470,7 @@ class DashboardAdminCalendarController extends Controller
                                                 ->withCalendarattachments($calendarattachments);
   }
   public function EditSave(Request $request,$id){
+    // return $request->calendartype;
     $auth = Auth::user();
     $unique_array  = Array();
     $comming_array  = Array();
@@ -462,10 +481,17 @@ class DashboardAdminCalendarController extends Controller
         $_user = User::find($user);
         $comming_array[] = $_user->id;
     }
+
+
+   
+
     $removeguest_array = EventCalendarAttendee::where('event_calendar_id',$request->id)->whereNotIn('user_id',$comming_array)->pluck('user_id')->toArray();
     EventCalendarAttendee::where('event_calendar_id',$request->id)->whereNotIn('user_id',$comming_array)->delete();
     $existing_array = EventCalendarAttendee::where('event_calendar_id',$request->id)->pluck('user_id')->toArray();
     $unique_array = array_diff($comming_array, $existing_array);
+
+
+  
     foreach($unique_array as $user){
         $_user = User::find($user);
         $newguest_array[] = $_user->id;
@@ -476,8 +502,10 @@ class DashboardAdminCalendarController extends Controller
         $eventcalendar->save();
     }
 
-    $updateguest_array = array_merge($existing_array,$newguest_array);
 
+
+    $updateguest_array = array_merge($existing_array,$newguest_array);
+    // return $updateguest_array;
     EventCalendar::find($id)->update([
       'eventdate' => DateConversion::thaiToEngDate($request->eventdate),
       'starttime' => $request->eventtimestart,
@@ -498,7 +526,26 @@ class DashboardAdminCalendarController extends Controller
       $eventcalendar->update(['isnotify_id' => $request->isnotify]);
     }
 
+
     $fulltbp = FullTbp::find(EventCalendar::find($id)->full_tbp_id);
+
+    if ($request->calendartype == 1) {
+      FullTbp::find($fulltbp->id)->update([
+        'brieftdate' => DateConversion::thaiToEngDate($request->eventdate)
+      ]);
+    }
+    else if ($request->calendartype == 2){
+      FullTbp::find($fulltbp->id)->update([
+        'fielddate' => DateConversion::thaiToEngDate($request->eventdate)
+      ]);
+     }
+     else if ($request->calendartype == 3){
+      FullTbp::find($fulltbp->id)->update([
+        'scoringdate' => DateConversion::thaiToEngDate($request->eventdate)
+      ]);
+     }
+
+
     $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
     $businessplan = BusinessPlan::find($minitbp->business_plan_id);
     $company = Company::find($businessplan->company_id);
@@ -509,6 +556,8 @@ class DashboardAdminCalendarController extends Controller
         $joinusers[] = 'คุณ'.$_user->name . ' ' . $_user->lastname;
         $mails[] = $_user->email;
     }
+
+    // return $joinusers;
     $eventcalendar = EventCalendar::find($id);
     $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
     $calendarattachements = CalendarAttachement::where('event_calendar_id',$request->id)->get();
@@ -540,23 +589,25 @@ class DashboardAdminCalendarController extends Controller
     '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
     .$attachmentfiles.
     '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-
+// return $updateguest_array;
     foreach($updateguest_array as $user){
         $_user = User::find($user);
-
         $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader,'(แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
         '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
-        .$attachmentfiles,Auth::user()->id,$_user->id);
+        .$attachmentfiles.
+        "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $id])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $id])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+        
+        ,Auth::user()->id,$_user->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $_user->id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). $calendartype->name. ' (แก้ไข) สำหรับโครงการ'.$minitbp->project.' ' ;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' '.$calendartype->name. ' (แก้ไข) สำหรับโครงการ'.$minitbp->project.' ' ;
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -649,5 +700,95 @@ class DashboardAdminCalendarController extends Controller
     CreateUserLog::createLog('ลบปฎิทินกิจกรรม');
     return redirect()->route('dashboard.admin.calendar')->withSuccess('ลบการสำเร็จ');
 
+  }
+
+  public function JoinEvent($id){
+    $auth = Auth::user();
+    $eventcalendar = EventCalendar::find($id);
+    $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+    $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+    $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+    $company = Company::find($businessplan->company_id);
+
+    $company_name = (!Empty($company->name))?$company->name:'';
+    $bussinesstype = $company->business_type_id;
+
+    $fullcompanyname = $company_name;
+    if($bussinesstype == 1){
+        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+    }else if($bussinesstype == 2){
+        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+    }else if($bussinesstype == 3){
+        $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+    }else if($bussinesstype == 4){
+        $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+    }
+    
+    $eventcalendarattendee = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->where('user_id',$auth->id)->first();
+    if(!Empty($eventcalendarattendee)){
+      if($eventcalendarattendee->joinevent != 2 && $eventcalendarattendee->joinevent != 3){
+          $eventcalendarattendee->update([
+              'joinevent' => '2',
+              'color' => '#088A08'
+          ]);
+      }else{
+        if($auth->user_type_id == 3){
+          return redirect()->route('dashboard.expert.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+        }else if($auth->user_type_id > 3){
+          return redirect()->route('dashboard.admin.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+        }
+      }
+    }
+    
+    if($auth->user_type_id == 3){
+      return redirect()->route('dashboard.expert.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);
+    }else if($auth->user_type_id > 3){
+      return redirect()->route('dashboard.admin.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);
+    }
+  }
+
+  public function RejectEvent($id){
+    $auth = Auth::user();
+    $eventcalendar = EventCalendar::find($id);
+    $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+    $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+    $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+    $company = Company::find($businessplan->company_id);
+
+    $company_name = (!Empty($company->name))?$company->name:'';
+    $bussinesstype = $company->business_type_id;
+
+    $fullcompanyname = $company_name;
+    if($bussinesstype == 1){
+        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+    }else if($bussinesstype == 2){
+        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+    }else if($bussinesstype == 3){
+        $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+    }else if($bussinesstype == 4){
+        $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+    }
+    
+    $eventcalendarattendee = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->where('user_id',$auth->id)->first();
+    if(!Empty($eventcalendarattendee)){
+      if($eventcalendarattendee->joinevent != 2 && $eventcalendarattendee->joinevent != 3){
+          $eventcalendarattendee->update([
+              'joinevent' => '3',
+              'color' => '#B43104'
+          ]);
+      }else{
+        if($auth->user_type_id == 3){
+          return redirect()->route('dashboard.expert.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+        }else if($auth->user_type_id > 3){
+          return redirect()->route('dashboard.admin.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+        }
+      }
+    }
+    
+    if($auth->user_type_id == 3){
+      return redirect()->route('dashboard.expert.report')->withSuccess('ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);
+    }else if($auth->user_type_id > 3){
+      return redirect()->route('dashboard.admin.report')->withSuccess('ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);
+    }
   }
 }

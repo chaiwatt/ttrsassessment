@@ -26,10 +26,10 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th>ชื่อ</th> 
-                                            <th>นามสกุล</th> 
-                                            <th id="thother">เพิ่มเติม</th>                                                                                   
+                                        <tr class="bg-info">
+                                            <th style="text-align: center">ชื่อ</th> 
+                                            <th style="text-align: center">นามสกุล</th> 
+                                            <th id="thother" style="text-align: center">เพิ่มเติม</th>                                                                                   
                                         </tr>
                                     </thead>
                                     <tbody id="usermember_wrapper_tr"> 
@@ -123,17 +123,17 @@
                                                     <tr>    
                                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                                         <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
-                                                        <td style="white-space: nowrap">
+                                                        <td style="white-space: nowrap;text-align: center">
                                                             @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
                                                             <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
                                                             @endif
                                                         
                                                         </td>
-                                                        <td style="white-space: nowrap"> 
+                                                        <td style="white-space: nowrap;text-align: center"> 
                                                             <button type="button" id="projectmember{{$fulltbp->id}}" data-projectleaderid="{{$fulltbp->projectleader}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                         </td>  
                                                         
-                                                        <td style="white-space: nowrap"> 
+                                                        <td style="white-space: nowrap;text-align: center"> 
                                                             @if (!Empty($fulltbp->finalassessmentdate))
                                                                     @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
                                                                             <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>

@@ -254,9 +254,27 @@
                                                         -
                                                     @endif
                                                 </td> 
-                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->briefingdate}} </td>  
-                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->assessmentdate}} </td>  
-                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->finalassessmentdate}} </td> 
+                                                <td style="white-space: nowrap;text-align:center">
+                                                    @if (!Empty($fulltbp->brieftdate))
+                                                         {{$fulltbp->brieftdateth}}
+                                                        @else
+                                                         {{$fulltbp->briefingdate}} 
+                                                    @endif 
+                                                </td>  
+                                                <td style="white-space: nowrap;text-align:center">
+                                                    @if (!Empty($fulltbp->fielddate))
+                                                        {{$fulltbp->fielddateth}}
+                                                        @else
+                                                        {{$fulltbp->assessmentdate}}
+                                                    @endif
+                                                      </td>  
+                                                <td style="white-space: nowrap;text-align:center"> 
+                                                    @if (!Empty($fulltbp->scoringdate))
+                                                    {{$fulltbp->scoringdateth}}
+                                                        @else
+                                                        {{$fulltbp->finalassessmentdate}}
+                                                    @endif
+                                                     </td> 
                                                 <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->expertassignment->accepted == 0)
                                                             <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>

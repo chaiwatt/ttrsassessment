@@ -2321,7 +2321,7 @@
 									</div>
 									
 									<div  class="col-md-12 mt-3">
-										<label><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart)</strong></label>
+										<label><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart) จำนวน {{$fulltbpgantt->numofmonth}} เดือน</strong></label>
 										{{-- <div class="row table-responsive"> --}}
 											
 										{{-- </div> --}}
@@ -2332,7 +2332,7 @@
 												<tr>
 				
 													<tr>
-														<th rowspan="2" style="padding:5px;width:1%;white-space: nowrap">รายละเอียดการดำเนินงาน</th> 
+														<th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:500px">รายละเอียดการดำเนินงาน</th> 
 														@foreach ($allyears as $key => $item)
 															@if ($item != 0)
 																<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
@@ -2362,9 +2362,9 @@
 											
 											<tbody >    
 												@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
-										
 													<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-														<td style="width: 350px;word-wrap: break-word;padding:5px"> {{$fulltbpprojectplan->name}}</td> 
+														<td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a>
+															</td> 
 														@php
 															$_count = 1;
 														@endphp
@@ -2376,16 +2376,23 @@
 																	$color = 'grey';
 																}
 															@endphp
-															<td style="background-color:{{$color}};width: 30px !important;font-size:12px;padding:5px;text-align:center">
+																@php
+																	$m = '';
+																	$_c = $fulltbpprojectplan->planIndex($i);
+																	if(!Empty($_c)){
+																		$m = $_c ;
+																	}
+																@endphp
+															<td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
 																@if ($color == 'grey')
-																 {{$_count}}
+																{{$m}}
 																@endif
 															</td> 
 															@php
 																$_count++;
 															@endphp
 														@endfor															
-
+			
 													</tr>
 												@endforeach                            
 											</tbody>

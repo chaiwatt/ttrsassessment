@@ -83,7 +83,7 @@
                                         <td> {{$eventcalendar->calendartype->name}}</td> 
                                         <td style="text-align: center">{{$eventcalendar->eventdateth}}</td> 
                                         <td style="text-align: center">{{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} น.</td> 
-                                        <td>
+                                        <td style="text-align: center">
                                             @if ($eventcalendar->fulltbp->minitbp->businessplan->business_plan_status_id <8 || !Empty($fulltbp->canceldate))
                                                 <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             @endif

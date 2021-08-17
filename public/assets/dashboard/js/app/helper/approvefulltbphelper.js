@@ -106,7 +106,7 @@ $(document).on('click', '.projectmember', function(e) {
               html1 += `<tr >                                        
                           <td> ${projectmember.user['name']}</td>                            
                           <td> ${projectmember.user['lastname']} </td>     
-                          <td ${hiddenbtn}>   
+                          <td style="text-align:center" ${hiddenbtn}>   
                               ${moreinfo}
                           </td>
                       </tr>`
@@ -197,7 +197,7 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
               html1 += `<tr >                                        
                           <td> ${projectmember.user['name']}</td>                            
                           <td> ${projectmember.user['lastname']} </td>     
-                          <td ${hiddenbtn}>   
+                          <td style="text-align:center" ${hiddenbtn}>   
                               ${moreinfo}
                           </td>
                       </tr>`
@@ -273,7 +273,7 @@ $(document).on('click', '.deleteprojectmember', function(e) {
             html1 += `<tr >                                        
                         <td> ${projectmember.user['name']}</td>                            
                         <td> ${projectmember.user['lastname']} </td>     
-                        <td ${hiddenbtn}>   
+                        <td style="text-align:center" ${hiddenbtn}>   
                             ${moreinfo}
                         </td>
                     </tr>`

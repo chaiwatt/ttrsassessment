@@ -724,10 +724,10 @@
                                 <thead>
                                     <tr>
                                         <tr>
-                                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงานของโครงการ</th> 
                                             @foreach ($allyears as $key => $item)
                                                 @if ($item != 0)
-                                                    <th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
+                                                    <th colspan="{{$item}}" class="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">{{$fulltbpgantt->startyear + $key}} </th> 
                                                 @endif
                                             @endforeach
                                             {{-- <th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th>  --}}
@@ -735,7 +735,7 @@
                                         @if ($minmonth != 0 && $maxmonth !=0)
                                             <tr >
                                                 @for ($i = $minmonth; $i <= $maxmonth; $i++)
-                                                    <th class="text-center" style="width: 40px;font-size:10px;padding:5px">
+                                                    <th class="text-center" style="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">
                                                         @php
                                                             $full = 12;
                                                             if($i%12 == 0){
@@ -769,7 +769,7 @@
                                     @endforeach                            
                                 </tbody> --}}
                                 <tbody id="ganttchart_wrapper_tr">  
-                                    @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+                                    {{-- @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
                                     
                                         <tr id= "{{$fulltbpprojectplan->id}}" >                                        
                                             <td> {{$fulltbpprojectplan->name}}</td> 
@@ -794,7 +794,41 @@
                                                 @endphp
                                             @endfor															
                                         </tr>
-                                    @endforeach                            
+                                    @endforeach                             --}}
+                                    @foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan)
+																				
+                                    <tr id= "{{$fulltbpprojectplan->id}}" >                                        
+                                        <td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a>
+                                             </td> 
+                                        @php
+                                            $_count = 1;
+                                        @endphp
+                                        @for ($i = $minmonth; $i <= $maxmonth; $i++)
+                                            @php
+                                                $color = 'white';
+                                                $check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+                                                if (!Empty($check)) {
+                                                    $color = 'grey';
+                                                }
+                                            @endphp
+                                                @php
+                                                    $m = '';
+                                                    $_c = $fulltbpprojectplan->planIndex($i);
+                                                    if(!Empty($_c)){
+                                                        $m = $_c ;
+                                                    }
+                                                @endphp
+                                            <td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
+                                                @if ($color == 'grey')
+                                                {{$m}}
+                                                @endif
+                                            </td> 
+                                            @php
+                                                $_count++;
+                                            @endphp
+                                        @endfor															
+                                    </tr>
+                                @endforeach 
                                 </tbody>
                             </table>
                     </div>

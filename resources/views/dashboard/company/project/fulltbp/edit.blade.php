@@ -1803,7 +1803,7 @@ th {
 																	<div id="btndeleteorgchart_wrapper"
 																		@if (Empty($fulltbp->minitbp->businessplan->company->organizeimg)) hidden @endif
 																	>
-																		<button type="button"  data-id="{{$fulltbp->minitbp->businessplan->company->id}}" id="delete_org_chart" class="btn btn-danger btn-icon ml-2 btn-sm hiddenelement_fulltbp"><i class="icon-add mr-2"></i>ลบรูป</button>
+																		<button type="button"  data-id="{{$fulltbp->minitbp->businessplan->company->id}}" id="delete_org_chart" class="btn btn-danger btn-icon ml-2 btn-sm hiddenelement_fulltbp"><i class="icon-trash mr-2"></i>ลบรูป</button>
 																	</div>
 																</div>
 
@@ -2319,7 +2319,7 @@ th {
 															</div>
 															<div class="col-md-12">
 																{{-- <div class="form-group">	 --}}
-																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong><button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong><span class="text-danger">*</span><button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	<span id="fulltbp_projectechdevlevel_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</span>
 																	
 																{{-- </div> --}}
@@ -2835,9 +2835,7 @@ th {
 																								@php
 																									$m = '';
 																									$_c = $fulltbpprojectplan->planIndex($i);
-																									//$check = @$ganttcollections->where('row',$key +1)->where('month',$i)->first();
 																									if(!Empty($_c)){
-																										//$m = $check['key'];
 																										$m = $_c ;
 																									}
 																								@endphp

@@ -72,12 +72,12 @@
                                         <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg" >
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-4">
+                                <div class="col-md-4" hidden>
                                     <div class="form-group">
                                         <label>ประเภทปฏิทิน</label>
-                                        <input type="text"  name="" id="" value="{{$eventcalendar->calendartype->name}}"  placeholder="ประเภทปฏิทิน" class="form-control form-control-lg" disabled>
+                                        <input type="text"  name="calendartype" id="" value="{{$eventcalendar->calendartype->id}}"  placeholder="ประเภทปฏิทิน" class="form-control form-control-lg" >
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
@@ -136,9 +136,9 @@
                                     <div class="form-group">
                                     <table class="table table-bordered table-striped" id="attachmenttable">
                                         <thead>
-                                            <tr>
-                                                <th>เอกสารแนบ</th> 
-                                                <th style="width:1%">เพิ่มเติม</th>                           
+                                            <tr class="bg-info">
+                                                <th style="text-align: center">เอกสารแนบ</th> 
+                                                <th style="width:1%;text-align: center">เพิ่มเติม</th>                           
                                             </tr>
                                         </thead>
                                         <tbody id="attachmenttable_wrapper_tr">

@@ -741,13 +741,14 @@ $(document).on('click', '#btnstckholder', function(e) {
 });
 
 $(document).on('change', '#debtpercenttosale', function(e) {
-  if ($(this).val() > 100 );{
+    // console.log($(this).val());
+  if ($(this).val() > 100 ){
     $(this).val(100)
   }
 });
 
 $(document).on('change', '#creditpercenttosale', function(e) {
-    if ($(this).val() > 100 );{
+    if ($(this).val() > 100 ){
       $(this).val(100)
     }
   });

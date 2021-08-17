@@ -352,6 +352,28 @@ class FullTbp extends Model
     public function getCreatedAtThAttribute(){
         return DateConversion::thaiDateTime2($this->created_at,'full');
     } 
+
+    public function getBrieftdatethAttribute(){
+        if(!Empty($this->brieftdate)){
+            return DateConversion::engToThaiDate($this->brieftdate);
+        }else{
+           return "" ;
+        }
+    } 
+    public function getFielddatethAttribute(){
+        if(!Empty($this->fielddate)){
+            return DateConversion::engToThaiDate($this->fielddate);
+        }else{
+           return "" ;
+        }
+    } 
+    public function getScoringdatethAttribute(){
+        if(!Empty($this->scoringdate)){
+            return DateConversion::engToThaiDate($this->scoringdate);
+        }else{
+           return "" ;
+        }
+    } 
 }
 
 

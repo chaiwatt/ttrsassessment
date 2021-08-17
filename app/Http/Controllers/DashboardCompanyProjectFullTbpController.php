@@ -169,8 +169,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
                     }
                 }
             }
-
-            
+ 
             //==== year three
 
             if(count($year1) != 0 || count($year2) != 0){

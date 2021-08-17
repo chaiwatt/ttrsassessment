@@ -159,9 +159,9 @@
                                             <div class="form-group">
                                             <table class="table table-bordered table-striped" id="attachmenttable">
                                                 <thead>
-                                                    <tr>
-                                                        <th>เอกสารแนบ</th> 
-                                                        <th style="width:1%">เพิ่มเติม</th>                           
+                                                    <tr class="bg-info">
+                                                        <th style="text-align: center">เอกสารแนบ</th> 
+                                                        <th style="width:1%;text-align: center">เพิ่มเติม</th>                           
                                                     </tr>
                                                 </thead>
                                                 <tbody id="attachmenttable_wrapper_tr">

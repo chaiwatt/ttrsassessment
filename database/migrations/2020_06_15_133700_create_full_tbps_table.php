@@ -41,7 +41,7 @@ class CreateFullTbpsTable extends Migration
             $table->date('finishdate')->nullable();
             $table->date('brieftdate')->nullable();
             $table->date('fielddate')->nullable();
-            $table->date('assessmentdate')->nullable();
+            $table->date('scoringdate')->nullable();
             $table->date('endprojectdate')->nullable();
             $table->char('success_objective',1)->default(0);
             $table->char('offer_expert',1)->default(0);

@@ -169,11 +169,8 @@ class CalendarController extends Controller
                     'color' => '#B43104',
                     'rejectreason' => $request->rejreason
                 ]);
-
-
             }
             $eventcalendarattendee = EventCalendarAttendee::find($request->id);
-            
             return response()->json($eventcalendarattendee);
         }else{
             return null;
