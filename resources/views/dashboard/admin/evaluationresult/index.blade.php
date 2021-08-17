@@ -100,7 +100,7 @@
                                                             </div>
                                                         </div>
                                                     </td> 
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="white-space: nowrap;text-align: center"> 
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id >=9)
                                                             <span class="badge badge-flat border-success text-success-600">แจ้งผลแล้ว</span>
                                                         @else
@@ -110,7 +110,7 @@
                                                         @endif
 
                                                     </td>
-                                                    <td style="white-space: nowrap">
+                                                    <td style="white-space: nowrap;text-align: center">
                                                         @if (!Empty($fulltbp->projectstatustransaction(7)))
                                                                 @if ($fulltbp->projectstatustransaction(7)->status == 2)  
                                                                         <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
@@ -132,7 +132,7 @@
                                                                 <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                         @endif
                                                     </td>
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="white-space: nowrap;text-align: center"> 
                                                         @if (!Empty($fulltbp->projectstatustransaction(8)))
                                                                 @if ($fulltbp->projectstatustransaction(8)->status == 2)
                                                                         <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
