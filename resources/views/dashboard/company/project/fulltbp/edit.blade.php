@@ -1097,7 +1097,7 @@ th {
 
 	{{-- modal_edit_sellstatus --}}
 	<div id="modal_edit_sellstatus" class="modal fade" style="overflow:hidden;">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายการ</h5>
