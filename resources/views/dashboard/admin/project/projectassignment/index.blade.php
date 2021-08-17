@@ -120,7 +120,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered mb-2" id="maintable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                         <th style="text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>

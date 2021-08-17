@@ -273,7 +273,7 @@
                                                     @endphp
                                                     {{$fullcompanyname}} 
                                                 </td> 
-                                                <td style="white-space: nowrap"> 
+                                                <td style="white-space: nowrap;text-align: center"> 
                                                     @if (Empty($minitbp->jdmessage))
                                                             @if (Auth::user()->user_type_id == 6)
                                                                 <a href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
