@@ -57,10 +57,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered mb-2" id="userlogtable">
                                 <thead>
-                                    <tr>
-                                        <th style="width:25%">วันที่</th>
-                                        <th style="width:30%">ชื่อ-นามสกุล</th> 
-                                        <th>Log</th>    
+                                    <tr class="bg-info">
+                                        <th style="width:25%;text-align: center">วันที่</th>
+                                        <th style="width:30%;text-align: center">ชื่อ-นามสกุล</th> 
+                                        <th style="text-align: center">Log</th>    
                                     </tr>
                                 </thead>
                                 <tbody>

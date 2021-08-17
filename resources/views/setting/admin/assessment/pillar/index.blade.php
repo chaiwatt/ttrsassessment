@@ -65,10 +65,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>ชื่อรายการ</th>  
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ชื่อรายการ</th>  
                                         {{-- <th>ร้อยละ</th>                               --}}
-                                        <th style="width:200px">เพิ่มเติม</th>
+                                        <th style="width:200px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +76,7 @@
                                     <tr>    
                                         <td> {{$pillar->name}} </td>  
                                         {{-- <td> {{$pillar->percent}} </td>                                     --}}
-                                        <td>   
+                                        <td style="text-align: center">   
                                             <a href="{{route('setting.admin.assessment.pillar.edit',['id' => $pillar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             {{-- <a href="{{route('setting.admin.assessment.pillar.delete',['id' => $pillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
                                         </td>

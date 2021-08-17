@@ -141,9 +141,9 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>บริษัท</th>
-                                        <th>ชื่อโครงการ</th> 
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">บริษัท</th>
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">

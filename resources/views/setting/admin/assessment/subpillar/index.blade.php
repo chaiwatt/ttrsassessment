@@ -65,10 +65,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>Pillar</th>                           
-                                        <th>Sub Pillar</th>
-                                        <th style="width:200px">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">Pillar</th>                           
+                                        <th style="text-align: center">Sub Pillar</th>
+                                        <th style="width:200px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,7 +77,7 @@
                                         {{-- <td> xxx </td>   --}}
                                         <td> {{$subpillar->pillar->name}} </td> 
                                         <td> {{$subpillar->name}} </td>                                     
-                                        <td>   
+                                        <td style="text-align: center">   
                                             <a href="{{route('setting.admin.assessment.subpillar.edit',['id' => $subpillar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.assessment.subpillar.delete',['id' => $subpillar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>

@@ -65,10 +65,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" >
                                 <thead>
-                                    <tr>
-                                        <th>ข้อความ (ภาษาไทย)</th>
-                                        <th>ข้อความอธิบาย (ภาษาไทย)</th>                            
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ข้อความ (ภาษาไทย)</th>
+                                        <th style="text-align: center">ข้อความอธิบาย (ภาษาไทย)</th>                            
+                                        <th style="width:150px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +76,7 @@
                                     <tr>   
                                         <td> {{$homepageservice->titlethai}} </td>   
                                         <td> {{$homepageservice->descriptionthai}} </td>                                   
-                                        <td> 
+                                        <td style="text-align: center"> 
                                             <a href="{{route('setting.admin.website.homepage.service.edit',['id' => $homepageservice->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                          
                                         </td>

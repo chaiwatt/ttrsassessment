@@ -76,10 +76,10 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 10)
                                             <tr>    
-                                                <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                <td style="text-align: center"> {{$fulltbp->minitbp->businessplan->code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td> 
                                                 <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
-                                                <td>
+                                                <td style="text-align: center">
                                                     @if ($fulltbp->success_objective == 0)
                                                             <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ติดตาม</span>
                                                         @else
@@ -91,7 +91,7 @@
                                                             
                                                     @endif
                                                 </td>                                        
-                                                <td style="white-space: nowrap"> 
+                                                <td style="white-space: nowrap;text-align: center"> 
                                                     @if ($fulltbp->success_objective == 0)
                                                         <a href="{{route('dashboard.admin.edit',['id' => $fulltbp->id])}}" class=" btn btn-sm bg-warning">เพิ่มผลการติดตาม</a>
                                                         @else

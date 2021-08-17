@@ -64,13 +64,13 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         {{-- <th>#</th> --}}
-                                        <th>ชื่อ</th>                               
-                                        <th>หมวด</th>
-                                        <th>จำนวนวิว</th>
-                                        <th>Unique IP</th>
-                                        <th style="width:250px">เพิ่มเติม</th>
+                                        <th style="text-align: center">ชื่อ</th>                               
+                                        <th style="text-align: center">หมวด</th>
+                                        <th style="text-align: center">จำนวนวิว</th>
+                                        <th style="text-align: center">Unique IP</th>
+                                        <th style="width:250px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,9 +79,9 @@
                                         {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$page->name}} </td>                                         
                                         <td> {{$page->pagecategory->name}} </td>  
-                                        <td> {{$page->pageview->count()}} </td> 
-                                        <td> {{$page->pageviewunique->count()}} </td> 
-                                        <td> 
+                                        <td style="text-align: center"> {{$page->pageview->count()}} </td> 
+                                        <td style="text-align: center"> {{$page->pageviewunique->count()}} </td> 
+                                        <td style="text-align: center"> 
                                             <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
                                             <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       

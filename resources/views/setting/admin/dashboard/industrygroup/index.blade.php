@@ -73,18 +73,18 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped"  id="industrygrouptable">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>กลุ่มอุตสาหกรรม</th>                               
-                                        <th style="width:200px">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="width:150px;text-align: center">#</th>
+                                        <th style="text-align: center">กลุ่มอุตสาหกรรม</th>                               
+                                        <th style="width:150px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($industrygroups as $key => $industrygroup)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        <td style="text-align: center"> {{$key+1}} </td>
                                         <td> {{$industrygroup->name}} </td>                                         
-                                        <td> 
+                                        <td style="text-align: center"> 
                                             <a href="{{route('setting.admin.dashboard.industrygroup.edit',['id' => $industrygroup->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             @if ($key > 12)
                                             <a href="{{route('setting.admin.dashboard.industrygroup.delete',['id' => $industrygroup->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       

@@ -57,28 +57,28 @@
                         <div class="table-responsive">
                             <table class="table table-bordered mb-2" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>ชื่อ-นามสกุล</th> 
-                                        <th>อีเมล</th> 
-                                        <th>กลุ่มผู้ใช้งาน</th>    
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">#</th>
+                                        <th style="text-align: center">ชื่อ-นามสกุล</th> 
+                                        <th style="text-align: center">อีเมล</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">กลุ่มผู้ใช้งาน</th>    
                                         {{-- <th style="width:1%;white-space: nowrap">ออนไลน์</th>   --}}
-                                        <th style="width:1%;white-space: nowrap">ยืนยันการใช้งาน</th>    
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>                          
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">ยืนยันการใช้งาน</th>    
+                                        <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>                          
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody >
                                     @foreach ($users as $key => $user)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        <td > {{$key+1}} </td>
                                         @php
                                             $userprefix = $user->prefix->name;
                                                 if($userprefix == 'อื่นๆ'){
                                                 $userprefix = $user->alter_prefix;
                                             }
                                         @endphp
-                                        <td> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
+                                        <td style="width:1%;white-space: nowrap"> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
                                         <td> {{$user->email}}</td>    
                                         <td> 
                                             @if ($user->user_type_id == 1 )
@@ -116,9 +116,9 @@
                                             @endif 
                                         </td>
                                         @if ($user->user_status_id == 1)
-                                                <td style="white-space: nowrap"><span class="badge badge-flat border-info text-info-600 rounded-0">{{@$user->userstatus->name}}</span></td> 
+                                                <td style="white-space: nowrap;text-align:center"><span class="badge badge-flat border-info text-info-600 rounded-0">{{@$user->userstatus->name}}</span></td> 
                                            @else 
-                                                <td style="white-space: nowrap"><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{@$user->userstatus->name}}</span></td> 
+                                                <td style="white-space: nowrap;text-align:center"><span class="badge badge-flat border-danger text-danger-600 rounded-0">{{@$user->userstatus->name}}</span></td> 
                                         @endif                                     
                                         
                                         <td style="white-space: nowrap;text-align:center"> 

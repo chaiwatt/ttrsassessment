@@ -64,12 +64,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         {{-- <th>#</th> --}}
-                                        <th>ชื่อเมนูภาษาไทย</th>                               
-                                        <th>ชื่อเมนูภาษาอังกฤษ</th>
-                                        <th>ลิงก์</th>
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
+                                        <th  style="text-align: center">ชื่อเมนูภาษาไทย</th>                               
+                                        <th style="text-align: center">ชื่อเมนูภาษาอังกฤษ</th>
+                                        <th style="text-align: center">ลิงก์</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,7 +81,7 @@
                                         <td> {{$directmenu->engname}} </td>  
                                         <td> {{$directmenu->url}}</td> 
                                         {{-- <td> {{$page->pageviewunique->count()}} </td>  --}}
-                                        <td style="white-space: nowrap"> 
+                                        <td style="white-space: nowrap;text-align: center"> 
                                             {{-- <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a> --}}
                                             <a href="{{route('setting.admin.website.menu.edit',['id' => $directmenu->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             @if ($key >= 7)

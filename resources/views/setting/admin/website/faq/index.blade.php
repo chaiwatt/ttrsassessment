@@ -60,20 +60,20 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>คำถาม</th>                               
-                                        <th>คำตอบ</th>
-                                        <th style="width:1%;white-space: nowrap">สถานะ</th>
-                                        <th  style="width:1%;white-space: nowrap">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">คำถาม</th>                               
+                                        <th style="text-align: center">คำตอบ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>
+                                        <th  style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($faqs as $key => $faq)
                                         <tr>    
-                                            <td> {{$faq->title}} </td>                                         
+                                            <td style="text-align: center"> {{$faq->title}} </td>                                         
                                             <td> {{$faq->body}}</td>      
                                             <td style="white-space: nowrap"> {{$faq->showstatus->name}}</td>                                                                                                               
-                                            <td  style="white-space: nowrap"> 
+                                            <td  style="white-space: nowrap;text-align: center"> 
                                                 <a href="{{route('setting.admin.website.faq.edit',['id' => $faq->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                                 <a href="{{route('setting.admin.website.faq.delete',['id' => $faq->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             </td>

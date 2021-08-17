@@ -64,18 +64,18 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>คำนำหน้า</th>                               
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">#</th>
+                                        <th style="text-align: center">คำนำหน้า</th>                               
+                                        <th style="width:150px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($prefixes as $key => $prefix)
                                     <tr>    
-                                        <td> {{$key+1}} </td>
+                                        <td style="width:150px;text-align: center"> {{$key+1}} </td>
                                         <td> {{$prefix->name}} </td>                                         
-                                        <td> 
+                                        <td style="text-align: center"> 
                                             <a href="{{route('setting.admin.dashboard.prefix.edit',['id' => $prefix->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             @if ($key > 4)
                                             <a href="{{route('setting.admin.dashboard.prefix.delete',['id' => $prefix->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       

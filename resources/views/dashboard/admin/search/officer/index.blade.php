@@ -103,10 +103,10 @@
                         <div class="table-responsive" >
                             <table class="table table-bordered table-striped" id="officertable">
                                 <thead>
-                                    <tr>
-                                        <th>ชื่อ-นามสกุล</th>
-                                        <th>ความเชี่ยวชาญ</th>
-                                        <th>โครงการรับผิดชอบ</th> 
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ชื่อ-นามสกุล</th>
+                                        <th style="text-align: center">ความเชี่ยวชาญ</th>
+                                        <th style="text-align: center">โครงการรับผิดชอบ</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
