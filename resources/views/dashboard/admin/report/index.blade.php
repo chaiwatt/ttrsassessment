@@ -1090,9 +1090,9 @@
                                                             @endif
                                                                 
                                                             @endif
-                                                    @endif          
+                                                    @endif     
                                                 </td>   
-                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->minitbp->projectdatediff}}  </td>  
+                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
                                                 <td style="white-space: nowrap;text-align:center"> {{$fulltbp->briefingdate}} </td>  
                                                 <td style="white-space: nowrap;text-align:center"> {{$fulltbp->assessmentdate}} </td>  
                                                 <td style="white-space: nowrap;text-align:center"> {{$fulltbp->finalassessmentdate}} </td>  

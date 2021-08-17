@@ -1097,6 +1097,10 @@ class DashboardAdminProjectFullTbpController extends Controller
         $projectlog->action = 'แจ้งสิ้นสุดโครงการ'.$minitbp->project. $fullcompanyname;
         $projectlog->save();
 
+        FullTbp::find($id)->update([
+            'endprojectdate' => Carbon::now()->toDateString()
+        ]);
+
         CreateUserLog::createLog('ยืนยันสิ้นสุดโครงการ โครงการ' . $minitbp->project. $fullcompanyname);
         return redirect()->back();
     }

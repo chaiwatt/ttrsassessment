@@ -267,8 +267,8 @@ function getEv(evid){
     });
     if(sum.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาดdd...',
-            text: 'ผลรวม Weight มากกว่า 1 !',
+            title: 'ผิดพลาด...',
+            text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + sum.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
             return;
@@ -277,7 +277,7 @@ function getEv(evid){
     if(newval.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
-            text: 'ผลรวม Weight มากกว่า 1 !',
+            text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + newval.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
             return;
@@ -301,7 +301,7 @@ $(document).on('focusin', '.weigthvalue', function(){
     if(sum.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
-            text: 'ผลรวม Weight มากกว่า 1 !',
+            text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + sum.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
             return;
@@ -310,7 +310,7 @@ $(document).on('focusin', '.weigthvalue', function(){
     if(newval.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
-            text: 'ผลรวม Weight มากกว่า 1 !',
+            text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + newval.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
             return;

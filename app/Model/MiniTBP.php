@@ -98,7 +98,13 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
                 $datefiff = Carbon::parse(Carbon::createFromFormat('Y-m-d', $this->submitdate))->DiffInDays(Carbon::now(), false);
                 return $datefiff ;
             }else{
-
+                $fulltbp = FullTbp::where('mini_tbp_id',$this->id)->first();
+                if(!Empty($fulltbp->endprojectdate)){
+                    $datefiff = Carbon::parse(Carbon::createFromFormat('Y-m-d', $this->submitdate))->DiffInDays(Carbon::parse(Carbon::createFromFormat('Y-m-d', $fulltbp->endprojectdate)), false);
+                    return $datefiff ;
+                }else{
+                    return "" ;  
+                }
             }
         }else{
            return "" ;
