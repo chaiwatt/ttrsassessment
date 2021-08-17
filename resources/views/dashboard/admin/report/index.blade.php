@@ -1475,7 +1475,7 @@
                         <div class="card-body">
                             
                             <div class="table-responsive">
-                                <table class="table text-nowrap" id="reporttable">
+                                <table class="table table-bordered text-nowrap" id="reporttable">
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>

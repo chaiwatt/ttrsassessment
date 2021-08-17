@@ -87,7 +87,7 @@
                     <div class="card-body">
                         
                         <div class="table-responsive">
-                            <table class="table text-nowrap" id="maintable">
+                            <table class="table table-bordered text-nowrap" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}

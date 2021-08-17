@@ -292,7 +292,6 @@
 				</div>
 
 				<div class="modal-footer">
-					{{-- <button type="button" class="btn btn-link" data-dismiss="modal">Close</button> --}}
 					<button type="button" id="btn_modal_message" data-dismiss="modal" class="btn bg-primary">ปิด</button>
 				</div>
 			</div>

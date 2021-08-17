@@ -59,7 +59,7 @@
                     <div class="card-body">
                         
                         <div class="table-responsive">
-                            <table class="table text-nowrap" id="maintable">
+                            <table class="table table-bordered text-nowrap" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">ชื่อโครงการ</th> 

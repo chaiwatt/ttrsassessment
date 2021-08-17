@@ -258,8 +258,8 @@ class DashboardAdminCalendarController extends Controller
        EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. ' มีรายละเอียดดังนี้' .
        '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
        '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-       '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-       '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+       '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+       '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
        '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
        $attachmentfiles.
        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
@@ -270,8 +270,8 @@ class DashboardAdminCalendarController extends Controller
             $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+            '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles,Auth::user()->id,$_user->id);
   
@@ -300,8 +300,8 @@ class DashboardAdminCalendarController extends Controller
             $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+            '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles,Auth::user()->id,$_user->id);
   
@@ -389,8 +389,8 @@ class DashboardAdminCalendarController extends Controller
             $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+            '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles,Auth::user()->id,$projectmember->user_id);
           
@@ -535,8 +535,8 @@ class DashboardAdminCalendarController extends Controller
     EmailBox::send($mails,'TTRS: (แก้ไข) นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> (แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
     '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-    '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-    '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+    '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+    '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
     '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
     .$attachmentfiles.
     '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
@@ -547,8 +547,8 @@ class DashboardAdminCalendarController extends Controller
         $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader,'(แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-        '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-        '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+        '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+        '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
         .$attachmentfiles,Auth::user()->id,$_user->id);
 
@@ -582,8 +582,8 @@ class DashboardAdminCalendarController extends Controller
         EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-        '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-        '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+        '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+        '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
         foreach($removeguest_array as $user){
@@ -591,8 +591,8 @@ class DashboardAdminCalendarController extends Controller
             Message::sendMessage('ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
-            '<br><strong>&nbsp;รายละเอียด:</strong> '.$request->summary.
-            '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+            '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
+            '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
         }
     
@@ -632,8 +632,8 @@ class DashboardAdminCalendarController extends Controller
     '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
     '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
     // '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
-    '<br><strong>&nbsp;รายละเอียด:</strong> '.$eventcalendar->summary.
-    '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
+    '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$eventcalendar->summary.
+    '</p><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
     '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     $eventcalendar->delete();
     foreach($eventcalendars as $user){
@@ -642,8 +642,8 @@ class DashboardAdminCalendarController extends Controller
         '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
         '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
         // '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
-        '<br><strong>&nbsp;รายละเอียด:</strong> '.$eventcalendar->summary.
-        '<br><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
+        '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$eventcalendar->summary.
+        '</p><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
         '<br><br>ด้วยความนับถือ<br>TTRS',Auth::user()->id,$_user->id);
     }
     CreateUserLog::createLog('ลบปฎิทินกิจกรรม');

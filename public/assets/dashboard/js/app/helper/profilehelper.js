@@ -180,7 +180,7 @@ $(document).on("click",".messagelink",function(e){
                     </div>
                 </li>`
             )
-
+        console.log(data.message.body);
         $("#tablemessage").html(html);
         $("#unreadmessages").html(html2);
         // $("#messagetitle").html(data.message.title);
