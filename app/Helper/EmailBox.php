@@ -17,7 +17,14 @@ class EmailBox
             ];
             $generalinfo = GeneralInfo::first();
             if($generalinfo->sendemail == 1){
-                Mail::to($mailto)->send(new EmailSystem($data));
+                if(Empty($mailcc)){
+                    Mail::to($mailto)->send(new EmailSystem($data));
+                }else{
+                    Mail::to($mailto)
+                    ->cc($mailcc)
+                    ->send(new EmailSystem($data));
+                }
+                
             }     
     } 
 
