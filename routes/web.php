@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('temp');
 // });
 
-Route::get('demojson', 'TestController@DemoJson')->name('demojson');
+// Route::get('demojson', 'TestController@DemoJson')->name('demojson');
+Route::get('ccmail', 'TestController@ccMail')->name('ccmail');
+
 
 Auth::routes(['verify' => true]);
 Route::get('ttrssitemap.xml','SitemapController@Index')->name('sitemap');     

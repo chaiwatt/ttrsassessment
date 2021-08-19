@@ -114,4 +114,13 @@ class TestController extends Controller
         if ($item1['month'] == $item2['month']) return 0;
         return ($item1['month'] > $item2['month']) ? 1 : -1;
     }
+
+    public  function ccMail()
+    {
+        // if ($item1['month'] == $item2['month']) return 0;
+        // return ($item1['month'] > $item2['month']) ? 1 : -1;
+        // $mailto,$mailcc,$title,$message
+        EmailBox::send('ttrsjd@npcsolution.com','ttrsadmin@npcsolution.com','ทดสอบการส่งเมล์และ cc','ทดสอบการส่งเมล์และ cc');
+        return ;
+    }
 }
