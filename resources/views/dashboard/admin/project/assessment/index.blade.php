@@ -46,12 +46,38 @@
             </div>
         </div>
     </div>
+
+    <div id="modal_select_reactiondate" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เลือกวันที่สรุปคะแนน</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">             
+                    <div class="row">
+                        <input type="text" id="newdate" hidden >
+                        <div class="col-md-12" >
+                            <div class="form-group">
+                                <label>เลือกวันที่สรุปคะแนน </label>
+                                <input type="text" id="reactiondate" name="reactiondate"  value="" class="form-control form-control-lg" >
+                                <p id="showwarning" style="color:red ;font-size:16px;margin-top:5px" hidden>เนื่องจากวันสรุปคะแนนเป็นวันปัจจุบัน จะต้องปลดล็อคเพื่อสรุปคะแนนโดยวิธี manual โดย Admin / Manager</p>
+                              </div>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button id="btn_modal_select_reactiondate" data-id="" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> ยืนยันรายการ</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page header -->
     <div class="page-header page-header-light">
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">ลงคะแนน</span></h4>
+                <h4> <span class="font-weight-semibold">ลงคะแนนโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -102,7 +128,6 @@
                             <table class="table table-bordered table-striped" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th style="text-align: center">ชื่อโครงการ</th> 
                                         <th style="text-align: center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">ความเห็นผู้เชี่ยวชาญ</th> 
@@ -113,16 +138,13 @@
                                 </thead>
                                 <tbody>
                                     <input type="text" id="fulltbpid" hidden>
-                                   {{-- {{$fulltbps}} --}}
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if (Empty($fulltbp->canceldate))
-                                        {{-- {{$fulltbp->id}} --}}
                                             @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
-                                           {{-- sdfsfdvvv --}}
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                     <tr>    
                                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                                        <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                                         <td style="white-space: nowrap;text-align: center">
                                                             @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
                                                             <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
@@ -160,14 +182,11 @@
 
                                                                 @endif        
                                                             @endif
-                                                        </td>     
-                                                                                
+                                                        </td>                     
                                                     </tr>
                                                 @endif
                                             @endif
-
                                         @endif 
-
                                     @endforeach
                                 </tbody>
                             </table>      
@@ -175,6 +194,55 @@
                     </div>
                 </div>
             </div>
+            @if ($fulltbpbackups->count() > 0 && Auth::user()->user_type_id == 4)
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header header-elements-sm-inline">
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ (โครงการเลยกำหนด)</h6>
+                            <div class="header-elements">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="maintable">
+                                    <thead>
+                                        <tr class="bg-info">
+                                            <th style="text-align: center">ชื่อโครงการ</th> 
+                                            <th style="text-align: center">บริษัท</th>
+                                            <th style="width:1%;white-space: nowrap;text-align: center">ลงคะแนน</th>
+              
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <input type="text" id="fulltbpid" hidden>
+                                        @foreach ($fulltbpbackups as $key => $fulltbpbackup)
+                                            @if (Empty($fulltbpbackup->canceldate))
+                                                @if ($fulltbpbackup->finished_onsite != 1 && $fulltbpbackup->canceldate == null)
+                                                    @if ($fulltbpbackup->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbpbackup->minitbp->businessplan->business_plan_status_id <= 8)
+                                                        <tr>    
+                                                            <td> {{$fulltbpbackup->minitbp->project}} </td>  
+                                                            <td> {{$fulltbpbackup->minitbp->businessplan->company->fullname}} </td> 
+                                                            <td style="width:1%;white-space: nowrap;text-align: center"> 
+                                                                @if ($fulltbpbackup->projectmember->count() == 0)
+                                                                    <button type="button" data-projectleaderid="{{$fulltbpbackup->projectleader}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbpbackup->id)}}" class="btn btn-sm bg-warning reaction" data-id="{{$fulltbpbackup->id}}">ทำรายการใหม่</button>
+                                                                @endif
+                                                            </td>
+                                                                        
+                                                        </tr>
+                                                    @endif
+                                                @endif
+                                            @endif 
+                                        @endforeach
+                                    </tbody>
+                                </table>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+         
+
         </div>
     </div>
     <!-- /content area -->
@@ -207,5 +275,23 @@
                 }
             });
         }
+
+        $('#reactiondate').bootstrapMaterialDatePicker({
+            format: 'DD/MM/YYYY',
+            clearButton: true,
+            cancelText: "ยกเลิก",
+            okText: "ตกลง",
+            clearText: "เคลียร์",
+            minDate: moment(),
+            time: false
+        }).on('change', function(e, date) {
+            $('#newdate').val(date.format("YYYY-MM-DD")); // ;
+           if(date.isSame(moment(), 'day')){
+                $("#showwarning").attr("hidden",false);
+           }else{
+                $("#showwarning").attr("hidden",true);
+           }
+        });
+
     </script>
 @stop

@@ -84,29 +84,21 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="searchtable">
+                                    <table class="table table-bordered table-striped mb-2" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th>เลขที่โครงการ</th> 
-                                                <th>โครงการ</th> 
-                                                <th>บริษัท</th> 
-                                                <th class="text-right">สถานะ</th>
+                                                <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 
+                                                <th style="text-align: center">โครงการ</th> 
+                                                <th style="text-align: center">บริษัท</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
                                             @foreach ($fulltbps as $fulltbp)
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
                                                     <tr>
-                                                        <td>{{$fulltbp->minitbp->businessplan->code}}</td>
-                                                        <td>{{$fulltbp->minitbp->project}}</td>
-                                                        <td>{{$fulltbp->minitbp->businessplan->company->name}}</td>
-                                                        <td class="text-right">
-                                                            @if ($fulltbp->status == 2)
-                                                                    <span class="badge badge-flat border-info text-info-600 rounded-0">กำลังดำเนินการ</span>
-                                                                @elseif($fulltbp->status == 3)
-                                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">เสร็จสิ้น</span>
-                                                            @endif
-                                                        </td>
+                                                        <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
+                                                        <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
+                                                        <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
                                                     </tr>
                                                 @endif
                                             @endforeach

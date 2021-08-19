@@ -54,28 +54,24 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">Control Flow</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>Control Flow</th>      
-                                        <th>ระยะเวลา (วัน)</th>                           
-                                        <th style="width:150px">เพิ่มเติม</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">Control Flow</th>      
+                                        <th style="text-align: center">ระยะเวลา (วัน)</th>                           
+                                        <th style="width:150px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($projectflows as $key => $projectflow)
                                     <tr>    
                                         <td> {{$projectflow->name}} </td>                                         
-                                        <td> {{$projectflow->duration}} </td> 
-                                        <td> 
+                                        <td style="text-align: center"> {{$projectflow->duration}} </td> 
+                                        <td style="text-align: center"> 
                                             <a href="{{route('setting.admin.system.projectflow.edit',['id' => $projectflow->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                         </td>
                                     </tr>
@@ -85,8 +81,28 @@
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
             </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ปลดล็อคเวลาสรุปคะแนน สำหรับวันนี้</h6>
+                        <div class="header-elements">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">	
+                            <div class="col-md-12">
+                                    <div class="form-group">
+                                        <a href="{{route('dashboard.admin.assessment.doaccessment')}}" class="btn btn-sm bg-primary">ปลดล็อค</a>
+                                    </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            
         </div>
         <!-- /form layouts -->
     </div>

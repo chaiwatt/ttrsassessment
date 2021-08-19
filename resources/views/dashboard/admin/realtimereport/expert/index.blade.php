@@ -91,12 +91,12 @@
                                     <table class="table table-bordered table-striped" id="testtopictable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th>ชื่อ-นามสกุล</th> 
-                                                <th>ตำแหน่ง</th> 
-                                                <th>หน่วยงานที่สังกัด</th> 
-                                                <th>สาขาความเชี่ยวชาญ</th> 
-                                                <th>ประสบการณ์ทำงาน</th> 
-                                                <th class="text-right">รายบุคคล</th>
+                                                <th style="text-align: center">ชื่อ-นามสกุล</th> 
+                                                <th style="text-align: center">ตำแหน่ง</th> 
+                                                <th style="text-align: center">หน่วยงานที่สังกัด</th> 
+                                                <th style="text-align: center">สาขาความเชี่ยวชาญ</th> 
+                                                <th style="text-align: center">ประสบการณ์ทำงาน</th> 
+                                                <th class="text-center">EXCEL</th>
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -112,9 +112,15 @@
                                                     <td>{{$expert->position}}</td>
                                                     <td>{{$expert->organization}}</td>
                                                     <td>{{$expert->expertbranch->name}}</td>
-                                                    <td>{{$expert->expereinceyear}} ปี {{$expert->expereincemonth}} เดือน</td>
-                                                    <td class="text-right"> 
+                                                    <td style="text-align: center">{{$expert->expereinceyear}} ปี {{$expert->expereincemonth}} เดือน</td>
+                                                    <td style="text-align: center"> 
+                                                        
+                                                        
+                                                        @if ($expert->user->company->saveprofile != 0)
                                                         <a href="{{route('dashboard.admin.realtimereport.singleexpertdownload',['id' => $expert->user_id])}}" class=" btn btn-sm bg-info">ดาวน์โหลด</a>
+                                                        @else
+                                                            <span class="badge badge-flat border-info text-info-600">ยังไม่ได้ตั้งค่าโปรไฟล์</span>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

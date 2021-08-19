@@ -70,7 +70,7 @@ class DashboardAdminFollowUpController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'TTRS:เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name. ' '.$auth->lastname.' ได้เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project. $fullcompanyname.' <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS:เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name. ' '.$auth->lastname.' ได้เพิ่มผลการติดตามโครงการ โครงการ'.$minitbp->project. $fullcompanyname.' <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         $result = 'บรรลุตามจุดประสงค์';

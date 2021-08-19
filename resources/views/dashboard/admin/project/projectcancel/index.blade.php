@@ -74,7 +74,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 3)
                                     <tr>    
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        <td> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                         <td> <a class="text-info" href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}">{{$fulltbp->minitbp->project}} </a> </td> 
                                         <td style="text-align: center"> {{$fulltbp->canceldateth}} </td> 
                                         {{-- <td>

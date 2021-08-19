@@ -76,7 +76,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 10)
                                             <tr>    
-                                                <td style="text-align: center"> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                                <td style="text-align: center"> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td> 
                                                 <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                                 <td style="text-align: center">

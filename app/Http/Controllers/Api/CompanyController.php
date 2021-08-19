@@ -42,6 +42,7 @@ class CompanyController extends Controller
         $companyemploy->lastname = $request->lastname;
         $companyemploy->employ_position_id = $request->position;
         $companyemploy->otherposition = $otherposition;
+        $companyemploy->isdirector = 1;
         // $companyemploy->signature_id = $request->signature;
         $companyemploy->save();
         

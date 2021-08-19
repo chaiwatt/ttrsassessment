@@ -85,7 +85,7 @@
                                                     <tr>
                                                         <td>{{$fulltbp->minitbp->businessplan->code}}</td>
                                                         <td>{{$fulltbp->minitbp->project}}</td>
-                                                        <td>{{$fulltbp->minitbp->businessplan->company->name}}</td>
+                                                        <td>{{$fulltbp->minitbp->businessplan->company->fullname}}</td>
                                                         <td class="text-right">
                                                             @if ($fulltbp->status == 2)
                                                                     <span class="badge badge-flat border-info text-info-600 rounded-0">กำลังดำเนินการ</span>

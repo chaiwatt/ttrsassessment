@@ -1384,7 +1384,7 @@
 										</div>
 									</div>  
 									<div class="col-md-12">	
-										<label><strong><u>1.7 รายการบุคลากร</u></strong></label>
+										<label><strong>1.7 รายการบุคลากร</strong></label>
 										<div class="table-responsive">
 											<table class="table table-bordered table-striped">
 												<thead>
@@ -1396,27 +1396,27 @@
 												<tbody >    
 													<tr >                                        
 														<td>จำนวนบุคลากรทั้งหมด</td>
-														<td>{{@$fulltbpemployee->department_qty}}</td>
+														<td style="text-align:center">{{@$fulltbpemployee->department_qty}}</td>
 													</tr>       
 													<tr >                                        
 														<td>ฝ่ายบริหาร</td>
-														<td>{{@$fulltbpemployee->department1_qty}}</td>
+														<td style="text-align:center">{{@$fulltbpemployee->department1_qty}}</td>
 													</tr>  
 													<tr >                                        
 														<td>ฝ่ายวิจัยและพัฒนา</td>
-														<td>{{@$fulltbpemployee->department2_qty}}</td>
+														<td style="text-align:center">{{@$fulltbpemployee->department2_qty}}</td>
 													</tr>     
 													<tr >                                        
 														<td>ฝ่ายผลิต/วิศวกรรม</td>
-														<td>{{@$fulltbpemployee->department3_qty}}</td>
+														<td style="text-align:center">{{@$fulltbpemployee->department3_qty}}</td>
 													</tr>  
 													<tr >                                        
 														<td>ฝ่ายการตลาด</td>
-														<td>{{@$fulltbpemployee->department4_qty}}</td>
+														<td style="text-align:center">{{@$fulltbpemployee->department4_qty}}</td>
 													</tr> 
 													<tr >                                        
 														<td>พนักงานทั่วไป</td>
-														<td>{{@$fulltbpemployee->department5_qty}}</td>
+														<td style="text-align:center">{{@$fulltbpemployee->department5_qty}}</td>
 													</tr>              
 												</tbody>
 											</table>
@@ -1508,7 +1508,7 @@
 																					<td> {{$education->employeducationlevel}} </td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
-																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
+																					<td style="text-align:center"> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																				</tr>
 																			@endforeach  
 																		</tbody>
@@ -1556,7 +1556,7 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employtraining->reverse() as $training)
 																				<tr>
-																					<td> {{$training->trainingdateth}}</td>                                            
+																					<td style="text-align:center"> {{$training->trainingdateth}}</td>                                            
 																					<td> {{$training->course}} </td> 
 																					<td> {{$training->owner}} </td>  
 																				</tr>
@@ -1660,7 +1660,7 @@
 																					</td>                                            
 																					<td> {{$education->employeducationinstitute}} </td> 
 																					<td> {{$education->employeducationmajor}} </td>                                            
-																					<td> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
+																					<td style="text-align:center"> {{$education->employeducationyearstart}} - {{$education->employeducationyearend}} </td> 
 																				</tr>
 																			@endforeach  
 																		</tbody>
@@ -1708,7 +1708,7 @@
 																		<tbody>  
 																			@foreach ($companyemploy->employtraining->reverse() as $training)
 																				<tr>
-																					<td> {{$training->trainingdateth}}</td>                                            
+																					<td style="text-align:center"> {{$training->trainingdateth}}</td>                                            
 																					<td> {{$training->course}} </td> 
 																					<td> {{$training->owner}} </td>  
 																				</tr>
@@ -2015,7 +2015,7 @@
 													<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
 														@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
 															<tr >                                        
-																<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+																<td style="text-align:center"> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
 															</tr>
@@ -2566,11 +2566,11 @@
 														@foreach ($fulltbpdebtpartners as $fulltbpdebtpartner)
 															<tr>
 																<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
-																<td class="text-right"> {{$fulltbpdebtpartner->numproject}} </td> 
+																<td class="text-center"> {{$fulltbpdebtpartner->numproject}} </td> 
 																<td class="text-right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
 																<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}}</td>                                            															
 																<td class="text-right"> {{number_format($fulltbpdebtpartner->percenttosale, 2)}}</td> 
-																<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
+																<td class="text-center"> {{$fulltbpdebtpartner->businessyear}} </td> 
 															</tr>
 														@endforeach              
 													</tbody>
@@ -2605,7 +2605,7 @@
 																<td class="text-right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
 																<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}}</td> 
-																<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
+																<td class="text-center"> {{$fulltbpcreditpartner->businessyear}} </td> 
 																{{-- <td> 
 																	<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																	<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-warning deletecreditpartner">ลบ</a> 

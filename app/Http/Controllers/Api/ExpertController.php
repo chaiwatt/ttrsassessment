@@ -171,7 +171,7 @@ class ExpertController extends Controller
             $projectlog->action = 'Manager มอบหมายผู้เชี่ยวชาญ (รายละเอียด: คุณ' . $expert->name . ' ' .$expert->lastname . ')';
             $projectlog->save();
 
-            EmailBox::send($expert->email,'TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($expert->email,'','TTRS:การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     }
 
     public function ExpertReject(Request $request){
@@ -221,7 +221,7 @@ class ExpertController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
         
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname. ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname. ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         $jduser = User::where('user_type_id',6)->first();
         $messagebox =  Message::sendMessage('ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$jduser->id);
@@ -236,7 +236,7 @@ class ExpertController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
         
-        EmailBox::send($jduser->email,'TTRS:ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'เรียน Manager<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send($jduser->email,'','TTRS:ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'เรียน Manager<br><br> ผู้เชี่ยวชาญ คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         CreateUserLog::createLog('ปฎิเสธเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
 
         $arr1 = User::where('id',$auth->id)->pluck('id')->toArray();
@@ -319,7 +319,7 @@ class ExpertController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
             
-            EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' =>  $request->fulltbpid]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> Manager ได้ยืนยันทีมผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' =>  $request->fulltbpid]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
             $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first();
             if($projectstatustransaction->status == 1){
@@ -346,7 +346,7 @@ class ExpertController extends Controller
                         'alertmessage_id' => $alertmessage->id
                     ]);
 
-                   EmailBox::send(User::find($projectassignment->leader_id)->email,'TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .$fullcompanyname . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                   EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:สร้างปฏิทินนัดหมาย โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> EV และ Weighting โครงการ' . $minitbp->project .$fullcompanyname . ' ได้รับการอนุมัติแล้ว กรุณาสร้างปฏิทินกิจกรรมเพื่อนัดหมายการประเมินต่อไป โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.calendar.createcalendar',['id' => $fulltbp->id]).'>ดำเนินการ</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                    DateConversion::addExtraDay($minitbp->id,3);
 
                    ProjectStatus::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',3)->first()->update([

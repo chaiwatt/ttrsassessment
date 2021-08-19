@@ -107,7 +107,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการไม่เข้าร่วมโครงการ
                 </h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -115,8 +115,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label id="messageshow">สาเหตุการไม่เข้าร่วมโครงการ</label>
-                            <textarea type="text" rows="5"  id="note" placeholder="ข้อความเพิ่มเติม สาเหตุการไม่เข้าร่วมโครงการ" class="form-control form-control-lg" ></textarea>
+                            <label id="messageshow">เหตุผลการไม่เข้าร่วมโครงการ</label>
+                            <textarea type="text" rows="5"  id="note" placeholder="โปรดระบุเหตุผลการไม่เข้าร่วม" class="form-control form-control-lg" ></textarea>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการไม่เข้าร่วมโครงการ
                 </h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -221,11 +221,11 @@
                                         {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
                                         <th style="text-align:center">โครงการ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปผลประเมิน</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">แสดงความเห็น</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center">วันนัดประชุมก่อนลงพื้นที่</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center">วันที่ประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center">วันที่สรุปผลประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center">เพิ่มเติม</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">การเข้าร่วม</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>
                                     </tr>
                                 </thead>
@@ -243,17 +243,7 @@
                                                     
                                                 </td>  
 
-                                                <td style="white-space: nowrap"> 
-                                                    @if($fulltbp->expertassignment->accepted == 1)
-                                                            @if (Empty($fulltbp->expertcomment))
-                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">แสดงความเห็น</a> 
-                                                                @else
-                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" ><span class="badge badge-flat border-success text-success-600">แสดงความเห็นแล้ว</span></a> 
-                                                            @endif
-                                                        @else
-                                                        -
-                                                    @endif
-                                                </td> 
+
                                                 <td style="white-space: nowrap;text-align:center">
                                                     @if (!Empty($fulltbp->brieftdate))
                                                          {{$fulltbp->brieftdateth}}
@@ -274,7 +264,16 @@
                                                         @else
                                                         {{$fulltbp->finalassessmentdate}}
                                                     @endif
-                                                     </td> 
+                                                </td> 
+                                                <td style="white-space: nowrap"> 
+                                                    @if($fulltbp->expertassignment->accepted == 1)
+                                                            @if (Empty($fulltbp->expertcomment))
+                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">แสดงความเห็น</a> 
+                                                                @else
+                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" ><span class="badge badge-flat border-success text-success-600">แสดงความเห็นแล้ว</span></a> 
+                                                            @endif
+                                                    @endif
+                                                </td> 
                                                 <td style="white-space: nowrap"> 
                                                     @if ($fulltbp->expertassignment->accepted == 0)
                                                             <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>

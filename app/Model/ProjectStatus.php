@@ -33,11 +33,11 @@ class ProjectStatus extends Model
                     $actiondate = Carbon::createFromFormat('Y-m-d', $this->actual_startdate);
                     $check = Carbon::parse($actiondate)->DiffInDays($plandate, false);
                     if($check > 0){
-                        return '+' . $check;
+                        return '+' . (intVal($check) + 1);
                     }else if($check == 0){
-                        return  $check;
+                        return  (intVal($check) + 1);
                     }else{
-                        return  $check;
+                        return  (intVal($check) + 1);
                     }
                 }else{
                     return '';

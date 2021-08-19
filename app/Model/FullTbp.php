@@ -34,6 +34,7 @@ use App\Model\FullTbpSellStatus;
 use App\Model\FullTbpDebtPartner;
 use App\Model\FullTbpProjectPlan;
 use App\Model\CriteriaTransaction;
+use App\Model\ProjectMemberBackup;
 use App\Model\FullTbpCreditPartner;
 use App\Model\FullTbpMarketAnalysis;
 use App\Model\FullTbpProjectCertify;
@@ -111,6 +112,9 @@ class FullTbp extends Model
     } 
     public function getProjectmemberAttribute(){
         return ProjectMember::where('full_tbp_id',$this->id)->get();
+    } 
+    public function getProjectmemberbackupAttribute(){
+        return ProjectMemberBackup::where('full_tbp_id',$this->id)->get();
     } 
     public function getJduserAttribute(){
         return User::where('user_type_id',6)->first();

@@ -195,7 +195,7 @@
                                             <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                         </td>  
                                         <td>  
-                                            <a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->name}} </a>  
+                                            <a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->fullname}} </a>  
                                         </td>  
                                     </tr>  
                                     @endforeach

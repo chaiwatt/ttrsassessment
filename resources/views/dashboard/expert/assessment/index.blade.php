@@ -70,9 +70,9 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
                                         {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        <td> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                        <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                         <td> 
                                             @if (!Empty($fulltbp->projectscore))
                                                     <a href="{{route('dashboard.expert.project.assessment.edit',['id' => $fulltbp->id])}}" class="badge bg-info">แก้ไขคะแนน</a>

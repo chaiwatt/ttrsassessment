@@ -77,7 +77,7 @@ $(document).on('click', '.projectmember', function(e) {
           var hiddenbtn = `-`;
           if (isleader == 0) {
             $("#selectothermember").attr("hidden",true);
-            $("#thother").attr("hidden",true);
+            // $("#thother").attr("hidden",true);
           }
           //console.log(data.iserror);
 
@@ -158,7 +158,7 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
           var hiddenbtn = `-`;
           if (isleader == 0) {
             $("#selectothermember").attr("hidden",true);
-            $("#thother").attr("hidden",true);
+            // $("#thother").attr("hidden",true);
           }
           // if(typeof(data.iserror) != "undefined"){
           //   Swal.fire({
@@ -243,7 +243,7 @@ $(document).on('click', '.deleteprojectmember', function(e) {
         var hiddenbtn = `-`;
         if (isleader == 0) {
           $("#selectothermember").attr("hidden",true);
-          $("#thother").attr("hidden",true);
+          // $("#thother").attr("hidden",true);
         }
         data.users.forEach(function (user,index) {
             html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`
@@ -419,11 +419,11 @@ $(document).on('click', '.showlog', function(e) {
 $(document).on('click', '.showapprovelog', function(e) {
   var html ='';
   getApproveLog($(this).data('id')).then(data => {  
-    // console.log(data);
+    //  console.log(data);
       $("#approvelog_detail").html(data[0].approvelog);
       $("#approvelog_info").html(data[0].approveby);
       $("#approvelog_date").html(data[0].createdatth);
-      $("#showapprovelogminitbp").html(data[0].project);
+      $("#showapprovelogminitbp").html(data[0].minitbp.project);
       $('#modal_show_approvelog').modal('show');
   }).catch(error => {})
 
@@ -469,4 +469,61 @@ function getApproveLog(fulltbpid){
       })
   })
 }
+
+
+$(document).on('click', '.reaction', function(e) {
+  Swal.fire({
+    title: 'ยืนยัน?',
+    text: "ต้องการทำรายการลงคะแนนหรือไม่!",
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'ตกลง',
+    cancelButtonText: 'ยกเลิก',
+    closeOnConfirm: false,
+    closeOnCancel: false
+  }).then((result) => {
+
+    if (result.value) {
+      $('#btn_modal_select_reactiondate').data('id',$(this).data('id'));
+      $('#modal_select_reactiondate').modal('show');
+    }
+  })
+});
+
+
+
+$(document).on('click', '#btn_modal_select_reactiondate', function(e) {
+  // console.log($(this).data('id'),$('#newdate').val());
+  if($('#reactiondate').val() == ''){
+      return ;
+  }
+  $("#spinicon").attr("hidden",false);
+  rescoring($(this).data('id'),$('#newdate').val()).then(data => {  
+    window.location.reload();
+  }).catch(error => {})
+
+  
+});
+
+
+function rescoring(fulltbpid,eventdate){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+      url: `${route.url}/dashboard/admin/assessment/rescoring`,
+      type: 'POST',
+      headers: {"X-CSRF-TOKEN":route.token},
+      data: {
+        fulltbpid : fulltbpid,
+        eventdate : eventdate
+      },
+      success: function(data) {
+          resolve(data)
+      },
+      error: function(error) {
+          reject(error)
+      },
+      })
+  })
+}
+
 

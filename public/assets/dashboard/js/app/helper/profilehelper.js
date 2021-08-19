@@ -875,7 +875,7 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
             html += `<tr >                                        
                <td> ${prefix}${director.name}  ${director.lastname}</td>                                          
                 <td> ${otherposition} </td>  
-                <td>
+                <td style="text-align:center">
                     ${check}
                 </td>   
                 <td style="width:1%;white-space: nowrap" class="text-center">
@@ -951,7 +951,7 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,othe
                     html += `<tr >                                        
                     <td> ${prefix}${director.name}  ${director.lastname} </td>                                            
                         <td> ${otherposition} </td>  
-                        <td>
+                        <td style="text-align:center">
                             ${check}
                         </td>   
                         <td style="width:1%;white-space: nowrap" class="text-center">
@@ -1279,7 +1279,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
                 html += `<tr >                                        
                     <td> ${prefix}${director.name}  ${director.lastname} </td>                                            
                     <td> ${otherposition} </td>  
-                    <td>
+                    <td style="text-align:center">
                         ${check}
                     </td>   
                     <td style="width:1%;white-space: nowrap" class="text-center">

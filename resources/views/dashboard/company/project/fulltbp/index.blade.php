@@ -74,7 +74,7 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        <td> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td> 
                                         <td>
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)

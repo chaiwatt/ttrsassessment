@@ -14,6 +14,7 @@ use App\Model\MiniTBP;
 use App\Model\Province;
 use App\Model\BusinessPlan;
 use App\Model\UserPosition;
+use App\Model\CompanyEmploy;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Model\CompanyAddress;
@@ -36,13 +37,15 @@ class DashboardAdminSearchCompanyProfileController extends Controller
         $industrygroups = IndustryGroup::get();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
         $userpositions = UserPosition::get();
-        $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
+        // $authorizeddirectors = AuthorizedDirector::where('company_id',$company->id)->get();
 
         $businessplanarray = BusinessPlan::where('company_id',$company->id)->pluck('id')->toArray();
 
         $minittbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         // return $minittbparray;
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minittbparray)->get();
+
+        $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
         return view('dashboard.admin.search.company.profile.view')->withUser($user)
                                             ->withPrefixes($prefixes)
                                             ->withProvinces($provinces)

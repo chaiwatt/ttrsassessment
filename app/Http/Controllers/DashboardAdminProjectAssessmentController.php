@@ -33,6 +33,7 @@ use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Model\CriteriaTransaction;
+use App\Model\ProjectMemberBackup;
 use Illuminate\Support\Facades\Auth;
 use App\Model\CriteriaGroupTransaction;
 use App\Model\ExtraCriteriaTransaction;
@@ -47,9 +48,14 @@ class DashboardAdminProjectAssessmentController extends Controller
                         ->where('notification_sub_category_id',7) // notification_sub_category_id 7 = การลงคะแนน
                         ->where('status',0)->delete();
         $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-        // return $auth->name ;
         $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
-        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps);
+
+        $projectmemberbackups = ProjectMemberBackup::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
+        $fulltbpbackups = FullTbp::whereIn('id', $projectmemberbackups)->get();
+
+        // return $fulltbpbackups;
+
+        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps)->withFulltbpbackups($fulltbpbackups);
     }
     public function Edit($id,$userid){  
         $fulltbp = FullTbp::find($id);
@@ -122,7 +128,7 @@ class DashboardAdminProjectAssessmentController extends Controller
             $pending .= 'คุณ' . $_user->name . '  ' .  $_user->lastname . ',';
         }
         
-        EmailBox::send($mails,'TTRS:มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
+        EmailBox::send($mails,'','TTRS:มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
         '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
         '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
         '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());

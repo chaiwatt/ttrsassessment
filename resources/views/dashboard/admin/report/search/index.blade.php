@@ -128,7 +128,7 @@
                                         {{-- <td> {{$fulltbp->updatedatth}} </td>  --}}
                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                         <td> 
-                                            <a  href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="btn btn-sm bg-info">{{$fulltbp->minitbp->businessplan->company->name}} </a>
+                                            <a  href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="btn btn-sm bg-info">{{$fulltbp->minitbp->businessplan->company->fullname}} </a>
                                         </td>  
                                         <td>
                                             <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span> 

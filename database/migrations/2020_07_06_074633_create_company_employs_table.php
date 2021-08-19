@@ -29,6 +29,7 @@ class CreateCompanyEmploysTable extends Migration
             $table->string('email',120)->nullable();
             $table->unsignedBigInteger('signature_id')->nullable();
             $table->unsignedBigInteger('stockholder_id')->defualt('1');
+            $table->char('isdirector',1)->default(0);
             $table->timestamps();
         });
     }

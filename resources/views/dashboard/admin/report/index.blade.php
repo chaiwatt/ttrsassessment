@@ -234,7 +234,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ<span id="showapprovelogminitbp"></span></h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ: <span id="showapprovelogminitbp"></span></h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -442,7 +442,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการไม่เข้าร่วมโครงการ
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -450,8 +450,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label id="messageshow">สาเหตุการไม่เข้าร่วมโครงการ</label>
-                                <textarea type="text" rows="5"  id="rej_note" placeholder="ข้อความเพิ่มเติม สาเหตุการไม่เข้าร่วมโครงการ" class="form-control form-control-lg" ></textarea>
+                                <label id="messageshow">เหตุผลการไม่เข้าร่วมโครงการ</label>
+                                <textarea type="text" rows="5"  id="rej_note" placeholder="โปรดระบุเหตุผลการไม่เข้าร่วม" class="form-control form-control-lg" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -468,7 +468,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการไม่เข้าร่วมโครงการ
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -1051,7 +1051,7 @@
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปผลประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap;text-align: center">เข้าร่วม(เฉพาะผู้เชี่ยวชาญ)</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">การเข้าร่วม</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">สถานภาพ</th>
                                     </tr>
                                 </thead>
@@ -1200,9 +1200,10 @@
                                                     </td>  
                                                     <td style="white-space: nowrap;text-align: center">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
-                                                                <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+                                                                {{-- <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span> --}}
+                                                                <a  href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}"><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
                                                                 @if (!Empty($fulltbp->approvelog))
-                                                                    <button  data-toggle="modal" data-id="{{$fulltbp->id}}" data-doctype="2" class="btn btn-sm bg-success showapprovelog mr-1">รายการอนุมัติ</a>
+                                                                    <button  data-toggle="modal" data-id="{{$fulltbp->id}}" data-doctype="2" class="btn btn-sm bg-success showapprovelog mr-1">การอนุมัติ</a>
                                                                 @endif
 
                                                                 @if ($fulltbp->reviselog->count() > 0)

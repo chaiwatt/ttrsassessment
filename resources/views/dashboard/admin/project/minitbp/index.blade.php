@@ -28,14 +28,14 @@
                                 @if (Auth::user()->user_type_id == 4)
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-input-styled" name="result" value="1" checked data-fouc>
+                                            <input type="radio" class="form-input-styled" name="result" value="1" data-fouc>
                                             อนุมัติ
                                         </label>
                                     </div>
                                 @endif
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-input-styled" name="result" value="2" data-fouc>
+                                        <input type="radio" class="form-input-styled" name="result" value="2" checked data-fouc>
                                         ให้แก้ไข
                                     </label>
                                 </div>
@@ -146,7 +146,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ<span id="showapprovelogminitbp"></span></h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ: <span id="showapprovelogminitbp"></span></h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -288,7 +288,7 @@
                                                             <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
                                                                 @if (!Empty($minitbp->approvelog))
                                                                     
-                                                                        <a href="#" data-id="{{$minitbp->id}}" data-doctype="1" data-project="{{$minitbp->project}}" class="btn btn-sm bg-success showapprovelog">รายการอนุมัติ</a>
+                                                                        <a href="#" data-id="{{$minitbp->id}}" data-doctype="1" data-project="{{$minitbp->project}}" class="btn btn-sm bg-success showapprovelog">การอนุมัติ</a>
                                                                 @endif
 
                                                                 @if ($minitbp->reviselog(1)->count() > 0)

@@ -170,10 +170,10 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
     
-            EmailBox::send(User::find($request->coleader)->email,'TTRS:มอบหมาย Co-Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.User::find($request->coleader)->name. ' ' .User::find($request->coleader)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.')</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());    
+            EmailBox::send(User::find($request->coleader)->email,'','TTRS:มอบหมาย Co-Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.User::find($request->coleader)->name. ' ' .User::find($request->coleader)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็น Co-Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.')</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());    
         }
 
-        EmailBox::send(User::find($request->leader)->email,'TTRS:มอบหมาย Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.User::find($request->leader)->name. ' ' .User::find($request->leader)->lastname. '<br><br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($request->leader)->email,'','TTRS:มอบหมาย Leader โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.User::find($request->leader)->name. ' ' .User::find($request->leader)->lastname. '<br><br> ท่านได้รับมอบหมายให้เป็น Leader ในโครงการ'.$minitbp->project.' (' .$fullcompanyname.') โปรดตรวจสอบข้อมูล <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
 
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',1)->first();
@@ -208,7 +208,7 @@ class DashboardAdminProjectProjectAssignmentController extends Controller
         $projectlog->save();
 
         CreateUserLog::createLog('มอบหมาย Leader และ Co-Leader โครงการ' . $minitbp->project);
-        return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('การมอบหมายสำเร็จ');
+        return redirect()->route('dashboard.admin.project.projectassignment')->withSuccess('การมอบหมาย Leader สำเร็จ');
     }
     public function GetWorkLoadLeader(Request $request){
         $businessplanids = ProjectAssignment::where('leader_id',$request->userid)->pluck('business_plan_id')->toArray();

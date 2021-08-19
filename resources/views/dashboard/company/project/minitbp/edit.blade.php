@@ -1565,6 +1565,17 @@ $(document).on('change', '#tambol', function(e) {
 	$('#postalcode').val($(this).find(':selected').data('id'));
 });
 
+$(document).on('change', '#website', function(e) {
+	var patt = /[ก-๙]/g;
+	var res = patt.test($(this).val());
+	if(res == true &&  $(this).val() != ''){
+		Swal.fire({
+			title: 'ผิดพลาด...',
+			text: 'กรุณากรอกเว็ปไซต์เป็นภาษาอังกฤษ!',
+		});
+		$(this).val('');
+	}
+});
 </script>
 @stop
 

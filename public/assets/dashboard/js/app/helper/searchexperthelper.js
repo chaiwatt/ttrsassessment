@@ -79,7 +79,7 @@ function createTable(data){
             td += `
             <li>
                 <i class="icon-primitive-dot mr-2"></i>
-                <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
+                <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
                 <span class="badge badge-pill ${color} ml-20 ml-md-0">${status}</span>
             </li>
             `

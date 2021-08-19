@@ -13,7 +13,7 @@ class CompanysizesTableSeeder extends Seeder
     {
         DB::table('companysizes')->insert([
             [
-                'name' => 'micro'
+                'name' => 'Micro'
             ],
             [
                 'name' => 'S'

@@ -96,12 +96,12 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
             $businessplan = BusinessPlan::find($this->business_plan_id);
             if($businessplan->business_plan_status_id < 10){
                 $datefiff = Carbon::parse(Carbon::createFromFormat('Y-m-d', $this->submitdate))->DiffInDays(Carbon::now(), false);
-                return $datefiff ;
+                return intVal($datefiff)+1 ;
             }else{
                 $fulltbp = FullTbp::where('mini_tbp_id',$this->id)->first();
                 if(!Empty($fulltbp->endprojectdate)){
                     $datefiff = Carbon::parse(Carbon::createFromFormat('Y-m-d', $this->submitdate))->DiffInDays(Carbon::parse(Carbon::createFromFormat('Y-m-d', $fulltbp->endprojectdate)), false);
-                    return $datefiff ;
+                    return intVal($datefiff)+1 ;
                 }else{
                     return "" ;  
                 }

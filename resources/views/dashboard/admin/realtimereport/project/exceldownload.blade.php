@@ -1,9 +1,9 @@
 <table>
     <thead>
     <tr>
-        <th>รายการ</th>
-        <th>ผู้ดาวน์โหลด</th>
-        <th>วันที่</th>
+        <th style="text-align: center">รายการ</th>
+        <th style="text-align: center">ผู้ดาวน์โหลด</th>
+        <th style="text-align: center">วันที่</th>
     </tr>
     </thead>
     <tbody>
@@ -12,7 +12,7 @@
             <tr>
                 <td>{{ $downloadstat->document }}</td>
                 <td>{{ $downloadstat->user->name }} {{ $downloadstat->user->lastname }}</td>
-                <td>{{ $downloadstat->created_at }}</td>
+                <td style="text-align: center">{{ $downloadstat->created_at }}</td>
             </tr>
     @endforeach
     </tbody>

@@ -1959,8 +1959,8 @@ th {
 																					@endif
 																					
 																				</td> 
-																				<td> {{$companyemploy->phone}} </td>                                            
-																				<td> {{$companyemploy->workphone}} </td> 
+																				<td style="text-align: center"> {{$companyemploy->phone}} </td>                                            
+																				<td style="text-align: center"> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
 																				<td style="white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
@@ -2007,8 +2007,8 @@ th {
 																					@endif
 																					
 																				</td> 
-																				<td> {{$companyemploy->phone}} </td>                                            
-																				<td> {{$companyemploy->workphone}} </td> 
+																				<td style="text-align: center"> {{$companyemploy->phone}} </td>                                            
+																				<td style="text-align: center"> {{$companyemploy->workphone}} </td> 
 																				<td> {{$companyemploy->email}} </td> 
 																				<td style="width:1%;white-space: nowrap"> 
 																					<a  data-id="{{$companyemploy->id}}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
@@ -2039,7 +2039,7 @@ th {
 																				<tr >                                        
 																					<td > {{$companystockholder->name}}</td> 
 																					<td style="width:350px"> {{$companystockholder->ceorelation}} </td> 
-																					<td class="hiddenelement_fulltbp"> <a  data-id="{{$companystockholder->id}}" class="btn btn-sm bg-danger hiddenelement_fulltbp deletestockholder">ลบ</a> </td> 
+																					<td style="text-align:center" class="hiddenelement_fulltbp"> <a  data-id="{{$companystockholder->id}}" class="btn btn-sm bg-danger hiddenelement_fulltbp deletestockholder">ลบ</a> </td> 
 																				</tr>
 																			@endforeach                            
 																		</tbody>
@@ -2080,8 +2080,8 @@ th {
 
 																						
 																					</td> 
-																					<td> {{$companyemploy->phone}} </td>                                            
-																					<td> {{$companyemploy->workphone}} </td> 
+																					<td style="text-align: center"> {{$companyemploy->phone}} </td>                                            
+																					<td style="text-align: center"> {{$companyemploy->workphone}} </td> 
 																					<td> {{$companyemploy->email}} </td> 
 																					<td style="white-space: nowrap">  
 																						<a  data-id="{{$companyemploy->id}}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a>
@@ -2319,7 +2319,7 @@ th {
 															</div>
 															<div class="col-md-12">
 																{{-- <div class="form-group">	 --}}
-																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong><span class="text-danger">*</span><button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong> <span class="text-danger">*</span><button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
 																	<span id="fulltbp_projectechdevlevel_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</span>
 																	
 																{{-- </div> --}}
@@ -2329,7 +2329,7 @@ th {
 																	<table class="table table-bordered table-striped" id="fulltbp_projectechdevlevel_table_wrapper">
 																		<thead>
 																			<tr class="bg-info">
-																				<th style="width:1%;white-space: nowrap">รายการ</th>  
+																				<th style="width:1%;white-space: nowrap;text-align:center">รายการ</th>  
 																				<th>เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
 																				<th>เทคโนโลยีในโครงการ</th>
 																				<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
@@ -3066,7 +3066,7 @@ th {
 																					<td class="text-right"> {{number_format($fulltbpsellstatus->past2, 2)}} </td>  
 																					<td class="text-right"> {{number_format($fulltbpsellstatus->past1, 2)}} </td> 
 																					<td class="text-right"> {{number_format($fulltbpsellstatus->present, 2)}} </td> 
-																					<td class="hiddenelement_fulltbp"> 
+																					<td class="hiddenelement_fulltbp text-center"> 
 																						<a  data-id="{{$fulltbpsellstatus->id}}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
 																					</td> 
 																				</tr>
@@ -3106,11 +3106,11 @@ th {
 																			@foreach ($fulltbpdebtpartners->reverse() as $fulltbpdebtpartner)
 																				<tr>
 																					<td> {{$fulltbpdebtpartner->debtpartner}}</td> 
-																					<td class="text-right"> {{$fulltbpdebtpartner->numproject}} </td> 
+																					<td class="text-center"> {{$fulltbpdebtpartner->numproject}} </td> 
 																					<td class="text-right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
 																					<td class="text-right"> {{number_format($fulltbpdebtpartner->totalyearsell, 2)}} </td>                                            															
 																					<td class="text-right"> {{number_format($fulltbpdebtpartner->percenttosale,2)}} </td> 
-																					<td class="text-right"> {{$fulltbpdebtpartner->businessyear}} </td> 
+																					<td class="text-center"> {{$fulltbpdebtpartner->businessyear}} </td> 
 																					<td style="width:1%;white-space: nowrap" class="hiddenelement_fulltbp"> 
 																						<a  data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a>
 																						<a  data-id="{{$fulltbpdebtpartner->id}}" class="btn btn-sm bg-danger hiddenelement_fulltbp deletedebtpartner">ลบ</a> 
@@ -3149,7 +3149,7 @@ th {
 																					<td class="text-right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
 																					<td class="text-right"> {{number_format($fulltbpcreditpartner->totalyearpurchase, 2)}}</td>                                            															
 																					<td class="text-right"> {{number_format($fulltbpcreditpartner->percenttopurchase, 2)}} </td> 
-																					<td class="text-right"> {{$fulltbpcreditpartner->businessyear}} </td> 
+																					<td class="text-center"> {{$fulltbpcreditpartner->businessyear}} </td> 
 																					<td style="width:1%;white-space: nowrap" class="hiddenelement_fulltbp"> 
 																						<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a>
 																						<a  data-id="{{$fulltbpcreditpartner->id}}" class="btn btn-sm bg-danger hiddenelement_fulltbp deletecreditpartner">ลบ</a> 

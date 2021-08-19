@@ -71,8 +71,8 @@
                                     <table class="table table-bordered table-striped" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th style="width:600px">ตำแหน่งรับผิดชอบ</th> 
-                                                <th>ชื่อ-นามสกุล</th> 
+                                                <th style="width:600px;text-align:center">ตำแหน่งรับผิดชอบ</th> 
+                                                <th style="text-align: center">ชื่อ-นามสกุล</th> 
                                             </tr>
                                         </thead>
                                         <tbody >

@@ -264,7 +264,7 @@ class DashboardAdminCalendarController extends Controller
         ]);
        }
       
-       EmailBox::send($mails,'TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. ' มีรายละเอียดดังนี้' .
+       EmailBox::send($mails,'','TTRS: นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> โปรดเข้าร่วม'.$messageheader. ' มีรายละเอียด ดังนี้' .
        '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
        '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
        '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -276,7 +276,7 @@ class DashboardAdminCalendarController extends Controller
       if ($request->calendartype == 1 ) {
         foreach($request->users as $user){
             $_user = User::find($user);
-            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
             '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -308,7 +308,7 @@ class DashboardAdminCalendarController extends Controller
       }elseif($request->calendartype == 2){
         foreach($request->users as $user){
             $_user = User::find($user);
-            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
             '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -338,7 +338,7 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->save();
         }
 
-        $messagebox =  Message::sendMessage('นัดหมายการประเมิน ณ สถานประกอบการ' , 'แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียดดังนี้
+        $messagebox =  Message::sendMessage('นัดหมายการประเมิน ณ สถานประกอบการ' , 'แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียด ดังนี้
         <br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place,$auth->id,$company->user_id);
@@ -356,7 +356,7 @@ class DashboardAdminCalendarController extends Controller
           'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียดดังนี้' .
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียด ดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
@@ -402,7 +402,7 @@ class DashboardAdminCalendarController extends Controller
             $notificationbubble->target_user_id = $_user->id;
             $notificationbubble->save();
 
-            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+            $messagebox = Message::sendMessage('นัด'.$messageheader,'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
             '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
             '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
             '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -581,7 +581,7 @@ class DashboardAdminCalendarController extends Controller
      }
 
 
-    EmailBox::send($mails,'TTRS: (แก้ไข) นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> (แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+    EmailBox::send($mails,'','TTRS: (แก้ไข) นัด'.$messageheader,'เรียน ผู้เชี่ยวชาญ <br><br> (แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
     '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
     '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -592,7 +592,7 @@ class DashboardAdminCalendarController extends Controller
 // return $updateguest_array;
     foreach($updateguest_array as $user){
         $_user = User::find($user);
-        $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader,'(แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียดดังนี้' .
+        $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader,'(แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -630,7 +630,7 @@ class DashboardAdminCalendarController extends Controller
     }
 
     if ($mails > 0){
-        EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
+        EmailBox::send($mails,'','TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -679,7 +679,7 @@ class DashboardAdminCalendarController extends Controller
     }
 
     $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
-    EmailBox::send($mails,'TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+    EmailBox::send($mails,'','TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
     '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
     // '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.

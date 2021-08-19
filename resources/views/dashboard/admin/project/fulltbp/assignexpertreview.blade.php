@@ -149,7 +149,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;สาเหตุการไม่เข้าร่วมโครงการ
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการไม่เข้าร่วมโครงการ
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -207,14 +207,14 @@
                                             
                                             @endif
                                             
-                                            <th >ชื่อ-นามสกุล</th>
-                                            <th >ตำแหน่ง</th>
-                                            <th >Manager มอบหมาย</th>
-                                            <th >การตอบรับ</th>
+                                            <th style="text-align: center">ชื่อ-นามสกุล</th>
+                                            <th style="text-align: center">ตำแหน่ง</th>
+                                            <th style="text-align: center">การมอบหมาย</th>
+                                            <th style="text-align: center">การตอบรับ</th>
                                             @if (Auth::user()->user_type_id >= 5)
-                                                <th >โครงการรับผิดชอบ</th> 
-                                                <th >กำลังดำเนินการ</th>    
-                                                <th >เสร็จสิ้น</th>
+                                                <th style="text-align: center">โครงการรับผิดชอบ</th> 
+                                                <th style="text-align: center">กำลังดำเนินการ</th>    
+                                                <th style="text-align: center">เสร็จสิ้น</th>
                                             @endif
 
                                         </tr>
@@ -235,7 +235,7 @@
                                            
                                             @else
                                                 @if ($fulltbp->assignexpert != 2)
-                                                    <td>
+                                                    <td style="text-align: center">
                                                         <i class="icon-spinner spinner mr-2" id="spiniconcheck{{$user->id}}" hidden></i>
                                                         <input type="checkbox" name="expert[]" data-id="{{$user->id}}" value="{{$user->id}}"  class="form-check-input-styled {{$isjd}}" data-fouc   
                                                             @if (!Empty($check))
@@ -267,7 +267,7 @@
                                             <td>
                                                 {{$user->usertype->name}} {{$user->expertType}}
                                             </td> 
-                                            <td style="white-space: nowrap">
+                                            <td style="white-space: nowrap;text-align: center">
                                                 @if (!Empty($check))
                                                     @if ($check->expert_assignment_status_id == 1)
                                                         @if (Auth::user()->user_type_id == 6)
@@ -281,7 +281,7 @@
                                                     @endif
                                                 @endif
                                             </td> 
-                                            <td style="white-space: nowrap"">
+                                            <td style="white-space: nowrap;text-align: center">
                                                 @if (!Empty($check))
                                                     @if($check->expert_assignment_status_id == 2)
                                                         @if ($check->accepted == 0)

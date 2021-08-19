@@ -75,7 +75,7 @@ class DashboardAdminProjectCancelController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project   . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.' (' .$fullcompanyname .') เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project   . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.' (' .$fullcompanyname .') เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         $arr1 = UserArray::adminandjd($minitbp->business_plan_id);

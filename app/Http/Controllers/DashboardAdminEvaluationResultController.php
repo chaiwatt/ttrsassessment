@@ -180,13 +180,13 @@ class DashboardAdminEvaluationResultController extends Controller
         $fullcompanyname = $company_name;
 
         if($bussinesstype == 1){
-            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
-            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 3){
-            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            $fullcompanyname = 'ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
         }else if($bussinesstype == 4){
-            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            $fullcompanyname = 'ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
         $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
         $strMonthThai=$strMonthCut[intval(Carbon::today()->format('m'))];
@@ -204,7 +204,7 @@ class DashboardAdminEvaluationResultController extends Controller
                    
         $shapeheader = $slide->createRichTextShape()
                 ->setHeight(60)
-                ->setWidth(800)
+                ->setWidth(1000)
                 ->setOffsetX(190)
                 ->setOffsetY(150);
         $headertextRun = $shapeheader->createTextRun($minitbp->project. ' ' . $minitbp->projecteng);
@@ -214,8 +214,8 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $shapeheader = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
-                ->setOffsetX(50)
+                ->setWidth(1000)
+                ->setOffsetX(40)
                 ->setOffsetY(210);
         $headertextRun = $shapeheader->createTextRun('เลขที่                '.$fulltbp->fulltbp_code);
         $headertextRun->getFont()->setBold(true)
@@ -224,8 +224,8 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $shapeone = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
-                ->setOffsetX(50)
+                ->setWidth(1000)
+                ->setOffsetX(40)
                 ->setOffsetY(245);
         $headertextRun = $shapeone->createTextRun('โดย                 '. $fullcompanyname);
         $headertextRun->getFont()->setBold(true)
@@ -235,8 +235,8 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $shapetwo = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
-                ->setOffsetX(50)
+                ->setWidth(1000)
+                ->setOffsetX(40)
                 ->setOffsetY(280);
         $headertextRun = $shapetwo->createTextRun('สาขาเทคโนโลยี        '. $company->industrygroup->name);
         $headertextRun->getFont()->setBold(true)
@@ -245,8 +245,8 @@ class DashboardAdminEvaluationResultController extends Controller
         
         $shapethree = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
-                ->setOffsetX(50)
+                ->setWidth(1000)
+                ->setOffsetX(40)
                 ->setOffsetY(315);
         $headertextRun = $shapethree->createTextRun('ระดับ                '.$fulltbp->projectgrade->grade);
         $headertextRun->getFont()->setBold(true)
@@ -255,8 +255,8 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $shapefour = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
-                ->setOffsetX(50)
+                ->setWidth(1000)
+                ->setOffsetX(40)
                 ->setOffsetY(350);
         $headertextRun = $shapefour->createTextRun('ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)');
         $headertextRun->getFont()->setBold(true)
@@ -265,8 +265,8 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $shapefive = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
-                ->setOffsetX(50)
+                ->setWidth(1000)
+                ->setOffsetX(40)
                 ->setOffsetY(430);
         $headertextRun = $shapefive->createTextRun('ให้ไว้ ณ วันที่ ' .ltrim(Carbon::today()->format('d'), '0'). ' '. $strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543));
         $headertextRun->getFont()->setBold(true)
@@ -275,7 +275,7 @@ class DashboardAdminEvaluationResultController extends Controller
           
         $shapesix = $slide->createRichTextShape()
                 ->setHeight(40)
-                ->setWidth(800)
+                ->setWidth(1000)
                 ->setOffsetX(150)
                 ->setOffsetY(490);
         $headertextRun = $shapesix->createTextRun('(' .$generalinfo->director. ')');
@@ -350,17 +350,16 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->UseTemplate($tplId);
         $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 69.5, 200, 150, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>เลขที่</strong></span>', 13, 84, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 50, 84, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 45, 84, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>โดย</strong></span>', 13, 92.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fullcompanyname.'</strong></span>', 50, 92.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fullcompanyname.'</strong></span>', 45, 92.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>สาขาเทคโนโลยี</strong></span>', 13, 101.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$company->industrygroup->name.'</strong></span>', 50, 101.5, 250, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$company->industrygroup->name.'</strong></span>', 45, 101.5, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ระดับ</strong></span>', 13, 109.5, 150, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 50, 109.5, 150, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 45, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)</strong></span>', 13, 118, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,160, 200, 90, 'auto');
-        // $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 50, 190, 150, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
     }

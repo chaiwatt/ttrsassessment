@@ -91,7 +91,7 @@
                                                 @endif --}}
                                                 {{$projectstatus->projectdatediff}}
                                             </td>
-                                            <td>
+                                            <td style="text-align: center">
                                                {!!$projectstatus->projectstatustransaction($projectstatus->project_flow_id,$minitbp->id)!!}
                                             </td>
                                             
@@ -161,7 +161,7 @@
                                             <tr class="bg-info">
                                                 <th style="width:150px;text-align: center">Mini TBP</th> 
                                                 <th style="text-align: center" >วันที่ส่งเอกสาร</th>
-                                                <th style="width:1%;white-space: nowrap">PDF</th>
+                                                <th style="width:1%;white-space: nowrap;text-align: center">PDF</th>
                                             
                                             </tr>
                                         </thead>
@@ -492,14 +492,14 @@
                                 </thead>
                                 <tbody >
                                     <tr>
-                                        <td>
+                                        <td style="text-align: center">
                                             @if ($businessplan->business_plan_status_id >= 8)
                                             {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}}
                                             @else
                                             <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif
                                         </td>  
-                                        <td>
+                                        <td style="text-align: center">
                                             @if ($businessplan->business_plan_status_id >= 8)
                                             {{@$fulltbp->projectgrade->grade}}
                                             @else
@@ -507,7 +507,7 @@
                                             @endif
                                         </td>
                                         
-                                        <td> 
+                                        <td style="text-align: center"> 
                                             {{-- @if (@$fulltbp->isevaluationresultready == 1) --}}
                                             @if (@$fulltbp->projectstatustransaction(7)->status == 2)
                                             {{-- $fulltbp->projectstatustransaction(7)->status != 2 --}}
@@ -524,7 +524,7 @@
                                                     <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                             @endif
                                         </td>
-                                        <td>
+                                        <td style="text-align: center">
                                             @if ($businessplan->business_plan_status_id >=9)
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-sm bg-success dropdown-toggle" data-toggle="dropdown">Certificate</button>
@@ -539,7 +539,7 @@
                                             @endif
 
                                         </td>
-                                        <td  style="white-space: nowrap">
+                                        <td  style="white-space: nowrap;text-align: center">
                                             @if ($businessplan->business_plan_status_id >= 8)
                                             <a  href="{{route('dashboard.admin.assessment.summary',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info" target="_blank">ผลคะแนน</a>
                                             @else

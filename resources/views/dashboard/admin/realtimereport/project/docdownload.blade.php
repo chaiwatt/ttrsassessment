@@ -70,12 +70,12 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="searchtable">
+                                    <table class="table table-bordered table-striped mb-2" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th>เอกสาร</th> 
-                                                <th>ผู้ดาวน์โหลด</th> 
-                                                <th class="text-right">วันที่ดาวน์โหลด</th> 
+                                                <th style="text-align: center">เอกสาร</th> 
+                                                <th style="text-align: center">ผู้ดาวน์โหลด</th> 
+                                                <th class="text-center">วันที่ดาวน์โหลด</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -83,7 +83,7 @@
                                                 <tr>
                                                     <td>{{$downloadstat->document}}</td>
                                                     <td>{{$downloadstat->user->name}} {{$downloadstat->user->lastname}}</td>
-                                                    <td class="text-right">{{$downloadstat->created_at}}</td>
+                                                    <td class="text-center">{{$downloadstat->created_at}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

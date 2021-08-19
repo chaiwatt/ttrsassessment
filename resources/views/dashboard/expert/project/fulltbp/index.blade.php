@@ -107,9 +107,9 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>    
-                                        <td> {{$fulltbp->minitbp->businessplan->code}} </td> 
+                                        <td> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td> 
+                                        <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                         <td> 
                                             @if ($fulltbp->expertassignment->accepted > 1)
                                                     <a href="#" data-id="{{$fulltbp->id}}" class="badge badge-flat border-success text-success-600 acceptfulltbp">ยอมรับ</a>

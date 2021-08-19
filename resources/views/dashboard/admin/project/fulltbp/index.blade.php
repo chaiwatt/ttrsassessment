@@ -129,7 +129,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ<span id="showapprovelogminitbp"></span></h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;โครงการ: <span id="showapprovelogminitbp"></span></h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -348,10 +348,12 @@
                                                 <td style="white-space: nowrap;text-align: center">    
                                                     {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id }} --}}
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
-                                                            <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
+
+                                                            <a  href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" ><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
+                                                            {{-- <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span> --}}
 
                                                             @if (!Empty($fulltbp->approvelog))
-                                                                <button data-id="{{$fulltbp->id}}" data-doctype="2" class="btn btn-sm bg-success showapprovelog">รายการอนุมัติ</button>
+                                                                <button data-id="{{$fulltbp->id}}" data-doctype="2" class="btn btn-sm bg-success showapprovelog">การอนุมัติ</button>
                                                             @endif
 
                                                             @if ($fulltbp->reviselog->count() > 0)

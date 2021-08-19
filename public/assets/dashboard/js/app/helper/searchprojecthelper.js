@@ -282,7 +282,7 @@ function createTable(data){
     data.forEach(function (fulltbp,index) {
         html += `<tr >                                                           
             <td>  
-                <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
+                <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
             </td>                         
             <td> 
                 <a href="${route.url}/dashboard/admin/search/company/profile/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp.businessplan.company['name']} </a> 

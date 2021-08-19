@@ -93,18 +93,18 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
-                                        <th>หน้าเพจ</th>                               
-                                        <th style="width: 200px">จำนวนเข้าชม</th>
-                                        <th style="width: 250px">เข้าดูล่าสุด</th>
+                                    <tr class="bg-info">
+                                        <th style="text-align:center">หน้าเพจ</th>                               
+                                        <th style="width: 200px;text-align:center">จำนวนเข้าชม</th>
+                                        <th style="width: 250px;text-align:center">เข้าดูล่าสุด</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($pages as $key => $page)
                                     <tr>    
                                         <td> <a href="{{route('landing.page',['slug' => $page->slug])}}" class="text-info" target="_blank">{{$page->name}}</a> </td>                                         
-                                        <td> {{$page->pageview->count()}} </td> 
-                                        <td> {{$page->viewdate}} </td> 
+                                        <td style="text-align:center"> {{$page->pageview->count()}} </td> 
+                                        <td style="text-align:center"> {{$page->viewdate}} </td> 
                                     </tr>
                                     @endforeach
                                 </tbody>

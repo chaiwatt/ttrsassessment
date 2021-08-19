@@ -821,6 +821,9 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('conflictscore','DashboardAdminAssessmentController@ConflictScore')->name('dashboard.admin.assessment.conflictscore'); 
                 Route::post('conflictgrade','DashboardAdminAssessmentController@ConflictGrade')->name('dashboard.admin.assessment.conflictgrade'); 
                 Route::post('pendinguser','DashboardAdminAssessmentController@PendingUser')->name('dashboard.admin.assessment.pendinguser');
+                Route::get('doaccessment','DashboardAdminAssessmentController@DoAccessment')->name('dashboard.admin.assessment.doaccessment');
+                Route::post('rescoring','DashboardAdminAssessmentController@ReScoring')->name('dashboard.admin.assessment.rescoring');
+                
             }); 
             Route::group(['prefix' => 'evaluationresult'], function(){
                 Route::get('','DashboardAdminEvaluationResultController@Index')->name('dashboard.admin.evaluationresult');           

@@ -177,20 +177,20 @@ class DashboardAdminProjectInvoiceController extends Controller
         $notificationbubble->target_user_id = $company->user_id;
         $notificationbubble->save();
 
-        $messagebox = Message::sendMessage('กรุณาตรวจสอบรายการใบแจ้งหนี้','กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
+        $messagebox = Message::sendMessage('โปรดตรวจสอบรายการใบแจ้งหนี้','โปรดตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $company->user_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a data-id="'.$messagebox->id.'" href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ' .$minitbp->project. ' <a data-id="'.$messagebox->id.'" href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:กรุณาตรวจสอบรายการใบแจ้งหนี้','เรียน ผู้ขอรับการประเมิน<br><br> กรุณาตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS:โปรดตรวจสอบรายการใบแจ้งหนี้','เรียน ผู้ขอรับการประเมิน<br><br> โปรดตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         CreateUserLog::createLog('ส่งใบแจ้งหนี้ โครงการ' . $minitbp->project);
         InvoiceTransaction::find($request->id)->update([
@@ -234,7 +234,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'TTRS:ยืนยันการชำระเงิน','เรียน ผู้ขอรับการประเมิน<br><br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS:ยืนยันการชำระเงิน','เรียน ผู้ขอรับการประเมิน<br><br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         
         InvoiceTransaction::find($id)->update([
@@ -274,7 +274,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             }
       
             $mailbody  ="เรียน คุณ".$fulltbp->fulltbpresponsibleperson->name ." ".$fulltbp->fulltbpresponsibleperson->lastname . " กรรมการผู้จัดการ ". $fullcompanyname ."<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการเลขที่ " . ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code) . " เรื่อง" .$fulltbp->minitbp->project ." ของ " . $fullcompanyname . " ความละเอียดทราบแล้วนั้น บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่งได้คะแนน " .ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')) . " คะแนน จากคะแนนเต็ม " .ThaiNumericConverter::toThaiNumeric('100') ." คะแนนคิดเป็นเกรดระดับ " . $fulltbp->projectgrade->grade ." โดยสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ จะจัดส่งหนังสือแจ้งผลการประเมินอย่างเป็นทางการในลำดับถัดไป";
-            EmailBox::send(User::find($company->user_id)->email,'TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send(User::find($company->user_id)->email,'','TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             DateConversion::addExtraDay($minitbp->id,6);
         }  
         CreateUserLog::createLog('ยืนยันการชำระเงินค่าธรรมเนียม โครงการ' . $minitbp->project);

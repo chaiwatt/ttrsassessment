@@ -187,8 +187,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     html += `<tr >                                        
                         <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname}</td>                                            
                         <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                        <td> ${phone} </td>                                            
-                        <td> ${workphone} </td> 
+                        <td style="text-align:center"> ${phone} </td>                                            
+                        <td style="text-align:center"> ${workphone} </td> 
                         <td> ${email} </td> 
                         <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a data-id="${employ.id}" data-type="employee"  class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td>  
@@ -199,8 +199,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     html += `<tr >                                        
                     <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                    <td> ${phone} </td>                                            
-                    <td> ${workphone} </td> 
+                    <td style="text-align:center"> ${phone} </td>                                            
+                    <td style="text-align:center"> ${workphone} </td> 
                     <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
@@ -211,8 +211,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
                     html += `<tr >                                        
                     <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                    <td> ${phone} </td>                                            
-                    <td> ${workphone} </td> 
+                    <td style="text-align:center"> ${phone} </td>                                            
+                    <td style="text-align:center"> ${workphone} </td> 
                     <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
@@ -287,8 +287,8 @@ $(document).on("click",".deletecompanyemploy",function(e){
                         html += `<tr >                                        
                             <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                            <td> ${phone} </td>                                            
-                            <td> ${workphone} </td> 
+                            <td style="text-align:center"> ${phone} </td>                                            
+                            <td style="text-align:center"> ${workphone} </td> 
                             <td> ${email} </td> 
                             <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a data-id="${employ.id}" data-type="board" class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td>  
@@ -350,8 +350,8 @@ $(document).on("click",".deletecompanyceo",function(e){
                         html += `<tr >                                        
                             <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                            <td> ${phone} </td>                                            
-                            <td> ${workphone} </td> 
+                            <td style="text-align:center"> ${phone} </td>                                            
+                            <td style="text-align:center"> ${workphone} </td> 
                             <td> ${email} </td> 
                             <td style="white-space: nowrap"> <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td>  
@@ -504,8 +504,8 @@ $(document).on('click', '#btn_modal_add_employeducation', function(e) {
                 <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
-                <td > ${deletecode} </td> 
+                <td style="text-align:center"> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
+                <td style="text-align:center"> ${deletecode} </td> 
             </tr>`
             });
          $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
@@ -559,12 +559,12 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
                 deletecode = ``;
             }
             html += `<tr >                                        
-                <td> ${experience.startdate} - ${experience.enddate}</td>                                            
+                <td style="text-align:center"> ${experience.startdate} - ${experience.enddate}</td>                                            
                 <td> ${experience.company} </td> 
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
                 <td> ${experience.endposition} </td> 
-                <td> ${deletecode} </td> 
+                <td style="text-align:center"> ${deletecode} </td> 
             </tr>`
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
@@ -595,10 +595,10 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
                 deletecode = ``;
             }
             html += `<tr >                                        
-                <td> ${training.trainingdateth}</td>                                            
+                <td style="text-align:center"> ${training.trainingdateth}</td>                                            
                 <td> ${training.course} </td> 
                 <td> ${training.owner} </td>                                            
-                <td> ${deletecode} </td> 
+                <td style="text-align:center"> ${deletecode} </td> 
             </tr>`
             });
          $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
@@ -650,8 +650,8 @@ $(document).on("click",".deleteemployeducation",function(e){
                 <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                     <td> ${education.employeducationmajor} </td>                                            
-                    <td> ${education.employeducationmajor} </td> 
-                    <td > ${deletecode} </td> 
+                    <td > ${education.employeducationmajor} </td> 
+                    <td style="text-align:center"> ${deletecode} </td> 
                 </tr>`
                 });
             $("#fulltbp_companyemployeducation_wrapper_tr").html(html);
@@ -683,12 +683,12 @@ $(document).on("click",".deleteemployexperience",function(e){
                         deletecode = ``;
                     }
                     html += `<tr >                                        
-                        <td> ${experience.startdate} - ${experience.enddate}</td>                                            
+                        <td style="text-align:center"> ${experience.startdate} - ${experience.enddate}</td>                                            
                         <td> ${experience.company} </td> 
                         <td> ${experience.businesstype} </td>                                            
                         <td> ${experience.startposition} </td> 
                         <td> ${experience.endposition} </td> 
-                        <td> ${deletecode} </td> 
+                        <td style="text-align:center"> ${deletecode} </td> 
                     </tr>`
                     });
                  $("#fulltbp_companyemployexperience_wrapper_tr").html(html);
@@ -720,10 +720,10 @@ $(document).on("click",".deleteemploytraining",function(e){
                         deletecode = ``;
                     }
                     html += `<tr >                                        
-                        <td> ${training.trainingdateth}</td>                                            
+                        <td style="text-align:center"> ${training.trainingdateth}</td>                                            
                         <td> ${training.course} </td> 
                         <td> ${training.owner} </td>                                            
-                        <td> ${deletecode} </td> 
+                        <td style="text-align:center"> ${deletecode} </td> 
                     </tr>`
                     });
                  $("#fulltbp_companyemploytraining_wrapper_tr").html(html);
@@ -819,7 +819,7 @@ $(document).on('click', '#btn_modal_add_stockholder', function(e) {
             html += `<tr >                                        
                 <td> ${stockholder.name}</td>                                            
                 <td> ${stockholder.ceorelation} </td>                                           
-                <td style="width:180px;white-space: nowrap"> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
+                <td style="width:180px;white-space: nowrap;text-align:center"> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
             </tr>`
             });
         $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -860,7 +860,7 @@ $(document).on("click",".deletestockholder",function(e){
                     html += `<tr >                                        
                         <td> ${stockholder.name}</td>                                            
                         <td> ${stockholder.ceorelation} </td>                                           
-                        <td> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
+                        <td style="text-align:center"> <a  data-id="${stockholder.id}" class="btn btn-sm bg-danger deletestockholder">ลบ</a> </td> 
                     </tr>`
                     });
                 $("#fulltbp_companystockholder_wrapper_tr").html(html);
@@ -953,7 +953,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
         var html = ``;
         data.forEach(function (techdevlevel,index) {
             html += `<tr >                                        
-                <td> ${techdevlevel.technology} </td>                                            
+                <td style="text-align:center"> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td style="white-space: nowrap"> 
@@ -987,7 +987,7 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                 var html = ``;
                 data.forEach(function (techdevlevel,index) {
                     html += `<tr >                                        
-                        <td> ${techdevlevel.technology} </td>                                            
+                        <td style="text-align:center"> ${techdevlevel.technology} </td>                                            
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
                         <td style="white-space: nowrap"> 
@@ -1019,7 +1019,7 @@ $(document).on("click","#btn_modal_edit_tectdevlevel",function(e){
         var html = ``;
         data.forEach(function (techdevlevel,index) {
             html += `<tr >                                        
-                <td> ${techdevlevel.technology} </td>                                            
+                <td style="text-align:center"> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td style="white-space: nowrap"> 
@@ -2231,11 +2231,11 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
-                <td class="text-right"> ${sell.numproject} </td>  
+                <td class="text-center"> ${sell.numproject} </td>  
                 <td class="text-right"> ${sell.partnertaxid} </td>                         
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
-                <td class="text-right"> ${sell.businessyear} </td> 
+                <td class="text-center"> ${sell.businessyear} </td> 
                 <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
@@ -2278,11 +2278,11 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
-                <td class="text-right"> ${sell.numproject} </td>  
+                <td class="text-center"> ${sell.numproject} </td>  
                 <td class="text-right"> ${sell.partnertaxid} </td>                         
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
-                <td class="text-right"> ${sell.businessyear} </td> 
+                <td class="text-center"> ${sell.businessyear} </td> 
                 <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
@@ -2315,11 +2315,11 @@ $(document).on("click",".deletedebtpartner",function(e){
                 data.forEach(function (sell,index) {
                     html += `<tr >                                        
                         <td> ${sell.debtpartner} </td>
-                        <td class="text-right"> ${sell.numproject} </td>  
+                        <td class="text-center"> ${sell.numproject} </td>  
                         <td class="text-right"> ${sell.partnertaxid} </td>                         
                         <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                         <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
-                        <td class="text-right"> ${sell.businessyear} </td> 
+                        <td class="text-center"> ${sell.businessyear} </td> 
                         <td style="width:1%;white-space: nowrap"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
@@ -2350,7 +2350,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 <td class="text-right"> ${sell.partnertaxid} </td>  
                 <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
                 <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
-                <td class="text-right"> ${sell.businessyear} </td> 
+                <td class="text-center"> ${sell.businessyear} </td> 
                 <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
@@ -2395,7 +2395,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 <td class="text-right"> ${sell.partnertaxid} </td>  
                 <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
                 <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
-                <td class="text-right"> ${sell.businessyear} </td> 
+                <td class="text-center"> ${sell.businessyear} </td> 
                 <td style="width:1%;white-space: nowrap"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
@@ -2430,7 +2430,7 @@ $(document).on("click",".deletecreditpartner",function(e){
                         <td class="text-right"> ${sell.partnertaxid} </td>  
                         <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
                         <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
-                        <td class="text-right"> ${sell.businessyear} </td> 
+                        <td class="text-center"> ${sell.businessyear} </td> 
                         <td style="width:1%;white-space: nowrap"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
@@ -3375,7 +3375,7 @@ $(document).on('change', '#boardattachment', function(e) {
                     }
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td> 
+                        <td style="text-align:center"> 
       
                             ${deletecode}                                      
                         </td>
@@ -3409,7 +3409,7 @@ $(document).on("click",".deleteboardattachment",function(e){
                     }
                     html += `<tr >                                        
                         <td> ${attachment.name} </td>                                            
-                        <td style="white-space: nowrap"> 
+                        <td style="white-space: nowrap;text-align:center" > 
                             <a href="${route.url}/${attachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                             ${deletecode}                                       
                         </td>
@@ -3802,8 +3802,8 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyearstart} - ${education.employeducationyearend}  </td> 
-                <td > 
+                <td style="text-align:center"> ${education.employeducationyearstart} - ${education.employeducationyearend}  </td> 
+                <td style="text-align:center"> 
                      ${deletecode}
                 </td> 
             </tr>`
@@ -3818,12 +3818,12 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 deletecode = ``;
             }
             experiencetable += `<tr >                                        
-                <td> ${experience.startdate} - ${experience.enddate}</td>                                            
+                <td style="text-align:center"> ${experience.startdate} - ${experience.enddate}</td>                                            
                 <td> ${experience.company} </td> 
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
                 <td> ${experience.endposition} </td> 
-                <td> ${deletecode} </td> 
+                <td style="text-align:center"> ${deletecode} </td> 
             </tr>`
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
@@ -3835,10 +3835,10 @@ $(document).on('click', '.editEmployinfo', function(e) {
                 deletecode = ``;
             }
             trainingtable += `<tr >                                        
-                 <td> ${training.trainingdateth}</td>                                            
+                 <td style="text-align:center"> ${training.trainingdateth}</td>                                            
                  <td> ${training.course} </td> 
                  <td> ${training.owner} </td>                                            
-                 <td> ${deletecode} </td> 
+                 <td style="text-align:center"> ${deletecode} </td> 
              </tr>`
              });
           $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
@@ -3850,7 +3850,7 @@ $(document).on('click', '.editEmployinfo', function(e) {
             }
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
-                  <td style="white-space: nowrap"> 
+                  <td style="white-space: nowrap;text-align:center"> 
                     <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                     ${deletecode} 
                   </td> 
@@ -3952,8 +3952,8 @@ function modaltrigger(id) {
                 <td> ${educationlevel} </td>                                            
                 <td> ${education.employeducationinstitute} </td> 
                 <td> ${education.employeducationmajor} </td>                                            
-                <td> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
-                <td > ${deletecode}</td> 
+                <td style="text-align:center"> ${education.employeducationyearstart} - ${education.employeducationyearend} </td> 
+                <td style="text-align:center"> ${deletecode}</td> 
             </tr>`
             });
         $("#fulltbp_companyemployeducation_wrapper_tr").html(employeducationtable);
@@ -3965,12 +3965,12 @@ function modaltrigger(id) {
                 deletecode = ``;
             }
             experiencetable += `<tr >                                        
-                <td> ${experience.startdate} - ${experience.enddate}</td>                                            
+                <td style="text-align:center"> ${experience.startdate} - ${experience.enddate}</td>                                            
                 <td> ${experience.company} </td> 
                 <td> ${experience.businesstype} </td>                                            
                 <td> ${experience.startposition} </td> 
                 <td> ${experience.endposition} </td> 
-                <td> ${deletecode} </td> 
+                <td style="text-align:center"> ${deletecode} </td> 
             </tr>`
             });
          $("#fulltbp_companyemployexperience_wrapper_tr").html(experiencetable);
@@ -3982,10 +3982,10 @@ function modaltrigger(id) {
                 deletecode = ``;
             }
             trainingtable += `<tr >                                        
-                 <td> ${training.trainingdateth}</td>                                            
+                 <td style="text-align:center"> ${training.trainingdateth}</td>                                            
                  <td> ${training.course} </td> 
                  <td> ${training.owner} </td>                                            
-                 <td> ${deletecode} </td> 
+                 <td style="text-align:center"> ${deletecode} </td> 
              </tr>`
              });
           $("#fulltbp_companyemploytraining_wrapper_tr").html(trainingtable);
@@ -3994,7 +3994,7 @@ function modaltrigger(id) {
        
             attachment += `<tr >                                        
                   <td> ${boardattachment.name}</td>                                                                                      
-                  <td style="white-space: nowrap"> 
+                  <td style="white-space: nowrap;text-align:center"> 
                     <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
                      
                   </td> 
@@ -4108,8 +4108,8 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
                 html += `<tr >                                        
                     <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                    <td> ${phone} </td>                                            
-                    <td> ${workphone} </td> 
+                    <td style="text-align:center"> ${phone} </td>                                            
+                    <td style="text-align:center"> ${workphone} </td> 
                     <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-type="board" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a  data-id="${employ.id}" data-type="board"  class="btn btn-sm bg-danger deletecompanyemploy">ลบ</a>  </td> 
@@ -4202,8 +4202,8 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
                 html += `<tr >                                        
                     <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                     <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                    <td> ${phone} </td>                                            
-                    <td> ${workphone} </td> 
+                    <td style="text-align:center"> ${phone} </td>                                            
+                    <td style="text-align:center"> ${workphone} </td> 
                     <td> ${email} </td> 
                     <td style="white-space: nowrap"> <a data-type="ceo" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                     <a  data-id="${employ.id}" data-type="ceo" class="btn btn-sm bg-danger deletecompanyceo">ลบ</a>  </td> 
@@ -4294,8 +4294,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
                     html += `<tr >                                        
                         <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                         <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                        <td> ${phone} </td>                                            
-                        <td> ${workphone} </td> 
+                        <td style="text-align:center"> ${phone} </td>                                            
+                        <td style="text-align:center"> ${workphone} </td> 
                         <td> ${email} </td> 
                         <td style="white-space: nowrap"> <a data-type="employee" data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
@@ -4358,8 +4358,8 @@ $(document).on("click",".deletecompanyemploy_research",function(e){
                         html += `<tr >                                        
                             <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                            <td> ${phone} </td>                                            
-                            <td> ${workphone} </td> 
+                            <td style="text-align:center"> ${phone} </td>                                            
+                            <td style="text-align:center"> ${workphone} </td> 
                             <td> ${email} </td> 
                             <td style="white-space: nowrap"> <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a  data-id="${employ.id}" data-type="employee" class="btn btn-sm bg-danger deletecompanyemploy_research">ลบ</a>  </td> 
@@ -4433,8 +4433,8 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
                     html += `<tr >                                        
                         <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                         <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                        <td> ${phone} </td>                                            
-                        <td> ${workphone} </td> 
+                        <td style="text-align:center"> ${phone} </td>                                            
+                        <td style="text-align:center"> ${workphone} </td> 
                         <td> ${email} </td> 
                         <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                         <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 
@@ -4489,8 +4489,8 @@ $(document).on("click",".deletecompanyemploy_projectmember",function(e){
                         html += `<tr >                                        
                             <td style="width:350px"> ${prefix}${employ.name} ${employ.lastname} </td>                                            
                             <td style="width:1%;white-space: nowrap"> ${position} </td> 
-                            <td> ${phone} </td>                                            
-                            <td> ${workphone} </td> 
+                            <td style="text-align:center"> ${phone} </td>                                            
+                            <td style="text-align:center"> ${workphone} </td> 
                             <td> ${email} </td> 
                             <td style="white-space: nowrap"> <a  data-id="${employ.id}" class="btn btn-sm bg-teal editEmployinfo">ข้อมูลส่วนตัว</a> 
                             <a  data-id="${employ.id}" class="btn btn-sm bg-danger deletecompanyemploy_projectmember">ลบ</a>  </td> 

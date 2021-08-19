@@ -64,7 +64,7 @@ class SettingProfileUserController extends Controller
         $industrygroups = IndustryGroup::get();
         $fulltbpcompanydocs = FullTbpCompanyDoc::where('company_id',$company->id)->get();
         $userpositions = UserPosition::get();
-        $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->get();
+        $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->where('isdirector',1)->get();
         $employpositions = EmployPosition::where('id', '<=',5)->get();
         $companyservicetypes = CompanyServiceType::get();
         $companysizes = Companysize::get();

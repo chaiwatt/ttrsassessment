@@ -683,7 +683,7 @@ function callGenRadarByBusinessSize(data){
     });
     var maxval = Math.max.apply(null, numgrade);
     var indicator =  [
-        { name: 'micro', max: maxval},
+        { name: 'Micro', max: maxval},
         { name: 'S', max: maxval},
         { name: 'M', max: maxval},
         { name: 'L', max: maxval}
@@ -707,7 +707,7 @@ function callGenBarByBusinessSize(data){
         gradedata.push(tmp);
     });
 
-    var xaxis = ['micro', 'S', 'M', 'L']
+    var xaxis = ['Micro', 'S', 'M', 'L']
 
     genBar(xaxis ,gradedata , 'gradebybusinesssize');
 }
@@ -727,7 +727,7 @@ function callGenPolarStackByBusinessSize(data){
         gradedata.push(tmp);
     });
 
-    var xaxis = ['micro', 'S', 'M', 'L']
+    var xaxis = ['Micro', 'S', 'M', 'L']
     genPolarStack(xaxis ,gradedata , 'gradebybusinesssize');
 }
 

@@ -74,27 +74,19 @@
         @endif
         <div class="row">
             <div class="col-md-12">
-
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">สรุปคะแนนการประเมิน</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">
-                        
                         <div class="table-responsive">
                             <table class="table table-bordered text-nowrap" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
                                         <th style="text-align: center">ชื่อโครงการ</th>
-                                        
                                         <th style="text-align: center">บริษัท</th>
-                                        
                                         <th style="width:1%;white-space: nowrap">สถานะ</th>                   
                                     </tr>
                                 </thead>
@@ -105,7 +97,7 @@
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                     <tr>    
                                                         <td> {{$fulltbp->minitbp->project}} </td>  
-                                                        <td> {{$fulltbp->minitbp->businessplan->company->name}} </td>
+                                                        <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td>
                                                         
                                                         <td style="white-space: nowrap">
                                                                 @if ($fulltbp->allscoring == 0)
@@ -134,6 +126,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
         <!-- /form layouts -->
     </div>

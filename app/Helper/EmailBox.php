@@ -1,13 +1,14 @@
 <?php
 namespace App\Helper;
 
+use App\User;
 use App\Mail\EmailSystem;
 use App\Model\GeneralInfo;
 use Illuminate\Support\Facades\Mail;
 
 class EmailBox
 {
-    public static function send($mailto,$title,$message){
+    public static function send($mailto,$mailcc,$title,$message){
         $data = [
             'sendermail' => env('MAIL_FROM_ADDRESS'),
             'sendername' => 'TTRS',
