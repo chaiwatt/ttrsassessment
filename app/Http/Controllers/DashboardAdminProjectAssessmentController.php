@@ -159,14 +159,18 @@ class DashboardAdminProjectAssessmentController extends Controller
                                     ->append('extracriteria'); 
         $extrascoring = ExtraScoring::where('ev_id',$request->evid)
                                     ->where('user_id',Auth::user()->id)
-                                    ->get();                             
+                                    ->get();   
+        $finalextrascoring = ExtraScoring::where('ev_id',$request->evid)
+                                    ->whereNull('user_id')
+                                    ->get();                           
         return response()->json(array(
             "criteriatransactions" => $criteriatransactions,
             "sumweigth" => $sumweigth,
             "pillars" => $pillars,
             "scoringstatus" => $scoringstatus,
             "extracriteriatransactions" => $extracriteriatransactions,
-            "extrascoring" => $extrascoring
+            "extrascoring" => $extrascoring,
+            "finalextrascoring" => $finalextrascoring,
         ));
     }
 
@@ -255,7 +259,7 @@ class DashboardAdminProjectAssessmentController extends Controller
                         preg_match('#\((.*?)\)#', $name, $match);
                         if(!Empty($match[1])){
                             preg_match('!\d+!',$match[1], $result);
-                            $_sumscore += intVal($result[0]);
+                            $_sumscore += number_format($result[0], 3, '.', '') ;// intVal($result[0]);
                         }else{
                             $_sumscore += 1;
                         }
@@ -309,13 +313,14 @@ class DashboardAdminProjectAssessmentController extends Controller
                 if($totalweight != 0){
                     $_percent = $totalweightsum/$totalweight*100;
                 }
-                $pillargrade = $this->checkPillarGrade(intVal($_percent));
-                $finalgrade =  new FinalGrade();
+                $_karnscore = number_format($_percent, 3, '.', '');
+                $pillargrade = $this->checkPillarGrade($_karnscore);
+                $finalgrade = new FinalGrade();
                 $finalgrade->full_tbp_id = $ev->full_tbp_id;
                 $finalgrade->ev_id = $ev->id;
                 $finalgrade->pillar_id = $pillar->id;
                 $finalgrade->grade = $pillargrade;
-                $finalgrade->percent = intVal($_percent);
+                $finalgrade->percent = $_karnscore; // intVal($_percent);
                 $finalgrade->save();
             }
         }
@@ -373,7 +378,7 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectgrade->indexweight = $ev->percentindex;
         $projectgrade->extrapercent = $extrapercent;
         $projectgrade->extraweight = $ev->percentextra;
-        $projectgrade->percent = intVal($percent);
+        $projectgrade->percent = number_format($percent, 3, '.', '');// intVal($percent);
         $projectgrade->grade = $grade;
         $projectgrade->businesssize = $company->company_size_id;
         $projectgrade->businesstype = $company->business_type_id;

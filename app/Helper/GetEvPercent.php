@@ -26,7 +26,7 @@ class GetEvPercent
                         $getscore++;
                     }
                 }else if(Empty($userscore) && Empty($finalscore)){
-                    $getscore++;
+                    // $getscore++;
                 }
             }
             return ($getscore/$criteriatransactions->count())*100;

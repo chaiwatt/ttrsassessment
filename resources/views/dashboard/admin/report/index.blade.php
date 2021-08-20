@@ -2107,6 +2107,7 @@
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'ตกลง',
                 cancelButtonText: 'ยกเลิก',
+                denyButtonText: `Preview`,
                 closeOnConfirm: false,
                 closeOnCancel: false
                 }).then((result) => {

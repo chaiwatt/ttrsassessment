@@ -87,9 +87,9 @@
                                                     <th style="width:20%">Pillar</th>  
                                                     <th style="width:20%">Sub Pillar</th>   
                                                     <th style="width:20%">Index</th>                                                                                
-                                                    <th style="width:20%">Criteria <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                    <th style="width:20%">My grade <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
                                                     @if ($projectgrade->count() !=0)
-                                                        <th style="width:20%">Final</th>
+                                                        <th style="width:20%">Final grade</th>
                                                     @endif
                                                 </tr>
                                             </thead>
@@ -129,7 +129,10 @@
                                                     <tr class="bg-info">
                                                         <th>Category</th>  
                                                         <th>Extra Criteria</th>   
-                                                        <th>Weight</th>                                                                                
+                                                        <th style="width:20%">My grade</th> 
+                                                        @if ($projectgrade->count() !=0)
+                                                            <th style="width:20%">Final grade</th>
+                                                        @endif                                                                               
                                                     </tr>
                                                 </thead>
                                                 <div class="theme_tail theme_tail_circle loadprogress">

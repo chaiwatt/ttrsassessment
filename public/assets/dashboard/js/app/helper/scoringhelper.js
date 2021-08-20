@@ -19,7 +19,7 @@ $(function() {
     getEv($('#evid').val(),route.userid).then(data => {
         RenderTable(data,1);
         //RenderTable(data,2);
-        RenderExtraTable(data.extracriteriatransactions,data.extrascoring);
+        RenderExtraTable(data.extracriteriatransactions,data.extrascoring,data.finalextrascoring);
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         // RowSpan("extra_criteriatable");
@@ -233,7 +233,7 @@ $(document).on('click', '#btnOnExcelExtra', function(e) {
 
 $(document).on('click', '#btnOnPdfExtra', function(e) {
     getEv($('#evid').val(),route.userid).then(data => {
-        console.log(data);
+        // console.log(data);
         RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
         callDataTableExtra();
        $('#evextraexporttable').DataTable().buttons(0,1).trigger();
@@ -317,16 +317,21 @@ function RenderTable(data,evtype){
                     if($('#isfinal').val() == 0){
                         hiddenfinal = "hidden";
                     }
+
+
                     var finalcheckscore = criteria.scoring.filter(x => x.user_id == null); 
                     if(typeof(finalcheckscore[0]) != "undefined"){
                         var _finalscoring = finalcheckscore[0];
-                        if(_finalscoring['comment']){finalcomment = _finalscoring['comment'];}
+                        if(_finalscoring['comment']){comment = _finalscoring['comment'];}
                         if(_finalscoring['scoretype'] == 1){
                             finaltextvalue = _finalscoring['score'];
                         }else if(_finalscoring['scoretype'] == 2){
-                            finalcheckvalue = "checked";
+                            if(_finalscoring['score'] == 1){
+                                finalcheckvalue = "checked";
+                            }
                         }
                     }
+
                     var warningtext ='';
                     var warninglabel ='';
                     if(finaltextvalue != textvalue){
@@ -358,7 +363,7 @@ function RenderTable(data,evtype){
                     <td style="font-size:18px"> ${criteria.subpillar['name']}</td>    
                     <td style="font-size:18px"> ${criteria.subpillarindex['name']}</td>   
                     <td style="font-size:18px"> ${criterianame} </td>       
-                    <td style="font-size:18px" ${hiddenfinal}> ${finalcriterianame} </td>                                      
+                    <td style="font-size:18px" ${hiddenfinal}> ${finalcriterianame}</td>                                      
                 </tr>`
                 }
             });
@@ -420,17 +425,25 @@ function RenderTable2(data,evtype){
     }); 
 }
 
-function RenderExtraTable(data,scoring){
+function RenderExtraTable(data,scoring,finalscoring){
     var html =``;
     var readonly =``;
 
     data.forEach(function (criteriatransaction,index) {
+        console.log(criteriatransaction);
         var checkscore = scoring.filter(x => x.extra_critreria_transaction_id == criteriatransaction.id)[0]; 
+        var checkfinalscore = finalscoring.filter(x => x.extra_critreria_transaction_id == criteriatransaction.id)[0]; 
         var score = '';
         var comment = '';
+        var finalscore = '';
+        var finalcomment = '';
             if(!jQuery.isEmptyObject(checkscore) ){
                 score = checkscore.scoring;
                 if(checkscore.comment){comment = checkscore.comment;}
+            }
+        if(!jQuery.isEmptyObject(checkfinalscore) ){
+                finalscore = checkfinalscore.scoring;
+                if(checkfinalscore.comment){finalcomment = checkfinalscore.comment;}
             }
             html += `<tr > 
             <td> ${criteriatransaction.extracategory['name']} <a href="#" data-categoryid="${criteriatransaction.extra_category_id}" class="text-grey-300"></a></td>                
@@ -443,6 +456,17 @@ function RenderExtraTable(data,scoring){
                     <div class="toggle"><div class="form-group">
                         <label><i>ความเห็น</i></label>
                         <input type="text" value="${comment}" data-id="${criteriatransaction.id}" data-type="comment" class="form-control form-control-lg inpscore inputextracomment" >
+                    </div>
+                </div>
+            </td> 
+            <td> 
+                <div class="form-group">
+                        <label>กรอกคะแนน (0-5)</label>
+                        <input type="text" value="${finalscore}" data-id="${criteriatransaction.id}" data-type="score" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
+                    </div>
+                    <div class="toggle"><div class="form-group">
+                        <label><i>ความเห็น</i></label>
+                        <input type="text" value="${finalcomment}" data-id="${criteriatransaction.id}" data-type="comment" class="form-control form-control-lg inpscore inputextracomment" >
                     </div>
                 </div>
             </td> 

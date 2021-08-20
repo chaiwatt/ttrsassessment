@@ -213,9 +213,11 @@
                 text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมินหรือไม่?`,
                 type: 'warning',
                 showCancelButton: true,
+                showDenyButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'ตกลง',
                 cancelButtonText: 'ยกเลิก',
+                denyButtonText: `Preview`,
                 closeOnConfirm: false,
                 closeOnCancel: false
                 }).then((result) => {

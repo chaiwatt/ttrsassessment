@@ -287,7 +287,8 @@ class AssessmentController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'','TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            $jd = User::where('user_type_id',6)->first();
+            EmailBox::send($_user->email,$jd->email,'TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         if($projectstatustransaction->status == 1){

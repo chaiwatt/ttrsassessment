@@ -69,7 +69,7 @@
                                             <h3 class="font-weight-semibold mb-0"><span id="showpercent"></span></h3>
                                         </div>
                                         <div>
-                                            เปอร์เซนต์
+                                            คะแนน
                                         </div>
                                     </div>
                 
@@ -108,7 +108,7 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header header-elements-sm-inline">
-                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ร้อยละเกรดแยกตาม Pillar</h6>
+                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="row l-400">
@@ -463,7 +463,7 @@
                             <thead>
                                 <tr class="bg-info">
                                     <th>Pillar (Index)</th>  
-                                    <th style="width:30%;text-align: center">เปอร์เซนต์</th>          
+                                    <th style="width:30%;text-align: center">คะแนน</th>          
                                     <th style="width:30%;text-align: center">เกรด</th>                                                                             
                                 </tr>
                             </thead>
@@ -489,8 +489,7 @@
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
                                                     <th>Index</th>                                                                                
-                                                    <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
-                                                    {{-- <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th>  --}}
+                                                    <th>Grade <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
                                                 </tr>
                                             </thead>
                                             <div class="theme_tail theme_tail_circle loadprogress">
