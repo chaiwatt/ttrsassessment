@@ -111,6 +111,8 @@
                                                 <th style="text-align: left">Criteria</th>  
                                                 <th style="text-align: left">Score</th>  
                                                 <th style="text-align: left">Comment</th> 
+                                                <th style="text-align: left">Final Score</th>  
+                                                <th style="text-align: left">Final Comment</th> 
                                             </tr>
                                         </thead>
                                     </table> 
@@ -151,6 +153,8 @@
                                                     <th style="text-align: left">Extra Criteria</th>   
                                                     <th style="text-align: left">Score</th>  
                                                     <th style="text-align: left">Comment</th> 
+                                                    <th style="text-align: left">Final Score</th>  
+                                                    <th style="text-align: left">Final Comment</th> 
                                                 </tr>
                                             </thead>
                                         </table>  

@@ -47,7 +47,9 @@ function callDataTable(){
             { "data" : "subpillarindex" },
             { "data" : "criteria" },
             { "data" : "score" },
-            { "data" : "comment" }
+            { "data" : "comment" },
+            { "data" : "finalscore" },
+            { "data" : "finalcomment" },
         ],
         
         searching: false,
@@ -68,7 +70,9 @@ function callDataTable(){
         buttons: [
             { 
                 extend: 'excelHtml5',
+               
                 className: 'btn-primary',
+                
                 text: 'Excel',
                 title: function () { 
                     return null; 
@@ -77,7 +81,7 @@ function callDataTable(){
                     return "รายการ EV (Index Criteria) โครงการ" + route.projectname + ' (' + route.user + ')';
                 }, 
                 exportOptions: {
-                    columns: [ 0, 1,2,3,4,5 ]
+                    columns: [ 0,1,2,3,4,5,6,7]
                 },
                 customize: function( xlsx ) {
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
@@ -86,8 +90,9 @@ function callDataTable(){
             },
             { 
                 extend: 'pdfHtml5',
-                pageSize: 'A4',
-                // orentation: 'landscape',
+                // pageSize: 'A4',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
                 customize: function(doc) {
                     doc.defaultStyle = {
                         font:'THSarabun',
@@ -95,15 +100,16 @@ function callDataTable(){
                     };
                     doc.styles.title.alignment = 'left';
                     doc.pageMargins = [30, 30, 30, 30];
-                    doc.content[1].table.widths = ['*','*', '*', '*', '*', '*']
+                    doc.content[1].table.widths = ['*','*', '*', '*', '*', '*', '*', '*']
                     var rowCount = doc.content[1].table.body.length;
                     for (var i = 1; i < rowCount; i++) {
-                    //doc.content[1].table.body[i][0].alignment = 'left';
+                       //doc.content[1].table.body[i][0].alignment = 'left';
                         doc.content[1].table.body[i][4].alignment = 'center';
+                        doc.content[1].table.body[i][6].alignment = 'center';
                     }
                 },
                 exportOptions: {
-                    columns: [ 0, 1,2,3,4,5 ]
+                    columns: [ 0,1,2,3,4,5,6,7]
                 },
                 title: function () { 
                     return "รายการ EV (Index Criteria โครงการ" + route.projectname + ' (' + route.user + ')';
@@ -133,7 +139,9 @@ function callDataTableExtra(){
             { "data" : "category" },
             { "data" : "criteria" },
             { "data" : "score" },
-            { "data" : "comment" }
+            { "data" : "comment" },
+            { "data" : "finalscore" },
+            { "data" : "finalcomment" }
         ],
         
         searching: false,
@@ -163,7 +171,7 @@ function callDataTableExtra(){
                     return "รายการ EV (Extra) โครงการ" + route.projectname + ' (' + route.user + ')';     
                 }, 
                 exportOptions: {
-                    columns: [ 0, 1,2,3]
+                    columns: [ 0, 1,2,3,4,5]
                 },
                 customize: function( xlsx ) {
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
@@ -172,8 +180,9 @@ function callDataTableExtra(){
             },
             { 
                 extend: 'pdfHtml5',
-                pageSize: 'A4',
-                // orentation: 'landscape',
+                // pageSize: 'A4',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
                 customize: function(doc) {
                     doc.defaultStyle = {
                         font:'THSarabun',
@@ -181,14 +190,15 @@ function callDataTableExtra(){
                     };
                     doc.styles.title.alignment = 'left';
                     doc.pageMargins = [30, 30, 30, 30];
-                    doc.content[1].table.widths = ['*','*','*','*']
+                    doc.content[1].table.widths = ['*','*','*','*','*','*']
                     var rowCount = doc.content[1].table.body.length;
                     for (var i = 1; i < rowCount; i++) {
                     doc.content[1].table.body[i][2].alignment = 'center';
+                    doc.content[1].table.body[i][4].alignment = 'center';
                     }
                 },
                 exportOptions: {
-                    columns: [ 0, 1,2,3]
+                    columns: [ 0, 1,2,3,4,5]
                 },
                 title: function () { 
                     return "รายการ EV (Extra) โครงการ" + route.projectname + ' (' + route.user + ')';
@@ -206,8 +216,10 @@ function callDataTableExtra(){
     } );
 }
 $(document).on('click', '#btnOnExcel', function(e) {
+    // console.log(evdata);
     getEv($('#evid').val(),route.userid).then(data => {
         RenderTable2(data,1);
+        
         callDataTable();
        $('#evexporttable').DataTable().buttons(0,0).trigger();
     }).catch(error => {})
@@ -223,7 +235,7 @@ $(document).on('click', '#btnOnPdf', function(e) {
 
 $(document).on('click', '#btnOnExcelExtra', function(e) {
     getEv($('#evid').val(),route.userid).then(data => {
-        console.log(data);
+        // console.log(data);
         RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
         callDataTableExtra();
        $('#evextraexporttable').DataTable().buttons(0,0).trigger();
@@ -232,9 +244,11 @@ $(document).on('click', '#btnOnExcelExtra', function(e) {
 
 
 $(document).on('click', '#btnOnPdfExtra', function(e) {
+    
     getEv($('#evid').val(),route.userid).then(data => {
-        // console.log(data);
+        console.log(evextradata);
         RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
+       
         callDataTableExtra();
        $('#evextraexporttable').DataTable().buttons(0,1).trigger();
     }).catch(error => {})
@@ -297,7 +311,7 @@ function RenderTable(data,evtype){
                      var showcriteria = criteria.subpillarindex['name'];
 
                     var criterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label>
-                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" placeholder="" value="${textvalue}" data-type="score" class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
+                    <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="score" value="${textvalue}"  class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
 
                     if(criteria.criteria != null){
                      showscore = checkvalue;
@@ -310,7 +324,7 @@ function RenderTable(data,evtype){
         
                     criterianame += `<div class="toggle"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" value="${comment}" data-type="comment" class="form-control form-control-lg inpscore comment" ${readonly}>
+                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="comment" value="${comment}"  class="form-control form-control-lg inpscore comment" ${readonly}>
                                         </div>
                                     </div>`;
 
@@ -332,6 +346,8 @@ function RenderTable(data,evtype){
                         }
                     }
 
+                    var showfinalscore = finaltextvalue;
+
                     var warningtext ='';
                     var warninglabel ='';
                     if(finaltextvalue != textvalue){
@@ -341,20 +357,21 @@ function RenderTable(data,evtype){
                         warninglabel ='text-danger';
                     }
 
-                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : showscore , "comment" : comment });
+                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : showscore , "comment" : comment , "finalscore" : showfinalscore , "finalcomment" : finalcomment });
 
-                    var finalcriterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label><input type="text" placeholder="" value="${finaltextvalue}" class="form-control form-control-lg " disabled ></div>`;
+                    var finalcriterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label><input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="finalscore" value="${finaltextvalue}" class="form-control form-control-lg " readonly ></div>`;
 
                     if(criteria.criteria != null){
+                        showfinalscore = finalcheckvalue;
                         finalcriterianame = `<label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input-styled-info" style="vertical-align: middle" ${finalcheckvalue} disabled>
+                                        <input type="checkbox" data-name="${criteria.criteria['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="finalscore"  class="form-check-input-styled-info" style="vertical-align: middle" ${finalcheckvalue} disabled>
                                         <span class="">${criteria.criteria['name']}<span>
                                     </label>`;
                     }
         
                     finalcriterianame += `<div class="toggle"><div class="form-group">
                                         <label><i>ความเห็น</i></label>
-                                        <input type="text" value="${finalcomment}" class="form-control form-control-lg" disabled>
+                                        <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="finalcomment" value="${finalcomment}" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
                                     `; 
@@ -388,6 +405,9 @@ function RenderTable2(data,evtype){
                     var textvalue = '';
                     var checkvalue = '';
                     var comment = '';
+                    var finaltextvalue = '';
+                    var finalcheckvalue = '';
+                    var finalcomment = '';
 
                     
                     var checkscore = criteria.scoring.filter(x => x.user_id == userid); 
@@ -402,27 +422,55 @@ function RenderTable2(data,evtype){
                             }
                         }
                     }
+
+                    var finalcheckscore = criteria.scoring.filter(x => x.user_id == null); 
+                    if(typeof(finalcheckscore[0]) != "undefined"){
+                        var _finalscoring = finalcheckscore[0];
+                        if(_finalscoring['comment']){finalcomment = _finalscoring['comment'];}
+                        if(_finalscoring['scoretype'] == 1){
+                            finaltextvalue = _finalscoring['score'];
+                        }else if(_finalscoring['scoretype'] == 2){
+                            if(_finalscoring['score'] == 1){
+                                finalcheckvalue = "checked";
+                            }
+                        }
+                    }
+
+
                      var showcriteria = criteria.subpillarindex['name'];
                      var score = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`).val();
                      var comment = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="comment"]`).val();
+                     var finalscore = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="finalscore"]`).val();
+                     var finalcomment = $(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="finalcomment"]`).val();
                      
                     if(criteria.criteria != null){
 
-                     showcriteria = criteria.criteria['name'];
+                        showcriteria = criteria.criteria['name'];
 
-                     if($($(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`)).is(":checked")){
-                            score = 'x';
-                     }else{
-                        score = '';
-                     }
+                        if($($(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="score"]`)).is(":checked")){
+                                score = 'x';
+                        }else{
+                            score = '';
+                        }
+
+
+                        if($($(`input[data-id="${criteria.id}"][data-subpillarindex="${criteria.subpillarindex['id']}"][data-type="finalscore"]`)).is(":checked")){
+                            finalscore = 'x';
+                        }else{
+                            finalscore = '';
+                        }
                     }
+
+
         
-                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : score , "comment" : comment });
+                     evdata.push({"pillar":  criteria.pillar['name'] , "subpillar": criteria.subpillar['name'], "subpillarindex": criteria.subpillarindex['name'], "criteria": showcriteria, "score" : score , "comment" : comment, "finalscore" : finalscore , "finalcomment" : finalcomment });
+                     
                 }
             });
 
         }
     }); 
+    // console.log(evdata);
 }
 
 function RenderExtraTable(data,scoring,finalscoring){
@@ -441,6 +489,11 @@ function RenderExtraTable(data,scoring,finalscoring){
                 score = checkscore.scoring;
                 if(checkscore.comment){comment = checkscore.comment;}
             }
+            var hiddenfinal = "";
+            if($('#isfinal').val() == 0){
+                hiddenfinal = "hidden";
+            }
+
         if(!jQuery.isEmptyObject(checkfinalscore) ){
                 finalscore = checkfinalscore.scoring;
                 if(checkfinalscore.comment){finalcomment = checkfinalscore.comment;}
@@ -459,14 +512,14 @@ function RenderExtraTable(data,scoring,finalscoring){
                     </div>
                 </div>
             </td> 
-            <td> 
+            <td ${hiddenfinal}> 
                 <div class="form-group">
                         <label>กรอกคะแนน (0-5)</label>
-                        <input type="text" value="${finalscore}" data-id="${criteriatransaction.id}" data-type="score" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
+                        <input type="text" value="${finalscore}" data-id="${criteriatransaction.id}" data-type="finalscore" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
                     </div>
                     <div class="toggle"><div class="form-group">
                         <label><i>ความเห็น</i></label>
-                        <input type="text" value="${finalcomment}" data-id="${criteriatransaction.id}" data-type="comment" class="form-control form-control-lg inpscore inputextracomment" >
+                        <input type="text" value="${finalcomment}" data-id="${criteriatransaction.id}" data-type="finalcomment" class="form-control form-control-lg inpscore inputextracomment" >
                     </div>
                 </div>
             </td> 
@@ -482,8 +535,10 @@ function RenderExtraTable2(data,scoring){
     data.forEach(function (criteriatransaction,index) {
         var score = $(`input[data-id="${criteriatransaction.id}"][data-type="score"]`).val();
         var comment = $(`input[data-id="${criteriatransaction.id}"][data-type="comment"]`).val();
+        var finalscore = $(`input[data-id="${criteriatransaction.id}"][data-type="finalscore"]`).val();
+        var finalcomment = $(`input[data-id="${criteriatransaction.id}"][data-type="finalcomment"]`).val();
 
-        evextradata.push({"category":  criteriatransaction.extracategory['name'] , "criteria": criteriatransaction.extracriteria['name'], "score": score , "comment" : comment });
+        evextradata.push({"category":  criteriatransaction.extracategory['name'] , "criteria": criteriatransaction.extracriteria['name'], "score": score , "comment" : comment, "finalscore": finalscore , "finalcomment" : finalcomment });
 
     });
 

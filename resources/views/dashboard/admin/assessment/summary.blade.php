@@ -489,7 +489,7 @@
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
                                                     <th>Index</th>                                                                                
-                                                    <th>Grade <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                    <th>Grade <a href="#"  class="text-default" id="togglecomment" data-toggle="modal" ><i class="icon-comments"></i></a> </th>  
                                                 </tr>
                                             </thead>
                                             <div class="theme_tail theme_tail_circle loadprogress">
