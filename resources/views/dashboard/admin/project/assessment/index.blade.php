@@ -207,7 +207,7 @@
                         <div class="card-body">
                             
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="maintable_2">
+                                <table class="table table-bordered table-striped mb-2" id="maintable_2">
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>
