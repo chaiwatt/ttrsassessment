@@ -214,9 +214,9 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $_company = Company::find($_businessplan->company_id);
         $_user = User::find($_company->user_id);
 
-        $company_name = (!Empty($_businessplan->company->name))?$_businessplan->company->name:'';
-        $bussinesstype = $_businessplan->business_type_id;
-        $fullcompanyname = $company_name;
+        $company_name = (!Empty($_company->name))?$_company->name:'';
+        $bussinesstype = $_company->business_type_id;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';

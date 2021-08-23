@@ -21,14 +21,15 @@ use App\Helper\EmailBox;
 use App\Helper\UserArray;
 
 
+use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+
 use App\Model\UserPosition;
 
 use App\Model\EvaluationDay;
-
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use App\Model\CompanyAddress;
@@ -38,8 +39,8 @@ use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
-use App\Helper\ThaiNumericConverter;
 
+use App\Helper\ThaiNumericConverter;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -83,6 +84,7 @@ class DashboardAdminEvaluationResultController extends Controller
     }
 
     public function EditSave(EvaluationResultEdit $request,$id){
+        $auth = Auth::user();
         EvaluationResult::find($id)->update([
             'headercode' => $request->headercode,
             'contactname' => $request->contactname,
@@ -101,6 +103,23 @@ class DashboardAdminEvaluationResultController extends Controller
         ]);
         $fulltbp = FullTbp::find(EvaluationResult::find($id)->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+  
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+  
+        $fullcompanyname = ' ' . $company_name;
+        if($bussinesstype == 1){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+  
         
         $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
         $arr2 = UserArray::leader($minitbp->business_plan_id);
@@ -110,10 +129,35 @@ class DashboardAdminEvaluationResultController extends Controller
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = Auth::user()->id;
         $projectlog->viewer = $userarray;
-        $projectlog->action = 'เพิ่ม/แก้ไขบทวิเคราะห์';
+        $projectlog->action = 'เพิ่ม / แก้ไขบทวิเคราะห์';
         $projectlog->save();
+
+        $jduser = User::where('user_type_id',6)->first();
+
+        $messagebox = Message::sendMessage('เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project .$fullcompanyname,'คุณ'.$auth->name . ' ' . $auth->lastname.' ได้เพิ่ม / แก้ไข บทวิเคราะห์ โครงการ'.$minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->id]).'>ดำเนินการ</a>',$auth->id,$jduser->id);
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $jduser->id;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().'เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project;
+        $alertmessage->save();
+
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+        $notificationbubble->notification_category_id = 1;
+        $notificationbubble->notification_sub_category_id = 5;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $jduser->id;
+        $notificationbubble->save();
+
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
+
+        EmailBox::send($jduser->email,'','TTRS:เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project .$fullcompanyname,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' ได้เพิ่ม / แก้ไข บทวิเคราะห์ โครงการ'.$minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
-        CreateUserLog::createLog('เพิ่ม/แก้ไขบทวิเคราะห์ โครงการ' . $minitbp->project);
+        CreateUserLog::createLog('เพิ่ม / แก้ไขบทวิเคราะห์ โครงการ' . $minitbp->project);
         return redirect()->route('dashboard.admin.evaluationresult')->withSuccess('เพิ่มบทวิเคราะห์สำเร็จ');
     }
 
@@ -177,7 +221,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $generalinfo = GeneralInfo::first();
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
@@ -328,7 +372,7 @@ class DashboardAdminEvaluationResultController extends Controller
         
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';

@@ -106,3 +106,12 @@ $(document).on('change', '#bank2', function(e) {
     }
     
 });
+$(document).on('change', '.chkauthorizeddirector', function(e) {
+    if($('.chkauthorizeddirector').filter(':checked').length > 6){
+        $(this).prop('checked', false);
+        Swal.fire({
+            title: 'ผิดพลาด!',
+            text: 'เลือกผู้ลงนามได้ไม่เกิน 6 คน',
+        });
+    }
+});

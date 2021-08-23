@@ -117,7 +117,7 @@ class CronSendmail extends Command
                     $company_name = (!Empty($businessplan->company->name))?$businessplan->company->name:'';
                     $bussinesstype = $businessplan->company->business_type_id;
             
-                    $fullcompanyname = $company_name;
+                    $fullcompanyname = ' ' . $company_name;
                     if($bussinesstype == 1){
                         $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
                     }else if($bussinesstype == 2){

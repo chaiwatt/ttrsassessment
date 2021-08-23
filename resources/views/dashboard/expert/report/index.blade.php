@@ -215,11 +215,12 @@
                     <div class="card-body">
                         <input id="attendeventid" type="text" hidden >
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="testtopictable">
+                            <table class="table table-bordered table-striped mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
+                                        <th hidden>date</th>
                                         <th style="text-align:center">โครงการ</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
@@ -233,6 +234,7 @@
                                     @foreach ($fulltbps as $fulltbp)
                                         @if ($fulltbp->canceldate == null)    
                                             <tr>
+                                                <td hidden >{{$fulltbp->updated_at}}</td>  
                                                 <td>  
                                                     
                                                     @if ($fulltbp->expertassignment->accepted == 1)
@@ -401,6 +403,27 @@
             })
         })
     }
+
+    var countitemtable =  "{{$fulltbps->count()}}";
+
+        if (countitemtable >= 1) {
+            $('#testtopictable').DataTable( {
+                "paging":   true,
+                "ordering": true,
+                "order": [[ 0, 'desc' ]],
+                "info":     false,
+                "pageLength" : 7,
+                "language": {
+                    "zeroRecords": " ",
+                    "search": "ค้นหา: ",  
+                    "sLengthMenu": "จำนวน _MENU_ รายการ",
+                    'paginate': {
+                        'previous': 'ก่อนหน้า',
+                        'next': 'ถัดไป'
+                    }
+                }
+            });
+        }
  
 </script>
 @stop

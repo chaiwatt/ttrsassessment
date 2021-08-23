@@ -3138,7 +3138,7 @@ $('.steps-basic').steps({
     }
 });
 
-$(".chkauthorizeddirector").on('change', function() {
+$(document).on('change', '.chkauthorizeddirector', function(e) {
     if($('.chkauthorizeddirector').filter(':checked').length > 6){
         $(this).prop('checked', false);
         Swal.fire({

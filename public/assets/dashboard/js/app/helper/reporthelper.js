@@ -280,8 +280,8 @@ import * as Attendee from './eventcalendarattendee.js';
             $('#pillar_bp').html('');
 
         }else{
-            $('#pillar_bp').html(pillar_bp + ' %');
-            $('.chart-skills').find('span:nth-child(1)').text(`${pillar_bp}%`);
+            $('#pillar_bp').html(pillar_bp);
+            $('.chart-skills').find('span:nth-child(1)').text(`${pillar_bp}`);
         }
 
         $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillar_bp*1.8}deg)`);
@@ -295,8 +295,8 @@ import * as Attendee from './eventcalendarattendee.js';
             $('.chart-skills2').find('span:nth-child(1)').text(``);
             $('#pillar_marketability').html('');
         }else{
-            $('#pillar_marketability').html(pillar_marketability + ' %');
-            $('.chart-skills2').find('span:nth-child(1)').text(`${pillar_marketability}%`);
+            $('#pillar_marketability').html(pillar_marketability);
+            $('.chart-skills2').find('span:nth-child(1)').text(`${pillar_marketability}`);
         }
         $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillar_marketability*1.8}deg)`);
         $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_marketability}deg)`);    
@@ -309,8 +309,8 @@ import * as Attendee from './eventcalendarattendee.js';
             $('.chart-skills3').find('span:nth-child(1)').text(``);
             $('#pillar_tech').html('');
         }else{
-            $('.chart-skills3').find('span:nth-child(1)').text(`${pillar_tech}%`);
-            $('#pillar_tech').html(pillar_tech + ' %');
+            $('.chart-skills3').find('span:nth-child(1)').text(`${pillar_tech}`);
+            $('#pillar_tech').html(pillar_tech);
         }
         $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillar_tech*1.8}deg)`);
         $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_tech}deg)`);
@@ -324,8 +324,8 @@ import * as Attendee from './eventcalendarattendee.js';
             $('.chart-skills4').find('span:nth-child(1)').text(``);
             $('#pillar_management').html('');
         }else{
-            $('.chart-skills4').find('span:nth-child(1)').text(`${pillar_management}%`);
-            $('#pillar_management').html(pillar_management + ' %');
+            $('.chart-skills4').find('span:nth-child(1)').text(`${pillar_management}`);
+            $('#pillar_management').html(pillar_management);
         }
         $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillar_management*1.8}deg)`);
         $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_management}deg)`);
@@ -428,7 +428,7 @@ import * as Attendee from './eventcalendarattendee.js';
             },
             tooltip: {
                 trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                formatter: '{a} <br/>{b}: {c} ({d})'
             },
             legend: {
                 bottom: 10,
@@ -1343,7 +1343,7 @@ function genNumProject(charttype,data,legend,text,sub,eleid,legendalign){
             },
             tooltip: {
                 trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                formatter: '{a} <br/>{b}: {c} ({d})'
             },
             legend: {
                 bottom: 10,
@@ -1436,7 +1436,7 @@ function genNumProject(charttype,data,legend,text,sub,eleid,legendalign){
             },
             tooltip: {
                 trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                formatter: '{a} <br/>{b}: {c} ({d})'
             },
             legend: {
                 bottom: 10,

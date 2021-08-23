@@ -50,7 +50,7 @@ class DashboardAdminProjectCancelController extends Controller
 
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
@@ -75,6 +75,7 @@ class DashboardAdminProjectCancelController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
+            
             EmailBox::send($_user->email,'','TTRS:ยกเลิกโครงการ โครงการ'.$minitbp->project   . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> คุณ'.$auth->name . ' '.$auth->lastname.' ได้ยกเลิกโครงการ โครงการ'.$minitbp->project.' (' .$fullcompanyname .') เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 

@@ -320,6 +320,7 @@
                             <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">Full TBP</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
@@ -331,7 +332,8 @@
                                 <tbody>
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
-                                            <tr>    
+                                            <tr>  
+                                                <td hidden>{{$fulltbp->updated_at}}</td>   
                                                 <td style="width:1%;white-space: nowrap"> 
                                                     @php
                                                         $cogcolor = 'text-info';
@@ -596,10 +598,11 @@
 		});
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 1) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 20,
                 "language": {

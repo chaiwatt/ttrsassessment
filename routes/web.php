@@ -812,6 +812,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('delete/{id}','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
                 Route::get('joinevent/{id}','DashboardAdminCalendarController@JoinEvent')->name('dashboard.admin.calendar.joinevent'); 
                 Route::get('rejectevent/{id}','DashboardAdminCalendarController@RejectEvent')->name('dashboard.admin.calendar.rejectevent'); 
+                Route::post('rejectjoinevent','DashboardAdminCalendarController@RejectJoinEvent')->name('dashboard.admin.calendar.rejectjoinevent'); 
             }); 
             Route::group(['prefix' => 'assessment'], function(){
                 Route::get('','DashboardAdminAssessmentController@Index')->name('dashboard.admin.assessment');     

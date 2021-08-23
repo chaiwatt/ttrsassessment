@@ -217,13 +217,13 @@
 							<div class="col-md-6" id="otherprefix_wrapper" hidden>
 								<div class="form-group" >
 									<label>ระบุคำนำหน้าชื่อ</label><span class="text-danger">*</span>
-									<input type="text" id="otherprefix" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat60">
+									<input type="text" id="otherprefix" placeholder="ระบุคำนำหน้าชื่อ" class="form-control form-control-lg stringformat10">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>ชื่อ</label><span class="text-danger">*</span>
-									<input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+									<input type="text" id="directorname" placeholder="ชื่อ" class="form-control form-control-lg stringformat15">
 								</div>
 							</div>
 						
@@ -231,7 +231,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>นามสกุล</label><span class="text-danger">*</span>
-									<input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+									<input type="text" id="directorlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat15">
 								</div>
 							</div>
              
@@ -926,7 +926,7 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>@if ($user->user_group_id == 1) ที่อยู่บริษัท @else ที่ตั้งสถานประกอบการ @endif</label><span class="text-danger">*</span>
-											<input type="text"  name="address" value="{{old('address') ?? $companyaddress->address}}"  placeholder="" class="form-control form-control-lg stringformat60">
+											<input type="text"  name="address" value="{{old('address') ?? $companyaddress->address}}"  placeholder="" class="form-control form-control-lg stringformat80">
 										</div>
 									</div>
 									<div class="col-md-6">

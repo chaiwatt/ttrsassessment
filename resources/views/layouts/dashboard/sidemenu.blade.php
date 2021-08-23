@@ -25,10 +25,11 @@
     <a href="{{route('dashboard.admin.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.admin.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.report')?'active':''}}">สรุปสถานภาพโครงการ</a></li>     
-        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.allbyyear')?'active':''}}"><span >โครงการทั้งหมดแยกตามปี</span></a></li>
-        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyindustrygroup')?'active':''}}"><span >โครงการแยกตามประเภทอุตสาหกรรม</span></a></li>
-        <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyobjective')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyobjective')?'active':''}}"><span >โครงการแยกตามวัตถุประสงค์ของการประเมิน</span></a></li>
-        
+       @if (Auth::user()->user_type_id >= 5)
+       <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.allbyyear')?'active':''}}"><span >โครงการทั้งหมดแยกตามปี</span></a></li>
+       <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyindustrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyindustrygroup')?'active':''}}"><span >โครงการแยกตามประเภทอุตสาหกรรม</span></a></li>
+       <li class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyobjective')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyobjective')?'active':''}}"><span >โครงการแยกตามวัตถุประสงค์ของการประเมิน</span></a></li>
+       @endif
     </ul>
     </li>
     @if (Auth::user()->user_type_id >=5 )

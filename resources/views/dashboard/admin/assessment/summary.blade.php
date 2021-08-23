@@ -108,7 +108,7 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header header-elements-sm-inline">
-                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
+                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนนแยกตาม Pillar</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="row l-400">
@@ -209,14 +209,14 @@
                                                         <div class="row">
                                                             <div class="col-sm-6"></div>
                                                             <div class="col-sm-6"> 
-                                                                <h2><span style="font-weight: bold"> 01</span></h2>
+                                                                {{-- <h2><span style="font-weight: bold"> 01</span></h2> --}}
                                                                 <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <h6 class="color-01" style="font-weight: bold">Management</h6>
+                                                        <h6 style="font-weight: bold;color:#00804f">Management</h6>
                                                         <h5><span id="pillar1"></span></h5>
-                                                        <h4 class="color-01"><span id="gradepillar1"></span></h4>
+                                                        <h4 style="font-weight: bold;color:#00804f"><span id="gradepillar1"></span></h4>
                                                        
                                                     </div>
                                                 </div>
@@ -227,14 +227,14 @@
                                                         <div class="row">
                                                             <div class="col-sm-6"></div>
                                                             <div class="col-sm-6"> 
-                                                                <h2><span style="font-weight: bold"> 02</span></h2>
+                                                                {{-- <h2><span style="font-weight: bold"> 02</span></h2> --}}
                                                                 <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <h6 class="color-02" style="font-weight: bold">Technology</h6>
+                                                        <h6 style="font-weight: bold;color:#002980">Technology</h6>
                                                         <h5><span id="pillar2"></span></h5>
-                                                        <h4 class="color-02"><span id="gradepillar2"></span></h4>
+                                                        <h4 style="font-weight: bold;color:#002980"><span id="gradepillar2"></span></h4>
                                                        
                                                     </div>
                                                 </div>
@@ -245,14 +245,14 @@
                                                     <div class="row">
                                                         <div class="col-sm-6"></div>
                                                         <div class="col-sm-6"> 
-                                                            <h2><span style="font-weight: bold"> 03</span></h2>
+                                                            {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
                                                             <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h6 class="color-03" style="font-weight: bold">Marketability</h6>
+                                                    <h6 style="font-weight: bold;color:#cc6301">Marketability</h6>
                                                     <h5><span id="pillar3"></span></h5>
-                                                    <h4 class="color-03"><span id="gradepillar3"></span></h4>
+                                                    <h4 style="font-weight: bold;color:#cc6301"><span id="gradepillar3"></span></h4>
                                                    
                                                 </div>
                                             </div>
@@ -262,14 +262,14 @@
                                                     <div class="row">
                                                         <div class="col-sm-6"></div>
                                                         <div class="col-sm-6"> 
-                                                            <h2><span style="font-weight: bold"> 04</span></h2>
+                                                            {{-- <h2><span style="font-weight: bold"> 04</span></h2> --}}
                                                             <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h6 class="color-04" style="font-weight: bold">Business Prospect</h6>
+                                                    <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6>
                                                     <h5><span id="pillar4"></span></h5>
-                                                    <h4 class="color-04"><span id="gradepillar4"></span></h4>
+                                                    <h4 style="font-weight: bold;color:#34d477"><span id="gradepillar4"></span></h4>
                                                    
                                                 </div>
                                             </div>

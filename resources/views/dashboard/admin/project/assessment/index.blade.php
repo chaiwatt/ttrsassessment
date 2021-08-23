@@ -125,9 +125,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="maintable">
+                            <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="text-align: center">ชื่อโครงการ</th> 
                                         <th style="text-align: center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">ความเห็นผู้เชี่ยวชาญ</th> 
@@ -143,6 +144,7 @@
                                             @if ($fulltbp->finished_onsite != 1 && $fulltbp->canceldate == null)
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                     <tr>    
+                                                        <td hidden>{{$fulltbp->updated_at}}</td> 
                                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                                         <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                                         <td style="white-space: nowrap;text-align: center">
@@ -205,9 +207,10 @@
                         <div class="card-body">
                             
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="maintable">
+                                <table class="table table-bordered table-striped" id="maintable_2">
                                     <thead>
                                         <tr class="bg-info">
+                                            <th hidden>date</th>
                                             <th style="text-align: center">ชื่อโครงการ</th> 
                                             <th style="text-align: center">บริษัท</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">ลงคะแนน</th>
@@ -221,6 +224,7 @@
                                                 @if ($fulltbpbackup->finished_onsite != 1 && $fulltbpbackup->canceldate == null)
                                                     @if ($fulltbpbackup->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbpbackup->minitbp->businessplan->business_plan_status_id <= 8)
                                                         <tr>    
+                                                            <td hidden>{{$fulltbpbackup->updated_at}}</td> 
                                                             <td> {{$fulltbpbackup->minitbp->project}} </td>  
                                                             <td> {{$fulltbpbackup->minitbp->businessplan->company->fullname}} </td> 
                                                             <td style="width:1%;white-space: nowrap;text-align: center"> 
@@ -258,10 +262,30 @@
         };
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 1) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
+                "info":     false,
+                "pageLength" : 20,
+                "language": {
+                    "zeroRecords": " ",
+                    "search": "ค้นหา: ",  
+                    "sLengthMenu": "จำนวน _MENU_ รายการ",
+                    'paginate': {
+                        'previous': 'ก่อนหน้า',
+                        'next': 'ถัดไป'
+                    }
+                }
+            });
+        }
+
+        if (countitemtable >= 1) {
+            $('#maintable_2').DataTable( {
+                "paging":   true,
+                "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 20,
                 "language": {

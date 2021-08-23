@@ -154,13 +154,13 @@ $(document).on("click",".messagelink",function(e){
         }
 
         if(data.unreadmessages.length > 0){
-            $("#_newmessagecount_wrapper").attr("hidden",false);
+            $("#_newmessagecount").attr("hidden",false);
             $("#_newmessagecount").html(data.unreadmessages.length);
             $("#newmessagecount1").html(data.unreadmessages.length);
             $("#newmessagecount2").html(data.unreadmessages.length + ' ข้อความใหม่');
         }else{
             $("#newmessagecount2").html('');
-            $("#_newmessagecount_wrapper").attr("hidden",true);
+            $("#_newmessagecount").attr("hidden",true);
         }
 
         data.unreadmessages.forEach((unreadmsg,index) => 

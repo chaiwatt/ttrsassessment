@@ -39,6 +39,12 @@ $(function() {
             delimiter: ''
         })
     });
+    $('.stringformat15').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [15],
+            delimiter: ''
+        })
+    });
     $('.stringformat20').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [20],
@@ -57,6 +63,12 @@ $(function() {
             delimiter: ''
         })
     });
+    $('.stringformat45').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [45],
+            delimiter: ''
+        })
+    });
     $('.stringformat50').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [50],
@@ -66,6 +78,18 @@ $(function() {
     $('.stringformat60').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [60],
+            delimiter: ''
+        })
+    });
+    $('.stringformat80').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [80],
+            delimiter: ''
+        })
+    });
+    $('.stringformat90').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [90],
             delimiter: ''
         })
     });

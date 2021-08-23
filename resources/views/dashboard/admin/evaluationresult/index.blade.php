@@ -59,9 +59,10 @@
                     <div class="card-body">
                         
                         <div class="table-responsive">
-                            <table class="table table-bordered text-nowrap" id="maintable">
+                            <table class="table table-bordered text-nowrap mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="text-align: center">ชื่อโครงการ</th> 
                                         <th style="text-align: center">คะแนน</th>
                                         <th style="text-align: center">เกรด</th>     
@@ -76,6 +77,7 @@
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 8 && $fulltbp->canceldate == null)
                                             @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                 <tr>    
+                                                    <td hidden>{{$fulltbp->updated_at}}</td> 
                                                     <td> {{$fulltbp->minitbp->project}} </td> 
                                                     <td style="text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                     <td style="text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
@@ -124,11 +126,6 @@
                                                                         @endif
                                                                 @endif  
                                                             @else
-                                                                {{-- @if ($generalinfo->invoiceoption == 1)
-                                                                
-                                                                    @else
-
-                                                                @endif --}}
                                                                 <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                         @endif
                                                     </td>
@@ -274,6 +271,7 @@
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 7,
                 "language": {

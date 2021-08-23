@@ -62,9 +62,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="maintable">
+                            <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="text-align: center">เลขที่โครงการ</th>
                                         <th style="text-align: center">ชื่อโครงการ</th>    
                                         <th style="text-align: center">บริษัท</th>  
@@ -76,6 +77,7 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 10)
                                             <tr>    
+                                                <td hidden>{{$fulltbp->updated_at}}</td> 
                                                 <td style="text-align: center"> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td> 
                                                 <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
@@ -124,10 +126,11 @@
         };
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 1) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 20,
                 "language": {

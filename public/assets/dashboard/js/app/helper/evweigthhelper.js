@@ -131,6 +131,7 @@ function callDataTable(){
                     var rowCount = doc.content[1].table.body.length;
                     for (var i = 1; i < rowCount; i++) {
                         doc.content[1].table.body[i][0].alignment = 'left';
+                        doc.content[1].table.body[i][2].alignment = 'center';
                     }
                 },
                 exportOptions: {

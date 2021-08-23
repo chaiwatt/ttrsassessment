@@ -364,7 +364,7 @@
                                             <tbody >
                                                 <tr>
                                                     <td>{{@$fulltbp->ev->name}}</td>  
-                                                    <td>
+                                                    <td style="text-align: center">
                                                     
                                                         {{@$fulltbp->ev->version}}
                                                     </td>    

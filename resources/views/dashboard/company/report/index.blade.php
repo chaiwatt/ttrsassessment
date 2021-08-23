@@ -51,7 +51,7 @@
                         $company = Auth::user()->company;
                         $company_name = (!Empty($company->name))?$company->name:'';
                         $bussinesstype = $company->business_type_id;
-                        $fullcompanyname = $company_name;
+                        $fullcompanyname = ' ' . $company_name;
 
                         if($bussinesstype == 1){
                             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';

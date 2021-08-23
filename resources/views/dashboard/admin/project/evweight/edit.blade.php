@@ -42,14 +42,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มความเห็น</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เพิ่มรายการแก้ไข</h5>
                     <button type="button" data-toggle="modal" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>ความเห็น<span class="text-danger">*</span></label>
-                            <textarea type="text" rows="5" id="comment" placeholder="ข้อความเพิ่มเติมแจ้ง Admin" class="form-control form-control-lg" ></textarea>
+                            <label>รายละเอียด<span class="text-danger">*</span></label>
+                            <textarea type="text" rows="5" id="comment" placeholder="" class="form-control form-control-lg" ></textarea>
                         </div>
                     </div>
                 </div>         
@@ -161,7 +161,7 @@
                                                 <tr class="bg-info">
                                                     <th>Pillar</th>  
                                                     <th>Sub Pillar</th>   
-                                                    <th>Weight<a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a></th>                                                                                
+                                                    <th>Weight<a href="#" class="text-white" data-toggle="modal" id="togglecomment"> <i class="icon-comments"></i></a></th>                                                                                
                                                 </tr>
                                             </thead>
                                             <tbody id="subpillar_index_transaction_wrapper_tr"> 

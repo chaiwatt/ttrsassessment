@@ -201,7 +201,7 @@ class AssessmentController extends Controller
 
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
@@ -215,7 +215,7 @@ class AssessmentController extends Controller
 
         foreach ($projectmembers as $key => $projectmember) {
             $_user = User::find($projectmember->user_id);
-            $messagebox = Message::sendMessage('ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project . $fullcompanyname,'ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project .  $fullcompanyname,$auth->id,$projectmember->user_id);
+            $messagebox = Message::sendMessage('ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project . $fullcompanyname,'ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project .  $fullcompanyname .' เรียบร้อยแล้ว',$auth->id,$projectmember->user_id);
             
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;
@@ -227,7 +227,7 @@ class AssessmentController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'','TTRS:ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project  .$fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> LEADER ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project. $fullcompanyname.' <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS:ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project  .$fullcompanyname,'เรียน คุณ'.$_user->name.' '.$_user->lastname.' <br><br> LEADER ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project. $fullcompanyname.' เรียบร้อยแล้ว<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
@@ -261,7 +261,7 @@ class AssessmentController extends Controller
 
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
@@ -288,7 +288,11 @@ class AssessmentController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
             $jd = User::where('user_type_id',6)->first();
-            EmailBox::send($_user->email,$jd->email,'TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน ผู้เชี่ยวชาญ <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            if($_user->id != $jd->id){
+                EmailBox::send($_user->email,$jd->email,'TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            }else{
+                EmailBox::send($_user->email,'','TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            }  
         }
 
         if($projectstatustransaction->status == 1){
@@ -325,7 +329,7 @@ class AssessmentController extends Controller
             $company_name = (!Empty($company->name))?$company->name:'';
             $bussinesstype = $company->business_type_id;
       
-            $fullcompanyname = $company_name;
+            $fullcompanyname = ' ' . $company_name;
             if($bussinesstype == 1){
                 $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
             }else if($bussinesstype == 2){

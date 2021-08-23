@@ -216,7 +216,7 @@ function callDataTableExtra(){
     } );
 }
 $(document).on('click', '#btnOnExcel', function(e) {
-    // console.log(evdata);
+    
     getEv($('#evid').val(),route.userid).then(data => {
         RenderTable2(data,1);
         
@@ -225,7 +225,7 @@ $(document).on('click', '#btnOnExcel', function(e) {
     }).catch(error => {})
 });
 $(document).on('click', '#btnOnPdf', function(e) {
-    console.log('here');
+    
     getEv($('#evid').val(),route.userid).then(data => {
         RenderTable2(data,1);
         callDataTable();
@@ -235,7 +235,7 @@ $(document).on('click', '#btnOnPdf', function(e) {
 
 $(document).on('click', '#btnOnExcelExtra', function(e) {
     getEv($('#evid').val(),route.userid).then(data => {
-        // console.log(data);
+        
         RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
         callDataTableExtra();
        $('#evextraexporttable').DataTable().buttons(0,0).trigger();
@@ -246,7 +246,7 @@ $(document).on('click', '#btnOnExcelExtra', function(e) {
 $(document).on('click', '#btnOnPdfExtra', function(e) {
     
     getEv($('#evid').val(),route.userid).then(data => {
-        console.log(evextradata);
+        
         RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
        
         callDataTableExtra();
@@ -470,7 +470,7 @@ function RenderTable2(data,evtype){
 
         }
     }); 
-    // console.log(evdata);
+    
 }
 
 function RenderExtraTable(data,scoring,finalscoring){
@@ -478,7 +478,7 @@ function RenderExtraTable(data,scoring,finalscoring){
     var readonly =``;
 
     data.forEach(function (criteriatransaction,index) {
-        console.log(criteriatransaction);
+        
         var checkscore = scoring.filter(x => x.extra_critreria_transaction_id == criteriatransaction.id)[0]; 
         var checkfinalscore = finalscoring.filter(x => x.extra_critreria_transaction_id == criteriatransaction.id)[0]; 
         var score = '';
@@ -515,7 +515,7 @@ function RenderExtraTable(data,scoring,finalscoring){
             <td ${hiddenfinal}> 
                 <div class="form-group">
                         <label>กรอกคะแนน (0-5)</label>
-                        <input type="text" value="${finalscore}" data-id="${criteriatransaction.id}" data-type="finalscore" class="form-control form-control-lg inputextrascore extravalue inpscore numeralformat2" ${readonly}>
+                        <input type="text" value="${finalscore}" data-id="${criteriatransaction.id}" data-type="finalscore" class="form-control form-control-lg inputextrascore inpscore numeralformat2" ${readonly}>
                     </div>
                     <div class="toggle"><div class="form-group">
                         <label><i>ความเห็น</i></label>
@@ -855,6 +855,7 @@ $('.step-evweight').steps({
                 var noblank = true;
                 $('.gradescore').each(function() {
                     if($(this).val() == ''){
+                        
                         noblank = false;
                         return;
                     }
@@ -863,24 +864,25 @@ $('.step-evweight').steps({
                 if (noblank == false){
                     Swal.fire({
                         title: 'ผิดพลาด...',
-                        text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                        text: 'กรุณากรอกเกรดครบ!',
                     })
                     return;
                 };
 
                 // inppercentextra
+                var noblank_extra = true;
                 if($("#inppercentextra").val() != ''){
                     $('.extravalue').each(function() {
                         if($(this).val() == ''){
-                            noblank = false;
+                            noblank_extra = false;
                             return;
                         }
                     });
             
-                    if (noblank == false){
+                    if (noblank_extra == false){
                         Swal.fire({
                             title: 'ผิดพลาด...',
-                            text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                            text: 'กรุณาคะแนนให้ครบ!',
                         })
                         return;
                     };

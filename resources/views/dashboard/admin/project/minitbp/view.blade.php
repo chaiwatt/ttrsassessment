@@ -29,7 +29,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> การประเมิน</a>
-                    <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการแบบคำขอรับการประเมิน (Mini TBP)</a>
+                    {{-- <a href="{{route('dashboard.company.project.minitbp')}}" class="breadcrumb-item"> รายการแบบคำขอรับการประเมิน (Mini TBP)</a> --}}
                     <span class="breadcrumb-item active">แบบคำขอรับการประเมิน (Mini TBP)</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -130,7 +130,7 @@
 																$company = $minitbp->businessplan->company;
 																$company_name = (!Empty($company->name))?$company->name:'';
 																$bussinesstype = $company->business_type_id;
-																$fullcompanyname = $company_name;
+																$fullcompanyname = ' ' . $company_name;
 																if($bussinesstype == 1){
 																	$fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
 																}else if($bussinesstype == 2){

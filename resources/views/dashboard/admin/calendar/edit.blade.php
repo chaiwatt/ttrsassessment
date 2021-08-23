@@ -203,12 +203,20 @@
             branchid: "{{Auth::user()->branch_id}}"
         };
 
+        var startdate = moment();
+        if($('#eventdate').val() != ''){
+            
+            startdate = moment($('#eventdate').val(), 'YYYY-MM-DD');
+        }
+
+        var m = moment();
         $('#eventdate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY HH:mm',
             clearButton: true,
             cancelText: "ยกเลิก",
             okText: "ตกลง",
             clearText: "เคลียร์",
+            minDate : startdate,
             time: false
         });
 

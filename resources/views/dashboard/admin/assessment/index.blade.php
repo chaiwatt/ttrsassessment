@@ -82,9 +82,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered text-nowrap" id="maintable">
+                            <table class="table table-bordered text-nowrap mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="text-align: center">ชื่อโครงการ</th>
                                         <th style="text-align: center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap">สถานะ</th>                   
@@ -95,7 +96,8 @@
                                         @if (Empty($fulltbp->canceldate))
                                             @if (!Empty($fulltbp->finalassessmentdate) && $fulltbp->canceldate == null)
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
-                                                    <tr>    
+                                                    <tr>  
+                                                        <td hidden>{{$fulltbp->updated_at}}</td>   
                                                         <td> {{$fulltbp->minitbp->project}} </td>  
                                                         <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td>
                                                         
@@ -143,10 +145,11 @@
         };
         
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 20) {
+        if (countitemtable >= 1) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 20,
                 "language": {

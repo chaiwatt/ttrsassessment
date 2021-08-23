@@ -151,6 +151,7 @@ class MiniTbpController extends Controller
                 ]
             ],
             'default_font' => 'kanit',
+            'simpleTables' => true,
             'adjustFontDescLineheight' => 1.1,
         ]);
         $generalinfo = GeneralInfo::first();
@@ -225,10 +226,16 @@ class MiniTbpController extends Controller
         $managerlastname = (!Empty($minitbp->managerlastname))?$minitbp->managerlastname:'';
         $managerposition = (!Empty($minitbp->managerposition_id))?UserPosition::find($minitbp->managerposition_id)->name:'';
         $fileContent = file_get_contents(asset("assets/dashboard/template/mininew.pdf"),'rb');
-        if($minitbpsignatures->count() > 1 && $minitbpsignatures->count() <= 3){
-            $fileContent = file_get_contents(asset("assets/dashboard/template/mininew1.pdf"),'rb');
-        }else if($minitbpsignatures->count() > 3){
-            $fileContent = file_get_contents(asset("assets/dashboard/template/mininew2.pdf"),'rb');
+        if($minitbpsignatures->count() == 2){
+            $fileContent = file_get_contents(asset("assets/dashboard/template/mininewfortwo.pdf"),'rb');
+        }else if($minitbpsignatures->count() == 3){
+                $fileContent = file_get_contents(asset("assets/dashboard/template/mininewforthree.pdf"),'rb');
+        }else if($minitbpsignatures->count() == 4){
+            $fileContent = file_get_contents(asset("assets/dashboard/template/mininewforfour.pdf"),'rb');
+        }else if($minitbpsignatures->count() == 5){
+            $fileContent = file_get_contents(asset("assets/dashboard/template/mininewforfive.pdf"),'rb');
+        }else if($minitbpsignatures->count() == 6){
+            $fileContent = file_get_contents(asset("assets/dashboard/template/mininewforsix.pdf"),'rb');
         }
       
         $pagecount = $mpdf->SetSourceFile(StreamReader::createByString($fileContent));
@@ -236,7 +243,7 @@ class MiniTbpController extends Controller
 
         $bussinesstype = $minitbp->businessplan->company->business_type_id;
         $companyname = $minitbp->businessplan->company->name;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
@@ -255,42 +262,86 @@ class MiniTbpController extends Controller
             if($userprefixname== 'อื่นๆ'){
                 $userprefixname = Auth::user()->alter_prefix ;
             }
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->minitbp_code .'</span>', 45, 33.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$userprefixname . $minitbp->contactname . ' ' .$minitbp->contactlastname .'</span>', 69, 59, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.sprintf('%02d', DateConversion::shortThaiDate($minitbp->created_at,'d')).'</div>',174, 27.3, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'m').'</span>',182, 27.3, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'y').'</span>',188, 27.3, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$fullcompanyname.'</span>', 69, 66, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company_address. ' ตำบล'. $company->companyaddress->first()->tambol->name .' อำเภอ'. $company->companyaddress->first()->amphur->name .' จังหวัด'. $company->companyaddress->first()->province->name. ' ' .$company->companyaddress->first()->postalcode.'</span>', 69, 72.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->contactphone.'</span>', 69, 79.2, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->contactemail.'</span>', 69, 85.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 92, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectnameeng.'</span>', 69, 98.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML($finance1_text, 20.8, 122.4, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_bank.'</div>', 35, 130, 350, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_loan.'</div>', 52, 136.5, 150, 90, 'auto');
+            if($minitbpsignatures->count() <= 3){
+                //น้อยกว่าเท่ากับ 3
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->minitbp_code .'</span>', 45, 33.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$userprefixname . $minitbp->contactname . ' ' .$minitbp->contactlastname .'</span>', 69, 59, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.sprintf('%02d', DateConversion::shortThaiDate($minitbp->created_at,'d')).'</div>',171, 27.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'m').'</span>',179, 27.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'y').'</span>',186, 27.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$fullcompanyname.'</span>', 69, 65.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;max-width: 350px;word-wrap: break-word;">'.$company_address.'</span>', 69, 72, 105, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;max-width: 350px;word-wrap: break-word;"> ตำบล'. $company->companyaddress->first()->tambol->name .' อำเภอ'. $company->companyaddress->first()->amphur->name .' จังหวัด'. $company->companyaddress->first()->province->name. ' ' .$company->companyaddress->first()->postalcode.'</span>', 69, 78.5, 105, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->contactphone.'</span>', 69, 85.4, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->contactemail.'</span>', 69, 91.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 98.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectnameeng.'</span>', 69, 104.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($finance1_text, 20.8, 127.6, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_bank.'</div>', 35, 135.2, 350, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_loan.'</div>', 52, 141.7, 150, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_1_bank.'</div>', 35, 148.3, 350, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_1_loan.'</div>', 52, 155, 150, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_2_bank.'</div>', 35, 161.5, 350, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_2_loan.'</div>', 52, 168, 150, 90, 'auto');
+    
+    
+                $mpdf->WriteFixedPosHTML($finance2_text, 20.8, 173.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($finance3_other_text, 20.8, 186.9, 150, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance3_other_detail.'</span>', 48, 188, 50, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML($nonefinance_head_text, 108.5, 127.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance1_text, 115.8, 135.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance2_text, 115.8, 141.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance3_text, 115.8, 148.1, 150, 90, 'auto');
+                
+                $mpdf->WriteFixedPosHTML($nonefinance5_text, 108.5, 153.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 114, 161.5, 70, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance6_text, 108.5, 174.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 114, 181.6, 70, 90, 'auto');
+            }else if($minitbpsignatures->count() > 3){
+                //มากกว่า 3
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->minitbp_code .'</span>', 45, 33.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$userprefixname . $minitbp->contactname . ' ' .$minitbp->contactlastname .'</span>', 69, 56.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:25px;heigh:100px;text-align:center;display:block;">'.sprintf('%02d', DateConversion::shortThaiDate($minitbp->created_at,'d')).'</div>',171, 27.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'m').'</span>',179, 27.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::shortThaiDate($minitbp->created_at,'y').'</span>',186, 27.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$fullcompanyname.'</span>', 69, 63.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$company_address.'</span>', 69, 70, 105, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;"> ตำบล'. $company->companyaddress->first()->tambol->name .' อำเภอ'. $company->companyaddress->first()->amphur->name .' จังหวัด'. $company->companyaddress->first()->province->name. ' ' .$company->companyaddress->first()->postalcode.'</span>', 69, 76.4, 105, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->contactphone.'</span>', 69, 83, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$minitbp->contactemail.'</span>', 69, 89.4, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectname.'</span>', 69, 96.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$projectnameeng.'</span>', 69, 103, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($finance1_text, 20.8, 121.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_bank.'</div>', 35, 129.7, 350, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_loan.'</div>', 52, 136.2, 150, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_1_bank.'</div>', 35, 142.3, 350, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_1_loan.'</div>', 52, 149, 150, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_2_bank.'</div>', 35, 155.5, 350, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_2_loan.'</div>', 52, 162.5, 150, 90, 'auto');
+    
+    
+                $mpdf->WriteFixedPosHTML($finance2_text, 20.8, 167.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($finance3_other_text, 20.8, 181, 150, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance3_other_detail.'</span>', 48, 181.9, 50, 90, 'auto');
+    
+                $mpdf->WriteFixedPosHTML($nonefinance_head_text, 108.5, 122, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance1_text, 115.3, 129.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance2_text, 115.3, 135.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance3_text, 115.3, 142.2, 150, 90, 'auto');
+                
+                $mpdf->WriteFixedPosHTML($nonefinance5_text, 108.5, 148, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 114, 155.5, 70, 90, 'auto');
+                $mpdf->WriteFixedPosHTML($nonefinance6_text, 108.5, 167.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 114, 175.5, 70, 90, 'auto');
+            }    
 
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_1_bank.'</div>', 35, 143.3, 350, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_1_loan.'</div>', 52, 149.8, 150, 90, 'auto');
-
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:350px;heigh:100px;margin-left:140px">'.$finance1_2_bank.'</div>', 35, 156.5, 350, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:150px;heigh:100px;text-align:center;">'.$finance1_2_loan.'</div>', 52, 162.8, 150, 90, 'auto');
-
-
-            $mpdf->WriteFixedPosHTML($finance2_text, 20.8, 168.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML($finance3_other_text, 20.8, 181.5, 150, 90, 'auto');
-
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$finance3_other_detail.'</span>', 48, 183, 50, 90, 'auto');
-
-            $mpdf->WriteFixedPosHTML($nonefinance_head_text, 108.5, 122.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML($nonefinance1_text, 115.8, 129, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML($nonefinance2_text, 115.8, 135.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML($nonefinance3_text, 115.8, 142.5, 150, 90, 'auto');
-            
-            $mpdf->WriteFixedPosHTML($nonefinance5_text, 108.5, 148.8, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance5_detail.'</span>', 114, 156.5, 70, 90, 'auto');
-            $mpdf->WriteFixedPosHTML($nonefinance6_text, 108.5, 181.5, 150, 90, 'auto');
-            $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.$nonefinance6_detail.'</span>', 136, 183, 50, 90, 'auto');
             if($minitbpsignatures->count() == 1){
                 $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -302,13 +353,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 116, 213, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:270px;heigh:100px;text-align:center;"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 108, 220, 180, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 118,226.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$directorposition. '</div>', 117,235.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 142,244, 150, 90, 'auto');
-
-
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:280px;heigh:100px;text-align:center;">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 104,232, 190, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:270px;heigh:100px;text-align:center;">'.$directorposition. '</div>', 107,240.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt;">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 138,249.5, 150, 90, 'auto');
 
             }else if($minitbpsignatures->count() == 2){
                 $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
@@ -321,11 +370,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 140, 215, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:230px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 120, 219, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:190px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 142,226.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:170px;heigh:100px;text-align:center">'.$directorposition. '</div>', 145,235.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 165,244.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:275px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 115,232, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorposition. '</div>', 125,240, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 145,249.5, 150, 90, 'auto');
 
                 $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -337,13 +386,13 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 80, 215, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:230px;heigh:100px;text-align:center;"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 35, 219, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:190px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 80,226.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:170px;heigh:100px;text-align:center">'.$directorposition. '</div>', 85,235.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 105,244.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:275px;heigh:100px;text-align:center;">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 25,232, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center;">'.$directorposition. '</div>', 38,240, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 55,249.5, 150, 90, 'auto');
 
-            }else if($minitbpsignatures->count() == 3){
+            }else if($minitbpsignatures->count() == 3){ //3 คน
                 $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
                 $directorposition = $director->employposition->name;
                 if($directorposition == 'อื่นๆ'){
@@ -354,11 +403,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 215, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center;"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 217, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,226.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,235.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 165,244.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 136,231.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 148,240.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 161,250.5, 150, 90, 'auto');
 
                 $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -370,11 +419,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 215, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 217, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 85,226.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 90,235.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 105,244.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 76,231.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 85,240.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 100,250.5, 150, 90, 'auto');
 
                 $director = CompanyEmploy::find($minitbpsignatures[2]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -386,12 +435,12 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25,215, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25,217, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 23,226.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 30,235.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 45,244.2, 150, 90, 'auto');
-            }else if($minitbpsignatures->count() == 4){
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 15.5,231.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 25,240.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 40,250.5, 150, 90, 'auto');
+            }else if($minitbpsignatures->count() == 4){ //4 คน
                 //person1
                 $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -403,11 +452,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 202, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 125, 205, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,228, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:260px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 116,215.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:200px;heigh:100px;text-align:center">'.$directorposition. '</div>', 129,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 143,231, 150, 90, 'auto');
                 
                 //person2
                 $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
@@ -420,11 +469,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 202, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 35, 205, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 85,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 90,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 103,228, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:260px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 27,215.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 41,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 53,231, 150, 90, 'auto');
                 
                 //person3
                 $director = CompanyEmploy::find($minitbpsignatures[2]->company_employee_id);
@@ -437,11 +486,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25,202, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 125,239, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 23,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 30,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 43,228, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 118,250.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 41,257.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 143,265.5, 150, 90, 'auto');
 
                 //person4
                 $director = CompanyEmploy::find($minitbpsignatures[3]->company_employee_id);
@@ -454,13 +503,13 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 235.4, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 35, 239, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,247.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,255, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,262.4, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 35,250.3, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 129,257.8, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 53,265.5, 150, 90, 'auto');
                       
-            }else if($minitbpsignatures->count() == 5){
+            }else if($minitbpsignatures->count() == 5){ // 5 คน
                 //person1
                 $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
                 $directorposition = $director->employposition->name;
@@ -472,11 +521,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 202, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 205, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,228, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 136,216, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 145,223.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,231.2, 150, 90, 'auto');
                 
                 //person2
                 $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
@@ -489,11 +538,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 202, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 205, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 85,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 90,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 103,228, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 75,216.2, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 85,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 101,231, 150, 90, 'auto');
                 
                 //person3
                 $director = CompanyEmploy::find($minitbpsignatures[2]->company_employee_id);
@@ -506,11 +555,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25,202, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 21,205, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 23,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 30,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 43,228, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 15,216, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 26,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 42,231, 150, 90, 'auto');
 
                 //person4
                 $director = CompanyEmploy::find($minitbpsignatures[3]->company_employee_id);
@@ -523,96 +572,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 235.4, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 120, 239, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,247.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,255, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,262.4, 150, 90, 'auto');
-                      
-                //person5
-                $director = CompanyEmploy::find($minitbpsignatures[4]->company_employee_id);
-                $directorposition = $director->employposition->name;
-                if($directorposition == 'อื่นๆ'){
-                    $directorposition = $director->otherposition;
-                }
-                $directorprefix = $director->prefix->name;
-                if($directorprefix == 'อื่นๆ'){
-                    $directorprefix = $director->otherprefix;
-                }
-                if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 235.4, 150, 90, 'auto');
-                } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 85,247.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 90,255, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 103,262.4, 150, 90, 'auto');
-            }else if($minitbpsignatures->count() == 6){
-                //person1
-                $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
-                $directorposition = $director->employposition->name;
-                if($directorposition == 'อื่นๆ'){
-                    $directorposition = $director->otherposition;
-                }
-                $directorprefix = $director->prefix->name;
-                if($directorprefix == 'อื่นๆ'){
-                    $directorprefix = $director->otherprefix;
-                }
-                if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 202, 150, 90, 'auto');
-                } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,228, 150, 90, 'auto');
-                
-                //person2
-                $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
-                $directorposition = $director->employposition->name;
-                if($directorposition == 'อื่นๆ'){
-                    $directorposition = $director->otherposition;
-                }
-                $directorprefix = $director->prefix->name;
-                if($directorprefix == 'อื่นๆ'){
-                    $directorprefix = $director->otherprefix;
-                }
-                if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 202, 150, 90, 'auto');
-                } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 85,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 90,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 103,228, 150, 90, 'auto');
-                
-                //person3
-                $director = CompanyEmploy::find($minitbpsignatures[2]->company_employee_id);
-                $directorposition = $director->employposition->name;
-                if($directorposition == 'อื่นๆ'){
-                    $directorposition = $director->otherposition;
-                }
-                $directorprefix = $director->prefix->name;
-                if($directorprefix == 'อื่นๆ'){
-                    $directorprefix = $director->otherprefix;
-                }
-                if ($minitbp->signature_status_id == 2) {
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25,202, 150, 90, 'auto');
-                } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 23,213, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 30,220.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 43,228, 150, 90, 'auto');
-
-                //person4
-                $director = CompanyEmploy::find($minitbpsignatures[3]->company_employee_id);
-                $directorposition = $director->employposition->name;
-                if($directorposition == 'อื่นๆ'){
-                    $directorposition = $director->otherposition;
-                }
-                $directorprefix = $director->prefix->name;
-                if($directorprefix == 'อื่นๆ'){
-                    $directorprefix = $director->otherprefix;
-                }
-                if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 235.4, 150, 90, 'auto');
-                } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 147,247.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 150,255, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,262.4, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 113,250.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 124,258, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 140,266, 150, 90, 'auto');
                       
                 //person5
                 $director = CompanyEmploy::find($minitbpsignatures[4]->company_employee_id);
@@ -625,11 +589,97 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 235.4, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 50, 239, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 85,247.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 90,255, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 103,262.4, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center;">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 46,250.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 55.5,258, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 72,266, 150, 90, 'auto');
+
+            }else if($minitbpsignatures->count() == 6){ //6 คน
+                //person1
+                $director = CompanyEmploy::find($minitbpsignatures[0]->company_employee_id);
+                $directorposition = $director->employposition->name;
+                if($directorposition == 'อื่นๆ'){
+                    $directorposition = $director->otherposition;
+                }
+                $directorprefix = $director->prefix->name;
+                if($directorprefix == 'อื่นๆ'){
+                    $directorprefix = $director->otherprefix;
+                }
+                if ($minitbp->signature_status_id == 2) {   
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 205, 150, 90, 'auto');
+                } 
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 136,216, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 143,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,231, 150, 90, 'auto');
+                
+                //person2
+                $director = CompanyEmploy::find($minitbpsignatures[1]->company_employee_id);
+                $directorposition = $director->employposition->name;
+                if($directorposition == 'อื่นๆ'){
+                    $directorposition = $director->otherposition;
+                }
+                $directorprefix = $director->prefix->name;
+                if($directorprefix == 'อื่นๆ'){
+                    $directorprefix = $director->otherprefix;
+                }
+                if ($minitbp->signature_status_id == 2) {
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 205, 150, 90, 'auto');
+                } 
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 75,216, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 85,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 102,231.2, 150, 90, 'auto');
+                
+                //person3
+                $director = CompanyEmploy::find($minitbpsignatures[2]->company_employee_id);
+                $directorposition = $director->employposition->name;
+                if($directorposition == 'อื่นๆ'){
+                    $directorposition = $director->otherposition;
+                }
+                $directorprefix = $director->prefix->name;
+                if($directorprefix == 'อื่นๆ'){
+                    $directorprefix = $director->otherprefix;
+                }
+                if ($minitbp->signature_status_id == 2) {
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25,205, 150, 90, 'auto');
+                } 
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 16,216, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 25,223.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 43,231.5, 150, 90, 'auto');
+
+                //person4
+                $director = CompanyEmploy::find($minitbpsignatures[3]->company_employee_id);
+                $directorposition = $director->employposition->name;
+                if($directorposition == 'อื่นๆ'){
+                    $directorposition = $director->otherposition;
+                }
+                $directorprefix = $director->prefix->name;
+                if($directorprefix == 'อื่นๆ'){
+                    $directorprefix = $director->otherprefix;
+                }
+                if ($minitbp->signature_status_id == 2) {   
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 145, 239, 150, 90, 'auto');
+                } 
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 136,250.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 143,258, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 163,265.4, 150, 90, 'auto');
+                      
+                //person5
+                $director = CompanyEmploy::find($minitbpsignatures[4]->company_employee_id);
+                $directorposition = $director->employposition->name;
+                if($directorposition == 'อื่นๆ'){
+                    $directorposition = $director->otherposition;
+                }
+                $directorprefix = $director->prefix->name;
+                if($directorprefix == 'อื่นๆ'){
+                    $directorprefix = $director->otherprefix;
+                }
+                if ($minitbp->signature_status_id == 2) {   
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 85, 239, 150, 90, 'auto');
+                } 
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 75,250.7, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 84,258.1, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 102,265.5, 150, 90, 'auto');
             
                 //person6
                 $director = CompanyEmploy::find($minitbpsignatures[5]->company_employee_id);
@@ -642,11 +692,11 @@ class MiniTbpController extends Controller
                     $directorprefix = $director->otherprefix;
                 }
                 if ($minitbp->signature_status_id == 2) {   
-                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25, 235.4, 150, 90, 'auto');
+                    $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center"><img src="'.asset(Signature::find($director->signature_id)->path).'" width="120" height="30" alt=""></div>', 25, 239, 150, 90, 'auto');
                 } 
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:160px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 23,247.5, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:140px;heigh:100px;text-align:center">'.$directorposition. '</div>', 30,255, 150, 90, 'auto');
-                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 43,262.4, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:220px;heigh:100px;text-align:center">'.$directorprefix.$director->name. ' ' . $director->lastname. '</div>', 16,250.5, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<div style="font-size: 9pt;width:180px;heigh:100px;text-align:center">'.$directorposition. '</div>', 25,258, 150, 90, 'auto');
+                $mpdf->WriteFixedPosHTML('<span style="font-size: 9pt">'.DateConversion::engToThaiDate(Carbon::today()->format('Y-m-d')). '</span>', 42,265.4, 150, 90, 'auto');
                    
             }
     
@@ -698,7 +748,8 @@ class MiniTbpController extends Controller
         $company = $minitbp->businessplan->company;
         $bussinesstype = $company->business_type_id;
         $company_name = (!Empty($company->name))?$company->name:'';
-        $fullcompanyname = $company_name;
+
+        $fullcompanyname = ' ' . $company_name;
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
@@ -730,7 +781,7 @@ class MiniTbpController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->target_user_id = $jd->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '.$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -752,7 +803,7 @@ class MiniTbpController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->target_user_id = $admin->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '.$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -779,8 +830,7 @@ class MiniTbpController extends Controller
                 'name' => $minitbp->project
             ]);
 
-            EmailBox::send($admin->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' '. $fullcompanyname,'เรียน Admin<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            EmailBox::send($jd->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . ' '. $fullcompanyname,'เรียน Manager<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดตรวจสอบและแต่งตั้ง Leader <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($jd->email,$admin->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project . $fullcompanyname,'เรียน Manager<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' โปรดตรวจสอบและแต่งตั้ง Leader <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
             $startdate = Carbon::now()->addDay(1);
             $projectflows = ProjectFlow::get();
@@ -832,13 +882,13 @@ class MiniTbpController extends Controller
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id = $leader->leader_id;
                 $alertmessage->messagebox_id = $messagebox->id;
-                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '.$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br><a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>ดำเนินการ</a>';
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br><a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>ดำเนินการ</a>';
                 $alertmessage->save();
     
                 MessageBox::find($messagebox->id)->update([
                     'alertmessage_id' => $alertmessage->id
                 ]);
-                EmailBox::send(User::find($leader->leader_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. ' '. $fullcompanyname . ' ที่มีการแก้ไข','เรียน Leader<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
+                EmailBox::send(User::find($leader->leader_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. $fullcompanyname . ' ที่มีการแก้ไข','เรียน Leader<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
                
             }else{
 
@@ -873,13 +923,18 @@ class MiniTbpController extends Controller
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id = $documenteditor->user_id;
                 $alertmessage->messagebox_id = $messagebox->id;
-                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '.$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>ดำเนินการ</a>';
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().$fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" class="btn btn-sm bg-success linknextaction" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>ดำเนินการ</a>';
                 $alertmessage->save();
     
                 MessageBox::find($messagebox->id)->update([
                     'alertmessage_id' => $alertmessage->id
                 ]);
-                EmailBox::send(User::find($documenteditor->user_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. ' '. $fullcompanyname . ' ที่มีการแก้ไข','เรียน Admin<br><br> '. $fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
+                $editor = 'Manager';
+                if(User::find($documenteditor->user_id)->user_type_id == 5){
+                    $editor = 'Admin';
+                }
+
+                EmailBox::send(User::find($documenteditor->user_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project. $fullcompanyname . ' ที่มีการแก้ไข','เรียน '.$editor.'<br><br> '. $fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project.' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature()); 
             }
             CreateUserLog::createLog('ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project .  ' ที่มีการแก้ไข' );
         }
@@ -917,7 +972,7 @@ class MiniTbpController extends Controller
         $company = $minitbp->businessplan->company;
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
@@ -952,7 +1007,7 @@ class MiniTbpController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->target_user_id = $jd->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '.$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดมอบหมาย Leader ในขั้นตอนต่อไป <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -975,7 +1030,7 @@ class MiniTbpController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->messagebox_id = $messagebox->id;
             $alertmessage->target_user_id = $admin->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' '.$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().$fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำหรับโครงการ' .$minitbp->project. ' โปรดตรวจสอบ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.minitbp').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -1002,8 +1057,8 @@ class MiniTbpController extends Controller
                 'name' => $minitbp->project
             ]);
          
-            EmailBox::send($admin->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' ' . $fullcompanyname,'เรียน Admin<br><br> '. $fullcompanyname. ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.minitbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-            EmailBox::send($jd->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' ' . $fullcompanyname,'เรียน Manager<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' โปรดตรวจสอบและแต่งตั้ง Leader ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            
+            EmailBox::send($jd->email,$admin->email,'TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project .  $fullcompanyname,'เรียน Manager<br><br> '. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' โปรดตรวจสอบและแต่งตั้ง Leader ได้ที่ <a href='.route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
             $startdate = Carbon::now()->addDay(1);
             $projectflows = ProjectFlow::get();
@@ -1062,7 +1117,7 @@ class MiniTbpController extends Controller
                 ]);
 
                 CreateUserLog::createLog('ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project .  ' ที่มีการแก้ไข' );
-                EmailBox::send(User::find($projectassignments->first()->leader_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project .' ' . $fullcompanyname .' ที่มีการแก้ไข','เรียน Leader<br><br>' . $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. ' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send(User::find($projectassignments->first()->leader_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . $fullcompanyname .' ที่มีการแก้ไข','เรียน Leader<br><br>' . $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. ' ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                 
             }else{
                 $documenteditor = DocumentEditor::where('mini_tbp_id',$id)->orderBy('id','desc')->first();
@@ -1102,8 +1157,11 @@ class MiniTbpController extends Controller
                 ]);
 
                 CreateUserLog::createLog('ส่งแบบคำขอรับการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project .  ' ที่มีการแก้ไข' );
-
-                EmailBox::send(User::find($documenteditor->user_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . ' '. $fullcompanyname .' ที่มีการแก้ไข','เรียน Admin <br><br>'. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. 'ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                $editor = 'Manager';
+                if(User::find($documenteditor->user_id)->user_type_id == 5){
+                    $editor = 'Admin';
+                }
+                EmailBox::send(User::find($documenteditor->user_id)->email,'','TTRS:แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project . $fullcompanyname .' ที่มีการแก้ไข','เรียน '.$editor.' <br><br>'. $fullcompanyname . ' ได้ส่งแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' .$minitbp->project. 'ที่มีการแก้ไขแล้ว มีรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->message.'</div><br>โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             }
         }
 

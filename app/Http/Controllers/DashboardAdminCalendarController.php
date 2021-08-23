@@ -220,7 +220,7 @@ class DashboardAdminCalendarController extends Controller
       $company_name = (!Empty($company->name))?$company->name:'';
       $bussinesstype = $company->business_type_id;
 
-      $fullcompanyname = $company_name;
+      $fullcompanyname = ' ' . $company_name;
       if($bussinesstype == 1){
           $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
       }else if($bussinesstype == 2){
@@ -283,7 +283,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent' data-id=".$_user->id.">ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
@@ -356,7 +356,7 @@ class DashboardAdminCalendarController extends Controller
           'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'','TTRS:นัดหมายการประเมิน ณ สถานประกอบการ','เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียด ดังนี้' .
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS:นัดหมายการประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project,'เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียด ดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
@@ -713,7 +713,7 @@ class DashboardAdminCalendarController extends Controller
     $company_name = (!Empty($company->name))?$company->name:'';
     $bussinesstype = $company->business_type_id;
 
-    $fullcompanyname = $company_name;
+    $fullcompanyname = ' ' . $company_name;
     if($bussinesstype == 1){
         $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
     }else if($bussinesstype == 2){
@@ -739,11 +739,28 @@ class DashboardAdminCalendarController extends Controller
         }
       }
     }
+    $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+
+    $messagebox =  Message::sendMessage('ยืนยันเข้าร่วมประชุม ' . $eventcalendar->subject .' โครงการ' . $minitbp->project ,'คุณ'.$auth->name . ' '. $auth->lastname .' ได้ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname ,Auth::user()->id,$projectassignment->leader_id);
+
+    $alertmessage = new AlertMessage();
+    $alertmessage->user_id = $auth->id;
+    $alertmessage->target_user_id =  $projectassignment->leader_id;
+    $alertmessage->messagebox_id = $messagebox->id;
+    $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project ;
+    $alertmessage->save();
+
+    MessageBox::find($messagebox->id)->update([
+         'alertmessage_id' => $alertmessage->id
+     ]);
+        
+   
+    EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:ยืนยันเข้าร่วมประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
     if($auth->user_type_id == 3){
-      return redirect()->route('dashboard.expert.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);
+      return redirect()->route('dashboard.expert.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project . $fullcompanyname);
     }else if($auth->user_type_id > 3){
-      return redirect()->route('dashboard.admin.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);
+      return redirect()->route('dashboard.admin.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project . $fullcompanyname);
     }
   }
 
@@ -758,7 +775,7 @@ class DashboardAdminCalendarController extends Controller
     $company_name = (!Empty($company->name))?$company->name:'';
     $bussinesstype = $company->business_type_id;
 
-    $fullcompanyname = $company_name;
+    $fullcompanyname = ' ' . $company_name;
     if($bussinesstype == 1){
         $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
     }else if($bussinesstype == 2){
@@ -784,6 +801,23 @@ class DashboardAdminCalendarController extends Controller
         }
       }
     }
+    $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+    $messagebox =  Message::sendMessage('ปฏิเสธเข้าประชุม ' . $eventcalendar->subject .' โครงการ' . $minitbp->project ,'คุณ'.$auth->name . ' '. $auth->lastname .' ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname ,Auth::user()->id,$projectassignment->leader_id);
+
+    $alertmessage = new AlertMessage();
+    $alertmessage->user_id = $auth->id;
+    $alertmessage->target_user_id =  $projectassignment->leader_id;
+    $alertmessage->messagebox_id = $messagebox->id;
+    $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project ;
+    $alertmessage->save();
+
+    MessageBox::find($messagebox->id)->update([
+         'alertmessage_id' => $alertmessage->id
+     ]);
+        
+    
+    EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:ปฏิเสธเข้าประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    
     
     if($auth->user_type_id == 3){
       return redirect()->route('dashboard.expert.report')->withSuccess('ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .' ของ'. $fullcompanyname);

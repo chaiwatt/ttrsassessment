@@ -64,7 +64,7 @@ class CompanyController extends Controller
             ]);
         }
 
-        $companyemploys = CompanyEmploy::where('company_id',$request->id)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();
+        $companyemploys = CompanyEmploy::where('company_id',$request->id)->where('employ_position_id', '<=',5)->where('isdirector',1)->orderBy('id','desc')->get();
         return response()->json($companyemploys);
     }
     public function DeleteAuthorizedDirector(Request $request){
@@ -80,7 +80,7 @@ class CompanyController extends Controller
             }
         $companyid = CompanyEmploy::find($request->id)->company_id;
         CompanyEmploy::find($request->id)->delete();
-        $companyemploys = CompanyEmploy::where('company_id',$companyid)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();
+        $companyemploys = CompanyEmploy::where('company_id',$companyid)->where('employ_position_id', '<=',5)->where('isdirector',1)->orderBy('id','desc')->get();
         return response()->json($companyemploys);
     }
     public function UploadOrganizeImg(Request $request){
@@ -166,7 +166,7 @@ class CompanyController extends Controller
             // 'signature_id' => $signature
         ]);
         $companyid = CompanyEmploy::find($request->id)->company_id;
-        $companyemploys = CompanyEmploy::where('company_id',$companyid)->where('employ_position_id', '<=',5)->orderBy('id','desc')->get();
+        $companyemploys = CompanyEmploy::where('company_id',$companyid)->where('employ_position_id', '<=',5)->where('isdirector',1)->orderBy('id','desc')->get();
         return response()->json($companyemploys);
     }
 

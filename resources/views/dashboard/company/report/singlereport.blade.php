@@ -83,7 +83,7 @@
                         <div class="card bg-teal-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0"><span id="showscore">{{ number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent, 2)}}</span> %</h1>
+                                    <h1 class="font-weight-semibold mb-0"><span id="showscore">{{ number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent, 2)}}</span></h1>
                                 </div>
                                 <div>
                                     ผลคะแนนการประเมิน
@@ -324,7 +324,7 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">Pillar (Index)</th> 
-                                        <th style="text-align: center">เปอร์เซนต์</th> 
+                                        <th style="text-align: center">คะแนน</th> 
                                         <th style="text-align: center">เกรด</th>   
                                                                
                                     </tr>
@@ -612,8 +612,8 @@
                 var pillarpercent2 = 0;
                 var pillarpercent1 = 0;
                 data.forEach((grade,index) => {
-                    $('#chartpillar' + (index+1)).html(grade.percent + ' %');
-                    $('#pillar' + (index+1)).html(grade.percent + ' %');
+                    $('#chartpillar' + (index+1)).html(grade.percent);
+                    $('#pillar' + (index+1)).html(grade.percent);
                     $('#gradepillar' + (index+1)).html(grade.grade);
                     //console.log(index);
             
@@ -627,10 +627,10 @@
                         pillarpercent1 = grade.percent;
                     }
 
-                    pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
-                    pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
-                    pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
-                    pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
+                    // pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
+                    // pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
+                    // pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
+                    // pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
 
                     if(index < 4){
                         var basepillar = ``;
@@ -674,28 +674,28 @@
 
                 });  
                 // var angle = grade.percent*1.8;
-                $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}%`);
+                $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}`);
                 $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
                 $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);
                 if(pillarpercent4 == 100){
                     $('.chart-skills4').find('span:nth-child(1)').css('top', `20px`);
                 }
 
-                $('.chart-skills3').find('span:nth-child(1)').text(`${pillarpercent3}%`);
+                $('.chart-skills3').find('span:nth-child(1)').text(`${pillarpercent3}`);
                 $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent3*1.8}deg)`);
                 $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent3}deg)`);
                 if(pillarpercent3 == 100){
                     $('.chart-skills3').find('span:nth-child(1)').css('top', `20px`);
                 }
 
-                $('.chart-skills2').find('span:nth-child(1)').text(`${pillarpercent2}%`);
+                $('.chart-skills2').find('span:nth-child(1)').text(`${pillarpercent2}`);
                 $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent2*1.8}deg)`);
                 $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent2}deg)`);
                 if(pillarpercent2 == 100){
                     $('.chart-skills2').find('span:nth-child(1)').css('top', `20px`);
                 }
 
-                $('.chart-skills').find('span:nth-child(1)').text(`${pillarpercent1}%`);
+                $('.chart-skills').find('span:nth-child(1)').text(`${pillarpercent1}`);
                 $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent1*1.8}deg)`);
                 $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent1}deg)`);
                 if(pillarpercent1 == 100){
@@ -978,7 +978,8 @@
                  },
                 data: [
                     {
-                        value: "{{@$businessplan->minitbp->fulltbp->projectgrade->percent}}", 
+                        //number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent,2)
+                        value: "{{@number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent,2)}}", 
                         // name: "{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}",
                         // fontSize: '18' 
                     }

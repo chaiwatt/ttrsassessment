@@ -9,6 +9,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\AlertMessage;
@@ -45,7 +46,7 @@ class DashboardAdminFollowUpController extends Controller
 
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
-        $fullcompanyname = $company_name;
+        $fullcompanyname = ' ' . $company_name;
 
         if($bussinesstype == 1){
             $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';

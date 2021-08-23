@@ -121,6 +121,7 @@
                             <table class="table table-bordered mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                         <th style="text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
@@ -135,6 +136,7 @@
                                     @foreach ($projectassignments->reverse() as $key => $projectassignment)
                                     @if ($projectassignment->businessplan->minitbp->fulltbp->canceldate == null)
                                     <tr>    
+                                        <td hidden>{{@$projectassignment->businessplan->minitbp->updated_at}}</td>
                                         <td style="width:1%;white-space: nowrap"> 
                                             @php
                                                 $cogcolor = 'text-info';
@@ -153,7 +155,7 @@
                                                 $company = $projectassignment->businessplan->company;
                                                 $company_name = (!Empty($company->name))?$company->name:'';
                                                 $bussinesstype = $company->business_type_id;
-                                                $fullcompanyname = $company_name;
+                                                $fullcompanyname = ' ' . $company_name;
                                                 if($bussinesstype == 1){
                                                     $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
                                                 }else if($bussinesstype == 2){
@@ -305,10 +307,11 @@
         }
 
         var countitemtable =  "{{$projectassignments->count()}}";
-        if (countitemtable >= 10) {
+        if (countitemtable >= 1) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
+                "order": [[ 0, 'desc' ]],
                 "info":     false,
                 "pageLength" : 10,
                 "language": {
