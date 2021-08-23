@@ -115,8 +115,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label id="messageshow">เหตุผลการไม่เข้าร่วมโครงการ</label>
-                            <textarea type="text" rows="5"  id="note" placeholder="โปรดระบุเหตุผลการไม่เข้าร่วม" class="form-control form-control-lg" ></textarea>
+                            <label id="messageshow">โปรดระบุเหตุผล</label>
+                            <textarea type="text" rows="5"  id="note" placeholder="โปรดระบุเหตุผล" class="form-control form-control-lg" ></textarea>
                         </div>
                     </div>
                 </div>

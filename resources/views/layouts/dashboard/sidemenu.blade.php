@@ -47,104 +47,110 @@
     </li>
     @endif
 
-
+    @if ((Auth::user()->user_type_id >= 4 && Auth::user()->isLeader() != 0) || Auth::user()->user_type_id >=5)
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
-    <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
-        @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
-            @if ($sharenotificationbubbles->where('notification_category_id','1')->where('notification_sub_category_id','6')->count() > 0)
-                @if (Auth::user()->user_type_id == 5)
+        <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
+            @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
+                @if ($sharenotificationbubbles->where('notification_category_id','1')->where('notification_sub_category_id','6')->count() > 0)
+                    @if (Auth::user()->user_type_id == 5)
+                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    @endif
+                @else
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
-            @else
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
             @endif
-        @endif
-
-    </a>
-    <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
-        @if (Auth::user()->user_type_id >=5)
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',1)->count() > 0)
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+    
+        </a>
+    
+        <ul class="nav nav-group-sub" data-submenu-title="โครงการ">
+            @if (Auth::user()->user_type_id >=5)
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.projectassignment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectassignment')?'active':''}}">การมอบหมาย
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',1)->count() > 0)
+                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    @endif
+                </a></li> 
+                @if ($generalinfo->use_invoice_status_id != 2)
+                    <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    </a></li>	
                 @endif
-            </a></li> 
-            @if ($generalinfo->use_invoice_status_id != 2)
-                <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้
-                    @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
+    
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
+                    @if (Auth::user()->user_type_id == 5)
+                            @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() || $sharenotificationbubbles->where('notification_sub_category_id',4)->count()> 0)
+                                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                            @endif
+                        @else
+                            @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
+                                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                            @endif
+                    @endif
+    
+                </a></li>	
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
+                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    @endif
+                </a></li>
+                {{-- @if (Auth::user()->user_type_id == 5)
+                    <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',6)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    </a></li>	
+                @endif --}}
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    </a>
+                </li>	
+                @if (Auth::user()->user_type_id >= 5)
+                    <li class="nav-item"><a href="{{route('dashboard.admin.project.projectcancel')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectcancel')?'active':''}}">ยกเลิกโครงการ
+                        {{-- @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif --}}
+                    </a></li>
+                @endif
+            @endif
+    
+            @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0)
+                @if ($generalinfo->use_invoice_status_id != 2)
+                    <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้
+                        @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
+                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                        @endif
+                    </a></li>	
+                @endif
+    
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
                         <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                     @endif
                 </a></li>	
-            @endif
-
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
-                @if (Auth::user()->user_type_id == 5)
-                        @if ($sharenotificationbubbles->where('notification_sub_category_id',2)->count() || $sharenotificationbubbles->where('notification_sub_category_id',4)->count()> 0)
-                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                        @endif
-                    @else
-                        @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
-                            <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                        @endif
-                @endif
-
-            </a></li>	
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                @endif
-            </a></li>
-            {{-- @if (Auth::user()->user_type_id == 5)
-                <li class="nav-item"><a href="{{route('dashboard.admin.project.evweight')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.evweight')?'active':''}}">กำหนด Weight
-                    @if ($sharenotificationbubbles->where('notification_sub_category_id',6)->count() > 0)
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
                         <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                     @endif
-                </a></li>	
-            @endif --}}
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                @endif
-            </a></li>	
-            @if (Auth::user()->user_type_id >= 5)
-                <li class="nav-item"><a href="{{route('dashboard.admin.project.projectcancel')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.projectcancel')?'active':''}}">ยกเลิกโครงการ
-                    {{-- @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
-                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                    @endif --}}
                 </a></li>
             @endif
-        @endif
-
-        @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0)
-            @if ($generalinfo->use_invoice_status_id != 2)
-                <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้
-                    @if ($sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
-                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                    @endif
-                </a></li>	
-            @endif
-
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.minitbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.minitbp')?'active':''}}">แบบคำขอรับบริการประเมิน
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',4)->count() > 0)
+    
+            @if (Auth::user()->user_type_id == 4 && Auth::user()->isProjectmember() != 0)
+                <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
+                    @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                 @endif
-            </a></li>	
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.fulltbp')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.fulltbp')?'active':''}}">แบบฟอร์มแผนธุรกิจเทคโนโลยี
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',5)->count() > 0)
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
-                @endif
-            </a></li>
-        @endif
-
-        @if (Auth::user()->user_type_id == 4 && Auth::user()->isProjectmember() != 0)
-            <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
-                @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
-                <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                </a></li>	 
             @endif
-            </a></li>	 
-        @endif
-        
-    </ul>
-    </li>
+            
+        </ul>
+    
+        </li>
+    @endif
+
+
     
     @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0 )
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.calendar')?'nav-item-expanded nav-item-open':''}}">
