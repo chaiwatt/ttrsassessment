@@ -217,7 +217,7 @@
                                                                 <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4  mt-2">
+                                                    <div class="col-sm-4  mt-3">
                                                         {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar1" ></span></h5>
                                                         <h4 style="font-weight: bold;color:#00804f;font-size:28px"><span id="gradepillar1"></span></h4>
@@ -236,7 +236,7 @@
                                                                 <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4  mt-2">
+                                                    <div class="col-sm-4  mt-3">
                                                         {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar2" ></span></h5>
                                                         <h4 style="font-weight: bold;color:#002980;font-size:28px"><span id="gradepillar2"></span></h4>
@@ -255,7 +255,7 @@
                                                             <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4  mt-2">
+                                                <div class="col-sm-4  mt-3">
                                                     {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar3" ></span></h5>
                                                     <h4 style="font-weight: bold;color:#cc6301;font-size:28px"><span id="gradepillar3"></span></h4>
@@ -274,7 +274,7 @@
                                                             <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4 mt-2">
+                                                <div class="col-sm-4 mt-3">
                                                     {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar4" ></span></h5>
                                                     <h4 style="font-weight: bold;color:#34d477;font-size:28px"><span id="gradepillar4"></span></h4>

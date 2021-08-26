@@ -805,7 +805,7 @@
                                                 <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 mt-2">
+                                    <div class="col-sm-4 mt-3">
                                         {{-- <h6 style="font-weight: bold;color:#00804f">Management</h6> --}}
                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar_management"></span></h5>
                                         <h4 style="font-weight: bold;color:#00804f;font-size:28px"><span id="gradepillar_management"></span></h4>
@@ -823,7 +823,7 @@
                                                 <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 mt-2">
+                                    <div class="col-sm-4 mt-3">
                                         {{-- <h6 class="color-02" style="font-weight: bold;color:#002980">Technology</h6> --}}
                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar_tech"></span></h5>
                                         <h4 style="font-weight: bold;color:#002980;font-size:28px"><span id="gradepillar_tech"></span></h4>
@@ -842,7 +842,7 @@
                                             <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 mt-2">
+                                <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar_marketability"></span></h5>
                                     <h4 style="font-weight: bold;color:#cc6301;font-size:28px"><span id="gradepillar_marketability"></span></h4>
@@ -859,7 +859,7 @@
                                             <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 mt-2">
+                                <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar_bp"></span></h5>
                                     <h4 style="font-weight: bold;color:#34d477;font-size:28px"><span id="gradepillar_bp"></span></h4>
