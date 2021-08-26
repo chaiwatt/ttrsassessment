@@ -93,6 +93,12 @@ $(function() {
             delimiter: ''
         })
     });
+    $('.stringformat100').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [100],
+            delimiter: ''
+        })
+    });
     $('.stringformat200').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [200],

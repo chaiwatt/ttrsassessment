@@ -350,7 +350,8 @@
 											<div class="col-md-6">  
 												<div class="form-group">
 													<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-													<input type="text"  name="postalcode"  id="postalcode"  value="{{old('postalcode') ?? $user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+													<input type="text" name="postalcode"  id="postalcode"  value="{{old('postalcode') ?? $user->postal}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+													<span id="postalcode_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> รหัสไปรษณีย์ไม่ถูกต้อง</span>
 												</div>
 											</div>
 											<legend>
@@ -425,6 +426,7 @@
 														<div class="form-group">
 															<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
 															<input type="text"  name="postalcode1" id="postalcode1" value="{{old('postalcode1') ?? $user->postal1}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+															<span id="postalcode1_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> รหัสไปรษณีย์ไม่ถูกต้อง</span>
 														</div>
 													</div>
 													<legend>
@@ -438,18 +440,19 @@
 												<div class="form-group">
 													<label>โทรศัพท์<span class="text-danger">*</span></label>
 													<input type="text" id="phone"  name="phone" value="{{old('phone') ?? $user->phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+													<span id="phone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>อีเมล<span class="text-danger">*</span></label>
-													<input type="text"  name="email" value="{{$user->email ?? $user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60" readonly>
+													<input type="text"  name="email" value="{{$user->email ?? $user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat30" readonly>
 												</div>
 											</div>
 											<div class="col-md-6"> 
 												<div class="form-group">
 													<label>เว็บไซต์</label>
-													<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat60">
+													<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat20">
 												</div>
 											</div>
 											<div class="col-md-6">  

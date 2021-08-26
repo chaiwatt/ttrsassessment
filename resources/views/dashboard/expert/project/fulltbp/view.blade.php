@@ -713,20 +713,20 @@
 								<input type="text" id="productname" placeholder="รายการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
+								<label>ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresent" placeholder="ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpast1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpast1" placeholder="ยอดขาย ปี{{$fulltbp->past1}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpast2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpast2" placeholder="ยอดขาย ปี{{$fulltbp->past2}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpast3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpast3" placeholder="ยอดขาย ปี{{$fulltbp->past3}}" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -756,20 +756,20 @@
 								<input type="text" id="productnameedit" placeholder="รายการ" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellpresentedit" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
+								<label>ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellpresentedit" placeholder="ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit1" placeholder="ยอดขาย ปี{{$fulltbp->past1}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit2" placeholder="ยอดขาย ปี{{$fulltbp->past2}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellpastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellpastedit3" placeholder="ยอดขาย ปี{{$fulltbp->past3}}" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -799,20 +799,20 @@
 								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control form-control-lg" readonly>
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
+								<label>ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspresentedit" placeholder="ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit1" placeholder="ยอดขาย ปี{{$fulltbp->past1}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit2" placeholder="ยอดขาย ปี{{$fulltbp->past2}}" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="number" id="sellstatuspastedit3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg">
+								<label>ยอดขาย ปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="number" id="sellstatuspastedit3" placeholder="ยอดขาย ปี{{$fulltbp->past3}}" class="form-control form-control-lg">
 							</div>
 						</div>
 					</div>
@@ -1862,7 +1862,7 @@
 
 														<div class="col-md-12">
 															<div class="form-group">
-																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
+																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
 																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i> </small></p>
 																<textarea name="" id="productdetails_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
@@ -2380,10 +2380,10 @@
 															<label for=""><u>Market Analysis</u> </label>
 															<p><small><i>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์ (ประมาณ 1-3 หน้า) โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
 																<ul>
-																	<li>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/Market requirements)</li>
+																	<li>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs / Market requirements)</li>
 																	<li>ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</li>
 																	<li>ส่วนแบ่งของตลาดที่คาดว่าผลิตภัณฑ์จะครอบครอง (Market share)</li>
-																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</li>
+																	<li>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis / Benchmarking matrix)</li>
 																</ul>
 																</i> </small></p>
 															<textarea name="" id="analysis" class="form-control form-control-lg" cols="3" rows="10">{{@$fulltbp->fulltbpmarketanalysis->detail}}</textarea>
@@ -2496,7 +2496,7 @@
 																	<thead>
 																		<tr class="bg-info">
 																			<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
-																			<th>ยอดขายปีปัจจุบัน</th> 
+																			<th>ยอดขาย ปีปัจจุบัน</th> 
 																			<th>{{$fulltbp->past1}}</th>                                                                                    
 																			<th>{{$fulltbp->past2}}</th>       
 																			<th>{{$fulltbp->past3}}</th>  
@@ -2528,7 +2528,7 @@
 																<thead>
 																	<tr  class="bg-info">
 																		<th>ระยะเวลา</th>  
-																		<th>ยอดขายปีปัจจุบัน</th> 
+																		<th>ยอดขาย ปีปัจจุบัน</th> 
 																		<th>{{$fulltbp->past1}}</th>                                                                                    
 																		<th>{{$fulltbp->past2}}</th>       
 																		<th>{{$fulltbp->past3}}</th>  
@@ -2897,18 +2897,46 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#responsibleeducationhistory').summernote({
 			toolbar: false,
 			height: 150,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#responsibleexperiencehistory').summernote({
 			toolbar: false,
 			height: 150,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#responsibletraininghistory').summernote({
 			toolbar: false,
 			height: 150,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectabtract_input').summernote({
 			toolbar: [
@@ -2920,6 +2948,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#mainproduct_input').summernote({
 			toolbar: [
@@ -2931,6 +2966,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#productdetails_input').summernote({
 			toolbar: [
@@ -2942,6 +2984,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectechdev_input').summernote({
 			toolbar: [
@@ -2953,6 +3002,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectechdevproblem_input').summernote({
 			toolbar: [
@@ -2964,6 +3020,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectinnovation_input').summernote({
 			toolbar: [
@@ -2975,6 +3038,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#projectstandard_input').summernote({
 			toolbar: [
@@ -2986,6 +3056,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#analysis').summernote({
 			toolbar: [
@@ -2997,6 +3074,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 		$('#swot').summernote({
 			toolbar: [
@@ -3008,6 +3092,13 @@
 				['height', ['height']]
 			],
 			height: 300,
+			callbacks: {
+				onPaste: function (e) {
+					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+					e.preventDefault();
+					document.execCommand('insertText', false, bufferText);
+				}
+			}
 		});
 	});
 

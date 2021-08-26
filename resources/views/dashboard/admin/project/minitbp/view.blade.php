@@ -546,12 +546,20 @@
 	// Basic wizard setup
 	var mytype = "{{Auth::user()->user_type_id}}";
 	var myid = "{{Auth::user()->id}}";
+	var approvestatus = 'ยังไม่ได้อนุมัติ';
 	var btnstatus = true;
     if (mytype == 4) {
 		if (myid != $("#leaderid").val()) {
 			btnstatus = false;
+		}else{
+			if((submitstatus > 3 && refixstatus == 0) || (submitstatus == 3 && refixstatus == 1)){
+				btnstatus = false;
+				approvestatus = 'ดำเนินการ';
+			}
 		}
 	}
+	// console.log('business plan staus:' + submitstatus + ' refix status:' + refixstatus);
+
 	var form = $('.step-minitbp').show();
 	$('.step-minitbp').steps({
 		headerTag: 'h6',
@@ -561,11 +569,20 @@
 		labels: {
 			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
 			next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
-			finish: 'ดำเนินการ <i class="icon-arrow-right14 ml-2" />'
+			finish: `${approvestatus} <i class="icon-arrow-right14 ml-2" />`
 		},
 		enableFinishButton: btnstatus,
 		onFinished: function (event, currentIndex) {
-			 window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
+			window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
+			// if(submitstatus > 3 && refixstatus == 0){
+			// 	window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
+			// }
+
+			// if(submitstatus == 3 && (refixstatus == 0 || refixstatus == 2)){
+			// 	// window.location.replace(`${route.url}/dashboard/admin/project/minitbp`);
+			// 	console.log('เลือกให้ action');
+			// }
+			 
 		},
 		transitionEffect: 'fade',
 		autoFocus: true,
@@ -702,13 +719,20 @@
 			this.value = "";
 			return false;
 		}
-		if (this.files[0].size/1024/1024*1000 > 2000 ){
+		if (this.files[0].size/1024/1024*1000 > 2048 ){
 			Swal.fire({
 				title: 'ผิดพลาด...',
 				text: 'ไฟล์ขนาดมากกว่า 2 MB',
 				});
 			return ;
 		}
+		if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
 		var formData = new FormData();
 		formData.append('attachment',file);
 		formData.append('id',$('#minitbpid').val());

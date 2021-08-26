@@ -300,16 +300,6 @@ $(document).on("change","#expertbranch",function(e){
     }
 }); 
 
-$(document).on("change","#phone",function(e){
-    if(($("#phone").val().length < 9 || $("#phone").val().length > 10) || $("#phone").val().charAt(0) != '0'){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
-        });
-        $('#phone').val('')
-        return;
-    }
-}); 
 
 
 //
@@ -328,10 +318,17 @@ $("#expertdoc").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 2000 ){
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -408,10 +405,17 @@ $("#coverimg").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -444,11 +448,18 @@ $("#avatarimg").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
         // alert('ไฟล์ขนาดมากกว่า 1 MB');
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -542,3 +553,31 @@ $(document).on('change', '#amphur1', function(e) {
         
     })
 });
+
+$(document).on("change","#postalcode",function(e){
+    if($(this).val().length != 5){
+        $("#postalcode_error").attr("hidden",false);
+        $(this).val('');
+    }else{
+        $("#postalcode_error").attr("hidden",true);
+    }
+}); 
+
+$(document).on("change","#postalcode1",function(e){
+    if($(this).val().length != 5){
+        $("#postalcode1_error").attr("hidden",false);
+        $(this).val('');
+    }else{
+        $("#postalcode1_error").attr("hidden",true);
+    }
+}); 
+
+
+$(document).on("change","#phone",function(e){
+    if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+        $("#phone_error").attr("hidden",false);
+        $(this).val('');
+    }else{
+        $("#phone_error").attr("hidden",true);
+    }
+}); 

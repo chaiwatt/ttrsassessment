@@ -29,6 +29,7 @@
                             <div class="col-md-12">
                                 
                                 <div class="form-group">
+                                    <input type="text" id="jointype" hidden>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="attendee_modal">
                                                 <tr>
@@ -212,6 +213,10 @@
                             </a> --}}
                         </div>
                     </div>
+                    @php
+                        $count = Auth::user()->Isexpertbelong; 
+                    @endphp
+                    {{-- {{$count}} --}}
                     <div class="card-body">
                         <input id="attendeventid" type="text" hidden >
                         <div class="table-responsive">
@@ -226,7 +231,9 @@
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปผลประเมิน</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">แสดงความเห็น</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center">การเข้าร่วม</th> 
+                                        @if ($count > 0)
+                                            <th style="width:1%;white-space: nowrap;text-align: center">การเข้าร่วม</th>
+                                        @endif
                                         <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>
                                     </tr>
                                 </thead>
@@ -276,15 +283,18 @@
                                                             @endif
                                                     @endif
                                                 </td> 
-                                                <td style="white-space: nowrap"> 
-                                                    @if ($fulltbp->expertassignment->accepted == 0)
-                                                            <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                            <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
-                                                        @elseif($fulltbp->expertassignment->accepted == 2)
-                                                            <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
-                                                    @endif
-                                                    
-                                                </td> 
+                                                @if ($count > 0)
+                                                    <td style="white-space: nowrap"> 
+                                                        @if ($fulltbp->expertassignment->accepted == 0)
+                                                                <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                                <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
+                                                            @elseif($fulltbp->expertassignment->accepted == 2)
+                                                                <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                        @endif
+                                                        
+                                                    </td> 
+                                                @endif
+
                                                 <td style="white-space: nowrap">  
                                                     <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
                                                 </td>  

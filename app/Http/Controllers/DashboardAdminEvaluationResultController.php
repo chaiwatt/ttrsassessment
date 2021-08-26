@@ -155,7 +155,7 @@ class DashboardAdminEvaluationResultController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send($jduser->email,'','TTRS:เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project .$fullcompanyname,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' ได้เพิ่ม / แก้ไข บทวิเคราะห์ โครงการ'.$minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send($jduser->email,'','TTRS: เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project .$fullcompanyname,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' ได้เพิ่ม / แก้ไข บทวิเคราะห์ โครงการ'.$minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         CreateUserLog::createLog('เพิ่ม / แก้ไขบทวิเคราะห์ โครงการ' . $minitbp->project);
         return redirect()->route('dashboard.admin.evaluationresult')->withSuccess('เพิ่มบทวิเคราะห์สำเร็จ');
@@ -179,7 +179,7 @@ class DashboardAdminEvaluationResultController extends Controller
         ];
         $pdf = PDF::loadView('dashboard.admin.evaluationresult.pdf', $data);
         $path = public_path("storage/uploads/fulltbp/");
-        return $pdf->stream('document.pdf');
+        return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf');
     }
     public function Word($id){
         $evaluationresult = EvaluationResult::find($id);
@@ -326,12 +326,13 @@ class DashboardAdminEvaluationResultController extends Controller
         $headertextRun->getFont()->setBold(false)
                 ->setName('PSL-Kittithada')
                 ->setSize(26);
-
+        $fname = 'ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pptx';
         header("Content-Type: application/vnd.openxmlformats-officedocument.presentationml.presentation");
-        header("Content-Disposition: attachment; filename=certificate.pptx");
+        header("Content-Disposition: attachment; filename=$fname");
         $oWriterPPTX = IOFactory::createWriter($objPHPPowerPoint, 'PowerPoint2007');
         $oWriterPPTX->save('php://output');
         //$oWriterPPTX->save("sample.pptx");
+        // 'ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'
     }
 
     public function Certificate($id,$type){
@@ -405,7 +406,8 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,160, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
-        $mpdf->Output();
+        $mpdf->Output('ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf', 'I');
+        // return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf');
     }
     
     public static function FixBreak($data){

@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">แจ้งการจ่ายเงิน @if ($invoicetransaction->status == 3)<span class="text-success">(ยืนยันจ่ายเงินแล้ว)</span> @endif    
+                <h4> <span class="font-weight-semibold">แจ้งการชำระเงิน @if ($invoicetransaction->status == 3)<span class="text-success">(ยืนยันชำระเงินแล้ว)</span> @endif    
                 </span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -23,7 +23,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
                     <a href="{{route('dashboard.company.project.invoice')}}" class="breadcrumb-item"> ใบแจ้งหนี้</a>
-                    <span class="breadcrumb-item active">แจ้งการจ่ายเงิน</span>
+                    <span class="breadcrumb-item active">แจ้งการชำระเงิน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
+                                            <label>เวลา<span class="text-danger">*</span></label>
                                             <input type="text"  name="paymenttime" value="{{$invoicetransaction->paymenttime}}" placeholder="เวลา" class="form-control form-control-lg" readonly>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                 <div class="text-right">
                                     <a  href="{{asset($invoicetransaction->attachment)}}" class="btn bg-primary" target="blank" >ดาวน์โหลดเอกสารแนบ<i class="icon-download ml-2"></i></a>
                                     @if ($invoicetransaction->status == 2)
-                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">ตรวจสอบเอกสารการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">ยืนยันได้ตรวจสอบเอกสารการชำระเงิน<i class="icon-paperplane ml-2"></i></button>
                                     @endif
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
         var frm = e.target.form;
         Swal.fire({
                 title: 'ยืนยัน',
-                text: `ได้ตรวจสอบเอกสารการจ่ายเงิน แล้วหรือไม่?`,
+                text: `ได้ตรวจสอบเอกสารการชำระเงินเรียบร้อยแล้ว?`,
                 type: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

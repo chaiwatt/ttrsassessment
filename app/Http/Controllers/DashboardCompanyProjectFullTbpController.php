@@ -485,7 +485,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         ];
         $pdf = PDF::loadView('dashboard.company.project.fulltbp.pdf', $data);
         $path = public_path("storage/uploads/fulltbp/");
-        return $pdf->stream('document.pdf');
+        return $pdf->stream('Full TBP โครงการ'.$minitbp->project. ' ' .$company->fullname. '.pdf');
     }
 
     public function Submit($id){
@@ -538,7 +538,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name .' ได้ส่ง'.$message.' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . 'โปรดตรวจสอบ ได้ที่ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>' ;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name .' ได้ส่ง'.$message.' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' โปรดตรวจสอบ ได้ที่ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>' ;
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -551,15 +551,15 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = User::where('user_type_id',6)->first()->id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name .' ได้ส่ง'.$message.' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . 'โปรดตรวจสอบ ได้ที่ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>' ;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' บริษัท'. $company->name .' ได้ส่ง'.$message.' โครงการ' . MiniTBP::find($fulltbp->mini_tbp_id)->project . ' โปรดตรวจสอบ ได้ที่ <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>' ;
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:'.$message,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        EmailBox::send(User::where('user_type_id',6)->first()->email,'','TTRS:'.$message,'เรียน Manager<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS: '.$message,'เรียน Leader<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::where('user_type_id',6)->first()->email,'','TTRS: '.$message,'เรียน Manager<br><br> บริษัท'. $company->name . ' ได้ส่ง'.$message.' โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.fulltbp').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
         
         

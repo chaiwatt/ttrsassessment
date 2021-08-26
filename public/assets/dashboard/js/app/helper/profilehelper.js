@@ -120,7 +120,7 @@ $(document).on("change","#file",function(e){
         return false;
     }
 
-    if (this.files[0].size/1024/1024*1000 > 2000 ){
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 2 MB!',
@@ -128,6 +128,13 @@ $(document).on("change","#file",function(e){
         this.value = "";
         $this.files[0].val(''); 
         $('#filename').val('');
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
         return ;
     }
 }); 
@@ -411,11 +418,18 @@ $("#attachment").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
         //alert('ไฟล์ขนาดมากกว่า 1 MB');
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -508,10 +522,17 @@ $("#coverimg").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -544,10 +565,17 @@ $("#avatarimg").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -586,10 +614,13 @@ $("#vatno").on('change', function() {
     $('#msg').removeClass();
     var vatid = $(this).val();
     if(vatid.length != 13){ 
-        $('#msg').addClass('text-danger');    
-        $('#msg').html(" เลขประจำตัวผู้เสียภาษีอากรไม่ถูกต้อง")
+        // $('#msg').addClass('text-danger');    
+        // $('#msg').html(" เลขประจำตัวผู้เสียภาษีอากรไม่ถูกต้อง")
+        $("#vatno_format_error").attr("hidden",false);
         $('#vatno').val('');
         return ;
+    }else{
+        $("#vatno_format_error").attr("hidden",true); 
     }
     checkTinPin($(this).val()).then(data => {
         $('#msg').removeClass();
@@ -773,13 +804,21 @@ $(document).on("change","#companydoc",function(e){
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 2000 ){
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
+
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
@@ -1037,8 +1076,11 @@ $(document).on('click', '#btn_modal_add_address', function(e) {
 });
 
 $(document).on('change', '#tambolmodal', function(e) {
-    console.log($(this).find(':selected').data('id'));
     $('#postalcode').val($(this).find(':selected').data('id'));
+});
+
+$(document).on('change', '#tambol', function(e) {
+    $('#postal').val($(this).find(':selected').data('id'));
 });
 
 $(document).on('click', '.deleteaddress', function(e) {
@@ -1332,5 +1374,39 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
             // $('#otherprefix_edit').val('');
         }
     });
+
+    $(document).on('click', '.rejectevent', function(e) {
+        e.preventDefault();
+        
+        $('#modal_message').modal('hide');
+
+        $('#linkurl').val(e.currentTarget.getAttribute('href')) ;// = e.currentTarget.getAttribute('href')+'?rejmsg='+message;
+        // window.location.href = urlToRedirect;
+        $('#modal_reject_join').modal('show');
+        // console.log(urlToRedirect);
+    });
+
+    
+    $(document).on('click', '#btn_modal_reject_join', function(e) {
+       var urlToRedirect =  $('#linkurl').val() +'?rejmsg='+$('#reject').val();
+    //    console.log(rejurl);
+    $("#spinicon").attr("hidden",false);
+    if($('#reject').val() != ''){
+        window.location.href = urlToRedirect;
+    }
+
+    $(document).on('click', '.acceptevent', function(e) {
+        e.preventDefault();
+        
+
+        $("#accept_spinicon").attr("hidden",false);
+        var urlToRedirect = e.currentTarget.getAttribute('href') ;// = e.currentTarget.getAttribute('href')+'?rejmsg='+message;
+        window.location.href = urlToRedirect;
+        $('#modal_message').modal('hide');
+   
+    });
+       
+    });
+    
     
     

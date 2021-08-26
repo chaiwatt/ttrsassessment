@@ -57,19 +57,19 @@ th {
 					<div class="col-md-6" id="otherprefix_ceo_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix_ceo" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="otherprefix_ceo" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_ceo" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employname_ceo" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_ceo" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employlastname_ceo" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					{{-- <div class="col-md-6">
@@ -88,18 +88,21 @@ th {
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone_ceo" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+							<span id="employphone_ceo_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone_ceo" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
+							<span id="employworkphone_ceo_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail_ceo" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+							<span id="employemail_ceo_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -137,19 +140,19 @@ th {
 					<div class="col-md-6" id="otherprefix_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="otherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employname" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employlastname" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -161,25 +164,28 @@ th {
 					<div class="col-md-6" id="employ_otherposition_wrapper" hidden>
 						<div class="form-group">
 							<label>ตำแหน่ง โปรดระบุ</label><span class="text-danger">*</span>
-							<input type="text" id="otherboardposition" placeholder="ตำแหน่ง โปรดระบุ" class="form-control form-control-lg">
+							<input type="text" id="otherboardposition" placeholder="ตำแหน่ง โปรดระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+							<span id="employphone_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
+							<span id="employworkphone_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+							<span id="employemail_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -217,19 +223,19 @@ th {
 					<div class="col-md-6" id="otherprefix_research_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix_research" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="otherprefix_research" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employname_research" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employlastname_research" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -241,25 +247,28 @@ th {
 					<div class="col-md-6" id="employ_position_other_research_wrapper" hidden>
 						<div class="form-group">
 							<label>ตำแหน่ง โปรดระบุ</label><span class="text-danger">*</span>
-							<input type="text" id="otherresearchposition" placeholder="ตำแหน่ง โปรดระบุ" class="form-control form-control-lg">
+							<input type="text" id="otherresearchposition" placeholder="ตำแหน่ง โปรดระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone_research" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+							<span id="employphone_research_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone_research" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
+							<span id="employworkphone_research_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail_research" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+							<span id="employemail_research_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -294,19 +303,19 @@ th {
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ชื่อ</label><span class="text-danger">*</span>
-							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employname_projectmember" placeholder="ชื่อ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6" id="otherprefix_projectmember_wrapper" hidden>
 						<div class="form-group">
 							<label>ระบุคำนำหน้าชื่อ</label>
-							<input type="text" id="otherprefix_projectmember" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+							<input type="text" id="otherprefix_projectmember" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>นามสกุล</label><span class="text-danger">*</span>
-							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+							<input type="text" id="employlastname_projectmember" placeholder="นามสกุล" class="form-control form-control-lg stringformat20">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -319,18 +328,21 @@ th {
 						<div class="form-group">
 							<label>โทรศัพท์</label><span class="text-danger">*</span>
 							<input type="text" id="employphone_projectmember" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+							<span id="employphone_projectmember_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 							<input type="text" id="employworkphone_projectmember" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone">
+							<span id="employworkphone_projectmember_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail_projectmember" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+							<span id="employemail_projectmember_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -376,19 +388,19 @@ th {
 										<div class="col-md-4" id="get_otherprefix_wrapper" hidden>
 											<div class="form-group">
 												<label>ระบุคำนำหน้าชื่อ</label>
-												<input type="text" id="getotherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat60" >
+												<input type="text" id="getotherprefix" placeholder="ระบุ" class="form-control form-control-lg stringformat20" >
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label>ชื่อ</label><span class="text-danger">*</span>
-												<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat60" >
+												<input type="text" id="employname_edit" placeholder="ชื่อ" class="form-control form-control-lg stringformat20" >
 											</div>
 										</div>
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>นามสกุล</label><span class="text-danger">*</span>
-											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat60" >
+											<input type="text" id="employlastname_edit" placeholder="นามสกุล" class="form-control form-control-lg stringformat20" >
 										</div>
 										</div>
 
@@ -396,18 +408,21 @@ th {
 										<div class="form-group">
 											<label>โทรศัพท์</label><span class="text-danger">*</span>
 											<input type="text" id="employphone_edit" placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+											<span id="employphone_edit_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 										</div>
 										</div>
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 											<input type="text" id="employworkphone_edit" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+											<span id="employworkphone_edit_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
 										</div>
 										</div>
 										<div class="col-md-4">
 										<div class="form-group">
 											<label>อีเมล</label><span class="text-danger">*</span>
 											<input type="text" id="employemail_edit" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+											<span id="employemail_edit_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 										</div>
 										</div>
 										<div class="col-md-12">
@@ -563,12 +578,14 @@ th {
 						<div class="form-group">
 							<label>ปี พ.ศ. ที่เริ่มต้นศึกษา</label><span class="text-danger">*</span>
 							<input type="text" id="employeducationyearstart" placeholder="" class="form-control form-control-lg numeralformatyear">
+							<span id="employeducationyearstart_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> ปี พ.ศ. ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ปี พ.ศ. ที่สิ้นสุดศึกษา</label><span class="text-danger">*</span>
 							<input type="text" id="employeducationyearend" placeholder="" class="form-control form-control-lg numeralformatyear">
+							<span id="employeducationyearend_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> ปี พ.ศ. ไม่ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -596,12 +613,14 @@ th {
 						<div class="form-group">
 							<label>ปี พ.ศ. ที่เริ่มงาน</label><span class="text-danger">*</span>
 							<input type="text" id="employexperiencestartdate" placeholder="" class="form-control form-control-lg numeralformatyear">
+							<span id="employexperiencestartdate_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> ปี พ.ศ. ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>ปี พ.ศ. ที่สิ้นสุดงาน</label><span class="text-danger">*</span>
 							<input type="text" id="employexperienceenddate" placeholder="" class="form-control form-control-lg numeralformatyear">
+							<span id="employexperienceenddate_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> ปี พ.ศ. ไม่ถูกต้อง</span>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -651,7 +670,7 @@ th {
 					<label for="" class="text-danger">*กรุณาบันทึกประวัติการฝึกอบรมจากปัจจุบันก่อน แล้วเรียงลำดับลงมา</label>
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label><span class="text-danger">*</span>
+							<label>วันที่</label><span class="text-danger">*</span>
 							<input type="text" id="employtrainingdate" placeholder="วัน เดือน ปี" class="form-control form-control-lg">
 						</div>
 
@@ -725,11 +744,11 @@ th {
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีที่มีอยู่ในปัจจุบัน</label><span class="text-danger">*</span>
-							<input type="text" id="tectdevleveltechnologypresent" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control form-control-lg stringformat200">
+							<input type="text" id="tectdevleveltechnologypresent" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control form-control-lg stringformat60">
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีในโครงการ</label><span class="text-danger">*</span>
-							<input type="text" id="tectdevleveltechnologyproject" placeholder="เทคโนโลยีในโครงการ" class="form-control form-control-lg stringformat200">
+							<input type="text" id="tectdevleveltechnologyproject" placeholder="เทคโนโลยีในโครงการ" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
 				</div>
@@ -951,7 +970,7 @@ th {
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>รายละเอียด</label><span class="text-danger">*</span>
-							<input type="text" id="plandetail" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control form-control-lg">
+							<input type="text" id="plandetail" placeholder="โปรดระบุแผนการดำเนินงาน" class="form-control form-control-lg stringformat100" >
 						</div>
 					</div>
 				</div>
@@ -1023,23 +1042,23 @@ th {
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>ชื่อผลิตภัณฑ์</label><span class="text-danger">*</span>
-								<input type="text" id="productname" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat60">
+								<input type="text" id="productname" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat30">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="text" id="sellpresent" placeholder="ยอดขายปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
+								<label>ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<input type="text" id="sellpresent" placeholder="ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpast1" placeholder="ยอดขายปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
+								<label>ยอดขาย ปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<input type="text" id="sellpast1" placeholder="ยอดขาย ปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpast2" placeholder="ยอดขายปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
+								<label>ยอดขาย ปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<input type="text" id="sellpast2" placeholder="ยอดขาย ปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>ยอดขายปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpast3" placeholder="ยอดขายปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
+								<label>ยอดขาย ปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<input type="text" id="sellpast3" placeholder="ยอดขาย ปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
 					</div>
@@ -1108,23 +1127,23 @@ th {
 						<div class="col-md-12">
 							<input type="text" id="sellstatusid" value="" hidden >
 							<div class="form-group">
-								<label>รายการยอดขาย</label><span class="text-danger">*</span>
+								<label id='modal_header'>รายการยอดขาย</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control form-control-lg" readonly>
 							</div>
 							<div class="form-group">
-								<label>วงเงินปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<label><span id='selllabel0'>ยอดขาย</span> ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>วงเงิน ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<label><span id='selllabel1'>ยอดขาย</span> ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit1" placeholder="ปี {{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>วงเงิน ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<label><span id='selllabel2'>ยอดขาย</span> ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit2" placeholder="ปี {{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
 							</div>
 							<div class="form-group">
-								<label>วงเงิน ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<label><span id='selllabel3'>ยอดขาย</span> ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit3" placeholder="ปี {{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
 							</div>
 						</div>
@@ -2188,7 +2207,7 @@ th {
 																<div class="form-group">
 																	<label>อีเมล</label><span class="text-danger">*</span>
 																	<input type="text" name="responsibleemail" id="responsibleemail" value="{{@$fulltbp->fulltbpresponsibleperson->email ?? Auth::user()->email}}" placeholder="อีเมล" class="form-control form-control-lg stringformat60" required>
-																	<span id="responsibleemail_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>รูปแบบอีเมลไม่ถูกต้อง</span>
+																	<span id="responsibleemail_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -2201,7 +2220,7 @@ th {
 																<div class="form-group">
 																	<label>โทรศัพท์</label><span class="text-danger">*</span>
 																	<input type="text" name="responsiblephone" id="responsiblephone" value="{{@$fulltbp->fulltbpresponsibleperson->phone1 ?? Auth::user()->phone}}" placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg numeralformathphone" required>
-																	<span id="responsiblephone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง</span>
+																	<span id="responsiblephone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 																</div>
 															</div>
 															<div class="col-md-6">
@@ -2209,7 +2228,7 @@ th {
 																	<label>โทรศัพท์มือถือ</label><span class="text-danger">*</span>
 														
 																	<input type="text" name="responsibleworkphone" id="responsibleworkphone" value="{{@$fulltbp->fulltbpresponsibleperson->phone2 ?? Auth::user()->phone}}" placeholder="โทรศัพท์มือถือ" class="form-control form-control-lg numeralformathphone" required>
-																	<span id="responsibleworkphone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง</span>
+																	<span id="responsibleworkphone_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 																</div>
 																
 															</div>
@@ -2296,7 +2315,7 @@ th {
 	
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span></label>
+																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span></label>
 																	<p><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
 																	<span id="productdetails_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
 																	<textarea name="productdetails_input" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
@@ -2338,7 +2357,7 @@ th {
 																		<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
 																			@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
 																				<tr >                                        
-																					<td style="text-align: center"> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
 																					<td style="white-space: nowrap"> 
@@ -2895,10 +2914,10 @@ th {
 															<label for=""><u>Market Analysis</u> </label><span class="text-danger">*</span>
 															<p>อธิบายความเป็นไปได้ทางการตลาดของผลิตภัณฑ์หรือบริการในโครงการ และ ระบุแผนงานในการนำผลลัพธ์ของโครงการออกสู่เชิงพาณิชย์  โดยให้ข้อมูลในประเด็นต่างๆ ดังนี้ 
 																<ul>
-																	<li><i>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs/Market requirements)</i></li>
+																	<li><i>การแก้ไขปัญหานี้จะตอบสนองความต้องการของตลาดได้อย่างไร (Market needs / Market requirements)</i></li>
 																	<li><i>ระบุและให้รายละเอียดเกี่ยวกับตลาดภายในและนอกประเทศ (Market size)</i></li>
 																	<li><i>ส่วนแบ่งของตลาดที่คาดว่าผลิตภัณฑ์จะครอบครอง (Market share)</i></li>
-																	<li><i>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis/ Benchmarking matrix)</i></li>
+																	<li><i>ข้อได้เปรียบที่สำคัญของผลิตภัณฑ์ หรือ บริการโดยเปรียบเทียบกับผลิตภัณฑ์ หรือ บริการของคู่แข่ง (Competitive analysis / Benchmarking matrix)</i></li>
 																</ul>
 																</p>
 																<span id="analysis_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
@@ -3621,7 +3640,7 @@ th {
         var business_plan_status_id = "{{$minitbp->businessplan->business_plan_status_id}}";
 		var fulltbprefixstatus = "{{$fulltbp->refixstatus}}";
 
-		console.log(business_plan_status_id + ' ' + fulltbprefixstatus);
+		
 
 		if(business_plan_status_id == 4 || fulltbprefixstatus == 1){ 
 			$(".hiddenelement_fulltbp").attr("hidden",false);   

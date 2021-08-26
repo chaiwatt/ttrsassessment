@@ -797,71 +797,72 @@
                             </div>
                             <div class="col-md-3 top-550">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="row">
-                                            <div class="col-sm-6"></div>
-                                            <div class="col-sm-6"> 
-                                                {{-- <h2><span style="font-weight: bold"> 01</span></h2> --}}
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-9"> 
+                                                <h2><span style="font-weight: bold;color:#00804f;font-size:18px;white-space: nowrap; overflow: "> Management</span></h2>
                                                 <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <h6 style="font-weight: bold;color:#00804f">Management</h6>
-                                        <h5><span id="pillar_management"></span></h5>
-                                        <h4 style="font-weight: bold;color:#00804f"><span id="gradepillar_management"></span></h4>
+                                    <div class="col-sm-4 mt-2">
+                                        {{-- <h6 style="font-weight: bold;color:#00804f">Management</h6> --}}
+                                        <h5 style="font-weight: bold;font-size:28px"><span id="pillar_management"></span></h5>
+                                        <h4 style="font-weight: bold;color:#00804f;font-size:28px"><span id="gradepillar_management"></span></h4>
                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="row">
-                                            <div class="col-sm-6"></div>
-                                            <div class="col-sm-6"> 
-                                                {{-- <h2><span style="font-weight: bold"> 02</span></h2> --}}
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-9"> 
+                                                <h2><span style="font-weight: bold;color:#002980;font-size:18px;white-space: nowrap; overflow: "> Technology</span></h2>
                                                 <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <h6 class="color-02" style="font-weight: bold;color:#002980">Technology</h6>
-                                        <h5><span id="pillar_tech"></span></h5>
-                                        <h4 style="font-weight: bold;color:#002980"><span id="gradepillar_tech"></span></h4>
+                                    <div class="col-sm-4 mt-2">
+                                        {{-- <h6 class="color-02" style="font-weight: bold;color:#002980">Technology</h6> --}}
+                                        <h5 style="font-weight: bold;font-size:28px"><span id="pillar_tech"></span></h5>
+                                        <h4 style="font-weight: bold;color:#002980;font-size:28px"><span id="gradepillar_tech"></span></h4>
                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3"> 
                                 <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-8">
                                     <div class="row">
-                                        <div class="col-sm-6"></div>
-                                        <div class="col-sm-6"> 
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9"> 
                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
+                                            <h2><span style="font-weight: bold;color:#cc6301;font-size:18px;white-space: nowrap; overflow: "> Marketability</span></h2>
                                             <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h6 style="font-weight: bold;color:#cc6301">Marketability</h6>
-                                    <h5><span id="pillar_marketability"></span></h5>
-                                    <h4 style="font-weight: bold;color:#cc6301"><span id="gradepillar_marketability"></span></h4>
+                                <div class="col-sm-4 mt-2">
+                                    {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
+                                    <h5 style="font-weight: bold;font-size:28px"><span id="pillar_marketability"></span></h5>
+                                    <h4 style="font-weight: bold;color:#cc6301;font-size:28px"><span id="gradepillar_marketability"></span></h4>
                                    
                                 </div>
                             </div>
                         </div>
                             <div class="col-md-3">  <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-8">
                                     <div class="row">
-                                        <div class="col-sm-6"></div>
-                                        <div class="col-sm-6"> 
-                                            {{-- <h2><span style="font-weight: bold"> 04</span></h2> --}}
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9"> 
+                                            <h2><span style="font-weight: bold;color:#002980;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
                                             <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6>
-                                    <h5><span id="pillar_bp"></span></h5>
-                                    <h4 style="font-weight: bold;color:#34d477"><span id="gradepillar_bp"></span></h4>
+                                <div class="col-sm-4 mt-2">
+                                    {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
+                                    <h5 style="font-weight: bold;font-size:28px"><span id="pillar_bp"></span></h5>
+                                    <h4 style="font-weight: bold;color:#34d477;font-size:28px"><span id="gradepillar_bp"></span></h4>
                                    
                                 </div>
                             </div>
@@ -872,7 +873,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6" @if ($generalinfo->showgradeperpillar != 1) hidden @endif>
+            <div class="col-lg-12" @if ($generalinfo->showgradeperpillar != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Pillar</h6>
@@ -896,7 +897,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" @if ($generalinfo->showgradeperbusinesssize != 1) hidden @endif>
+            <div class="col-lg-12" @if ($generalinfo->showgradeperbusinesssize != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามขนาดธุรกิจ</h6>
@@ -922,7 +923,7 @@
             </div>
 
 
-            <div class="col-lg-6" @if ($generalinfo->showgradepersection != 1) hidden @endif>
+            <div class="col-lg-12" @if ($generalinfo->showgradepersection != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามภูมิภาค</h6>
@@ -946,7 +947,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" @if ($generalinfo->showgradeperbusinesstype != 1) hidden @endif>
+            <div class="col-lg-12" @if ($generalinfo->showgradeperbusinesstype != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามประเภทธุรกิจ</h6>
@@ -970,7 +971,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" @if ($generalinfo->showgradeperindustrygroup != 1) hidden @endif>
+            <div class="col-lg-12" @if ($generalinfo->showgradeperindustrygroup != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตามกลุ่มอุตสาหกรรม</h6>
@@ -994,7 +995,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6" @if ($generalinfo->showgradeperisic != 1) hidden @endif>
+            <div class="col-lg-12" @if ($generalinfo->showgradeperisic != 1) hidden @endif>
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เกรดแยกตาม Isic</h6>
@@ -1040,6 +1041,11 @@
                         <div class="header-elements">
                         </div>
                     </div>
+                    @php
+                        $count = Auth::user()->Isexpertbelong; 
+                        
+                    @endphp
+                    {{-- {{$count}} --}}
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-2" id="maintable" >
@@ -1051,12 +1057,15 @@
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปผลประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap;text-align: center">การเข้าร่วม</th>
+                                        @if (Auth::user()->user_type_id < 5 && $count > 0)
+                                            <th style="width:1%;white-space: nowrap;text-align: center">การเข้าร่วม</th>
+                                        @endif
+                                        
                                         <th style="width:1%;white-space: nowrap;text-align: center">สถานภาพ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                
                                     @foreach ($fulltbps as $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 2 & ($fulltbp->canceldate == null))
                                             @php
@@ -1082,7 +1091,7 @@
                                                                 <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                                 <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                             @else
-                                                            @if (Auth::user()->isColeader($fulltbp->id) > 0 )
+                                                            @if (Auth::user()->isProjectCoLeader($fulltbp->id) > 0 )
                                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                                     <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                                 @else
@@ -1109,22 +1118,24 @@
                                                       </td>  
                                                 <td style="white-space: nowrap;text-align:center"> 
                                                     @if (!Empty($fulltbp->scoringdate))
-                                                    {{$fulltbp->scoringdateth}}
+                                                            {{$fulltbp->scoringdateth}}
                                                         @else
-                                                        {{$fulltbp->finalassessmentdate}}
+                                                            {{$fulltbp->finalassessmentdate}}
                                                     @endif
-                                                     </td>  
-                                                
-                                                <td style="white-space: nowrap;text-align: center"> 
-                                                    @if (!Empty($check))
-                                                        @if ($fulltbp->expertassignment->accepted == 0)
-                                                                <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                                <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
-                                                            @elseif($fulltbp->expertassignment->accepted == 2)
-                                                                <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                </td>  
+                                                @if (Auth::user()->user_type_id < 5 && $count > 0)
+                                                    <td style="white-space: nowrap;text-align: center"> 
+                                                        @if (!Empty($check))
+                                                            @if ($fulltbp->expertassignment->accepted == 0)
+                                                                    <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                                    <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
+                                                                @elseif($fulltbp->expertassignment->accepted == 2)
+                                                                    <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </td> 
+                                                    </td> 
+                                                @endif
+                                            
                                                 <td style="white-space: nowrap;text-align: center"> 
                                                     @if ($fulltbp->status == 3)
                                                             <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 

@@ -285,7 +285,7 @@
                                                     @endif
                                                 </td>  
                                                 @if (Auth::user()->user_type_id >= 4)
-                                                    <td style="white-space: nowrap;text-align:center"> 
+                                                    <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($minitbp->businessplan->business_plan_status_id > 3)
                                                             <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
                                                                 @if (!Empty($minitbp->approvelog))
@@ -314,7 +314,7 @@
                                                         @endif
                                                     </td> 
                                                 @endif
-                                                <td style="white-space: nowrap"> 
+                                                <td style="width:1%;white-space: nowrap;"> 
                                                     <a  href="{{asset($minitbp->attachment)}}" class="btn btn-sm bg-teal" target="_blank">ดาวน์โหลด</a>
                                                     <a  href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="btn btn-sm bg-primary" target="_blank">รายละเอียด</a>
                                                 </td>                                
@@ -356,8 +356,15 @@
         });
 
         $('#note').summernote({
-			toolbar: false,
+            toolbar: false,
             height: 200,
+            callbacks: {
+                onPaste: function (e) {
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    document.execCommand('insertText', false, bufferText);
+                }
+            }
         });
           
         $(document).on('click', '#btn_modal_add_jdmessage', function(e) {

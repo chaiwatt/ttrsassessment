@@ -1982,7 +1982,7 @@
 									</div>
 									
 									<div class="col-md-12">
-										<label><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้าและบริการ) ของโครงการ</strong></label>
+										<label><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong></label>
 										<div class="form-group">
 											<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->productdetail!!}</div>
 										</div>
@@ -2015,7 +2015,7 @@
 													<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
 														@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
 															<tr >                                        
-																<td style="text-align:center"> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+																<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
 															</tr>

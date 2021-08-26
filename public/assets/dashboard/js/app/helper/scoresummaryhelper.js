@@ -66,11 +66,15 @@ function callDataTable(){
                     return null; 
                 },
                 filename: function() {
-                    return "รายการ EV (Index Criteria)"      
+                    return "สรุปคะแนน Index โครงการ" + $('#projectname') .val()    
                 }, 
                 exportOptions: {
                     columns: [ 0, 1,2,3,4,5 ]
                 },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','โครงการ' + $('#projectname').val());
+                }, 
             },
             { 
                 extend: 'pdfHtml5',
@@ -94,10 +98,10 @@ function callDataTable(){
                     columns: [ 0, 1,2,3,4,5 ]
                 },
                 title: function () { 
-                    return "สรุปคะแนน (Index Criteria)"; 
+                    return "สรุปคะแนน Index โครงการ" + $('#projectname') .val() ;  
                 },
                 filename: function() {
-                    return "สรุปคะแนน (Index Criteria)"      
+                    return "สรุปคะแนน Index โครงการ" + $('#projectname') .val()   ;     
                 }, 
             }
             
@@ -148,10 +152,14 @@ function callDataTableExtra(){
                     return null; 
                 },
                 filename: function() {
-                    return "รายการ EV (Extra)"      
+                    return "สรุปคะแนน Extra โครงการ" + $('#projectname') .val()       
                 }, 
                 exportOptions: {
                     columns: [ 0, 1,2,3]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','โครงการ' + $('#projectname').val());
                 },
             },
             { 
@@ -175,10 +183,10 @@ function callDataTableExtra(){
                     columns: [ 0, 1,2,3]
                 },
                 title: function () { 
-                    return "สรุปคะแนน (Extra)"; 
+                    return "สรุปคะแนน Extra โครงการ" + $('#projectname') .val()  ;
                 },
                 filename: function() {
-                    return "สรุปคะแนน (Extra)"      
+                    return "สรุปคะแนน Extra โครงการ" + $('#projectname') .val()  ;     
                 }, 
             }     
         ],

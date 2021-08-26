@@ -283,7 +283,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent' data-id=".$_user->id.">ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1 acceptevent' >เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent' data-id=".$_user->id.">ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
@@ -315,7 +315,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
@@ -351,12 +351,11 @@ class DashboardAdminCalendarController extends Controller
         $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project;
         $alertmessage->save();
  
-
         MessageBox::find($messagebox->id)->update([
           'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'','TTRS:นัดหมายการประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project,'เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียด ดังนี้' .
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS: นัดหมายการประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project,'เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ขอแจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project.' ณ สถานประกอบการของท่าน ตามรายละเอียด ดังนี้' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
@@ -409,7 +408,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
           
             $alertmessage = new AlertMessage();
@@ -469,6 +468,37 @@ class DashboardAdminCalendarController extends Controller
                                                 ->withIsnotifies($isnotifies)
                                                 ->withCalendarattachments($calendarattachments);
   }
+
+  public function View($id){
+    $calendartypes = CalendarType::get();
+    $eventcalendar = EventCalendar::find($id);
+    $calendarattachments = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();
+    $eventcalendarattendees = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->get();
+    $isnotifies = Isnotify::get();
+    $tmpmember=array();
+    $tmpmember = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+    array_push($tmpmember,User::where('user_type_id',5)->first()->id);
+    array_push($tmpmember,User::where('user_type_id',6)->first()->id);
+
+    if($eventcalendar->calendar_type_id != 3){
+      $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+      $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
+      
+      foreach ($expertdetailarr as $key => $value) {
+        array_push($tmpmember,$value);
+      }
+    }
+
+   $users = User::whereIn('id',$tmpmember)->get();
+
+    return view('dashboard.admin.calendar.view')->withUsers($users)
+                                                ->withEventcalendar($eventcalendar)
+                                                ->withEventcalendarattendees($eventcalendarattendees)
+                                                ->withCalendartypes($calendartypes)
+                                                ->withIsnotifies($isnotifies)
+                                                ->withCalendarattachments($calendarattachments);
+  }
+
   public function EditSave(Request $request,$id){
     // return $request->calendartype;
     $auth = Auth::user();
@@ -599,7 +629,7 @@ class DashboardAdminCalendarController extends Controller
         '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
         .$attachmentfiles.
-        "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $id])." type='button' class='btn btn-sm bg-success mr-1'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $id])." type='button' class='btn btn-sm bg-warning'>ไม่เข้าร่วม</a></div>"
+        "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $id])." type='button' class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $id])." type='button' class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
         
         ,Auth::user()->id,$_user->id);
 
@@ -630,7 +660,7 @@ class DashboardAdminCalendarController extends Controller
     }
 
     if ($mails > 0){
-        EmailBox::send($mails,'','TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
+        EmailBox::send($mails,'','TTRS: ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมาย ดังรายการนี้ได้ <span style="color:red">ยกเลิก</span>  ' .
         '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
         '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
         '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$request->summary.
@@ -679,7 +709,7 @@ class DashboardAdminCalendarController extends Controller
     }
 
     $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
-    EmailBox::send($mails,'','TTRS:ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
+    EmailBox::send($mails,'','TTRS: ยกเลิก ' . $calendartype->name . ' โครงการ'. $minitbp->project,'เรียน ผู้เชี่ยวชาญ <br><br>โปรดทราบว่าการนัดหมายดังรายการได้ <span style="color:red">ยกเลิก</span>  ' .
     '<br><br><strong>&nbsp;วันที่:</strong> '.DateConversion::engToThaiDate($eventcalendar->eventdate).
     '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
     // '<br><strong>&nbsp;ห้อง:</strong> '.$eventcalendar->room.
@@ -755,7 +785,7 @@ class DashboardAdminCalendarController extends Controller
      ]);
         
    
-    EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:ยืนยันเข้าร่วมประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS: ยืนยันเข้าร่วมประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
     if($auth->user_type_id == 3){
       return redirect()->route('dashboard.expert.report')->withSuccess('ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project . $fullcompanyname);
@@ -764,7 +794,12 @@ class DashboardAdminCalendarController extends Controller
     }
   }
 
-  public function RejectEvent($id){
+  public function RejectEvent(Request $request,$id){
+    $rejreason = $request->rejmsg;
+    if(Empty($request->rejmsg) || $request->rejmsg == null){
+      $rejreason = '';
+    }
+    // dd($request->rejmsg);
     $auth = Auth::user();
     $eventcalendar = EventCalendar::find($id);
     $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
@@ -791,7 +826,8 @@ class DashboardAdminCalendarController extends Controller
       if($eventcalendarattendee->joinevent != 2 && $eventcalendarattendee->joinevent != 3){
           $eventcalendarattendee->update([
               'joinevent' => '3',
-              'color' => '#B43104'
+              'color' => '#B43104',
+              'rejectreason' => $rejreason
           ]);
       }else{
         if($auth->user_type_id == 3){
@@ -816,7 +852,7 @@ class DashboardAdminCalendarController extends Controller
      ]);
         
     
-    EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:ปฏิเสธเข้าประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS: ปฏิเสธเข้าประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
     
     if($auth->user_type_id == 3){

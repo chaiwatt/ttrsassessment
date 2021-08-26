@@ -88,7 +88,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactphone" id="contactphone" value="{{$evaluationresult->contactphone ?? $generalinfo->phone1}}"  placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg required">
+                                            <input type="text" name="contactphone" id="contactphone" value="{{$evaluationresult->contactphone ?? $generalinfo->phone1}}"  placeholder="เบอร์โทรศัพท์" class="form-control form-control-lg required" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -100,13 +100,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>โทรสาร<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactfax" id="contactfax" value="{{$evaluationresult->contactfax ?? $generalinfo->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg required">
+                                            <input type="text" name="contactfax" id="contactfax" value="{{$evaluationresult->contactfax ?? $generalinfo->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg required" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactemail" id="contactemail" value="{{$evaluationresult->contactemail ?? $user->email}}"  placeholder="อีเมล" class="form-control form-control-lg required">
+                                            <input type="text" name="contactemail" id="contactemail" value="{{$evaluationresult->contactemail ?? $user->email}}"  placeholder="อีเมล" class="form-control form-control-lg required" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -180,18 +180,46 @@
             $('#management').summernote({
                 toolbar:false,
                 height: 300,
+                callbacks: {
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    }
+                }
             });
             $('#technoandinnovation').summernote({
                 toolbar:false,
                 height: 300,
+                callbacks: {
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    }
+                }
             });
             $('#marketability').summernote({
                 toolbar:false,
                 height: 300,
+                callbacks: {
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    }
+                }
             });
             $('#businessprospect').summernote({
                 toolbar:false,
                 height: 300,
+                callbacks: {
+                    onPaste: function (e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    }
+                }
             });
         });
     </script>

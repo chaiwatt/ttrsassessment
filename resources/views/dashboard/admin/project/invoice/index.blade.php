@@ -64,12 +64,13 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
-                                    <tr>
-                                        <th>วันที่</th>
-                                        <th>บริษัท</th>
-                                        <th>เลขที่เอกสาร</th>    
-                                        <th>สถานภาพ</th> 
-                                        <th style="width:1%;white-space: nowrap">เพิ่มเติม</th>                       
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">วันที่</th>
+                                        <th style="text-align: center">โครงการ</th>  
+                                        <th style="text-align: center">บริษัท</th>
+                                          
+                                        <th style="text-align: center">สถานภาพ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: cente">เพิ่มเติม</th>                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,17 +78,18 @@
                                         @if ($invoicetransaction->company->businessplan->minitbp->fulltbp->canceldate == null)
                                         @if (Auth::user()->isProjectLeader($invoicetransaction->company->businessplan->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                         <tr>    
-                                            <td> {{$invoicetransaction->issuedateth}} </td>  
-                                            <td> {{$invoicetransaction->company->name}} </td> 
-                                            <td> {{$invoicetransaction->docno}} </td> 
-                                            <td> 
+                                            <td> {{$invoicetransaction->issuedateth}} </td> 
+                                            <td> {{$invoicetransaction->company->businessplan->minitbp->project}} </td>  
+                                            <td> {{$invoicetransaction->company->fullname}} </td> 
+                                            
+                                            <td style="text-align: center"> 
                                                 @if ($invoicetransaction->price != 0)
                                                     @if ($invoicetransaction->status == 3)
-                                                        <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</a>
+                                                        <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class="badge badge-flat border-success text-success-600 rounded-0">ชำระเงินแล้ว</a>
                                                         @elseif($invoicetransaction->status == 2)
                                                         <a href="{{route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info">แจ้งการชำระแล้ว</a>
                                                         @elseif($invoicetransaction->status == 1)
-                                                        <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่จ่ายเงิน</span>
+                                                        <span class="badge badge-flat border-warning text-warning-600 rounded-0">ยังไม่ชำระเงิน</span>
                                                         @else                                     
                                                         <a href="#" id="notifyuser" type="button" data-id="{{$invoicetransaction->id}}" class=" btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งผู้รับบริการ</a>
                                                     @endif
@@ -108,7 +110,7 @@
                                              
                                                 <a href="{{route('dashboard.admin.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
                                                 @if ($invoicetransaction->status == 1)
-                                                <a href="{{route('dashboard.admin.project.invoice.delete',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">ลบ</a>
+                                                    <a href="{{route('dashboard.admin.project.invoice.delete',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-danger">ลบ</a>
                                                 @endif
                                                 
                                             </td>    
@@ -142,7 +144,7 @@
         };
 
         var countitemtable =  "{{$invoicetransactions->count()}}";
-        if (countitemtable >= 20) {
+        // if (countitemtable >= 20) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
@@ -158,7 +160,7 @@
                     }
                 }
             });
-        }
+        // }
 
     </script>
 @stop

@@ -111,8 +111,14 @@ class DashboardCompanyInvoiceController extends Controller
 
     public function PaymentNotificationSave(EditPaymentNotification $request,$id){
         $auth = Auth::user();
+        $invoicetransaction = InvoiceTransaction::find($id);
+        $company = Company::find($invoicetransaction->company_id);
+        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+
         $file = $request->file;
-        $new_name = str_random(10).".".$file->getClientOriginalExtension();
+        $new_name = $minitbp->minitbp_code."_invoice.".$file->getClientOriginalExtension();
         $file->move("storage/uploads/company/invoice/prove" , $new_name);
         $filelocation = "storage/uploads/company/invoice/prove/".$new_name;
         InvoiceTransaction::find($id)->update([
@@ -125,10 +131,23 @@ class DashboardCompanyInvoiceController extends Controller
             'status' => 2
         ]);
         $invoicetransaction = InvoiceTransaction::find($id);
-        $company = Company::find($invoicetransaction->company_id);
-        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
-        $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
-        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+   
+
+        $company = Company::find($businessplan->company_id);
+  
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+  
+        $fullcompanyname = ' ' . $company_name;
+        if($bussinesstype == 1){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
 
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
@@ -138,20 +157,20 @@ class DashboardCompanyInvoiceController extends Controller
         $notificationbubble->target_user_id = $projectassignment->leader_id;
         $notificationbubble->save();
 
-        $messagebox = Message::sendMessage('โปรดตรวจสอบผลการแจ้งการชำระเงิน','โปรดตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);    
+        $messagebox = Message::sendMessage('โปรดตรวจสอบผลการแจ้งการชำระเงิน โครงการ' .$minitbp->project.$fullcompanyname,'โปรดตรวจสอบผลการแจ้งการชำระเงิน โครงการ' .$minitbp->project.$fullcompanyname. ' <a href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);    
         
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $projectassignment->leader_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' โปรดตรวจสอบผลการแจ้งการชำระเงิน โครงการ' .$minitbp->project.$fullcompanyname. ' <a data-id="'.$messagebox->id.'" href="'.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS:โปรดตรวจสอบผลการแจ้งการชำระเงิน','เรียน Leader<br><br> โปรดตรวจสอบผลการแจ้งการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS: โปรดตรวจสอบผลการแจ้งการชำระเงิน โครงการ' .$minitbp->project.$fullcompanyname,'เรียน Leader<br><br> โปรดตรวจสอบผลการแจ้งการชำระเงิน โครงการ'.$minitbp->project.$fullcompanyname. ' <a href='.route('dashboard.admin.project.invoice.payment',['id' => $invoicetransaction->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         CreateUserLog::createLog('แจ้งการชำระเงินใบแจ้งหนี้ โครงการ' . $minitbp->project);
 

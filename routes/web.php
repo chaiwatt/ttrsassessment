@@ -809,6 +809,7 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::post('createcalendarsave/{id}','DashboardAdminCalendarController@CreateCalendarSave')->name('dashboard.admin.calendar.createcalendarsave');
                 Route::get('edit/{id}','DashboardAdminCalendarController@Edit')->name('dashboard.admin.calendar.edit'); 
                 Route::post('editsave/{id}','DashboardAdminCalendarController@EditSave')->name('dashboard.admin.calendar.editsave'); 
+                Route::get('view/{id}','DashboardAdminCalendarController@View')->name('dashboard.admin.calendar.view'); 
                 Route::get('delete/{id}','DashboardAdminCalendarController@Delete')->name('dashboard.admin.calendar.delete'); 
                 Route::get('joinevent/{id}','DashboardAdminCalendarController@JoinEvent')->name('dashboard.admin.calendar.joinevent'); 
                 Route::get('rejectevent/{id}','DashboardAdminCalendarController@RejectEvent')->name('dashboard.admin.calendar.rejectevent'); 

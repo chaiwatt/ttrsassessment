@@ -19,6 +19,13 @@ $(document).on('change', '#boldoc', function(e) {
                 });
             return ;
         }
+        if (this.files[0].name.length > 70 ){
+            Swal.fire({
+                title: 'ผิดพลาด...',
+                text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+                });
+            return ;
+        }
         var formData = new FormData();
         formData.append('file',file);
         formData.append('id',$(this).data('id'));

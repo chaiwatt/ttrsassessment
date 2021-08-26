@@ -200,7 +200,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
         $_businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $_company = Company::find($_businessplan->company_id);
         $_user = User::find($_company->user_id);
-        EmailBox::send($_user->email,'','TTRS:กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ได้ผ่านการอนุมัติ ให้สามารถกรอกข้อมูล Full TBP ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send($_user->email,'','TTRS: กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ได้ผ่านการอนุมัติ ให้สามารถกรอกข้อมูล Full TBP ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         Message::sendMessage('กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','แบบคำขอรับบริการประเมิน TTRS (Mini TBP) ได้ผ่านการอนุมัติ ให้สามารถกรอกข้อมูล Full TBP ได้ที่ <a href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$_user->id);
         
         return redirect()->back()->withSuccess('อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) สำเร็จ');
@@ -254,7 +254,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($_user->email,'','TTRS:กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ กรุณากรอกแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ในขั้นตอนต่อไป <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS: กรอกข้อมูลแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ได้ผ่านการอนุมัติ กรุณากรอกแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) ในขั้นตอนต่อไป <a class="btn btn-sm bg-success" href='.route('dashboard.company.project.fulltbp.edit',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
             $jduser = User::where('user_type_id',6)->first();
             $messagebox = Message::sendMessage('อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.  $fullcompanyname,Auth::user()->id,$jduser->id) ;
@@ -270,7 +270,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send($jduser->email,'','TTRS:อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project . $fullcompanyname .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($jduser->email,'','TTRS: อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ' . $minitbp->project,'เรียน Manager<br><br> คุณ'.$auth->name . ' ' . $auth->lastname.' (Leader) ได้อนุมัติแบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project . $fullcompanyname .'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
             $arr1 = User::where('id',$_company->user_id)->pluck('id')->toArray();
             $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
@@ -394,7 +394,7 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $projectlog->save();
 
             CreateUserLog::createLog('ส่งคืน Mini TBP โครงการ'.$minitbp->project);
-            EmailBox::send($_user->email,'','TTRS:แก้ไขข้อมูลแบบคำขอรับบริการประเมิน TTRS (Mini TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br>โปรดตรวจสอบ <a href="'.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS: แก้ไขข้อมูลแบบคำขอรับบริการประเมิน TTRS (Mini TBP)','เรียน ผู้ขอรับการประเมิน<br><br> แบบคำขอรับบริการประเมิน TTRS (Mini TBP) โครงการ'.$minitbp->project.' ของท่านยังไม่ได้รับการอนุมัติ โปรดเข้าสู่ระบบเพื่อทำการแก้ไขตามข้อแนะนำ ดังนี้<br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$request->note.'</div><br>โปรดตรวจสอบ <a href="'.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'" class="btn btn-sm bg-success">คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
         // 
         return response()->json($minitbp); 

@@ -190,7 +190,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'','TTRS:โปรดตรวจสอบรายการใบแจ้งหนี้','เรียน ผู้ขอรับการประเมิน<br><br> โปรดตรวจสอบรายการใบแจ้งหนี้ สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS: รายการใบแจ้งหนี้ โครงการ'.$minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งค่าธรรมเนียมสำหรับการประเมินโครงการ โดยท่านสามารถดาวน์โหลดเอกสารใบแจ้งหนี้และแจ้งชำระเงินได้ <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         CreateUserLog::createLog('ส่งใบแจ้งหนี้ โครงการ' . $minitbp->project);
         InvoiceTransaction::find($request->id)->update([
@@ -207,12 +207,19 @@ class DashboardAdminProjectInvoiceController extends Controller
     }
 
     public function PaymentProve(Request $request,$id){
+
         $invoicetransaction = InvoiceTransaction::find($request->id);
         $company = Company::find($invoicetransaction->company_id);
-        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
-        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $minitbp = MiniTBP::find($invoicetransaction->mini_tbp_id);
+
+        
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+       
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
         $auth = Auth::user();
+
+//  dd($request->id);
+
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
         $notificationbubble->notification_category_id = 1;
@@ -234,8 +241,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'','TTRS:ยืนยันการชำระเงิน','เรียน ผู้ขอรับการประเมิน<br><br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-        
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS: ยืนยันการชำระเงิน','เรียน ผู้ขอรับการประเมิน<br><br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         InvoiceTransaction::find($id)->update([
             'status' => 3
@@ -274,7 +280,7 @@ class DashboardAdminProjectInvoiceController extends Controller
             }
       
             $mailbody  ="เรียน คุณ".$fulltbp->fulltbpresponsibleperson->name ." ".$fulltbp->fulltbpresponsibleperson->lastname . " กรรมการผู้จัดการ ". $fullcompanyname ."<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการเลขที่ " . ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code) . " เรื่อง" .$fulltbp->minitbp->project ." ของ " . $fullcompanyname . " ความละเอียดทราบแล้วนั้น บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่งได้คะแนน " .ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')) . " คะแนน จากคะแนนเต็ม " .ThaiNumericConverter::toThaiNumeric('100') ." คะแนนคิดเป็นเกรดระดับ " . $fulltbp->projectgrade->grade ." โดยสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ จะจัดส่งหนังสือแจ้งผลการประเมินอย่างเป็นทางการในลำดับถัดไป";
-            EmailBox::send(User::find($company->user_id)->email,'','TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send(User::find($company->user_id)->email,'','TTRS: แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             DateConversion::addExtraDay($minitbp->id,6);
         }  
         CreateUserLog::createLog('ยืนยันการชำระเงินค่าธรรมเนียม โครงการ' . $minitbp->project);

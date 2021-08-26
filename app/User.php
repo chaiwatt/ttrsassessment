@@ -23,6 +23,7 @@ use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\VerifyExpertStatus;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ExpertRejectAssignment;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -139,6 +140,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $count;
     }
 
+    
+
     public function isProjectLeader($fulltbpid)
     {
         $count = ProjectAssignment::where('leader_id',Auth::user()->id)->where('full_tbp_id',$fulltbpid)->first();
@@ -148,6 +151,27 @@ class User extends Authenticatable implements MustVerifyEmail
             return 0;
         } 
     }
+
+    public function isProjectCoLeader($fulltbpid)
+    {
+        $count = ProjectAssignment::where('coleader_id',Auth::user()->id)->where('full_tbp_id',$fulltbpid)->first();
+        if(!Empty($count)){
+            return 1;
+        }else{
+            return 0;
+        } 
+    }
+    public function expertreject($fulltbpid,$userid)
+    {
+        $check = ExpertRejectAssignment::where('user_id',$userid)->where('full_tbp_id',$fulltbpid)->first();
+        if(!Empty($check)){
+            return $check->rejectreason;
+        }else{
+            return "";
+        } 
+    }
+
+    
 
     public function isProjectsLeader($fulltbps)
     {
@@ -197,6 +221,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function IsExpert($fulltbpid)
     {
         return ExpertAssignment::where('user_id',$this->id)->where('full_tbp_id',$fulltbpid)->first();
+    }
+
+    public function getIsexpertbelongAttribute()
+    {
+        // $fulltbparray = ExpertAssignment::pluck('full_')->toArray();
+        return ExpertAssignment::where('user_id',$this->id)->where('accepted',0)->count();
     }
 
     public function getUsergroupAttribute()

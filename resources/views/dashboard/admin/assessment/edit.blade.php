@@ -17,9 +17,9 @@
                         <table class="table table-bordered table-striped" id="criteriatable_modal">
                             <thead>
                                 <tr>
-                                    <th>ชื่อ-นามสกุล</th>                                                                                   
-                                    <th>Score</th>  
-                                    <th>ความเห็น</th>  
+                                    <th style="text-align: center">ชื่อ-นามสกุล</th>                                                                                   
+                                    <th style="text-align: center">Score</th>  
+                                    <th style="text-align: center">ความเห็น</th>  
                                 </tr>
                             </thead>
                             <tbody id="show_conflict_modal_wrapper_tr"> 
@@ -101,11 +101,11 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
-                                                <tr>
-                                                    <th>Pillar</th>  
-                                                    <th>Sub Pillar</th>   
-                                                    <th>Index</th>                                                                                
-                                                    <th>Criteria <a href="#" class="text-default" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                <tr class="bg-info">
+                                                    <th style="text-align: center">Pillar</th>  
+                                                    <th style="text-align: center">Sub Pillar</th>   
+                                                    <th style="text-align: center">Index</th>                                                                                
+                                                    <th style="text-align: center">Grade <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
                                                     {{-- <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th>  --}}
                                                 </tr>
                                             </thead>

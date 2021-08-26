@@ -309,13 +309,13 @@
         @endif
     
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนน/เกรดแยกตาม Pillar</h6>
                         <div class="header-elements">
-                            {{-- <button class="btn bg-primary" data-toggle="modal" data-target="#modal_add_project">เพิ่มโครงการใหม่</button> --}}
+               
                         </div>
                     </div>
                     <div class="card-body">
@@ -330,34 +330,14 @@
                                     </tr>
                                 </thead>
                                 <tbody id="gradesummary_wrapper_tr">
-                                    {{-- <tr>    
-                                        <td>Management</td>
-                                        <td style="text-align: center"><span id="manage_percent"></span></td>
-                                        <td style="text-align: center"><span id="manage_grade"></span></td>          
-                                    </tr>
-                                    <tr>    
-                                        <td>Technology</td>
-                                        <td style="text-align: center"><span id="tech_percent"></span></td>
-                                        <td style="text-align: center"><span id="tech_grade"></span></td>          
-                                    </tr>
-                                    <tr>    
-                                        <td>Marketability</td>
-                                        <td style="text-align: center"><span id="market_percent"></span></td>
-                                        <td style="text-align: center"><span id="market_grade"></span></td>          
-                                    </tr>
-                                    <tr>    
-                                        <td>Business Prospect</td>
-                                        <td style="text-align: center"><span id="business_percent"></span></td>
-                                        <td style="text-align: center"><span id="business_grade"></span></td>          
-                                    </tr> --}}
                                 </tbody>
                             </table>      
                         </div>
                     </div>
                 </div>
-            <!-- /striped rows -->
+
             </div>
-        </div>
+        </div> --}}
         
         <div class="row" >
         
@@ -365,7 +345,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">TimeLine</h6>
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">Timeline</h6>
                             <div class="header-elements">
 
                             </div>
@@ -703,7 +683,7 @@
                 }
 
                 $("#chartarea").attr("hidden",false);
-                $("#gradesummary_wrapper_tr").html(html1); 
+                // $("#gradesummary_wrapper_tr").html(html1); 
                 $("#extra_gradesummary_wrapper_tr").html(html2); 
 
             }).catch(error => {})

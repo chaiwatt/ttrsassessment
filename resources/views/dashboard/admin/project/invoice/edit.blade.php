@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-md-6">  
                                     <div class="form-group">
-                                        <label>วันที่ใบสั่งขาย/Sale Order Date (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label>
+                                        <label>วันที่ใบสั่งขาย/Sale Order Date</label>
                                         <input type="text"  name="saleorderdate" id="saleorderdate" value="{{$invoicetransaction->saleorderdateth}}"  placeholder="วันที่ใบสั่งขาย/Sale Order Date" class="form-control form-control-lg">
                                     </div>
                                 </div>

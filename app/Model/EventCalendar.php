@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\Model\Ev;
 use App\Model\FullTbp;
+use App\Model\Scoring;
 use App\Model\CalendarType;
 use App\Helper\DateConversion;
 use App\Model\EventCalendarAttendee;
@@ -39,6 +41,9 @@ class EventCalendar extends Model
         ->first()
         ->eventdate;
     } 
+    public function getCurrentcalendartypeAttribute(){
+       return  max(EventCalendar::where('full_tbp_id',$this->full_tbp_id)->pluck('calendar_type_id')->toArray());
+    } 
 
     public function getCalendartypeAttribute(){
         return CalendarType::find($this->calendar_type_id);
@@ -46,4 +51,17 @@ class EventCalendar extends Model
     public function getEventcalendarattendeeAttribute(){
         return EventCalendarAttendee::where('event_calendar_id',$this->calendar_type_id)->where('user_id',Auth::user()->id)->first();
     } 
+
+    public function getIsscoredAttribute(){
+        $ev = Ev::where('full_tbp_id',$this->full_tbp_id)->first();
+        $check = Scoring::where('ev_id',$ev->id)
+                    ->whereNull('user_id')
+                    ->get(); 
+        if($check->count() > 0){
+            return 1;
+        } else{
+            return 0;
+        }           
+    } 
+
 }

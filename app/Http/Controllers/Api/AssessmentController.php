@@ -143,7 +143,7 @@ class AssessmentController extends Controller
                     'alertmessage_id' => $alertmessage->id
                 ]);
                 
-                EmailBox::send(User::where('user_type_id',6)->first()->email,'','TTRS:ขอรับการประเมินใหม่','เรียน Manager<br><br> บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send(User::where('user_type_id',6)->first()->email,'','TTRS: ขอรับการประเมินใหม่','เรียน Manager<br><br> บริษัท'. $company->name . ' ได้สร้างรายการขอการประเมิน โปรดตรวจสอบ ได้ที่ <a href='.route('dashboard.admin.project.businessplan.view',['id' => $businessplan->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
                
             }
         }else{
@@ -227,7 +227,7 @@ class AssessmentController extends Controller
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
-            EmailBox::send($_user->email,'','TTRS:ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project  .$fullcompanyname,'เรียน คุณ'.$_user->name.' '.$_user->lastname.' <br><br> LEADER ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project. $fullcompanyname.' เรียบร้อยแล้ว<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS: ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project  .$fullcompanyname,'เรียน คุณ'.$_user->name.' '.$_user->lastname.' <br><br> LEADER ยืนยันส่งจดหมายแจ้งผล โครงการ'.$minitbp->project. $fullcompanyname.' เรียบร้อยแล้ว<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         }
 
         $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
@@ -289,9 +289,9 @@ class AssessmentController extends Controller
             ]);
             $jd = User::where('user_type_id',6)->first();
             if($_user->id != $jd->id){
-                EmailBox::send($_user->email,$jd->email,'TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($_user->email,$jd->email,'TTRS: ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             }else{
-                EmailBox::send($_user->email,'','TTRS:ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($_user->email,'','TTRS: ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> LEADER ยืนยันแจ้งผลการประเมิน โครงการ'.$minitbp->project. $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             }  
         }
 
@@ -342,7 +342,7 @@ class AssessmentController extends Controller
       
 
             $mailbody  ="เรียน คุณ".$fulltbp->fulltbpresponsibleperson->name ." ".$fulltbp->fulltbpresponsibleperson->lastname . " กรรมการผู้จัดการ ". $fullcompanyname ."<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการเลขที่ " . ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code) . " เรื่อง" .$fulltbp->minitbp->project ." ของ " . $fullcompanyname . " ความละเอียดทราบแล้วนั้น บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่งได้คะแนน " .ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')) . " คะแนน จากคะแนนเต็ม " .ThaiNumericConverter::toThaiNumeric('100') ." คะแนนคิดเป็นเกรดระดับ " . $fulltbp->projectgrade->grade ." โดยสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ จะจัดส่งหนังสือแจ้งผลการประเมินอย่างเป็นทางการในลำดับถัดไป";
-            EmailBox::send($companyuser->email,'','TTRS:แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($companyuser->email,'','TTRS: แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             DateConversion::addExtraDay($minitbp->id,6);
         } 
         

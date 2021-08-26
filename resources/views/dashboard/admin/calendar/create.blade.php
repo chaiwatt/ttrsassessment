@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label><span class="text-danger">*</span>
+                                                <label>วันที่</label><span class="text-danger">*</span>
                                                 <input type="text"  name="eventdate" id="eventdate" value="{{old('eventdate')}}"  placeholder="วันที่" class="form-control form-control-lg" >
                                             </div>
                                         </div>
@@ -186,7 +186,7 @@
                                     @if ($fulltbps->count() != 0)
                                         <div class="text-right">
                                             <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก<i class="icon-paperplane ml-2"></i></button>
-                                            {{-- <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button> --}}
+                                            {{-- <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการชำระเงิน<i class="icon-paperplane ml-2"></i></button> --}}
                                         </div>
                                     @endif
                                 </div>

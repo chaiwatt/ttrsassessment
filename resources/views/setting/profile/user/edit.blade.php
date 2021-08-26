@@ -250,7 +250,7 @@
 							<div class="col-md-6" id="otherposition_wrapper" hidden>
 								<div class="form-group" >
 									<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
-									<input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+									<input type="text" id="otherposition" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 								</div>
 							</div>
 						
@@ -336,7 +336,7 @@
 
 									<div class="form-group" >
 										<label>ระบุตำแหน่ง</label><span class="text-danger">*</span>
-										<input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat60">
+										<input type="text" id="otherposition_edit" placeholder="ระบุ" class="form-control form-control-lg stringformat20">
 									</div>
 								</div>
 
@@ -468,6 +468,7 @@
 							<div class="form-group">
 								<label>รหัสไปรษณีย์</label><span class="text-danger">*</span>
 								<input type="text" id="postalcode" placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal" >
+								<span id="postalcode_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> รหัสไปรษณีย์ไม่ถูกต้อง</span>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -708,6 +709,8 @@
 										<div class="form-group">
 											<label>@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคล <span class="text-danger">*</span> @else เลขประจำตัวผู้เสียภาษีอากร @endif</label></span><label></label> <span id="msg" class="text-success"></span>
 											<input type="text" name="vatno" id="vatno" value="{{old('vatno') ?? $user->companyvatid}}" data-placeholder="หมายเลขผู้เสียภาษีนิติบุคคล" class="form-control form-control-lg numeralformath13" @if ($user->user_group_id == 2) @endif>
+											<span id="vatno_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i>
+												@if (Auth::user()->user_group_id == 1) เลขทะเบียนนิติบุคคลไม่ถูกต้อง @else เลขประจำตัวผู้เสียภาษีอากรไม่ถูกต้อง @endif </span>
 										</div>
 									</div>
 								@endif
@@ -722,8 +725,9 @@
 								@endif
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>ปีที่จดทะเบียน@if ($user->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
-										<input type="text" name="registeredyear" value="{{old('registeredyear') ?? $user->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg numeralformatyear inputfield40">
+										<label>ปีที่จดทะเบียน (พ.ศ.)@if ($user->user_group_id == 1)<span class="text-danger">*</span> @endif</label>
+										<input type="text" id="registeredyear" name="registeredyear" value="{{old('registeredyear') ?? $user->company->registeredyear}}"  placeholder="ปีที่จดทะเบียน" class="form-control form-control-lg numeralformatyear inputfield40">
+										<span id="registeredyear_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> ปีที่จดทะเบียนไม่ถูกต้อง</span>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -740,7 +744,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>วันที่ชำระทุนจดทะเบียน (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label>
+										<label>วันที่ชำระทุนจดทะเบียน</label>
 										<input type="text" id="paidupcapitaldate"  name="paidupcapitaldate"  value="{{old('paidupcapitaldate') ?? $user->company->paidupcapitaldateth}}"  placeholder="เมื่อวันที่" class="form-control form-control-lg" >
 									</div>
 								</div>
@@ -829,7 +833,8 @@
 												$phone = Auth::user()->phone;
 											}
 										@endphp
-										<input type="text"  name="phone" value="{{old('phone') ?? $phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+										<input type="text" id="phone" name="phone" value="{{old('phone') ?? $phone}}"  placeholder="โทรศัพท์" class="form-control form-control-lg numeralformathphone">
+										<span id="phone_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์ไม่ถูกต้อง</span>
 									</div>
 								</div>
 								<div class="col-md-6">   
@@ -847,13 +852,14 @@
 												$email = Auth::user()->email;
 											}
 										@endphp
-										<input type="text"  name="email" value="{{old('email') ?? $email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60">
+										<input type="text" id="email" name="email" value="{{old('email') ?? $email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat30">
+										<span id="email_format_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 									</div>
 								</div>
 								<div class="col-md-6">  
 									<div class="form-group">
 										<label>เว็บไซต์</label>
-										<input type="text"  name="website" value="{{old('website') ?? $user->company->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat60">
+										<input type="text"  name="website" value="{{old('website') ?? $user->company->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat20">
 									</div>
 								</div>
 								@if ($user->user_group_id == 1)
@@ -978,7 +984,8 @@
 									<div class="col-md-6">  
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
-											<input type="text"  name="postalcode" id="postal"  value="{{old('postal') ?? $companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+											<input type="text" id="postal" name="postalcode" id="postal"  value="{{old('postal') ?? $companyaddress->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
+											<span id="postal_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> รหัสไปรษณีย์ไม่ถูกต้อง</span>
 										</div>
 									</div>
 									<div class="col-md-6">  
@@ -1289,6 +1296,7 @@ $(".form-control-select2").select2();
             cancelText: "ยกเลิก",
             okText: "ตกลง",
             clearText: "เคลียร์",
+			maxDate : moment(),
             time: false
 		});
 
@@ -1326,6 +1334,59 @@ $(".form-control-select2").select2();
 			$('#postal').val($(this).find(':selected').data('id'));
 		});
 
+		$(document).on("change","#phone",function(e){
+			if(($("#phone").val().length < 9 || $("#phone").val().length > 10) || $("#phone").val().charAt(0) != '0'){
+				$("#phone_format_error").attr("hidden",false);
+				$(this).val('');
+			}else{
+				$("#phone_format_error").attr("hidden",true);
+			}
+		}); 
+
+
+
+		$(document).on("change","#email",function(e){
+			if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#email').val())== false)
+			{
+				$("#email_format_error").attr("hidden",false);
+				$(this).val('');
+			}else{
+				$("#email_format_error").attr("hidden",true);
+			}
+		}); 
+
+		$(document).on("change","#registeredyear",function(e){
+
+			if($(this).val().length != 4){
+				$("#registeredyear_format_error").attr("hidden",false);
+				$(this).val('');
+			}else{
+				if (parseInt($(this).val()) < 2000 || parseInt($(this).val()) > (parseInt(moment().year())+543) ) {
+					$("#registeredyear_format_error").attr("hidden",false);
+					$(this).val('');
+				}else{
+					$("#registeredyear_format_error").attr("hidden",true);
+				}
+			}
+		}); 
+
+		$(document).on("change","#postal",function(e){
+			if($(this).val().length != 5){
+				$("#postal_format_error").attr("hidden",false);
+				$(this).val('');
+			}else{
+				$("#postal_format_error").attr("hidden",true);
+			}
+		}); 
+
+		$(document).on("change","#postalcode",function(e){
+			if($(this).val().length != 5){
+				$("#postalcode_format_error").attr("hidden",false);
+				$(this).val('');
+			}else{
+				$("#postalcode_format_error").attr("hidden",true);
+			}
+		}); 
 	
     </script>	
 @stop

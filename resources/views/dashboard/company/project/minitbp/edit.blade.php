@@ -382,6 +382,7 @@
 										<div class="form-group">
 											<label>รหัสไปรษณีย์<span class="text-danger">*</span></label>
 											<input type="text" name="postalcode" id="postalcode" value="{{$user->company->companyaddress->first()->postalcode}}"  placeholder="รหัสไปรษณีย์" class="form-control form-control-lg required numeralformatpostal" >
+											<span id="postalcode_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> รหัสไปรษณีย์ไม่ถูกต้อง</span>
 										</div>
 									</div>
 									<legend>
@@ -1377,10 +1378,17 @@
 		if (file === undefined) {
 			return ;
 		}
-		if (this.files[0].size/1024/1024*1000 > 2000 ){
+		if (this.files[0].size/1024/1024*1000 > 2048 ){
 			Swal.fire({
 				title: 'ผิดพลาด...',
 				text: 'ไฟล์ขนาดมากกว่า 2 MB',
+				});
+			return ;
+		}
+		if (this.files[0].name.length > 70 ){
+			Swal.fire({
+				title: 'ผิดพลาด...',
+				text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
 				});
 			return ;
 		}
@@ -1540,15 +1548,15 @@ $(document).on('click', '#btn_modal_add_authorized_director', function(e) {
     .catch(error => {})
 });
 
-$(document).on('change', '#contactphone', function(e) {
-	if($(this).val().length < 9 || $(this).val().length > 10 ){
-		$(this).val('')
+$(document).on("change","#contactphone",function(e){
+	if(($("#contactphone").val().length < 9 || $("#contactphone").val().length > 10) || $("#contactphone").val().charAt(0) != '0'){
 		$("#contactphone_error").attr("hidden",false);
+		$(this).val('');
 	}else{
-		
 		$("#contactphone_error").attr("hidden",true);
 	}
-});
+}); 
+
 
 $(document).on('change', '#contactemail', function(e) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#contactemail').val())== false)
@@ -1576,6 +1584,15 @@ $(document).on('change', '#website', function(e) {
 		$(this).val('');
 	}
 });
+
+$(document).on("change","#postalcode",function(e){
+	if($(this).val().length != 5){
+		$("#postalcode_format_error").attr("hidden",false);
+		$(this).val('');
+	}else{
+		$("#postalcode_format_error").attr("hidden",true);
+	}
+}); 
 </script>
 @stop
 

@@ -38,7 +38,7 @@ class MailController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send($user->email,'','TTRS:'.$request->topic,'เรียน ผู้ขอรับการประเมิน<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send($user->email,'','TTRS: '.$request->topic,'เรียน ผู้ขอรับการประเมิน<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
        
         return response()->json($fulltbp); 
     }
@@ -60,7 +60,7 @@ class MailController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
             
-            EmailBox::send($user->email,'','TTRS:'.$request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($user->email,'','TTRS: '.$request->topic,'เรียนทีมในโครงการ'.$minitbp->project.'<br><br>' .$request->body.  ' แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
            
         }
 

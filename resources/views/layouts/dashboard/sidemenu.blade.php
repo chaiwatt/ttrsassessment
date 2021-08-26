@@ -47,7 +47,7 @@
     </li>
     @endif
 
-    @if ((Auth::user()->user_type_id >= 4 && Auth::user()->isLeader() != 0) || Auth::user()->user_type_id >=5)
+    @if ((Auth::user()->user_type_id >= 4 && Auth::user()->isLeader() != 0) || Auth::user()->user_type_id >=5 || (Auth::user()->user_type_id >= 4 && Auth::user()->isProjectmember() != 0))
     <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.project')?'nav-item-expanded nav-item-open':''}}">
         <a href="#" class="nav-link"><i class="icon-archive"></i> <span>โครงการ</span>
             @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
@@ -115,7 +115,7 @@
                     </a></li>
                 @endif
             @endif
-    
+
             @if (Auth::user()->user_type_id == 4 && Auth::user()->isLeader() != 0)
                 @if ($generalinfo->use_invoice_status_id != 2)
                     <li class="nav-item"><a href="{{route('dashboard.admin.project.invoice')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.invoice')?'active':''}}">ใบแจ้งหนี้

@@ -63,7 +63,7 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-info">
                                         <th style="text-align:center">วันที่</th>
                                         <th style="text-align:center">เลขที่เอกสาร</th>    
                                         <th style="text-align:center">รายละเอียด</th>   
@@ -75,20 +75,20 @@
                                     @foreach ($invoicetransactions as $key => $invoicetransaction)
                                     <tr>    
                                         <td style="text-align:center"> {{$invoicetransaction->issuedate}} </td> 
-                                        <td> {{$invoicetransaction->docno}} </td> 
-                                        <td> {{$invoicetransaction->description}} </td>                                      
-                                        <td> 
+                                        <td style="text-align: center"> {{$invoicetransaction->docno}} </td> 
+                                        <td > {{$invoicetransaction->description}} </td>                                      
+                                        <td style="text-align: center"> 
                                             @if ($invoicetransaction->status == 3)
-                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">จ่ายเงินแล้ว</span>
+                                                    <span class="badge badge-flat border-success text-success-600 rounded-0">ชำระเงินแล้ว</span>
                                                 @elseif($invoicetransaction->status == 2)
                                                     <span class="badge badge-flat border-info text-info-600 rounded-0">รอการตรวจสอบ</span>
                                                     
                                                 @elseif($invoicetransaction->status == 1)
-                                                    <a href="{{route('dashboard.company.project.invoice.paymentnotification',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งการจ่ายเงิน</a>
+                                                    <a href="{{route('dashboard.company.project.invoice.paymentnotification',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-primary"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>แจ้งการชำระเงิน</a>
                                                 @else                                       
                                             @endif
                                         </td> 
-                                        <td style="text-align: right">
+                                        <td style="text-align: center">
                                             @if($invoicetransaction->status == 1)
                                             <a href="{{route('dashboard.company.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info" target="_blank" >ดาวน์โหลดใบแจ้งหนี้</a>
                                             @endif

@@ -495,13 +495,13 @@ $('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
 
 var event_val =  $('#jointype').val();
 $(document).on('change', '.confirm', function(e) { 
-    console.log($(this).val());
+    // console.log($(this).val());
     event_val = $(this).val();
     if(typeof($(this).val()) === "undefined" || $(this).val() === null || $(this).val() === ''){
         event_val = 1;
     }
     if(event_val == 3){
-        console.log('yes');
+        // console.log('yes');
         $("#rej_meeting_note_wrapper").attr("hidden",false);   
     }else{
         $("#rej_meeting_note_wrapper").attr("hidden",true); 
@@ -512,6 +512,8 @@ $(document).on('change', '.confirm', function(e) {
 
 $(document).on('click', '#btn_modal_get_calendar', function(e) {
    $("#spinicon").attr("hidden",false);
+//    console.log($('#jointype').val());
+//    return ;
    Attendee.updateJoinEvent($('#attendeventid').val(),$('#jointype').val(),$('#rej_meeting_note').val()).then(data => {
        $("#spinicon").attr("hidden",true);
        document.location.reload();

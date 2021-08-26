@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">แจ้งการจ่ายเงิน</span></h4>
+                <h4> <span class="font-weight-semibold">แจ้งการชำระเงิน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> โครงการ</a>
                     <a href="{{route('dashboard.company.project.invoice')}}" class="breadcrumb-item"> ใบแจ้งหนี้</a>
-                    <span class="breadcrumb-item active">แจ้งการจ่ายเงิน</span>
+                    <span class="breadcrumb-item active">แจ้งการชำระเงิน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -70,30 +70,32 @@
                                     <div class="form-group">
                                         <label>จ่ายผ่านธนาคาร<span class="text-danger">*</span></label>
                                         <select name="bank" data-placeholder="ธนาคาร" class="form-control form-control-lg form-control-select2">
-                                            @foreach ($banks as $bank)
-                                                <option value="{{$bank->id}}" 
-                                                    @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
+                                            @foreach ($banks as $key => $bank)
+                                            @if ($key != $banks->count()-1)
+                                            <option value="{{$bank->id}}" @if ($bank->id == $invoicetransaction->bank_id ) selected @endif >{{$bank->name}}</option> 
+                                            @endif
+                                                
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>วันที่ (วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})<span class="text-danger">*</span></label>
+                                        <label>วันที่<span class="text-danger">*</span></label>
                                         <input type="text"  name="paymentdate" id="paymentdate" value="{{old('paymentdate')}}"  placeholder="วันที่" class="form-control form-control-lg">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>เวลา เช่น 12.35<span class="text-danger">*</span></label>
+                                        <label>เวลา<span class="text-danger">*</span></label>
                                         <input type="text"  name="paymenttime" value="{{old('paymenttime')}}" placeholder="เวลา" class="form-control form-control-lg timeformat">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>เอกสารการจ่ายเงิน</label>
+                                        <label>เอกสารการชำระเงิน</label>
                                         <div class="input-group">													
-                                            <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="เอกสารการจ่ายเงิน"  >
+                                            <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="เอกสารการชำระเงิน"  >
                                             <span class="input-group-append">
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
                                             </span>
@@ -110,7 +112,7 @@
                             </div>
                             @if ($invoicetransaction->status == 1)
                                 <div class="text-right">
-                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการจ่ายเงิน<i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการชำระเงิน<i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             @endif
                         </form>
@@ -140,7 +142,7 @@
             var frm = e.target.form;
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการแจ้งการจ่ายเงินหรือไม่? `,
+                    text: `ต้องการแจ้งการชำระเงินหรือไม่? `,
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

@@ -156,6 +156,13 @@ $("#singlefile").on('change', function() {
         alert('ไฟล์ขนาดมากกว่า 250 KB');
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
 
     var galleries = $('.gal').map(function() {
         return $(this).val();
@@ -253,6 +260,13 @@ $("#file").on('change', function() {
     }
     if (this.files[0].size/1024/1024*1000 > 250 ){
         alert('ไฟล์ขนาดมากกว่า 250 KB');
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
         return ;
     }
     // if($('.featureinp').length>0){

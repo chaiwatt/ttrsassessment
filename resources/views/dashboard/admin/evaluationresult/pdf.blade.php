@@ -26,7 +26,7 @@
 
                 <div class="box bw600 mt20 ml30">
                     <div>{{$thainumeric::toThaiNumeric($evaluationresult->headercode)}}</div>
-                    <div class="bw400 text-right">{{$evaluationresult->evaluation_day_id}} {{$evaluationresult->month->name}} {{$thainumeric::toThaiNumeric($dateconversion::thaiYearNow())}}</div>
+                    <div class="bw400 text-right">{{$thainumeric::toThaiNumeric($evaluationresult->evaluation_day_id)}} {{$evaluationresult->month->name}} {{$thainumeric::toThaiNumeric($dateconversion::thaiYearNow())}}</div>
                 </div>
 
                 <div class="box mt20 ml30">
@@ -39,7 +39,7 @@
                     <div class="box ml50 text-justify" style="width:550px;word-wrap:break-word" ><span>บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการ</span></div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word" >ประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการ</div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word">ประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่ง</div>
-                    <div class="box bw600 text-justify" style="word-wrap:break-word">ได้คะแนน {{$thainumeric::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', ''))}} คะแนน จากคะแนนเต็ม {{$thainumeric::toThaiNumeric('100')}} คะแนนคิดเป็นเกรดระดับ {{$fulltbp->projectgrade->grade}} โดยมีประเด็นสำคัญในการ</div>
+                    <div class="box bw600 text-justify" style="word-wrap:break-word">ได้คะแนน {{$thainumeric::toThaiNumeric(intVal($fulltbp->projectgrade->percent))}} คะแนน จากคะแนนเต็ม {{$thainumeric::toThaiNumeric('100')}} คะแนนคิดเป็นเกรดระดับ {{$fulltbp->projectgrade->grade}} โดยมีประเด็นสำคัญในการ</div>
                     <div class="box bw600 text-justify" style="word-wrap:break-word">กำหนดระดับคะแนนและข้อเสนอแนะจากประเมิน ดังต่อไปนี้</div>
                 </div>
                 <div class="box mt10 ml30">
@@ -63,7 +63,7 @@
                 <div class="box mt15" style="page-break-inside: avoid;">
                     <div class="ml70">อนึ่ง หากท่านต้องการสอบถามข้อมูลเพิ่มเติม โปรดติดต่อ คุณ{{$evaluationresult->contactname}} {{$evaluationresult->contactlastname}} ตำแหน่ง {{$evaluationresult->contactposition}}</div>
                      
-                    <div class="ml30">หมายเลขโทรศัพท์ {{$thainumeric::toThaiNumeric($generalinfo->phone1)}} ต่อ {{$thainumeric::toThaiNumeric($generalinfo->contactphoneext)}} หรือ อีเมล {{$evaluationresult->contactemail}}</div>
+                    <div class="ml30">หมายเลขโทรศัพท์ {{$thainumeric::toThaiNumeric($generalinfo->phone1)}} ต่อ {{$thainumeric::toThaiNumeric($evaluationresult->contactphoneext)}} หรือ อีเมล {{$evaluationresult->contactemail}}</div>
                     <div class="ml70 mt20">จึงเรียนมาเพื่อทราบ</div>
                     <div class="box ml200 mt20 bw400 text-center">
                         ขอแสดงความนับถือ

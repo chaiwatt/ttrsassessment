@@ -17,6 +17,7 @@ class CreateInvoiceTransactionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->unsignedBigInteger('mini_tbp_id')->nullable();
             $table->unsignedBigInteger('bank_id');
             $table->string('customer',50)->nullable();
             $table->string('docno',50)->nullable();

@@ -11,7 +11,7 @@ import * as FullTbp from './fulltbp.js';
 var usermessage = '';
 var d = new Date();
 var currentyear = d.getFullYear()+543;
-// console.log(currentyear);
+
 
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
@@ -44,11 +44,18 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 2000 ){
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             }); 
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
         return ;
     }
     var formData = new FormData();
@@ -261,7 +268,7 @@ $(document).on("click",".deletecompanyemploy",function(e){
         if (result.value) {
             Employ.deleteEmployInfo($(this).data('id')).then(data => {
                 var html = ``;
-                // console.log(data);
+                
                 data.forEach(function (employ,index) {
                     if(employ.employ_position_id < 6  && employ.employ_position_id != 1 ){
                         var prefix = employ.prefix['name'];
@@ -429,37 +436,37 @@ $(document).on("click",".deletecompanyceo",function(e){
 //  });
  
 
-$(document).on('change', '#employeducationyearstart', function(e) {
-    if($('#employeducationyearstart').val() != ''){
-        if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200) || parseInt($('#employeducationyearstart').val()) > parseInt(currentyear)){
-            Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
-                });
-            $('#employeducationyearstart').val('') ;
-        }
-    }
- });
+// $(document).on('change', '#employeducationyearstart', function(e) {
+//     if($('#employeducationyearstart').val() != ''){
+//         if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200) || parseInt($('#employeducationyearstart').val()) > parseInt(currentyear)){
+//             Swal.fire({
+//                 title: 'ผิดพลาด...',
+//                 text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
+//                 });
+//             $('#employeducationyearstart').val('') ;
+//         }
+//     }
+//  });
 
- $(document).on('change', '#employeducationyearend', function(e) {
-    if($('#employeducationyearend').val() != ''){
-        if(parseInt($('#employeducationyearend').val()) > parseInt(currentyear)){
-         Swal.fire({
-             title: 'ผิดพลาด...',
-             text: 'กรอกปีสิ้นสุดไม่ถูกต้อง!',
-             });
-         $('#employeducationyearend').val('') ;
-     }
-    }
+//  $(document).on('change', '#employeducationyearend', function(e) {
+//     // if($('#employeducationyearend').val() != ''){
+//     //     if(parseInt($('#employeducationyearend').val()) > parseInt(currentyear)){
+//     //      Swal.fire({
+//     //          title: 'ผิดพลาด...',
+//     //          text: 'กรอกปีสิ้นสุดไม่ถูกต้อง!',
+//     //          });
+//     //      $('#employeducationyearend').val('') ;
+//     //  }
+//     // }
 
-    if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
-        });
-        $('#employeducationyearend').val('') ;
-    }
- });
+//     if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
+//         Swal.fire({
+//             title: 'ผิดพลาด...',
+//             text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+//         });
+//         $('#employeducationyearend').val('') ;
+//     }
+//  });
 
 
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
@@ -741,7 +748,7 @@ $(document).on('click', '#btnstckholder', function(e) {
 });
 
 $(document).on('change', '#debtpercenttosale', function(e) {
-    // console.log($(this).val());
+    
   if ($(this).val() > 100 ){
     $(this).val(100)
   }
@@ -1054,40 +1061,7 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
 });
 
 
-$(document).on('change', '#employexperiencestartdate', function(e) {
-    if($('#employexperiencestartdate').val() != ''){
- 
-     if(parseInt($('#employexperiencestartdate').val()) < (parseInt(currentyear)-200) || parseInt($('#employexperiencestartdate').val()) > parseInt(currentyear)){
-         Swal.fire({
-             title: 'ผิดพลาด...',
-             text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
-             });
-         $('#employexperiencestartdate').val('') ;
-     }
 
-    }
- });
-
-$(document).on('change', '#employexperienceenddate', function(e) {
-   if($('#employexperienceenddate').val() != ''){
-
-    if(parseInt($('#employexperienceenddate').val()) > parseInt(currentyear)){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรอกปีสิ้นสุดไม่ถูกต้อง!',
-            });
-        $('#employexperienceenddate').val('') ;
-    }
-
-    if(parseInt($('#employexperiencestartdate').val()) > parseInt($('#employexperienceenddate').val())){
-        Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'ปีที่สิ้นสุดงานน้อยกว่าปีเริ่มทำงาน!',
-            });
-        $('#employexperienceenddate').val('') ;
-    }
-   }
-});
 
 $(document).on('change', '#employeducationyearend', function(e) {
     if($('#employeducationyearstart').val() != ''){
@@ -1224,6 +1198,13 @@ $(document).on('change', '#certify', function(e) {
             });
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
@@ -1304,6 +1285,13 @@ $(document).on('change', '#award', function(e) {
             });
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
@@ -1381,6 +1369,13 @@ $(document).on('change', '#standard', function(e) {
             Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -1847,6 +1842,13 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
             });
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
 
     var formData = new FormData();
     formData.append('file',file);
@@ -1929,6 +1931,13 @@ $(document).on('change', '#swotfile', function(e) {
             });
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$(this).data('id'));
@@ -2004,10 +2013,17 @@ $(document).on('change', '#financialplan', function(e) {
         return false;
     }
 
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
             Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -2184,12 +2200,45 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
 
 $(document).on('click', '.editsellstatus', function(e) {
     Sell.getSellStatus($(this).data('id')).then(data => {
+        var selllabel0 = 'ยอดขาย';
+        var selllabel1 = 'ยอดขาย';
+        var selllabel2 = 'ยอดขาย';
+        var selllabel3 = 'ยอดขาย';
+        var modal_header = 'รายการยอดขาย';
+        console.log(data.name);
+
+
+
+
+        let position = data.name.indexOf('Letter of Credit');
+        if(position != -1){
+            selllabel0 = 'ยอดขายเปิด LC';
+            selllabel1 = 'ยอดขายเปิด LC';
+            selllabel2 = 'ยอดขายเปิด LC';
+            selllabel3 = 'ยอดขายเปิด LC';
+        }
+
+        position = data.name.indexOf('วงเงินตามสัญญา');
+        if(position != -1){
+            var modal_header = 'รายการวงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน';
+        }
+
+        
+
         $('#sellstatusid').val(data.id);
         $('#sellstatus').val(data.name);
         $('#sellstatuspresentedit').val(data.present);
         $('#sellstatuspastedit1').val(data.past1);
         $('#sellstatuspastedit2').val(data.past2);
         $('#sellstatuspastedit3').val(data.past3);
+
+        $('#sellstatuspastedit3').val(data.past3);
+
+        $('#modal_header').html(modal_header);
+        $('#selllabel0').html(selllabel0);
+        $('#selllabel1').html(selllabel1);
+        $('#selllabel2').html(selllabel2);
+        $('#selllabel3').html(selllabel3);
     })
     .catch(error => {})
     $('#modal_edit_sellstatus').modal('show');
@@ -2608,10 +2657,17 @@ $(document).on('change', '#companydoc', function(e) {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
             Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -2730,6 +2786,13 @@ $(document).on('change', '#organizeimg', function(e) {
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -2899,7 +2962,7 @@ $('.steps-basic').steps({
        }else if(newIndex == 2){
 
             var fulltbp_projectechdevlevel_table_wrapper = $('#fulltbp_projectechdevlevel_table_wrapper tr').length;
-            console.log(fulltbp_projectechdevlevel_table_wrapper);
+            
             if(fulltbp_projectechdevlevel_table_wrapper == 1){
                 $("#fulltbp_projectechdevlevel_error").attr("hidden",false);
                 return false;
@@ -3356,6 +3419,13 @@ $(document).on('change', '#boardattachment', function(e) {
             });
         return ;
     }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
+            });
+        return ;
+    }
     var formData = new FormData();
     formData.append('file',file);
     formData.append('id',$('#employid').val());
@@ -3506,6 +3576,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
             cancelButtonText: 'ยกเลิก',
     
             }).then((result) => {
+
                 if (result.value) {
                     usermessage = result.value;
                     Swal.fire({
@@ -3552,7 +3623,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         }
                     });
                 }else{
-                    if(route.refixstatus != 0 & usermessage == ''){
+                    if(route.refixstatus != 0 && usermessage == ''){
                         Swal.fire({
                             title: 'ผิดพลาด...',
                             text: 'กรุณาระบุข้อมูลที่แก้ไขใน Full TBP',
@@ -3587,10 +3658,17 @@ $(document).on('change', '#fulltbppdf', function(e) {
     if (file === undefined) {
         return ;
     }
-    if (this.files[0].size/1024/1024*1000 > 2000 ){
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
@@ -4025,6 +4103,8 @@ $(document).on('click', '#btnaddresearch', function(e) {
     $('#employphone_research').val('');
     $('#employworkphone_research').val('');
     $('#employemail_research').val('');
+    $('#otherresearchposition').val('');
+    
 
     Employ.getEmployPosition().then(data => {
         var selectemployposition = `<select id="employposition_research" data-placeholder="ตำแหน่ง" class="form-control form-control-select2">`;
@@ -4799,4 +4879,234 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             $("#cer11qty_error").attr("hidden",false);
         }
     });
+
+    $(document).on("change","#employphone_edit",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employphone_edit_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employphone_edit_format_error").attr("hidden",true);
+        }
+    }); 
+
+    $(document).on("change","#employworkphone_edit",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employworkphone_edit_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employworkphone_edit_format_error").attr("hidden",true);
+        }
+    }); 
+
+
+    $(document).on("change","#employemail_edit",function(e){
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($(this).val())== false)
+        {
+            $("#employemail_edit_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employemail_edit_format_error").attr("hidden",true);
+        }
+    });    
+
+    $(document).on("change","#employphone_ceo",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employphone_ceo_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employphone_ceo_format_error").attr("hidden",true);
+        }
+    }); 
+
+    $(document).on("change","#employworkphone_ceo",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employworkphone_ceo_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employworkphone_ceo_format_error").attr("hidden",true);
+        }
+    }); 
+
+
+    $(document).on("change","#employemail_ceo",function(e){
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($(this).val())== false)
+        {
+            $("#employemail_ceo_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employemail_ceo_format_error").attr("hidden",true);
+        }
+    });  
+
+    $(document).on("change","#employeducationyearstart",function(e){
+        
+        if($(this).val().length != 4){
+            $("#employeducationyearstart_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            if (parseInt($(this).val()) < (parseInt(currentyear)-200) || parseInt($(this).val()) > (parseInt(moment().year())+543) ) {
+                $("#employeducationyearstart_format_error").attr("hidden",false);
+                $(this).val('');
+            }else{
+                $("#employeducationyearstart_format_error").attr("hidden",true);
+            }
+        }
+    }); 
+
+    $(document).on("change","#employeducationyearend",function(e){
+        
+        if($(this).val().length != 4){
+            $("#employeducationyearend_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            if (parseInt($(this).val()) < (parseInt(currentyear)-200) || parseInt($(this).val()) > (parseInt(moment().year())+543) ) {
+                $("#employeducationyearend_format_error").attr("hidden",false);
+                $(this).val('');
+            }else{
+                if(parseInt($('#employeducationyearstart').val()) > parseInt($(this).val())){
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+                    });
+                    $("#employeducationyearend_format_error").attr("hidden",false);
+                    $(this).val('') ;
+                }else{
+                    $("#employeducationyearend_format_error").attr("hidden",true);
+                }
+                
+            }
+        }
+    }); 
+
+
+    $(document).on("change","#employexperiencestartdate",function(e){
+        
+        if($(this).val().length != 4){
+            $("#employexperiencestartdate_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            if (parseInt($(this).val()) < (parseInt(currentyear)-200) || parseInt($(this).val()) > (parseInt(moment().year())+543) ) {
+                $("#employexperiencestartdate_format_error").attr("hidden",false);
+                $(this).val('');
+            }else{
+                $("#employexperiencestartdate_format_error").attr("hidden",true);
+            }
+        }
+    }); 
+
+    $(document).on("change","#employexperienceenddate",function(e){
+        
+        if($(this).val().length != 4){
+            $("#employexperienceenddate_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            if (parseInt($(this).val()) < (parseInt(currentyear)-200) || parseInt($(this).val()) > (parseInt(moment().year())+543) ) {
+                $("#employexperienceenddate_format_error").attr("hidden",false);
+                $(this).val('');
+            }else{
+                if(parseInt($('#employexperiencestartdate').val()) > parseInt($(this).val())){
+                    Swal.fire({
+                        title: 'ผิดพลาด...',
+                        text: 'ปีที่สิ้นสุดงานน้อยกว่าปีเริ่มทำงาน!',
+                    });
+                    $(this).val('') ;
+                    $("#employexperienceenddate_format_error").attr("hidden",false);
+                }else{
+                    $("#employexperienceenddate_format_error").attr("hidden",true);
+                }
+               
+            }
+        }
+    }); 
+
+    $(document).on("change","#employphone",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employphone_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employphone_format_error").attr("hidden",true);
+        }
+    }); 
+
+    $(document).on("change","#employworkphone",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employworkphone_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employworkphone_format_error").attr("hidden",true);
+        }
+    }); 
+
+
+    $(document).on("change","#employemail",function(e){
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($(this).val())== false)
+        {
+            $("#employemail_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employemail_format_error").attr("hidden",true);
+        }
+    });  
+
+    $(document).on("change","#employphone_research",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employphone_research_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employphone_research_format_error").attr("hidden",true);
+        }
+    }); 
+
+    $(document).on("change","#employworkphone_research",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#employworkphone_research_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employworkphone_research_format_error").attr("hidden",true);
+        }
+    }); 
+
+
+    $(document).on("change","#employemail_research",function(e){
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($(this).val())== false)
+        {
+            $("#employemail_research_format_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#employemail_research_format_error").attr("hidden",true);
+        }
+    });  
+
+
+    $(document).on("change","#responsiblephone",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#responsiblephone_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#responsiblephone_error").attr("hidden",true);
+        }
+    }); 
+
+    $(document).on("change","#responsibleworkphone",function(e){
+        if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
+            $("#responsibleworkphone_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#responsibleworkphone_error").attr("hidden",true);
+        }
+    }); 
+
+
+    $(document).on("change","#responsibleemail",function(e){
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($(this).val())== false)
+        {
+            $("#responsibleemail_error").attr("hidden",false);
+            $(this).val('');
+        }else{
+            $("#responsibleemail_error").attr("hidden",true);
+        }
+    });  
+
+
+
 

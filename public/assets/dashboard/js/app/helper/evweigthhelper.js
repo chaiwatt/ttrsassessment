@@ -4,6 +4,18 @@ var commentreadonly =``;
 var evdata = [];
 var evextradata = [];
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    // didOpen: (toast) => {
+    //   toast.addEventListener('mouseenter', Swal.stopTimer)
+    //   toast.addEventListener('mouseleave', Swal.resumeTimer)
+    // }
+  })
+
 $(function() {
 
     pdfMake.fonts = {
@@ -259,6 +271,7 @@ function getEv(evid){
     $(this).val($(this).val().replace(/[^0-9\.]/g,''));
 
     var check = parseFloat($('#weight').html().replace(/[{()}]/g, ''));
+
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
 
     var sum =0;
@@ -266,6 +279,7 @@ function getEv(evid){
         var val = parseFloat($(this).val());
         sum += val;
     });
+
     if(sum.toFixed(3) > 1){
         Swal.fire({
             title: 'ผิดพลาด...',
@@ -285,6 +299,10 @@ function getEv(evid){
     }
     editWeight($(this).data('id'),$(this).val(),1).then(data => {
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
+        Toast.fire({
+            // icon: 'success',
+            title: 'Weight sum ' + data.sumweigth.toFixed(3)
+          })
     }).catch(error => {})
 });
 
@@ -318,6 +336,10 @@ $(document).on('focusin', '.weigthvalue', function(){
     }
     Extra.editExtraWeight($('#evid').val(),$(this).data('id'),$(this).val()).then(data => {
         $('#extraweight').html('(' + parseFloat(data).toFixed(3) + ')');
+        Toast.fire({
+            // icon: 'success',
+            title: 'Weight sum ' + parseFloat(data).toFixed(3)
+          })
     }).catch(error => {})
 });
 

@@ -63,9 +63,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="testtopictable">
+                            <table class="table table-bordered table-striped mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>date</th>
                                         <th style="text-align: center">ชื่อโครงการ</th> 
                                         <th style="text-align: center">บริษัท</th> 
                                         <th style="text-align: center">ประเภทกิจกรรม</th>  
@@ -77,15 +78,35 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($eventcalendars->reverse() as $key => $eventcalendar)
-                                    <tr>    
+                                    <tr>  
+                                        <td hidden>{{$eventcalendar->updated_at}}</td>  
                                         <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
                                         <td> {{$eventcalendar->fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                         <td> {{$eventcalendar->calendartype->name}}</td> 
                                         <td style="text-align: center">{{$eventcalendar->eventdateth}}</td> 
                                         <td style="text-align: center">{{$eventcalendar->starttime}}-{{$eventcalendar->endtime}} น.</td> 
                                         <td style="text-align: center">
-                                            @if ($eventcalendar->fulltbp->minitbp->businessplan->business_plan_status_id <8 || !Empty($fulltbp->canceldate))
-                                                <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            
+                                            @if ($eventcalendar->fulltbp->minitbp->businessplan->business_plan_status_id < 8 || !Empty($fulltbp->canceldate))
+                                            
+                                                @if ($eventcalendar->calendar_type_id == $eventcalendar->currentcalendartype)
+                                                  
+                                                        @if ($eventcalendar->isscored == 0)
+                                                        
+                                                            {{-- @if ($eventcalendar->fulltbp->finished_onsite == 2)
+                                                                    <a href="{{route('dashboard.admin.calendar.view',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                                                @else --}}
+                                                                    <a href="{{route('dashboard.admin.calendar.edit',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-info">แก้ไข</a>
+                                                            {{-- @endif --}}
+                                                            
+                                                        @else
+                                                            <a href="{{route('dashboard.admin.calendar.view',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                                        @endif
+                                                    @else
+                                                        <a href="{{route('dashboard.admin.calendar.view',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>
+                                                @endif
+                                            @else  
+                                                    <a href="{{route('dashboard.admin.calendar.view',['id' => $eventcalendar->id])}}" class="btn btn-sm bg-primary">รายละเอียด</a>  
                                             @endif
                                             
                                             {{-- <a href="{{route('dashboard.admin.calendar.delete',['id' => $eventcalendar->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                        --}}
@@ -136,6 +157,22 @@
             date: false,
         });
         
+        $('#testtopictable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "order": [[ 0, 'desc' ]],
+            "info":     false,
+            "pageLength" : 10,
+            "language": {
+                "zeroRecords": " ",
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
 
     </script>
 @stop

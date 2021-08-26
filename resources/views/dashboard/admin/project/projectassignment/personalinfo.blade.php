@@ -463,13 +463,13 @@
 								<div class="col-md-6"> 
 									<div class="form-group">
 										<label>อีเมล</label>
-										<input type="text"  name="email" value="{{$user->email ?? $user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat60" disabled>
+										<input type="text"  name="email" value="{{$user->email ?? $user->company->email}}"  placeholder="อีเมล" class="form-control form-control-lg stringformat30" disabled>
 									</div>
 								</div>
 								<div class="col-md-6"> 
 									<div class="form-group">
 										<label>เว็บไซต์</label>
-										<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat60" disabled>
+										<input type="text"  name="website" value="{{old('website') ?? $user->website}}"  placeholder="เว็บไซต์" class="form-control form-control-lg stringformat20" disabled>
 									</div>
 								</div>
 								<div class="col-md-6">  

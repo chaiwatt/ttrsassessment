@@ -42,7 +42,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความคิดเห็นผู้เชี่ยวชาญ</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความคิดเห็นผู้เชี่ยวชาญ </h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -121,7 +121,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ </span></h4>
+                <h4> <span class="font-weight-semibold">มอบหมายผู้เชี่ยวชาญ โครงการ{{$fulltbp->minitbp->project}}</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             @if (Auth::user()->user_type_id != 6 )
@@ -190,10 +190,13 @@
                 {{ $errors->first() }}
             </div>
         @endif
+        {{-- {{$fulltbp->assignexpert}} --}}
         <form method="POST" action="{{route('dashboard.admin.project.fulltbp.assignexpertreviewsave',['id' => $fulltbp->id])}}" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-12">
+                    @if ($fulltbp->assignexpert == 2)  <label for=""><strong>ผู้เชี่ยวชาญที่เข้าร่วมโครงการ</strong></label> @endif
+                   
                     <div class="form-group">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
@@ -330,7 +333,41 @@
     
             </div>
         </form>
- 
+        @if ($fulltbp->assignexpert == 2)
+        <div class="row">
+            <div class="col-md-12">
+                <label for=""><strong>ผู้เชี่ยวชาญที่ปฎิเสธไม่เข้าร่วมโครงการ</strong></label>
+                <div class="form-group">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">ชื่อ-นามสกุล</th>
+                                        <th style="text-align: center">ตำแหน่ง</th>
+                                        <th style="text-align: center">เหตุผลการไม่เข้าร่วมโครงการ</th>
+                                        {{-- <th style="text-align: center">การตอบรับ</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody > 
+                                    @foreach ($expertrejectassignmentusers as $user)
+                                    <tr>
+                                        <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
+                                        <td>{{$user->usertype->name}} {{$user->expertType}}</td> 
+                                        <td>{{$user->expertreject($fulltbp->id,$user->id)}}</td> 
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                   
+                </div>
+            </div>
+        </div>
+        @endif
+
+
+
         <!-- /form layouts -->
         <div class="loader loader-default" data-text="กำลังบันทึก..."></div>
     </div>

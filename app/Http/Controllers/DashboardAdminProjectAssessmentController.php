@@ -128,7 +128,7 @@ class DashboardAdminProjectAssessmentController extends Controller
             $pending .= 'คุณ' . $_user->name . '  ' .  $_user->lastname . ',';
         }
         
-        EmailBox::send($mails,'','TTRS:มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
+        EmailBox::send($mails,'','TTRS: มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
         '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
         '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
         '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());

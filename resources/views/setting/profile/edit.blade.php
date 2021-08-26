@@ -4,6 +4,8 @@
 @stop
 
 @section('content')
+
+
     <!-- Page header -->
 	{{-- modal expertexpience --}}
 	<div id="modal_expertexpience" class="modal fade" style="overflow:hidden;">
@@ -55,6 +57,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	{{-- modal edit expertexpience --}}
 	<div id="modal_edit_expertexpience" class="modal fade" style="overflow:hidden;">
 		<div class="modal-dialog">
@@ -288,7 +292,9 @@
 
 				<div class="modal-body">
 					<p id="messagebody"></p>
+					
 					<div id="tablemessage"></div>
+					
 				</div>
 
 				<div class="modal-footer">
@@ -487,7 +493,31 @@
 		</div>
 	</div> --}}
 	<!-- /profile navigation -->
-
+	<div id="modal_reject_join" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการไม่เข้าร่วม</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+		<input type="text" id="linkurl" hidden>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ระบุเหตุผล<span class="text-danger">*</span></label>
+								<textarea style="font-size:16px"  id="reject" rows="5"  placeholder="ระบุเหตุผล" class="form-control form-control-lg"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_reject_join" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- Content area -->
     <div class="content">
 		@if (Session::has('success'))
@@ -539,7 +569,8 @@
 								</div>
 							</div>
 							<div class="table-responsive">
-								<table class="table table-inbox">
+								{{--  class="table table-bordered table-striped" --}}
+								<table class="table  table-inbox table-striped">
 									<tbody >										
 										@foreach ($messagereceives as $messagereceive)
 										@php
@@ -563,21 +594,21 @@
 														<span class="letter-icon">J</span>
 													</span>
 												</td>
-												<td class="table-inbox-name">
+												<td class="table-inbox-name" style="white-space: nowrap">
 													<a href="#" data-id="{{$messagereceive->id}} ">
 														<div class="letter-icon-title text-default">&nbsp; {{$messagereceive->sender->name}} {{$messagereceive->sender->lastname}}</div>
 													</a>
 												</td>
 												<td class="table-inbox-message">
-													<span class="table-inbox-subject">{{$messagereceive->title}} &nbsp;-&nbsp;</span>
-													<span class="text-muted font-weight-normal">{{ strip_tags($messagereceive->body)}}</span>
+													<span class="table-inbox-subject">{{$messagereceive->title}}</span>
+													{{-- <span class="text-muted font-weight-normal">{{ strip_tags($messagereceive->body)}}</span> --}}
 												</td>
-												<td class="table-inbox-attachment">
+												{{-- <td class="table-inbox-attachment">
 													@if ($messagereceive->messageboxattachment->count() > 0)
 														<i class="icon-attachment text-muted"></i>
 													@endif
-												</td>
-												<td style="width:100px" class="table-inbox-time">
+												</td> --}}
+												<td class="table-inbox-time" style="white-space: nowrap">
 													{{$messagereceive->timeago}}
 												</td>
 											</tr>

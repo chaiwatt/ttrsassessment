@@ -129,8 +129,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
-                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
                                         <th style="text-align: center">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปคะแนน</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">ความเห็นผู้เชี่ยวชาญ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align: center">ทีมลงคะแนน</th> 
 
@@ -145,8 +146,9 @@
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                     <tr>    
                                                         <td hidden>{{$fulltbp->updated_at}}</td> 
-                                                        <td> {{$fulltbp->minitbp->project}} </td>  
+                                                        <td style="width:1%;white-space: nowrap"> {{$fulltbp->minitbp->project}} </td>  
                                                         <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
+                                                        <td style="text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
                                                         <td style="white-space: nowrap;text-align: center">
                                                             @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
                                                             <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
@@ -211,8 +213,9 @@
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>
-                                            <th style="text-align: center">ชื่อโครงการ</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
                                             <th style="text-align: center">บริษัท</th>
+                                            <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปคะแนน</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">ลงคะแนน</th>
               
                                         </tr>
@@ -225,8 +228,9 @@
                                                     @if ($fulltbpbackup->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbpbackup->minitbp->businessplan->business_plan_status_id <= 8)
                                                         <tr>    
                                                             <td hidden>{{$fulltbpbackup->updated_at}}</td> 
-                                                            <td> {{$fulltbpbackup->minitbp->project}} </td>  
+                                                            <td style="width:1%;white-space: nowrap"> {{$fulltbpbackup->minitbp->project}} </td>  
                                                             <td> {{$fulltbpbackup->minitbp->businessplan->company->fullname}} </td> 
+                                                            <td style="text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
                                                             <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                                 @if ($fulltbpbackup->projectmember->count() == 0)
                                                                     <button type="button" data-projectleaderid="{{$fulltbpbackup->projectleader}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbpbackup->id)}}" class="btn btn-sm bg-warning reaction" data-id="{{$fulltbpbackup->id}}">ทำรายการใหม่</button>

@@ -74,7 +74,7 @@ class BusinessPlanController extends Controller
                 'alertmessage_id' => $alertmessage->id
             ]);
             
-            EmailBox::send($_user->email,'','TTRS:กรอกข้อมูล Mini TBP โครงการ' . $minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจได้ผ่านการอนุมัติ ให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($_user->email,'','TTRS: กรอกข้อมูล Mini TBP โครงการ' . $minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> คำขอประเมินธุรกิจได้ผ่านการอนุมัติ ให้สามารถกรอกข้อมูล Mini TBP ได้ที่ <a href='.route('dashboard.company.project.minitbp.edit',['id' => $minitbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
             
 
         }

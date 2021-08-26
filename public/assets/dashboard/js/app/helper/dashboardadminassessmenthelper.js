@@ -493,7 +493,7 @@ function addScore(transactionid,score,subpillarindex,scoretype){
             }
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-            <td> ${icon} </td>  
+            <td style="text-align:center"> ${icon} </td>  
             <td> ${_comment} </td>                                            
             </tr>`
             });
@@ -536,7 +536,7 @@ function showConflictScore(id){
 
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-            <td> ${conflict.score} </td>   
+            <td style="text-align:center"> ${conflict.score} </td>   
             <td> ${_comment} </td>                                           
             </tr>`
         });
@@ -577,7 +577,7 @@ function showConflictGrade(id){
 
             html += `<tr > 
             <td> ${conflict.user['name']} ${conflict.user['lastname']}</td>                                            
-           <td> ${conflict.scoring} </td>   
+           <td style="text-align:center"> ${conflict.scoring} </td>   
            <td> ${_comment} </td>                                             
             </tr>`
             });

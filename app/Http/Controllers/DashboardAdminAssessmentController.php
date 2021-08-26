@@ -357,7 +357,7 @@ class DashboardAdminAssessmentController extends Controller
         return response()->json($users); 
     }
 
-    public function UpdateScore(Request $request){  
+    public function UpdateScore(Request $request){ 
         $auth = Auth::user(); 
         if($request->arraylist != null){
             foreach ($request->arraylist as $key => $criteria) {
@@ -494,6 +494,7 @@ class DashboardAdminAssessmentController extends Controller
 
             $invoicetransaction = new InvoiceTransaction();
             $invoicetransaction->company_id = $company->id;
+            $invoicetransaction->mini_tbp_id = $minitbp->id;
             $invoicetransaction->customer = $company->name;
             $invoicetransaction->issuedate = Carbon::now()->toDateString();
             $invoicetransaction->saleorderdate = Carbon::now()->toDateString();
@@ -548,23 +549,23 @@ class DashboardAdminAssessmentController extends Controller
                     'alertmessage_id' => $alertmessage->id
                 ]);
         
-                EmailBox::send($_user->email,'','TTRS:สรุปผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.assessment.summary',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($_user->email,'','TTRS: สรุปผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.assessment.summary',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
             }else{
-                $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว',Auth::user()->id,$projectmember->user_id);
+                $messagebox = Message::sendMessage('สรุปผลการประเมิน โครงการ'.$minitbp->project . $fullcompanyname,'ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.assessment.summary',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectmember->user_id);
 
                 $alertmessage = new AlertMessage();
                 $alertmessage->user_id = $auth->id;
                 $alertmessage->target_user_id = $projectmember->user_id;
                 $alertmessage->messagebox_id = $messagebox->id;
-                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว ';
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.assessment.summary',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
                 $alertmessage->save();
         
                 MessageBox::find($messagebox->id)->update([
                     'alertmessage_id' => $alertmessage->id
                 ]);
         
-                EmailBox::send($_user->email,'','TTRS:สรุปผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว <br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+                EmailBox::send($_user->email,'','TTRS: สรุปผลการประเมิน โครงการ'.$minitbp->project  . $fullcompanyname,'เรียน คุณ'.$_user->name .' '.$_user->lastname.' <br><br> ทีมผู้เชี่ยวชาญได้สรุปคะแนนการประเมิน โครงการ'.$minitbp->project . $fullcompanyname.' เสร็จเรียบร้อยแล้ว โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.assessment.summary',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
             }
         }
@@ -697,24 +698,26 @@ class DashboardAdminAssessmentController extends Controller
                                     ->whereNull('user_id')
                                     ->get(); 
                     if($check->count() == 0){
-                        $userid = Scoring::where('ev_id',$ev->id)
+                        $checkscoring = Scoring::where('ev_id',$ev->id)
                                 ->whereNotNull('user_id')
-                                ->first()->user_id; 
-                        $scorings = Scoring::where('ev_id',$ev->id)
-                                ->where('user_id',$userid)
+                                ->first(); 
+                        if(!Empty($checkscoring)){    
+                            $scorings = Scoring::where('ev_id',$ev->id)
+                                ->where('user_id',$checkscoring->user_id)
                                 ->get(); 
-                        foreach ($scorings as $key => $scoring) {
-                            $new = new Scoring();
-                            $new->ev_id = $scoring->ev_id;
-                            $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
-                            $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
-                            $new->scoretype = $scoring->scoretype;
-                            $new->score = $scoring->score;
-                            $new->save();
-                        } 
-                        $fulltbp = FullTbp::find($eventcalendar->full_tbp_id)->update([
-                            'done_assessment' => 1
-                        ]);     
+                            foreach ($scorings as $key => $scoring) {
+                                $new = new Scoring();
+                                $new->ev_id = $scoring->ev_id;
+                                $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
+                                $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
+                                $new->scoretype = $scoring->scoretype;
+                                $new->score = $scoring->score;
+                                $new->save();
+                            } 
+                            $fulltbp = FullTbp::find($eventcalendar->full_tbp_id)->update([
+                                'done_assessment' => 1
+                            ]); 
+                        }        
                     }
                 }
             }

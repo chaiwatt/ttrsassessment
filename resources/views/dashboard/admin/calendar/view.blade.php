@@ -68,20 +68,20 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>(วดป. เช่น {{date("d")}}/{{date("m")}}/{{intVal(date("Y"))+543}})</label>
-                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg" >
+                                        <label>วดป.</label>
+                                        <input type="text"  name="eventdate" id="eventdate" value="{{$eventcalendar->eventdateth}}"  placeholder="วันที่" class="form-control form-control-lg" disabled >
                                     </div>
                                 </div>
                                 <div class="col-md-4" hidden>
                                     <div class="form-group">
                                         <label>ประเภทปฏิทิน</label>
-                                        <input type="text"  name="calendartype" id="" value="{{$eventcalendar->calendartype->id}}"  placeholder="ประเภทปฏิทิน" class="form-control form-control-lg" >
+                                        <input type="text"  name="calendartype" id="" value="{{$eventcalendar->calendartype->id}}"  placeholder="ประเภทปฏิทิน" class="form-control form-control-lg" disabled >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>อีเมลแจ้งเตือนซ้ำ</label><span class="text-danger">*</span>
-                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2">
+                                        <select name="isnotify" data-placeholder="ส่งอีเมลแจ้งเตือนซ้ำ" class="form-control form-control-lg form-control-select2" disabled>
                                             @foreach ($isnotifies as $isnotify)
                                                 <option value="{{$isnotify->id}}" @if ($isnotify->id == $eventcalendar->isnotify_id) selected @endif>{{$isnotify->name}}</option> 
                                             @endforeach
@@ -93,13 +93,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาเริ่ม</label>
-                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{$eventcalendar->starttime}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" required >
+                                        <input type="text"  name="eventtimestart" id="eventtimestart" value="{{$eventcalendar->starttime}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" required readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เวลาสิ้นสุด</label>
-                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{$eventcalendar->endtime}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" required>
+                                        <input type="text"  name="eventtimeend" id="eventtimeend" value="{{$eventcalendar->endtime}}"  placeholder="เวลา" class="form-control form-control-lg timeformat" required readonly>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>สถานที่</label>
-                                        <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control form-control-lg" required>
+                                        <input type="text"  name="place"  value="{{$eventcalendar->place}}"  placeholder="สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)" class="form-control form-control-lg" required readonly>
                                     </div>
                                 </div>
 
@@ -116,23 +116,22 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>หัวข้อ</label>
-                                        <input type="text"  name="subject" value="{{$eventcalendar->subject}}"  placeholder="หัวข้อ" class="form-control form-control-lg" >
+                                        <input type="text"  name="subject" value="{{$eventcalendar->subject}}"  placeholder="หัวข้อ" class="form-control form-control-lg" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>รายละเอียด</label>
-                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg" required>{{$eventcalendar->summary}}</textarea>
+                                        <textarea name="summary" rows="5" cols="5" placeholder="รายละเอียด" class="form-control form-control-lg" required readonly>{{$eventcalendar->summary}}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="input-group">													
-                                        <label for="">เอกสารแนบ<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement"  id="btnuploadcalendarattachment" onclick="document.getElementById('calendarattachment').click();"><i class="icon-add mr-2"></i>อัปโหลดไฟล์</button></label>
-                                    </div>
-                                    <input type="file" style="display:none;" data-id="" id="calendarattachment" name="calendarattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>    
-                                </div> 
+                   
                                 @if ($calendarattachments->count() > 0)
+                               
                                 <div class="col-md-12" id="attachmenttable_wrapper">
+                                    <div class="input-group">													
+                                        <label for="">เอกสารแนบ</label>
+                                    </div>
                                     <div class="form-group">
                                     <table class="table table-bordered table-striped" id="attachmenttable">
                                         <thead>
@@ -147,7 +146,7 @@
                                                 <td> {{$calendarattachment->name}} </td> 
                                                 <td style="white-space: nowrap">
                                                     <a href="{{asset($calendarattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                                                    <a href="#" data-id="{{$calendarattachment->id}}" class="btn btn-sm bg-danger deleteattachment" data-toggle="modal" >ลบ</a>
+                                                  
                                                 </td> 
                                             </tr>
                                             @endforeach
@@ -158,25 +157,28 @@
                                 @endif
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
-                                        <select name="users[]" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
-                                            @foreach ($users as $user)
-                                                <option value="{{$user->id}}"
-                                                    @if (!Empty($eventcalendarattendees->where('user_id',$user->id)->first()))
-                                                        selected
-                                                    @endif
-                                                    >{{$user->name}} {{$user->lastname}}</option> 
-                                            @endforeach
-                                        </select>
+                                        <label>ผู้เข้าร่วม</label>
+ 
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr class="bg-info">
+                                                    <th style="text-align: center;width:150px">#</th> 
+                                                    <th style="text-align: center">ชื่อ-สกุล</th>                           
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($users as $key => $user)
+                                                <tr>    
+                                                    <td style="text-align: center"> {{$key+1}} </td> 
+                                                    <td style="white-space: nowrap">คุณ{{$user->name}} {{$user->lastname}}</td> 
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table> 
                                     </div>
                                 </div>
 
 
-                            </div>
-                            <div class="text-right">
-                                <div class="form-group">
-                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -193,11 +195,6 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
-
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
-
-
-
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>

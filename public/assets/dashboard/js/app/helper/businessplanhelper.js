@@ -71,10 +71,17 @@ $("#attachment").on('change', function() {
         this.value = "";
         return false;
     }
-    if (this.files[0].size/1024/1024*1000 > 1000 ){
+    if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
             title: 'ผิดพลาด...',
             text: 'ไฟล์ขนาดมากกว่า 1 MB!',
+            });
+        return ;
+    }
+    if (this.files[0].name.length > 70 ){
+        Swal.fire({
+            title: 'ผิดพลาด...',
+            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }

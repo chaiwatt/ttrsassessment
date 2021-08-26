@@ -43,26 +43,26 @@ class FullTbpBolController extends Controller
         $admin = User::where('user_type_id',5)->first()->id;
         $jd = User::where('user_type_id',6)->first()->id;
 
-        $messagebox =  Message::sendMessage('เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name , 'คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .'โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin);
+        $messagebox =  Message::sendMessage('เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name , 'คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$admin);
     
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $admin;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        $messagebox =  Message::sendMessage('เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'LEADER ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .'โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$jd);
+        $messagebox =  Message::sendMessage('เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'LEADER ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$jd);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $jd;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้เพิ่มเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>ดำเนินการ</a>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -99,7 +99,7 @@ class FullTbpBolController extends Controller
         $admin = User::where('user_type_id',5)->first()->id;
         $jd = User::where('user_type_id',6)->first()->id;
 
-        $messagebox =  Message::sendMessage('ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name , 'คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .'โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin);
+        $messagebox =  Message::sendMessage('ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name , 'คุณ' .$auth->name . ' ' . $auth->lastname. ' (LEADER) ได้ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$admin);
     
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
@@ -112,7 +112,7 @@ class FullTbpBolController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        $messagebox =  Message::sendMessage('ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'LEADER ได้ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .'โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$jd);
+        $messagebox =  Message::sendMessage('ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name ,'LEADER ได้ลบเอกสาร BOL ของโครงการ' . $minitbp->project . ' บริษัท' . $company->name .' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id]).'>คลิกที่นี่</a>',Auth::user()->id,$jd);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
