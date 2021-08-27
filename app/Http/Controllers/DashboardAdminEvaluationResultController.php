@@ -358,7 +358,7 @@ class DashboardAdminEvaluationResultController extends Controller
                 ]
             ],
             'default_font' => 'kittithada',
-            'format' => [279, 203]
+            'format' => [274, 191]
         ]);
         // $mpdf->SetCompression(false);
         $evaluationresult = EvaluationResult::find($id);
@@ -394,7 +394,7 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $projectname = $minitbp->project;
         $mpdf->UseTemplate($tplId);
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 69.5, 200, 150, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 58.55, 200, 150, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>เลขที่</strong></span>', 13, 84, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 45, 84, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>โดย</strong></span>', 13, 92.5, 150, 90, 'auto');
@@ -405,7 +405,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'. $fulltbp->projectgrade->grade.'</strong></span>', 45, 109.5, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ตามระบบการประเมินและจัดอันดับเทคโนโลยีของประเทศ (Thailand Technology Rating System : TTRS)</strong></span>', 13, 118, 250, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
-        $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,160, 200, 90, 'auto');
+        $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,148, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output('ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf', 'I');
         // return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf');
