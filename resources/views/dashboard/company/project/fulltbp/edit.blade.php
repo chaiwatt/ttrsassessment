@@ -3482,7 +3482,11 @@ th {
 		$('#pdfname').val("{{$fulltbp->attachment}}");
 		$('#companyhistory').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3493,7 +3497,11 @@ th {
 		});
 		$('#responsibleeducationhistory').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3504,7 +3512,11 @@ th {
 		});
 		$('#responsibleexperiencehistory').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3515,7 +3527,11 @@ th {
 		});
 		$('#responsibletraininghistory').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3526,7 +3542,11 @@ th {
 		});
 		$('#projectabtract_input').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3537,7 +3557,11 @@ th {
 		});
 		$('#mainproduct_input').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3548,7 +3572,11 @@ th {
 		});
 		$('#productdetails_input').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3559,7 +3587,11 @@ th {
 		});
 		$('#projectechdev_input').summernote({
 			toolbar: true,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3570,7 +3602,11 @@ th {
 		});
 		$('#projectechdevproblem_input').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3581,7 +3617,11 @@ th {
 		});
 		$('#projectinnovation_input').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3592,7 +3632,11 @@ th {
 		});
 		$('#projectstandard_input').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3603,7 +3647,11 @@ th {
 		});
 		$('#analysis').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3614,7 +3662,11 @@ th {
 		});
 		$('#swot').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
@@ -3625,7 +3677,11 @@ th {
 		});
 		$('#modelcanvas').summernote({
 			toolbar: false,
-			height: 200,
+			height: 500,
+			toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
