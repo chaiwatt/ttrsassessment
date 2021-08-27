@@ -76,7 +76,7 @@
                 <div class="box mt50">
                     <div class="ml30"><span class="font12">ศูนย์บริหารจัดการเทคโนโลยี</span> </div>
                     <div class="ml30"><span class="font12">ศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS)</span> </div>
-                    <div class="ml30"><span class="font12">โทรศัพท์ {{$thainumeric::toThaiNumeric($evaluationresult->contactphone)}} ต่อ คุณ{{$evaluationresult->contactname}} {{$evaluationresult->contactlastname}}</span> </div>
+                    <div class="ml30"><span class="font12">โทรศัพท์ {{$thainumeric::toThaiNumeric($evaluationresult->contactphone)}} ต่อ {{$thainumeric::toThaiNumeric($evaluationresult->contactphoneext)}} คุณ{{$evaluationresult->contactname}} {{$evaluationresult->contactlastname}}</span> </div>
                     <div class="ml30"><span class="font12">โทรสาร {{$thainumeric::toThaiNumeric($evaluationresult->contactfax)}}</span> </div>
                 </div>
         </div>
