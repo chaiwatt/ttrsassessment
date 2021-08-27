@@ -185,6 +185,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $evaluationresult = EvaluationResult::find($id);
         $fulltbp = FullTbp::find($evaluationresult->full_tbp_id);
         $generalinfo = GeneralInfo::first();
+        //หนังสือแจ้งผลโครงการเลขที่ 2108002  ห้างหุ้นส่วน ไทยชนะรีสอร์ต จำกัด (1).pdf
         $wordtemplate = new TemplateProcessor(asset("assets/dashboard/template/letter.docx"));
         $wordtemplate->setValue('headercode',ThaiNumericConverter::toThaiNumeric($evaluationresult->headercode));
         $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
@@ -205,11 +206,11 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
         $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
         $wordtemplate->setValue('phone',ThaiNumericConverter::toThaiNumeric($generalinfo->phone1));
-        $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($generalinfo->contactphoneext));
+        $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
         $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
         $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
-        $wordtemplate->saveAs('letter.docx');
-        return response()->download('letter.docx')->deleteFileAfterSend(true);
+        $wordtemplate->saveAs('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx');
+        return response()->download('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx')->deleteFileAfterSend(true);
     }
 
     public function Ppt($id){

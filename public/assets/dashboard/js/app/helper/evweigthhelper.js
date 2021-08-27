@@ -91,6 +91,7 @@ function callDataTable(){
         columns : [
             { "data" : "pillar" },
             { "data" : "subpillar" },
+            { "data" : "subpillarindex" },  
             { "data" : "weight" }
         ],
 
@@ -121,7 +122,7 @@ function callDataTable(){
                     return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val()     
                 }, 
                 exportOptions: {
-                    columns: [ 0, 1,2 ]
+                    columns: [ 0, 1,2,3 ]
                 },
                 customize: function( xlsx ) {
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
@@ -130,8 +131,10 @@ function callDataTable(){
             },
             { 
                 extend: 'pdfHtml5',
-                pageSize: 'A4',
+                // pageSize: 'A4',
                 // orentation: 'landscape',
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
                 customize: function(doc) {
                     doc.defaultStyle = {
                         font:'THSarabun',
@@ -139,15 +142,15 @@ function callDataTable(){
                     };
                     doc.styles.title.alignment = 'left';
                     doc.pageMargins = [30, 30, 30, 30];
-                    doc.content[1].table.widths = ['*','*', '*']
+                    doc.content[1].table.widths = ['*','*', '*', '*']
                     var rowCount = doc.content[1].table.body.length;
                     for (var i = 1; i < rowCount; i++) {
                         doc.content[1].table.body[i][0].alignment = 'left';
-                        doc.content[1].table.body[i][2].alignment = 'center';
+                        doc.content[1].table.body[i][3].alignment = 'center';
                     }
                 },
                 exportOptions: {
-                    columns: [ 0, 1,2]
+                    columns: [ 0, 1,2,3]
                 },
                 title: function () { 
                     return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val() ; 
@@ -166,7 +169,7 @@ function callDataTable(){
 }
 
 function callDataTableExtra(){
-console.log(evextradata);
+// console.log(evextradata);
 $('#evextraexporttable').DataTable( {
     dom: 'Bfrtip',
     data: evextradata,
@@ -225,6 +228,7 @@ $('#evextraexporttable').DataTable( {
                 var rowCount = doc.content[1].table.body.length;
                 for (var i = 1; i < rowCount; i++) {
                 doc.content[1].table.body[i][0].alignment = 'left';
+                doc.content[1].table.body[i][2].alignment = 'center';
                 }
             },
             exportOptions: {
@@ -405,7 +409,7 @@ function RenderWeightTable(data,evtypeid){
     if($('#evstatus').val() == 2 || route.refixstatus == 1){
         commentreadonly =``;
     }
-    console.log(readonly);
+    // console.log(readonly);
     data.forEach(function (pillaindex,index) {
         var comment = '';
         if(pillaindex.comment){
@@ -413,8 +417,8 @@ function RenderWeightTable(data,evtypeid){
         }
 
 
-        evdata.push({"pillar":  pillaindex.pillar['name'] , "subpillar": pillaindex.subpillarindex['name'], "weight": pillaindex.weigth});
-
+        evdata.push({"pillar":  pillaindex.pillar['name'] , "subpillar": pillaindex.subpillar['name'], "subpillarindex": pillaindex.subpillarindex['name'], "weight": pillaindex.weigth});
+        
         if(pillaindex.ev_type_id == evtypeid){
             html += `<tr > 
                 <td> ${pillaindex.pillar['name']}</td>                                            
@@ -434,7 +438,7 @@ function RenderWeightTable(data,evtypeid){
             </tr>`
         }
         });
-        
+        // console.log(evdata);
         if(evtypeid == 1){
             $("#subpillar_index_transaction_wrapper_tr").html(html);
         }else if(evtypeid == 2){
@@ -794,7 +798,14 @@ function updateEvAdminStatus(id,value){
 		transitionEffect: 'fade',
 		autoFocus: true,
 		onStepChanged:function (event, currentIndex, newIndex) {
-
+        console.log(currentIndex);
+        if(currentIndex == 1 && submitbutton == true){
+            $(document).find(".actions ul").append(`
+            <li class='libtn'><button type='button' id='previewweight' class='btn btn-info'> Preview <i class='icon-eye ml-2' /></button></li>  
+        `);
+        }else{
+            $(".actions").find(".libtn").remove();
+        }
 		return true;
 		},
 		
@@ -869,7 +880,26 @@ function updateEvAdminStatus(id,value){
         }
     
     });
+    $(document).on('click', '#previewweight', function(e) {
+    // $("#previewweight").on('click', function() {
+        var html =``;
+        evdata.forEach(function (data,index) {
+                html += `<tr > 
+                <td> ${data.pillar} </td>                                            
+                <td> ${data.subpillar} </td>    
+                <td> ${data.subpillarindex} </td>  
+                <td style="text-align:center"> ${data.weight} </td>                                          
+                </tr>`
+            });
+            $("#preview_wrapper_tr").html(html);
+            $('#modal_preview_weight').modal('show');
+            // 
+        
+     console.log('');
+    
+    });
 
+    
     $("#btnOnPdf").on('click', function() {
         if (!$('#evexporttable').DataTable().data().any() ) {
             // Swal.fire({

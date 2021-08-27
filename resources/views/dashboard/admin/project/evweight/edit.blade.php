@@ -38,6 +38,40 @@
         </div>
     </div>
 
+    <div id="modal_preview_weight" class="modal fade" style="overflow:hidden;">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Preview Weight</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-striped" id="subpillarindex">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">Pillar</th>  
+                                        <th style="text-align: center">Sub Pillar</th>   
+                                        <th style="text-align: center">Sub Pillar Index</th>  
+                                        <th style="text-align: center">Weight</th>                                                                                
+                                    </tr>
+                                </thead>
+                                <tbody id="preview_wrapper_tr"> 
+  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>           
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="modal_add_comment" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -172,7 +206,8 @@
                                             <thead>
                                                 <tr >
                                                     <th style="text-align: left">Pillar</th>  
-                                                    <th style="text-align: left">Sub Pillar</th>   
+                                                    <th style="text-align: left">Sub Pillar</th>  
+                                                    <th style="text-align: left">Sub Pillar Index</th>   
                                                     <th style="text-align: left">Weight</th>                                                                                
                                                 </tr>
                                             </thead>
