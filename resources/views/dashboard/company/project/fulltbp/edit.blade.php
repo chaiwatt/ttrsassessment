@@ -1887,7 +1887,7 @@ th {
 														<div class="col-md-12">
 															<label><strong>1.9) ประวัติบริษัท (Company Profile)</strong></label><span class="text-danger">*</span>
 															<div class="form-group">
-																<label for=""><i>รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </i><span id="companyhistoryerror" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span> </label>
+																<label for=""><i>รายละเอียด (การก่อตั้ง การเพิ่มทุน การเปลี่ยนแปลงชื่อบริษัท หรือการเปลี่ยนแปลงทางธุรกิจ ฯลฯ) </i><span id="companyhistoryerror" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกประวัติบริษัท (Company Profile)</span> </label>
 																<textarea name="companyhistory" id="companyhistory" class="form-control form-control-lg summernoteelement" cols="3" rows="7" required >{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</textarea>
 															</div>
 															
@@ -2295,7 +2295,7 @@ th {
 																		<label for=""><strong>2.3) บทคัดย่อโครงการ </strong></label><span class="text-danger">*</span>  <span class="text-primary" id="projectabtracttextlength"></span>
 																		</label>
 																		<p><i> ควรประกอบด้วย 3 ย่อหน้า (1) ปัญหาหรือความต้องการของอุตสาหกรรมที่จะแก้ไข (Pain Point) (2) การแก้ปัญหาหรือตอบโจทย์ความต้องการของอุตสาหกรรมในโครงการ และ (3) ผลที่จะได้จากโครงการ รวมถึงผลกระทบเชิงเศรษฐกิจและสังคม</i></p>
-																		<span id="projectabtract_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
+																		<span id="projectabtract_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด บทคัดย่อโครงการ</span>
 																		
 																		<textarea name="projectabtract_input" id="projectabtract_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->abtract!!}</textarea>
 																	</div>
@@ -2305,7 +2305,7 @@ th {
 																<div class="form-group">
 																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span></label>
 																	<p><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
-																	<span id="mainproduct_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
+																	<span id="mainproduct_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</span>
 																	<textarea name="mainproduct_input" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
 																
 																</div>
@@ -2317,7 +2317,7 @@ th {
 																<div class="form-group">
 																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span></label>
 																	<p><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
-																	<span id="productdetails_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
+																	<span id="productdetails_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</span>
 																	<textarea name="productdetails_input" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																	
 																</div>
@@ -2332,7 +2332,7 @@ th {
 																<div class="form-group">
 																	<label for=""><strong>2.6.1) การพัฒนาเทคโนโลยี</strong></label> <span class="text-primary" id="projectechdevtextlength"></span><span class="text-danger">*</span> </label>
 																	<p><i>เขียนอธิบายการพัฒนาเทคโนโลยี และนวัตกรรมในโครงการ</i></p>
-																	<span class="text-primary" id="productdetailstextlength"></span><span id="projectechdev_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
+																	<span class="text-primary" id="productdetailstextlength"></span><span id="projectechdev_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด การพัฒนาเทคโนโลยี</span>
 																	<textarea name="" id="projectechdev_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdev!!}</textarea>
 																</div>
 															</div>
@@ -2357,7 +2357,7 @@ th {
 																		<tbody id="fulltbp_projectechdevlevel_wrapper_tr">    
 																			@foreach ($fulltbpprojecttechdevlevels as $fulltbpprojecttechdevlevel)
 																				<tr >                                        
-																					<td> {{$fulltbpprojecttechdevlevel->technology}} </td> 
+																					<td style="width:27%;"> {{$fulltbpprojecttechdevlevel->technology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->presenttechnology}} </td> 
 																					<td> {{$fulltbpprojecttechdevlevel->projecttechnology}} </td> 
 																					<td style="white-space: nowrap"> 
@@ -2374,7 +2374,7 @@ th {
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="">อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี (<i>เขียนอธิบายอุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</i>)</label> <span class="text-primary" id="projectechdevproblemtextlength"></span><span class="text-danger">*</span> </label>
-																	<span class="text-primary" id="productdetailstextlength"></span><span id="projectechdevproblem_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span>
+																	<span class="text-primary" id="productdetailstextlength"></span><span id="projectechdevproblem_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี</span>
 																	<textarea name="" id="projectechdevproblem_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->techdevproblem!!}</textarea>
 																
 																</div>
@@ -2605,10 +2605,10 @@ th {
 																</div>
 															</div>
 															<div class="col-md-12 mt-3">
-																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label>
+																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> <span class="text-danger">*</span></label>
 																<div class="form-group">
-																	{{-- <label for="">เอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ</label><span class="text-danger">*<span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span></label> --}}
-																	
+																	{{-- <span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ --}}
+																	<span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</span>
 																	<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
 																</div>	
 																{{-- <div class="form-group">												 --}}
@@ -2646,7 +2646,7 @@ th {
 																</div>  
 															</div>
 															<div class="col-md-12 mt-3">	
-																<label for=""><strong>2.6.4) ใบรับรองมาตรฐานต่างๆ ที่ได้รับ ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</strong> </label><span class="text-danger">*</span><span id="projectstandard_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด</span></label>
+																<label for=""><strong>2.6.4) ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ</strong> </label><span class="text-danger">*</span><span id="projectstandard_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ใบรับรองมาตรฐานต่างๆ ที่ได้รับ</span></label>
 																<div class="form-group">
 																	
 																	<textarea name="" id="projectstandard_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->standard!!}</textarea>
