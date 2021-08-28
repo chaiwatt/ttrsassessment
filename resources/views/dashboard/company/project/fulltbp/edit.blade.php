@@ -3483,9 +3483,11 @@ th {
 		$('#companyhistory').summernote({
 			toolbar: false,
 			height: 500,
+			
+			// lineHeight: 10,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3494,13 +3496,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#responsibleeducationhistory').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3509,13 +3514,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#responsibleexperiencehistory').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3524,13 +3532,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#responsibletraininghistory').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3539,13 +3550,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#projectabtract_input').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3554,13 +3568,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#mainproduct_input').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3569,13 +3586,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#productdetails_input').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3584,13 +3604,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#projectechdev_input').summernote({
 			toolbar: true,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3599,13 +3622,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#projectechdevproblem_input').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3614,13 +3640,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#projectinnovation_input').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3629,13 +3658,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#projectstandard_input').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3644,13 +3676,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#analysis').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3659,13 +3694,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#swot').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3674,13 +3712,16 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 		$('#modelcanvas').summernote({
 			toolbar: false,
 			height: 500,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
+				
 			],
 			callbacks: {
 				onPaste: function (e) {
@@ -3689,6 +3730,9 @@ th {
 					document.execCommand('insertText', false, bufferText);
 				}
 			}
+		}).on("summernote.enter", function(we, e) {
+			$(this).summernote("pasteHTML", "<br><br>");
+			e.preventDefault();
 		});
 
 

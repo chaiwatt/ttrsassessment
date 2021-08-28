@@ -161,7 +161,7 @@
                 </div>
                 <div class="box bw650 font8 border" style="background-color: #daedf3;">
                     <div class="ml10 mt10" style="font-size:13px;"><u><strong>วิธียื่นแผนธุรกิจเทคโนโลยีเพื่อเข้ารับการประเมินฯ</strong></u></div>
-                    <div class="ml15 mt5" style="font-size:13px">{!!$provider::FixBreak("• ผู้ที่ประสงค์จะยื่นแผนธุรกิจเทคโนโลยีจะต้องกรอกข้อมูลในแบบฟอร์ม และยื่นเอกสารต่อสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)")!!}</div>
+                    <div class="ml15 mt5" style="font-size:13px;">{!!$provider::FixBreak("• ผู้ที่ประสงค์จะยื่นแผนธุรกิจเทคโนโลยีจะต้องกรอกข้อมูลในแบบฟอร์ม และยื่นเอกสารต่อสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)")!!}</div>
                     <div class="ml15" style="font-size:13px">• กรุณาศึกษาข้อแนะนำอย่างละเอียดก่อนที่จะกรอกข้อมูลในแบบฟอร์มแผนธุรกิจเทคโนโลยี </div>
                     <div class="ml15" style="font-size:13px">• โปรดตรวจสอบและแนบเอกสารที่เกี่ยวข้องประกอบการยื่นแผนธุรกิจเทคโนโลยีให้ครบถ้วน</div> 
                     <div class="ml15 mb10" style="font-size:13px">• หากมีข้อสงสัยหรือต้องการข้อมูลเพิ่มเติม โปรดติดต่อศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยี สวทช. <br>&nbsp;&nbsp;E-mail: ttrs@nstda.or.th</div>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="page-break"></div>
                     <div class="ml20 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>1.9 ประวัติของบริษัท (Company Profile)</strong>
-                        <div style="font-size:13px">{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
+                        <div style="font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
                     </div>
                     <div class="ml20 mt10" style="font-size:13px"><strong>1.10 ข้อมูลผู้บริหารระดับสูง (CEO หรือ กรรมการผู้จัดการ)</strong>
                         <div style="page-break-inside: avoid;">
