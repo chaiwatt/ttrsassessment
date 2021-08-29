@@ -394,7 +394,7 @@ class DashboardAdminEvaluationResultController extends Controller
 
         $projectname = $minitbp->project;
         $mpdf->UseTemplate($tplId);
-        $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 58.55, 200, 150, 'auto');
+        $mpdf->WriteFixedPosHTML('<span style="font-size: 37pt;">'. $minitbp->project. ' ' . $minitbp->projecteng.'</span>', 45, 58.55, 250, 150, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>เลขที่</strong></span>', 13, 84, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>'.$fulltbp->fulltbp_code.'</strong></span>', 45, 84, 150, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>โดย</strong></span>', 13, 92.5, 150, 90, 'auto');
