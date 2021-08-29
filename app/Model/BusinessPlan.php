@@ -88,7 +88,7 @@ class BusinessPlan extends Model
     public function getAssessmentdurationAttribute(){
         $check0 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',2)->where('details', 'LIKE', '%ผ่านการอนุมัติ%')->first();
         $check1 = TimeLineHistory::where('business_plan_id',$this->id)->where('message_type',3)->where('details', 'LIKE', '%สรุปผลการประเมินสำเร็จ%')->first();
-        if(!Empty($check1)){
+        if(!Empty($check0) && !Empty($check1)){
             $from = Carbon::parse($check0->created_at);
             $to = Carbon::parse($check1->created_at);
             $diff_in_day = $to->diffInDays($from);
