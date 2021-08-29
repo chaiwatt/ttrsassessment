@@ -1222,20 +1222,17 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
            top: -5,
            type: 'scroll',
            orient: 'horizontal',
-           fontSize: 8,
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
            legend
         },
         radar: {
-            // shape: 'circle',
             name: {
                 textStyle: {
-                    color: '#fff',
-                    backgroundColor: '#999',
-                    borderRadius: 3,
-                },
-                textStyle: {
                     fontSize: 16,
-                    color: "#000000"
+                    color: "#000000",
                 },
             },
             indicator: indicator
@@ -1259,6 +1256,9 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
     echart.clear();
     var option = null;
     option = {
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {            // 
@@ -1270,7 +1270,10 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
             type: 'scroll',
             data: ['AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC', 'CC', 'C', 'D', 'E'],
             selected:{'AAA':true, 'AA':true,'A':true, 'BBB':true,'BB':true,'B':true, 'CCC':true,'CC':true, 'C':true,'D':true, 'E':true},
-            
+            textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
         },
         grid: {
             left: '3%',
@@ -1303,10 +1306,15 @@ function genPolarStack(xaxis,data,eleid){
     echart.clear();
     var option = null;
     option = {
+        textStyle: {
+            fontFamily: 'Kanit',
+           
+        },
         angleAxis: 
         {
             type: 'category',
             data: xaxis,
+
         },
         tooltip: {
             trigger: 'axis',
@@ -1315,14 +1323,20 @@ function genPolarStack(xaxis,data,eleid){
             }
         },
         radiusAxis: {
+      
         },
         polar: {
+        
         },
         legend: {
             top: -5,
             type: 'scroll',
             data: ['AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC', 'CC', 'C', 'D', 'E'],
             selected:{'AAA':true, 'AA':true,'A':true, 'BBB':true,'BB':true,'B':true, 'CCC':true,'CC':true, 'C':true,'D':true, 'E':true},
+            textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
         },
         series: data
     };

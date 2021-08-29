@@ -542,6 +542,9 @@ Route::group(['middleware' => 'auth'], function(){
                 });
             }); 
             Route::group(['prefix' => 'realtimereport'], function(){
+                Route::get('','DashboardAdminRealtimeReportController@Index')->name('dashboard.admin.realtimereport');
+                Route::post('searchreport','DashboardAdminRealtimeReportController@Searchreport')->name('dashboard.admin.realtimereport.searchreport');
+                
                 Route::group(['prefix' => 'project'], function(){
                     Route::get('','DashboardAdminRealtimeReportProjectController@Index')->name('dashboard.admin.realtimereport.project');
                     Route::get('getproject','DashboardAdminRealtimeReportProjectController@GetProject')->name('dashboard.admin.realtimereport.getproject');

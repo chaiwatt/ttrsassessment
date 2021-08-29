@@ -115,8 +115,8 @@ class DatabaseSeeder extends Seeder
         $this->call(HomepageIndustryGroupTextsSeeder::class);
         $this->call(DirectMenu2sTableSeeder::class);
         $this->call(PagesTableSeeder::class);
-        // $this->call(ProjectBudgetsTableSeeder::class);
-        
+        $this->call(ReportListsTableSeeder::class);
+
     }
 }
 
