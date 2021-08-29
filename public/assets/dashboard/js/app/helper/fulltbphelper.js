@@ -960,7 +960,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
         var html = ``;
         data.forEach(function (techdevlevel,index) {
             html += `<tr >                                        
-                <td style="text-align:center"> ${techdevlevel.technology} </td>                                            
+                <td style="width:27%;"> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td style="white-space: nowrap"> 
@@ -994,7 +994,7 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                 var html = ``;
                 data.forEach(function (techdevlevel,index) {
                     html += `<tr >                                        
-                        <td style="text-align:center"> ${techdevlevel.technology} </td>                                            
+                        <td style="width:27%;"> ${techdevlevel.technology} </td>                                            
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
                         <td style="white-space: nowrap"> 
@@ -1026,7 +1026,7 @@ $(document).on("click","#btn_modal_edit_tectdevlevel",function(e){
         var html = ``;
         data.forEach(function (techdevlevel,index) {
             html += `<tr >                                        
-                <td style="text-align:center"> ${techdevlevel.technology} </td>                                            
+                <td style="width:27%;"> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
                 <td style="white-space: nowrap"> 
@@ -3550,7 +3550,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         $("#appceptagreement_wrapper").attr("hidden",true);
                             Swal.fire({
                                 title: 'สำเร็จ',
-                                text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
+                                text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ!',
                             }).then(() => {
                                 window.location.replace(`${route.url}/dashboard/company/report`);
                             });
@@ -3611,7 +3611,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                                     $("#appceptagreement_wrapper").attr("hidden",true);
                                         Swal.fire({
                                             title: 'สำเร็จ',
-                                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) สำเร็จ!',
+                                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ!',
                                         }).then(() => {
                                             window.location.replace(`${route.url}/dashboard/company/report`);
                                         });                                       

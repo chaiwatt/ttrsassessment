@@ -33,6 +33,30 @@ $(function() {
             numeralIntegerScale: 10
         })
     });	
+    $('.numeralformat9').toArray().forEach(function(field){
+        new Cleave(field, {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand',
+            numeralPositiveOnly: true,
+            numeralIntegerScale: 9
+        })
+    });
+    
+    $('.numeralformat8digit').toArray().forEach(function(field){
+        // new Cleave(field, {
+        //     numeral: true,
+        //     numeralThousandsGroupStyle: 'thousand',
+        //     numeralPositiveOnly: true,
+        //     numeralIntegerScale: 10
+        // })
+        new Cleave(field, {
+            numericOnly: true,
+            numeralThousandsGroupStyle: 'thousand',
+            numeralPositiveOnly: true,
+            numeralIntegerScale: 8,
+            blocks: [8]
+        })
+    });	
     $('.stringformat10').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [10],

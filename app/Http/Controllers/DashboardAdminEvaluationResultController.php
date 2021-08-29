@@ -412,11 +412,13 @@ class DashboardAdminEvaluationResultController extends Controller
     }
     
     public static function FixBreak($data){
+        $data = str_replace("</p><p>","",$data);
         $segment = new \Segment();
         return $segment->get_segment_array($data);
     } 
 
     public static function FixBreak2($data){
+        $data = str_replace("</p><p>","",$data);
         $segment = new \Segment();
         return $segment->get_segment_array_org($data);
     } 

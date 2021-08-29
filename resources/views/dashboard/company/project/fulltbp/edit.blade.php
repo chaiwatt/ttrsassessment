@@ -1046,19 +1046,19 @@ th {
 							</div>
 							<div class="form-group">
 								<label>ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="text" id="sellpresent" placeholder="ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpresent" placeholder="ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ยอดขาย ปี{{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpast1" placeholder="ยอดขาย ปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpast1" placeholder="ยอดขาย ปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ยอดขาย ปี{{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpast2" placeholder="ยอดขาย ปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpast2" placeholder="ยอดขาย ปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ยอดขาย ปี{{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpast3" placeholder="ยอดขาย ปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpast3" placeholder="ยอดขาย ปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 					</div>
@@ -1089,19 +1089,19 @@ th {
 							</div>
 							<div class="form-group">
 								<label>ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="text" id="sellpresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpastedit1" placeholder="ปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpastedit1" placeholder="ปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpastedit2" placeholder="ปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpastedit2" placeholder="ปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellpastedit3" placeholder="ปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellpastedit3" placeholder="ปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 					</div>
@@ -1132,19 +1132,19 @@ th {
 							</div>
 							<div class="form-group">
 								<label><span id='selllabel0'>ยอดขาย</span> ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
-								<input type="text" id="sellstatuspresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellstatuspresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label><span id='selllabel1'>ยอดขาย</span> ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellstatuspastedit1" placeholder="ปี {{$fulltbp->past1}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellstatuspastedit1" placeholder="ปี {{$fulltbp->past1}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label><span id='selllabel2'>ยอดขาย</span> ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellstatuspastedit2" placeholder="ปี {{$fulltbp->past2}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellstatuspastedit2" placeholder="ปี {{$fulltbp->past2}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label><span id='selllabel3'>ยอดขาย</span> ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
-								<input type="text" id="sellstatuspastedit3" placeholder="ปี {{$fulltbp->past3}}" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="sellstatuspastedit3" placeholder="ปี {{$fulltbp->past3}}" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 					</div>
@@ -1188,7 +1188,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="debttotalyearsell" placeholder="" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="debttotalyearsell" placeholder="" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1246,7 +1246,7 @@ th {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>ยอดขายต่อปี (บาท)</label><span class="text-danger">*</span>
-									<input type="text" id="debttotalyearselledit" placeholder="" class="form-control form-control-lg numeralformat10">
+									<input type="text" id="debttotalyearselledit" placeholder="" class="form-control form-control-lg numeralformat9">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -1296,7 +1296,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="credittotalyearsell" placeholder="" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="credittotalyearsell" placeholder="" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1347,7 +1347,7 @@ th {
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>ยอดซื้อต่อปี (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="credittotalyearselledit" placeholder="" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="credittotalyearselledit" placeholder="" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -1391,15 +1391,15 @@ th {
 							</div>
 							<div class="form-group">
 								<label>จำนวนเงิน (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="assetcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="assetcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>จำนวน (<span id="unit">หน่วย</span>)</label><span class="text-danger">*</span>
-								<input type="text" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg numeralformat8digit">
 							</div>
 							<div class="form-group">
 								<label>ราคาต่อหน่วย (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="assetpriceedit" placeholder="ราคาต่อหน่วย (บาท)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="assetpriceedit" placeholder="ราคาต่อหน่วย (บาท)" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
@@ -1434,7 +1434,7 @@ th {
 							</div>
 							<div class="form-group">
 								<label>จำนวนเงิน (บาท)</label><span class="text-danger">*</span>
-								<input type="text" id="investmentcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="investmentcostedit" placeholder="จำนวนเงิน (บาท)" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 					</div>
@@ -1465,19 +1465,19 @@ th {
 							</div>
 							<div class="form-group">
 								<label>เงินทุนที่มีอยู่แล้ว</label><span class="text-danger">*</span>
-								<input type="text" id="costexistingedit" placeholder="เงินทุนที่มีอยู่แล้ว" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="costexistingedit" placeholder="เงินทุนที่มีอยู่แล้ว" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>เงินทุนที่เสนอขออนุมัติ</label><span class="text-danger">*</span>
-								<input type="text" id="costneededit" placeholder="เงินทุนที่เสนอขออนุมัติ" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="costneededit" placeholder="เงินทุนที่เสนอขออนุมัติ" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>เงินทุนที่ได้รับการอนุมัติแล้ว</label><span class="text-danger">*</span>
-								<input type="text" id="costapprovededit" placeholder="เงินทุนที่ได้รับการอนุมัติแล้ว" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="costapprovededit" placeholder="เงินทุนที่ได้รับการอนุมัติแล้ว" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>แผนการหาเงินทุนเพิ่ม</label><span class="text-danger">*</span>
-								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control form-control-lg numeralformat10">
+								<input type="text" id="costplanedit" placeholder="แผนการหาเงินทุนเพิ่ม" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
 					</div>
@@ -3307,15 +3307,15 @@ th {
 														<fieldset>	
 															<div class="form-group">
 																<label>ประมาณการรายได้ที่จะเพิ่มขึ้น (บาท)</label>
-																<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat10" >
+																<input type="text"  value="{{$fulltbpreturnofinvestment->income}}" id="income" placeholder="ประมาณการรายได้ที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat9" >
 															</div>
 															<div class="form-group">
 																<label>ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น (บาท)</label>
-																<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat10" >
+																<input type="text" value="{{$fulltbpreturnofinvestment->profit}}" id="profit" placeholder="ประมาณการกำไรสุทธิที่จะเพิ่มขึ้น" class="form-control form-control-lg numeralformat9" >
 															</div>
 															<div class="form-group">
 																<label>ประมาณการต้นทุนที่จะลดลง (บาท)</label>
-																<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control form-control-lg numeralformat10" >
+																<input type="text" value="{{$fulltbpreturnofinvestment->reduce}}" id="reduce" placeholder="ประมาณการต้นทุนที่จะลดลง" class="form-control form-control-lg numeralformat9" >
 															</div>
 														</fieldset>
 													</div>
@@ -3487,13 +3487,18 @@ th {
 			// lineHeight: 10,
 			toolbar: [
 				['style', ['bold', 'italic', 'underline', 'clear']],
-				
+				// ['view', ['fullscreen', 'codeview', 'help']]
 			],
 			callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
 					e.preventDefault();
 					document.execCommand('insertText', false, bufferText);
+				},
+				onFocus: function (contents) {
+					if($('#companyhistory').summernote('isEmpty')){
+					$("#companyhistory").html(''); 
+					}
 				}
 			}
 		}).on("summernote.enter", function(we, e) {
