@@ -2833,7 +2833,9 @@ th {
 																					@endif
 																				</tr>
 																			</thead>
-																			
+																			@php
+																				$realactive=array();
+																			@endphp
 																			<tbody id="ganttchart_wrapper_tr">  
 																				@foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan)
 																				
@@ -2858,10 +2860,17 @@ th {
 																										$m = $_c ;
 																									}
 																								@endphp
+
 																							<td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
-																								@if ($color == 'grey')
-																								{{$m}}
-																								@endif
+																								{{-- @if ($color == 'grey')
+																									{{$m}}
+																								@endif --}}
+																								@php
+																									if($color == 'grey'){
+																										echo($m);
+																										array_push($realactive,intval($m));
+																									}
+																								@endphp
 																							</td> 
 																							@php
 																								$_count++;
@@ -2873,13 +2882,13 @@ th {
 																						</td>  --}}
 																					</tr>
 																				@endforeach    
-																				 
-																				<input type="text" id="max_m" value="{{@$_c}}" hidden>                      
+																				<input type="text" id="max_m" value="{{@$_c}}" hidden >                      
 																			</tbody>
 																		</table>
 																		</div>		
 																		
-																		<input type="text" id="maxrow" value="{{@$_count-1}}" hidden>
+																		{{-- <input type="text" id="maxrow" value="{{@$_count-1}}" > --}}
+																		<input type="text" id="maxrow" value="{{max(@$realactive)}}" hidden >
 																	</div>
 																</div>
 															

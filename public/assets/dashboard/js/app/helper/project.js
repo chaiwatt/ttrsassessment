@@ -321,7 +321,7 @@ function getPlan(id){
     })
 }
 
-function addMonthPlan(id,ganttnummonth){
+function addMonthPlan(id,ganttnummonth,flag){
   return new Promise((resolve, reject) => {
       $.ajax({
         url: `${route.url}/api/fulltbp/project/plan/addmonth`,
@@ -329,7 +329,8 @@ function addMonthPlan(id,ganttnummonth){
         headers: {"X-CSRF-TOKEN":route.token},
         data: {
           'id': id,
-          'numofmonth': ganttnummonth
+          'numofmonth': ganttnummonth,
+          'flag': flag
         },
         success: function(data) {
           resolve(data)

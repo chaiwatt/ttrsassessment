@@ -1499,6 +1499,8 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                             </tr>
                         </thead>`
                  var maxrow = 0;
+                 var realactive = [];
+                 var _maxactive = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
@@ -1508,10 +1510,12 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                             var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
                             var x =JSON.parse(JSON.stringify(_plan));
                             $("#max_m").val(x.mindex);
+                            realactive.push(parseInt(x.mindex)); 
                             tdbody += `<td style="background-color:grey ;width:30px;max-width:30px !important;font-size:12px;text-align:center">${x.mindex}</td>`;
                         }else{
                             tdbody += `<td style="background-color:white ;width:30px;max-width:30px !important;font-size:12px;text-align:center"></td>`;
                         } 
+                        _maxactive = Math.max(...realactive);
                         maxrow = _count;
                         _count ++;
                         
@@ -1523,7 +1527,7 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                     </tr>`
                     });
                     $("#spinicon_add_projectplan").attr("hidden",true);
-                    $("#maxrow").val(maxrow);
+                 $("#maxrow").val(_maxactive);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
            })
@@ -1630,6 +1634,8 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                             </tr>
                         </thead>`
                  var maxrow = 0;
+                 var realactive = [];
+                 var _maxactive = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
@@ -1639,10 +1645,12 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                             var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
                             var x =JSON.parse(JSON.stringify(_plan));
                             $("#max_m").val(x.mindex);
+                            realactive.push(parseInt(x.mindex)); 
                             tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${x.mindex}</td>`;
                         }else{
                             tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
+                        _maxactive = Math.max(...realactive);
                         maxrow = _count;
                         _count ++;
                         
@@ -1654,7 +1662,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
                     </tr>`
                     });
                     $("#spinicon_edit_projectplan").attr("hidden",true);
-                 $("#maxrow").val(maxrow);
+                 $("#maxrow").val(_maxactive);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
             })
@@ -1721,19 +1729,25 @@ $(document).on("click",".deleteprojectplan",function(e){
                             </tr>
                         </thead>`
                  var maxrow = 0;
+                 var realactive = [];
+                 var _maxactive = 0;
                 data.fulltbpprojecplans.forEach(function (plan,index) {
                     var tdbody =``;
                     var _count = 1;
+
                     for (var k = minmonth; k <= maxmonth; k++) {
                         var _check = data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id);
                         if(_check != -1){
                             var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
                             var x =JSON.parse(JSON.stringify(_plan));
                             $("#max_m").val(x.mindex);
+                            // console.log(x.mindex);
+                            realactive.push(parseInt(x.mindex)); 
                             tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${x.mindex}</td>`;
                         }else{
                             tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
                         } 
+                        _maxactive = Math.max(...realactive);
                         maxrow = _count;
                         _count ++;
                         
@@ -1744,7 +1758,8 @@ $(document).on("click",".deleteprojectplan",function(e){
                     
                     </tr>`
                     });
-                 $("#maxrow").val(maxrow);
+                    // console.log(realactive);
+                 $("#maxrow").val(_maxactive);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
            })
@@ -3130,7 +3145,8 @@ $('.steps-basic').steps({
             }
 
             // if(parseInt($("#maxrow").val()) != parseInt($("#ganttnummonth").val())){
-            if(parseInt($("#ganttnummonth").val()) != parseInt($("#max_m").val())){
+                // console.log($("#maxrow").val());
+            if(parseInt($("#ganttnummonth").val()) != parseInt($("#maxrow").val())){
                 $("#notmatch_wrapper_error").attr("hidden",false);
                 // $("#month_added").html(`(เพิ่มแล้ว ${})`);
                 return false;
@@ -4611,15 +4627,109 @@ $("#modal_add_stockholder").on("hidden.bs.modal", function () {
     $("#employsearch_wrapper").html('');
     $("#employsearch_wrapper").attr("hidden",true);
 });
+var oldnummonth = 0;
+$("#ganttnummonth").on('focus', function(e) {
+    oldnummonth = $(this).val();
+});   
 
+$("#ganttnummonth").on('change', function(e) {
 
-$("#ganttnummonth").on('change', function() {
-    if($(this).val() > 36){
-        $(this).val(36) ;
+    var _maxrow = $('#maxrow').val();
+    if(_maxrow > 0){
+        Swal.fire({
+            title: 'คำเตือน!',
+            text: `การเปลี่ยนจำนวนเดือน แผนการดำเนินการเดิมจะถูกลบ ยืนยันทำรายการหรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ยืนยันลบ',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                if($(this).val() > 36){
+                    $(this).val(36) ;
+                }
+                Project.addMonthPlan($('#fulltbpid').val(),$(this).val(),2).then(data => {
+                    var html = ``;
+                    var th = ``;
+                    data.allyears.forEach(function (year,i) {      
+                        if(year != 0){
+                            th += `<th colspan="${year}" class="text-center" style="width:1%;white-space: nowrap; !important;font-size:12px">${parseInt($('#ganttyear').val()) + i} </th>`;
+                        }
+                    });
+                    var tr = ``;
+                    var minmonth = parseInt(data.minmonth);
+                    var maxmonth = parseInt(data.maxmonth);
+                    if(minmonth != 0  && maxmonth !=0){
+                        tr = `<tr>`;
+                        for (let j = minmonth; j <= maxmonth; j++) {
+                            var full = j % 12;
+                            if(full == 0){
+                                full = 12;
+                            }
+                            tr += `<th class="text-center" style="width:30px !important;font-size:12px;padding:5px;text-align:center">${full}</th>`;
+                        }
+                        tr += `</tr>`;
+                    }
+                    
+                    html += `<thead>
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:600px">รายละเอียดการดำเนินงานของโครงการ</th> 
+                                         ${th}
+                                        
+                                    </tr>
+                                        ${tr}
+                                </tr>
+                            </thead>`
+                     var maxrow = 0;
+                     var realactive = [];
+                     var _maxactive = 0;
+                    data.fulltbpprojecplans.forEach(function (plan,index) {
+                        var tdbody =``;
+                        var _count = 1;
+                        for (var k = minmonth; k <= maxmonth; k++) {
+                            var _check = data.fulltbpprojectplantransactions.findIndex(x => x.month == k && x.project_plan_id == plan.id);
+                            if(_check != -1){
+                                var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
+                                var x =JSON.parse(JSON.stringify(_plan));
+                                $("#max_m").val(x.mindex);
+                                realactive.push(parseInt(x.mindex)); 
+                                tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${x.mindex}</td>`;
+                            }else{
+                                tdbody += `<td style="background-color:white ;width: 30px !important;font-size:12px;padding:5px;text-align:center"></td>`;
+                            } 
+                            _maxactive = Math.max(...realactive);
+                            maxrow = _count;
+                            _count ++;
+                            
+                        }
+                        html += `<tr >                                        
+                            <td style="max-width:350px;padding:5px"> ${plan.name} <a href="#" data-toggle="modal" data-id="${plan.id}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="${plan.id}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a></td>                                            
+                                ${tdbody}
+                        
+                        </tr>`
+                        });
+                     $("#maxrow").val(_maxactive);
+                     $("#table_gantt_wrapper").html(html);
+                     $("#table_gantt_wrapper").tableDnD();
+                })
+                .catch(error => {})
+            }else{
+                $(this).val(oldnummonth);
+            }
+        });
+    }else{
+        if($(this).val() > 36){
+            $(this).val(36) ;
+        }
+        Project.addMonthPlan($('#fulltbpid').val(),$(this).val(),1).then(data => {
+        })
+        .catch(error => {})
     }
-    Project.addMonthPlan($('#fulltbpid').val(),$(this).val()).then(data => {
-    })
-    .catch(error => {})
+
 });
 
 $(document).on('click', '#btn_add_projectplan', function(e) {
