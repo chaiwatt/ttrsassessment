@@ -1305,7 +1305,7 @@ $(".form-control-select2").select2();
 			var frm = e.target.form;
 			Swal.fire({
 					title: 'ยืนยันการบันทึก',
-					text: `ยืนยันการบันทึกหรือไม่? `,
+					text: `ยืนยันการบันทึกหรือไม่ `,
 					type: 'info',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',

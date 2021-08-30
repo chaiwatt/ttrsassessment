@@ -168,7 +168,7 @@
             var urlToRedirect = e.currentTarget.getAttribute('href');
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการสิ้นสุดโครงการหรือไม่? `,
+                    text: `ต้องการสิ้นสุดโครงการหรือไม่ `,
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -207,7 +207,7 @@
         $(document).on("click",".notifyresult",function(e){
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมินหรือไม่?`,
+                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมินหรือไม่`,
                 type: 'warning',
                 showCancelButton: true,
                 showDenyButton: true,

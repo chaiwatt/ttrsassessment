@@ -475,7 +475,7 @@
             var frm = e.target.form;
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการส่งรายการมอบหมายหรือไม่? `,
+                    text: `ต้องการส่งรายการมอบหมายหรือไม่ `,
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

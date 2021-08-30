@@ -142,7 +142,7 @@
             var frm = e.target.form;
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการแจ้งการชำระเงินหรือไม่? `,
+                    text: `ต้องการแจ้งการชำระเงินหรือไม่ `,
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

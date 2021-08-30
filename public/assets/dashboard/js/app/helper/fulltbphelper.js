@@ -4642,7 +4642,7 @@ $("#ganttnummonth").on('change', function(e) {
     if(_maxrow > 0){
         Swal.fire({
             title: 'คำเตือน!',
-            text: `การเปลี่ยนจำนวนเดือน แผนการดำเนินการเดิมจะถูกลบ ยืนยันทำรายการหรือไม่`,
+            html: `การเปลี่ยนจำนวนเดือน รายละเอียดการดำเนินงาน<br>ของโครงการเดิมจะถูกลบ ยืนยันทำรายการหรือไม่`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
