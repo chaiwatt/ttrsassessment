@@ -1442,6 +1442,8 @@ $(document).on("click",".deletefulltbpstandardattachment",function(e){
 
 $(document).on('click', '#btn_modal_add_projectplan', function(e) {
     var data = [];
+
+    $("#notmatch_wrapper_error").attr("hidden",true);
     $('.checkboxplan:checked').each(function(){
         data.push($(this).val());
       })
@@ -1585,6 +1587,7 @@ $(document).on('click', '.editprojectplan', function(e) {
 
 $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
     var data = [];
+    $("#notmatch_wrapper_error").attr("hidden",true);
     $('.checkboxplane_dit:checked').each(function(){
         data.push($(this).val());
       })
@@ -1683,6 +1686,7 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
 });
             
 $(document).on("click",".deleteprojectplan",function(e){
+    $("#notmatch_wrapper_error").attr("hidden",true);
     Swal.fire({
         title: 'คำเตือน!',
         text: `ต้องการลบรายการ หรือไม่`,
