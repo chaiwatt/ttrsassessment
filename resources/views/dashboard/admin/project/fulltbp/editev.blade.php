@@ -311,7 +311,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal"><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
+                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal" disabled><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
                 </div>
             </div>
         </div>
