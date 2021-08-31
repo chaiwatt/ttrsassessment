@@ -338,13 +338,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ชื่อบริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control form-control-lg required" >
+											<input type="text" name ="companyname" id ="companyname" value="{{old('companyname') ?? $minitbp->businessplan->company->name}}" class="form-control form-control-lg required stringformat30"  >
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="">ที่อยู่บริษัท<span class="text-danger">*</span></label>
-											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control form-control-lg required" >
+											<input type="text" name ="address" id ="address" value="{{$user->company->companyaddress->first()->address}}" class="form-control form-control-lg required stringformat80" >
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -1413,7 +1413,7 @@
 				$("#appceptagreement_wrapper").attr("hidden",true);
 				Swal.fire({
 					title: 'สำเร็จ...',
-					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ',
 				}).then((result) => {
 					window.location.replace(`${route.url}/dashboard/company/report`);
 				});

@@ -78,7 +78,7 @@
                                         @if ($invoicetransaction->company->businessplan->minitbp->fulltbp->canceldate == null)
                                         @if (Auth::user()->isProjectLeader($invoicetransaction->company->businessplan->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                         <tr>    
-                                            <td> {{$invoicetransaction->issuedateth}} </td> 
+                                            <td style="text-align: center"> {{$invoicetransaction->issuedateth}} </td> 
                                             <td> {{$invoicetransaction->company->businessplan->minitbp->project}} </td>  
                                             <td> {{$invoicetransaction->company->fullname}} </td> 
                                             

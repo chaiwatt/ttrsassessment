@@ -840,6 +840,13 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('ppt/{id}','DashboardAdminEvaluationResultController@Ppt')->name('dashboard.admin.evaluationresult.ppt'); 
                 Route::get('certificate/{id}/{type}','DashboardAdminEvaluationResultController@Certificate')->name('dashboard.admin.evaluationresult.certificate'); 
                 Route::post('editsave/{id}','DashboardAdminEvaluationResultController@EditSave')->name('dashboard.admin.evaluationresult.editsave');  
+                Route::group(['prefix' => 'attachment'], function(){
+                    Route::get('/{id}','DashboardAdminEvaluationResultAttachmentController@Index')->name('dashboard.admin.evaluationresult.attachment');           
+                    Route::post('add','DashboardAdminEvaluationResultAttachmentController@Add')->name('dashboard.admin.evaluationresult.attachment.add');  
+                    Route::post('delete','DashboardAdminEvaluationResultAttachmentController@Delete')->name('dashboard.admin.evaluationresult.attachment.delete');  
+                    Route::post('show','DashboardAdminEvaluationResultAttachmentController@Show')->name('dashboard.admin.evaluationresult.attachment.show');  
+                    Route::post('hide','DashboardAdminEvaluationResultAttachmentController@Hide')->name('dashboard.admin.evaluationresult.attachment.hide');  
+                }); 
             }); 
             Route::group(['prefix' => 'followup'], function(){
                 Route::get('','DashboardAdminFollowUpController@Index')->name('dashboard.admin.followup');    
@@ -921,9 +928,7 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','DashboardCompanyProjectFullTbpController@EditSave')->name('dashboard.company.project.fulltbp.editsave');   
                     Route::get('downloadpdf/{id}','DashboardCompanyProjectFullTbpController@DownloadPDF')->name('dashboard.company.project.fulltbp.downloadpdf'); 
                     Route::get('submit/{id}','DashboardCompanyProjectFullTbpController@Submit')->name('dashboard.company.project.fulltbp.submit'); 
-                    Route::post('submitsave/{id}','DashboardCompanyProjectFullTbpController@SubmitSave')->name('dashboard.company.project.fulltbp.submitsave'); 
-                   
-                           
+                    Route::post('submitsave/{id}','DashboardCompanyProjectFullTbpController@SubmitSave')->name('dashboard.company.project.fulltbp.submitsave');      
                 }); 
             });       
 

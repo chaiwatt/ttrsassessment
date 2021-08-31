@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Model\TimeLineHistory;
 use App\Model\EventCalendarAttendee;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectFinishAttachment;
 
 class DashboardCompanyReportController extends Controller
 {
@@ -80,6 +81,7 @@ class DashboardCompanyReportController extends Controller
     }
 
     public function SingleReport($id){
+        
         $auth = Auth::user();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$auth->id)->first()->id)->get();
@@ -87,13 +89,15 @@ class DashboardCompanyReportController extends Controller
         $businessplan = BusinessPlan::find($id);
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+        $projectfinishattachments = ProjectFinishAttachment::where('full_tbp_id',$fulltbp->id)->where('publicstatus',1)->get();
         if(!Empty($fulltbp->canceldate)){
             return redirect()->route('dashboard.company.report')->withError('โครงการถูกยกเลิกแล้ว');
         }
         return view('dashboard.company.report.singlereport')->withBusinessplans($businessplans)
                                                 ->withAlertmessages($alertmessages)
                                                 ->withTimelinehistories($timelinehistories)
-                                                ->withBusinessplan($businessplan);
+                                                ->withBusinessplan($businessplan)
+                                                ->withProjectfinishattachments($projectfinishattachments);
     }
     
 }

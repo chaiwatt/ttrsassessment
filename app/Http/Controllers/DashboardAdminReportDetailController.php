@@ -20,6 +20,7 @@ use App\Model\ExpertAssignment;
 use App\Helper\OnlyBelongPerson;
 use App\Model\ProjectAssignment;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectFinishAttachment;
 use App\Model\ProjectStatusTransaction;
 use Illuminate\Support\Facades\Session;
 
@@ -55,7 +56,7 @@ class DashboardAdminReportDetailController extends Controller
         $company_name = (!Empty($company->name))?$company->name:'';
         $bussinesstype = $company->business_type_id;
         $fullcompanyname = ' ' . $company_name;
-
+        $projectfinishattachments = ProjectFinishAttachment::where('full_tbp_id',$fulltbp->id)->where('publicstatus',1)->get();
         if($bussinesstype == 1){
             $fullcompanyname = 'บริษัท ' . $company_name . ' จำกัด (มหาชน)';
         }else if($bussinesstype == 2){
@@ -80,7 +81,8 @@ class DashboardAdminReportDetailController extends Controller
                 ->withBusinessplan($businessplan)
                 ->withFulltbp($fulltbp)
                 ->withFullcompanyname($fullcompanyname)
-                ->withMinitbphistories($minitbphistories);
+                ->withMinitbphistories($minitbphistories)
+                ->withProjectfinishattachments($projectfinishattachments);
         }else{
             Auth::logout();
             Session::flush();

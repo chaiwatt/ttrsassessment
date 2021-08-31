@@ -377,7 +377,7 @@ $(document).on('click', '#sendtojd', function(e) {
         var html = ``;
           Swal.fire({
             title: 'สำเร็จ...',
-            text: 'ส่งผู้เชี่ยวชาญให้ Manager พิจารณาสำเร็จ!',
+            text: 'ส่งผู้เชี่ยวชาญให้ Manager พิจารณาสำเร็จ',
         }).then((result) => {
             window.location.reload();
         });

@@ -308,6 +308,39 @@
 
         @endif
     
+        @if ($projectfinishattachments->count() > 0)
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารแนบ</h6>
+                        <div class="header-elements">
+            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="testtopictable">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">เอกสาร</th> 
+                                        <th style="text-align: center;width:1%;white-space: nowrap">ดาวน์โหลด</th> 
+                                                            
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    @foreach ($projectfinishattachments as $projectfinishattachment)
+                                        <tr>
+                                            <td> {{$projectfinishattachment->name}} </td> 
+                                            <td style="text-align: center"> <a href="{{asset($projectfinishattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a></td> 
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
 
         {{-- <div class="row">
             <div class="col-md-12">

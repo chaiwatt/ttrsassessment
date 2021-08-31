@@ -22,7 +22,7 @@ class CreateCustomMessagesTable extends Migration
             $table->string('noneselectsignature_header',250)->default('ผิดพลาด!');
             $table->string('noneselectsignature',250)->default('กรุณาเลือกการใช้ลายมือชื่ออิเล็กทรอนิกส์');
             $table->string('confirmsendfulltbp_header',250)->default('โปรดยืนยัน');
-            $table->string('confirmsendfulltbp',250)->default('ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP)');
+            $table->string('confirmsendfulltbp',250)->default('ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)');
             $table->string('confirmuploadfulltbp_header',250)->default('อัปโหลดไฟล์');
             $table->string('confirmuploadfulltbp',250)->default('โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อและประทับตราแล้ว');
             $table->string('confirmsubmitfulltbp_header',250)->default('ยืนยัน');

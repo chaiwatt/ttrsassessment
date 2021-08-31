@@ -647,7 +647,7 @@
                         </table>
                     </div>  
 
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>
+                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>
                         <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</div>
                     </div>
 
@@ -972,7 +972,7 @@
                                             <td style="font-size:13px;text-align: right;white-space: nowrap">{{number_format($fulltbpasset->cost,2)}}</td> 
                                             <td style="font-size:13px;text-align: right;white-space: nowrap"> {{$fulltbpasset->quantity}}</td>                                            															
                                             <td style="font-size:13px;text-align: right;white-space: nowrap">{{number_format($fulltbpasset->price,2)}}</td> 
-                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpasset->specification),25)!!}</td> 
+                                            <td style="font-size:13px;line-height: 150%;">{!!splitText($provider::FixBreak2($fulltbpasset->specification),25)!!}</td> 
                                             {{--  --}}
                                         </tr>   
                                     @endforeach

@@ -741,14 +741,17 @@ th {
 						<div class="form-group">
 							<label>รายละเอียดเทคโนโลยี</label><span class="text-danger">*</span>
 							<input type="text" id="tectdevleveltechnology" placeholder="รายการ" class="form-control form-control-lg stringformat60">
+							<span id="tectdevleveltechnology_error" class="form-text text-warning"  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีที่มีอยู่ในปัจจุบัน</label><span class="text-danger">*</span>
 							<input type="text" id="tectdevleveltechnologypresent" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control form-control-lg stringformat60">
+							<span id="tectdevleveltechnologypresent_error" class="form-text text-warning"  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีในโครงการ</label><span class="text-danger">*</span>
 							<input type="text" id="tectdevleveltechnologyproject" placeholder="เทคโนโลยีในโครงการ" class="form-control form-control-lg stringformat60">
+							<span id="tectdevleveltechnologyproject_error" class="form-text text-warning"  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -776,14 +779,17 @@ th {
 						<div class="form-group">
 							<label>รายละเอียดเทคโนโลยี</label><span class="text-danger">*</span>
 							<input type="text" id="tectdevleveltechnology_edit" placeholder="รายการ" class="form-control form-control-lg stringformat60">
+							<span id="tectdevleveltechnology_edit_error" class="form-text text-warning"  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีที่มีอยู่ในปัจจุบัน</label><span class="text-danger">*</span>
 							<input type="text" id="tectdevleveltechnologypresent_edit" placeholder="เทคโนโลยีที่มีอยู่ในปัจจุบัน" class="form-control form-control-lg stringformat200">
+							<span id="tectdevleveltechnologypresent_edit_error" class="form-text text-warning"  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 						</div>
 						<div class="form-group">
 							<label>เทคโนโลยีในโครงการ</label><span class="text-danger">*</span>
 							<input type="text" id="tectdevleveltechnologyproject_edit" placeholder="เทคโนโลยีในโครงการ" class="form-control form-control-lg stringformat200">
+							<span id="tectdevleveltechnologyproject_edit_error" class="form-text text-warning"  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -1403,7 +1409,8 @@ th {
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
-								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg"></textarea>
+								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg stringformat100"></textarea>
+								<span id="assetspecificationedit_error" class="form-text text-warning "  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 							</div>
 						</div>
 					</div>
@@ -2338,7 +2345,12 @@ th {
 															</div>
 															<div class="col-md-12">
 																{{-- <div class="form-group">	 --}}
-																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong> <span class="text-danger">*</span><button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																	<label for=""><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong> <span class="text-danger">*</span></label>
+																	<div class="form-group">
+																		เพิ่มระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์
+																		<button type="button" id="add_tectdevlevel" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" ><i class="icon-add mr-2"></i>เพิ่ม</button>
+																	</div>
+																	
 																	<span id="fulltbp_projectechdevlevel_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</span>
 																	
 																{{-- </div> --}}
@@ -2888,7 +2900,12 @@ th {
 																		</div>		
 																		
 																		{{-- <input type="text" id="maxrow" value="{{@$_count-1}}" > --}}
-																		<input type="text" id="maxrow" value="{{max(@$realactive)}}" hidden >
+																		@if (count($realactive) > 0)
+																				<input type="text" id="maxrow" value="{{max(@$realactive)}}" hidden >
+																			@else
+																				<input type="text" id="maxrow" value="0" hidden >
+																		@endif
+																		
 																	</div>
 																</div>
 															
@@ -3227,12 +3244,12 @@ th {
 															<table class="table table-bordered table-striped">
 																<thead>
 																	<tr class="bg-info">
-																		<th>รายการ</th>  
-																		<th>จำนวนเงิน (บาท)</th>                                                                                    
-																		<th>จำนวน (หน่วย)</th>       
-																		<th>ราคาต่อหน่วย (บาท)</th>  
-																		<th>ข้อมูลจำเพาะทางเทคนิค</th> 
-																		<th class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
+																		<th style="text-align: center">รายการ</th>  
+																		<th style="width:1%;white-space: nowrap;text-align: center">จำนวนเงิน (บาท)</th>                                                                                    
+																		<th style="width:1%;white-space: nowrap;text-align: center">จำนวน (หน่วย)</th>       
+																		<th style="width:1%;white-space: nowrap;text-align: center">ราคาต่อหน่วย (บาท)</th>  
+																		<th style="text-align: center">ข้อมูลจำเพาะทางเทคนิค</th> 
+																		<th class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_asset_wrapper_tr">    
@@ -3243,7 +3260,7 @@ th {
 																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
 																			<td style="max-width: 350px;word-wrap: break-word;"> {{$fulltbpasset->specification}} </td> 
-																			<td  class="hiddenelement_fulltbp"> 
+																			<td  style="text-align: center" class="hiddenelement_fulltbp"> 
 																				<a  data-id="{{$fulltbpasset->id}}" data-assetname="{{$fulltbpasset->asset}}" class="btn btn-sm bg-info editasset">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -3262,8 +3279,8 @@ th {
 																<thead>
 																	<tr class="bg-info">
 																		<th>รายการ</th>  
-																		<th class="text-right">จำนวนเงิน (บาท)</th>                                                                                    
-																		<th class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
+																		<th style="text-align: center;width:1%;white-space: nowrap">จำนวนเงิน (บาท)</th>                                                                                    
+																		<th class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>    
 																	</tr>
 																</thead>
 																<tbody id="fulltbp_investment_wrapper_tr">    
@@ -3271,7 +3288,7 @@ th {
 																		<tr >
 																			<td> {{$fulltbpinvestment->investment}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpinvestment->cost, 2)}}</td> 
-																			<td style="width:1%;white-space: nowrap" class="hiddenelement_fulltbp"> 
+																			<td style="width:1%;white-space: nowrap;text-align: center" class="hiddenelement_fulltbp"> 
 																				<a  data-id="{{$fulltbpinvestment->id}}" class="btn btn-sm bg-info editinvestment">แก้ไข</a>
 																			</td> 
 																		</tr>
@@ -3297,13 +3314,13 @@ th {
 																<tbody id="fulltbp_cost_wrapper_tr">    
 																	@foreach ($fulltbpcosts as $fulltbpcost)
 																		<tr >
-																			<td> {{$fulltbpcost->costname}}</td> 
+																			<td style="width:1%;white-space: nowrap"> {{$fulltbpcost->costname}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->existing), 2)}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->need), 2)}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->approved), 2)}}</td> 
 																			<td class="text-right"> {{number_format(intval($fulltbpcost->plan), 2)}}</td> 
-																			<td style="width:1%;white-space: nowrap" class="hiddenelement_fulltbp"> 
-																				<a  data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">เพิ่มข้อมูลแหล่งเงินทุน</a>
+																			<td style="width:1%;white-space: nowrap;text-align: center" class="hiddenelement_fulltbp"> 
+																				<a  data-id="{{$fulltbpcost->id}}" data-name="{{$fulltbpcost->costname}}" class="btn btn-sm bg-info editcost">แก้ไข</a>
 																			</td> 
 																		</tr>
 																	@endforeach              

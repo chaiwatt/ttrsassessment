@@ -6,7 +6,7 @@ var evextradata = [];
 
 const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'center-end',
     showConfirmButton: false,
     timer: 1000,
     timerProgressBar: true,
@@ -398,11 +398,53 @@ function RenderWeightTable(data,evtypeid){
     var html =``;
     evdata = [];
     var readonly =`readonly`;
-    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
-        if(route.usertypeid != 6){
+    // if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
+    //     if(route.usertypeid != 6){
+    //         readonly =``;
+    //     }
+    // }
+
+    // if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3))){
+    //     if(route.refixstatus == 1){
+    //         if(route.usertypeid != 6){
+    //             readonly =``;
+    //         }
+    //     }else if(route.refixstatus == 2){
+    //         if(route.usertypeid == 6){
+    //             readonly =``;
+    //         }
+    //     }else if(route.refixstatus == 0){
+    //         if(route.usertypeid != 6){
+    //             readonly =``;
+    //         }
+    //     }
+    // }
+
+    if(($('#evstatus').val() == 2)){
+        if(route.usertypeid != 6){  //only admin
             readonly =``;
         }
     }
+
+    if(($('#evstatus').val() == 3)){
+        if(route.refixstatus == 0){
+            if(route.usertypeid == 6){ //only jd
+                readonly =``;
+            }
+        }else if(route.refixstatus == 1){ //only admin
+            if(route.usertypeid != 6){
+                readonly =``;
+            }
+        }else if(route.refixstatus == 2){ //only jd
+            if(route.usertypeid == 6){
+                readonly =``;
+            }
+        }
+    }
+
+
+
+
    if($('#evstatus').val() >= 4 ){
         commentreadonly =`readonly`;
     }
@@ -426,12 +468,12 @@ function RenderWeightTable(data,evtypeid){
                 <td> 
                     <div class="form-group">
                         <label>${pillaindex.subpillarindex['name']}</label>
-                        <input type="text" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}" class="form-control form-control-lg inputweigth weigthvalue${evtypeid} decimalformat">
+                        <input type="text" data-pillarname="${pillaindex.pillar['name']}" data-subpillarname="${pillaindex.subpillar['name']}" data-subpillarindexname="${pillaindex.subpillarindex['name']}" value="${pillaindex.weigth}" ${readonly} data-id="${pillaindex.id}" class="form-control form-control-lg inputweigth weigthvalue${evtypeid} decimalformat">
                     </div>
                     <div class="toggle" >
                         <div class="form-group" style="margin-top:5px">
                             <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
-                            <input type="text" data-id="${pillaindex.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadonly} >
+                            <input type="text" data-id="${pillaindex.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly} >
                         </div>
                     </div>
                 </td>                           
@@ -452,17 +494,49 @@ function RenderExtraTable(data){
     evextradata = [];
     var readonly =`readonly`;
    
-    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
-        if(route.usertypeid != 6){
+    // if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3 && route.refixstatus == 1))){
+    if(($('#evstatus').val() == 2 || ($('#evstatus').val() == 3))){
+        // console.log('here');
+        if(route.refixstatus == 1){
+            if(route.usertypeid != 6){
+                readonly =``;
+            }
+        } if(route.refixstatus == 2){
+            if(route.usertypeid == 6){
+                readonly =``;
+            }
+        }
+    }
+    // if($('#evstatus').val() >= 4 || route.usertypeid != 6){
+    //     commentreadonly =`readonly`;
+    // }
+    // if($('#evstatus').val() == 2 || route.refixstatus == 1){
+    //     commentreadonly =``;
+    // }
+
+    if(($('#evstatus').val() == 2)){
+        if(route.usertypeid != 6){  //only admin
             readonly =``;
         }
     }
-    if($('#evstatus').val() >= 4 || route.usertypeid != 6){
-        commentreadonly =`readonly`;
+
+    if(($('#evstatus').val() == 3)){
+        if(route.refixstatus == 0){
+            if(route.usertypeid == 6){ //only jd
+                readonly =``;
+            }
+        }else if(route.refixstatus == 1){ //only admin
+            if(route.usertypeid != 6){
+                readonly =``;
+            }
+        }else if(route.refixstatus == 2){ //only jd
+            if(route.usertypeid == 6){
+                readonly =``;
+            }
+        }
     }
-    if($('#evstatus').val() == 2 || route.refixstatus == 1){
-        commentreadonly =``;
-    }
+
+
     data.forEach(function (criteria,index) {
         var comment = '';
         if(criteria.weightcomment){
@@ -479,7 +553,7 @@ function RenderExtraTable(data){
                 <div class="toggle">
                     <div class="form-group" style="margin-top:5px">
                         <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
-                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadonly} >
+                        <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${readonly} >
                     </div>
                 </div>
             </div>
@@ -784,7 +858,7 @@ function updateEvAdminStatus(id,value){
                                 $("#spiniconsendjd").attr("hidden",true);
                                 Swal.fire({
                                     title: 'สำเร็จ...',
-                                    text: 'นำส่ง Manager สำเร็จ!',
+                                    text: 'นำส่ง Manager สำเร็จ',
                                 }).then((result) => {
                                     window.location.reload();
                                 });
@@ -881,9 +955,13 @@ function updateEvAdminStatus(id,value){
     
     });
     $(document).on('click', '#previewweight', function(e) {
-    // $("#previewweight").on('click', function() {
+        var previewdata = []
+        $('.inputweigth').each(function(){
+            previewdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
+            // console.log($(this).data('pillarname') + ' ' + $(this).data('subpillarname') + ' ' + $(this).data('subpillarindexname') + ' ' + $(this).val());
+        });
         var html =``;
-        evdata.forEach(function (data,index) {
+        previewdata.forEach(function (data,index) {
                 html += `<tr > 
                 <td> ${data.pillar} </td>                                            
                 <td> ${data.subpillar} </td>    
@@ -895,7 +973,7 @@ function updateEvAdminStatus(id,value){
             $('#modal_preview_weight').modal('show');
             // 
         
-     console.log('');
+    //  console.log('');
     
     });
 

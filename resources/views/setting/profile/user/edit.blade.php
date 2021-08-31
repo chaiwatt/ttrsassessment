@@ -668,7 +668,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label></span>
-										<input type="text" name="company" value="{{old('company') ?? $user->company->name}}" class="form-control form-control-lg stringformat60">
+										<input type="text" name="company" value="{{old('company') ?? $user->company->name}}" class="form-control form-control-lg stringformat30">
 									</div>
 								</div>
 

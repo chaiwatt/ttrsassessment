@@ -100,6 +100,10 @@ class DashboardCompanyInvoiceController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 8.5pt;">บริษัท '.$company->name.'</span>', 15.5, 230, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
+
+        // $randname = 'ใบแจ้งหนี้การประเมิน_TTRS_' .$minitbp->minitbp_code.'_โครงการ'.$minitbp->project.$company->fullname;
+        // $mpdf->Output($path . $randname.'.pdf');
+
     }
 
     public function PaymentNotification($id){

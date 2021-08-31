@@ -18,7 +18,7 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center">ชื่อ-นามสกุล</th>                                                                                   
-                                    <th style="text-align: center">Score</th>  
+                                    <th style="text-align: center">เกรด / คะแนน</th>  
                                     <th style="text-align: center">ความเห็น</th>  
                                 </tr>
                             </thead>

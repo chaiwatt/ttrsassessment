@@ -87,3 +87,30 @@ function deleteAlert(id) {
         })
     })
 }
+
+function maxRepeating(str)
+{
+   var _str = str.replace(/\s/g, "");
+    let len = _str.length;
+    let count = 0;
+
+    let res = _str[0];
+    for (let i=0; i<len; i++)
+    {
+        let cur_count = 1;
+        for (let j=i+1; j<len; j++)
+        {
+            if (_str[i] != _str[j])
+                break;
+            cur_count++;
+        }
+
+        // Update result if required
+        if (cur_count > count)
+        {
+            count = cur_count;
+            res = _str[i];
+        }
+    }
+    return count;
+}

@@ -130,6 +130,7 @@ class DashboardAdminProjectInvoiceController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 8.5pt;">บริษัท '.$company->name.'</span>', 15.5, 230, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
         $mpdf->Output();
+        
     }
 
     public function Edit($id){
@@ -216,9 +217,22 @@ class DashboardAdminProjectInvoiceController extends Controller
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
        
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();
+  
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+  
+        $fullcompanyname = ' ' . $company_name;
+        if($bussinesstype == 1){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+  
         $auth = Auth::user();
-
-//  dd($request->id);
 
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
@@ -228,27 +242,31 @@ class DashboardAdminProjectInvoiceController extends Controller
         $notificationbubble->target_user_id = $company->user_id;
         $notificationbubble->save();
 
-        $messagebox = Message::sendMessage('ยืนยันการชำระเงิน','ยืนยันการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success">ดำเนินการ</a>',Auth::user()->id,$company->user_id);    
+        $messagebox = Message::sendMessage('ยืนยันการชำระเงิน โครงการ' .$minitbp->project,'ยืนยันการชำระเงิน โครงการ' .$minitbp->project,Auth::user()->id,$company->user_id);    
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $company->user_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ยืนยันการชำระเงิน สำหรับโครงการ' .$minitbp->project. ' <a data-id="'.$messagebox->id.'" href="'.route('dashboard.company.project.invoice').'" class="btn btn-sm bg-success linknextaction">ดำเนินการ</a>';
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ยืนยันการชำระเงิน โครงการ' .$minitbp->project;
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        EmailBox::send(User::find($company->user_id)->email,'','TTRS: ยืนยันการชำระเงิน','เรียน ผู้ขอรับการประเมิน<br><br> ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($company->user_id)->email,'','TTRS: ยืนยันการชำระเงิน โครงการ' .$minitbp->project,'เรียน ผู้ขอรับการประเมิน<br><br> ระบบได้ยืนยันการชำระเงิน สำหรับโครงการ'.$minitbp->project. ' โปรดตรวจสอบ <a href='.route('dashboard.company.project.invoice').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         InvoiceTransaction::find($id)->update([
             'status' => 3
         ]);
-        BusinessPlan::where('company_id',$company->id)->first()->update([
+        // BusinessPlan::where('company_id',$company->id)->first()->update([
+        //     'business_plan_status_id' => 9
+        //   ]);
+
+        BusinessPlan::find($minitbp->business_plan_id)->update([
             'business_plan_status_id' => 9
-          ]);
+        ]);
 
         $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',6)->first();
         
@@ -267,17 +285,7 @@ class DashboardAdminProjectInvoiceController extends Controller
       
             $company_name = (!Empty($company->name))?$company->name:'';
             $bussinesstype = $company->business_type_id;
-      
-            $fullcompanyname = ' ' . $company_name;
-            if($bussinesstype == 1){
-                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
-            }else if($bussinesstype == 2){
-                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
-            }else if($bussinesstype == 3){
-                $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
-            }else if($bussinesstype == 4){
-                $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
-            }
+    
       
             $mailbody  ="เรียน คุณ".$fulltbp->fulltbpresponsibleperson->name ." ".$fulltbp->fulltbpresponsibleperson->lastname . " กรรมการผู้จัดการ ". $fullcompanyname ."<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการเลขที่ " . ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code) . " เรื่อง" .$fulltbp->minitbp->project ." ของ " . $fullcompanyname . " ความละเอียดทราบแล้วนั้น บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ได้ทำการประเมินเสร็จสิ้นเป็นที่เรียบร้อยแล้ว จึงขอแจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model ซึ่งได้คะแนน " .ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')) . " คะแนน จากคะแนนเต็ม " .ThaiNumericConverter::toThaiNumeric('100') ." คะแนนคิดเป็นเกรดระดับ " . $fulltbp->projectgrade->grade ." โดยสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ จะจัดส่งหนังสือแจ้งผลการประเมินอย่างเป็นทางการในลำดับถัดไป";
             EmailBox::send(User::find($company->user_id)->email,'','TTRS: แจ้งผลการประเมินศักยภาพผู้ประกอบการโดย TTRS Model โครงการ' . $minitbp->project,$mailbody.'<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());

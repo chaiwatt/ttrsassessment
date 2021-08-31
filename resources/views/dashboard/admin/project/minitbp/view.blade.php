@@ -695,7 +695,7 @@
 							var html = ``;
 							Swal.fire({
 								title: 'สำเร็จ...',
-								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+								text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ',
 							});
 						})
 					.catch(error => {})
@@ -753,7 +753,7 @@
 				$("#appceptagreement_wrapper").attr("hidden",true);
 				Swal.fire({
 					title: 'สำเร็จ...',
-					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ!',
+					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ',
 				});
 			}
 		});

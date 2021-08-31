@@ -21,7 +21,7 @@ $(document).on('click', '.user', function(e) {
             User.updateVerifyExpert($(this).data('id'),status).then(data => {
                 Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'แก้ไขรายการสำเร็จ!',
+                    text: 'แก้ไขรายการสำเร็จ',
                 }).then((result) => {
                     window.location.reload();
                 });

@@ -24,7 +24,7 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
     CompanyProfile.addCompanyProfile(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่มประวัติบริษัทสำเร็จ!',
+            text: 'เพิ่มประวัติบริษัทสำเร็จ',
             });
     })
     .catch(error => {})
@@ -246,7 +246,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
          }
          Swal.fire({
             title: 'สำเร็จ...',
-            text: 'แก้ไขข้อมูลบุคลากรสำเร็จ!',
+            text: 'แก้ไขข้อมูลบุคลากรสำเร็จ',
             });
     })
     .catch(error => {})
@@ -784,15 +784,58 @@ $(document).on('click', '#add_creditpartner', function(e) {
 
 $(document).on('change', '#tectdevleveltechnology', function(e) {
     $('#tectdevleveltechnology').val( $('#tectdevleveltechnology').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+    if(maxRepeating($(this).val()) > 15){
+        $("#tectdevleveltechnology_error").attr("hidden",false);
+    }else{
+        $("#tectdevleveltechnology_error").attr("hidden",true);
+    }
  });
 
  $(document).on('change', '#tectdevleveltechnologypresent', function(e) {
     $('#tectdevleveltechnologypresent').val( $('#tectdevleveltechnologypresent').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+    if(maxRepeating($(this).val()) > 15){
+        $("#tectdevleveltechnologypresent_error").attr("hidden",false);
+    }else{
+        $("#tectdevleveltechnologypresent_error").attr("hidden",true);
+    }
  });
 
  $(document).on('change', '#tectdevleveltechnologyproject', function(e) {
     $('#tectdevleveltechnologyproject').val( $('#tectdevleveltechnologyproject').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+    if(maxRepeating($(this).val()) > 15){
+        $("#tectdevleveltechnologyproject_error").attr("hidden",false);
+    }else{
+        $("#tectdevleveltechnologyproject_error").attr("hidden",true);
+    }
  });
+
+ $(document).on('change', '#tectdevleveltechnology_edit', function(e) {
+    $('#tectdevleveltechnology_edit').val( $('#tectdevleveltechnology_edit').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+    if(maxRepeating($(this).val()) > 15){
+        $("#tectdevleveltechnology_edit_error").attr("hidden",false);
+    }else{
+        $("#tectdevleveltechnology_edit_error").attr("hidden",true);
+    }
+ });
+
+ $(document).on('change', '#tectdevleveltechnologypresent_edit', function(e) {
+    $('#tectdevleveltechnologypresent_edit').val( $('#tectdevleveltechnologypresent_edit').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+    if(maxRepeating($(this).val()) > 15){
+        $("#tectdevleveltechnologypresent_edit_error").attr("hidden",false);
+    }else{
+        $("#tectdevleveltechnologypresent_edit_error").attr("hidden",true);
+    }
+ });
+
+ $(document).on('change', '#tectdevleveltechnologyproject_edit', function(e) {
+    $('#tectdevleveltechnologyproject_edit').val( $('#tectdevleveltechnologyproject_edit').val().replace(/[$@%''"";^/#,:£®!]/g, ''));
+    if(maxRepeating($(this).val()) > 15){
+        $("#tectdevleveltechnologyproject_edit_error").attr("hidden",false);
+    }else{
+        $("#tectdevleveltechnologyproject_edit_error").attr("hidden",true);
+    }
+ });
+
 
 $(document).on('click', '#add_tectdevlevel', function(e) {
     $('#tectdevleveltechnology').val('');
@@ -889,7 +932,7 @@ $(document).on('click', '#btnaddprojectabtract', function(e) {
     Project.addAbtract(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่มบทคัดย่อสำเร็จ!',
+            text: 'เพิ่มบทคัดย่อสำเร็จ',
             });
     })
     .catch(error => {})
@@ -906,7 +949,7 @@ $(document).on('click', '#btnaddmainproduct', function(e) {
     Project.addProduct(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่มรายละเอียดผลิตภัณฑ์สำเร็จ!',
+            text: 'เพิ่มรายละเอียดผลิตภัณฑ์สำเร็จ',
             });
     })
     .catch(error => {})
@@ -923,7 +966,7 @@ $(document).on('click', '#btnaddproductdetails', function(e) {
     Project.addProductDetail(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่มจุดเด่นผลิตภัณฑ์สำเร็จ!',
+            text: 'เพิ่มจุดเด่นผลิตภัณฑ์สำเร็จ',
             });
     })
     .catch(error => {})
@@ -940,7 +983,7 @@ $(document).on('click', '#btnaddprojectechdev', function(e) {
     Project.addTechDev(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่มการพัฒนาเทคโนโลยีสำเร็จ!',
+            text: 'เพิ่มการพัฒนาเทคโนโลยีสำเร็จ',
             });
     })
     .catch(error => {})
@@ -963,7 +1006,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
                 <td style="width:27%;"> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
-                <td style="white-space: nowrap"> 
+                <td style="white-space: nowrap;text-align:center"> 
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-info editprojectechdevlevel">แก้ไข</a> 
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
@@ -997,7 +1040,7 @@ $(document).on("click",".deleteprojectechdevlevel",function(e){
                         <td style="width:27%;"> ${techdevlevel.technology} </td>                                            
                         <td> ${techdevlevel.presenttechnology} </td> 
                         <td> ${techdevlevel.projecttechnology} </td>                                            
-                        <td style="white-space: nowrap"> 
+                        <td style="white-space: nowrap;text-align:center"> 
                         <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-info editprojectechdevlevel">แก้ไข</a>  
                         <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
                     </tr>`
@@ -1029,7 +1072,7 @@ $(document).on("click","#btn_modal_edit_tectdevlevel",function(e){
                 <td style="width:27%;"> ${techdevlevel.technology} </td>                                            
                 <td> ${techdevlevel.presenttechnology} </td> 
                 <td> ${techdevlevel.projecttechnology} </td>                                            
-                <td style="white-space: nowrap"> 
+                <td style="white-space: nowrap;text-align:center"> 
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-info editprojectechdevlevel">แก้ไข</a> 
                 <a  data-id="${techdevlevel.id}" class="btn btn-sm bg-danger deleteprojectechdevlevel">ลบ</a>  </td> 
             </tr>`
@@ -1054,7 +1097,7 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     Project.addTechDevProblem(lines,$(this).data('id')).then(data => {;
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่มปัญหาและอุปสรรคสำเร็จ!',
+            text: 'เพิ่มปัญหาและอุปสรรคสำเร็จ',
             });
     })
     .catch(error => {})
@@ -1174,7 +1217,7 @@ $(document).on('click', '#btnaddprojectcertify', function(e) {
     Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer10qty').val(),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'อัพเดทสำเร็จ!',
+            text: 'อัพเดทสำเร็จ',
             });
     })
     .catch(error => {})
@@ -1783,7 +1826,7 @@ $(document).on('click', '#btnaddmarketneed', function(e) {
     Market.addNeed(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่ม Market need สำเร็จ!',
+            text: 'เพิ่ม Market need สำเร็จ',
             });
     })
     .catch(error => {})
@@ -1800,7 +1843,7 @@ $(document).on('click', '#btnaddmarketsize', function(e) {
     Market.addSize(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่ม Market size สำเร็จ!',
+            text: 'เพิ่ม Market size สำเร็จ',
             });
     })
     .catch(error => {})
@@ -1817,7 +1860,7 @@ $(document).on('click', '#btnaddmarketshare', function(e) {
     Market.addShare(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่ม Market share สำเร็จ!',
+            text: 'เพิ่ม Market share สำเร็จ',
             });
     })
     .catch(error => {})
@@ -1834,7 +1877,7 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
     Market.addCompetitive(lines,$(this).data('id')).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'เพิ่ม Market competitive สำเร็จ!',
+            text: 'เพิ่ม Market competitive สำเร็จ',
             });
     })
     .catch(error => {})
@@ -2123,7 +2166,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                     
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
@@ -2160,7 +2203,7 @@ $(document).on("click",".deletesell",function(e){
                         <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>   
                         <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
                         <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                         
-                        <td style="width:1%;white-space: nowrap"> 
+                        <td style="width:1%;white-space: nowrap;text-align:center"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                         </td> 
@@ -2204,7 +2247,7 @@ $(document).on('click', '#btn_modal_edit_sell', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                     
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editsell">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletesell">ลบ</a>
                 </td> 
@@ -2274,7 +2317,7 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
                 <td class="text-right"> ${parseFloat(sell.past2).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.past1).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.present).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>                                                                   
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editsellstatus">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2304,7 +2347,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
                 <td class="text-center"> ${sell.businessyear} </td> 
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
@@ -2351,7 +2394,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
                 <td class="text-center"> ${sell.businessyear} </td> 
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                 </td> 
@@ -2388,7 +2431,7 @@ $(document).on("click",".deletedebtpartner",function(e){
                         <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                         <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
                         <td class="text-center"> ${sell.businessyear} </td> 
-                        <td style="width:1%;white-space: nowrap"> 
+                        <td style="width:1%;white-space: nowrap;text-align:center"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editdebtpartner">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletedebtpartner">ลบ</a>
                         </td> 
@@ -2419,7 +2462,7 @@ $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
                 <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
                 <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
                 <td class="text-center"> ${sell.businessyear} </td> 
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
@@ -2464,7 +2507,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
                 <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
                 <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
                 <td class="text-center"> ${sell.businessyear} </td> 
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                     <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                 </td> 
@@ -2499,7 +2542,7 @@ $(document).on("click",".deletecreditpartner",function(e){
                         <td class="text-right"> ${parseFloat(sell.totalyearpurchase).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>                         
                         <td class="text-right"> ${parseFloat(sell.percenttopurchase).toFixed(2)} </td> 
                         <td class="text-center"> ${sell.businessyear} </td> 
-                        <td style="width:1%;white-space: nowrap"> 
+                        <td style="width:1%;white-space: nowrap;text-align:center"> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-info editcreditpartner">แก้ไข</a> 
                             <a  data-id="${sell.id}" class="btn btn-sm bg-danger deletecreditpartner">ลบ</a>
                         </td> 
@@ -2553,7 +2596,7 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
                 <td class="text-right"> ${asset.quantity} </td>                         
                 <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
                 <td> ${checkspec} </td> 
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2590,7 +2633,7 @@ $(document).on('click', '#btn_modal_edit_investment', function(e) {
             html += `<tr >                                        
                 <td> ${invesment.investment} </td>                            
                 <td class="text-right"> ${parseFloat(invesment.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${invesment.id}" class="btn btn-sm bg-info editinvestment">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2639,7 +2682,7 @@ $(document).on('click', '#btn_modal_edit_cost', function(e) {
                 <td class="text-right"> ${parseFloat(cost.need).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
                 <td class="text-right"> ${parseFloat(cost.approved).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
                 <td class="text-right"> ${parseFloat(cost.plan).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                <td style="width:1%;white-space: nowrap"> 
+                <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${cost.id}" class="btn btn-sm bg-info editcost">แก้ไข</a> 
                 </td> 
             </tr>`
@@ -2658,7 +2701,7 @@ $(document).on('click', '#btnaddreturnofinvestment', function(e) {
         $('#reduce').val(data.reduce);
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'แก้ไขประมาณการผลตอบแทนจากการลงทุนสำเร็จ!',
+            text: 'แก้ไขประมาณการผลตอบแทนจากการลงทุนสำเร็จ',
             });
     })
     .catch(error => {})
@@ -2783,7 +2826,7 @@ $(document).on('click', '#btneditquantityemploy', function(e) {
         $('#department5_qty').val(data.department5_qty);
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'แก้ไขจำนวนบุคลากรสำเร็จ!',
+            text: 'แก้ไขจำนวนบุคลากรสำเร็จ',
             });
     })
     .catch(error => {})
@@ -3532,9 +3575,9 @@ $(document).on('click', '#submitfulltbp', function(e) {
         });
         return;
     }
-    var text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP) หรือไม่'
+    var text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) หรือไม่'
     if($('#usersignature').val() == 1){
-        text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (FUll TBP)'
+        text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)'
     }
     
     if(route.refixstatus == 0){
@@ -3570,7 +3613,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         $("#appceptagreement_wrapper").attr("hidden",true);
                             Swal.fire({
                                 title: 'สำเร็จ',
-                                text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ!',
+                                text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ',
                             }).then(() => {
                                 window.location.replace(`${route.url}/dashboard/company/report`);
                             });
@@ -3631,7 +3674,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                                     $("#appceptagreement_wrapper").attr("hidden",true);
                                         Swal.fire({
                                             title: 'สำเร็จ',
-                                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ!',
+                                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ',
                                         }).then(() => {
                                             window.location.replace(`${route.url}/dashboard/company/report`);
                                         });                                       
@@ -5221,6 +5264,45 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
         }
     });  
 
+    $(document).on("change","#assetspecificationedit",function(e){
+        
+        if(maxRepeating($(this).val()) > 15){
+            console.log('โปรดตรวจสอบรายการ');
+            $("#assetspecificationedit_error").attr("hidden",false);
+        }else{
+            $("#assetspecificationedit_error").attr("hidden",true);
+        }
+        
+    }); 
+
+    
+
+    function maxRepeating(str)
+    {
+    var _str = str.replace(/\s/g, "");
+        let len = _str.length;
+        let count = 0;
+
+        let res = _str[0];
+        for (let i=0; i<len; i++)
+        {
+            let cur_count = 1;
+            for (let j=i+1; j<len; j++)
+            {
+                if (_str[i] != _str[j])
+                    break;
+                cur_count++;
+            }
+
+            // Update result if required
+            if (cur_count > count)
+            {
+                count = cur_count;
+                res = _str[i];
+            }
+        }
+        return count;
+    }
 
 
 

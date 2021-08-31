@@ -357,8 +357,12 @@
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:600px;text-align: center">ชื่อ EV</th> 
-                                                    <th style="text-align: center">เวอร์ชั่น</th> 
-                                                    <th style="width:1%;text-align: center">เพิ่มเติม</th> 
+                                                    <th style="text-align: center;white-space: nowrap">เวอร์ชั่น</th> 
+                                                    <th style="width:1%;text-align: center;white-space: nowrap">รายการ EV</th> 
+                                                    @if (Auth::user()->user_type_id >= 5)
+                                                    <th style="width:1%;text-align: center;white-space: nowrap">รายการ Weight</th> 
+                                                    @endif
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody >
@@ -370,14 +374,21 @@
                                                     </td>    
                                                     <td style="white-space: nowrap">
                                                         @if (@$fulltbp->ev->status >= 4)
-                                                        <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายละเอียด</a>
+                                                            <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายการ EV</a>
                                                         @else
                                                         
                                                         <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                                         @endif
                                                         
                                                     
-                                                    </td>                                   
+                                                    </td>  
+                                                    @if (Auth::user()->user_type_id >= 5)
+                                                        <td>
+                                                            @if (@$fulltbp->ev->status >= 4)
+                                                                <a href="{{route('dashboard.admin.project.evweight.edit',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายการ Weight</a>
+                                                            @endif
+                                                        </td>
+                                                    @endif                                 
                                                 </tr>  
                                             </tbody>
                                         </table>
@@ -554,6 +565,40 @@
                     </div>
                 </div>
             </div>
+
+            @if ($projectfinishattachments->count() > 0)
+            <div class="col-md-12" {{$hidden}}>
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารแนบ</h6>
+                        <div class="header-elements">
+            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="testtopictable">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th style="text-align: center">เอกสาร</th> 
+                                        <th style="text-align: center;width:1%;white-space: nowrap">ดาวน์โหลด</th> 
+                                                            
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    @foreach ($projectfinishattachments as $projectfinishattachment)
+                                        <tr>
+                                            <td> {{$projectfinishattachment->name}} </td> 
+                                            <td style="text-align: center"> <a href="{{asset($projectfinishattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a></td> 
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
             @endif
               
             <div class="col-md-12" {{$hidden}}>

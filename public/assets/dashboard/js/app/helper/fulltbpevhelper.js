@@ -708,7 +708,7 @@ function AddCheckList(criterias){
                  $("#spiniconcriteria").attr("hidden",true);
                  Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'เพิ่มรายการสำเร็จ!',
+                    text: 'เพิ่มรายการสำเร็จ',
                     });
             $("#toggleselect")[0].checked = false;     
             $('.subpillarindexcheckbox').each(function(){ 
@@ -738,7 +738,7 @@ function AddGrading(){
         if(data.result == 1){
             Swal.fire({
                title: 'สำเร็จ...',
-               text: 'เพิ่มรายการสำเร็จ!',
+               text: 'เพิ่มรายการสำเร็จ',
                });
                $("#toggleselect")[0].checked = false;
                $('.subpillarindexcheckbox').each(function(){ 
@@ -803,11 +803,9 @@ function RenderTable(criterias,pillaindexweigths){
         var find = pillaindexweigths.filter(function(result) {
             return result.ev_id == $('#evid').val() && result.pillar_id == criteria.pillar['id']  && result.sub_pillar_id == criteria.subpillar['id']  && result.sub_pillar_index_id == criteria.subpillarindex['id'];
           });
-        var commentreadlonly = '';
+        var commentreadlonly = 'readonly';
         var weightval = '';
-        if(route.usertypeid != 6 ){
-            commentreadlonly = "readonly";
-        }
+
         if ($('#evstatus').val() >= 4 ) {
             if (route.usertypeid >= 5) {
                 if(find[0].weigth){
@@ -816,14 +814,40 @@ function RenderTable(criterias,pillaindexweigths){
             }
             readonly = "readonly";
         }
-        if ($('#evstatus').val() >= 2) {
-            commentreadlonly = "readonly";
-        }else if($('#evstatus').val() == 0){
-            commentreadlonly = "";
+
+        if ($('#evstatus').val() == 0) {
+            if(route.usertypeid != 6 ){
+                commentreadlonly = "";
+            }
+        }else if($('#evstatus').val() == 1) {
+            if (route.refixstatus == 0) {
+                if(route.usertypeid == 6 ){
+                    commentreadlonly = "";
+                }
+            }else if(route.refixstatus == 1){
+                if(route.usertypeid != 6 ){
+                    commentreadlonly = "";
+                }
+            }else if(route.refixstatus == 2){
+                if(route.usertypeid == 6 ){
+                    commentreadlonly = "";
+                }
+            }
         }
-        if (route.refixstatus == 1) {
-            commentreadlonly = "";
-        }
+
+
+        // if(route.usertypeid != 6 ){
+        //     commentreadlonly = "readonly";
+        // }
+        
+        // if ($('#evstatus').val() >= 2) {
+        //     commentreadlonly = "readonly";
+        // }else if($('#evstatus').val() == 0){
+        //     commentreadlonly = "";
+        // }
+        // if (route.refixstatus == 1) {
+        //     commentreadlonly = "";
+        // }
 
         var comment = '';
         if(criteria.comment){
@@ -875,7 +899,7 @@ function RenderExtraTable(data){
     evextradata = [];
     data.forEach(function (criteria,index) {
         var weightval = '';
-        var commentreadlonly = '';
+        var commentreadlonly = 'readonly';
         if(route.usertypeid != 6 ){
             commentreadlonly = "readonly";
         }
@@ -889,14 +913,38 @@ function RenderExtraTable(data){
 
             commentreadlonly = "readonly";
         }
-        if ($('#evstatus').val() >= 2) {
-            commentreadlonly = "readonly";
-        }else if($('#evstatus').val() == 0){
-            commentreadlonly = "";
+
+        // if ($('#evstatus').val() >= 2) {
+        //     commentreadlonly = "readonly";
+        // }else if($('#evstatus').val() == 0){
+        //     commentreadlonly = "";
+        // }
+        // if (route.refixstatus == 1) {
+        //     commentreadlonly = "";
+        // }
+
+
+        if ($('#evstatus').val() == 0) {
+            if(route.usertypeid != 6 ){
+                commentreadlonly = "";
+            }
+        }else if($('#evstatus').val() == 1) {
+            if (route.refixstatus == 0) {
+                if(route.usertypeid == 6 ){
+                    commentreadlonly = "";
+                }
+            }else if(route.refixstatus == 1){
+                if(route.usertypeid != 6 ){
+                    commentreadlonly = "";
+                }
+            }else if(route.refixstatus == 2){
+                if(route.usertypeid == 6 ){
+                    commentreadlonly = "";
+                }
+            }
         }
-        if (route.refixstatus == 1) {
-            commentreadlonly = "";
-        }
+
+
         var comment = '';
         if(criteria.extracomment){
             comment = criteria.extracomment;
@@ -1014,7 +1062,7 @@ $(document).on('click', '.deletepillar', function(e) {
             Pillar.deletePillar($('#evid').val(),$(this).data('pillar')).then(data => {
                 Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'ลบรายการสำเร็จ!',
+                    text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -1079,7 +1127,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
             SubPillar.deleteSubPillar($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar')).then(data => {
                 Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'ลบรายการสำเร็จ!',
+                    text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -1106,7 +1154,7 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
             SubPillar.deleteSubPillarIndex($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar'),$(this).data('subpillarindex')).then(data => {
                 Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'ลบรายการสำเร็จ!',
+                    text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -1237,7 +1285,7 @@ $(document).on('click', '#editev', function(e) {
     Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
         Swal.fire({
             title: 'สำเร็จ...',
-            text: 'แก้ไข EV สำเร็จ!',
+            text: 'แก้ไข EV สำเร็จ',
             });
     })
     .catch(error => {})
@@ -1352,7 +1400,7 @@ $(document).on('click', '#updateev', function(e) {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
                         title: 'สำเร็จ...',
-                        text: 'นำส่ง EV สำเร็จ!',
+                        text: 'นำส่ง EV สำเร็จ',
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -1651,7 +1699,7 @@ $(document).on('click', '.deletecategorytransaction', function(e) {
                 // RowSpanExtra("extracriteriatable");
                  Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'ลบรายการสำเร็จ!',
+                    text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -1681,11 +1729,11 @@ $(document).on('click', '.deletetriteriatransaction', function(e) {
                 // RowSpanExtra("extracriteriatable");
                 //  Swal.fire({
                 //     title: 'สำเร็จ...',
-                //     text: 'ลบรายการสำเร็จ!',
+                //     text: 'ลบรายการสำเร็จ',
                 //     });
                 Swal.fire({
                     title: 'สำเร็จ...',
-                    text: 'ลบรายการสำเร็จ!',
+                    text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
                     });

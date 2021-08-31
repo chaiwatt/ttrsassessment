@@ -5,7 +5,8 @@
 
 {{-- @if ($test == 1) --}}
     @if (Auth::user()->user_type_id == 3)
-    <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}">
+    <li class="nav-item nav-item-submenu nav-item-expanded nav-item-open">
+    {{-- <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}"> --}}
     <a href="{{route('dashboard.expert.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
         <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">แดชบอร์ด</a></li>

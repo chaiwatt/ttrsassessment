@@ -150,7 +150,7 @@
                                                     {{$businessplan->minitbp->project}} 
                                             @endif
                                         </td> 
-                                        <td> {{$businessplan->code}} </td> 
+                                        <td style="text-align: center"> {{$businessplan->code}} </td> 
                                         <td>
                                             <div class="progress" style="height: 1.375rem;">
                                                 <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">

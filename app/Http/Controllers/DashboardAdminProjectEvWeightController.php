@@ -46,7 +46,6 @@ class DashboardAdminProjectEvWeightController extends Controller
     }
 
     public function Edit($id){
-
         $auth = Auth::user();
         NotificationBubble::where('target_user_id',$auth->id)
                         ->where('notification_category_id',1)
