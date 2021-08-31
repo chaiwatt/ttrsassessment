@@ -334,7 +334,7 @@ class AssessmentEvController extends Controller
             $new->pillar_id = $pillaindexweigth->pillar_id;
             $new->sub_pillar_id = $pillaindexweigth->sub_pillar_id;
             $new->sub_pillar_index_id = $pillaindexweigth->sub_pillar_index_id;
-            $new->weigth = 0;
+            $new->weigth = $pillaindexweigth->weigth;
             $new->save();
         }     
         
