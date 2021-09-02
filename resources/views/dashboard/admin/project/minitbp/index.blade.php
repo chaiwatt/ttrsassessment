@@ -72,8 +72,8 @@
                             <input type="text" id="minitbpid" hidden>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>ข้อความเพิ่มเติม</label>
-                                    <textarea type="text" rows="5" id="messagebody" placeholder="ข้อความเพิ่มเติม แจ้งไปยัง Leader" class="form-control form-control-lg" @if (Auth::user()->user_type_id != 6) readonly @endif></textarea>
+                                    <label>ความเห็น</label>
+                                    <textarea type="text" rows="5" id="messagebody" placeholder="ความเห็น Manager" class="form-control form-control-lg" @if (Auth::user()->user_type_id != 6) readonly @endif></textarea>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="modal-footer">
                         <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
                         @if (Auth::user()->user_type_id == 6)
-                            <button id="btn_modal_add_jdmessage" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i> เพิ่ม</button>
+                            <button id="btn_modal_add_jdmessage" class="btn bg-primary"><i class="icon-spinner spinner mr-2" id="userspinicon" hidden></i> <span id="btnname">เพิ่ม</span> </button>
                         @endif
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
-                                        @if (Auth::user()->user_type_id >= 4)
+                                        @if (Auth::user()->user_type_id == 4)
                                             <th style="width:1%;white-space: nowrap;text-align:center">การอนุมัติ</th> 
                                         @endif
                                         
@@ -251,7 +251,7 @@
                                         @if (Empty($minitbp->fulltbp->canceldate))
                                             <tr>    
                                                 <td hidden>{{$minitbp->updated_at}}</td> 
-                                                <td style="width:1%;white-space: nowrap;"> 
+                                                <td style="white-space: nowrap;"> 
                                                     <a href="#" data-toggle="modal" data-id="{{$minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                     <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">{{$minitbp->project}}</a>
                                                 </td>  
@@ -275,16 +275,19 @@
                                                     @endphp
                                                     {{$fullcompanyname}} 
                                                 </td> 
-                                                <td style="white-space: nowrap;text-align: center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                     @if (Empty($minitbp->jdmessage))
                                                             @if (Auth::user()->user_type_id == 6)
-                                                                <a href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                                @if ($minitbp->businessplan->business_plan_status_id == 3 && $minitbp->businessplan->projectassignment->leader_id == null)
+                                                                        <a data-message="{{$minitbp->businessplan->projectassignment->leader_id}}" href="#" data-id="{{$minitbp->businessplan->projectassignment->id}}" data-toggle="modal" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                                @endif
+                                                                
                                                             @endif
                                                         @else
-                                                            <a href="#" data-id="{{$minitbp->id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                            <a data-message="{{$minitbp->businessplan->projectassignment->leader_id}}" href="#" data-id="{{$minitbp->id}}" data-toggle="modal" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                                     @endif
                                                 </td>  
-                                                @if (Auth::user()->user_type_id >= 4)
+                                                @if (Auth::user()->user_type_id == 4)
                                                     <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($minitbp->businessplan->business_plan_status_id > 3)
                                                             <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span>
@@ -301,7 +304,7 @@
                                                                         <a href="#" data-id="{{$minitbp->id}}" id="editapprove" data-project="{{$minitbp->project}}" class="btn btn-sm bg-warning"><i class="icon-spinner spinner mr-2" id="spinicon{{$minitbp->id}}" hidden></i>ยังไม่ได้อนุมัติ</a>
                                                                     @elseif($minitbp->refixstatus == 1)
                                                                             <span class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</span>
-                                                                            {{-- <a href="#"  data-id="{{$minitbp->id}}" class="badge badge-flat border-pink text-pink-600">ส่งคืนแก้ไข</a> --}}
+                                                                            
                                                                         @if ($minitbp->reviselog(1)->count() > 0)
                                                                             <a href="#" data-id="{{$minitbp->id}}" data-project="{{$minitbp->project}}" data-doctype="1" class="btn btn-sm bg-pink showlog" ><i class="icon-spinner spinner mr-2" id="spinicon_showlog{{$minitbp->id}}" hidden></i>รายการแก้ไข</a>
                                                                         @endif
@@ -347,9 +350,23 @@
         };
         $(document).on('click', '.jdmessage', function(e) {
             getJdMessage($(this).data('id')).then(data => {
-                $('#messagebody').html(data.jdmessage);
+                $('#messagebody').val('');
+                if(data.jdmessage != null && $(this).data('message') != ''){
+                    $("#messagebody").prop("readonly",true);
+                    $("#btn_modal_add_jdmessage").attr("hidden",true);
+                }else{
+                    $("#messagebody").prop("readonly",false);
+                    $("#btn_modal_add_jdmessage").attr("hidden",false); 
+                }
+
+                if(data.jdmessage !=  null){
+                    $('#btnname').html("แก้ไข");
+                }
+
+                $('#messagebody').val(data.jdmessage);
                 $('#minitbpid').val($(this).data('id'));
                 
+
                 $('#modal_add_jdmessage').modal('show');
             })
             .catch(error => {}) 

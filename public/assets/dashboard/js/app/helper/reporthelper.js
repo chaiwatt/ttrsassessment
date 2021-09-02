@@ -117,17 +117,30 @@ import * as Attendee from './eventcalendarattendee.js';
                                 $('#modal_get_calendar').modal('show');
 
                                 var html =``;
+                                // console.log(data.leader);
                                 data.eventcalendarattendees.forEach(function (attendee,index) {
                                     var rejreason = "";
                                     if(attendee['rejectreason'] != null){
-                                        rejreason = ' ('+attendee['rejectreason']+')';
+                                        if(data.leader == 1){
+                                            rejreason = ' ('+attendee['rejectreason']+')';
+
+                                           
+                                        }else{
+                                            rejreason = ' ('+attendee['rejectreason']+')';
+                                        }
+                                        
                                     }
 
                                     var attendeestatus = `<span class="badge badge-flat border-info text-info-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
                                     if(attendee.joinevent == 2){
                                         attendeestatus = `<span class="badge badge-flat border-success text-success-600">${attendee.eventcalendarattendeestatus['name']}</span>`;
                                     }else if(attendee.joinevent == 3){
-                                        attendeestatus = `<span class="badge badge-flat border-danger text-danger-600">${attendee.eventcalendarattendeestatus['name']}</span> ${rejreason}`;
+                                        if(data.leader == 1){
+                                            attendeestatus = `<a data-toggle="modal" href="#" data-event="${e.event.id}" data-id="${attendee.id}" class="btn btn-sm bg-danger removereject mr-1" ><i class="icon-spinner spinner mr-2" id="spinicon${attendee.id}" hidden/><i class="icon-pencil5"></i> ${attendee.eventcalendarattendeestatus['name']}</a> ${rejreason}`;
+                                        }else{
+                                            attendeestatus = `<span class="badge badge-flat border-danger text-danger-600">${attendee.eventcalendarattendeestatus['name']}</span> ${rejreason}`;
+                                        }
+                                       
                                     }
                                     html += `<tr > 
                                     <td > ${attendee.user['name']} ${attendee.user['lastname']}</td>                                            
@@ -243,6 +256,28 @@ import * as Attendee from './eventcalendarattendee.js';
             })
         })
     }
+
+    $(document).on("click",".removereject",function(e){
+        Swal.fire({
+            title: 'ยืนยัน!',
+            text: `ต้องการเปลี่ยนเป็นให้เข้าร่วม หรือไม่`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+            closeOnConfirm: false,
+            closeOnCancel: false
+            }).then((result) => {
+            if (result.value) {
+                $("#spinicon"+$(this).data('id')).attr("hidden",false);
+                Attendee.joinEvent($(this).data('event'),$(this).data('id')).then(data => {
+                    $('#modal_get_calendar').modal('hide');
+                })
+                .catch(error => {})
+            }
+        });
+    });
 
     function callUpdateChart(data) {
         var pillar_management = data.finalgrades.filter(x => x.pillar_id == 1).reduce((a, b) => +a + +b.percent, 0)/(data.finalgrades.length/4); 
@@ -512,8 +547,6 @@ $(document).on('change', '.confirm', function(e) {
 
 $(document).on('click', '#btn_modal_get_calendar', function(e) {
    $("#spinicon").attr("hidden",false);
-//    console.log($('#jointype').val());
-//    return ;
    Attendee.updateJoinEvent($('#attendeventid').val(),$('#jointype').val(),$('#rej_meeting_note').val()).then(data => {
        $("#spinicon").attr("hidden",true);
        document.location.reload();

@@ -589,12 +589,16 @@
 														@endif
 													</a>
 												</td> --}}
+												@php
+													$f = substr($messagereceive->sender->email, 0, 1);
+													
+												@endphp
 												<td class="table-inbox-image">
 													<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
-														<span class="letter-icon">J</span>
+														<span class="letter-icon">{{strtoupper($f)}}</span>
 													</span>
 												</td>
-												<td class="table-inbox-name" style="white-space: nowrap">
+												<td class="table-inbox-name" style="width:25%" >
 													<a href="#" data-id="{{$messagereceive->id}} ">
 														<div class="letter-icon-title text-default">&nbsp; {{$messagereceive->sender->name}} {{$messagereceive->sender->lastname}}</div>
 													</a>

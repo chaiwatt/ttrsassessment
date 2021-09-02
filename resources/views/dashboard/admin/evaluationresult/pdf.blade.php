@@ -26,7 +26,7 @@
 
                 <div class="box bw600 mt20 ml30">
                     <div>{{$thainumeric::toThaiNumeric($evaluationresult->headercode)}}</div>
-                    <div class="bw400 text-right">{{$thainumeric::toThaiNumeric($evaluationresult->evaluation_day_id)}} {{$evaluationresult->month->name}} {{$thainumeric::toThaiNumeric($dateconversion::thaiYearNow())}}</div>
+                    <div class="bw400 text-right">{{$thainumeric::toThaiNumeric($evaluationresult->evaluation_day_id)}} {{$evaluationresult->month->name}} {{$thainumeric::toThaiNumeric($evaluationresult->evaluation_year)}}</div>
                 </div>
 
                 <div class="box mt20 ml30">

@@ -319,10 +319,18 @@ $(document).on('change', '#pillar', function(e) {
         $("#subpillar option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
         Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
+            var html1 =`<option value="0" >=== EV ที่คล้ายกัน ===</option>`;
+
+            if(data.length > 0){
+                $("#relateev").attr("hidden",false);
+            }else{
+                $("#relateev").attr("hidden",true);
+            } 
             data.forEach(function (ev,index) {
                     html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                    html1 += `<option value="${ev['id']}" >${ev['name']}</option>`
                 });
-             $("#relateev").html(html);
+             $("#similarev").html(html1);
         }).catch(error => {})
     }).catch(error => {})
 });
@@ -334,12 +342,12 @@ $(document).on('change', '#subpillar', function(e) {
         var html1 ='';
         data.subpillarindexs.forEach(function (subpillar,index) {
             var checkindex = data.criteriatransactions.filter(x => x.ev_id == $('#evid').val() && x.sub_pillar_index_id == subpillar['id']);
-            //console.log(subpillar['id'] + ' ' + checkindex.length);
             if(checkindex.length == 0){
                 html0 += `<option value="${subpillar['id']}" >${subpillar['name']}  </option>`
             }
                 
             });
+   
         data.indextypes.forEach(function (indextype,index) {
                 html1 += `<option value="${indextype['id']}" >${indextype['name']}</option>`
             });
@@ -348,10 +356,19 @@ $(document).on('change', '#subpillar', function(e) {
         $("#subpillarindex option:contains("+$(this).find("option:selected").text()+")").attr('selected', true).change();
         Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
+            var html1 =`<option value="0" >=== EV ที่คล้ายกัน ===</option>`;
+
+            if(data.length > 0){
+                $("#relateev").attr("hidden",false);
+            }else{
+                $("#relateev").attr("hidden",true);
+            } 
+
             data.forEach(function (ev,index) {
-                    html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                    // html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                    html1 += `<option value="${ev['id']}" >${ev['name']}</option>`
                 });
-             $("#relateev").html(html);
+            $("#similarev").html(html1);
         }).catch(error => {})
     }).catch(error => {})
 });
@@ -382,10 +399,19 @@ $(document).on('change', '#subpillarindex', function(e) {
     
         Pillar.getRelatedEv($('#evid').val()).then(data => {
             var html =``;
+            var html1 =`<option value="0" >=== EV ที่คล้ายกัน ===</option>`;
+
+            if(data.length > 0){
+                $("#relateev").attr("hidden",false);
+            }else{
+                $("#relateev").attr("hidden",true);
+            } 
+
             data.forEach(function (ev,index) {
-                html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                // html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                html1 += `<option value="${ev['id']}" >${ev['name']}</option>`
             });
-             $("#relateev").html(html);
+            $("#similarev").html(html1);
         }).catch(error => {})
     }).catch(error => {})
 });
@@ -423,6 +449,7 @@ $('.steps-basic').steps({
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
     enableFinishButton: false,
+    enableKeyNavigation: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> กลับ',
@@ -566,6 +593,7 @@ $('.steps-basic-extra').steps({
     headerTag: 'h6',
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
+    enableKeyNavigation: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> กลับ',
@@ -701,10 +729,18 @@ function AddCheckList(criterias){
          if(data.result == 1){
             Pillar.getRelatedEv($('#evid').val()).then(data => {
                 var html =``;
+                var html1 =`<option value="0" >=== EV ที่คล้ายกัน ===</option>`;
+
+                if(data.length > 0){
+                    $("#relateev").attr("hidden",false);
+                }else{
+                    $("#relateev").attr("hidden",true);
+                } 
                 data.forEach(function (ev,index) {
-                        html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                        // html += `<button type="button" class="btn badge badge-light badge-striped badge-striped-left border-left-info" id="relateevid" data-id="${ev['id']}">${ev['name']}</button>&nbsp; `
+                        html1 += `<option value="${ev['id']}" >${ev['name']}</option>`
                     });
-                 $("#relateev").html(html);
+                    $("#similarev").html(html1);
                  $("#spiniconcriteria").attr("hidden",true);
                  Swal.fire({
                     title: 'สำเร็จ...',
@@ -867,7 +903,7 @@ function RenderTable(criterias,pillaindexweigths){
                 ${criterianame} 
                 <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
+                        <label><i>ความเห็น</i></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -882,7 +918,7 @@ function RenderTable(criterias,pillaindexweigths){
                 ${criterianame} 
                 <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
+                        <label><i>ความเห็น</i></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -959,7 +995,7 @@ function RenderExtraTable(data){
             <td> ${criteria.extracriteria['name']} <a href="#"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300 deletetriteriatransaction"><i class="icon-trash"></i></a>
                 <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small> </label>
+                        <label><i>ความเห็น</i></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -972,7 +1008,7 @@ function RenderExtraTable(data){
             <td> ${criteria.extracriteria['name']} <a href="#"  data-categoryid="${criteria.extra_category_id}" data-criteriaid="${criteria.extra_criteria_id}" class="text-grey-300"></a>
                 <div class="toggle" >
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
+                        <label><i>ความเห็น</i></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${commentreadlonly} >
                     </div>
                 </div>
@@ -1237,9 +1273,9 @@ $(document).on('change', '#tmpcriteria', function(e) {
     $('#nameedit').val($('#tmpcriteria option:selected').text());
 });
 
-$(document).on('click', '#relateevid', function(e) {
-    $("#existingev").val($(this).data('id')).change();
-    Ev.getEv($(this).data('id')).then(data => {
+$(document).on('change', '#similarev', function(e) {
+    $("#existingev").val($(this).val()).change();
+    Ev.getEv($(this).val()).then(data => {
         RenderModalTable(data);
         RowSpan("criteriatable_modal");
         $('#modal_exisingev').modal('show');

@@ -161,7 +161,7 @@
                 </div>
                 <div class="box bw650 font8 border" style="background-color: #daedf3;">
                     <div class="ml10 mt10" style="font-size:13px;"><u><strong>วิธียื่นแผนธุรกิจเทคโนโลยีเพื่อเข้ารับการประเมินฯ</strong></u></div>
-                    <div class="ml15 mt5" style="font-size:13px;text-align:justify">{!!$provider::FixBreak("• ผู้ที่ประสงค์จะยื่นแผนธุรกิจเทคโนโลยีจะต้องกรอกข้อมูลในแบบฟอร์ม และยื่นเอกสารต่อสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)")!!}</div>
+                    <div class="ml15 mt5" style="font-size:13px">{!!$provider::FixBreak("• ผู้ที่ประสงค์จะยื่นแผนธุรกิจเทคโนโลยีจะต้องกรอกข้อมูลในแบบฟอร์ม และยื่นเอกสารต่อสำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)")!!}</div>
                     <div class="ml15" style="font-size:13px">• กรุณาศึกษาข้อแนะนำอย่างละเอียดก่อนที่จะกรอกข้อมูลในแบบฟอร์มแผนธุรกิจเทคโนโลยี </div>
                     <div class="ml15" style="font-size:13px">• โปรดตรวจสอบและแนบเอกสารที่เกี่ยวข้องประกอบการยื่นแผนธุรกิจเทคโนโลยีให้ครบถ้วน</div> 
                     <div class="ml15 mb10" style="font-size:13px">• หากมีข้อสงสัยหรือต้องการข้อมูลเพิ่มเติม โปรดติดต่อศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยี สวทช. <br>&nbsp;&nbsp;E-mail: ttrs@nstda.or.th</div>
@@ -182,12 +182,12 @@
                             <img src="{{asset($fulltbp->minitbp->businessplan->company->organizeimg)}}" class="bw500 bh300" alt="">
                         </div>
                     </div>
-                    <div class="ml20 mt0" style="font-size:13px">1.7 จำนวนบุคลากรทั้งหมด&emsp;{{number_format($fulltbp->fulltbpemployee->department_qty)}}&emsp;คน
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายบริหาร&emsp;{{number_format($fulltbp->fulltbpemployee->department1_qty)}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายวิจัยและพัฒนา&emsp;{{number_format($fulltbp->fulltbpemployee->department2_qty)}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายผลิต/วิศวกรรม&emsp;{{number_format($fulltbp->fulltbpemployee->department3_qty)}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายการตลาด&emsp;{{number_format($fulltbp->fulltbpemployee->department4_qty)}}&emsp;คน</div>
-                        <div class="ml50 mt0" style="font-size:13px">- พนักงานทั่วไป&emsp;{{number_format($fulltbp->fulltbpemployee->department5_qty)}}&emsp;คน</div>
+                    <div class="ml20 mt0" style="font-size:13px">1.7 จำนวนบุคลากรทั้งหมด&emsp;{{number_format($fulltbp->minitbp->businessplan->company->department_qty)}}&emsp;คน
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายบริหาร&emsp;{{number_format($fulltbp->minitbp->businessplan->company->department1_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายวิจัยและพัฒนา&emsp;{{number_format($fulltbp->minitbp->businessplan->company->department2_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายผลิต/วิศวกรรม&emsp;{{number_format($fulltbp->minitbp->businessplan->company->department3_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- ฝ่ายการตลาด&emsp;{{number_format($fulltbp->minitbp->businessplan->company->department4_qty)}}&emsp;คน</div>
+                        <div class="ml50 mt0" style="font-size:13px">- พนักงานทั่วไป&emsp;{{number_format($fulltbp->minitbp->businessplan->company->department5_qty)}}&emsp;คน</div>
                     </div>
                     <div class="ml20 mt0" style="font-size:13px"><strong>1.8 ประเภทของธุรกิจ</strong>
                         <div class="ml50 mt0" style="font-size:13px"><strong>1.8.1 ธุรกิจนิติบุคคล</strong>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="page-break"></div>
                     <div class="ml20 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>1.9 ประวัติของบริษัท (Company Profile)</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
                     </div>
                     <div class="ml20 mt0" style="font-size:13px"><strong>1.10 ข้อมูลผู้บริหารระดับสูง (CEO หรือ กรรมการผู้จัดการ)</strong>
                         <div style="page-break-inside: avoid;">
@@ -607,20 +607,20 @@
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.2 ชื่อโครงการ (ภาษาอังกฤษ) :</strong> {{$fulltbp->minitbp->projecteng}}</div>
                    
                     <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.3 บทคัดย่อโครงการ :</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->abtract)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->abtract)!!}</div>
                     </div>
                     <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</div>
                     </div>
                     <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
                     </div>
                     {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div> --}}
                     {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->productdetail)!!}</span></div> --}}
                     {{-- <div style="page-break-inside: avoid;"> --}}
                     <div class="ml30 mt0" style="font-size:13px;margin-buttom:-20px;page-break-inside: avoid;"> <strong>2.6 ข้อมูลเทคโนโลยี</strong>
                         <div class="mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong>
-                            <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->techdev)!!}</div>
+                            <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->techdev)!!}</div>
                         </div>
                     </div>
 
@@ -648,7 +648,7 @@
                     </div>  
 
                     <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</div>
                     </div>
 
                     {{-- <div class="ml30" style="font-size:13px;margin-top:-10px">     --}}
@@ -720,11 +720,11 @@
                     {{-- </div> --}}
 
                     <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                     </div>
 
                     <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.4 ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ </strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->standard)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->standard)!!}</div>
                     </div>
 
                 </div>
@@ -808,22 +808,22 @@
                 <div class="box bw650  mt10" >
                     <div class="ml30 " style="font-size:13px"><strong>3.1 ข้อมูลด้านการตลาด</strong></div>
                     <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>Market analysis</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
                     </div>
 
                     <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>Business model canvas</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
                     </div>
 
                     <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>วิเคราะห์ศักยภาพทางการค้า</strong>
-                        <div style="margin-top:-15px;font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
+                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     </div>
 
-                    {{-- <div class="ml50" style="font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div> --}}
+                    {{-- <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div> --}}
                     {{-- <div class="ml50" style="font-size:13px;margin-top:-20px"><strong>Business model canvas</strong></div>
-                    <div class="ml50" style="font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div> --}}
+                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div> --}}
                     {{-- <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
-                    <div class="ml50" style="font-size:13px;text-align:justify">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div> --}}
+                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div> --}}
                     <div class="ml30" style="font-size:13px" ><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
                     <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >

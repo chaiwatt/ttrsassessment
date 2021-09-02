@@ -546,7 +546,7 @@
 	// Basic wizard setup
 	var mytype = "{{Auth::user()->user_type_id}}";
 	var myid = "{{Auth::user()->id}}";
-	var approvestatus = 'ยังไม่ได้อนุมัติ';
+	var approvestatus = 'ดำเนินการต่อ';
 	var btnstatus = true;
     if (mytype == 4) {
 		if (myid != $("#leaderid").val()) {
@@ -565,6 +565,7 @@
 		headerTag: 'h6',
 		bodyTag: 'fieldset',
 		transitionEffect: 'fade',
+		enableKeyNavigation: false,
 		titleTemplate: '<span class="number">#index#</span> #title#',
 		labels: {
 			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',

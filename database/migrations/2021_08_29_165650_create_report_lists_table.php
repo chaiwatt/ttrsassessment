@@ -20,6 +20,8 @@ class CreateReportListsTable extends Migration
             $table->string('reportname',250)->nullable();
             $table->string('reportroute',250)->nullable();
             $table->string('icon',100)->nullable();
+            $table->char('group_id',2)->nullable();
+            $table->string('groupname',100)->nullable();
             $table->timestamps();
         });
     }

@@ -573,7 +573,7 @@
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0">{{$businessplans->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:32px">{{$businessplans->count()}}</h1>
                         </div>
                         <div>
                           <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนโครงการ</a>  
@@ -588,7 +588,7 @@
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:32px">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
                         </div>
                         <div>
                             <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
@@ -602,7 +602,7 @@
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:32px">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
                         </div>
                         <div>  
                             <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
@@ -615,7 +615,7 @@
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',5)->where('business_plan_status_id','<',9)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:32px">{{$businessplans->where('business_plan_status_id','>=',5)->where('business_plan_status_id','<',9)->count()}}</h1>
                         </div>
                         <div> 
                             <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
@@ -628,7 +628,7 @@
                 <div class="card bg-green-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0">{{$businessplans->where('business_plan_status_id','>=',9)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:32px">{{$businessplans->where('business_plan_status_id','>=',9)->count()}}</h1>
                         </div>
                         <div> 
                             <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">โครงการที่ประเมินเสร็จสิ้น</a>
@@ -801,14 +801,14 @@
                                         <div class="row">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9"> 
-                                                <h2><span style="font-weight: bold;color:#00804f;font-size:18px;white-space: nowrap; overflow: "> Management</span></h2>
+                                                <h2><span style="font-weight: bold;color:#da462c;font-size:18px;white-space: nowrap; overflow: "> Management</span></h2>
                                                 <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-3">
                                         {{-- <h6 style="font-weight: bold;color:#00804f">Management</h6> --}}
                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar_management"></span></h5>
-                                        <h4 style="font-weight: bold;color:#00804f;font-size:28px"><span id="gradepillar_management"></span></h4>
+                                        <h4 style="font-weight: bold;color:#da462c;font-size:28px"><span id="gradepillar_management"></span></h4>
                                        
                                     </div>
                                 </div>
@@ -819,14 +819,14 @@
                                         <div class="row">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9"> 
-                                                <h2><span style="font-weight: bold;color:#002980;font-size:18px;white-space: nowrap; overflow: "> Technology</span></h2>
+                                                <h2><span style="font-weight: bold;color:#ff9618;font-size:18px;white-space: nowrap; overflow: "> Technology</span></h2>
                                                 <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-3">
                                         {{-- <h6 class="color-02" style="font-weight: bold;color:#002980">Technology</h6> --}}
                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar_tech"></span></h5>
-                                        <h4 style="font-weight: bold;color:#002980;font-size:28px"><span id="gradepillar_tech"></span></h4>
+                                        <h4 style="font-weight: bold;color:#ff9618;font-size:28px"><span id="gradepillar_tech"></span></h4>
                                        
                                     </div>
                                 </div>
@@ -838,14 +838,14 @@
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9"> 
                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
-                                            <h2><span style="font-weight: bold;color:#cc6301;font-size:18px;white-space: nowrap; overflow: "> Marketability</span></h2>
+                                            <h2><span style="font-weight: bold;color:#ffed44;font-size:18px;white-space: nowrap; overflow: "> Marketability</span></h2>
                                             <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar_marketability"></span></h5>
-                                    <h4 style="font-weight: bold;color:#cc6301;font-size:28px"><span id="gradepillar_marketability"></span></h4>
+                                    <h4 style="font-weight: bold;color:#ffed44;font-size:28px"><span id="gradepillar_marketability"></span></h4>
                                    
                                 </div>
                             </div>
@@ -855,14 +855,14 @@
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9"> 
-                                            <h2><span style="font-weight: bold;color:#002980;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
+                                            <h2><span style="font-weight: bold;color:#20ae51;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
                                             <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar_bp"></span></h5>
-                                    <h4 style="font-weight: bold;color:#34d477;font-size:28px"><span id="gradepillar_bp"></span></h4>
+                                    <h4 style="font-weight: bold;color:#20ae51;font-size:28px"><span id="gradepillar_bp"></span></h4>
                                    
                                 </div>
                             </div>
@@ -1073,7 +1073,7 @@
                                             @endphp
                                             <tr> 
                                                 <td hidden>{{$fulltbp->minitbp->updated_at}}</td>
-                                                <td style="width:1%;white-space: nowrap">
+                                                <td style="white-space: nowrap">
                                                     @php
                                                         $cogcolor = 'text-info';
                                                         $latetext = '';
@@ -1101,22 +1101,22 @@
                                                             @endif
                                                     @endif     
                                                 </td>   
-                                                <td style="white-space: nowrap;text-align:center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
-                                                <td style="white-space: nowrap;text-align:center">
+                                                <td style="width:1%;white-space: nowrap;text-align: center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
+                                                <td style="width:1%;white-space: nowrap;text-align: center">
                                                     @if (!Empty($fulltbp->brieftdate))
                                                          {{$fulltbp->brieftdateth}}
                                                         @else
                                                          {{$fulltbp->briefingdate}} 
                                                     @endif 
                                                 </td>  
-                                                <td style="white-space: nowrap;text-align:center">
+                                                <td style="width:1%;white-space: nowrap;text-align: center">
                                                     @if (!Empty($fulltbp->fielddate))
                                                         {{$fulltbp->fielddateth}}
                                                         @else
                                                         {{$fulltbp->assessmentdate}}
                                                     @endif
                                                       </td>  
-                                                <td style="white-space: nowrap;text-align:center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                     @if (!Empty($fulltbp->scoringdate))
                                                             {{$fulltbp->scoringdateth}}
                                                         @else
@@ -1124,7 +1124,7 @@
                                                     @endif
                                                 </td>  
                                                 @if (Auth::user()->user_type_id < 5 && $count > 0)
-                                                    <td style="white-space: nowrap;text-align: center"> 
+                                                    <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                         @if (!Empty($check))
                                                             @if ($fulltbp->expertassignment->accepted == 0)
                                                                     <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
@@ -1136,7 +1136,7 @@
                                                     </td> 
                                                 @endif
                                             
-                                                <td style="white-space: nowrap;text-align: center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                     @if ($fulltbp->status == 3)
                                                             <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                         @else
@@ -1196,7 +1196,7 @@
                                             @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
                                                 <tr>  
                                                     <td hidden >{{$fulltbp->updated_at}}</td>  
-                                                    <td style="width:1%;white-space: nowrap;"> 
+                                                    <td style="white-space: nowrap;"> 
                                                         @php
                                                             $cogcolor = 'text-info';
                                                             $latetext = '';
@@ -1209,7 +1209,7 @@
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!} </a>  
                                                     </td>  
-                                                    <td style="white-space: nowrap;text-align: center">    
+                                                    <td style="width:1%;white-space: nowrap;text-align:center">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                                 {{-- <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span> --}}
                                                                 <a  href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}"><span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span></a>
@@ -1236,7 +1236,7 @@
                                                                 @endif       
                                                         @endif
                                                     </td>
-                                                    <td style="white-space: nowrap;text-align: center"> 
+                                                    <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($fulltbp->expertassignments->count() > 0)
                                                         {{-- {{$fulltbp->expertassignments->where('expert_assignment_status_id',1)->count()}} --}}
                                                                 {{-- @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
@@ -1304,7 +1304,7 @@
                                                             
                                                         @endif
                                                     </td>  
-                                                    <td style="white-space: nowrap;text-align: center"> 
+                                                    <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if (!Empty($fulltbp->ev))
                                                             @php
                                                                 $evstatus = 'ผ่านการอนุมัติ';
@@ -1377,7 +1377,7 @@
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                         @endif
                                                     </td> 
-                                                    <td style="white-space: nowrap;text-align: center"> 
+                                                    <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ( $fulltbp->bol->count() != 0)
                                                                 <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" >
                                                                     <span class="badge badge-flat border-success text-success-600" style="text-align: center">เอกสาร BOL</span>
@@ -1395,7 +1395,7 @@
                                                                 @endif
                                                         @endif
                                                     </td>  
-                                                    <td style="white-space: nowrap;text-align: center">
+                                                    <td style="width:1%;white-space: nowrap;text-align:center">
                                                         @if (!Empty($fulltbp->canceldate))
                                                             <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
                                                         @else
@@ -1510,8 +1510,8 @@
                                         <tr class="bg-info">
                                             <th hidden>date</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
-                                            <th style="text-align: center">คะแนน</th>
-                                            <th style="text-align: center">เกรด</th>     
+                                            <th style="width:1%;white-space: nowrap;text-align: center">คะแนน</th>
+                                            <th style="width:1%;white-space: nowrap;text-align: center">เกรด</th>     
                                             <th style="width:1%;white-space: nowrap;text-align: center">รายงานผล</th>    
                                             <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผล</th> 
                                             <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผลทางจดหมาย</th>  
@@ -1524,10 +1524,10 @@
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                     <tr>   
                                                         <td hidden>{{$fulltbp->updated_at}}</td> 
-                                                        <td style="width:1%;white-space: nowrap"> {{$fulltbp->minitbp->project}} </td> 
-                                                        <td style="text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
-                                                        <td style="text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
-                                                        <td style="white-space: nowrap;text-align: center"> 
+                                                        <td style="white-space: nowrap"> {{$fulltbp->minitbp->project}} </td> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                             @if(@$fulltbp->projectstatustransaction(8)->status != 2)
                                                                 <a href="{{route('dashboard.admin.evaluationresult.edit',['id' => $fulltbp->evaluationresult->id])}}" class="btn btn-sm bg-info">เขียนบทวิเคราะห์</a>
                                                             @endif  
@@ -1551,7 +1551,7 @@
                                                                 </div>
                                                             </div>
                                                         </td> 
-                                                        <td style="white-space: nowrap;text-align: center"> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id >=9)
                                                                 <span class="badge badge-flat border-success text-success-600">แจ้งผลแล้ว</span>
                                                             @else
@@ -1561,7 +1561,7 @@
                                                             @endif
 
                                                         </td>
-                                                        <td style="white-space: nowrap;text-align: center">
+                                                        <td style="width:1%;white-space: nowrap;text-align: center">
                                                             @if (!Empty($fulltbp->projectstatustransaction(7)))
                                                                     @if ($fulltbp->projectstatustransaction(7)->status == 2)  
                                                                             <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
@@ -1584,7 +1584,7 @@
                                                                     <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                             @endif
                                                         </td>
-                                                        <td style="white-space: nowrap;text-align: center"> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                             @if (!Empty($fulltbp->projectstatustransaction(8)))
                                                                     @if ($fulltbp->projectstatustransaction(8)->status == 2)
                                                                             <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
@@ -1937,12 +1937,72 @@
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
 
 <script>
-      AOS.init();
+    // AOS.init();
     var route = {
         url: "{{ url('/') }}",
         token: $('meta[name="csrf-token"]').attr('content'),
         branchid: "{{Auth::user()->branch_id}}"
     };
+
+
+        // define container
+    var redips = {};
+    
+    // append scroll parameter to URL or return scroll value
+    redips.scroll = function (url) {
+        let scroll, q;
+        // DOM compliant
+        if (document.body && document.body.scrollTop) {
+            scroll = document.body.scrollTop;
+        }
+        // old - Netscape compliant
+        else if (typeof (window.pageYOffset) === 'number') {
+            scroll = window.pageYOffset;
+        }
+        // very very old - IE6 standards compliant mode
+        else if (document.documentElement && document.documentElement.scrollTop) {
+            scroll = document.documentElement.scrollTop;
+        }
+        // when vertical scroll bar is on the top
+        else {
+            scroll = 0;
+        }
+        // if input parameter does not exist then return scroll value
+        if (url === undefined) {
+            return scroll;
+        }
+        // else append scroll parameter to URL
+        else {
+            // set "?" or "&" before scroll parameter
+            q = url.indexOf('?') === -1 ? '?' : '&';
+            // load page with scroll position parameter
+            window.location.href = url + q + 'scroll=' + scroll;
+        }
+    };
+    
+    // set scroll position if URL contains scroll=nnn parameter
+    redips.setScrollOnLoad = function () {
+        // get query string parameter with "?"
+        let search = window.location.search,
+            matches;
+        // if query string exists
+        if (search) {
+            // find scroll parameter in query string
+            matches = /scroll=(\d+)/.exec(search);
+            // jump to scroll position if scroll parameter exists
+            if (matches) {
+                window.scrollTo(0, matches[1]);
+            }
+        }
+    };
+    
+    // add onload event listener
+    if (window.addEventListener) {
+        window.addEventListener('load', redips.setScrollOnLoad, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onload', redips.setScrollOnLoad);
+    }
 
     var countitemtable =  "{{$fulltbps->count()}}";
         if (countitemtable >= 1) {

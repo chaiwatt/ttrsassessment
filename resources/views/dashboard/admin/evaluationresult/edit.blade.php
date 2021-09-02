@@ -82,7 +82,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>ตำแหน่ง<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactposition" id="contactposition" value="{{$evaluationresult->contactposition ?? $user->position}}"  placeholder="ตำแหน่ง" class="form-control form-control-lg required">
+                                            <input type="text" name="contactposition" id="contactposition" value="{{$evaluationresult->contactposition ?? $user->expertposition}}"  placeholder="ตำแหน่ง" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -127,6 +127,12 @@
                                                     <option value="{{$evaluationmonth->id}}" @if ($evaluationmonth->id == $evaluationresult->evaluation_month_id) selected @endif> {{$evaluationmonth->name}} </option>
                                                 @endforeach   
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>ปีในจดหมาย<span class="text-danger">*</span></label>
+                                            <input type="text" name="evaluationyear" id="evaluationyear" value="{{$evaluationresult->evaluation_year ?? (date('Y')+543)}}"  placeholder="ปีในจดหมาย" class="form-control form-control-lg required" >
                                         </div>
                                     </div>
                                 </div>

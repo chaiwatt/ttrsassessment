@@ -99,7 +99,8 @@ class DashboardAdminEvaluationResultController extends Controller
             'marketability' => $request->marketability,
             'businessprospect' => $request->businessprospect,
             'evaluation_day_id' => $request->evaluationday,
-            'evaluation_month_id' => $request->evaluationmonth
+            'evaluation_month_id' => $request->evaluationmonth,
+            'evaluation_year' => $request->evaluationyear
         ]);
         $fulltbp = FullTbp::find(EvaluationResult::find($id)->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
@@ -190,7 +191,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('headercode',ThaiNumericConverter::toThaiNumeric($evaluationresult->headercode));
         $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
         $wordtemplate->setValue('_month',$evaluationresult->month->name);
-        $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric(DateConversion::thaiYearNow()));
+        $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_year));
         $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
         $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
         $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);

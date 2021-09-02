@@ -2,8 +2,42 @@
 @section('pageCss')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
 
+
+<style>
+
+.pdfobject-container { 
+        height: 600px; 
+        width: 100%;
+        border: 1rem solid rgba(0,0,0,.1); 
+    }
+</style>
 @stop
 @section('content')
+
+
+<div id="modal_view_fulltbp" class="modal fade" style="overflow:hidden;">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;Full TBP</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="example1"></div>
+                    </div>
+                </div>
+            </div>           
+            <div class="modal-footer">
+                <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
     {{-- modal_show_conflict --}}
     <div id="modal_show_conflict" class="modal fade" style="overflow:hidden;">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -85,6 +119,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="form-group">
+                            <button type="button" id="showfulltbp" class="btn bg-warning" data-toggle="modal" >Full TBP <i class="icon-eye ml-2"></i></button>
+                        </div>
                         <input type="text" id="projectname" value="{{$ev->fulltbp->minitbp->project}}" hidden>
                         <input type="text" id="fulltbpid" value="{{$ev->fulltbp->id}}" hidden>
                         <input type="text" id="evid" value="{{$ev->id}}" hidden>
@@ -207,6 +244,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/dashboardadminassessmenthelper.js')}}"></script>
     <script>
         var route = {
@@ -215,5 +253,11 @@
             usertypeid: "{{Auth::user()->user_type_id}}",
             ev: "{{$ev}}"
         };
+
+        $(document).on('click', '#showfulltbp', function(e) {
+            PDFObject.embed("{{asset($ev->fulltbp->attachment)}}", "#example1");
+            $('#modal_view_fulltbp').modal('show');
+        });
+
     </script>
 @stop

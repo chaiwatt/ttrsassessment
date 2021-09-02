@@ -237,7 +237,13 @@
                             </div>
                             
                         </div>
-                        <div id="relateev"></div>
+                        <div class="col-md-12" id="relateev" hidden>
+                            <div class="form-group" style="margin-left: 20px;width:93%">
+                                <select name="similarev" id="similarev" class="form-control form-control-lg form-control-select2" >
+                                    <option value="0" >==EV ที่คล้ายกัน==</option>
+                                </select> 
+                            </div>
+                        </div>
                     </div>
                 </div>           
                 {{-- <div class="modal-footer">
@@ -311,7 +317,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal" disabled><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
+                    <button id="btn_modal_exisingev" class="btn bg-primary" data-dismiss="modal" ><i class="icon-copy3 font-size-base mr-1"></i> คัดลอก</button>
                 </div>
             </div>
         </div>

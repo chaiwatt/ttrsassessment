@@ -31,6 +31,7 @@ class CreateEvaluationResultsTable extends Migration
             $table->longText('businessprospect')->nullable();
             $table->unsignedBigInteger('evaluation_day_id')->nullable();
             $table->unsignedBigInteger('evaluation_month_id')->nullable();
+            $table->char('evaluation_year',4)->nullable();
             $table->timestamps();
         });
     }

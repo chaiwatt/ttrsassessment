@@ -1441,31 +1441,31 @@
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>จำนวนบุคลากรทั้งหมด</label>
-																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbpemployee->department_qty}}" class="form-control form-control-lg" readonly >
+																	<input type="number" name ="department_qty" id ="department_qty" value="{{$fulltbp->minitbp->businessplan->company->department_qty}}" class="form-control form-control-lg" readonly >
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายบริหาร</label>
-																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbpemployee->department1_qty}}" class="form-control form-control-lg" readonly>
+																	<input type="number" name ="department1_qty"  id ="department1_qty" value="{{$fulltbp->minitbp->businessplan->company->department1_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายวิจัยและพัฒนา</label>
-																	<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbpemployee->department2_qty}}" class="form-control form-control-lg" readonly>
+																	<input type="number" name ="department2_qty" id ="department2_qty" value="{{$fulltbp->minitbp->businessplan->company->department2_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายผลิต/วิศวกรรม</label>
-																	<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbpemployee->department3_qty}}" class="form-control form-control-lg" readonly>
+																	<input type="number" name ="department3_qty" id ="department3_qty" value="{{$fulltbp->minitbp->businessplan->company->department3_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">
 																<div class="form-group">
 																	<label>ฝ่ายการตลาด</label>
-																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbpemployee->department4_qty}}" class="form-control form-control-lg" readonly>
+																	<input type="number" name ="department4_qty" id ="department4_qty" value="{{$fulltbp->minitbp->businessplan->company->department4_qty}}" class="form-control form-control-lg" readonly>
 																</div>
 															</div>
 															<div class="col-md-3">

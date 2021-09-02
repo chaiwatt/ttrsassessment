@@ -1409,7 +1409,7 @@ th {
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
-								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg stringformat100"></textarea>
+								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg stringformat200"></textarea>
 								<span id="assetspecificationedit_error" class="form-text text-warning "  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 							</div>
 						</div>
@@ -1843,37 +1843,37 @@ th {
 																<div class="col-md-12">
 																	<div class="form-group">
 																		{{-- <label>จำนวนบุคลากรทั้งหมด</label><span class="text-danger">*</span> --}}
-																		<input type="text" name ="department_qty" id ="department_qty" value="{{intval($fulltbpemployee->department_qty)}}" class="form-control form-control-lg numeralformat4" required >
+																		<input type="text" name ="department_qty" id ="department_qty" value="{{intval($fulltbp->minitbp->businessplan->company->department_qty)}}" class="form-control form-control-lg numeralformat4" required >
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
 																		<label>ฝ่ายบริหาร</label><span class="text-danger">*</span>
-																		<input type="text" name ="department1_qty"  id ="department1_qty" value="{{intval($fulltbpemployee->department1_qty)}}" class="form-control form-control-lg numeralformat4" required>
+																		<input type="text" name ="department1_qty"  id ="department1_qty" value="{{intval($fulltbp->minitbp->businessplan->company->department1_qty)}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
 																		<label>ฝ่ายวิจัยและพัฒนา</label><span class="text-danger">*</span>
-																		<input type="text" name ="department2_qty" id ="department2_qty" value="{{intval($fulltbpemployee->department2_qty)}}" class="form-control form-control-lg numeralformat4" required>
+																		<input type="text" name ="department2_qty" id ="department2_qty" value="{{intval($fulltbp->minitbp->businessplan->company->department2_qty)}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
 																		<label>ฝ่ายผลิต/วิศวกรรม</label><span class="text-danger">*</span>
-																		<input type="text" name ="department3_qty" id ="department3_qty" value="{{intval($fulltbpemployee->department3_qty)}}" class="form-control form-control-lg numeralformat4" required>
+																		<input type="text" name ="department3_qty" id ="department3_qty" value="{{intval($fulltbp->minitbp->businessplan->company->department3_qty)}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
 																		<label>ฝ่ายการตลาด</label><span class="text-danger">*</span>
-																		<input type="text" name ="department4_qty" id ="department4_qty" value="{{intval($fulltbpemployee->department4_qty)}}" class="form-control form-control-lg numeralformat4" required>
+																		<input type="text" name ="department4_qty" id ="department4_qty" value="{{intval($fulltbp->minitbp->businessplan->company->department4_qty)}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 																<div class="col-md-3">
 																	<div class="form-group">
 																		<label>พนักงานทั่วไป</label><span class="text-danger">*</span>
-																		<input type="text" name ="department5_qty" id ="department5_qty" value="{{intval($fulltbpemployee->department5_qty)}}" class="form-control form-control-lg numeralformat4" required>
+																		<input type="text" name ="department5_qty" id ="department5_qty" value="{{intval($fulltbp->minitbp->businessplan->company->department5_qty)}}" class="form-control form-control-lg numeralformat4" required>
 																	</div>
 																</div>
 															</div>

@@ -8,6 +8,10 @@ use Carbon\Carbon;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Helper\Message;
+use App\Helper\EmailBox;
+use App\Model\MessageBox;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\CalendarType;
 use App\Model\ExpertDetail;
@@ -15,7 +19,10 @@ use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
 use Illuminate\Http\Request;
+use App\Helper\DateConversion;
 use App\Model\ExpertAssignment;
+use App\Model\ProjectAssignment;
+use App\Model\NotificationBubble;
 use App\Model\CalendarAttachement;
 use App\Http\Controllers\Controller;
 use App\Model\EventCalendarAttendee;
@@ -139,6 +146,11 @@ class CalendarController extends Controller
         }else if($bussinesstype == 4){
             $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
+        $leader = 0;
+        $_leader = ProjectAssignment::where('full_tbp_id',$fulltbp->id)->first()->leader_id;
+        if(Auth::user()->id == $_leader){
+            $leader = 1;
+        }
 
         return response()->json(array(
             "eventcalendar" => $eventcalendar,
@@ -146,7 +158,8 @@ class CalendarController extends Controller
             "eventcalendarattendeestatuses" => $eventcalendarattendeestatuses,
             "attendeecalendar" => $attendeecalendar,
             "calendarattachments" => $calendarattachments,
-            "fullcompanyname" => $fullcompanyname
+            "fullcompanyname" => $fullcompanyname,
+            "leader" => $leader
         ));
     }
 
@@ -175,6 +188,82 @@ class CalendarController extends Controller
         }else{
             return null;
         } 
+    }
+
+    public function JoinEvent(Request $request){
+        $auth = Auth::user();
+        $eventcalendarattendee = EventCalendarAttendee::where('event_calendar_id',$request->id)->where('id',$request->userid)->first();
+        $eventcalendar = EventCalendar::find($eventcalendarattendee->event_calendar_id);
+        $calendartype = CalendarType::find($eventcalendar->calendar_type_id);
+        $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+  
+        $company_name = (!Empty($company->name))?$company->name:'';
+        $bussinesstype = $company->business_type_id;
+  
+        $fullcompanyname = ' ' . $company_name;
+        if($bussinesstype == 1){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+        }else if($bussinesstype == 2){
+            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 3){
+            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+        }else if($bussinesstype == 4){
+            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        }
+
+        $messageheader = "" ;
+        $logname = "";
+        if ($eventcalendar->calendar_type_id == 1) {
+          $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project .$fullcompanyname;
+        }
+        else if ($eventcalendar->calendar_type_id == 2){
+           $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project .$fullcompanyname;
+
+         }else if($eventcalendar->calendar_type_id == 3){
+          $messageheader = "ประชุมและสรุปผลการประเมิน และลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
+         }
+
+        $_user = User::find($eventcalendarattendee->user_id);
+        $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader . " (เพิ่มโดย Leader)",'โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
+        '<br><br><strong>&nbsp;วันที่:</strong> '.$eventcalendar->eventdate.
+        '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
+        '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$eventcalendar->summary.
+        '</p><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place,$auth->id,$_user->id);
+
+        EmailBox::send($_user->email,'','TTRS: (แก้ไข) นัด'.$messageheader . " (เพิ่มโดย Leader)",'เรียน ผู้เชี่ยวชาญ <br><br>โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
+        '<br><br><strong>&nbsp;วันที่:</strong> '.$eventcalendar->eventdate.
+        '<br><strong>&nbsp;เวลา:</strong> '.$eventcalendar->eventtimestart. ' - ' . $eventcalendar->eventtimeend .
+        '<br><strong>&nbsp;รายละเอียด:</strong><p>'.$eventcalendar->summary.
+        '</p><strong>&nbsp;สถานที่:</strong> '.$eventcalendar->place.
+        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $auth->id;
+        $alertmessage->target_user_id = $_user->id;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' '.$calendartype->name. ' (แก้ไข) สำหรับโครงการ'.$minitbp->project.' ' ;
+        $alertmessage->save();
+
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
+  
+        $notificationbubble = new NotificationBubble();
+        $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+        $notificationbubble->notification_category_id = 2;
+        $notificationbubble->notification_sub_category_id = 8;
+        $notificationbubble->user_id = $auth->id;
+        $notificationbubble->target_user_id = $_user->id;
+        $notificationbubble->save();
+
+        EventCalendarAttendee::where('event_calendar_id',$request->id)->where('id',$request->userid)->first()->update([
+                    'joinevent' => '2',
+                    'color' => '#088A08',
+                    'rejectreason' => ''
+                ]);
     }
 
     public function AddAttachment(Request $request){

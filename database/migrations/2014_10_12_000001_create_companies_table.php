@@ -39,6 +39,12 @@ class CreateCompaniesTable extends Migration
             $table->string('organizeimg',250)->nullable();
             $table->longText('companyhistory')->nullable();
             $table->char('saveprofile',1)->default(0);
+            $table->char('department_qty',5)->default(0);
+            $table->char('department1_qty',5)->default(0);
+            $table->char('department2_qty',5)->default(0);
+            $table->char('department3_qty',5)->default(0);
+            $table->char('department4_qty',5)->default(0);
+            $table->char('department5_qty',5)->default(0);
             $table->timestamps();
         });
     }

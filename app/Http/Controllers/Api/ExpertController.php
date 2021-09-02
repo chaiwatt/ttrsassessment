@@ -263,8 +263,8 @@ class ExpertController extends Controller
        $check = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted',1)->get();
        if($check->count() != 0){
 
-        $_expertassignments = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted',2)->get();
-        // dd($_expertassignments);
+        $_expertassignments = ExpertAssignment::where('full_tbp_id',$request->fulltbpid)->where('accepted','!=',1)->get();
+
         foreach ($_expertassignments as $key => $_expertassignment) {
             $expertrejectassignment = new ExpertRejectAssignment();
             $expertrejectassignment->full_tbp_id = $_expertassignment->full_tbp_id;

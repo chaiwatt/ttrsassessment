@@ -110,7 +110,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EvsTableSeeder::class);
         $this->call(CriteriaTransactionsTableSeeder::class);
         $this->call(CheckListGradingsTableSeeder::class);
-        $this->call(PillaIndexWeigthsTableSeeder::class);
+        // $this->call(PillaIndexWeigthsTableSeeder::class);
         $this->call(HeaderTextsTableSeeder::class);
         $this->call(HomepageIndustryGroupTextsSeeder::class);
         $this->call(DirectMenu2sTableSeeder::class);

@@ -283,7 +283,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1 acceptevent' >เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent' data-id=".$_user->id.">ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." class='btn btn-sm bg-success mr-1 acceptevent' >เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." class='btn btn-sm bg-warning rejectevent' data-id=".$_user->id.">ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
@@ -315,7 +315,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
   
             $alertmessage = new AlertMessage();
@@ -408,7 +408,7 @@ class DashboardAdminCalendarController extends Controller
             '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
             '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers).
             $attachmentfiles.
-            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." type='button' class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $request->eventcalendarid])." class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $request->eventcalendarid])." class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
             ,Auth::user()->id,$_user->id);
           
             $alertmessage = new AlertMessage();
@@ -512,9 +512,6 @@ class DashboardAdminCalendarController extends Controller
         $comming_array[] = $_user->id;
     }
 
-
-   
-
     $removeguest_array = EventCalendarAttendee::where('event_calendar_id',$request->id)->whereNotIn('user_id',$comming_array)->pluck('user_id')->toArray();
     EventCalendarAttendee::where('event_calendar_id',$request->id)->whereNotIn('user_id',$comming_array)->delete();
     $existing_array = EventCalendarAttendee::where('event_calendar_id',$request->id)->pluck('user_id')->toArray();
@@ -558,6 +555,24 @@ class DashboardAdminCalendarController extends Controller
 
 
     $fulltbp = FullTbp::find(EventCalendar::find($id)->full_tbp_id);
+    $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+    $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+    $company = Company::find($businessplan->company_id);
+
+    $company_name = (!Empty($company->name))?$company->name:'';
+    $bussinesstype = $company->business_type_id;
+
+    $fullcompanyname = ' ' . $company_name;
+    if($bussinesstype == 1){
+        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+    }else if($bussinesstype == 2){
+        $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+    }else if($bussinesstype == 3){
+        $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+    }else if($bussinesstype == 4){
+        $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+    }
+
 
     if ($request->calendartype == 1) {
       FullTbp::find($fulltbp->id)->update([
@@ -600,14 +615,14 @@ class DashboardAdminCalendarController extends Controller
       $attachmentfiles = '<br><strong>รายการเอกสารแนบ:</strong>' . $html . '</ul>';
     }
 
-    $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+    $messageheader = "ประชุมและลงคะแนนการประเมิน โครงการ" . $minitbp->project . $fullcompanyname;
     $logname = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน";
     if ($request->calendartype == 1) {
-      $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+      $messageheader = "ประชุม (briefing) ก่อนการลงพื้นที่ประเมิน โครงการ" . $minitbp->project . $fullcompanyname;
     }
     else if ($request->calendartype == 2){
       $logname = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ";
-       $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project . " บริษัท" . $company->name;
+       $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project .$fullcompanyname;
      }
 
 
@@ -619,7 +634,7 @@ class DashboardAdminCalendarController extends Controller
     '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
     .$attachmentfiles.
     '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-// return $updateguest_array;
+
     foreach($updateguest_array as $user){
         $_user = User::find($user);
         $messagebox = Message::sendMessage('(แก้ไข) นัด'.$messageheader,'(แก้ไข) โปรดเข้าร่วม'. $messageheader. ' มีรายละเอียด ดังนี้' .
@@ -629,7 +644,7 @@ class DashboardAdminCalendarController extends Controller
         '</p><strong>&nbsp;สถานที่:</strong> '.$request->place.
         '<br><strong>&nbsp;ผู้เข้าร่วม:</strong> '.implode(", ", $joinusers)
         .$attachmentfiles.
-        "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $id])." type='button' class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $id])." type='button' class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
+        "<div class='mt-2 mb-1'><a href=".route('dashboard.admin.calendar.joinevent',['id' => $id])." class='btn btn-sm bg-success mr-1 acceptevent'>เข้าร่วม</a><a href=".route('dashboard.admin.calendar.rejectevent',['id' => $id])." class='btn btn-sm bg-warning rejectevent'>ไม่เข้าร่วม</a></div>"
         
         ,Auth::user()->id,$_user->id);
 
@@ -651,6 +666,41 @@ class DashboardAdminCalendarController extends Controller
         $notificationbubble->user_id = $auth->id;
         $notificationbubble->target_user_id = $_user->id;
         $notificationbubble->save();
+
+        EventCalendarAttendee::where('event_calendar_id',$id)->where('user_id',$_user->id)->first()->update([
+          'joinevent' => 1,
+          'color' => '#cc6699'
+        ]);
+
+ 
+
+        
+
+    }
+
+    if($request->calendartype == 2){
+      $messagebox =  Message::sendMessage('นัดหมายการประเมิน ณ สถานประกอบการ' , 'แจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project. ' ณ สถานประกอบการ มีรายละเอียด ดังนี้
+      <br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+      '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+      '<br><strong>&nbsp;สถานที่:</strong> '.$request->place,$auth->id,$company->user_id);
+
+      $alertmessage = new AlertMessage();
+      $alertmessage->user_id = $auth->id;
+      $alertmessage->target_user_id = $company->user_id;
+      $alertmessage->messagebox_id = $messagebox->id;
+      $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' นัดหมายเข้าประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project;
+      $alertmessage->save();
+
+      MessageBox::find($messagebox->id)->update([
+        'alertmessage_id' => $alertmessage->id
+      ]);
+
+      EmailBox::send(User::find($company->user_id)->email,'','TTRS: (แก้ไข) นัดหมายการประเมิน ณ สถานประกอบการ โครงการ'.$minitbp->project,'เรียน ผู้ขอรับการประเมิน '.$fullcompanyname.'<br><br> ตามที่ท่านได้แจ้งความประสงค์เข้ารับบริการประเมินศักยภาพผู้ประกอบการโดย TTRS Model บัดนี้ สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.) โดยศูนย์สนับสนุนและให้บริการประเมินจัดอันดับเทคโนโลยีของประเทศบริการประเมินจัดอันดับเทคโนโลยีของประเทศ (TTRS) ขอแจ้งนัดหมายการประเมิน โครงการ'.$minitbp->project.' ณ สถานประกอบการของท่าน ตามรายละเอียด ดังนี้' .
+      '<br><br><strong>&nbsp;วันที่:</strong> '.$request->eventdate.
+      '<br><strong>&nbsp;เวลา:</strong> '.$request->eventtimestart. ' - ' . $request->eventtimeend .
+      '<br><strong>&nbsp;สถานที่:</strong> '.$request->place.
+      '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+
     }
 
     $mails = array();

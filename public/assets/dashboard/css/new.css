@@ -151,14 +151,14 @@ h4{
   
   .chart-skills li:nth-child(1) {
     z-index: 4;
-    border-color: rgb(52, 212, 119);
+    border-color: rgb(32, 174, 81);
     transform: rotate(0deg);
   }
   
   
   .chart-skills span {
     position: absolute;
-    font-size: .85rem;
+    font-size: 1.1rem;
     backface-visibility: hidden;
     animation: fade-in .4s linear forwards;
   }
@@ -264,7 +264,7 @@ h4{
   
   .chart-skills2 li:nth-child(1) {
     z-index: 4;
-    border-color: rgb(204, 99, 1);
+    border-color: rgb(255, 237, 68);
     /* animation-name: rotate-two; */
     transform: rotate(0deg);
   }
@@ -272,7 +272,7 @@ h4{
   
   .chart-skills2 span {
     position: absolute;
-    font-size: .85rem;
+    font-size: 1.1rem;
     backface-visibility: hidden;
     animation: fade-in .4s linear forwards;
   }
@@ -376,7 +376,7 @@ h4{
   
   .chart-skills3 li:nth-child(1) {
     z-index: 4;
-    border-color: rgb(0, 41, 128);
+    border-color: rgb(255, 150, 24);
     /* animation-name: rotate-three; */
     transform: rotate(0deg);
   }
@@ -384,7 +384,7 @@ h4{
   
   .chart-skills3 span {
     position: absolute;
-    font-size: .85rem;
+    font-size: 1.1rem;
     backface-visibility: hidden;
     animation: fade-in .4s linear forwards;
   }
@@ -488,7 +488,7 @@ h4{
   
   .chart-skills4 li:nth-child(1) {
     z-index: 4;
-    border-color: rgb(0, 128, 79);
+    border-color: rgb(218, 70, 44);
     /* animation-name: rotate-four; */
     transform: rotate(0deg);
     
@@ -496,7 +496,7 @@ h4{
     
   .chart-skills4 span {
     position: absolute;
-    font-size: .85rem;
+    font-size: 1.1rem;
     backface-visibility: hidden;
     animation: fade-in .4s linear forwards;
   }

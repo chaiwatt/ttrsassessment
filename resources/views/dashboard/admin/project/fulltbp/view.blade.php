@@ -1396,27 +1396,27 @@
 												<tbody >    
 													<tr >                                        
 														<td>จำนวนบุคลากรทั้งหมด</td>
-														<td style="text-align:center">{{@$fulltbpemployee->department_qty}}</td>
+														<td style="text-align:center">{{@$fulltbp->minitbp->businessplan->company->department_qty}}</td>
 													</tr>       
 													<tr >                                        
 														<td>ฝ่ายบริหาร</td>
-														<td style="text-align:center">{{@$fulltbpemployee->department1_qty}}</td>
+														<td style="text-align:center">{{@$fulltbp->minitbp->businessplan->company->department1_qty}}</td>
 													</tr>  
 													<tr >                                        
 														<td>ฝ่ายวิจัยและพัฒนา</td>
-														<td style="text-align:center">{{@$fulltbpemployee->department2_qty}}</td>
+														<td style="text-align:center">{{@$fulltbp->minitbp->businessplan->company->department2_qty}}</td>
 													</tr>     
 													<tr >                                        
 														<td>ฝ่ายผลิต/วิศวกรรม</td>
-														<td style="text-align:center">{{@$fulltbpemployee->department3_qty}}</td>
+														<td style="text-align:center">{{@$fulltbp->minitbp->businessplan->company->department3_qty}}</td>
 													</tr>  
 													<tr >                                        
 														<td>ฝ่ายการตลาด</td>
-														<td style="text-align:center">{{@$fulltbpemployee->department4_qty}}</td>
+														<td style="text-align:center">{{@$fulltbp->minitbp->businessplan->company->department4_qty}}</td>
 													</tr> 
 													<tr >                                        
 														<td>พนักงานทั่วไป</td>
-														<td style="text-align:center">{{@$fulltbpemployee->department5_qty}}</td>
+														<td style="text-align:center">{{@$fulltbp->minitbp->businessplan->company->department5_qty}}</td>
 													</tr>              
 												</tbody>
 											</table>
@@ -2326,77 +2326,84 @@
 											
 										{{-- </div> --}}
 									</div>
-									<div class="col-md-12" >			
-										<table class="table table-bordered table-striped" style="width: 100%">
-											<thead>
-												<tr>
-				
+									<div class="col-md-12" >
+										
+										<div style="max-width:1800px">
+											<table class="table-bordered" style="table-layout: auto;width: 100%;display: block;overflow: auto;" id="">
+												<thead>
 													<tr>
-														<th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:500px">รายละเอียดการดำเนินงาน</th> 
-														@foreach ($allyears as $key => $item)
-															@if ($item != 0)
-																<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
-															@endif
-														@endforeach
-														
-													</tr>
-
-													@if ($minmonth != 0 && $maxmonth !=0)
-														<tr >
-															@for ($i = $minmonth; $i <= $maxmonth; $i++)
-																<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">
-																	@php
-																		$full = 12;
-																		if($i%12 == 0){
-																			echo (12);
-																		}else{
-																			echo($i%12);
-																		}
-																	@endphp
-																</th>
-															@endfor
+					
+														<tr>
+															<th rowspan="2" style="width:1%;white-space: nowrap;max-width:350px;padding:5px;padding-right:500px">รายละเอียดการดำเนินงาน</th> 
+															@foreach ($allyears as $key => $item)
+																@if ($item != 0)
+																	<th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
+																@endif
+															@endforeach
+															
 														</tr>
-													@endif
-												</tr>
-											</thead>
-											
-											<tbody >    
-												@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
-													<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-														<td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a>
-															</td> 
-														@php
-															$_count = 1;
-														@endphp
-														@for ($i = $minmonth; $i <= $maxmonth; $i++)
+	
+														@if ($minmonth != 0 && $maxmonth !=0)
+															<tr >
+																@for ($i = $minmonth; $i <= $maxmonth; $i++)
+																	<th class="text-center" style="width: 40px !important;font-size:12px;padding:5px">
+																		@php
+																			$full = 12;
+																			if($i%12 == 0){
+																				echo (12);
+																			}else{
+																				echo($i%12);
+																			}
+																		@endphp
+																	</th>
+																@endfor
+															</tr>
+														@endif
+													</tr>
+												</thead>
+												
+												<tbody >    
+													@foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+														<tr id= "{{$fulltbpprojectplan->id}}" >                                        
+															<td style="max-width:350px"> {{$fulltbpprojectplan->name}} 
+																</td> 
 															@php
-																$color = 'white';
-																$check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
-																if (!Empty($check)) {
-																	$color = 'grey';
-																}
+																$_count = 1;
 															@endphp
+															@for ($i = $minmonth; $i <= $maxmonth; $i++)
 																@php
-																	$m = '';
-																	$_c = $fulltbpprojectplan->planIndex($i);
-																	if(!Empty($_c)){
-																		$m = $_c ;
+																	$color = 'white';
+																	$check = $fulltbpprojectplan->fulltbpprojectplantransaction->where('month',$i)->first();
+																	if (!Empty($check)) {
+																		$color = 'grey';
 																	}
 																@endphp
-															<td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
-																@if ($color == 'grey')
-																{{$m}}
-																@endif
-															</td> 
-															@php
-																$_count++;
-															@endphp
-														@endfor															
-			
-													</tr>
-												@endforeach                            
-											</tbody>
-										</table>
+																	@php
+																		$m = '';
+																		$_c = $fulltbpprojectplan->planIndex($i);
+																		if(!Empty($_c)){
+																			$m = $_c ;
+																		}
+																	@endphp
+																<td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
+																	@if ($color == 'grey')
+																	{{$m}}
+																	@endif
+																</td> 
+																@php
+																	$_count++;
+																@endphp
+															@endfor															
+				
+														</tr>
+													@endforeach                            
+												</tbody>
+											</table>
+										</div>
+
+										{{-- <table class="table table-bordered table-striped" style="width: 100%">
+									
+										</table> --}}
 									</div>
 								</div>
 
@@ -2817,17 +2824,27 @@
 		});
 	});
 
+	var mytype = "{{Auth::user()->user_type_id}}";
+	var myid = "{{Auth::user()->id}}";
+	var btnstatus = false;
+    if (mytype == 4) {
+		if (myid != $("#leaderid").val()) {
+			btnstatus = true;
+		}
+	}
+
 var form = $('.steps-basic').show();
 $('.steps-basic').steps({
     headerTag: 'h6',
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
-    enableFinishButton: false,
+    enableFinishButton: btnstatus,
+	enableKeyNavigation: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> ย้อนกลับ',
         next: 'ต่อไป <i class="icon-arrow-right14 ml-2" />',
-		finish: 'ดำเนินการ <i class="icon-arrow-right14 ml-2" />'
+		finish: 'ดำเนินการต่อ <i class="icon-arrow-right14 ml-2" />'
     },
     onStepChanged:function (event, currentIndex, newIndex) {
 		if(currentIndex == 4){

@@ -29,6 +29,7 @@ var FormWizard = function() {
             headerTag: 'h6',
             bodyTag: 'fieldset',
             transitionEffect: 'fade',
+            enableKeyNavigation: false,
             titleTemplate: '<span class="number">#index#</span> #title#',
             labels: {
                 previous: '<i class="icon-arrow-left13 mr-2" /> Previous',
@@ -68,6 +69,7 @@ var FormWizard = function() {
         $('.steps-state-saving').steps({
             headerTag: 'h6',
             bodyTag: 'fieldset',
+            enableKeyNavigation: false,
             titleTemplate: '<span class="number">#index#</span> #title#',
             labels: {
                 previous: '<i class="icon-arrow-left13 mr-2" /> Previous',
@@ -86,6 +88,7 @@ var FormWizard = function() {
         $('.steps-starting-step').steps({
             headerTag: 'h6',
             bodyTag: 'fieldset',
+            enableKeyNavigation: false,
             titleTemplate: '<span class="number">#index#</span> #title#',
             labels: {
                 previous: '<i class="icon-arrow-left13 mr-2" /> Previous',
@@ -106,6 +109,7 @@ var FormWizard = function() {
             bodyTag: 'fieldset',
             transitionEffect: 'fade',
             enableAllSteps: true,
+            enableKeyNavigation: false,
             titleTemplate: '<span class="number">#index#</span> #title#',
             labels: {
                 previous: '<i class="icon-arrow-left13 mr-2" /> Previous',

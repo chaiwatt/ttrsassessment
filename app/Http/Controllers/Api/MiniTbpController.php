@@ -704,7 +704,7 @@ class MiniTbpController extends Controller
    
         // $mpdf->Output();
          $path = public_path("storage/uploads/");
-         $randname = 'แบบคำขอรับบริการประเมิน_TTRS_' .$minitbp->minitbp_code.'_โครงการ'.$minitbp->project.$company->fullname;
+         $randname = $minitbp->minitbp_code.$company->fullname;
          $mpdf->Output($path . $randname.'.pdf');
         return 'storage/uploads/'.$randname.'.pdf' ;
     }

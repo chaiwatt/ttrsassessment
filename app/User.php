@@ -77,6 +77,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return VerifyExpertStatus::find($this->verify_expert)->name;
     }
+    public function getExpertpositionAttribute()
+    {
+        $officerdetail = OfficerDetail::where('user_id',$this->id)->first();
+        if(!Empty($officerdetail)){
+            return $officerdetail->position;
+        }else{
+            return '';
+        }
+    }
     public function getExpertTypeAttribute()
     {
         if ($this->user_type_id == 3){

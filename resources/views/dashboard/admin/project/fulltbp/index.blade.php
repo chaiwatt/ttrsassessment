@@ -334,7 +334,7 @@
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>  
                                                 <td hidden>{{$fulltbp->updated_at}}</td>   
-                                                <td style="width:1%;white-space: nowrap"> 
+                                                <td style="white-space: nowrap"> 
                                                     @php
                                                         $cogcolor = 'text-info';
                                                         $latetext = '';
@@ -347,7 +347,7 @@
                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                     <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                 </td>  
-                                                <td style="white-space: nowrap;text-align: center">    
+                                                <td style="width:1%;white-space: nowrap;text-align:center">    
                                                     {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id }} --}}
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
 
@@ -377,7 +377,7 @@
                                                             @endif       
                                                     @endif
                                                 </td>
-                                                <td style="white-space: nowrap;text-align: center">
+                                                <td style="width:1%;white-space: nowrap;text-align:center">
                                                     {{-- {{$fulltbp->assignexpert}}  --}}
                                                     @if ($fulltbp->expertassignments->count() > 0)
                                                             @if ($fulltbp->expertassignments->where('expert_assignment_status_id',1)->count() > 0)
@@ -410,7 +410,7 @@
                                                            
                                                     @endif
                                                 </td>  
-                                                <td style="white-space: nowrap;text-align: center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                     {{-- {{$fulltbp->ev->status}} --}}
                                                     @if (!Empty($fulltbp->ev))
                                                         @php
@@ -487,7 +487,7 @@
                                                             <a href="{{route('dashboard.admin.project.fulltbp.viewev',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">ยังไม่ได้เพิ่ม</a>
                                                     @endif
                                                 </td> 
-                                                <td style="white-space: nowrap;text-align: center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                     @if ( $fulltbp->bol->count() != 0)
                                                             <a href="{{route('dashboard.admin.project.fulltbp.bol',['id' => $fulltbp->id])}}" >
                                                                 <span class="badge badge-flat border-success text-success-600">เอกสาร BOL</span>
@@ -504,7 +504,7 @@
                                                             @endif
                                                     @endif
                                                 </td>  
-                                                <td style="white-space: nowrap;text-align: center">
+                                                <td style="width:1%;white-space: nowrap;text-align:center">
                                                     @if (!Empty($fulltbp->canceldate))
                                                         <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
                                                     @else

@@ -123,7 +123,7 @@
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
-                                        <th style="text-align:center">บริษัท</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">Leader</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>
@@ -137,7 +137,7 @@
                                     @if ($projectassignment->businessplan->minitbp->fulltbp->canceldate == null)
                                     <tr>    
                                         <td hidden>{{@$projectassignment->businessplan->minitbp->updated_at}}</td>
-                                        <td style="width:1%;white-space: nowrap"> 
+                                        <td style="white-space: nowrap"> 
                                             @php
                                                 $cogcolor = 'text-info';
                                                 $latetext = '';
@@ -150,7 +150,7 @@
                                             <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="{{$cogcolor}}" target="_blank">{{$projectassignment->businessplan->minitbp->project}} {!!$latetext!!}</a>
                                         </td> 
-                                        <td style="width:1%;white-space: nowrap"> 
+                                        <td style="white-space: nowrap"> 
                                             @php
                                                 $company = $projectassignment->businessplan->company;
                                                 $company_name = (!Empty($company->name))?$company->name:'';
@@ -170,14 +170,17 @@
                                             @endphp
                                             {{$fullcompanyname}}
                                         </td> 
-                                        <td style="white-space: nowrap;text-align:center"> 
+                                        <td style="width:1%;white-space: nowrap;text-align:center"> 
                                             @if (Empty($projectassignment->businessplan->minitbp->jdmessage))
                                                     @if (Auth::user()->user_type_id == 6)
-                                                    <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                        @if ($projectassignment->businessplan->business_plan_status_id == 3 && $projectassignment->leader_id == null)
+                                                            <a data-message="{{$projectassignment->leader_id}}" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" data-toggle="modal" class="btn btn-sm bg-warning jdmessage">เพิ่มความเห็น</a>
+                                                        @endif
+                                                        
                                                     @endif
                                                     
                                                 @else
-                                                    <a data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
+                                                    <a data-message="{{$projectassignment->leader_id}}" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" data-toggle="modal" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                         </td>  
                                         <td style="white-space: nowrap"> 
@@ -186,7 +189,7 @@
                                             @endif
                                         </td>  
 
-                                        <td style="white-space: nowrap;text-align:center">
+                                        <td style="width:1%;white-space: nowrap;text-align:center">
                                             @if ($projectassignment->leader_id == null)
                                                 <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้มอบหมาย</span>
                                                 @else
@@ -194,7 +197,7 @@
                                             @endif
                                         </td>
                                         @if (Auth::user()->user_type_id>=5)
-                                            <td style="white-space: nowrap;text-align:center"> 
+                                            <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                 @if (@$projectassignment->businessplan->minitbp->fulltbp->projectstatustransaction(8)->status != 2)
                                                     @if ($projectassignment->leader_id == null)
                                                             <a href="{{route('dashboard.admin.project.projectassignment.edit',['id' => $projectassignment->id])}}" class="btn btn-sm bg-primary">มอบหมาย</a>
@@ -237,16 +240,29 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        
+        
 
         $(document).on('click', '.jdmessage', function(e) {
             getJdMessage($(this).data('id')).then(data => {
-                $('#messagebody').html(data.jdmessage);
-                $('#minitbpid').val($(this).data('id'));
-                if ($(this).data('statusid') > 9) {
+                console.log(data.jdmessage);
+                $('#messagebody').val('');
+                if(data.jdmessage != null && $(this).data('message') != ''){
+                    $("#messagebody").prop("readonly",true);
                     $("#btn_modal_add_jdmessage").attr("hidden",true);
                 }else{
-                    $("#btn_modal_add_jdmessage").attr("hidden",false);
+                    $("#messagebody").prop("readonly",false);
+                    $("#btn_modal_add_jdmessage").attr("hidden",false); 
                 }
+
+                $('#messagebody').val(data.jdmessage);
+                
+                $('#minitbpid').val($(this).data('id'));
+                // if ($(this).data('statusid') > 9) {
+                //     $("#btn_modal_add_jdmessage").attr("hidden",true);
+                // }else{
+                //     $("#btn_modal_add_jdmessage").attr("hidden",false);
+                // }
                 if(data.jdmessage !=  null){
                     $('#btnname').html("แก้ไข");
                 }

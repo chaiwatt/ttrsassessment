@@ -345,94 +345,97 @@
                     </div>
                 @endif
                 @if (!Empty($projectassignment))
-                    @if (@$businessplan->business_plan_status_id >= 5)
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header header-elements-sm-inline">
-                                    <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการ EV</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr class="bg-info">
-                                                    <th style="width:600px;text-align: center">ชื่อ EV</th> 
-                                                    <th style="text-align: center;white-space: nowrap">เวอร์ชั่น</th> 
-                                                    <th style="width:1%;text-align: center;white-space: nowrap">รายการ EV</th> 
-                                                    @if (Auth::user()->user_type_id >= 5)
-                                                    <th style="width:1%;text-align: center;white-space: nowrap">รายการ Weight</th> 
-                                                    @endif
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody >
-                                                <tr>
-                                                    <td>{{@$fulltbp->ev->name}}</td>  
-                                                    <td style="text-align: center">
-                                                    
-                                                        {{@$fulltbp->ev->version}}
-                                                    </td>    
-                                                    <td style="white-space: nowrap">
-                                                        @if (@$fulltbp->ev->status >= 4)
-                                                            <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายการ EV</a>
-                                                        @else
-                                                        
-                                                        <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
+                    @if (Auth::user()->experttype != "(ภายนอก)")
+                        @if (@$businessplan->business_plan_status_id >= 5)
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header header-elements-sm-inline">
+                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการ EV</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th style="width:600px;text-align: center">ชื่อ EV</th> 
+                                                        <th style="text-align: center;white-space: nowrap">เวอร์ชั่น</th> 
+                                                        <th style="width:1%;text-align: center;white-space: nowrap">รายการ EV</th> 
+                                                        @if (Auth::user()->user_type_id >= 5)
+                                                        <th style="width:1%;text-align: center;white-space: nowrap">รายการ Weight</th> 
                                                         @endif
                                                         
-                                                    
-                                                    </td>  
-                                                    @if (Auth::user()->user_type_id >= 5)
-                                                        <td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody >
+                                                    <tr>
+                                                        <td>{{@$fulltbp->ev->name}}</td>  
+                                                        <td style="text-align: center">
+                                                        
+                                                            {{@$fulltbp->ev->version}}
+                                                        </td>    
+                                                        <td style="white-space: nowrap">
                                                             @if (@$fulltbp->ev->status >= 4)
-                                                                <a href="{{route('dashboard.admin.project.evweight.edit',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายการ Weight</a>
+                                                                <a href="{{route('dashboard.admin.project.fulltbp.editev',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายการ EV</a>
+                                                            @else
+                                                            
+                                                            <span class="badge badge-flat border-pink text-pink-600">อยู่ระหว่างการดำเนินการ</span>
                                                             @endif
-                                                        </td>
-                                                    @endif                                 
-                                                </tr>  
-                                            </tbody>
-                                        </table>
+                                                            
+                                                        
+                                                        </td>  
+                                                        @if (Auth::user()->user_type_id >= 5)
+                                                            <td>
+                                                                @if (@$fulltbp->ev->status >= 4)
+                                                                    <a href="{{route('dashboard.admin.project.evweight.edit',['id' => @$fulltbp->ev->id])}}" class="btn btn-sm bg-info" target="_blank">รายการ Weight</a>
+                                                                @endif
+                                                            </td>
+                                                        @endif                                 
+                                                    </tr>  
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-12" {{$hidden}}>
-                            <div class="card">
-                                <div class="card-header header-elements-sm-inline">
-                                    <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการเอกสาร BOL
-                                    
-                                    @if ($bols->count() == 0)
-                                    <span class="text-pink-600"> (ยังไม่ได้อัปโหลด)</span>
-                                    @endif
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr class="bg-info">
-                                                    <th style="text-align: center">ชื่อเอกสาร</th> 
-                                                    <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th> 
-                                                </tr>
-                                            </thead>
-                                            <tbody >
-                                                @foreach ($bols as $bol)
-                                                <tr>
-                                                    <td>{{@$bol->name}}</td>     
-                                                    <td style="white-space: nowrap">
-                                                        <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                                                    </td>                                   
-                                                </tr>    
-                                                @endforeach
- 
-                                            </tbody>
-                                        </table>
+                            <div class="col-md-12" {{$hidden}}>
+                                <div class="card">
+                                    <div class="card-header header-elements-sm-inline">
+                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการเอกสาร BOL
+                                        
+                                        @if ($bols->count() == 0)
+                                        <span class="text-pink-600"> (ยังไม่ได้อัปโหลด)</span>
+                                        @endif
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr class="bg-info">
+                                                        <th style="text-align: center">ชื่อเอกสาร</th> 
+                                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th> 
+                                                    </tr>
+                                                </thead>
+                                                <tbody >
+                                                    @foreach ($bols as $bol)
+                                                    <tr>
+                                                        <td>{{@$bol->name}}</td>     
+                                                        <td style="white-space: nowrap">
+                                                            <a href="{{asset($bol->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
+                                                        </td>                                   
+                                                    </tr>    
+                                                    @endforeach
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
+                   
                 @endif
             @endif
             @if ($businessplan->business_plan_status_id >=8)

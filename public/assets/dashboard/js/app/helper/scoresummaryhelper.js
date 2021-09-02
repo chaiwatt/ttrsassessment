@@ -655,6 +655,7 @@ $('.step-evweight').steps({
     headerTag: 'h6',
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
+    enableKeyNavigation: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',

@@ -77,9 +77,8 @@ $(document).on('click', '.projectmember', function(e) {
           var hiddenbtn = `-`;
           if (isleader == 0) {
             $("#selectothermember").attr("hidden",true);
-            // $("#thother").attr("hidden",true);
+
           }
-          //console.log(data.iserror);
 
           data.users.forEach(function (user,index) {
               html += `<option value="${user['id']}" >${user['name']}  ${user['lastname']}</option>`

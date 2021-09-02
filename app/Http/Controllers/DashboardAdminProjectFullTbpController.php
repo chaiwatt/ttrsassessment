@@ -23,6 +23,7 @@ use App\Model\BusinessPlan;
 use App\Model\BusinessType;
 use App\Model\CompanyBoard;
 use App\Model\EvCommentTab;
+use App\Model\ExpertDetail;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
 use App\Model\UserPosition;
@@ -340,7 +341,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $leader = ProjectAssignment::where('full_tbp_id',$id)->pluck('leader_id')->toArray();
         $coleader = ProjectAssignment::where('full_tbp_id',$id)->pluck('coleader_id')->toArray();
         $expertassignmentarray = array_unique(array_merge($leader,$coleader)); 
-        // $unique_array = array_diff($_experts, $expertassignmentarray);
+
         $unique_array = array_diff($_experts, $leader);
 
         $fulltbp = FullTbp::find($id);
@@ -834,7 +835,12 @@ class DashboardAdminProjectFullTbpController extends Controller
 
         $projectmemberarray = ProjectMember::where('full_tbp_id',$request->id)->pluck('user_id')->toArray();
         $userarray = array_diff($userarray3,$projectmemberarray);
-        $users = User::whereIn('id',$userarray)->get();
+
+        $extexperts = ExpertDetail::where('expert_type_id',2)->pluck('user_id')->toArray();
+
+        $users = User::whereIn('id',$userarray)->whereNotIn('id',$extexperts)->get();
+
+        $extexperts = ExpertDetail::where('expert_type_id',2)->pluck('user_id')->toArray();
 
         $ev = Ev::where('full_tbp_id',$request->id)->first();
         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->get();
@@ -863,7 +869,14 @@ class DashboardAdminProjectFullTbpController extends Controller
 
         $projectmemberarray = ProjectMember::where('full_tbp_id',$request->fulltbpid)->pluck('user_id')->toArray();
         $userarray = array_diff($userarray3,$projectmemberarray);
-        $users = User::whereIn('id',$userarray)->get();
+
+
+        // $users = User::whereIn('id',$userarray)->get();
+
+
+        $extexperts = ExpertDetail::where('expert_type_id',2)->pluck('user_id')->toArray();
+
+        $users = User::whereIn('id',$userarray)->whereNotIn('id',$extexperts)->get();
 
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
         $ev = Ev::where('full_tbp_id',$request->fulltbpid)->first();
@@ -886,7 +899,10 @@ class DashboardAdminProjectFullTbpController extends Controller
         
         $projectmemberarray = ProjectMember::where('full_tbp_id',$request->fulltbpid)->pluck('user_id')->toArray();
         $userarray = array_diff($userarray3,$projectmemberarray);
-        $users = User::whereIn('id',$userarray)->get();
+        // $users = User::whereIn('id',$userarray)->get();
+        $extexperts = ExpertDetail::where('expert_type_id',2)->pluck('user_id')->toArray();
+
+        $users = User::whereIn('id',$userarray)->whereNotIn('id',$extexperts)->get();
         
         $projectmembers = ProjectMember::where('full_tbp_id',$request->fulltbpid)->get();
         $ev = Ev::where('full_tbp_id',$request->fulltbpid)->first();

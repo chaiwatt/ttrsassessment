@@ -17,19 +17,19 @@ class FullTbpGeneralController extends Controller
     public function Edit(Request $request){
         
         $fulltbp = FullTbp::find($request->id);
-        FullTbpEmployee::where('full_tbp_id',$request->id)->first()->update([
+
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+
+        Company::find($businessplan->company_id)->update([
+            'companyhistory' => $request->companyhistory,
+            'business_type_id' => $request->businesstype,
             'department_qty' => $request->department_qty,
             'department1_qty' => $request->department1_qty,
             'department2_qty' => $request->department2_qty,
             'department3_qty' => $request->department3_qty,
             'department4_qty' => $request->department4_qty,
             'department5_qty' => $request->department5_qty
-        ]); 
-        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
-        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-        Company::find($businessplan->company_id)->update([
-            'companyhistory' => $request->companyhistory,
-            'business_type_id' => $request->businesstype
         ]);   
         $check = FullTbpResponsiblePerson::where('full_tbp_id',$request->id)->first();
         if(Empty($check)){

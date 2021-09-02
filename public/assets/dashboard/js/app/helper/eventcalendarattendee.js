@@ -19,4 +19,24 @@ function updateJoinEvent(id,state,rejreason) {
     })
 }
 
-export {updateJoinEvent}
+function joinEvent(id,userid) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${route.url}/api/calendar/joinevent`,
+            type: 'POST',
+            headers: {"X-CSRF-TOKEN":route.token},
+            data: {
+                id : id,
+                userid : userid
+            },
+            success: function(data) {
+            resolve(data)
+            },
+            error: function(error) {
+            reject(error)
+            },
+        })
+    })
+}
+
+export {updateJoinEvent,joinEvent}

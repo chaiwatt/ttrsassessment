@@ -83,10 +83,10 @@
                         <div class="card bg-teal-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0"><span id="showscore">{{ number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent, 2)}}</span></h1>
+                                    <h1 class="font-weight-semibold mb-0" style="font-size: 32px"><span id="showscore">{{ intVal(@$businessplan->minitbp->fulltbp->projectgrade->percent)}}</span></h1>
                                 </div>
                                 <div>
-                                    ผลคะแนนการประเมิน
+                                    คะแนน
                                 </div>
                             </div>
                             <div class="container-fluid">
@@ -98,7 +98,7 @@
                         <div class="card bg-blue-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0"><span id="showgrade">{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}</span></h1>
+                                    <h1 class="font-weight-semibold mb-0" style="font-size: 32px"><span id="showgrade">{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}</span></h1>
                                 </div>
                                 <div>
                                     ระดับเกรดการประเมิน
@@ -992,7 +992,7 @@
                 data: [
                     {
                         //number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent,2)
-                        value: "{{@number_format(@$businessplan->minitbp->fulltbp->projectgrade->percent,2)}}", 
+                        value: "{{@intVal(@$businessplan->minitbp->fulltbp->projectgrade->percent)}}", 
                         // name: "{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}",
                         // fontSize: '18' 
                     }

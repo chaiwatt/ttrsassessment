@@ -245,7 +245,7 @@ function getEv(evid){
         data.criteriatransactions.forEach((criteria,index) => {
                 var comment = '';
                 var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" data-criterianame="${criteria.subpillarindex['name']}" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
-                                <input type="text" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" data-type="score" class="form-control scoring gradescore">
+                                <input type="text" data-subpillarname="${criteria.subpillarindex['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" data-type="score" class="form-control scoring gradescore">
                                     `;
         
                 if(criteria.criteria != null){
@@ -641,6 +641,7 @@ $('.step-evweight').steps({
     headerTag: 'h6',
     bodyTag: 'fieldset',
     transitionEffect: 'fade',
+    enableKeyNavigation: false,
     titleTemplate: '<span class="number">#index#</span> #title#',
     labels: {
         previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
@@ -662,7 +663,21 @@ $('.step-evweight').steps({
             }).then((result) => {
             if (result.value) {
                 var noblank = true;
-                $('.scoring').each(function() {
+
+
+
+
+                var arrerror = [];
+
+                $('.gradescore').each(function() {
+                    if($(this).val() == ''){
+                        arrerror.push($(this).data('subpillarname'));
+                    }
+                });
+
+
+
+                $('.gradescore').each(function() {
                     if($(this).val() == ''){
                         noblank = false;
                         return;
@@ -670,9 +685,15 @@ $('.step-evweight').steps({
                 });
         
                 if (noblank == false){
+                    var errlist ='';
+                    arrerror.forEach(function (err,index) {
+                        console.log(err);
+                        errlist += err + '<br>'
+                    });
+
                     Swal.fire({
                         title: 'ผิดพลาด...',
-                        text: 'กรุณากรอกเกรด/คะแนนให้ครบ!',
+                        html: `กรุณากรอกเกรดให้ครบ! ดังนี้ <br><strong>${errlist} </strong>`,
                     })
                     return;
                 };

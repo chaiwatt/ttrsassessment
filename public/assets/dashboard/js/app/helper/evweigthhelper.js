@@ -8,7 +8,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'center-end',
     showConfirmButton: false,
-    timer: 1000,
+    timer: 2000,
     timerProgressBar: true,
     // didOpen: (toast) => {
     //   toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -442,16 +442,13 @@ function RenderWeightTable(data,evtypeid){
         }
     }
 
-
-
-
    if($('#evstatus').val() >= 4 ){
         commentreadonly =`readonly`;
     }
     if($('#evstatus').val() == 2 || route.refixstatus == 1){
         commentreadonly =``;
     }
-    // console.log(readonly);
+    // console.log(data);
     data.forEach(function (pillaindex,index) {
         var comment = '';
         if(pillaindex.comment){
@@ -472,7 +469,7 @@ function RenderWeightTable(data,evtypeid){
                     </div>
                     <div class="toggle" >
                         <div class="form-group" style="margin-top:5px">
-                            <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
+                            <label><i>ความเห็น</i></label>
                             <input type="text" data-id="${pillaindex.id}" value="${comment}" class="form-control form-control-lg inpscore comment" ${readonly} >
                         </div>
                     </div>
@@ -549,10 +546,10 @@ function RenderExtraTable(data){
             <td> 
             <div class="form-group">
                 <label>${criteria.extracriteria['name']}</label>
-                <input type="text" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${readonly} >
+                <input type="text" data-category="${criteria.extracategory['name']}" data-extracriteria="${criteria.extracriteria['name']}" value="${criteria.weight}" data-id="${criteria.id} "class="form-control form-control-lg inputextraweigth weigthvalue decimalformat" ${readonly} >
                 <div class="toggle">
                     <div class="form-group" style="margin-top:5px">
-                        <label><i>ความเห็น</i> <small><i>(บันทึกอัตโนมัติ)<i/></small></label>
+                        <label><i>ความเห็น</i></label>
                         <input type="text" data-id="${criteria.id}" value="${comment}" class="form-control form-control-lg inpscore extracomment" ${readonly} >
                     </div>
                 </div>
@@ -799,6 +796,7 @@ function updateEvAdminStatus(id,value){
 		headerTag: 'h6',
 		bodyTag: 'fieldset',
 		transitionEffect: 'fade',
+        enableKeyNavigation: false,
 		titleTemplate: '<span class="number">#index#</span> #title#',
 		labels: {
 			previous: '<i class="icon-arrow-left13 mr-2" /> ก่อนหน้า',
@@ -872,14 +870,13 @@ function updateEvAdminStatus(id,value){
 		transitionEffect: 'fade',
 		autoFocus: true,
 		onStepChanged:function (event, currentIndex, newIndex) {
-        console.log(currentIndex);
-        if(currentIndex == 1 && submitbutton == true){
-            $(document).find(".actions ul").append(`
-            <li class='libtn'><button type='button' id='previewweight' class='btn btn-info'> Preview <i class='icon-eye ml-2' /></button></li>  
-        `);
-        }else{
-            $(".actions").find(".libtn").remove();
-        }
+        // if(submitbutton == true){
+        //     $(document).find(".actions ul").append(`
+        //     <li class='libtn'><button type='button' id='previewweight' class='btn btn-info'> Preview <i class='icon-eye ml-2' /></button></li>  
+        // `);
+        // }else{
+        //     $(".actions").find(".libtn").remove();
+        // }
 		return true;
 		},
 		
@@ -942,24 +939,29 @@ function updateEvAdminStatus(id,value){
     
      
      $("#btnOnExcel").on('click', function() {
-        if (!$('#evexporttable').DataTable().data().any() ) {
-            // Swal.fire({
-            //     title: 'ผิดพลาด...',
-            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            // });
+        // if (!$('#evexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "1");
             window.location.reload();
-        }else{
-            $('#evexporttable').DataTable().buttons(0,0).trigger();
-        }
+        // }else{
+        //     $('#evexporttable').DataTable().buttons(0,0).trigger();
+        // }
     
     });
-    $(document).on('click', '#previewweight', function(e) {
+    $(document).on('click', '.preview', function(e) {
         var previewdata = []
+        var previewextradata = []
         $('.inputweigth').each(function(){
             previewdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
-            // console.log($(this).data('pillarname') + ' ' + $(this).data('subpillarname') + ' ' + $(this).data('subpillarindexname') + ' ' + $(this).val());
+            
         });
+
+        $('.inputextraweigth').each(function(){
+            previewextradata.push({"category":  $(this).data('category') , "extracriteria": $(this).data('extracriteria'), "weight": $(this).val()});
+            
+        });
+
+
+
         var html =``;
         previewdata.forEach(function (data,index) {
                 html += `<tr > 
@@ -969,56 +971,58 @@ function updateEvAdminStatus(id,value){
                 <td style="text-align:center"> ${data.weight} </td>                                          
                 </tr>`
             });
-            $("#preview_wrapper_tr").html(html);
+
+
+        if(previewextradata.length > 0){
+            var html1 =``;
+            previewextradata.forEach(function (data,index) {
+                    html1 += `<tr > 
+                    <td> ${data.category} </td>                                            
+                    <td> ${data.extracriteria} </td>    
+                    <td style="text-align:center"> ${data.weight} </td>                                          
+                    </tr>`
+                });
+            $("#extra_preview_wrapper").attr("hidden",false);
+        }else{
+            $("#extra_preview_wrapper").attr("hidden",true);
+        }
+        $("#preview_wrapper_tr").html(html);
+            $("#extra_preview_wrapper_tr").html(html1);
             $('#modal_preview_weight').modal('show');
-            // 
-        
-    //  console.log('');
+  
     
     });
 
     
     $("#btnOnPdf").on('click', function() {
-        if (!$('#evexporttable').DataTable().data().any() ) {
-            // Swal.fire({
-            //     title: 'ผิดพลาด...',
-            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            // });
+        // if (!$('#evexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "2");
             window.location.reload();
-        }else{
-            $('#evexporttable').DataTable().buttons(0,1).trigger();
-        }
+        // }else{
+        //     $('#evexporttable').DataTable().buttons(0,1).trigger();
+        // }
        
     });
     
     $("#btnOnExcelExtra").on('click', function() {
     
-        if (!$('#evextraexporttable').DataTable().data().any() ) {
-            // Swal.fire({
-            //     title: 'ผิดพลาด...',
-            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            // });
+        // if (!$('#evextraexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "3");
             window.location.reload();
-        }else{
-            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
-        }
+        // }else{
+        //     $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+        // }
         
     
     });
     
     $("#btnOnPdfExtra").on('click', function() {
-        if (!$('#evextraexporttable').DataTable().data().any() ) {
-            // Swal.fire({
-            //     title: 'ผิดพลาด...',
-            //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-            // });
+        // if (!$('#evextraexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "4");
             window.location.reload();
-        }else{
-            $('#evextraexporttable').DataTable().buttons(0,1).trigger();
-        }
+        // }else{
+        //     $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+        // }
         
     });
     

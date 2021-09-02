@@ -184,6 +184,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::post('getparticipate','Api\CalendarController@GetParticipate')->name('api.calendar.getparticipate');   
             Route::post('getevent','Api\CalendarController@GetEvent')->name('api.calendar.getevent');  
             Route::post('updatejoinevent','Api\CalendarController@UpdateJoinEvent')->name('api.calendar.updatejoinevent');     
+            Route::post('joinevent','Api\CalendarController@JoinEvent')->name('api.calendar.joinevent');   
             Route::post('addattachment','Api\CalendarController@AddAttachment')->name('api.calendar.addattachment');    
             Route::post('deleteattachment','Api\CalendarController@DeleteAttachment')->name('api.calendar.deleteattachment');
         });

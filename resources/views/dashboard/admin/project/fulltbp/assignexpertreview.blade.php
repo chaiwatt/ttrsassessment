@@ -333,7 +333,7 @@
     
             </div>
         </form>
-        @if ($fulltbp->assignexpert == 2)
+        @if ($fulltbp->assignexpert == 2 && $expertrejectassignmentusers->count() > 0)
         <div class="row">
             <div class="col-md-12">
                 <label for=""><strong>ผู้เชี่ยวชาญที่ปฎิเสธไม่เข้าร่วมโครงการ</strong></label>
@@ -351,16 +351,25 @@
                                 <tbody > 
                                     @foreach ($expertrejectassignmentusers as $user)
                                     <tr>
-                                        <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
+                                        @php
+                                            $rejectreason = $user->expertreject($fulltbp->id,$user->id);
+                                        @endphp
+                                        <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}
+                                        </td>
                                         <td>{{$user->usertype->name}} {{$user->expertType}}</td> 
-                                        <td>{{$user->expertreject($fulltbp->id,$user->id)}}</td> 
+                                        <td>
+                                            
+                                            @if (Empty($rejectreason)) 
+                                                <span class="badge badge-flat border-warning text-warning-600 rounded-0">ไม่ได้ตอบรับ</span>
+                                            @else
+                                                {{$rejectreason}}
+                                            @endif
+                                            </td> 
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-
-                   
+                        </div> 
                 </div>
             </div>
         </div>
