@@ -511,10 +511,11 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbybusinesstype(Request $request){
         $businesstypes = BusinessType::get();
-        $companies = Company::where('business_type_id',1)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        // $companies = Company::where('business_type_id',1)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.projectbybusinesstype')->withBusinesstypes($businesstypes)->withFulltbps($fulltbps);
     }
     public function getprojectbybusinesstype(Request $request){
@@ -540,10 +541,10 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbybusinesssize(Request $request){
         $companysizes = Companysize::get();
-        $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        // $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.projectbybusinesssize')->withCompanysizes($companysizes)->withFulltbps($fulltbps);
     }
     public function getprojectbybusinesssize(Request $request){
@@ -567,10 +568,10 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbyisiccode(Request $request){
         $isics = Isic::get();
-        $companies = Company::where('isic_id',1)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        // $companies = Company::where('isic_id',1)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.projectbyisiccode')->withIsics($isics)->withFulltbps($fulltbps);
     }
     public function getprojectbyisiccode(Request $request){
@@ -594,10 +595,10 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbyindustrygroup(Request $request){
         $industrygroups = IndustryGroup::get();
-        $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        // $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.projectbyindustrygroup')->withIndustrygroups($industrygroups)->withFulltbps($fulltbps);
     }
     public function getprojectbyindustrygroup(Request $request){
@@ -620,11 +621,11 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbyprovince(Request $request){
         $provinces = Province::get();
-        $addressarray = array_unique(CompanyAddress::where('province_id',1)->pluck('company_id')->toArray());
-        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        // $addressarray = array_unique(CompanyAddress::where('province_id',1)->pluck('company_id')->toArray());
+        // $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.projectbyprovince')->withProvinces($provinces)->withFulltbps($fulltbps);
     }
     public function getprojectbyprovince(Request $request){
@@ -648,13 +649,13 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbysector(Request $request){
         $sectors = Sector::get();
-        $provincearray = Province::where('map_code',1)->pluck('id')->toArray();
+        // $provincearray = Province::where('map_code',1)->pluck('id')->toArray();
 
-        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
-        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        // $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
+        // $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::get();
         return view('dashboard.admin.realtimereport.project.projectbysector')->withSectors($sectors)->withFulltbps($fulltbps);
     }
     public function getprojectbysector(Request $request){
