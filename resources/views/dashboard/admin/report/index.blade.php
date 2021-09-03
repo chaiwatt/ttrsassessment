@@ -1622,7 +1622,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
                             <div class="header-elements">
                                 <div class="list-icons ml-3">
                                     <div class="list-icons-item dropdown">
@@ -1680,7 +1680,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการตามเกรดการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการตามเกรดการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
                         <div class="header-elements">
                             <div class="list-icons ml-3">
                                 <div class="list-icons-item dropdown">

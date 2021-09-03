@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">จำนวนโครงการแยกตามผลการอนุมัติ</span></h4>
+                <h4> <span class="font-weight-semibold">โครงการแยกตามผลการอนุมัติ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <span class="breadcrumb-item">โครงการ</span>
-                    <span class="breadcrumb-item active">จำนวนโครงการแยกตามผลการอนุมัติ</span>
+                    <span class="breadcrumb-item active">โครงการแยกตามผลการอนุมัติ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -38,7 +38,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการแยกตามผลการอนุมัติ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการแยกตามผลการอนุมัติ</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a>
@@ -101,7 +101,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการต่อการยื่น ปี2563</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการต่อการยื่น ปี2563</h6>
                         <div class="header-elements">
                             <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>

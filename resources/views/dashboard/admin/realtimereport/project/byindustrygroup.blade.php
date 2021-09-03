@@ -116,7 +116,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการต่อการยื่น ปี2563</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการต่อการยื่น ปี2563</h6>
                         <div class="header-elements">
                             <a class="text-default font-weight-semibold cursor-pointer dropdown-toggle">
                                 <span></span>
