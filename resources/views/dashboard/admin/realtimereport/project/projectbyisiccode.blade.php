@@ -85,7 +85,7 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
-                                                    <td style="text-align: center">{{$fulltbp->minitbp->businessplan->company->isic->name}}</td>
+                                                    <td>{{$fulltbp->minitbp->businessplan->company->isic->name}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach
