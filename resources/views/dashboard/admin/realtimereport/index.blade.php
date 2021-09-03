@@ -64,7 +64,7 @@
                                                         </div>
                                                         <div class="media-body">
                                                             <h6 class="mb-0 text-left" style="margin-top:-20px"><span style="font-size: 16px"> <a href="{{route($reportlist->reportroute)}}" class="text-primary">{{$reportlist->reportname}}</a></span></h6>
-                                                            <span class="text-muted">แสดงรายงาน {{$reportlist->reportname}}</span>
+                                                            <span class="text-muted">แสดงรายงานหมวด {{$reporttype->name}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -207,7 +207,7 @@
                                                             </div>
                                                             <div class="media-body">
                                                                  <h6 class="mb-0 text-left" style="margin-top:-20px"><span style="font-size: 16px"> <a href="${route.url}/${$routeconv}" class="text-primary">${reportlist.reportname}</a></span></h6>
-                                                                <span class="text-muted">แสดงรายงาน ${reporttype.name}</span>
+                                                                <span class="text-muted">แสดงรายงานหมวด ${reporttype.name}</span>
                                                              </div>
                                                         </div>
                                                      </div>
