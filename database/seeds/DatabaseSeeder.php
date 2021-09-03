@@ -116,7 +116,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DirectMenu2sTableSeeder::class);
         $this->call(PagesTableSeeder::class);
         $this->call(ReportListsTableSeeder::class);
-
+        $this->call(ReportTypesTableSeeder::class);
+        
     }
 }
 

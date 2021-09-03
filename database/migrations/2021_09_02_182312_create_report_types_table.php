@@ -15,6 +15,8 @@ class CreateReportTypesTable extends Migration
     {
         Schema::create('report_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

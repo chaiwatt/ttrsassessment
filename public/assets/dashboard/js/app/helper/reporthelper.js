@@ -1264,7 +1264,7 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
         radar: {
             name: {
                 textStyle: {
-                    fontSize: 16,
+                    // fontSize: 16,
                     color: "#000000",
                 },
             },

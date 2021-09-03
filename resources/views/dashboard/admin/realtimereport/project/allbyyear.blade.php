@@ -12,7 +12,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">จำนวนโครงการรายปี</span></h4>
+                <h4> <span class="font-weight-semibold">โครงการทั้งหมดแยกตามปี</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
                     <span class="breadcrumb-item">โครงการ</span>
-                    <span class="breadcrumb-item active">จำนวนโครงการรายปี</span>
+                    <span class="breadcrumb-item active">โครงการทั้งหมดแยกตามปี</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -38,7 +38,7 @@
                 <div class="card">
                     <input id="attendeventid" type="text" hidden>
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนโครงการรายปี</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการทั้งหมดแยกตามปี</h6>
                         <div class="header-elements">
                             <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                             </a>
@@ -62,8 +62,8 @@
                                     <table class="table table-bordered table-striped mb-2" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
-                                                <th style="text-align: center">เลขที่โครงการ</th> 
-                                                <th style="text-align: center">ปี พ.ศ.</th> 
+                                                <th style="text-align: center;width:20%">เลขที่โครงการ</th> 
+                                                <th style="text-align: center;width:20%">ปี พ.ศ.</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
                                             </tr>
@@ -73,7 +73,7 @@
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
                                                     <tr>
                                                         <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
-                                                        <td>{{$fulltbp->minitbp->submitdateyearth}}</td>
+                                                        <td style="text-align: center">{{$fulltbp->minitbp->submitdateyearth}}</td>
                                                         <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                         <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
                                                         

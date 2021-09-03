@@ -259,7 +259,7 @@
     <a href="#" class="nav-link"><i class="icon-chart"></i> <span>รายงาน</span>
     </a>
     <ul class="nav nav-group-sub" data-submenu-title="รายงาน">
-        <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'active':''}}"><span style="font-size: 15px">ค้นหารายงาน</span></a></li>      
+        <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport')?'active':''}}"><span style="font-size: 16px">ค้นหารายงาน</span></a></li>      
         {{-- <li style="margin-left: -17px" class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>โครงการ</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="โครงการ">

@@ -30,6 +30,9 @@
     </div>
     <!-- /page header -->
 
+
+
+
     <div class="content" >
         <div class="card card-body">
             <div class="form-group">
@@ -37,26 +40,51 @@
                 <input type="text" id="searchreport" placeholder="ค้นหา..." class="form-control form-control-lg">
             </div>
         </div>
+        <div id="report_wrapper">
+        @foreach ($reporttypes as $key => $reporttype)
+            @php
+                $_reportlists = $reportlists->where('group_id',$reporttype->id);
+                // echo(($key+1) . ' ' . count($_reportlists) . '<br>');
+            @endphp
+           
+                @if(count($_reportlists) > 0)
+                    <div class="card card-body border-top-{{$reporttype->color}}">
+                        {{-- <div class="card-body"> --}}
+                            <label for="">{{$reporttype->name}}</label>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="row" >
 
-        <div class="row" id="report_wrapper">
-            @foreach ($reportlists as $reportlist)
-                <div class="col-md-4">
-                    <div class="card card-body">
-                        <div class="media">
-                            <div class="mr-3">
-                                <a href="#">
-                                    <a href="{{route($reportlist->reportroute)}}"><i class="{{$reportlist->icon}} text-success-400 icon-2x mt-1"></i></a>
-                                </a>
+                                        @foreach ($_reportlists as $reportlist)
+                                            <div class="col-md-4">
+                                                <div class="card card-body ">
+                                                    <div class="media">
+                                                        <div class="mr-3">
+                                                            <a href="{{route($reportlist->reportroute)}}"><i class="{{$reportlist->icon}} text-success-400 icon-2x mt-1"></i></a>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mb-0 text-left" style="margin-top:-20px"><span style="font-size: 16px"> <a href="{{route($reportlist->reportroute)}}" class="text-primary">{{$reportlist->reportname}}</a></span></h6>
+                                                            <span class="text-muted">แสดงรายงาน {{$reportlist->reportname}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <h6 class="mb-0 text-left" style="margin-top:-20px"><span style="font-size: 16px"> <a href="{{route($reportlist->reportroute)}}" class="text-primary">{{$reportlist->reportname}}</a></span></h6>
-                                <span class="text-muted">แสดงรายงาน {{$reportlist->reportname}}</span>
-                            </div>
-                        </div>
+                        {{-- </div> --}}
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endif
+           
+
+        @endforeach
+    </div>
+  
+
+
+{{--  --}}
     </div>
 @endsection
 @section('pageScript')
@@ -155,33 +183,48 @@
             clearText: "เคลียร์",
             time: false
 		});
-        //  <a href="${route.url}/${boardattachment.path}" class="btn btn-sm bg-primary" target="_blank">ดูเอกสาร</a>
+
         $(document).on('keyup', '#searchreport', function(e) {
             searchReport($(this).val()).then(data => {
                 var html = ``;
-                data.forEach(function (report,index) {
-                    var url = report.reportroute.replaceAll(".", "/");
-                    // console.log(report.reportroute);
-                    html += `<div class="col-md-4">
-                            <div class="card card-body">
-                                <div class="media">
-                                    <div class="mr-3">
-                                        <a href="#">
-                                            <a href="${route.url}/${url}"><i class="${report.icon} text-success-400 icon-2x mt-1"></i></a>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6 class="mb-0 text-left" style="margin-top:-20px"><span style="font-size: 16px"> <a href="${route.url}/${url}" class="text-primary">${report.reportname}</a></span></h6>
-                                        <span class="text-muted">แสดงรายงาน ${report.reportname}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`
-                    });
-                 $("#report_wrapper").html(html);
-            }).catch(error => {})
-        });
+                $("#report_wrapper").html('');
+                data.reporttypes.forEach(function (reporttype,index) {
+                    var _reportlists = data.reportlists.filter(x => x.group_id == reporttype.id); 
+                    if(typeof(_reportlists[0]) != "undefined"){
+                        html += `<div class="card card-body border-top-${reporttype.color}">
+                                <label for="">${reporttype.name}</label>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="row" >`;
 
+                                            _reportlists.forEach(function (reportlist,index) {
+                                                $routeconv = reportlist.reportroute.replace(/\./g,'/')
+                                                html += `<div class="col-md-4">
+                                                     <div class="card card-body ">
+                                                         <div class="media">
+                                                            <div class="mr-3">
+                                                                <a href="${route.url}/${$routeconv}"><i class="${reportlist.icon} text-success-400 icon-2x mt-1"></i></a>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                 <h6 class="mb-0 text-left" style="margin-top:-20px"><span style="font-size: 16px"> <a href="${route.url}/${$routeconv}" class="text-primary">${reportlist.reportname}</a></span></h6>
+                                                                <span class="text-muted">แสดงรายงาน ${reporttype.name}</span>
+                                                             </div>
+                                                        </div>
+                                                     </div>
+                                                 </div>`;
+                                            });
+                                            
+                        html += `</div>
+                            </div>
+                        </div>
+                    </div>`;
+                    }
+        
+                  $("#report_wrapper").html(html);
+                });
+            }).catch(error => {})
+        
+    });
         function searchReport(search){
             return new Promise((resolve, reject) => {
                 $.ajax({
