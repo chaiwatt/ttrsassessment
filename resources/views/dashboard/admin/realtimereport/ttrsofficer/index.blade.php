@@ -77,7 +77,7 @@
 									</div>
 								</div>
                                 <div class="col-md-12">
-                                    <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>  
+                                    {{-- <button type="submit" name="btnsubmit" value="excel" class="btn btn-sm bg-teal float-right ml-1">Excel</button>   --}}
                                     <button type="submit" name="btnsubmit" value="search" class="btn btn-sm bg-teal float-right">ค้นหา</button>  
                                 </div>
                             </div>        
