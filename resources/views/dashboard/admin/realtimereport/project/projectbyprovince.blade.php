@@ -51,10 +51,19 @@
                                 <div class="col-md-12">
 									<div class="form-group">
 										<label>เลือกจังหวัด</label>
+                                        @php
+                                            $provinceid = '0';
+                                        @endphp
 										<select name="province" data-placeholder="เลือกจังหวัด" value="{{old('province')}}"  class="form-control form-control-lg form-control-select2">
                                             <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($provinces as $province)
-                                                <option value="{{$province->id}}" @if ($province->id == Request::get('province')) selected @endif >{{$province->name}}</option> 
+                                                <option value="{{$province->id}}" 
+                                                    @if ($province->id == Request::get('province')) 
+                                                        selected 
+                                                        @php
+                                                            $provinceid = $province->id;
+                                                        @endphp
+                                                    @endif >{{$province->name}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -85,7 +94,7 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
-                                                    <td style="text-align: center">{{$fulltbp->projectprovincename}}</td>
+                                                    <td >{{$fulltbp->projectprovincename($provinceid)}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach

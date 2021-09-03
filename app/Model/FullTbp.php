@@ -394,12 +394,30 @@ class FullTbp extends Model
         }
     } 
 
-    public function getProjectprovincenameAttribute(){
+    public function Projectprovincename($proviceid){
+        // dd($proviceid);
+        // return;
+        // $minitbp = MiniTBP::find($this->mini_tbp_id);
+        // $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        // $company = Company::find($businessplan->company_id);
+        // $provinceid = CompanyAddress::where('company_id',$company->id)->first();
+        if(!Empty($proviceid)){
+            return Province::find($proviceid)->name;
+        }else{
+
         $minitbp = MiniTBP::find($this->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
-        $provinceid = CompanyAddress::where('company_id',$company->id)->first();
-        return Province::find($provinceid->province_id)->name;
+        $arr = CompanyAddress::where('company_id',$company->id)->pluck('province_id')->toArray();
+        $provinces = Province::whereIn('id',$arr)->get();
+        $_provinces = '';
+        foreach ($provinces as $key => $province) {
+            $_provinces .= $province->name . ', ';
+        }
+
+            return rtrim($_provinces, ', ');
+        }
+        
     } 
 
     public function getProjectprovincesectornameAttribute(){
