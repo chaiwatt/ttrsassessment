@@ -656,7 +656,7 @@ Route::group(['middleware' => 'auth'], function(){
                  
                 });
                 Route::group(['prefix' => 'ttrsofficer'], function(){
-                    Route::get('','DashboardAdminRealtimeReportTTRSofficerController@Index')->name('dashboard.admin.realtimereport.officer');
+                    Route::get('','DashboardAdminRealtimeReportTTRSofficerController@Index')->name('dashboard.admin.realtimereport.ttrsofficer');
                     Route::get('getofficer','DashboardAdminRealtimeReportTTRSofficerController@GetOfficer')->name('dashboard.admin.realtimereport.getofficer');
                     Route::get('singledownload/{id}','DashboardAdminRealtimeReportTTRSofficerController@SingleDownload')->name('dashboard.admin.realtimereport.singledownload');
                 });

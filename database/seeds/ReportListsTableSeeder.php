@@ -412,7 +412,7 @@ class ReportListsTableSeeder extends Seeder
                 'order' => 45,
                 'reporttype' => 2,
                 'reportname' => 'เจ้าหน้าที่ TTRS',
-                'reportroute' => 'dashboard.admin.realtimereport.officer',
+                'reportroute' => 'dashboard.admin.realtimereport.ttrsofficer',
                 'icon' => 'icon-users2',
                 'group_id' => 11,
                 'groupname' => 'TTRS STAFF'
