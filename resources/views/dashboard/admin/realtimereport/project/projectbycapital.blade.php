@@ -52,6 +52,7 @@
 									<div class="form-group">
 										<label>เลือกงบประมาณของโครงการ</label>
 										<select name="projectbudget" data-placeholder="ปี" value="{{old('projectbudget')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option> 
 											@foreach ($projectbudgets as $key => $projectbudget)
                                                 @if ($key == 0)
                                                         <option value="{{$projectbudget->id}}" @if ($projectbudget->id == Request::get('projectbudget')) selected @endif > น้อยกว่า {{number_format(@$projectbudget->maxbudget)}} บาท</option> 
@@ -81,6 +82,7 @@
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th>  
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center">งบประมาณของโครงการ</th> 
                                             </tr>
                                       
                                         </thead>
@@ -91,6 +93,7 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
+                                                    <td style="text-align: center">{{$fulltbp->projectcapitalname}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach

@@ -25,16 +25,20 @@ class ReportProjectExportByBudget implements FromView,ShouldAutoSize,WithTitle
     }
     public function view(): View
     {
-        $projectbudgetcapital = ProjectBudget::find($this->projectbudget);
-        $fulltbpinvestmentarr = FullTbpInvestment::distinct('full_tbp_id')->pluck('full_tbp_id')->toArray();
-        $arr = array();
-        foreach ($fulltbpinvestmentarr as $key => $item) {
-            $check = FullTbpInvestment::where('full_tbp_id',$item)->sum('cost');
-            if($check > $projectbudgetcapital->minbudget && $check <= $projectbudgetcapital->maxbudget){
-                array_push($arr,$item);
+        if($this->projectbudget != 0){
+            $projectbudgetcapital = ProjectBudget::find($this->projectbudget);
+            $fulltbpinvestmentarr = FullTbpInvestment::distinct('full_tbp_id')->pluck('full_tbp_id')->toArray();
+            $arr = array();
+            foreach ($fulltbpinvestmentarr as $key => $item) {
+                $check = FullTbpInvestment::where('full_tbp_id',$item)->sum('cost');
+                if($check >= $projectbudgetcapital->minbudget && $check <= $projectbudgetcapital->maxbudget){
+                    array_push($arr,$item);
+                }
             }
+            $fulltbps = FullTbp::whereIn('id',$arr)->get();
+        }else{
+            $fulltbps = FullTbp::get();
         }
-        $fulltbps = FullTbp::whereIn('id',$arr)->get();
 
         return view('dashboard.admin.realtimereport.project.downloadallbyprojectbudget', [
             'fulltbps' => $fulltbps

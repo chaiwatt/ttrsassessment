@@ -52,6 +52,7 @@
 									<div class="form-group">
 										<label>เลือกจังหวัด</label>
 										<select name="province" data-placeholder="เลือกจังหวัด" value="{{old('province')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($provinces as $province)
                                                 <option value="{{$province->id}}" @if ($province->id == Request::get('province')) selected @endif >{{$province->name}}</option> 
 											@endforeach
@@ -74,6 +75,7 @@
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center">จังหวัด</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -83,6 +85,7 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
+                                                    <td style="text-align: center">{{$fulltbp->projectprovincename}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach

@@ -27,12 +27,17 @@ class ReportProjectExportBySector implements FromView,ShouldAutoSize,WithTitle
     }
     public function view(): View
     {
-        $provincearray = Province::where('map_code',$this->sector)->pluck('id')->toArray();
-        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
-        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        if($this->sector != 0){
+            $provincearray = Province::where('map_code',$this->sector)->pluck('id')->toArray();
+            $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
+            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        }else{
+            $fulltbps = FullTbp::get();
+        }
+
 
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps

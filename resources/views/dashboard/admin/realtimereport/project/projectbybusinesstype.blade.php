@@ -52,6 +52,7 @@
 									<div class="form-group">
 										<label>เลือกประเภทธุรกิจ</label>
 										<select name="businesstype" data-placeholder="เลือกประเภทธุรกิจ" value="{{old('businesstype')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option> 
 											@foreach ($businesstypes as $businesstype)
                                                 <option value="{{$businesstype->id}}" @if ($businesstype->id == Request::get('businesstype')) selected @endif >{{$businesstype->name}}</option> 
 											@endforeach
@@ -74,6 +75,7 @@
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center">ประเภทธุรกิจ</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -83,6 +85,7 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
+                                                    <td style="text-align: center">{{$fulltbp->minitbp->businessplan->company->businesstype->name}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach

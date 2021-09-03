@@ -491,16 +491,20 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByBudget($projectbudget), 'allbyyearbudget.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $projectbudgetcapital = ProjectBudget::find($request->projectbudget);
-            $fulltbpinvestmentarr = FullTbpInvestment::distinct('full_tbp_id')->pluck('full_tbp_id')->toArray();
-            $arr = array();
-            foreach ($fulltbpinvestmentarr as $key => $item) {
-                $check = FullTbpInvestment::where('full_tbp_id',$item)->sum('cost');
-                if($check > $projectbudgetcapital->minbudget && $check <= $projectbudgetcapital->maxbudget){
-                    array_push($arr,$item);
+            if($request->projectbudget != 0){
+                $projectbudgetcapital = ProjectBudget::find($request->projectbudget);
+                $fulltbpinvestmentarr = FullTbpInvestment::distinct('full_tbp_id')->pluck('full_tbp_id')->toArray();
+                $arr = array();
+                foreach ($fulltbpinvestmentarr as $key => $item) {
+                    $check = FullTbpInvestment::where('full_tbp_id',$item)->sum('cost');
+                    if($check >= $projectbudgetcapital->minbudget && $check <= $projectbudgetcapital->maxbudget){
+                        array_push($arr,$item);
+                    }
                 }
+                $fulltbps = FullTbp::whereIn('id',$arr)->get();
+            }else{
+                $fulltbps = FullTbp::get();  
             }
-            $fulltbps = FullTbp::whereIn('id',$arr)->get();
             return view('dashboard.admin.realtimereport.project.projectbycapital')->withProjectbudgets($projectbudgets)->withFulltbps($fulltbps); 
         }
     }
@@ -514,15 +518,22 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         return view('dashboard.admin.realtimereport.project.projectbybusinesstype')->withBusinesstypes($businesstypes)->withFulltbps($fulltbps);
     }
     public function getprojectbybusinesstype(Request $request){
+        
         $businesstypes = BusinessType::get();
         $businesstype = BusinessType::find($request->businesstype);
+        
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByBusinessType($businesstype->id), 'projectbybusinesstype.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $companies = Company::where('business_type_id',$businesstype->id)->pluck('id')->toArray();
-            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            if($request->businesstype != 0){
+                $companies = Company::where('business_type_id',$businesstype->id)->pluck('id')->toArray();
+                $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            }else{
+                $fulltbps = FullTbp::get();
+            }
+  
             return view('dashboard.admin.realtimereport.project.projectbybusinesstype')->withBusinesstypes($businesstypes)->withFulltbps($fulltbps); 
         }
     }
@@ -541,10 +552,15 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByBusinessSize($companysize->id), 'projectbybusinesssize.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $companies = Company::where('company_size_id',$companysize->id)->pluck('id')->toArray();
-            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            if($request->companysize != 0){
+                $companies = Company::where('company_size_id',$companysize->id)->pluck('id')->toArray();
+                $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            }else{
+                $fulltbps = FullTbp::get();
+            }
+
             return view('dashboard.admin.realtimereport.project.projectbybusinesssize')->withCompanysizes($companysizes)->withFulltbps($fulltbps); 
         }
     }
@@ -563,10 +579,15 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByIsic($isic->id), 'projectbyisiccode.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $companies = Company::where('isic_id',$isic->id)->pluck('id')->toArray();
-            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            if($request->isic != 0){
+                $companies = Company::where('isic_id',$isic->id)->pluck('id')->toArray();
+                $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            }else{
+                $fulltbps = FullTbp::get();
+            }
+
             return view('dashboard.admin.realtimereport.project.projectbyisiccode')->withIsics($isics)->withFulltbps($fulltbps); 
         }
     }
@@ -584,10 +605,15 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByIndustrygroup($request->industrygroup), 'projectbyindustrygroup.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
-            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            if($request->industrygroup !=0){
+                $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
+                $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            }else{
+                $fulltbps = FullTbp::get();
+            }
+
             return view('dashboard.admin.realtimereport.project.projectbyindustrygroup')->withIndustrygroups($industrygroups)->withFulltbps($fulltbps); 
         }
     }
@@ -607,10 +633,15 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByProvince($request->province), 'projectbyprovince.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            if($request->province != 0){
+                $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+                $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            }else{
+                $fulltbps = FullTbp::get();
+            }
+
             return view('dashboard.admin.realtimereport.project.projectbyprovince')->withProvinces($provinces)->withFulltbps($fulltbps); 
         }
     }
@@ -632,13 +663,16 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportBySector($request->sector), 'projectbysector.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
-            
-            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-            
-            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            if($request->sector != 0){
+                $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
+                $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+                $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            }else{
+                $fulltbps = FullTbp::get();
+            }
+  
             return view('dashboard.admin.realtimereport.project.projectbysector')->withSectors($sectors)->withFulltbps($fulltbps); 
         }
     }

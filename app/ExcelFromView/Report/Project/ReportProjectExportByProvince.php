@@ -26,11 +26,16 @@ class ReportProjectExportByProvince implements FromView,ShouldAutoSize,WithTitle
     }
     public function view(): View
     {
-        $addressarray = array_unique(CompanyAddress::where('province_id',$this->province)->pluck('company_id')->toArray());
-        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        if($this->province != 0){
+            $addressarray = array_unique(CompanyAddress::where('province_id',$this->province)->pluck('company_id')->toArray());
+            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        }else{
+            $fulltbps = FullTbp::get();
+        }
+
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

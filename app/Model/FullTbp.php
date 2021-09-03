@@ -8,6 +8,7 @@ use App\Model\Bol;
 use App\Model\Prefix;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\Province;
 use App\Model\ReviseLog;
 use App\Model\FullTbpCost;
 use App\Model\FullTbpSell;
@@ -20,6 +21,7 @@ use App\Model\EventCalendar;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
 use App\Model\ScoringStatus;
+use App\Model\CompanyAddress;
 use App\Model\EmployTraining;
 use App\Model\ProjectScoring;
 use App\Helper\DateConversion;
@@ -327,7 +329,7 @@ class FullTbp extends Model
 
     public function getProjectBudgetAttribute(){
         $check = FullTbpInvestment::where('full_tbp_id',$this->id)->sum('cost');
-        $projectbudget = ProjectBudget::where('minbudget','<',$check)->where('maxbudget','>=',$check)->first();
+        $projectbudget = ProjectBudget::where('minbudget','<=',$check)->where('maxbudget','>=',$check)->first();
         if($projectbudget->id == 1){
            return "น้อยกว่า " . number_format($projectbudget->maxbudget) ." บาท";
         }elseif($projectbudget->id == 4){
@@ -378,6 +380,37 @@ class FullTbp extends Model
            return "" ;
         }
     } 
+
+    public function getProjectcapitalnameAttribute(){
+        $check = FullTbpInvestment::where('full_tbp_id',$this->id)->sum('cost');
+        if($check >=0 && $check <500000){
+            return 'น้อยกว่า 500,000 บาท';
+        }else if($check >=500000 && $check <1000000){
+            return 'ตั้งแต่ 500,000 - 1,000,000 บาท';
+        }else if($check >=1000000 && $check <10000000){
+            return 'ตั้งแต่ 1,000,000 - 10,000,000 บาท';
+        }else if($check >=100000000){
+            return 'มากกว่า 10,000,000 บาท';
+        }
+    } 
+
+    public function getProjectprovincenameAttribute(){
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $provinceid = CompanyAddress::where('company_id',$company->id)->first();
+        return Province::find($provinceid->province_id)->name;
+    } 
+
+    public function getProjectprovincesectornameAttribute(){
+        $minitbp = MiniTBP::find($this->mini_tbp_id);
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        $company = Company::find($businessplan->company_id);
+        $provinceid = CompanyAddress::where('company_id',$company->id)->first();
+        return Sector::find(Province::find($provinceid->province_id)->map_code)->name;
+        // return Province::find($provinceid->province_id)->name;
+    } 
+
 }
 
 
