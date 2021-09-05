@@ -680,7 +680,7 @@
                             </div>
                             </div>
                             <div class="col-md-1 l-75 table-none">
-                                  <table class="table table-bordered table-h table-dark" data-aos="fade-laft" data-aos-delay="200" >
+                                  <table class="table table-bordered table-h table-dark">
                                 <thead>
                                   <tr>
                                    
