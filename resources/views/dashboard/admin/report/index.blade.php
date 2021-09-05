@@ -740,7 +740,7 @@
                     <div class="card-footer">
                         <div class="row l-50">
                             <div class="f-table table2-none table-w">
-                                <table class="table table-bordered table-dark" data-aos="fade-laft" data-aos-delay="200">
+                                <table class="table table-bordered table-dark" >
                                     <thead>
                                       <tr>
                                        
