@@ -4,6 +4,7 @@ namespace App\ExcelFromView\Report\Project;
 
 use App\User;
 use Carbon\Carbon;
+use App\Model\Sector;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
@@ -22,8 +23,13 @@ class ReportProjectExportBySector implements FromView,ShouldAutoSize,WithTitle
     protected $sector;
     protected $projectname;
     function __construct($sector) {
-        $this->projectname = ' โครงการแยกตามภูมิภาค';
-           $this->sector = $sector;
+        if($sector != 0){
+            $this->projectname = ' โครงการ ภาค' . Sector::find($sector)->name;
+        }else{
+            $this->projectname = ' โครงการแยกตามภูมิภาค';
+        }
+        
+        $this->sector = $sector;
     }
     public function view(): View
     {
@@ -33,11 +39,10 @@ class ReportProjectExportBySector implements FromView,ShouldAutoSize,WithTitle
             $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
             $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
             $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
         }else{
-            $fulltbps = FullTbp::get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
         }
-
 
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps

@@ -23,7 +23,7 @@
                                         <div class="icon-box-area mb-20">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/01.png')}}" alt=""></a> 
+                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/ttrs-01.png')}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
                                                     <h4 class="title"><a href="{{route('landing.pillars')}}">
@@ -39,7 +39,7 @@
                                         <div class="icon-box-area purple-bg">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/03.png')}}" alt=""></a> 
+                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/ttrs-03.png')}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
                                                     <h4 class="title"><a href="{{route('landing.pillars')}}">
@@ -57,7 +57,7 @@
                                         <div class="icon-box-area blue-bg mb-20">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/02.png')}}" alt=""></a> 
+                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/ttrs-02.png')}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
                                                     <h4 class="title"><a href="{{route('landing.pillars')}}">
@@ -73,7 +73,7 @@
                                         <div class="icon-box-area pink-bg">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/04.png')}}" alt=""></a> 
+                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset('assets/dashboard/images/pillar/ttrs-04.png')}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
                                                     <h4 class="title"><a href="{{route('landing.pillars')}}">

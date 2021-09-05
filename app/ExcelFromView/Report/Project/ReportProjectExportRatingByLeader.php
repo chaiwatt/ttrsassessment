@@ -47,7 +47,14 @@ class ReportProjectExportRatingByLeader implements FromView,ShouldAutoSize,WithT
             } 
         }
 
-        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        if($this->leader == 0){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        }else{
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+        }
+
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

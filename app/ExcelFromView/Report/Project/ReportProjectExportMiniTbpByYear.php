@@ -18,13 +18,23 @@ class ReportProjectExportMiniTbpByYear implements FromView,ShouldAutoSize,WithTi
     protected $year;
     protected $projectname;
     function __construct($year) {
-        $this->projectname = 'Mini Tbp ปี พ.ศ.' . (intVal($year)+543) ;
+        if($year == 0){
+            $this->projectname = 'Mini Tbp';
+        }else{
+            $this->projectname = 'Mini Tbp ปี พ.ศ.' . (intVal($year)+543) ;
+        }
+        
         $this->year = $year;
     }
     public function view(): View
     {
-        $minitbparray = MiniTBP::whereYear('submitdate',$this->year)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        if($this->year == 0){
+            $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbparr)->get();
+        }else{
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        }
 
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps

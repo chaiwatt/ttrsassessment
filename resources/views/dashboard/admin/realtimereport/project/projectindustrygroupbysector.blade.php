@@ -52,6 +52,7 @@
 									<div class="form-group">
 										<label>เลือกประเภทอุตสาหกรรม</label>
 										<select name="industrygroup" data-placeholder="เลือกประเภทอุตสาหกรรม" value="{{old('industrygroup')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($industrygroups as $industrygroup)
                                                 <option value="{{$industrygroup->id}}" @if ($industrygroup->id == Request::get('industrygroup')) selected @endif >{{$industrygroup->name}}</option> 
 											@endforeach
@@ -62,6 +63,7 @@
 									<div class="form-group">
 										<label>เลือกภูมิภาค</label>
 										<select name="sector" data-placeholder="เลือกภูมิภาค" value="{{old('sector')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($sectors as $sector)
                                                 <option value="{{$sector->id}}" @if ($sector->id == Request::get('sector')) selected @endif >{{$sector->name}}</option> 
 											@endforeach
@@ -84,6 +86,8 @@
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center">ประเภทอุตสาหกรรม</th> 
+                                                <th style="text-align: center">ภาค</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -93,6 +97,8 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
+                                                    <td >{{$fulltbp->minitbp->businessplan->company->industrygroup->name}}</td>
+                                                    <td >{{$fulltbp->projectprovincesectorname}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach

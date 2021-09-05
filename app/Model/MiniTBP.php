@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\User;
 use Carbon\Carbon;
 use App\Model\Prefix;
 use App\Model\FullTbp;
@@ -182,5 +183,36 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
 
      public function getCreatedAtThAttribute(){
         return DateConversion::thaiDateTime2($this->created_at,'full');
+    } 
+
+
+    public function getSubmitmonthAttribute(){
+        if(!Empty($this->submitdate)){
+            return DateConversion::getThaiMonth($this->submitdate);
+        }else{
+            return '';
+        }
+    } 
+
+    public function getSubmityearAttribute(){
+        if(!Empty($this->submitdate)){
+            return intVal(explode ("/", $this->submitdate)[0])+543; 
+            // return DateConversion::getThaiMonth($this->submitdate);
+        }else{
+            return '';
+        }
+    } 
+
+    public function getProjectleaderAttribute(){
+        $fulltbp = FullTbp::where('mini_tbp_id',$this->id)->first();
+        $check = ProjectAssignment::where('full_tbp_id',$fulltbp->id)->first();
+        if(!Empty($check)){
+            if(!Empty($check->leader_id)){
+                $user = User::find($check->leader_id);
+                return $user->name . ' ' . $user->lastname;
+            }else{
+                return '';
+            }
+        }
     } 
 }

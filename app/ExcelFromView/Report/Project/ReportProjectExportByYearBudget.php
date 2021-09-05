@@ -15,15 +15,30 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class ReportProjectExportByYearBudget implements FromView,ShouldAutoSize,WithTitle
 {
-    //protected $year;
+    protected $year;
     protected $projectname;
-    function __construct() {
-        $this->projectname = ' โครงการทั้งหมดตามปีงบประมาณ' ;
-        //$this->year = $year;
+    protected $startdate;
+    protected $enddate;
+    function __construct($startdate,$enddate,$year) {
+        if($year > 0){
+            $this->projectname = 'ปีงบประมาณ' .(intVal($year) + 543) ;
+        }else{
+            $this->projectname = 'โครงการทั้งหมดตามปีงบประมาณ' ;
+        }
+        
+        $this->year = $year;
+        $this->startdate = $startdate;
+        $this->enddate = $enddate;
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::get();
+        if($this->year > 0){
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereBetween('submitdate',[$this->startdate, $this->enddate])->get();
+
+        }else{
+            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+        }
+
         return view('dashboard.admin.realtimereport.project.downloadallbyyearbudget', [
             'fulltbps' => $fulltbps
         ]);

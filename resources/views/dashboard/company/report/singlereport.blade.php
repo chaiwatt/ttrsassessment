@@ -251,7 +251,7 @@
                                                     <div class="col-sm-6"></div>
                                                     <div class="col-sm-6"> 
                                                         <h2><span style="font-weight: bold"> 02</span></h2>
-                                                        <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                                        <img src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -269,7 +269,7 @@
                                                 <div class="col-sm-6"></div>
                                                 <div class="col-sm-6"> 
                                                     <h2><span style="font-weight: bold"> 03</span></h2>
-                                                    <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                                    <img src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -286,7 +286,7 @@
                                                 <div class="col-sm-6"></div>
                                                 <div class="col-sm-6"> 
                                                     <h2><span style="font-weight: bold"> 04</span></h2>
-                                                    <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                                    <img src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">

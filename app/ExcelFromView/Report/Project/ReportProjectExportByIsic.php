@@ -29,9 +29,9 @@ class ReportProjectExportByIsic implements FromView,ShouldAutoSize,WithTitle
             $companies = Company::where('isic_id',$this->isic)->pluck('id')->toArray();
             $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
             $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
         }else{
-            $fulltbps = FullTbp::get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.download', [

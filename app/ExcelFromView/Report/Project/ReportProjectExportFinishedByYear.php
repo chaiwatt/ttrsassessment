@@ -18,12 +18,22 @@ class ReportProjectExportFinishedByYear implements FromView,ShouldAutoSize,WithT
     protected $year;
     protected $projectname;
     function __construct($year) {
-        $this->projectname = 'ประเมินเสร็จ พ.ศ.' . (intVal($year)+543) ;
+        if($year == 0){
+            $this->projectname = 'ประเมินเสร็จ';
+        }else{
+            $this->projectname = 'ประเมินเสร็จ พ.ศ.' . (intVal($year)+543) ;
+        }
+        
         $this->year = $year;
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::whereYear('submitdate',$this->year)->whereNotNull('finishdate')->get();
+        if($this->year == 0){
+            $fulltbps = FullTbp::whereNotNull('finishdate')->get();
+        }else{
+            $fulltbps = FullTbp::whereYear('finishdate',$this->year)->whereNotNull('finishdate')->get();
+        }
+        
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

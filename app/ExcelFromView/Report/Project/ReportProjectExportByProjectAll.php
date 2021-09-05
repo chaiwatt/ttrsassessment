@@ -19,13 +19,13 @@ class ReportProjectExportByProjectAll implements FromView,ShouldAutoSize,WithTit
 {
     protected $projectname;
     function __construct() {
-        $this->projectname = ' โครงการระหว่างการประเมินทั้งหมด' ;
+        $this->projectname = 'โครงการระหว่างการประเมินทั้งหมด' ;
     }
     public function view(): View
     {
         $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

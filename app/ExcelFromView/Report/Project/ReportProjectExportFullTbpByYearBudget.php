@@ -20,13 +20,22 @@ class ReportProjectExportFullTbpByYearBudget implements FromView,ShouldAutoSize,
     protected $projectname;
     protected $year;
     function __construct($startdate,$enddate,$year) {
-        $this->projectname = 'Full Tbp ปีงบประมาณ ' . (intVal($year)+543) ;
+        $this->projectname = 'Full Tbp ปีงบประมาณ ' ;
+        if($year > 0){
+            $this->projectname = 'Full Tbp ปีงบประมาณ ' . (intVal($year)+543) ;
+        }
+        
         $this->startdate = $startdate;
         $this->enddate = $enddate;
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::whereBetween('submitdate',[$this->startdate, $this->enddate])->get();
+
+        if($this->year > 0){
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereBetween('submitdate',[$this->startdate, $this->enddate])->get();
+        }else{
+            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+        }
 
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps

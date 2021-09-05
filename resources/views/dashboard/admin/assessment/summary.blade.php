@@ -214,7 +214,7 @@
                                                             <div class="col-sm-3"></div>
                                                             <div class="col-sm-9"> 
                                                                 <h2><span style="font-weight: bold;color:#da462c;font-size:18px"> Management</span></h2>
-                                                                <img src="{{asset('assets/dashboard/images/chart/01.png')}}" width="100px" alt=""></div>
+                                                                <img src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4  mt-3">
@@ -233,7 +233,7 @@
                                                             <div class="col-sm-9"> 
                                                                 {{-- <h2><span style="font-weight: bold"> 02</span></h2> --}}
                                                                 <h2><span style="font-weight: bold;color:#ff9618;font-size:18px"> Technology</span></h2>
-                                                                <img src="{{asset('assets/dashboard/images/chart/02.png')}}" width="100px" alt=""></div>
+                                                                <img src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4  mt-3">
@@ -252,7 +252,7 @@
                                                         <div class="col-sm-9"> 
                                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
                                                             <h2><span style="font-weight: bold;color:#ffed44;font-size:18px"> Marketability</span></h2>
-                                                            <img src="{{asset('assets/dashboard/images/chart/03.png')}}" width="100px" alt=""></div>
+                                                            <img src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4  mt-3">
@@ -271,7 +271,7 @@
                                                         <div class="col-sm-9"> 
                                                             {{-- <h2><span style="font-weight: bold"> 04</span></h2> --}}
                                                             <h2><span style="font-weight: bold;color:#20ae51;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
-                                                            <img src="{{asset('assets/dashboard/images/chart/04.png')}}" width="100px" alt=""></div>
+                                                            <img src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4 mt-3">

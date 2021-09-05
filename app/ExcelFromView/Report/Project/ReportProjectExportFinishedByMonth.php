@@ -20,13 +20,31 @@ class ReportProjectExportFinishedByMonth implements FromView,ShouldAutoSize,With
     protected $projectname;
     function __construct($year,$month) {
      $_m = (string)((int)($month));
+     if($_m == '00'){
+        $this->projectname = 'ประเมินเสร็จ-พ.ศ.' . (intVal($year)+543) ;
+     }else{
         $this->projectname = 'ประเมินเสร็จ-' . EvaluationMonth::find($_m)->name . ' พ.ศ.' . (intVal($year)+543) ;
+     }
+        
         $this->year = $year;
         $this->month = $month;
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::whereMonth('submitdate',$this->month)->whereYear('submitdate',$this->year)->whereNotNull('finishdate')->get();
+        if($this->year == 0){
+            if($month == '00'){
+                $fulltbps = FullTbp::whereNotNull('finishdate')->get();
+            }else{
+                $fulltbps = FullTbp::whereMonth('finishdate',$this->month)->whereNotNull('finishdate')->get();
+            }
+        }else{
+            if($this->month == '00'){
+                $fulltbps = FullTbp::whereYear('finishdate',$this->year)->whereNotNull('finishdate')->get();
+            }else{
+                $fulltbps = FullTbp::whereMonth('finishdate',$this->month)->whereYear('finishdate',$this->year)->whereNotNull('finishdate')->get();
+            }
+        }
+        
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

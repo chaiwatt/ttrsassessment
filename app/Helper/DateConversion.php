@@ -84,6 +84,15 @@ class DateConversion
         $strMonthThai=$strMonthCut[intval(Carbon::today()->format('m'))];
         return $strMonthThai;
     }
+
+    public static function getThaiMonth($date)
+	{
+        $_date = Carbon::createFromFormat('Y-m-d', $date);
+		$strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+        $strMonthThai=$strMonthCut[intval($_date->format('m'))];
+        return $strMonthThai;
+    }
+
     public static function thaiYearNow()
 	{
         return Carbon::today()->format('yy')+543;;

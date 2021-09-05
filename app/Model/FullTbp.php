@@ -381,26 +381,28 @@ class FullTbp extends Model
         }
     } 
 
+    public function getFinishdatethAttribute(){
+        if(!Empty($this->finishdate)){
+            return DateConversion::engToThaiDate($this->finishdate);
+        }else{
+           return "" ;
+        }
+    } 
+
     public function getProjectcapitalnameAttribute(){
-        $check = FullTbpInvestment::where('full_tbp_id',$this->id)->sum('cost');
+        $check = intVal(FullTbpInvestment::where('full_tbp_id',$this->id)->sum('cost'));
         if($check >=0 && $check <500000){
             return 'น้อยกว่า 500,000 บาท';
         }else if($check >=500000 && $check <1000000){
             return 'ตั้งแต่ 500,000 - 1,000,000 บาท';
         }else if($check >=1000000 && $check <10000000){
             return 'ตั้งแต่ 1,000,000 - 10,000,000 บาท';
-        }else if($check >=100000000){
+        }else if($check >= 10000000){
             return 'มากกว่า 10,000,000 บาท';
         }
     } 
 
     public function Projectprovincename($proviceid){
-        // dd($proviceid);
-        // return;
-        // $minitbp = MiniTBP::find($this->mini_tbp_id);
-        // $businessplan = BusinessPlan::find($minitbp->business_plan_id);
-        // $company = Company::find($businessplan->company_id);
-        // $provinceid = CompanyAddress::where('company_id',$company->id)->first();
         if(!Empty($proviceid)){
             return Province::find($proviceid)->name;
         }else{
@@ -428,6 +430,75 @@ class FullTbp extends Model
         return Sector::find(Province::find($provinceid->province_id)->map_code)->name;
         // return Province::find($provinceid->province_id)->name;
     } 
+
+    public function getFinishmonthAttribute(){
+        if(!Empty($this->finishdate)){
+            return DateConversion::getThaiMonth($this->finishdate);
+        }else{
+            return '';
+        }
+    } 
+
+    public function getFinishyearAttribute(){
+        if(!Empty($this->finishdate)){
+            return intVal(explode("/",$this->finishdate)[0])+543;
+        }else{
+            return '';
+        }
+    } 
+
+    public function getFinishyearbudgetAttribute(){
+        if(!Empty($this->finishdate)){
+            return  $this->fiscalYear($this->finishdate);
+        }else{
+           return "" ;
+        }
+    }
+
+    public function getSubmitdateyearbudgetthAttribute(){
+        if(!Empty($this->submitdate)){
+            return  $this->fiscalYear($this->submitdate);
+        }else{
+           return "" ;
+        }
+    }
+
+    public function getSubmitdateyearthAttribute(){
+        if(!Empty($this->submitdate)){
+            $check = DateConversion::engToThaiDate($this->submitdate);
+            preg_match("/[^\/]+$/", $check, $matches);
+            return $matches[0]; 
+        }else{
+           return "" ;
+        }
+    } 
+
+    
+    public function getSubmitmonthAttribute(){
+        if(!Empty($this->submitdate)){
+            return DateConversion::getThaiMonth($this->submitdate);
+        }else{
+            return '';
+        }
+    } 
+
+    public function fiscalYear($date) {
+        // วันที่ที่ต้องการตรวจสอบ
+        list($year, $month, $day) = explode("-", $date);
+        // วันที่ที่ส่งมา (mktime)
+        $cday = mktime(0, 0, 0, $month, $day, $year);
+        // ปีงบประมาณตามค่าที่ส่งมา (mktime)
+        $d1 = mktime(0, 0, 0, 10, 1, $year );
+        // ปีใหม่
+        $d2 = mktime(0, 0, 0, 9, 30, $year + 1);
+        if ($cday >= $d1 && $cday < $d2) {
+            // 1 ตค. -  ธค.
+        
+        $year++;
+        
+        }
+        return $year+543;
+    }
 
 }
 
