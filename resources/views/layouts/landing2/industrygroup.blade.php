@@ -26,81 +26,44 @@
                 <!-- Skillbar Section Start -->
                <div class="rs-skillbar style1 home4">
                    <div class="cl-skill-bar">
-                      <!-- Start Skill Bar -->
                       @php
                           $total = $shareindustrygroups->sum('companybelong');
+                          $c = 0;
                       @endphp
-                      <span class="skillbar-title" style="font-size: 16px">
+
+                    @foreach ($shareindustrygroupcollections->sortByDesc('occured')->take(4) as $key => $industrygroup)
+                        @php
+                            $bg = '';
+                            if($c == 1){
+                                $bg = 'paste-bg';
+                            }else if($c == 2){
+                                $bg = 'blue-bg';
+                            }else if($c == 3){
+                                $bg = 'pink-bg';
+                            }
+                            $c++;
+                        @endphp
+                        <span class="skillbar-title" style="font-size: 16px">
                             @if (Config::get('app.locale') == 'th')
-                                {{$shareindustrygroups[0]->nameth}}
+                                {{$industrygroup['thname']}} ({{$industrygroup['occured']}} โครงการ)
                             @else
-                                {{$shareindustrygroups[0]->nameeng}}
+                            {{$industrygroup['engname']}} ({{$industrygroup['occured']}} projects)
                             @endif
                         </span>
                         @php
-                            $percent0 = 0;
-                            if($total != 0){
-                                $percent0 = round($shareindustrygroups[0]->companybelong/$total*100);
+                            $percent = 0;
+                            if($industrygroup['total'] != 0){
+                                $percent = round($industrygroup['occured']/$industrygroup['total']*100);
                             }
                         @endphp
-                      <div class="skillbar" data-percent="{{$percent0}}">
-                          <p class="skillbar-bar"></p>
-                          <span class="skill-bar-percent"></span> 
-                      </div>
-                      <!-- Start Skill Bar -->
-                      <span class="skillbar-title" style="font-size: 16px">
-                        @if (Config::get('app.locale') == 'th')
-                            {{$shareindustrygroups[1]->nameth}}
-                        @else
-                            {{$shareindustrygroups[1]->nameeng}}
-                        @endif
-                      </span>
-                      @php
-                        $percent1 = 0;
-                            if($total != 0){
-                                $percent1 = round($shareindustrygroups[1]->companybelong/$total*100);
-                            }
-                        @endphp
-                      <div class="skillbar" data-percent="{{$percent1}}">
-                          <p class="skillbar-bar paste-bg"></p>
-                          <span class="skill-bar-percent"></span> 
-                      </div>
-                      <!-- Start Skill Bar -->
-                      <span class="skillbar-title" style="font-size: 16px">
-                        @if (Config::get('app.locale') == 'th')
-                            {{$shareindustrygroups[2]->nameth}}
-                        @else
-                            {{$shareindustrygroups[2]->nameeng}}
-                        @endif
-                      </span>
-                      @php
-                        $percent2 = 0;
-                            if($total != 0){
-                                $percent2 = round($shareindustrygroups[2]->companybelong/$total*100);
-                            }
-                        @endphp
-                      <div class="skillbar" data-percent="{{$percent2}}">
-                          <p class="skillbar-bar blue-bg"></p>
-                          <span class="skill-bar-percent"></span> 
-                      </div>    
-                      <!-- Start Skill Bar -->
-                      <span class="skillbar-title" style="font-size: 16px">
-                        @if (Config::get('app.locale') == 'th')
-                            {{$shareindustrygroups[3]->nameth}}
-                        @else
-                            {{$shareindustrygroups[3]->nameeng}}
-                        @endif
-                      </span>
-                      @php
-                      $percent3 = 0;
-                          if($total != 0){
-                              $percent3= round($shareindustrygroups[3]->companybelong/$total*100);
-                          }
-                      @endphp
-                      <div class="skillbar" data-percent="{{$percent3}}">
-                          <p class="skillbar-bar pink-bg"></p>
-                          <span class="skill-bar-percent"></span> 
-                      </div>
+                        <div class="skillbar" data-percent="{{$percent}}">
+                            <p class="skillbar-bar {{$bg}}"></p>
+                            <span class="skill-bar-percent"></span> 
+                        </div>
+                    @endforeach
+
+           
+ 
 
                       <div class="btn-part mt-55">
                           <a class="readon started" href="{{route('landing.performance')}}">

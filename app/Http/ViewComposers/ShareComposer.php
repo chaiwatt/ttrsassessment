@@ -49,8 +49,17 @@ class ShareComposer
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
         $directmenus2 = DirectMenu2::get();
         $shareagent  = new Agent();
-        // $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
-
+        
+        $industrygroups = IndustryGroup::get();
+        $industrygrouparray = array();
+        $totalminitbp = MiniTBP::whereNotNull('submitdate')->count();
+        foreach ($industrygroups as $key => $industrygroup) {
+            $minitbps = MiniTBP::whereNotNull('submitdate')->where('industry_group_id',$industrygroup->id)->get();
+                if ($minitbps->count() > 0) {
+                    $industrygrouparray[] = array('name' => $industrygroup->name,'thname' => $industrygroup->nameth,'engname' => $industrygroup->nameeng, 'occured' => $minitbps->count(), 'total' => $totalminitbp);
+                }
+        }
+        $shareindustrygroupcollections = collect($industrygrouparray);
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
             ->withShareunreadmessages($shareunreadmessages)
@@ -69,6 +78,7 @@ class ShareComposer
             ->withShareindustrygroups($shareindustrygroups)
             ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext)
             ->withDirectmenus2($directmenus2)
+            ->withShareindustrygroupcollections($shareindustrygroupcollections)
             ->withShareagent($shareagent);
     }
 }

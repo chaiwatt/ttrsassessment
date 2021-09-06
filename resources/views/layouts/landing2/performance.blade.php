@@ -272,20 +272,20 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @php
+                                                        {{-- @php
                                                             $total = $shareindustrygroups->sum('companybelong');
-                                                        @endphp
-                                                        @foreach ($shareindustrygroups as $industrygroup)
+                                                        @endphp --}}
+                                                        @foreach ($shareindustrygroupcollections->sortByDesc('occured') as $industrygroup)
 
                                                         @php
                                                             $percent = 0;
-                                                            if($total != 0){
-                                                                $percent = round($industrygroup->companybelong/$total*100);
+                                                            if($industrygroup['total'] != 0){
+                                                                $percent = round($industrygroup['occured']/$industrygroup['total']*100);
                                                             }
                                                         @endphp
                                                         <tr>    
-                                                            <td> {{$industrygroup->name}} </td>  
-                                                            <td style="text-align: center"> {{$industrygroup->projectbelong}} </td> 
+                                                            <td> {{$industrygroup['name']}} </td>  
+                                                            <td style="text-align: center"> {{$industrygroup['occured']}} </td> 
                                                             {{-- <td> {{$percent}} </td>    --}}
                                                         </tr>
                                                         @endforeach
