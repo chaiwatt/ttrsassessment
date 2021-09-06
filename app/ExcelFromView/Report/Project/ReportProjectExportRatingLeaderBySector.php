@@ -35,38 +35,134 @@ class ReportProjectExportRatingLeaderBySector implements FromView,ShouldAutoSize
     }
     public function view(): View
     {
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
     
-        $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
-        $leaders = User::whereIn('id',$leaderarray)->get();
-        $fulltbparray = ProjectAssignment::where('leader_id',$this->leader)->pluck('full_tbp_id')->toArray();
-        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        // $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
+        // $leaders = User::whereIn('id',$leaderarray)->get();
+        // $fulltbparray = ProjectAssignment::where('leader_id',$this->leader)->pluck('full_tbp_id')->toArray();
+        // $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
         
-        $sectors = Sector::get();
-        $provincearray = Province::where('map_code',$this->sector)->pluck('id')->toArray();
-        $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
-        $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
-        $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+        // $sectors = Sector::get();
+        // $provincearray = Province::where('map_code',$this->sector)->pluck('id')->toArray();
+        // $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+        // $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps3 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
     
-        $_intersec = array();
-        foreach($fulltbps1 as $f1) {
-            if (in_array($f1,$fulltbps2)) {
-                array_push($_intersec,$f1);
-            } 
-        }
+        // $_intersec = array();
+        // foreach($fulltbps1 as $f1) {
+        //     if (in_array($f1,$fulltbps2)) {
+        //         array_push($_intersec,$f1);
+        //     } 
+        // }
     
-        $intersec = array();
-        foreach($_intersec as $f1) {
-            if (in_array($f1,$fulltbps3)) {
-                array_push($intersec,$f1);
-            } 
-        }
+        // $intersec = array();
+        // foreach($_intersec as $f1) {
+        //     if (in_array($f1,$fulltbps3)) {
+        //         array_push($intersec,$f1);
+        //     } 
+        // }
 
-        $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+        // $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+
+        if($this->leader == 0 && $this->sector == 0){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $minitbparray)->get();
+        }else if($this->leader != 0 && $this->sector != 0){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+            $fulltbparray = ProjectAssignment::where('leader_id',$this->leader)->pluck('full_tbp_id')->toArray();
+            $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+            
+            $provincearray = Province::where('map_code',$this->sector)->pluck('id')->toArray();
+            $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+            $_intersec = array();
+            foreach($fulltbps1 as $f1) {
+                if (in_array($f1,$fulltbps2)) {
+                    array_push($_intersec,$f1);
+                } 
+            }
+    
+            $intersec = array();
+            foreach($_intersec as $f1) {
+                if (in_array($f1,$fulltbps3)) {
+                    array_push($intersec,$f1);
+                } 
+            }
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+        }else if($this->leader == 0 && $this->sector != 0){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+            $fulltbparray = ProjectAssignment::pluck('full_tbp_id')->toArray();
+            $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+            
+            $provincearray = Province::where('map_code',$this->sector)->pluck('id')->toArray();
+            $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+            $_intersec = array();
+            foreach($fulltbps1 as $f1) {
+                if (in_array($f1,$fulltbps2)) {
+                    array_push($_intersec,$f1);
+                } 
+            }
+    
+            $intersec = array();
+            foreach($_intersec as $f1) {
+                if (in_array($f1,$fulltbps3)) {
+                    array_push($intersec,$f1);
+                } 
+            }
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+
+        }else if($this->leader != 0 && $this->sector == 0){
+            $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+            $fulltbparray = ProjectAssignment::where('leader_id',$this->leader)->pluck('full_tbp_id')->toArray();
+            $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+            
+            $provincearray = Province::pluck('id')->toArray();
+            $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
+            $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
+            $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+    
+            $_intersec = array();
+            foreach($fulltbps1 as $f1) {
+                if (in_array($f1,$fulltbps2)) {
+                    array_push($_intersec,$f1);
+                } 
+            }
+    
+            $intersec = array();
+            foreach($_intersec as $f1) {
+                if (in_array($f1,$fulltbps3)) {
+                    array_push($intersec,$f1);
+                } 
+            }
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+        }
+        
+
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

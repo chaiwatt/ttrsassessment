@@ -55,10 +55,10 @@ class DashboardAdminEvaluationResultController extends Controller
     public function Index(){
         $auth = Auth::user();
         $fulltbps = FullTbp::get();
-        NotificationBubble::where('target_user_id',$auth->id)
-                            ->where('notification_category_id',3)
-                            ->where('notification_sub_category_id',9)
-                            ->where('status',0)->delete();
+        // NotificationBubble::where('target_user_id',$auth->id)
+        //                     ->where('notification_category_id',3)
+        //                     ->where('notification_sub_category_id',9)
+        //                     ->where('status',0)->delete();
         NotificationBubble::where('target_user_id',$auth->id)
                             ->where('notification_category_id',3)
                             ->where('notification_sub_category_id',10)

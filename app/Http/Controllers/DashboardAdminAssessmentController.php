@@ -45,8 +45,7 @@ class DashboardAdminAssessmentController extends Controller
 {
     public function Index(){
         $auth = Auth::user();
-
-
+        // return 'ok';
         NotificationBubble::where('target_user_id',$auth->id)
                         ->where('notification_category_id',3) // notification_category_id 1 = โครงการ
                         ->where('notification_sub_category_id',9) // notification_sub_category_id 7 = การลงคะแนน
