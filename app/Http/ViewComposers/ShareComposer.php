@@ -6,6 +6,7 @@ use App\Model\Tag;
 use App\Model\Menu;
 use App\Model\Page;
 use App\Model\Slide;
+use App\Model\MiniTBP;
 use App\Model\FrontPage;
 use App\Model\DirectMenu;
 use App\Model\HeaderText;
@@ -14,6 +15,7 @@ use App\Model\DirectMenu2;
 use App\Model\GeneralInfo;
 use Illuminate\View\View; 
 use App\Model\PageCategory;
+use Jenssegers\Agent\Agent;
 use App\Model\IndustryGroup;
 use App\Model\WebsiteLayout;
 use App\Model\HomepagePillar;
@@ -22,7 +24,6 @@ use App\Model\HomepageService;
 use App\Model\NotificationBubble;
 use App\Model\HomepagePillarSection;
 use App\Model\HomepageIndustryGroupText;
-use Jenssegers\Agent\Agent;
 
 class ShareComposer 
 { 
@@ -48,6 +49,7 @@ class ShareComposer
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
         $directmenus2 = DirectMenu2::get();
         $shareagent  = new Agent();
+        // $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
 
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)

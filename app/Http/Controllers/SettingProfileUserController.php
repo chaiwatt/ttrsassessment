@@ -118,9 +118,6 @@ class SettingProfileUserController extends Controller
             ]);
         }
         $company = Company::where('user_id',$auth->id)->first();
-        
-        // $file = $request->picture; 
-        // $filelocation = $company->logo;
          
         $paidupcapitaldate=null;
         if(!Empty($request->paidupcapitaldate)){
@@ -208,6 +205,7 @@ class SettingProfileUserController extends Controller
 
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
+                $minitbp->industry_group_id = $company->industry_group_id;
                 $minitbp->contactname = $auth->name;
                 $minitbp->contactprefix = $user->prefix_id;
                 $minitbp->contactposition = $user->position;
@@ -318,7 +316,7 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
-            return redirect()->back()->withSuccess('แก้ไขข้อมูลProfileสำเร็จ'); 
+            return redirect()->back()->withSuccess('แก้ไขข้อมูล Profile สำเร็จ'); 
         }
     }
 }

@@ -51,9 +51,11 @@ class AssessmentController extends Controller
                 $businessplan->company_id = $request->companyid;
                 $businessplan->business_plan_status_id = 1;
                 $businessplan->save();
+                $company = Company::find($request->companyid);
 
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
+                $minitbp->industry_group_id = $company->industry_group_id;
                 $minitbp->save();
 
                 $fulltbp = new FullTbp();

@@ -17,6 +17,7 @@ class CreateMiniTBPSTable extends Migration
             $table->id();
             $table->unsignedBigInteger('business_plan_id');
             $table->foreign('business_plan_id')->references('id')->on('business_plans')->onDelete('cascade');
+            $table->unsignedBigInteger('industry_group_id')->nullable();
             $table->date('submitdate')->nullable();
             $table->char('ref_doc',15)->nullable();
             $table->string('minitbp_code',20)->nullable();

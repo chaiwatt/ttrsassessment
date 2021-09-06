@@ -18,7 +18,7 @@ class CreateIndustryGroupsTable extends Migration
             $table->string('name',250)->comment('กลุ่มธุรกิจ เช่น เกษตรและอุตสาหกรรมอาหาร');
             $table->string('nameth',250)->nullable();
             $table->string('nameeng',250)->nullable();
-            $table->char('companybelong',2)->default(0);
+            $table->char('companybelong',5)->default(0);
             $table->timestamps();
         });
     }

@@ -97,6 +97,7 @@ class BusinessPlanController extends Controller
 
             $minitbp = new MiniTBP();
             $minitbp->business_plan_id = $businessplan->id;
+            $minitbp->industry_group_id = $company->industry_group_id;
             $minitbp->project = $request->projectname;
             $minitbp->contactname = $auth->name;
             $minitbp->contactprefix = $auth->prefix_id;
