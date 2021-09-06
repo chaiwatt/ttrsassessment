@@ -53,11 +53,12 @@
 										<label>เลือก Lead</label>
                                         @php
                                             $check = Request::get('leader');
-                                            if(Empty($check)){
-                                                $check = $firstleader;
-                                            }
+                                            // if(Empty($check)){
+                                            //     $check = $firstleader;
+                                            // }
                                         @endphp
-										<select name="leader" data-placeholder="เลือก ISIC Code" value="{{old('leader')}}"  class="form-control form-control-lg form-control-select2">
+										<select name="leader" data-placeholder="เลือก leader" value="{{old('leader')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($leaders as $leader)
                                                 <option value="{{$leader->id}}" @if ($leader->id == $check) selected @endif >{{$leader->name}} {{$leader->lastname}}</option> 
 											@endforeach
@@ -68,6 +69,7 @@
 									<div class="form-group">
 										<label>เลือกประเภทอุตสาหกรรม</label>
 										<select name="industrygroup" data-placeholder="เลือกประเภทอุตสาหกรรม" value="{{old('industrygroup')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($industrygroups as $industrygroup)
                                                 <option value="{{$industrygroup->id}}" @if ($industrygroup->id == Request::get('industrygroup')) selected @endif >{{$industrygroup->name}}</option> 
 											@endforeach
@@ -90,6 +92,8 @@
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center;width:1%;white-space: nowrap">Leader</th> 
+                                                <th style="text-align: center">กลุ่มอุตสาหกรรม</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -99,6 +103,8 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
+                                                    <td style="width:1%;white-space: nowrap">{{$fulltbp->minitbp->projectleader}}</td>
+                                                    <td >{{$fulltbp->minitbp->businessplan->company->industrygroup->name}}</td>
                                                 </tr>
                                                 @endif
                                             @endforeach

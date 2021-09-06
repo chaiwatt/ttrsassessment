@@ -52,8 +52,9 @@
 									<div class="form-group">
 										<label>เลือกปี</label>
 										<select name="year" data-placeholder="ปี" value="{{old('year')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($years as $year)
-                                                <option value="{{$year}}" @if ($year == Request::get('year')) selected @endif >{{$year}}</option> 
+                                                <option value="{{$year}}" @if ($year == Request::get('year')) selected @endif >{{$year+543}}</option> 
 											@endforeach
 										</select>
 									</div>
@@ -72,8 +73,10 @@
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="text-align: center">เลขที่โครงการ</th> 
+                                                <th style="text-align: center;width:1%;white-space: nowrap">วันที่ยกเลิก</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center">ปี</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -81,9 +84,10 @@
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
                                                     <tr>
                                                         <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
+                                                        <td style="text-align: center">{{$fulltbp->canceldateth}}</td>
                                                         <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                         <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
-                                                        
+                                                        <td style="text-align: center">{{$fulltbp->cancelyear}}</td>
                                                     </tr>
                                                 @endif
                                             @endforeach

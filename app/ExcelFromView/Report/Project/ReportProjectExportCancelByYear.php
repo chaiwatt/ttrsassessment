@@ -18,12 +18,21 @@ class ReportProjectExportCancelByYear implements FromView,ShouldAutoSize,WithTit
     protected $year;
     protected $projectname;
     function __construct($year) {
-        $this->projectname = ' โครงการยกเลิก พ.ศ.' . (intVal($year)+543) ;
+        $this->projectname = 'โครงการยกเลิก';
+        if($year != 0){
+            $this->projectname = 'โครงการยกเลิก พ.ศ.' . (intVal($year)+543) ;
+        }
+       
         $this->year = $year;
     }
     public function view(): View
     {
-        $fulltbps = FullTbp::whereYear('canceldate',$this->year)->whereNotNull('canceldate')->get();
+        if($this->year == 0){
+            $fulltbps = FullTbp::whereNotNull('canceldate')->get();
+        }else{
+            $fulltbps = FullTbp::whereYear('canceldate',$this->year)->whereNotNull('canceldate')->get();
+        }
+        
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

@@ -62,6 +62,7 @@
 									<div class="form-group">
 										<label>เลือกขนาดธุรกิจ</label>
 										<select name="companysize" data-placeholder="เลือกขนาดธุรกิจ" value="{{old('companysize')}}"  class="form-control form-control-lg form-control-select2">
+                                            <option value="0" > == เลือกทั้งหมด ==</option>
 											@foreach ($companysizes as $companysize)
                                                 <option value="{{$companysize->id}}" @if ($companysize->id == Request::get('companysize')) selected @endif >{{$companysize->name}}</option> 
 											@endforeach
@@ -84,6 +85,8 @@
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 
                                                 <th style="text-align: center">โครงการ</th> 
                                                 <th style="text-align: center">บริษัท</th> 
+                                                <th style="text-align: center">ขนาดธุรกิจ</th> 
+                                                <th style="text-align: center">เกรด</th> 
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -93,6 +96,9 @@
                                                     <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
+                                                    <td style="text-align: center">{{$fulltbp->minitbp->businessplan->company->companysize}}</td>
+                                                    <td style="text-align: center">{{$fulltbp->projectgrade->grade}}</td>
+                                                   
                                                 </tr>
                                                 @endif
                                             @endforeach

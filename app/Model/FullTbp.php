@@ -463,6 +463,14 @@ class FullTbp extends Model
         }
     }
 
+    public function getCanceldateyearbudgetthAttribute(){
+        if(!Empty($this->canceldate)){
+            return  $this->fiscalYear($this->canceldate);
+        }else{
+           return "" ;
+        }
+    }
+
     public function getSubmitdateyearthAttribute(){
         if(!Empty($this->submitdate)){
             $check = DateConversion::engToThaiDate($this->submitdate);
@@ -499,6 +507,25 @@ class FullTbp extends Model
         }
         return $year+543;
     }
+
+
+    public function getCancelyearAttribute(){
+        if(!Empty($this->canceldate)){
+            return intVal(explode("/",$this->canceldate)[0])+543;
+        }else{
+            return '';
+        }
+    } 
+
+    public function getCancelmonthAttribute(){
+        if(!Empty($this->canceldate)){
+            return DateConversion::getThaiMonth($this->canceldate);
+        }else{
+            return '';
+        }
+    } 
+
+
 
 }
 
