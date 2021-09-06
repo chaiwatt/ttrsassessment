@@ -266,8 +266,8 @@
                                                 <table class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr class="bg-info text-white">
-                                                            <th>กลุ่มอุตสาหกรรม</th> 
-                                                            <th>จำนวนโครงการที่รับการประเมิน</th> 
+                                                            <th style="text-align: center">กลุ่มอุตสาหกรรม</th> 
+                                                            <th style="text-align: center">จำนวนโครงการที่รับการประเมิน</th> 
                                                             {{-- <th>ร้อยละประเมิน</th>   --}}
                                                         </tr>
                                                     </thead>
@@ -285,7 +285,7 @@
                                                         @endphp
                                                         <tr>    
                                                             <td> {{$industrygroup->name}} </td>  
-                                                            <td> {{$industrygroup->projectbelong}} </td> 
+                                                            <td style="text-align: center"> {{$industrygroup->projectbelong}} </td> 
                                                             {{-- <td> {{$percent}} </td>    --}}
                                                         </tr>
                                                         @endforeach
