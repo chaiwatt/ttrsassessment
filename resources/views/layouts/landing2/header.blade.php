@@ -90,6 +90,12 @@
                                 <nav class="rs-menu pr-0 md-pr-0">
                                     <ul id="onepage-menu" class="nav-menu">
                                         @foreach($directmenus2 as $key => $menu)
+                                        @php
+                                            $menuurl = url('').'/'.$menu->url;
+                                            if(filter_var($menu->url, FILTER_VALIDATE_URL) == true){
+                                                $menuurl = $menu->url;
+                                            }
+                                        @endphp
                                             @if (Config::get('app.locale') == 'th')
                                                 @if ($key == 0)
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
@@ -98,7 +104,7 @@
                                                                 @if (substr("$menu->url",0,1) == '#')
                                                                         <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                                     @else
-                                                                        <li> <a href="//{{$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                        <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                                 @endif    
                                                             @else
                                                                 @if ($shareagent->isPhone() == 1)
@@ -123,10 +129,10 @@
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
                                                     @else
                                                     @if ($menu->name != 'เข้าสู่ระบบ')
-                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                        <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
                                                     @else
                                                         @if ($shareagent->isPhone() == 1)
-                                                            <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
+                                                            <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
                                                         @endif
                                                     @endif                                                       
                                                 @endif

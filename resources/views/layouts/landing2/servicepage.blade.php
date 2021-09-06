@@ -132,47 +132,54 @@
                                         <nav class="rs-menu pr-70 md-pr-0">
                                             <ul id="onepage-menu" class="nav-menu">
                                                 @foreach($directmenus2 as $key => $menu)
-                                                @if (Config::get('app.locale') == 'th')
-                                                    @if ($key == 0)
-                                                            <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                        @else
-                                                            @if ($menu->name != 'เข้าสู่ระบบ')
-                                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                                @else
-                                                                    @if ($shareagent->isPhone() == 1)
-                                                                        <li>
-                                                                            @if (!Auth::check())
-                                                                                <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                    @php
+                                                        $menuurl = url('').'/'.$menu->url;
+                                                        if(filter_var($menu->url, FILTER_VALIDATE_URL) == true){
+                                                            $menuurl = $menu->url;
+                                                        }
+                                                    @endphp
+                                                    @if (Config::get('app.locale') == 'th')
+                                                        @if ($key == 0)
+                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                            @else
+                                                                @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                        @if (substr("$menu->url",0,1) == '#')
+                                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                                             @else
-                                                                                @if (Auth::user()->user_type_id >= 4)
-                                                                                    <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
-                                                                                @elseif(Auth::user()->user_type_id == 3)
-                                                                                    <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                        @endif    
+                                                                    @else
+                                                                        @if ($shareagent->isPhone() == 1)
+                                                                            <li>
+                                                                                @if (!Auth::check())
+                                                                                    <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
                                                                                 @else
-                                                                                    <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @if (Auth::user()->user_type_id >= 4)
+                                                                                        <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @elseif(Auth::user()->user_type_id == 3)
+                                                                                        <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @else
+                                                                                        <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @endif
                                                                                 @endif
-                                                                            @endif
-                                                                        </li>
-                                                                    @endif
-                                                            @endif
-                                                           
-                                                    @endif
-                                                @else
-                                                    @if ($key == 0)
-                                                            <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                        @else
-                                                        @if ($menu->name != 'เข้าสู่ระบบ')
-                                                            <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                        @else
-                                                            @if ($shareagent->isPhone() == 1)
-                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
-                                                            @endif
+                                                                            </li>
+                                                                        @endif
+                                                                @endif                                                      
                                                         @endif
-                                                            
+                                                    @else
+                                                        @if ($key == 0)
+                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                            @else
+                                                            @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                            @else
+                                                                @if ($shareagent->isPhone() == 1)
+                                                                    <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
+                                                                @endif
+                                                            @endif                                                       
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            @endforeach
-        
+                                                @endforeach
                                             </ul> 
                                         </nav>                                     
                                     </div> <!-- //.main-menu -->                               

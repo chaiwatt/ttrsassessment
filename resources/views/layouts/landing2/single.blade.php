@@ -48,48 +48,44 @@
                 <div class="bg-transparent topbar-area style2 modify1">
                     <div class="container">
                         <div class="row y-middle">
-                            <div class="col-lg-8">
+                            <div class="col-lg-7">
                                 <div class="topbar-contact">
                                    <ul>
                                        <li>
                                            <i class="flaticon-email"></i>
-                                           <a href="mailto:{{$generalinfo->email}}">{{$generalinfo->email}}</a>
+                                           <a href="mailto:{{$generalinfo->email}}" style="font-size: 16px"> {{$generalinfo->email}}</a>
                                        </li>
                                        <li>
                                            <i class="flaticon-call"></i>
-                                           {{-- <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a> --}}
                                            @if (Config::get('app.locale') == 'th')
-                                                <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a>
-                                            @else
-                                                <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} Ext {{$generalinfo->phone1_ext}}</a>
-                                            @endif
+                                                 <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} ต่อ {{$generalinfo->phone1_ext}}</a>
+                                             @else
+                                                 <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} Ext {{$generalinfo->phone1_ext}}</a>
+                                             @endif
                                        </li>
-                                       {{-- <li>
-                                           <i class="flaticon-location"></i>
-                                           05 kandi BR. New York
-                                       </li> --}}
                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 text-right">
+                            <div class="col-lg-5 text-right">
                                 <div class="toolbar-sl-share ">
                                     <ul>
-                                         {{-- <li class="opening"> <em><i class="flaticon-clock"></i> 08:00am-6:00pm</em> </li> --}}
                                          <li>
                                              @if (!Auth::check())
-                                                 <a href="{{route('login')}}" ><i class="fa fa-sign-in" aria-hidden="true"></i> 
+                                             <a href="{{route('register')}}" style="font-size: 16px"><i class="fa fa-user" aria-hidden="true"></i> 
+                                                 {{trans('lang.register')}} &nbsp;&nbsp;
+                                             <a href="{{route('login')}}" style="font-size: 16px"><i class="fa fa-sign-in" aria-hidden="true"></i> 
                                                  {{trans('lang.login')}}
                                              @else
                                                  @if (Auth::user()->user_type_id >= 4)
-                                                     <a href="{{route('dashboard.admin.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                                     <a href="{{route('dashboard.admin.report')}}" class="linkedin sarabun" style="text-decoration: none" ><i class="fa fa-user"></i> <span style="font-size: 16px"> {{trans('lang.dashboard')}}</span> </a>
                                                  @elseif(Auth::user()->user_type_id == 3)
-                                                     <a href="{{route('dashboard.expert.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                                     <a href="{{route('dashboard.expert.report')}}" class="linkedin sarabun" style="text-decoration: none" style="font-size: 16px"><i class="fa fa-user"></i> <span style="font-size: 16px"> {{trans('lang.dashboard')}}</span> </a>
                                                  @else
-                                                     <a href="{{route('dashboard.company.report')}}" class="linkedin sarabun" style="text-decoration: none"><i class="fa fa-user"></i> {{trans('lang.dashboard')}} </a>
+                                                     <a href="{{route('dashboard.company.report')}}" class="linkedin sarabun" style="text-decoration: none" style="font-size: 16px"><i class="fa fa-user"></i> <span style="font-size: 16px"> {{trans('lang.dashboard')}}</span> </a>
                                                  @endif
          
                                                  &nbsp
-                                                 <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> 
+                                                 <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-size: 16px"><i class="fa fa-sign-out" aria-hidden="true"></i> 
                                                          {{trans('lang.signout')}}
                                                      
                                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -99,11 +95,11 @@
                                                  </a>
                                      </li>
                                          <li>
-                                             @if (Config::get('app.locale') == 'th')
-                                                 <li><a href="{{route('change',['locale' => 'en'])}}"><i class="fa fa-reply-all"></i> ไทย</a></li>
-                                             @else
-                                                 <li><a href="{{route('change',['locale' => 'th'])}}"><i class="fa fa-reply-all"></i> English</a></li>
-                                             @endif
+                                             {{-- @if (Config::get('app.locale') == 'th') --}}
+                                                 <li><a href="{{route('change',['locale' => 'th'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/thflag.png')}}" alt=""> ไทย</a></li>
+                                             {{-- @else --}}
+                                                 <li><a href="{{route('change',['locale' => 'en'])}}" class="thai-font" style="font-size: 16px"><img class="flag" src="{{asset('assets/landing2/images/flag/usflag.png')}}" alt=""> English</a></li>
+                                             {{-- @endif --}}
                                          </li>
                                  
                                     </ul>
@@ -136,48 +132,55 @@
                                         <nav class="rs-menu pr-70 md-pr-0">
                                             <ul id="onepage-menu" class="nav-menu">
                                                 @foreach($directmenus2 as $key => $menu)
-                                                @if (Config::get('app.locale') == 'th')
-                                                    @if ($key == 0)
-                                                            <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                        @else
-                                                            @if ($menu->name != 'เข้าสู่ระบบ')
-                                                                        <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                                @else
-                                                                    @if ($shareagent->isPhone() == 1)
-                                                                        <li>
-                                                                            @if (!Auth::check())
-                                                                                <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                    @php
+                                                        $menuurl = url('').'/'.$menu->url;
+                                                        if(filter_var($menu->url, FILTER_VALIDATE_URL) == true){
+                                                            $menuurl = $menu->url;
+                                                        }
+                                                    @endphp
+                                                    @if (Config::get('app.locale') == 'th')
+                                                        @if ($key == 0)
+                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                            @else
+                                                                @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                        @if (substr("$menu->url",0,1) == '#')
+                                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                                             @else
-                                                                                @if (Auth::user()->user_type_id >= 4)
-                                                                                    <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
-                                                                                @elseif(Auth::user()->user_type_id == 3)
-                                                                                    <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                        @endif    
+                                                                    @else
+                                                                        @if ($shareagent->isPhone() == 1)
+                                                                            <li>
+                                                                                @if (!Auth::check())
+                                                                                    <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
                                                                                 @else
-                                                                                    <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @if (Auth::user()->user_type_id >= 4)
+                                                                                        <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @elseif(Auth::user()->user_type_id == 3)
+                                                                                        <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @else
+                                                                                        <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                                    @endif
                                                                                 @endif
-                                                                            @endif
-                                                                        </li>
-                                                                    @endif
-                                                            @endif
-                                                           
-                                                    @endif
-                                                @else
-                                                    @if ($key == 0)
-                                                            <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                        @else
-                                                        @if ($menu->name != 'เข้าสู่ระบบ')
-                                                            <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                        @else
-                                                            @if ($shareagent->isPhone() == 1)
-                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
-                                                            @endif
+                                                                            </li>
+                                                                        @endif
+                                                                @endif                                                      
                                                         @endif
-                                                            
+                                                    @else
+                                                        @if ($key == 0)
+                                                                <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                            @else
+                                                            @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                            @else
+                                                                @if ($shareagent->isPhone() == 1)
+                                                                    <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
+                                                                @endif
+                                                            @endif                                                       
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            @endforeach
-        
-                                            </ul> 
+                                                @endforeach
+                                            </ul>  
                                         </nav>                                     
                                     </div> <!-- //.main-menu -->                               
                                 </div>

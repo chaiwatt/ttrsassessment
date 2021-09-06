@@ -14,6 +14,7 @@
 
 </head>
 <body>
+
   <!-- ======= Top Bar ======= -->
   @include('layouts.landing.topbar')
 
