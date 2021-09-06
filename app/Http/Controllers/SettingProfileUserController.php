@@ -307,6 +307,7 @@ class SettingProfileUserController extends Controller
                 $fulltbpreturnofinvestment->save();               
                 return redirect()->route('dashboard.company.project.minitbp.edit',['id'=>$minitbp->id])->withSuccess('บันทึกข้อมูลสำเร็จ กรุณากรอกแบบคำขอเพื่อขอรับการประเมินธุรกิจ'); 
         }else{
+            
             if($request->status == 1){
                 $businessplan->where('company_id',$company->id)->first()->update([
                     'business_plan_active_status_id' => '1'
@@ -316,6 +317,13 @@ class SettingProfileUserController extends Controller
                     'business_plan_active_status_id' => '2'
                 ]);
             }
+
+            $businessplanarr = BusinessPlan::where('company_id',$company->id)->pluck('id')->toArray();
+            MiniTBP::whereIn('business_plan_id',$businessplanarr)->update([
+                'industry_group_id' => $company->industry_group_id
+            ]);
+            
+
             return redirect()->back()->withSuccess('แก้ไขข้อมูล Profile สำเร็จ'); 
         }
     }

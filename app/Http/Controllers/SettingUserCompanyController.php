@@ -138,6 +138,7 @@ class SettingUserCompanyController extends Controller
 
                 $minitbp = new MiniTBP();
                 $minitbp->business_plan_id = $businessplan->id;
+                $minitbp->industry_group_id = $request->industrygroup;
                 $minitbp->save();
 
                 $fulltbp = new FullTbp();
