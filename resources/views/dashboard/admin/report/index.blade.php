@@ -631,7 +631,7 @@
                             <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$businessplans->where('business_plan_status_id','>=',9)->count()}}</h1>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">โครงการที่ประเมินเสร็จสิ้น</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">ประเมินเสร็จสิ้น</a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -1922,17 +1922,11 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/interaction/main.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/aos/aos.js')}}"></script>
-{{-- <script src='https://unpkg.com/popper.js/dist/umd/popper.min.js'></script>
-<script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script> --}}
 
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-{{-- <script src="{{asset('assets/dashboard/js/plugins/chart/chart.2.6.0.js')}}"></script> --}}
-{{-- <script src="{{asset('assets/dashboard/js/plugins/chart/chart.js')}}"></script> --}}
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
 
