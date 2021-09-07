@@ -58,7 +58,7 @@
                             <table class="table table-bordered mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
-                                        <th style="text-align: center">#</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">#</th>
                                         <th style="text-align: center">ชื่อ-นามสกุล</th> 
                                         <th style="text-align: center">อีเมล</th> 
                                         <th style="width:1%;white-space: nowrap;text-align: center">กลุ่มผู้ใช้งาน</th>    
@@ -78,9 +78,9 @@
                                                 $userprefix = $user->alter_prefix;
                                             }
                                         @endphp
-                                        <td style="width:1%;white-space: nowrap"> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
+                                        <td style="white-space: nowrap"> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
                                         <td> {{$user->email}}</td>    
-                                        <td> 
+                                        <td style="white-space: nowrap;"> 
                                             @if ($user->user_type_id == 1 )
                                                 @if ($user->user_group_id == 1)
                                                         ผู้ขอรับการประเมินนิติบุคคล
