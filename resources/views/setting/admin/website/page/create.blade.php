@@ -165,11 +165,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
+                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg stringformat100">
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg"></textarea>
+                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat200" style="font-size:16px"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-group">                                                
@@ -285,6 +285,7 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 
 <script  type="text/javascript">
 	var route = {
@@ -303,6 +304,8 @@
 			}
         });
     });
+
+    
     $("#file").on('change', function() {
         $("#filename").val(this.value);
     });

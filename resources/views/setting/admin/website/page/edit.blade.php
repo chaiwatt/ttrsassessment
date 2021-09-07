@@ -165,11 +165,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{$page->name}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
+                                            <input type="text"  name="title" value="{{$page->name}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg stringformat100">
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg">{{$page->header}}</textarea>
+                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat200">{{$page->header}}</textarea>
                                         </div>
                                         <div class="form-group">                                                
                                             <label>หมวดหมู่</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>
@@ -332,6 +332,7 @@
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
 <script src="{{ asset('assets/dashboard/js/plugins/media/fancybox.min.js') }}"></script>
 <script src="{{ asset('assets/dashboard/js/demo_pages/gallery.js') }}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 
 <script  type="text/javascript">
 	var route = {

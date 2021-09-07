@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class PagesTableSeeder extends Seeder
@@ -45,6 +46,8 @@ class PagesTableSeeder extends Seeder
                 'feature_image_id' => 1,
                 'feature_image_thumbnail_id' => 1,
                 'user_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ],
             [
                 'page_category_id' => 1,
@@ -56,6 +59,8 @@ class PagesTableSeeder extends Seeder
                 'feature_image_id' => 2,
                 'feature_image_thumbnail_id' => 2,
                 'user_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ],
             [
                 'page_category_id' => 1,
@@ -67,6 +72,8 @@ class PagesTableSeeder extends Seeder
                 'feature_image_id' => 3,
                 'feature_image_thumbnail_id' => 3,
                 'user_id' => 1,
+                'created_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString(),
+                'updated_at' => Carbon::now(new DateTimeZone('Asia/Bangkok'))->toDateTimeString()
             ]
         ]);
         DB::table('page_tags')->insert([
