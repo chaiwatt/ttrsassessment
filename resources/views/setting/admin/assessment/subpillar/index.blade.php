@@ -63,7 +63,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="testtopictable">
+                            <table class="table table-bordered table-striped mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">Pillar</th>                           
