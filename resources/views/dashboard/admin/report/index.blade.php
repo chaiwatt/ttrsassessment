@@ -573,7 +573,9 @@
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalproject}}</h1>
+                            <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalproject}}</h1></a>  
+                            
+                            
                         </div>
                         <div>
                           <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white">จำนวนโครงการ</a>  
@@ -589,7 +591,8 @@
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalminitbp}}</h1>
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalminitbp}}</h1></a> 
+                            
                         </div>
                         <div>
                             <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
@@ -603,7 +606,8 @@
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfulltbp}}</h1>
+                            
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfulltbp}}</h1></a> 
                         </div>
                         <div>  
                             <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
@@ -616,7 +620,8 @@
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalonprocess}}</h1>
+                            
+                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalonprocess}}</h1></a>
                         </div>
                         <div> 
                             <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
@@ -629,7 +634,8 @@
                 <div class="card bg-green-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfinish}}</h1>
+                            
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfinish}}</h1></a>
                         </div>
                         <div> 
                             <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">ประเมินเสร็จสิ้น</a>
