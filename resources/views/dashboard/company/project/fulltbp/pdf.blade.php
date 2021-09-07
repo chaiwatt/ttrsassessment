@@ -719,7 +719,7 @@
 
                     {{-- </div> --}}
 
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong>
+                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong>
                         <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                     </div>
 

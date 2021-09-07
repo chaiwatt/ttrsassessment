@@ -1,75 +1,11 @@
 @inject('provider', 'App\Http\Controllers\DashboardAdminEvaluationResultController')
-
-@php
-    // function splitText($string,$len)
-    // {
-   
-    //     $myArray = explode('|', $string);
-    //     $new_string = "";
-    //     $tmp_string = "";
-    //     $i=0;
-    //     foreach($myArray as $key => $word){
-    //         $tmp_string .= $word;
-    //         $strlen =  getStrLenTH($tmp_string);
-    //         if($strlen > $len ){
-    //             $tmp_string  = "";
-    //                 $new_string .=  $word . '<br>';
-    //             $i++;
-               
-    //         }else{
-    //             $new_string .= $word;
-    //         }
-    //     }
-    //     $check = substr($new_string, -5);
-    //     if($check  == '<br>'){
-    //         return (substr($new_string, 0, -4));
-    //     }
-    //     else{
-    //         return ($new_string);
-    //     }
-    // }
-
-    // function getStrLenTH($string)
-    // {
-    //     $array = getMBStrSplit($string);
-    //     $count = 0;
-    //     foreach($array as $value)
-    //     {
-    //         $ascii = ord(iconv("UTF-8", "TIS-620", $value ));
-            
-    //         if( !( $ascii == 209 ||  ($ascii >= 212 && $ascii <= 218 ) || ($ascii >= 231 && $ascii <= 238 )) )
-    //         {
-    //             $count += 1;
-    //         }
-    //     }
-    //     return $count;
-    // }
-
-    // function getMBStrSplit($string, $split_length = 1){
-    //     mb_internal_encoding('UTF-8');
-    //     mb_regex_encoding('UTF-8'); 
-        
-    //     $split_length = ($split_length <= 0) ? 1 : $split_length;
-    //     $mb_strlen = mb_strlen($string, 'utf-8');
-    //     $array = array();
-    //     $i = 0; 
-        
-    //     while($i < $mb_strlen)
-    //     {
-    //         $array[] = mb_substr($string, $i, $split_length);
-    //         $i = $i+$split_length;
-    //     }  
-    //     return $array;
-    // }
-@endphp
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=1252">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>แผนธุรกิจเทคโนโลยี</title>
+        <title>แผนธุรกิจเทคโนโลยี (ย่อ)</title>
         <link href="{{asset('assets/dashboard/css/pdf.css')}}" rel="stylesheet" type="text/css">
         <style>
             @page {
@@ -97,11 +33,6 @@
             }
             div{
                 font-size:12px !important;
-            }
-            .specifixpre{
-                font-family: "THSarabunNew";
-                margin-top: 50px !important;
-                padding: 50px !important;
             }
         </style>
     </head>
@@ -172,61 +103,42 @@
                     <div class="box bw650  mt20 " style="background-color: #bdd6ee;">
                         <div style="font-size:13px"><strong>2. ภาพรวมโครงการที่ขอรับการประเมิน</strong></div>
                     </div>
-                    <div class="ml30 mt10" style="font-size:13px"><strong>2.1 ชื่อโครงการ :</strong> {{$fulltbp->minitbp->project}}</div>
+                    <div class="ml30 mt20 "><strong>2.1 ชื่อโครงการ :</strong> {{$fulltbp->minitbp->project}}</div>
                 </div>
                 <div class="box bw650 " >
                     
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.2 ชื่อโครงการ (ภาษาอังกฤษ) :</strong> {{$fulltbp->minitbp->projecteng}}</div>
-                   
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.3 บทคัดย่อโครงการ :</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->abtract)!!}</div>
-                    </div>
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</div>
-                    </div>
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
-                    </div>
-                    {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div> --}}
-                    {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->productdetail)!!}</span></div> --}}
-                    {{-- <div style="page-break-inside: avoid;"> --}}
-                    <div class="ml30 mt0" style="font-size:13px;margin-buttom:-20px;page-break-inside: avoid;"> <strong>2.6 ข้อมูลเทคโนโลยี</strong>
-                        <div class="mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong>
-                            <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->techdev)!!}</div>
-                        </div>
-                    </div>
-
-                    <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
-                        <table class="mt5  border tbwrap" >
-                            <thead>
-                                <tr>
-                                    <th style="width:8%;font-size:13px">รายการ</th>
-                                    <th style="width:46%;font-size:13px">เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
-                                    <th style="width:46%;font-size:13px">เทคโนโลยีในโครงการ</th>
-                                <tr>
-                            </thead>
-                            <tbody>
-                                @if ($fulltbp->fulltbpprojecttechdevlevel->count() > 0)
-                                    @foreach ($fulltbp->fulltbpprojecttechdevlevel as $fulltbpprojecttechdevlevel)
-                                        <tr>
-                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpprojecttechdevlevel->technology),20)!!}</td>
-                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpprojecttechdevlevel->presenttechnology),20)!!}</td>
-                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpprojecttechdevlevel->projecttechnology),20)!!}</td>
-                                        </tr>   
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>  
-
-                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</div>
-                    </div>
-
-                    {{-- <div class="ml30" style="font-size:13px;margin-top:-10px">     --}}
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.3 บทคัดย่อโครงการ :</strong> <span >{!!$provider::FixBreak($fulltbp->abtract)!!}</span></div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.6 ข้อมูลเทคโนโลยี
+                        <div class="ml30 mt0" style="font-size:13px"> <strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
+                        <div class="mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
+                            <table class="mt5  border tbwrap" >
+                                <thead>
+                                    <tr>
+                                        <th style="width:30%;font-size:13px">รายการ</th>
+                                        <th style="width:35%;font-size:13px">เทคโนโลยีที่มีอยู่ในปัจจุบัน</th>
+                                        <th style="width:35%;font-size:13px">เทคโนโลยีในโครงการ</th>
+                                    <tr>
+                                </thead>
+                                <tbody>
+                                    @if ($fulltbp->fulltbpprojecttechdevlevel->count() > 0)
+                                        @foreach ($fulltbp->fulltbpprojecttechdevlevel as $fulltbpprojecttechdevlevel)
+                                            <tr>
+                                                <td style="font-size:13px">{{$fulltbpprojecttechdevlevel->technology}}</td>
+                                                <td style="font-size:13px">{{$fulltbpprojecttechdevlevel->presenttechnology}}</td>
+                                                <td style="font-size:13px">{{$fulltbpprojecttechdevlevel->projecttechnology}}</td>
+                                            </tr>   
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>  
+                        
                         <div style="font-size:13px;page-break-inside: avoid;">
-                            {{-- <div class="ml30 mt20" style="font-size:13px"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong><span style="text-align: justify">{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</span> </div> --}}
-                            <div class="ml0 mt5" style="font-size:13px"><strong>2.6.2 การจัดการด้านทรัพย์สินทางปัญญา </strong></div>
+                            <div class="ml30 mt20" style="font-size:13px"><strong>อุปสรรค ความเสี่ยง และโอกาสในการพัฒนาด้านเทคโนโลยี : </strong>{!!$provider::FixBreak($fulltbp->techdevproblem)!!}</div>
+                            <div class="ml30 mt5" style="font-size:13px"><strong>2.6.2 การจัดการด้านทรัพย์สินทางปัญญา </strong></div>
                             <table class="mt5  tbwrap" >
                                 <thead>
                                     <tr>
@@ -274,10 +186,10 @@
                                     </tr>
                                     <tr>
                                         <td style="font-size:13px;border-right: none !important;border-top: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer9)) checked="checked" @endif> เครื่องหมายการค้า @if($fulltbp->fulltbpprojectcertify->cer9_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer9_qty}} )@endif</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer9)) checked="checked" @endif> เครื่องหมายการค้า @if($fulltbp->fulltbpprojectcertify->cer9_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer9_qty}} ) @endif</div>
                                         </td>
                                         <td colspan="2"  style="font-size:13px;border-left: none !important;border-top: none !important;border-bottom: none !important;">
-                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer10)) checked="checked" @endif> ซื้อหรือต่อยอดทรัพย์สินทางปัญญา @if($fulltbp->fulltbpprojectcertify->cer10_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer10_qty}} )@endif</div>
+                                            <div class="ml0 mt50" style="font-size:13px"><input type="checkbox" @if (!Empty($fulltbp->fulltbpprojectcertify->cer10)) checked="checked" @endif> ซื้อหรือต่อยอดทรัพย์สินทางปัญญา @if($fulltbp->fulltbpprojectcertify->cer10_qty>0) (จำนวน: {{$fulltbp->fulltbpprojectcertify->cer10_qty}} ) @endif</div>
                                         </td>
                                     </tr >
                                     <tr>
@@ -288,58 +200,57 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div style="page-break-inside: avoid;">
+                            <div class="ml30 mt20" style="font-size:13px"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong></div>
+                            <div class="ml30" style="font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
+                        </div>
 
-                    {{-- </div> --}}
+                        <div style="page-break-inside: avoid;">
+                            <div class="ml30" style="font-size:13px"><strong>2.6.4 ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ </strong></div>
+                            <div class="ml30" style="font-size:13px">{!!$provider::FixBreak($fulltbp->standard)!!}</div>
+                        </div>
 
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
-                    </div>
-
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.4 ใบรับรองมาตรฐานต่างๆ ที่ได้รับ เช่น ISO, อย., มอก., GMP, HACCP, CMMI ฯลฯ </strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->standard)!!}</div>
                     </div>
 
                 </div>
-
-               
-                    <div class="landscape" style="width:980px !important;">
-                        <div class="ml20 mt20 " style="font-size:13px"><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart) จำนวน {{$fulltbpgant->numofmonth}}  เดือน</strong></div>
-                            <table class="mt5  border" style="width:100%">
-                                <thead>
+                <div class="landscape" style="width:980px">
+                        <div class="ml20 mt20 " style="font-size:13px"><strong>2.7 แผนการดำเนินงานโครงการ (Gantt Chart) </strong></div>
+                        <table class="mt5  border">
+                            <thead>
+                                <tr>
                                     <tr>
-                                        <tr>
-                                            <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงานของโครงการ</th> 
-                                            @foreach ($allyears as $key => $item)
-                                                @if ($item != 0)
-                                                    <th colspan="{{$item}}" class="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">{{$fulltbpgantt->startyear + $key}} </th> 
-                                                @endif
-                                            @endforeach
-                                            {{-- <th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th>  --}}
-                                        </tr>
-                                        @if ($minmonth != 0 && $maxmonth !=0)
-                                            <tr >
-                                                @for ($i = $minmonth; $i <= $maxmonth; $i++)
-                                                    <th class="text-center" style="width:30px;max-width:30px !important;font-size:12px;padding:5px;text-align:center">
-                                                        @php
-                                                            $full = 12;
-                                                            if($i%12 == 0){
-                                                                echo (12);
-                                                            }else{
-                                                                echo($i%12);
-                                                            }
-                                                        @endphp
-                                                    </th>
-                                                @endfor
-                                            </tr>
-                                        @endif
+                                        <th rowspan="2" style="padding:5px">รายละเอียดการดำเนินงาน</th> 
+                                        @foreach ($allyears as $key => $item)
+                                            @if ($item != 0)
+                                                <th colspan="{{$item}}" class="text-center">{{$fulltbpgantt->startyear + $key}} </th> 
+                                            @endif
+                                        @endforeach
+                                        {{-- <th rowspan="2" class="text-center hiddenelement" style="width: 140px">เพิ่มเติม</th>  --}}
                                     </tr>
-                                </thead>
-                                <tbody id="ganttchart_wrapper_tr">  
-                                    @foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan)
-																				
+                                    @if ($minmonth != 0 && $maxmonth !=0)
+                                        <tr >
+                                            @for ($i = $minmonth; $i <= $maxmonth; $i++)
+                                                <th class="text-center" style="width: 40px;font-size:10px;padding:5px">
+                                                    @php
+                                                        $full = 12;
+                                                        if($i%12 == 0){
+                                                            echo (12);
+                                                        }else{
+                                                            echo($i%12);
+                                                        }
+                                                    @endphp
+                                                </th>
+                                            @endfor
+                                        </tr>
+                                    @endif
+                                </tr>
+                            </thead>
+                            
+                            <tbody id="ganttchart_wrapper_tr">  
+                                @foreach ($fulltbpprojectplans as $fulltbpprojectplan)
+                                
                                     <tr id= "{{$fulltbpprojectplan->id}}" >                                        
-                                        <td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a>
-                                             </td> 
+                                        <td> {{$fulltbpprojectplan->name}}</td> 
                                         @php
                                             $_count = 1;
                                         @endphp
@@ -351,16 +262,9 @@
                                                     $color = 'grey';
                                                 }
                                             @endphp
-                                                @php
-                                                    $m = '';
-                                                    $_c = $fulltbpprojectplan->planIndex($i);
-                                                    if(!Empty($_c)){
-                                                        $m = $_c ;
-                                                    }
-                                                @endphp
-                                            <td style="background-color:{{$color}};width:30px;max-width:30px !important;font-size:12px;text-align:center">
+                                            <td style="background-color:{{$color}};width: 40px;font-size:9px;padding:5px;text-align:center">
                                                 @if ($color == 'grey')
-                                                {{$m}}
+                                                 {{$_count}}
                                                 @endif
                                             </td> 
                                             @php
@@ -368,36 +272,25 @@
                                             @endphp
                                         @endfor															
                                     </tr>
-                                @endforeach 
-                                </tbody>
-                            </table>
-                    </div>
-             
+                                @endforeach                            
+                            </tbody>
+                        </table>
+                </div>
                 <div class="portrait"></div>
                 <div class="box bw650  mt20 " style="background-color: #bdd6ee;">
                     <div style="font-size:13px"><strong>3. ความเป็นไปได้ด้านการตลาดและแผนสู่เชิงพาณิชย์</strong></div>
                 </div>
-                <div class="box bw650  mt10" >
+                <div class="box bw650  mt20" >
                     <div class="ml30 " style="font-size:13px"><strong>3.1 ข้อมูลด้านการตลาด</strong></div>
-                    <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>Market analysis</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
-                    </div>
-
-                    <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>Business model canvas</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
-                    </div>
-
-                    <div class="ml30" style="font-size:13px;page-break-inside: avoid;"><strong>วิเคราะห์ศักยภาพทางการค้า</strong>
-                        <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
-                    </div>
-
-                    {{-- <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div> --}}
-                    {{-- <div class="ml50" style="font-size:13px;margin-top:-20px"><strong>Business model canvas</strong></div>
-                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div> --}}
-                    {{-- <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
-                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div> --}}
+                    <div class="ml50" style="font-size:13px"><strong>Market analysis</strong></div>
+                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketanalysis->detail)!!}</div>
+                    <div class="ml50" style="font-size:13px"><strong>Business model canvas</strong></div>
+                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketbusinessmodelcanvas->detail)!!}</div>
+                    <div class="ml50" style="font-size:13px"><strong>วิเคราะห์ศักยภาพทางการค้า</strong></div>
+                    <div class="ml50" style="font-size:13px">{!!$provider::FixBreak($fulltbp->fulltbpmarketswot->detail)!!}</div>
                     <div class="ml30" style="font-size:13px" ><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></div>
                     <div style="font-size:13px">ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
+                    @if ($fulltbp->fulltbpsell->count() > 0)
                     <table class="mt5  border tbwrap" >
                         <thead>
                             <tr>
@@ -409,10 +302,10 @@
                             <tr>
                         </thead>
                         <tbody>
-                            @if ($fulltbp->fulltbpsell->count() > 0)
+                            
                                 @foreach ($fulltbp->fulltbpsell as $fulltbpsell)
                                     <tr>
-                                        <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpsell->name),25)!!}</td> 
+                                        <td style="font-size:13px"> {{$fulltbpsell->name}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past3,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past2,2)}}</td>  
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsell->past1,2)}} </td> 
@@ -426,9 +319,10 @@
                                     <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('past1'),2)}} </td>   
                                     <td style="font-size:13px;text-align: right">{{number_format($fulltbp->fulltbpsell->sum('present'),2)}} </td>    
                                 </tr>
-                            @endif
+                            
                         </tbody>
                     </table>
+                    @endif
                     <div class="mt20" style="font-size:13px">(สถานะยอดขาย 3 ปีย้อนหลัง) (หน่วย : บาท)</div>
                     <table class="mt5  border tbwrap" >
                         <thead>
@@ -444,7 +338,7 @@
                             @if ($fulltbp->fulltbpsellstatus->count() > 0)
                                 @foreach ($fulltbp->fulltbpsellstatus as $fulltbpsellstatus)
                                     <tr>
-                                        <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpsellstatus->name),30)!!}</td>
+                                        <td style="font-size:13px">{!!$provider::FixBreak($fulltbpsellstatus->name)!!}</td>
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past3,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past2,2)}}</td> 
                                         <td style="font-size:13px;text-align: right">{{number_format($fulltbpsellstatus->past1,2)}} </td> 
@@ -471,14 +365,14 @@
                                     <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
                                     <th style="width:10%;font-size:12px">ยอดขายต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
                                     <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดขาย (%)</pre></th>  
-                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน (ปี)</pre></th> 
+                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
                                 <tr>
                             </thead>
                             <tbody>
                                 @if ($fulltbp->fulltbpdebtpartner->count() > 0)
                                     @foreach ($fulltbp->fulltbpdebtpartner as $fulltbpdebtpartner)
                                         <tr>
-                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpdebtpartner->debtpartner),20)!!}</td> 
+                                            <td style="font-size:13px;"> {{$fulltbpdebtpartner->debtpartner}}</td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->numproject}} </td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpdebtpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpdebtpartner->totalyearsell,2)}}</td>                                            															
@@ -496,17 +390,17 @@
                             <thead>
                                 <tr>
                                     <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
-                                    <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
-                                    <th style="width:15%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
-                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดซื้อ (%)</pre></th>  
-                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน (ปี)</pre></th> 
+                                    <th style="width:20%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
+                                    <th style="width:20%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
+                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับยอดซื้อ<pre style="font-family: THSarabunNew">(%)</pre></th>  
+                                    <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน(ปี)</pre></th> 
                                 <tr>
                             </thead>
                             <tbody>
                                 @if ($fulltbp->fulltbpcreditpartner->count() > 0)
                                     @foreach ($fulltbp->fulltbpcreditpartner as $fulltbpcreditpartner)
                                         <tr>
-                                            <td style="font-size:13px">{!!splitText($provider::FixBreak2($fulltbpcreditpartner->creditpartner),30)!!}</td> 
+                                            <td style="font-size:13px;"> {{$fulltbpcreditpartner->creditpartner}}</td> 
                                             <td style="font-size:13px;text-align: right"> {{$fulltbpcreditpartner->partnertaxid}} </td> 
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->totalyearpurchase,2)}}</td>                                            															
                                             <td style="font-size:13px;text-align: right">{{number_format($fulltbpcreditpartner->percenttopurchase,2)}}</td> 
@@ -517,74 +411,66 @@
                             </tbody>
                         </table>
                     </div>
+                   
                 </div>
         </div>
-        <div class="box ml30 mt20 " style="page-break-inside: avoid;width:680px">
+        <div class="box ml50 bw650  mt20 " style="page-break-inside: avoid;">
             <div class="mt50" style="font-size:13px"><strong><u>หมายเหตุ</u> โปรดแนบเอกสารที่เกี่ยวข้องดังต่อไปนี้</strong></div>
             <div class="ml30" style="font-size:13px">1. สำเนาหนังสือรับรองจากการจดทะเบียนนิติบุคคล</div>
             <div class="ml30" style="font-size:13px">2. สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ. 5)</div>
             <div class="ml30" style="font-size:13px">3. เอกสารอื่นๆ ที่เกี่ยวข้องกับโครงการ</div>
-
-            <div style="page-break-inside: avoid;">
-                <div class="box  mt30 " style="width:680px">
-                    <div class="mt30" style="font-size:13px">
-                        <p style="white-space: nowrap"><strong><u>ข้อตกลง:</u></strong> การลงลายมือชื่อข้างท้ายนี้ ผู้ขอรับการประเมินขอรับรองและยืนยันความถูกต้องของข้อมูลและรายละเอียดตามที่ระบุไว้
-                        <br>ในแผนธุรกิจเทคโนโลยีฉบับนี้ หากภายหลังปรากฏเหตุอันเกิดข้อพิพาทที่เกี่ยวกับโครงการนี้ว่ามีการละเมิดทรัพย์สินทางปัญญาของ
-                        <br>ผู้อื่นและหรือปลอมแปลงเอกสารของผู้อื่น หรือไม่ว่าประการใดก็ตาม ผู้ขอรับการประเมินจะเป็นผู้รับผิดชอบทั้งทางแพ่งและอาญา<br>แต่เพียงผู้เดียว</p>
-
-                    </div>
-                </div>
-                <table class="bw500 ml50 mt50 center border">
-                    <tr>
-                        <td class="" style="text-align: center;width: 200px;color:grey;border: none;font-size:13px">(ประทับตราบริษัท – ถ้ามี)</td>
-                        <td class="" style="text-align: right;width: 90px;border: none;"></td>
-                        <td class="" style="text-align: right;width: 300px;border: none;">
-                            @foreach ($fulltbpsignatures as $fulltbpsignature)
-                              @php
-                                   $directorposition = $fulltbpsignature->companyemploy->employposition->name;
-                                   if($directorposition == 'อื่นๆ'){
-                                        $directorposition = $fulltbpsignature->companyemploy->otherposition;
-                                    }
-                              @endphp
-                              <table class="mt20">
-                                <tr>
-                                    <td class="" style="width:1px; text-align: right;border: none;font-size:13px">ลงชื่อ</td>
-                                    <td class="" style="width: 200px;text-align: center;border: none;font-size:13px">
-                                        @if ($fulltbp->signature_status_id == 2)
-                                            <img src="{{asset($fulltbpsignature->companyemploy->signature->path)}}" alt="Girl in a jacket" width="100" height="40">
-                                        @endif
-                                    </td>
-                                    <td class="" style="width: 1px;border: none;font-size:13px">ผู้ขอรับการประเมิน</td>
-                                </tr>
-                                <tr>
-                                    <td class="" style="width: 1px; text-align: right;padding-top:15px;border: none;">(</td>
-                                    <td class="" style="width: 200px;text-align: center;padding-top:15px;border: none;">
-                                       @php
-                                            $directorprefix = @$fulltbpsignature->companyemploy->prefix->name;
-                                            if($directorprefix == 'อื่นๆ'){
-                                                $directorprefix = @$fulltbpsignature->companyemploy->otherprefix;
-                                            }
-                                       @endphp
-                                        {{$directorprefix}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}}
-                                    </td>
-                                    <td class="" style="width: 1px;text-align: left;padding-top:15px;border: none;">)</td>
-                                </tr>
-                                <tr>
-                                    <td class="" style="width: 1px; text-align: right;border: none;"></td>
-                                    <td class=" center" style="width: 200px;text-align: center;border: none;font-size:13px">{{$directorposition}}</td>
-                                    <td class="" style="width: 1px;border: none;"></td>
-                                </tr>
-                            </table>
-                            @endforeach
-                        </td>
-                    </tr>
-                </table>
-    
-            </div>
         </div>
-      
+        <div style="page-break-inside: avoid;">
+            <div class="box ml50 bw650  mt30 ">
+                <div class="mt30" style="font-size:13px"><strong><u>ข้อตกลง :</u></strong>
+                    {!!$provider::FixBreak("การลงลายมือชื่อข้างท้ายนี้ ผู้ขอรับการประเมินขอรับรองและยืนยันความถูกต้องของข้อมูลและรายละเอียดตามที่ระบุไว้ในแผนธุรกิจเทคโนโลยีฉบับนี้ หากภายหลังปรากฏเหตุอันเกิดข้อพิพาทที่เกี่ยวกับโครงการนี้ว่ามีการละเมิดทรัพย์สิน ทางปัญญาของผู้อื่นและหรือปลอมแปลงเอกสารของผู้อื่นหรือไม่ว่าประการใดก็ตามผู้ขอรับการประเมินจะเป็นผู้รับผิดชอบทั้งทางแพ่งและอาญาแต่เพียงผู้เดียว")!!}
+                </div>
+            </div>
+            <table class="bw500 ml50 mt50 center border">
+                <tr>
+                    <td class="" style="text-align: center;width: 200px;color:grey;border: none;font-size:13px">(ประทับตราบริษัท – ถ้ามี)</td>
+                    <td class="" style="text-align: right;width: 90px;border: none;"></td>
+                    <td class="" style="text-align: right;width: 300px;border: none;">
+                        @foreach ($fulltbpsignatures as $fulltbpsignature)
+                          
+                          <table class="mt20">
+                            <tr>
+                                <td class="" style="width:1px; text-align: right;border: none;font-size:13px">ลงชื่อ</td>
+                                <td class="" style="width: 200px;text-align: center;border: none;font-size:13px">
+                                    {{-- @if ($fulltbp->signature_status_id == 2)
+                                        <img src="{{asset($fulltbpsignature->companyemploy->signature->path)}}" alt="Girl in a jacket" width="100" height="40">
+                                    @endif --}}
+                                </td>
+                                <td class="" style="width: 1px;border: none;font-size:13px">ผู้ขอรับการประเมิน</td>
+                            </tr>
+                            <tr>
+                                <td class="" style="width: 1px; text-align: right;padding-top:15px;border: none;">(</td>
+                                <td class="" style="width: 200px;text-align: center;padding-top:15px;border: none;">
+                                   @php
+                                        $directorprefix = @$fulltbpsignature->companyemploy->prefix->name;
+                                        if($directorprefix == 'อื่นๆ'){
+                                            $directorprefix = @$fulltbpsignature->companyemploy->otherprefix;
+                                        }
+                                   @endphp
+                                    {{$directorprefix}}{{$fulltbpsignature->companyemploy->name}} {{$fulltbpsignature->companyemploy->lastname}}
+                                </td>
+                                <td class="" style="width: 1px;text-align: left;padding-top:15px;border: none;">)</td>
+                            </tr>
+                            <tr>
+                                <td class="" style="width: 1px; text-align: right;border: none;"></td>
+                                <td class=" center" style="width: 200px;text-align: center;border: none;font-size:13px">เจ้าของหรือผู้บริหารระดับสูง</td>
+                                <td class="" style="width: 1px;border: none;"></td>
+                            </tr>
+                        </table>
+                        @endforeach
+                    </td>
+                </tr>
+            </table>
+
+        </div>
 
     </body>
 
 </html>   
+
 

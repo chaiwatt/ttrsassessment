@@ -97,125 +97,102 @@
             @endforeach
         </div>
       
-       
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
-                        <div class="header-elements">
-                            @if (@$businessplans->first()->business_plan_status_id > 2)
-                                <button class="btn bg-primary" data-toggle="modal" data-target="#modal_add_project">เพิ่มโครงการใหม่</button>
-                            @else
-                                @if (!Empty(@$businessplans->first()->minitbp))
-                                    <a class="btn bg-primary" href="{{route('dashboard.company.project.minitbp.edit',['id' => @$businessplans->first()->minitbp->id])}}" >เพิ่มโครงการใหม่</a>
-                                @endif
-                            @endif  
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            @if (@$businessplans->first()->business_plan_status_id > 2)
-                            <table class="table table-bordered table-striped" id="testtopictable">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th style="text-align: center">ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap;text-align: center">เลขที่โครงการ</th> 
-                                        <th style="text-align: center">ความก้าวหน้าการประเมิน</th>   
-                                        <th style="width:1%;white-space: nowrap;text-align: center">Mini TBP</th>  
-                                        <th style="width:1%;white-space: nowrap;text-align: center">Full TBP</th>  
-                                        <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>                                                                  
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($businessplans->reverse() as $key => $businessplan)
-                                    <tr>    
-                                        <td> 
-                                            
-                                            @if ($businessplan->business_plan_status_id < 4)
-                                                    <a class="text-info" href="{{route('dashboard.company.project.minitbp.edit',['id' => $businessplan->minitbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
-                                                @elseif($businessplan->business_plan_status_id >= 4)
-                                                    @if ($businessplan->minitbp->fulltbp->canceldate != null)
-                                                            {{$businessplan->minitbp->project}} 
-                                                        @else
-                                                            @if ($businessplan->business_plan_status_id >= 9)
-                                                                    <a class="text-info" href="{{route('dashboard.company.report.singlereport',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
-                                                                @else
-                                                                    <a class="text-info" href="{{route('dashboard.company.project.fulltbp.edit',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
-                                                            @endif
-                                                           
-                                                    @endif       
-                                                @else
-                                                    {{$businessplan->minitbp->project}} 
-                                            @endif
-                                        </td> 
-                                        <td style="text-align: center"> {{$businessplan->code}} </td> 
-                                        <td>
-                                            <div class="progress" style="height: 1.375rem;">
-                                                <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
-                                                    {{-- <span class="sr-only"></span> --}}
-                                                    <span style="font-size: 14px">{{$businessplan->businessplanstatus->progress}}%</span>
-                                                </div>
-                                            </div>
-                                        </td> 
-                                        <td>
-                                            @if (!Empty($businessplan->minitbp->attachment))
-                                                <a  href="{{asset(@$businessplan->minitbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">Mini TBP</a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if (!Empty($businessplan->fulltbp->attachment))
-                                            <a  href="{{asset(@$businessplan->fulltbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">Full TBP</a>
-                                        @endif
-                                        </td>
-                                        <td style="white-space: nowrap"> 
-                                            @if (!Empty($businessplan->minitbp->fulltbp->canceldate))
-                                                    <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
-                                                @else
-                                                    @if ($businessplan->business_plan_status_id > 3 && $businessplan->business_plan_status_id < 10)
-                                                        <span class="badge badge-flat border-warning text-warning-400 rounded-0">อยู่ระหว่างการประเมิน</span>
-                                                        @elseif($businessplan->business_plan_status_id >= 9)
-                                                        <span class="badge badge-flat border-success text-success-400 rounded-0">ประเมินเสร็จสิ้น</span>
-                                                    @endif
-                                            @endif
-
-                                        </td>                                       
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>   
-                            @endif   
-                        </div>
-                    </div>
-                </div>
-            <!-- /striped rows -->
-            </div>
-        </div>
-       
-        <div class="row" 
-        {{-- @if (@$businessplans->first()->business_plan_status_id >= 9)
-            hidden
-        @endif --}}
-        >
-            {{-- <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ความก้าวหน้าโครงการ</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 ">
-                                <div class="chart-container" >
-                                    <div class="chart has-fixed-height" style="margin-top:-40px; " id="progress_chart"></div>
-                                </div>
+        @if (Auth::user()->company->saveprofile != 0)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header header-elements-sm-inline">
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
+                            <div class="header-elements">
+                                @if (@$businessplans->first()->business_plan_status_id > 2)
+                                    <button class="btn bg-primary" data-toggle="modal" data-target="#modal_add_project">เพิ่มโครงการใหม่</button>
+                                @else
+                                    @if (!Empty(@$businessplans->first()->minitbp))
+                                        <a class="btn bg-primary" href="{{route('dashboard.company.project.minitbp.edit',['id' => @$businessplans->first()->minitbp->id])}}" >เพิ่มโครงการใหม่</a>
+                                    @endif
+                                @endif  
                             </div>
-                           
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                @if (@$businessplans->first()->business_plan_status_id > 2)
+                                <table class="table table-bordered table-striped" id="testtopictable">
+                                    <thead>
+                                        <tr class="bg-info">
+                                            <th style="text-align: center">ชื่อโครงการ</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align: center">เลขที่โครงการ</th> 
+                                            <th style="text-align: center">ความก้าวหน้าการประเมิน</th>   
+                                            <th style="width:1%;white-space: nowrap;text-align: center">Mini TBP</th>  
+                                            <th style="width:1%;white-space: nowrap;text-align: center">Full TBP</th>  
+                                            <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>                                                                  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($businessplans->reverse() as $key => $businessplan)
+                                        <tr>    
+                                            <td> 
+                                                
+                                                @if ($businessplan->business_plan_status_id < 4)
+                                                        <a class="text-info" href="{{route('dashboard.company.project.minitbp.edit',['id' => $businessplan->minitbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}} </a>
+                                                    @elseif($businessplan->business_plan_status_id >= 4)
+                                                        @if ($businessplan->minitbp->fulltbp->canceldate != null)
+                                                                {{$businessplan->minitbp->project}} 
+                                                            @else
+                                                                @if ($businessplan->business_plan_status_id >= 9)
+                                                                        <a class="text-info" href="{{route('dashboard.company.report.singlereport',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
+                                                                    @else
+                                                                        <a class="text-info" href="{{route('dashboard.company.project.fulltbp.edit',['id' => $businessplan->minitbp->fulltbp->id])}}" class="breadcrumb-item">{{$businessplan->minitbp->project}}</a>
+                                                                @endif
+                                                            
+                                                        @endif       
+                                                    @else
+                                                        {{$businessplan->minitbp->project}} 
+                                                @endif
+                                            </td> 
+                                            <td style="text-align: center"> {{$businessplan->code}} </td> 
+                                            <td>
+                                                <div class="progress" style="height: 1.375rem;">
+                                                    <div class="progress-bar bg-success" style="width: {{$businessplan->businessplanstatus->progress}}%">
+                                                        {{-- <span class="sr-only"></span> --}}
+                                                        <span style="font-size: 14px">{{$businessplan->businessplanstatus->progress}}%</span>
+                                                    </div>
+                                                </div>
+                                            </td> 
+                                            <td>
+                                                @if (!Empty($businessplan->minitbp->attachment))
+                                                    <a  href="{{asset(@$businessplan->minitbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">Mini TBP</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if (!Empty($businessplan->fulltbp->attachment))
+                                                <a  href="{{asset(@$businessplan->fulltbp->attachment)}}" class="btn btn-sm bg-info" target="_blank">Full TBP</a>
+                                            @endif
+                                            </td>
+                                            <td style="white-space: nowrap"> 
+                                                @if (!Empty($businessplan->minitbp->fulltbp->canceldate))
+                                                        <span class="badge badge-flat border-warning text-warning-400 rounded-0">โครงการถูกยกเลิก</span>
+                                                    @else
+                                                        @if ($businessplan->business_plan_status_id > 3 && $businessplan->business_plan_status_id < 10)
+                                                            <span class="badge badge-flat border-warning text-warning-400 rounded-0">อยู่ระหว่างการประเมิน</span>
+                                                            @elseif($businessplan->business_plan_status_id >= 9)
+                                                            <span class="badge badge-flat border-success text-success-400 rounded-0">ประเมินเสร็จสิ้น</span>
+                                                        @endif
+                                                @endif
+
+                                            </td>                                       
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>   
+                                @endif   
+                            </div>
                         </div>
                     </div>
+                <!-- /striped rows -->
                 </div>
-            </div> --}}
-            {{-- @if (@$businessplans->first()->business_plan_status_id > 2) --}}
+            </div>
+        
+            <div class="row" >
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
@@ -249,13 +226,13 @@
                         </div>
                     </div>
                 </div>
-            {{-- @endif --}}
-
-        </div>
-        <div class="row">
-            <div class="col-md-12">
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+        @endif
+
     </div>
 @endsection
 @section('pageScript')
