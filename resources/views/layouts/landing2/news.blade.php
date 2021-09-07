@@ -200,21 +200,6 @@
                 <div class="offcanvas-text">
                     <p>111 อุทยานวิทยาศาสตร์ประเทศไทย ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120</p>
                 </div>
-                {{-- <div class="canvas-contact">
-                    <h5 class="canvas-contact-title">Contact Info</h5>
-                    <ul class="contact">
-                        <li><i class="fa fa-globe"></i>Middle Badda, Dhaka, BD</li>
-                        <li><i class="fa fa-phone"></i>+123445789</li>
-                        <li><i class="fa fa-envelope"></i><a href="mailto:info@yourcompany.com">info@yourcompany.com</a></li>
-                        <li><i class="fa fa-clock-o"></i>10:00 AM - 11:30 PM</li>
-                    </ul>
-                    <ul class="social">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div> --}}
             </nav>
             <!-- Canvas Menu end -->
         </div>

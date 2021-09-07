@@ -90,12 +90,12 @@
                                 <nav class="rs-menu pr-0 md-pr-0">
                                     <ul id="onepage-menu" class="nav-menu">
                                         @foreach($directmenus2 as $key => $menu)
-                                        @php
-                                            $menuurl = url('').'/'.$menu->url;
-                                            if(filter_var($menu->url, FILTER_VALIDATE_URL) == true){
-                                                $menuurl = $menu->url;
-                                            }
-                                        @endphp
+                                            @php
+                                                $menuurl = url('').'/'.$menu->url;
+                                                if(filter_var($menu->url, FILTER_VALIDATE_URL) == true){
+                                                    $menuurl = $menu->url;
+                                                }
+                                            @endphp
                                             @if (Config::get('app.locale') == 'th')
                                                 @if ($key == 0)
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>

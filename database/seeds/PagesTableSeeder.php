@@ -13,24 +13,24 @@ class PagesTableSeeder extends Seeder
     {
         DB::table('feature_images')->insert([
             [
-                'name' => 'assets/landing2/images/blog/demo/feature1.jpg'
+                'name' => 'assets/landing2/images/features/default.png'
             ],
             [
-                'name' => 'assets/landing2/images/blog/demo/feature2.jpg'
+                'name' => 'assets/landing2/images/features/default.png'
             ],
             [
-                'name' => 'assets/landing2/images/blog/demo/feature3.jpg'
+                'name' => 'assets/landing2/images/features/default.png'
             ]
         ]);
         DB::table('feature_image_thumbnails')->insert([
             [
-                'name' => 'assets/landing2/images/blog/demo/feature1_thrumb.jpg'
+                'name' => 'assets/landing2/images/features/thumbdefault.png'
             ],
             [
-                'name' => 'assets/landing2/images/blog/demo/feature2_thrumb.jpg'
+                'name' => 'assets/landing2/images/features/thumbdefault.png'
             ],
             [
-                'name' => 'assets/landing2/images/blog/demo/feature3_thrumb.jpg'
+                'name' => 'assets/landing2/images/features/thumbdefault.png'
             ]
         ]);
 
