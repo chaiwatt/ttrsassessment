@@ -578,7 +578,7 @@
                             
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white">จำนวนโครงการ</a>  
+                          <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white">โครงการทั้งหมด</a>  
                         </div>
                     </div>
                     <div class="container-fluid">
