@@ -31,7 +31,6 @@ class DashboardAdminReportController extends Controller
         $businessplanarr = BusinessPlan::where('business_plan_status_id','>',2)->pluck('id')->toArray();
         $minitbparr = MiniTBP::whereIn('business_plan_id',$businessplanarr)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbparr)->get();
-        // $fulltbparray = FullTbp::whereIn('mini_tbp_id',$minitbparr)->pluck('id')->toArray();
         if($auth->user_type_id == 4){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             ->orWhere('coleader_id',$auth->id)
@@ -45,20 +44,16 @@ class DashboardAdminReportController extends Controller
             // $fulltbparray = FullTbp::whereIn('id',$uniquefulltbparr)->pluck('id')->toArray();
 
         }
-
-        // return $fulltbparray;
-        // $posts = Post::join('comments', 'posts.id', '=', 'comments.post_id')
-        //     ->orderBy('comments.some_field', 'DESC')
-        //     ->get();
-
-        // else if($auth->user_type_id == 5){
-        //     $projectmembers = ProjectMember::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
-        //     $fulltbps = FullTbp::whereIn('id', $projectmembers)->get();
-        // }
-
-        // return $fulltbps;
         
         $businessplans = BusinessPlan::get();
+        $totalproject = BusinessPlan::get()->count();
+        $totalminitbp = MiniTBP::whereNotNull('submitdate')->count();
+        $totalfulltbp = FullTbp::whereNotNull('submitdate')->count();
+        $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $totalonprocess = FullTbp::whereIn('mini_tbp_id',$minitbparr)->whereNull('finishdate')->count();
+        $totalfinish = FullTbp::whereIn('mini_tbp_id',$minitbparr)->whereNotNull('finishdate')->count();
+
+     
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
         $eventcalendarattendees = EventCalendarAttendee::where('user_id',$auth->id)->get();
 
@@ -146,23 +141,6 @@ class DashboardAdminReportController extends Controller
         $projectgradecollections = collect($projectgrades);
         $projectindustrycollections = collect($projectindustrys);
         $objecttivecollections = collect($objectives);
-
-
-
-        // $auth = Auth::user();
-        // NotificationBubble::where('target_user_id',Auth::user()->id)
-        //             ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
-        //             ->where('notification_sub_category_id',5) // notification_sub_category_id 5 = Full TBP
-        //             ->where('status',0)->delete();                  
-        // $fulltbps = FullTbp::get();
-        // if($auth->user_type_id < 5){
-        //     $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
-        //                                     // ->orWhere('coleader_id',$auth->id)
-        //                                     ->pluck('business_plan_id')->toArray();
-        //     $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-        //     $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
-        // }
-        // return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
      
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
@@ -171,7 +149,15 @@ class DashboardAdminReportController extends Controller
                                                 ->withNumprojectcollections($numprojectcollections)
                                                 ->withProjectgradecollections($projectgradecollections)
                                                 ->withProjectindustrycollections($projectindustrycollections)
-                                                ->withObjecttivecollections($objecttivecollections);
+                                                ->withObjecttivecollections($objecttivecollections)
+                                                ->withTotalproject($totalproject)
+                                                ->withTotalminitbp($totalminitbp)
+                                                ->withTotalfulltbp($totalfulltbp)
+                                                ->withTotalonprocess($totalonprocess)
+                                                ->withTotalfinish($totalfinish);
+
+
+
     }
     public function GetEvent(Request $request){
         $auth = Auth::user();

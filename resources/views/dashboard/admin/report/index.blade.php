@@ -573,7 +573,7 @@
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$businessplans->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalproject}}</h1>
                         </div>
                         <div>
                           <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนโครงการ</a>  
@@ -584,11 +584,12 @@
                     </div>
                 </div>
             </div>
+
             <div class="col">
                 <div class="card bg-blue-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$businessplans->where('business_plan_status_id','>=',4)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalminitbp}}</h1>
                         </div>
                         <div>
                             <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
@@ -602,7 +603,7 @@
                 <div class="card bg-pink-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$businessplans->where('business_plan_status_id','>=',6)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfulltbp}}</h1>
                         </div>
                         <div>  
                             <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
@@ -615,7 +616,7 @@
                 <div class="card bg-orange-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$businessplans->where('business_plan_status_id','>=',5)->where('business_plan_status_id','<',9)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalonprocess}}</h1>
                         </div>
                         <div> 
                             <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
@@ -628,7 +629,7 @@
                 <div class="card bg-green-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$businessplans->where('business_plan_status_id','>=',9)->count()}}</h1>
+                            <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfinish}}</h1>
                         </div>
                         <div> 
                             <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">ประเมินเสร็จสิ้น</a>
