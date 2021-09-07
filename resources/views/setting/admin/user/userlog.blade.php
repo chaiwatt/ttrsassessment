@@ -58,16 +58,22 @@
                             <table class="table table-bordered mb-2" id="userlogtable">
                                 <thead>
                                     <tr class="bg-info">
-                                        <th style="width:25%;text-align: center">วันที่</th>
-                                        <th style="width:30%;text-align: center">ชื่อ-นามสกุล</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">วันที่</th>
+                                        <th style="text-align: center">ชื่อ-นามสกุล</th> 
                                         <th style="text-align: center">Log</th>    
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($userlogs as $key => $userlog)
+                                    @php
+                                        $userprefix = $userlog->user->prefix->name;
+                                        if($userprefix == 'อื่นๆ'){
+                                            $userprefix = $userlog->user->alter_prefix;
+                                        }
+                                    @endphp
                                     <tr>    
-                                        <td>{{$userlog->createdatth}}</td>
-                                        <td> {{$userlog->user->prefix->name}}{{$userlog->user->name}} {{$userlog->user->lastname}} </td>    
+                                        <td style="width:1%;white-space: nowrap">{{$userlog->createdatth}}</td>
+                                        <td style="white-space: nowrap"> {{$userprefix}}{{$userlog->user->name}} {{$userlog->user->lastname}} </td>    
                                         <td> {{$userlog->document}} </td> 
                                     </tr>
                                     @endforeach
