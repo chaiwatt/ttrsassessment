@@ -576,7 +576,7 @@
                             <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalproject}}</h1>
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.search.project')}}" class="text-white">จำนวนโครงการ</a>  
+                          <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white">จำนวนโครงการ</a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -619,7 +619,7 @@
                             <h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalonprocess}}</h1>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
