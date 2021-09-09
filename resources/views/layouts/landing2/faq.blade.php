@@ -24,7 +24,7 @@
                        @foreach ($sharefaqs as $key => $faq)
                        <div class="card" data-aos="fade-right" data-aos-delay="{{($key + 1)*100}}">
                             <div class="card-header">
-                                <a class="card-link collapsed" data-toggle="collapse" href="#collapse{{$key}}"  aria-expanded="false">
+                                <a class="card-link collapsed" data-toggle="collapse" href="#collapse{{$key}}"  aria-expanded="false" >
                                     @if (Config::get('app.locale') == 'th')
                                         {{$faq->title}}
                                     @else

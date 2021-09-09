@@ -19,7 +19,7 @@
                         @endif
                     </p>
                     <ul class="banner-btn">
-                        <li><a class="readon started text-center" style="width:150px"  href="{{route('register')}}">
+                        <li><a class="readon started text-center" style="min-width:200px"  href="{{route('register')}}">
                             
                                 @if (Config::get('app.locale') == 'th')
                                     สมัคร
@@ -28,7 +28,7 @@
                                 @endif
                             </a>
                         </li>
-                        <li><a class="readon started" style="width:150px ; margin-left:25px;text-align:center" href="{{route('login')}}">
+                        <li><a class="readon started" style="min-width:200px ; margin-left:25px;text-align:center;white-space: nowrap" href="{{route('login')}}">
                             
                             @if (Config::get('app.locale') == 'th')
                                 เข้าสู่ระบบ

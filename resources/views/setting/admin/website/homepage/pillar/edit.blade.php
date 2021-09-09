@@ -56,92 +56,91 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="textth1" value="{{$homepagepillar->textth1}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="textth1" value="{{$homepagepillar->textth1}}"  placeholder="ข้อความที่ 1 (ภาษาไทย)" class="form-control form-control-lg stringformat30">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 1 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="texteng1" value="{{$homepagepillar->texteng1}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="texteng1" value="{{$homepagepillar->texteng1}}"  placeholder="ข้อความที่ 1 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่ 2 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="textth2" value="{{$homepagepillar->textth2}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="textth2" value="{{$homepagepillar->textth2}}"  placeholder="ข้อความที่ 2 (ภาษาไทย)" class="form-control form-control-lg stringformat300">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความที่2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="texteng2" value="{{$homepagepillar->texteng2}}"  placeholder="ข้อความที่2 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="texteng2" value="{{$homepagepillar->texteng2}}"  placeholder="ข้อความที่2 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat300">
                                         </div>
-
 
                                         <div class="form-group">
                                             <label>Title Pillar1 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleth1" value="{{$homepagepillar->pillartitleth1}}"  placeholder="Title Pillar1 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleth1" value="{{$homepagepillar->pillartitleth1}}"  placeholder="Title Pillar1 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Title Pillar1 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleeng1" value="{{$homepagepillar->pillartitleeng1}}"  placeholder="Title Pillar1 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleeng1" value="{{$homepagepillar->pillartitleeng1}}"  placeholder="Title Pillar1 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Description Pillar1 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardescth1" value="{{$homepagepillar->pillardescth1}}"  placeholder="Description Pillar1 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardescth1" value="{{$homepagepillar->pillardescth1}}"  placeholder="Description Pillar1 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Description Pillar1 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardesceng1" value="{{$homepagepillar->pillardesceng1}}"  placeholder="Description Pillar1 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardesceng1" value="{{$homepagepillar->pillardesceng1}}"  placeholder="Description Pillar1 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Title Pillar2 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleth2" value="{{$homepagepillar->pillartitleth2}}"  placeholder="Title Pillar2 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleth2" value="{{$homepagepillar->pillartitleth2}}"  placeholder="Title Pillar2 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Title Pillar2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleeng2" value="{{$homepagepillar->pillartitleeng2}}"  placeholder="Title Pillar2 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleeng2" value="{{$homepagepillar->pillartitleeng2}}"  placeholder="Title Pillar2 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Description Pillar2 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardescth2" value="{{$homepagepillar->pillardescth2}}"  placeholder="Description Pillar2 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardescth2" value="{{$homepagepillar->pillardescth2}}"  placeholder="Description Pillar2 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Description Pillar2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardesceng2" value="{{$homepagepillar->pillardesceng2}}"  placeholder="Description Pillar2 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardesceng2" value="{{$homepagepillar->pillardesceng2}}"  placeholder="Description Pillar2 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Title Pillar3 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleth3" value="{{$homepagepillar->pillartitleth3}}"  placeholder="Title Pillar3 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleth3" value="{{$homepagepillar->pillartitleth3}}"  placeholder="Title Pillar3 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Title Pillar3 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleeng3" value="{{$homepagepillar->pillartitleeng3}}"  placeholder="Title Pillar3 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleeng3" value="{{$homepagepillar->pillartitleeng3}}"  placeholder="Title Pillar3 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Description Pillar3 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardescth3" value="{{$homepagepillar->pillardescth3}}"  placeholder="Description Pillar3 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardescth3" value="{{$homepagepillar->pillardescth3}}"  placeholder="Description Pillar3 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Description Pillar3 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardesceng3" value="{{$homepagepillar->pillardesceng3}}"  placeholder="Description Pillar3 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardesceng3" value="{{$homepagepillar->pillardesceng3}}"  placeholder="Description Pillar3 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Title Pillar4 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleth4" value="{{$homepagepillar->pillartitleth4}}"  placeholder="Title Pillar4 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleth4" value="{{$homepagepillar->pillartitleth4}}"  placeholder="Title Pillar4 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Title Pillar4 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillartitleeng4" value="{{$homepagepillar->pillartitleeng4}}"  placeholder="Title Pillar4 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillartitleeng4" value="{{$homepagepillar->pillartitleeng4}}"  placeholder="Title Pillar4 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Description Pillar4 (ภาษาไทย)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardescth4" value="{{$homepagepillar->pillardescth4}}"  placeholder="Description Pillar4 (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardescth4" value="{{$homepagepillar->pillardescth4}}"  placeholder="Description Pillar4 (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>Description Pillar4 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="pillardesceng4" value="{{$homepagepillar->pillardesceng4}}"  placeholder="Description Pillar4 (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="pillardesceng4" value="{{$homepagepillar->pillardesceng4}}"  placeholder="Description Pillar4 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
 
                                     </fieldset>
@@ -163,6 +162,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
     <script type="text/javascript">
         $("#file").on('change', function() {
             $("#filename").val(this.value);

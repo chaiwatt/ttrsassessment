@@ -61,19 +61,19 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>คำถาม<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{$faq->title}}"  placeholder="คำถาม" class="form-control form-control-lg">
+                                            <input type="text"  name="title" value="{{$faq->title}}"  placeholder="คำถาม" class="form-control form-control-lg stringformat120">
                                         </div>
                                         <div class="form-group">
                                             <label>คำถาม (English)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="titleeng" value="{{$faq->titleeng}}"  placeholder="คำถาม" class="form-control form-control-lg">
+                                            <input type="text"  name="titleeng" value="{{$faq->titleeng}}"  placeholder="คำถาม" class="form-control form-control-lg stringformat120">
                                         </div>
                                         <div class="form-group">
                                             <label>คำตอบ<span class="text-danger">*</span></label>
-											<textarea name="body" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->body}}</textarea>
+											<textarea name="body" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ">{{$faq->body}}</textarea>
                                         </div>    
                                         <div class="form-group">
                                             <label>คำตอบ (English)<span class="text-danger">*</span></label>
-											<textarea name="bodyeng" class="form-control mb-3" rows="7" cols="1" placeholder="คำตอบ">{{$faq->bodyeng}}</textarea>
+											<textarea name="bodyeng" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ">{{$faq->bodyeng}}</textarea>
                                         </div>                            
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>
@@ -103,7 +103,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 <script  type="text/javascript">
 	var route = {
         url: "{{ url('/') }}",

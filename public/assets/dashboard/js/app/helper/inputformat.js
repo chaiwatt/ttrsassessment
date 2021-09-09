@@ -123,9 +123,21 @@ $(function() {
             delimiter: ''
         })
     });
+    $('.stringformat120').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [120],
+            delimiter: ''
+        })
+    });
     $('.stringformat200').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [200],
+            delimiter: ''
+        })
+    });
+    $('.stringformat600').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [600],
             delimiter: ''
         })
     });

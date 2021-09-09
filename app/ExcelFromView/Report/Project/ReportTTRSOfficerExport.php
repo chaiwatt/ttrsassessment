@@ -29,7 +29,6 @@ class ReportTTRSOfficerExport implements FromView,ShouldAutoSize, WithTitle
     }
     public function view(): View
     {
-
         if(!Empty($this->search) && $this->expertbranch == 0  && $this->educationlevel == 0){
             $userarray = User::where('name', 'like', '%' . $this->search . '%')
                             ->orWhere('lastname', 'like', '%' . $this->search . '%')->pluck('id')->toArray();

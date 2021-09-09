@@ -99,6 +99,13 @@
                                             @if (Config::get('app.locale') == 'th')
                                                 @if ($key == 0)
                                                         <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+
+                                                        {{-- <li class="menu-item-has-children"> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}cc</a>
+                                                            <ul class="sub-menu">
+                                                                <li><a href="blog.html">Blog</a> </li>
+                                                                <li><a href="blog-details.html">Blog Details</a></li>
+                                                            </ul>
+                                                        </li> --}}
                                                     @else
                                                         @if ($menu->name != 'เข้าสู่ระบบ')
                                                                 @if (substr("$menu->url",0,1) == '#')

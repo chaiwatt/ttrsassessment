@@ -57,23 +57,23 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ข้อความ (ภาษาไทย)</label>
-                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="ข้อความที่ (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="ข้อความที่ (ภาษาไทย)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความ (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="ข้อความที่ (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="ข้อความที่ (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความอธิบาย (ภาษาไทย)</label>
-                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="ข้อความอธิบาย (ภาษาไทย)" class="form-control form-control-lg">
+                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="ข้อความอธิบาย (ภาษาไทย)" class="form-control form-control-lg stringformat200">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความอธิบาย (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat200">
                                         </div>
                                         <div class="form-group">
                                             <label>ลิงก์</label>
-                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg">
+                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat200">
                                         </div>
                                         <div class="form-group">
                                             <label>เลือกสีพื้น</label>
