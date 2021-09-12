@@ -65,7 +65,7 @@ class HomepageServicesTableSeeder extends Seeder
             [
                 'titlethai' => 'แจ้งผลการประเมินและออกใบรับรอง',
                 'titleeng' => 'Detemined result and awarded a certificate',
-                'descriptionthai' => 'แจ้งผลการประเมินและออกใบรับรองและผลวิเคราะห์ศักยภาพธุรกิจ',
+                'descriptionthai' => 'แจ้งผลการประเมิน ออกใบรับรองและผลวิเคราะห์ศักยภาพธุรกิจ',
                 'descriptioneng' => 'Detemined result and awarded a certificate with a business performance analysis report.',
                 'icon' => '/assets/landing/img/register/6.png',
                 'link' => 'servicepage',

@@ -283,7 +283,7 @@
             <nav class="right_menu_togle hidden-md">
                 <div class="close-btn"><span id="nav-close" class="text-center"><i class="fa fa-close"></i></span></div>
                 <div class="canvas-logo">
-                    <a href="index.html"><img src="assets/images/logo-dark.png" alt="logo"></a>
+                    <a href="{{url('')}}"><img src="assets/images/logo-dark.png" alt="logo"></a>
                 </div>
                 <div class="offcanvas-text">
                     <p>111 อุทยานวิทยาศาสตร์ประเทศไทย ถ.พหลโยธิน ตำบลคลองหนึ่ง อำเภอคลองหลวง จังหวัดปทุมธานี 12120</p>

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-12 col-sm-12 footer-widget">
                     <div class="footer-logo mb-30">
-                        <a href="index.html"><img src="{{asset($generalinfo->logo)}}" alt=""></a>
+                        <a href="{{url('')}}"><img src="{{asset($generalinfo->logo)}}" alt=""></a>
                     </div>
                       <div class="textwidget pb-30">
                           
