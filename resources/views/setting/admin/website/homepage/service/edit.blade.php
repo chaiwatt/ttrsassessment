@@ -17,9 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
-                    {{-- <span class="breadcrumb-item active">แก้ไข Intro section</span> --}}
-                    <span class="breadcrumb-item active">Service</span>
+                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> Service</a>
+                    <span class="breadcrumb-item active">แก้ไข Service</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -57,23 +57,23 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>ข้อความ (ภาษาไทย)</label>
-                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="ข้อความที่ (ภาษาไทย)" class="form-control form-control-lg stringformat50">
+                                            <input type="text"  name="titlethai" value="{{$homepageservice->titlethai}}"  placeholder="ข้อความที่ (ภาษาไทย)" class="form-control form-control-lg stringformat30">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความ (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="ข้อความที่ (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat50">
+                                            <input type="text"  name="titleeng" value="{{$homepageservice->titleeng}}"  placeholder="ข้อความที่ (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความอธิบาย (ภาษาไทย)</label>
-                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="ข้อความอธิบาย (ภาษาไทย)" class="form-control form-control-lg stringformat200">
+                                            <input type="text"  name="descriptionthai" value="{{$homepageservice->descriptionthai}}"  placeholder="ข้อความอธิบาย (ภาษาไทย)" class="form-control form-control-lg stringformat120">
                                         </div>
                                         <div class="form-group">
                                             <label>ข้อความอธิบาย (ภาษาอังกฤษ)</label>
-                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat200">
+                                            <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat120">
                                         </div>
                                         <div class="form-group">
                                             <label>ลิงก์</label>
-                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat200">
+                                            <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat100">
                                         </div>
                                         <div class="form-group">
                                             <label>เลือกสีพื้น</label>
@@ -87,7 +87,7 @@
 										<div class="form-group">
 											<label>Icon ปกติ<span class="text-danger">*</span></label>
 											<div class="input-group">													
-												<input type="text" id="_iconnormal" class="form-control border-right-0" placeholder="รูปไอคอน" disabled>
+												<input type="text" id="_iconnormal" class="form-control border-right-0" placeholder="Icon ปกติ" disabled>
 												<span class="input-group-append">
 													<button class="btn bg-info" type="button" onclick="document.getElementById('iconnormal').click();">อัปโหลดรูป</button>													
 												</span>
@@ -103,7 +103,7 @@
                                         <div class="form-group">
 											<label>Icon Hover<span class="text-danger">*</span></label>
 											<div class="input-group">													
-												<input type="text" id="_iconhover" class="form-control border-right-0" placeholder="รูปไอคอน" disabled>
+												<input type="text" id="_iconhover" class="form-control border-right-0" placeholder="Icon Hover" disabled>
 												<span class="input-group-append">
 													<button class="btn bg-info" type="button" onclick="document.getElementById('iconhover').click();">อัปโหลดรูป</button>													
 												</span>
@@ -115,6 +115,7 @@
                                                 <img class="img-responsive" src="{{asset($homepageservice->iconhover)}}" style="width:100px;width:100px" >
                                             </div>
                                         </div>
+                                     
                                         <br>
                                     </fieldset>
                                     
@@ -135,6 +136,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
     <script type="text/javascript">
         $("#iconnormal").on('change', function() {
             $("#_iconnormal").val(this.value);

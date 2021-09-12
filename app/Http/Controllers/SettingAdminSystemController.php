@@ -20,12 +20,13 @@ class SettingAdminSystemController extends Controller
 {
     public function Index(){
         $generalinfo = GeneralInfo::first();
+        $frontpagestatuses = FrontPageStatus::get();
         $auth = Auth::user();
         $provinces = Province::get();
         $amphurs = Amphur::where('province_id',$generalinfo->province_id)->get();
         $tambols = Tambol::where('amphur_id',$generalinfo->amphur_id)->get();
         $useinvoicestatuses = UseInvoiceStatus::get();
-        $frontpagestatuses = FrontPageStatus::get();
+        
         $verifyexpertstatuses = VerifyExpertStatus::get();
         $showalerts = ShowAlert::get();
         $showfinishedprojects = ShowFinishedProject::get();

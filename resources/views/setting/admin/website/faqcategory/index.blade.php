@@ -11,7 +11,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.faqcategory.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มหมวดหมู่คำถามที่พบบ่อย<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.website.homepage.faqcategory.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มหมวดหมู่คำถามที่พบบ่อย<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -76,8 +76,8 @@
                                         <td> {{$key+1}} </td>
                                         <td> {{$faqcategory->name}} </td>                                         
                                         <td> 
-                                            <a href="{{route('setting.admin.website.faqcategory.edit',['id' => $faqcategory->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            <a href="{{route('setting.admin.website.faqcategory.delete',['id' => $faqcategory->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.website.homepage.faqcategory.edit',['id' => $faqcategory->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            <a href="{{route('setting.admin.website.homepage.faqcategory.delete',['id' => $faqcategory->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
                                     </tr>
                                     @endforeach

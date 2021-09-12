@@ -17,8 +17,8 @@ class CreateHomepagePillarSectionsTable extends Migration
             $table->id();
             $table->string('textth1')->nullable();
             $table->string('texteng1')->nullable();
-            $table->string('textth2')->nullable();
-            $table->string('texteng2')->nullable();
+            $table->longText('textth2')->nullable();
+            $table->longText('texteng2')->nullable();
             $table->string('titleth')->nullable();
             $table->string('titleen')->nullable();
             $table->longText('detailth')->nullable();

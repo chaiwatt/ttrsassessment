@@ -107,7 +107,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">แก้ไขหน้าเพจ</span></h4>
+                <h4> <span class="font-weight-semibold">แก้ไขหน้าบทความ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -117,8 +117,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.page')}}" class="breadcrumb-item"> หน้าเพจ</a>
-                    <span class="breadcrumb-item active">แก้ไขหน้าเพจ</span>
+                    <a href="{{route('setting.admin.website.page')}}" class="breadcrumb-item"> หน้าบทความ</a>
+                    <span class="breadcrumb-item active">แก้ไขหน้าบทความ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -154,7 +154,7 @@
                             <div class="row">	
                                 <div class="col-md-12">
                                     {{-- <fieldset>	 --}}
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>เมนู</label>
                                                 <select name="menu" placeholder="เมนู" class="form-control form-control-select2">
                                                     <option value="" >เลือกรายการเมนู</option>                                                     
@@ -162,16 +162,16 @@
                                                         <option value="{{$menu->id}}" @if ($menu->page_id == $page->id) selected @endif >{{$menu->name}}</option>
                                                     @endforeach
                                                 </select>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label>หัวเรื่อง<span class="text-danger">*</span></label>
                                             <input type="text"  name="title" value="{{$page->name}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg stringformat100">
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat200">{{$page->header}}</textarea>
+                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat200" style="font-size:16px">{{$page->header}}</textarea>
                                         </div>
-                                        <div class="form-group">                                                
+                                        {{-- <div class="form-group">                                                
                                             <label>หมวดหมู่</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a data-toggle="modal" href="#modal_create_category"  class="dropdown-item" ><i class="icon-folder-plus2"></i> เพิ่มหมวดหมู่</a>
@@ -184,9 +184,9 @@
                                                 <option value="{{$pagecategory->id}}" @if ($pagecategory->id == $page->page_category_id) selected @endif >{{$pagecategory->name}}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
-                                            <label>รูป Feature (ขนาด 960x540 px)<span class="text-danger">*</span></label>
+                                            <label>รูป Feature (ขนาด 1280x800 px เพื่อการแสดงผลที่เหมาะสม)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด Feature</button>													
                                             </div>
@@ -196,6 +196,7 @@
                                                 <div class="col-md-12" id="feature_input_wrapper">
                                                     <input name="featureinp" id="featureinp" value="{{$page->feature_image_id}}" data-id="{{$page->feature_image_id}}" class="featureinp" hidden> 
                                                     <input name="featurethumbnail" id="featurethumbnail" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden> 
+                                                    <input name="bloglistimage" id="bloglistimage" value="{{$page->blogsidebarimage_id}}" data-id="" hidden> 
                                                 </div>
                                                 <div id="featurethumbnail_wrapper">
                                                     <div class="form-group" id="featurediv" >
@@ -204,7 +205,7 @@
                                                                 <div class="card">
                                                                     <div class="card-img-actions mx-1 mt-1">
                                                                         @if (Empty($page->feature_image_id))
-                                                                            <img id="featureimage" class="card-img img-fluid" src="{{asset('storage/uploads//page/feature/default.png')}}" alt="">
+                                                                            <img id="featureimage" class="card-img img-fluid" src="{{asset('storage/uploads/page/feature/default.png')}}" alt="">
                                                                             @else
                                                                             <img id="featureimage" class="card-img img-fluid" src="{{asset($page->featureimage->name)}}" alt="">
                                                                         @endif
@@ -233,9 +234,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label>บทความ<span class="text-danger">*</span></label>
-											<textarea name="content" id="summernote" class="form-control mb-3" rows="7" cols="1" placeholder="บทความ">{{$page->content}}</textarea>
+											<textarea name="content" id="summernote" class="form-control mb-3" rows="7" cols="1" placeholder="บทความ" >{{$page->content}}</textarea>
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>ป้ายกำกับ</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a data-toggle="modal" href="#modal_create_tag"  class="dropdown-item" ><i class="icon-folder-plus2"></i> เพิ่มป้ายกำกับ</a>
@@ -251,7 +252,7 @@
                                                         <option value="{{$tag->id}}"  @if (!Empty($check)) selected @endif >{{$tag->name}}</option>
                                                     @endforeach
                                                 </select>
-                                        </div>
+                                        </div> --}}
                                         <div id="images_wrapper">
                                             <div class="form-group">
                                                 <div class="row">

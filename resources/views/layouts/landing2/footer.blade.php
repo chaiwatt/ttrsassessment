@@ -90,7 +90,7 @@
                 <div class="col-lg-3 col-md-12 col-sm-12">
                     <h3 class="widget-title">Site map</h3>
                         <ul class="copy-right-menu" >
-                            <li><a href="{{route('sitemap')}}" target="_blank">Site map xml</a></li>
+                            <li><a href="{{route('landing.sitemap')}}" target="_blank">Site map</a></li>
                         </ul>
                 </div>
             </div>

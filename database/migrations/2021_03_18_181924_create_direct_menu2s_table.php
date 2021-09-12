@@ -15,6 +15,8 @@ class CreateDirectMenu2sTable extends Migration
     {
         Schema::create('direct_menu2s', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('menu_type_id')->default(1);
+            $table->char('submenu',3)->nullable();
             $table->string('name',250)->comment('ชื่อเมนูเว็บไซต์ ภาษาไทย');
             $table->string('slug')->nullable();
             $table->string('engname',250)->comment('ชื่อเมนูเว็บไซต์ ภาษาอังกฤษ');

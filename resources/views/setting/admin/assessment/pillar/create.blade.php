@@ -16,9 +16,8 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> Pillar</a>
-                    <a href="{{route('setting.admin.assessment.pillar')}}" class="breadcrumb-item"> รายการ Pillar</a>
+                    <a href="#" class="breadcrumb-item"> EV</a>
+                    <a href="{{route('setting.admin.assessment.pillar')}}" class="breadcrumb-item"> Pillar</a>
                     <span class="breadcrumb-item active">เพิ่ม Pillar</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

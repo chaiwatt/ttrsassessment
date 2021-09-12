@@ -8,6 +8,7 @@ use App\Model\Menu;
 use App\Model\Page;
 use App\Helper\Crop;
 use App\Model\PageTag;
+use App\HomePageSection;
 use App\Model\PageImage;
 use App\Model\PageStatus;
 use App\Helper\CreateSlug;
@@ -33,7 +34,8 @@ class SettingAdminWebsitePageController extends Controller
 
     public function Index(){
         $pages = Page::get();
-        return view('setting.admin.website.page.index')->withPages($pages);
+        $homepagesection = HomePageSection::where('order_list',4)->first();
+        return view('setting.admin.website.page.index')->withPages($pages)->withHomepagesection($homepagesection);
     }
     public function Create(){
         $pagecategories = PageCategory::get();
@@ -68,58 +70,39 @@ class SettingAdminWebsitePageController extends Controller
         $detail = $dom->savehtml();
 
         $page = new Page();
-        $page->page_category_id = $request->pagecategory;
+        // $page->page_category_id = $request->pagecategory;
         $page->page_status_id = $request->status;
         if(!Empty($request->publicdate)){
             $page->publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
         }
+        
         $page->name = $request->title;
         $page->slug = CreateSlug::createSlug($request->title);
         $page->header = $request->description;
         $page->content = $detail;
         $page->feature_image_id = $request->featureinp;
         $page->feature_image_thumbnail_id =  $request->featurethumbnail;
-        $page->blogsidebarimage_id =  $request->blogsidebarimage;
-        $page->bloghomepageimage_id =  $request->bloghomepageimage;
+        $page->blogsidebarimage_id =  $request->bloglistimage;
+        // $page->bloghomepageimage_id =  $request->bloghomepageimage;
 
 
         $page->user_id = Auth::user()->id;
         $page->save();
 
-        // foreach ($request->gal as $key => $gal) {
-        //     PageImage::find($gal)->update([
+        // foreach ($request->pagetag as $key => $tag) {
+        //     $pagetag = new PageTag();
+        //     $pagetag->page_id = $page->id;
+        //     $pagetag->tag_id = $tag;
+        //     $pagetag->save(); 
+        // }
+        // if(!Empty($request->menu)){
+        //     $menu = Menu::find($request->menu)->update([
         //         'page_id' => $page->id
         //     ]);
         // }
 
-        // foreach($imgarray as $item){
-        //     $summernoteimage = new SummernoteImage();
-        //     $summernoteimage->page_id = $page->id;
-        //     $summernoteimage->file = $item;
-        //     $summernoteimage->save();
-        // }
 
-        foreach ($request->pagetag as $key => $tag) {
-            $pagetag = new PageTag();
-            $pagetag->page_id = $page->id;
-            $pagetag->tag_id = $tag;
-            $pagetag->save(); 
-        }
-        if(!Empty($request->menu)){
-            $menu = Menu::find($request->menu)->update([
-                'page_id' => $page->id
-            ]);
-        }
-
-        // $pages = Page::get();
-        // $sitemap = Sitemap::create();
-        // foreach ($pages as $key => $page) {
-        //     $sitemap->add(route('landing.page',['slug' => $page->slug]));
-        // }
-        // $sitemap->writeToFile(public_path('sitemap.xml'));
-        //{{route('landing.page',['slug' => $page->slug])}}
-
-        return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มหน้าเพจสำเร็จ');
+        return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มบทความสำเร็จ');
     }
 
     public function Edit($id){
@@ -187,22 +170,13 @@ class SettingAdminWebsitePageController extends Controller
         
         $detail = $dom->savehtml();
 
-        // $exist_feature_image_id = $page->feature_image_id;
-        // $exist_feature_image_thumbnail_id = $page->feature_image_thumbnail_id;
-
-        // if(!Empty($page->feature_image_id)){
-        //     $exist_feature_image_id = $request->featureinp;
-        //     $exist_feature_image_thumbnail_id =  $request->featurethumbnailinp;
-        // }
-
-         
 
         $publicdate =  $page->publicdate;
         if(!Empty($request->publicdate)){
             $publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
         }
         $page->update([
-            'page_category_id' => $request->pagecategory,
+            // 'page_category_id' => $request->pagecategory,
             'page_status_id' => $request->status,
             'name' => $request->title,
             'slug' => CreateSlug::createSlug($request->title),
@@ -210,43 +184,29 @@ class SettingAdminWebsitePageController extends Controller
             'publicdate' => $publicdate, 
             'content' => $detail, 
             'feature_image_id' => $request->featureinp, 
-            'feature_image_thumbnail_id' => $request->featurethumbnail
+            'feature_image_thumbnail_id' => $request->featurethumbnail,
+            'blogsidebarimage_id' =>  $request->bloglistimage
         ]);
 
-        $comming_array  = Array();
-        $existing_array  = Array();
-        $unique_array  = Array();
-        foreach( $request->pagetag as $key => $tag ){
-            $comming_array[] = $tag;
-        }
-
-        PageTag::where('page_id',$id)->whereNotIn('tag_id',$comming_array)->delete();
-        $existing_array = PageTag::where('page_id',$id)->pluck('tag_id')->toArray();
-        $unique_array = array_diff($comming_array, $existing_array);
-
-        foreach( $unique_array as $_tag ){
-            $pagetag = new PageTag();
-            $pagetag->page_id = $id;
-            $pagetag->tag_id = $_tag;
-            $pagetag->save(); 
-        }
-
-        // foreach ($request->gal as $key => $gal) {
-        //     PageImage::find($gal)->update([
-        //         'page_id' => $page->id
-        //     ]);
+        // $comming_array  = Array();
+        // $existing_array  = Array();
+        // $unique_array  = Array();
+        // foreach( $request->pagetag as $key => $tag ){
+        //     $comming_array[] = $tag;
         // }
 
+        // PageTag::where('page_id',$id)->whereNotIn('tag_id',$comming_array)->delete();
+        // $existing_array = PageTag::where('page_id',$id)->pluck('tag_id')->toArray();
+        // $unique_array = array_diff($comming_array, $existing_array);
 
-        // $pages = Page::get();
-
-        // $sitemap = App::make("sitemap");
-
-        // foreach ($pages as $key => $page) {
-        //     $sitemap->add(route('landing.page',['slug' => $page->slug]), $page->updated_at, '1.0', 'daily');
+        // foreach( $unique_array as $_tag ){
+        //     $pagetag = new PageTag();
+        //     $pagetag->page_id = $id;
+        //     $pagetag->tag_id = $_tag;
+        //     $pagetag->save(); 
         // }
-        // $sitemap->store('xml', 'sitemap');
-        return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าเพจสำเร็จ');
+
+        return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าบทความสำเร็จ');
     }
  
     public function Delete($id){
@@ -267,7 +227,14 @@ class SettingAdminWebsitePageController extends Controller
         }
         PageImage::where('page_id',$page->id)->delete();
         $page->delete();
-        return redirect()->route('setting.admin.website.page')->withSuccess('ลบหน้าเพจสำเร็จ');
+        return redirect()->route('setting.admin.website.page')->withSuccess('ลบหน้าบทความสำเร็จ');
+    }
+
+    public function EditSaveStatus(Request $request){
+        HomePageSection::where('order_list',4)->first()->update([
+            'show' => $request->status
+        ]);
+        return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขรายการสำเร็จ');
     }
 
 }

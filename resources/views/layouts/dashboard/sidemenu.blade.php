@@ -44,6 +44,7 @@
             <li class="nav-item"><a href="{{route('dashboard.admin.search.company')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.company')?'active':''}}">ผู้รับการประเมิน</a></li>
             <li class="nav-item"><a href="{{route('dashboard.admin.search.expert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.expert')?'active':''}}">ผู้เชี่ยวชาญ</a></li>
             <li class="nav-item"><a href="{{route('dashboard.admin.search.officer')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.search.officer')?'active':''}}">เจ้าหน้าที่ TTRS</a></li>
+            
         </ul>
     </li>
     @endif
@@ -370,11 +371,12 @@
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagestatus')?'active':''}}">สถานะเพจ</a></li>	 --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagecategory')?'active':''}}">หมวดหมู่เพจ</a></li> --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่คำถามที่พบบ่อย</a></li> --}}
-                <li class="nav-item"><a href="{{route('setting.admin.website.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faq')?'active':''}}">คำถามที่พบบ่อย</a></li>
+                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faq')?'active':''}}">คำถามที่พบบ่อย</a></li> --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.tag')?'active':''}}">ป้ายกำกับ</a></li>		              --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.slide')?'active':''}}">ภาพสไลด์</a></li>		              --}}
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.introsection')?'active':''}}">Intro section</a></li>		              --}}
-                <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าเพจ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าบทความ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.website.webpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website')?'active':''}}">หน้าเพจ</a></li>		             
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	 --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu')?'active':''}}">เมนู</a></li>	
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.layout')?'active':''}}">เลย์เอาท์</a></li>	 --}}
@@ -386,6 +388,16 @@
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.service')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.service')?'active':''}}">Service</a></li>		             
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.industryugroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.industryugroup')?'active':''}}">กลุ่มอุตสาหกรรม</a></li>	
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.pillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.pillar')?'active':''}}">Pillar</a></li>	
+                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.faq')?'active':''}}">คำถามที่พบบ่อย</a></li>
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><span>Custom Section</span></a>
+                            <ul class="nav nav-group-sub" data-submenu-title="Custom Section">
+                                @for ($i = 6; $i <= 10; $i++)
+                                    <li class="nav-item" style="margin-left:15px"><a href="{{route('setting.admin.website.homepage.customsection',['id' => $i])}}" class="nav-link">Section {{$i-5}}</a></li>		             
+                                @endfor
+                                
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item"><a href="{{route('sitemap')}}" class="nav-link {{starts_with(Route::currentRouteName(),'sitemap')?'active':''}}" target="_blank" >Sitemap</a></li>	
@@ -417,6 +429,7 @@
             <ul class="nav nav-group-sub" data-submenu-title="ระบบ">
                 <li class="nav-item"><a href="{{route('setting.admin.system')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.system')?'active':''}}">ตั้งค่าระบบ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.system.projectflow')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.system.projectflow')?'active':''}}">Control Flow</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.system.contactinfo')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.system.contactinfo')?'active':''}}">ข้อมูลการติดต่อ</a></li>
             </ul>
         </li>
         @endif

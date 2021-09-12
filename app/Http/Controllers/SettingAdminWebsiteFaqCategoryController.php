@@ -16,29 +16,29 @@ class SettingAdminWebsiteFaqCategoryController extends Controller
     }
     public function Index(){
         $faqcategories = FaqCategory::get();
-        return view('setting.admin.website.faqcategory.index')->withFaqcategories($faqcategories);
+        return view('setting.admin.website.homepage.faqcategory.index')->withFaqcategories($faqcategories);
     }
     public function Create(){
-        return view('setting.admin.website.faqcategory.create');
+        return view('setting.admin.website.homepage.faqcategory.create');
     }
     public function CreateSave(CreateFaqCategoryRequest $request){
         $faqcategory = new FaqCategory();
         $faqcategory->name = $request->faqcategory;
         $faqcategory->save();
-        return redirect()->route('setting.admin.website.faqcategory')->withSuccess('เพิ่มหมวดหมู่ faq สำเร็จ');
+        return redirect()->route('setting.admin.website.homepage.faqcategory')->withSuccess('เพิ่มหมวดหมู่ faq สำเร็จ');
     }
     public function Edit($id){
         $faqcategory  = FaqCategory::find($id);
-        return view('setting.admin.website.faqcategory.edit')->withFaqcategory($faqcategory);
+        return view('setting.admin.website.homepage.faqcategory.edit')->withFaqcategory($faqcategory);
     }
     public function EditSave(CreateFaqCategoryRequest $request,$id){
         $faqcategory = FaqCategory::find($id)->update([
             'name' => $request->faqcategory
         ]);
-        return redirect()->route('setting.admin.website.faqcategory')->withSuccess('แก้ไขหมวดหมู่ faq สำเร็จ');
+        return redirect()->route('setting.admin.website.homepage.faqcategory')->withSuccess('แก้ไขหมวดหมู่ faq สำเร็จ');
     }
     public function Delete($id){
         FaqCategory::find($id)->delete();
-        return redirect()->route('setting.admin.website.faqcategory')->withSuccess('ลบหมวดหมู่ faq สำเร็จ');
+        return redirect()->route('setting.admin.website.homepage.faqcategory')->withSuccess('ลบหมวดหมู่ faq สำเร็จ');
     }
 }

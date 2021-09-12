@@ -32,6 +32,11 @@
 <script src="{{asset('assets/landing2/js/main.js')}}"></script>
 
 <script src="{{asset('assets/landing2/js/aos/aos.js')}}"></script>
+
+
+
+
 <script>
+  
     AOS.init();
   </script>

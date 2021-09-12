@@ -14,7 +14,7 @@ return [
     'openhour' => 'เวลาทำการ',
     'copyright' => 'สงวนลิขสิทธิ์',
     'dashboard' => 'แดชบอร์ด',
-    'registrationprocess' => 'แนะนำบริการ',
+    'registrationprocess' => 'ขั้นตอนการบริการ',
     'submitanapplication' => 'ยื่นใบสมัคร',
     'fillouttheform' => 'กรอกแบบฟอร์ม',
     'preliminaryconsideration' => 'พิจารณาเบื้องต้น',

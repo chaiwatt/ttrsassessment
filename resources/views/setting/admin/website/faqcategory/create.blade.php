@@ -17,7 +17,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <a href="{{route('setting.admin.website.faqcategory')}}" class="breadcrumb-item"> หมวดหมู่ faq</a>
+                    <a href="{{route('setting.admin.website.homepage.faqcategory')}}" class="breadcrumb-item"> หมวดหมู่ faq</a>
                     <span class="breadcrumb-item active">เพิ่มหมวดหมู่ faq</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -49,7 +49,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.faqcategory.createsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.homepage.faqcategory.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">

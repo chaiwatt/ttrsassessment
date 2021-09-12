@@ -13,10 +13,10 @@ class FrontPagStatusesTableSeeder extends Seeder
     {
         DB::table('front_page_statuses')->insert([
             [
-                'name' => 'ปิดใช้ Front page'
+                'name' => 'ปิดใช้ Billboard'
             ],
             [
-                'name' => 'ใช้ Front page'
+                'name' => 'ใช้ Billboard'
             ]
         ]);
     }

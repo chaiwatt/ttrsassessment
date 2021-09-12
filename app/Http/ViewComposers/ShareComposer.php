@@ -7,6 +7,7 @@ use App\Model\Menu;
 use App\Model\Page;
 use App\Model\Slide;
 use App\Model\MiniTBP;
+use App\HomePageSection;
 use App\Model\FrontPage;
 use App\Model\DirectMenu;
 use App\Model\HeaderText;
@@ -21,7 +22,10 @@ use App\Model\WebsiteLayout;
 use App\Model\HomepagePillar;
 use App\Helper\GoogleCalendar;
 use App\Model\HomepageService;
+use App\Model\HomePagePillarUrl;
+use App\Model\HomePageServiceUrl;
 use App\Model\NotificationBubble;
+use App\Model\HomePageIndustryUrl;
 use App\Model\HomepagePillarSection;
 use App\Model\HomepageIndustryGroupText;
 
@@ -47,7 +51,7 @@ class ShareComposer
         $shareheadertext = HeaderText::first();
         $shareindustrygroups = IndustryGroup::orderBy('companybelong','desc')->get();
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
-        $directmenus2 = DirectMenu2::get();
+        $directmenus2 = DirectMenu2::where('hide',1)->get();
         $shareagent  = new Agent();
         
         $industrygroups = IndustryGroup::get();
@@ -59,6 +63,10 @@ class ShareComposer
                     $industrygrouparray[] = array('name' => $industrygroup->name,'thname' => $industrygroup->nameth,'engname' => $industrygroup->nameeng, 'occured' => $minitbps->count(), 'total' => $totalminitbp);
                 }
         }
+        $sharehomepagesections = HomePageSection::where('show',1)->orderBy('order_list','asc')->get();
+        $sharehomepageserviceurl = HomePageServiceUrl::first();
+        $sharehomepagepillarurl = HomePagePillarUrl::first();
+        $sharehomepageindustryurl = HomePageIndustryUrl::first();
         $shareindustrygroupcollections = collect($industrygrouparray);
         $view->withGeneralinfo($generalinfo)
             ->withDirectmenus($directmenus)
@@ -79,6 +87,10 @@ class ShareComposer
             ->withSharehomepageindustrygrouptext($sharehomepageindustrygrouptext)
             ->withDirectmenus2($directmenus2)
             ->withShareindustrygroupcollections($shareindustrygroupcollections)
-            ->withShareagent($shareagent);
+            ->withShareagent($shareagent)
+            ->withSharehomepagesections($sharehomepagesections)
+            ->withSharehomepageserviceurl($sharehomepageserviceurl)
+            ->withSharehomepagepillarurl($sharehomepagepillarurl)
+            ->withSharehomepageindustryurl($sharehomepageindustryurl);
     }
 }

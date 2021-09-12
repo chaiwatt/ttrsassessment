@@ -18,7 +18,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ผู้ใช้งานระบบ</a>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> ผู้ใช้งานระบบ</a>
                     <span class="breadcrumb-item active">ผู้ใช้งาน</span>
                 </div>
 

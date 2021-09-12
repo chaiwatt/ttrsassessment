@@ -17,7 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.page')}}" class="breadcrumb-item"> คำถามที่พบบ่อย</a>
+                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    <a href="{{route('setting.admin.website.homepage.faq')}}" class="breadcrumb-item"> คำถามที่พบบ่อย</a>
                     <span class="breadcrumb-item active">เพิ่มคำถามที่พบบ่อย</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -49,7 +50,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.faq.createsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.homepage.faq.createsave')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">
@@ -64,11 +65,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>คำตอบ<span class="text-danger">*</span></label>
-											<textarea name="body" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ"></textarea>
+											<textarea name="body" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ" style="font-size:16px"></textarea>
                                         </div>      
                                         <div class="form-group">
                                             <label>คำตอบ(English)<span class="text-danger">*</span></label>
-											<textarea name="bodyeng" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ"></textarea>
+											<textarea name="bodyeng" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ" style="font-size:16px"></textarea>
                                         </div>                           
                                         <div class="form-group">
                                             <label>สถานะการแสดง</label>

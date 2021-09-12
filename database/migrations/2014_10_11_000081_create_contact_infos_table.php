@@ -17,7 +17,8 @@ class CreateContactInfosTable extends Migration
             $table->id();
             $table->text('name',150)->nullable();
             $table->text('email',150)->nullable();
-            $table->text('subject',250)->nullable();
+            $table->char('phone',10)->nullable();
+            $table->text('website',250)->nullable();
             $table->longText('message')->nullable();
             $table->char('status',1)->default(1);
             $table->timestamps();

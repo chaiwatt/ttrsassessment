@@ -49,6 +49,13 @@
                 </div>
             </div>
         </div>
-    </div>           
-    <img class="d-none d-md-block images-part img-animate m-40" src="{{asset('assets/landing2/images/banner/banner-01.png')}}" alt="">
+    </div>     
+    {{-- {{$shareheadertext->imgbanner}}      --}}
+    @if (Empty($shareheadertext->imgbanner))
+            <img class="d-none d-md-block images-part img-animate m-40" src="{{asset('assets/landing2/images/banner/banner-01.png')}}" alt="">
+        @else
+            <img class="d-none d-md-block images-part img-animate m-40" src="{{asset($shareheadertext->imgbanner)}}" alt="">
+        {{-- {{asset($headertext->imgbanner)}} --}}
+    @endif 
+    
 </div>

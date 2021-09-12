@@ -26,21 +26,10 @@
         <div class="main-content">
             
             @include('layouts.landing2.header')
-  
             @include('layouts.landing2.banner')
-
-            @include('layouts.landing2.services')
-
-            @if ($shareindustrygroupcollections->count() != 0)
-                @include('layouts.landing2.industrygroup')
-            @endif
-
-            @include('layouts.landing2.pillars')
-
-            @include('layouts.landing2.blogs')
-
-            @include('layouts.landing2.faq')
-
+            @foreach ($sharehomepagesections as $sharehomepagesection)
+                @include($sharehomepagesection->name)
+            @endforeach
         </div> 
         @include('layouts.landing2.cookie')
         @include('layouts.landing2.footer')

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">ความก้าวหน้าโครงการ</span></h4>
+                <h4> <span class="font-weight-semibold">สถานะโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             {{-- <div class="header-elements d-none">
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <span class="breadcrumb-item active">ความก้าวหน้าโครงการ</span>
+                    <span class="breadcrumb-item active">สถานะโครงการ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

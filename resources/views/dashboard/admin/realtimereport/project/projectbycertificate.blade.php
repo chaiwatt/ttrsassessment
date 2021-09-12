@@ -21,7 +21,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> รายงาน</a>
-                    <span class="breadcrumb-item">โครงการ</span>
+                    <a href="{{route('dashboard.admin.realtimereport')}}" class="breadcrumb-item"> ค้นหารายงาน</a>
                     <span class="breadcrumb-item active">โครงการแยกตามที่ได้รับใบรับรอง</span>
                 </div>
 

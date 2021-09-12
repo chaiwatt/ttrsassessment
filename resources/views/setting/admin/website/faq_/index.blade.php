@@ -11,7 +11,7 @@
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.faq.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มคำถามที่พบบ่อย<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.website.homepage.faq.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มคำถามที่พบบ่อย<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -74,8 +74,8 @@
                                             <td> {{$faq->body}}</td>      
                                             <td style="white-space: nowrap"> {{$faq->showstatus->name}}</td>                                                                                                               
                                             <td  style="white-space: nowrap;text-align: center"> 
-                                                <a href="{{route('setting.admin.website.faq.edit',['id' => $faq->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                                <a href="{{route('setting.admin.website.faq.delete',['id' => $faq->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                                <a href="{{route('setting.admin.website.homepage.faq.edit',['id' => $faq->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                                <a href="{{route('setting.admin.website.homepage.faq.delete',['id' => $faq->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             </td>
                                         </tr>
                                     @endforeach

@@ -1,24 +1,17 @@
 <div id="rs-faq" class="rs-faq rs-project style3 bgProject gray-color pt-50 md-pb-395 pb-50 md-pt-90 ">
     <div class="container">
-        {{-- <div class="sec-title2 text-center mt-30"> --}}
-   
-        {{-- <div class="desc">
-            We've been building creative tools together for over a decade and have a deep appreciation for software applications
-        </div> --}}
-        {{-- </div> --}}
         <div class="row">
-           {{-- <div class="col-lg-6 pr-40 md-pr-15">
-                <div class="images-part">
-                    <img src="assets/images/about/about-home.png" alt="">
-                </div>
-           </div> --}}
            <div class="col-lg-12">
-                {{-- <div class="sec-title2 mb-45">
-                    <span class="sub-text style-bg">Faqs</span>
-                    <h2 class="title title6">
-                       Do You Have Any Questions?
+                <div class="sec-title2 mb-45 mt-0">
+                    <h2 class="title title6 text-white"  style="margin-top: -50px">
+                      
+                      @if (Config::get('app.locale') == 'th')
+                      คำถามที่พบบ่อย
+                        @else
+                            FAQ
+                        @endif
                     </h2>
-                </div> --}}
+                </div>
                <div class="faq-content">
                    <div id="accordion" class="accordion">
                        @foreach ($sharefaqs as $key => $faq)

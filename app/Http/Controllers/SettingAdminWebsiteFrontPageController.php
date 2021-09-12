@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Model\FrontPage;
+use App\Model\GeneralInfo;
 use Illuminate\Http\Request;
+use App\Model\FrontPageStatus;
 use App\Http\Requests\SaveFrontPageRequest;
 
 class SettingAdminWebsiteFrontPageController extends Controller
 {
     public function Index(){
+        $generalinfo = GeneralInfo::first();
+        $frontpagestatuses = FrontPageStatus::get();
         $frontpage = FrontPage::first();
-        return view('setting.admin.website.frontpage.index')->withFrontpage($frontpage);
+        return view('setting.admin.website.frontpage.index')->withGeneralinfo($generalinfo)->withFrontpagestatuses($frontpagestatuses)->withFrontpage($frontpage);
     }
 
     public function Save(SaveFrontPageRequest $request){
@@ -31,6 +35,9 @@ class SettingAdminWebsiteFrontPageController extends Controller
         //     $btnimg->move("storage/uploads/landing/frontpage" , $new_name);
         //     $btnimglocation = "storage/uploads/landing/frontpage/".$new_name;
         // }
+        GeneralInfo::first()->update([
+            'front_page_status_id' => $request->billboard
+        ]);
         $frontpage->update([
             'file' => $frontimglocation,
             'entersitebtn' => $btnimglocation,

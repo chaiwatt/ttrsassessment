@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">รายงานหน้าเพจ</span></h4>
+                <h4> <span class="font-weight-semibold">รายงานหน้าบทความ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             {{-- <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.page.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มหน้าเพจ<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.website.page.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มบทความ<b><i class="icon-plus3"></i></b></a>
             </div> --}}
         </div>
 
@@ -62,7 +62,7 @@
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr>
-                                        <th>หน้าเพจ</th>                               
+                                        <th>หน้าบทความ</th>                               
                                         <th style="width: 200px">จำนวนเข้าชม</th>
                                         <th style="width: 250px">เข้าดูล่าสุด</th>
                                     </tr>
@@ -84,7 +84,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">การเข้าชมหน้าเพจ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">การเข้าชมหน้าบทความ</h6>
                         <div class="header-elements">
 
                         </div>
@@ -94,7 +94,7 @@
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
-                                        <th style="text-align:center">หน้าเพจ</th>                               
+                                        <th style="text-align:center">หน้าบทความ</th>                               
                                         <th style="width: 200px;text-align:center">จำนวนเข้าชม</th>
                                         <th style="width: 250px;text-align:center">เข้าดูล่าสุด</th>
                                     </tr>

@@ -272,7 +272,7 @@ $("#file").on('change', function() {
     // if($('.featureinp').length>0){
     //     return ;
     // }
-    console.log(file);
+    // console.log(file);
     var formData = new FormData();
     formData.append('file',file);
         $.ajax({
@@ -286,6 +286,7 @@ $("#file").on('change', function() {
                 console.log(data);
                     $('#featureinp').val(data.feature.id);
                     $('#featurethumbnail').val(data.bloghomepageimage.id);
+                    $('#bloglistimage').val(data.bloglistimage.id);
                     $('#featureimage').attr('src',route.url+'/'+data.feature.name);
                     
                 // <input name="featurethumbnailinp" value="{{$page->feature_image_thumbnail_id}}" data-id="{{$page->feature_image_thumbnail_id}}" class="featurethumbnailinp" hidden>
@@ -332,7 +333,7 @@ $(document).on('click', '#deletefeature', function (e) {
         success: function(data){
             $('#featureinp').val('');
             $('#featurethumbnail').val('');
-            $('#featureimage').attr('src',route.url+'/storage/uploads//page/feature/default.png');
+            $('#featureimage').attr('src',route.url+'/storage/uploads/page/feature/default.png');
             //$("div[id='featurediv']").remove();
             // $('#featurethumbnail').html('');
         }

@@ -7,7 +7,7 @@
     @endif
 @section('content')
     <div id="modal_term" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header pb-3">
                     <h5 class="modal-title">นโยบายและข้อกำหนด (กรุณาเลื่อนอ่านเพื่อยอมรับ)</h5>
@@ -29,18 +29,150 @@
             </div>
         </div>
     </div>
-    <div class="login-form" style="width:600px">
+
+
+<!-- Content area -->
+{{-- <div class="content d-flex justify-content-center align-items-center">
+    <form action="index.html" class="flex-fill">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="text-center mb-3">
+                    <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+                </div>
+                <div class="card mb-0">
+                    
+                    <div class="card-body">
+                       
+                        <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
+                            <li class="nav-item bg-info-300" style="margin-right:5px" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">ผู้ขอรับการประเมิน</span></h6></a></li>
+                            <li class="nav-item bg-teal-300" style="margin-right:5px" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">เจ้าหน้าที่ TTRS</h6></a></li>
+                            <li class="nav-item bg-warning-300" style="margin-right:5px" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">ผู้เชี่ยวชาญ</h6></a></li>
+                        </ul>
+
+                        <div class="form-group form-group-feedback form-group-feedback-right">
+                            <input type="text" class="form-control" placeholder="Choose username">
+                            <div class="form-control-feedback">
+                                <i class="icon-user-plus text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-feedback form-group-feedback-right">
+                                    <input type="text" class="form-control" placeholder="First name">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-user-check text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-group-feedback form-group-feedback-right">
+                                    <input type="text" class="form-control" placeholder="Second name">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-user-check text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-feedback form-group-feedback-right">
+                                    <input type="password" class="form-control" placeholder="Create password">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-user-lock text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-group-feedback form-group-feedback-right">
+                                    <input type="password" class="form-control" placeholder="Repeat password">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-user-lock text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-feedback form-group-feedback-right">
+                                    <input type="email" class="form-control" placeholder="Your email">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-mention text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-group-feedback form-group-feedback-right">
+                                    <input type="email" class="form-control" placeholder="Repeat email">
+                                    <div class="form-control-feedback">
+                                        <i class="icon-mention text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-input-styled" checked data-fouc>
+                                    Send me <a href="#">test account settings</a>
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-input-styled" checked data-fouc>
+                                    Subscribe to monthly newsletter
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-input-styled" data-fouc>
+                                    Accept <a href="#">terms of service</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right"><b><i class="icon-plus3"></i></b> Create account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> --}}
+<!-- /content area -->
+
+    
+ <div class="login-form" style="width:800px">
+    <div class="text-center mb-2">
+        <a href="{{url('')}}"><img  src="{{asset('assets/dashboard/images/headerlogowhite.png')}}" alt=""></a>   
+    </div>
         <div class="card mb-0">
             <div class="card mb-0">
+                {{-- <div class="text-center mb-0">
+                    
+                    <img  src="{{asset('assets/dashboard/images/loginlogo.png')}}" alt="">
+                </div> --}}
+
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                <ul class="nav nav-tabs nav-justified alpha-grey mb-0" id="usertype">
+                <ul class="nav nav-tabs nav-justified alpha-grey " id="usertype" >
                     <li class="nav-item bg-info-300" style="margin-right:5px" value="1"><a href="#login-tab1" class="nav-link border-y-0 border-left-0 active" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">ผู้ขอรับการประเมิน</span></h6></a></li>
                     <li class="nav-item bg-teal-300" style="margin-right:5px" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">เจ้าหน้าที่ TTRS</h6></a></li>
                     <li class="nav-item bg-warning-300" style="margin-right:5px" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">ผู้เชี่ยวชาญ</h6></a></li>
                 </ul>
                 
-                <div class="tab-content card-body">
+                <div class="tab-content card-body" style="margin-top:-20px">
+                    {{-- <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div> --}}
                     <div class="tab-pane fade show active" id="login-tab1">
                         
                         <div class="text-center mb-3 mb-md-2" style="font-size:36px">
@@ -73,117 +205,143 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group form-group-feedback form-group-feedback-left" id="userselect">                    
+                                <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-lg form-control-select2">
+                                    @foreach ($usergroups as $usergroup)
+                                        <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group" id="vatwrapper" >
+                                <input id="vatno" type="text" maxlength="13" class="form-control form-control-lg allownumericwithoutdecimal @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประจำตัวประชาชน" >
+                                <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
+                                @error('vatno')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                                <input type="text" name="companyname" id="companyname" hidden>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input id="name" type="text" class="form-control form-control-lg stringformat60 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
+                                <div class="form-control-feedback">
+                                    <i class="icon-user text-muted"></i>
+                                </div>
+                                @error('name')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                            </div>  
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input id="lastname" type="text" class="form-control form-control-lg stringformat60 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
+                                <div class="form-control-feedback">
+                                    <i class="icon-user text-muted"></i>
+                                </div>
+                                @error('lastname')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                            </div> 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input id="email" type="email" class="form-control form-control-lg stringformat60 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
+                                <div class="form-control-feedback">
+                                    <i class="icon-mention text-muted"></i>
+                                </div>
+                                @error('email')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                                <span id="email_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> รูปแบบอีเมลไม่ถูกต้อง</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input id="phone" type="text" maxlength="10" name="phone" class="form-control form-control-lg allownumericwithoutdecimal @error('phone') is-invalid @enderror"  value="{{ old('phone') }}"  placeholder="เบอร์โทรศัพท์มือถือ">
+                                <span id="phone_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> เบอร์โทรศัพท์ไม่ถูกต้อง</span>
+                                <div class="form-control-feedback">
+                                    <i class="icon-phone2 text-muted"></i>
+                                </div>
+                                @error('phone')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                              <div class="input-group form-group form-group-feedback form-group-feedback-left" >
+                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
+                                
+                                <div class="form-control-feedback">
+                                    <i class="icon-eye-blocked text-muted toggle_password"></i>
+                                </div>
+                                
+                                @error('password')
+                                    <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                @enderror
+                                
+                                <span class="input-group-append">
+                                    <button class="btn btn-light" type="button" id="genpassword" >สุ่มรหัสผ่าน</button>
+                                </span>
+                                <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
+                                <div class="form-control-feedback ">
+                                    <i class="icon-eye-blocked text-muted toggle_password"></i>
+                                </div>
+                            </div>
+                        </div>
+   
+
+                        <div class="col-md-12" id="pwd-container">
+                            
+                          
+                            
+                            <div class="pwstrength_viewport_progress"></div>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <div class="form-group d-flex align-items-center">
+                                <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="user_type" type="text" class="form-control form-control-lg" name="user_type" hidden>
+                            <div class="form-group">
+                                <button type="submit" id="term" class="btn btn-primary btn-block" disabled><span style="font-size: 18px">สมัครสมาชิก</span>  <i class="icon-circle-right2 ml-2"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <a href="{{ route('login') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span></a>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="form-group form-group-feedback form-group-feedback-left" id="userselect">                    
-                        <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-lg form-control-select2">
-                            @foreach ($usergroups as $usergroup)
-                                <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
-                            @endforeach
-                        </select>
-                    </div>
+              
     
-                    <div class="form-group" id="vatwrapper" >
-                        <input id="vatno" type="text" maxlength="13" class="form-control form-control-lg allownumericwithoutdecimal @error('vatno') is-invalid @enderror" name="vatno" value="{{ old('vatno') }}" placeholder="เลขประจำตัวผู้เสียภาษีอากร/บัตรประจำตัวประชาชน" >
-                        <label id="vatnomessage" class="validation-invalid-label" hidden><small id="msg"></small></label>
-                        @error('vatno')
-                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                        @enderror
-                        <input type="text" name="companyname" id="companyname" hidden>
-                    </div>
-                    <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="name" type="text" class="form-control form-control-lg stringformat60 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
-                        @error('name')
-                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                        @enderror
-                    </div>             
-                    <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="lastname" type="text" class="form-control form-control-lg stringformat60 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
-                        @error('lastname')
-                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                        @enderror
-                    </div>    
-                    <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="email" type="email" class="form-control form-control-lg stringformat60 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
-                        <div class="form-control-feedback">
-                            <i class="icon-mention text-muted"></i>
-                        </div>
-                        @error('email')
-                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                        @enderror
-                        <span id="email_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> รูปแบบอีเมลไม่ถูกต้อง</span>
-                    </div>
+                
+                               
+                       
+                    
     
-                    <div class="form-group form-group-feedback form-group-feedback-left">
-                        <input id="phone" type="text" maxlength="10" name="phone" class="form-control form-control-lg allownumericwithoutdecimal @error('phone') is-invalid @enderror"  value="{{ old('phone') }}"  placeholder="เบอร์โทรศัพท์มือถือ">
-                        <span id="phone_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> เบอร์โทรศัพท์ไม่ถูกต้อง</span>
-                        <div class="form-control-feedback">
-                            <i class="icon-phone2 text-muted"></i>
-                        </div>
-                        @error('phone')
-                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                        @enderror
-                        
-                    </div>
+                    
 
-                    <div id="pwd-container">
-                        
-                        <div class="input-group form-group form-group-feedback form-group-feedback-left" >
-                            <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
-                            
-                            <div class="form-control-feedback">
-                                <i class="icon-eye-blocked text-muted toggle_password"></i>
-                            </div>
-                            
-                            @error('password')
-                                <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
-                            @enderror
-                            {{-- <small class="form-text text-right pwstrength_viewport_verdict"></small> --}}
-                            <span class="input-group-append">
-                                <button class="btn btn-light" type="button" id="genpassword" >สุ่มรหัสผ่าน</button>
-                            </span>
-                            <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
-                        </div>
         
-                        <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
-                            <div class="form-control-feedback ">
-                                <i class="icon-eye-blocked text-muted toggle_password"></i>
-                            </div>
-                            {{-- <div class="col-sm-12" style="padding-top: 5px;"> --}}
-                            <div class="pwstrength_viewport_progress" style="padding-top: 10px;"></div>
-                            {{-- </div> --}}
-                        </div>
-
-                    </div>
-
-                    <div class="form-group d-flex align-items-center">
-                        <a href="#" data-toggle="modal" data-target="#modal_term" class="text-primary"><u>ยอมรับนโยบายและข้อกำหนด</u></a>  
-                    </div>
-                    <input id="user_type" type="text" class="form-control form-control-lg" name="user_type" hidden>
-                    <div class="form-group">
-                        <button type="submit" id="term" class="btn btn-primary btn-block" disabled><span style="font-size: 18px">สมัครสมาชิก</span>  <i class="icon-circle-right2 ml-2"></i></button>
-                    </div>
-                    {{-- <hr> --}}
-                    <div class="form-group text-center text-muted content-divider">
-                        <span class="px-2">{{trans('lang.hasaccount')}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <a href="{{ route('login') }}" class="btn btn-light btn-block"><span style="font-size: 18px">{{trans('lang.login')}}</span></a>
-                    </div>
+                   
 
 
                 </div>
                 </form>
             </div>
         </div>
-    </div>
+    </div> 
 
     @section('pageScript')
         <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>

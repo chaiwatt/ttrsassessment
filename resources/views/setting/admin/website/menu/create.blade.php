@@ -18,7 +18,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <span class="breadcrumb-item active">จัดการเมนู</span>
+                    <a href="{{route('setting.admin.website.menu')}}" class="breadcrumb-item"> เมนู</a>
+                    <span class="breadcrumb-item active">เพิ่มเมนู</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -54,19 +55,30 @@
                               <form action="{{route('setting.admin.website.menu.createsave')}}" method="post">
                                  @csrf
                                  <input type="text" id="menuid" name="menuid" hidden>
-                                 {{-- <div class="row">
+                                 <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
-                                          <label>เมนูหลัก</label>
-                                          <select name="parentmenu" id="parentmenu" placeholder="เมนู" class="form-control form-control-select2">
-                                            <option value="" >เลือกเมนูหลัก</option>
-                                            @foreach($allmenus as $key => $menu)
-                                                <option value="{{$key}}" >{{$menu}}</option>
+                                          <label>ประเภทเมนู</label>
+                                          <select name="menutype" id="menutype" placeholder="ประเภทเมนู" class="form-control form-control-select2">
+                                            @foreach($menutypes as $key => $menutype)
+                                                <option value="{{$menutype->id}}" >{{$menutype->name}}</option>
                                             @endforeach
                                         </select>
                                        </div>
                                     </div>
-                                 </div> --}}
+                                 </div>
+                                 <div class="row" id="parent_wrapper" hidden>
+                                    <div class="col-md-12">
+                                       <div class="form-group">
+                                          <label>Parent</label>
+                                          <select name="parent" id="parent" placeholder="Parent" class="form-control form-control-select2">
+                                            @foreach($directmenu2s as $key => $directmenu2)
+                                                <option value="{{$directmenu2->id}}" >{{$directmenu2->name}}</option>
+                                            @endforeach
+                                        </select>
+                                       </div>
+                                    </div>
+                                 </div>
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="form-group">
@@ -144,5 +156,14 @@
         url: "{{ url('/') }}",
         token: $('meta[name="csrf-token"]').attr('content')
     };
+
+    $(document).on('change', '#menutype', function(e) {
+        console.log($(this).val());
+        if($(this).val() == 3){
+            $("#parent_wrapper").attr("hidden",false);
+        }else{
+            $("#parent_wrapper").attr("hidden",true);
+        }
+    });
 </script>
 @stop

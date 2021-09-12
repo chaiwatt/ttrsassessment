@@ -21,7 +21,7 @@ class EditPageRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'pagecategory' => 'required',
+            // 'pagecategory' => 'required',
             'featureinp' => 'required',  //1024 = 1MB
             'content' => 'required',
             // 'gallery.*' => 'image|mimes:jpeg,png,jpg|max:1024|dimensions:min_width=1000,min_height=1000', //1024 = 1MB
@@ -34,7 +34,7 @@ class EditPageRequest extends FormRequest
       return  [
         'title.required' => 'ยังไม่ได้กรอกหัวเรื่อง',
         'description.required' => 'ยังไม่ได้กรอกคำอธิบายย่อ',
-        'pagecategory.required' => 'ยังไม่ได้กรอกหมวดหมู่',
+        // 'pagecategory.required' => 'ยังไม่ได้กรอกหมวดหมู่',
         'featureinp.required' => 'กรุณาเลือกไฟล์รูป', 
         //'featureinp.mimes' => 'รองรับเฉพาะไฟล์รูปเท่านั้น',
         //'featureinp.max' => 'ขนาดไฟล์มากกว่า 1 MB',

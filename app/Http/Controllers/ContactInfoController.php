@@ -12,9 +12,11 @@ class ContactInfoController extends Controller
         $contactinfo = new ContactInfo();
         $contactinfo->name = $request->name;
         $contactinfo->email = $request->email;
-        $contactinfo->subject = $request->subject;
+        $contactinfo->phone = $request->phone;
+        $contactinfo->website = $request->website;
         $contactinfo->message = $request->message;
         $contactinfo->save();
         return redirect()->back()->withSuccess('ขอบคุณ เราได้รับข้อความแล้ว');
     }
 }
+

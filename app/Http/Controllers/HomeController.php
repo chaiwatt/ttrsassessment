@@ -11,10 +11,12 @@ use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\PageTag;
+use App\Model\WebPage;
 use App\Model\Announce;
 use App\Model\PageView;
 use App\Model\PageImage;
 use App\Model\DirectMenu;
+use App\Model\DirectMenu2;
 use App\Model\GeneralInfo;
 use App\Model\ServicePage;
 use App\Model\BusinessPlan;
@@ -73,6 +75,7 @@ class HomeController extends Controller
 
     public function Front()
     {
+
         return view('landing2.index');
     }
 
@@ -109,6 +112,16 @@ class HomeController extends Controller
             return abort(404);
         }
         return view('landing2.single')->withPage($page)->withPages($pages);
+    }
+
+    public function WebPage($slug)
+    {
+        // return $slug;
+        $page = WebPage::where('slug',$slug)->first();
+        if(Empty($page)){
+            return abort(404);
+        }
+        return view('landing2.webpage')->withPage($page);
     }
     // public function Page($slug)
     // {
@@ -165,14 +178,14 @@ class HomeController extends Controller
         return view('landing.blog')->withPages($pages);
     }
 
-    public function Contact(){
-        $directmenu = DirectMenu::find(5);
-        $directmenu->update([
-            'view' => intVal($directmenu->view) +1
-        ]);
-        $generalinfo = GeneralInfo::first();
-        return view('landing.contact')->withGeneralinfo($generalinfo);
-    }
+    // public function Contact(){
+    //     $directmenu = DirectMenu::find(5);
+    //     $directmenu->update([
+    //         'view' => intVal($directmenu->view) +1
+    //     ]);
+    //     $generalinfo = GeneralInfo::first();
+    //     return view('landing.contact')->withGeneralinfo($generalinfo);
+    // }
 
     public function DemoTTRSUser(){
         DB::table('users')->insert([
@@ -2511,11 +2524,26 @@ class HomeController extends Controller
         return view('layouts.landing2.performance');
 
     }
+    public function Sitemap(){
+        $directmenu2s = DirectMenu2::get();
+        $blogs = Page::get();
+        return view('layouts.landing2.sitemap')->withDirectmenu2s($directmenu2s)->withBlogs($blogs);
+
+    }
+
+    public function Policy(){
+        return view('layouts.landing2.policy');
+
+    }
 
     public function Pillars(){
         $homepagepillarsection = HomepagePillarSection::first();
         return view('layouts.landing2.pillarpage')->withHomepagepillarsection($homepagepillarsection);
    }
+
+   public function Contact(){
+    return view('layouts.landing2.contact');
+}
     
 }
 

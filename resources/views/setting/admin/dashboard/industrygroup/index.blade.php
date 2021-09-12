@@ -76,7 +76,7 @@
                                     <tr class="bg-info">
                                         <th style="width:150px;text-align: center">#</th>
                                         <th style="text-align: center">กลุ่มอุตสาหกรรม</th>                               
-                                        <th style="width:150px;text-align: center">เพิ่มเติม</th>
+                                        <th style="width:250px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>

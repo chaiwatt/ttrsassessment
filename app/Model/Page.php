@@ -38,6 +38,17 @@ class Page extends Model
     {
         return DateConversion::thaiDate($this->created_at,'y');
     }
+
+    public function getMonthenAttribute()
+    {
+        return $this->created_at->format('F');
+        // return DateConversion::thaiDate($this->created_at,'m');
+    }
+    public function getYearenAttribute()
+    {
+        return DateConversion::thaiDate($this->created_at,'y');
+    }
+
     public function getPageViewAttribute()
     {
         return PageView::where('page_id',$this->id);
@@ -69,6 +80,10 @@ class Page extends Model
     public function getFeatureImageThumbnailAttribute()
     {
         return FeatureImageThumbnail::find($this->feature_image_thumbnail_id);
+    }
+    public function getNewsimageAttribute()
+    {
+        return FeatureImageThumbnail::find($this->blogsidebarimage_id);
     }
     public function getBlogcommentAttribute()
     {

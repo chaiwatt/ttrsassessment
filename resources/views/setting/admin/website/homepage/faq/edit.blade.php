@@ -12,7 +12,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">คำถามที่พบบ่อย</span></h4>
+                <h4> <span class="font-weight-semibold">แก้ไขคำถามที่พบบ่อย</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -22,8 +22,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="{{route('setting.admin.website.page')}}" class="breadcrumb-item"> คำถามที่พบบ่อย</a>
-                    <span class="breadcrumb-item active">คำถามที่พบบ่อย</span>
+                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    <a href="{{route('setting.admin.website.homepage.faq')}}" class="breadcrumb-item"> คำถามที่พบบ่อย</a>
+                    <span class="breadcrumb-item active">แก้ไขคำถามที่พบบ่อย</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -54,7 +55,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.faq.editsave',['id' => $faq->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.homepage.faq.editsave',['id' => $faq->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
                                 <div class="col-md-12">

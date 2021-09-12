@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">หน้าเพจ</span></h4>
+                <h4> <span class="font-weight-semibold">หน้าบทความ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">หน้าเพจ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">หน้าบทความ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -80,7 +80,7 @@
                                             <td> {{$announce->user->name}} {{$announce->user->lastname}}</td> 
                                             <td> {{$announce->pagestatus->name}} </td>                                                                         
                                             <td> 
-                                                <a href="{{route('landing.announcenews',['slug' => $announce->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
+                                                <a href="{{route('landing.announcenews',['slug' => $announce->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าบทความ</a>
                                                 <a href="{{route('setting.admin.website.announce.edit',['id' => $announce->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                                 <a href="{{route('setting.admin.website.announce.delete',['id' => $announce->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             </td>

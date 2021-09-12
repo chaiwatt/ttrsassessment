@@ -17,8 +17,9 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
+                    {{-- <a href="#" class="breadcrumb-item"> ทั่วไป</a> --}}
                     <a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="breadcrumb-item"> สถานะโครงการ</a>
-                    {{-- <span class="breadcrumb-item active">แก้ไขสถานะโครงการ</span> --}}
+                    <span class="breadcrumb-item active">แก้ไขสถานะโครงการ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

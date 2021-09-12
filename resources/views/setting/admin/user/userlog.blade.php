@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">ผู้ใช้งาน</span></h4>
+                <h4> <span class="font-weight-semibold">Log</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             {{-- <div class="header-elements d-none">
@@ -18,7 +18,8 @@
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
             <div class="d-flex">
                 <div class="breadcrumb">
-                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ผู้ใช้งานระบบ</a>
+                    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
+                    <a href="#" class="breadcrumb-item"> ผู้ใช้งานระบบ</a>
                     <span class="breadcrumb-item active">Log</span>
                 </div>
 
@@ -51,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ผู้ใช้งานระบบ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">Log</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

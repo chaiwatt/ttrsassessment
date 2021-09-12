@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">{{$subpillarindex->name}}</span></h4>
+                <h4> <span class="font-weight-semibold">แก้ไข Sub Pillar Index</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -16,10 +16,9 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> Sub Pillar Index</a>
-                    <a href="{{route('setting.admin.assessment.subpillarindex')}}" class="breadcrumb-item"> รายการ Sub Pillar Index</a>
-                    <span class="breadcrumb-item active">{{$subpillarindex->name}}</span>
+                    <a href="#" class="breadcrumb-item"> EV</a>
+                    <a href="{{route('setting.admin.assessment.subpillarindex')}}" class="breadcrumb-item"> Sub Pillar Index</a>
+                    <span class="breadcrumb-item active">แก้ไข Sub Pillar Index</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

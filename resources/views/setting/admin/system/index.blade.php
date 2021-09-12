@@ -18,7 +18,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ระบบ</a>
-                    <a href="#" class="breadcrumb-item"> ตั้งค่าระบบ</a>
+                    <span class="breadcrumb-item active">ตั้งค่าระบบ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Front page (Bill board)</label>
+                                        <label>การแสดง Billboard</label>
                                         <select name="frontpage" data-placeholder="Front page (Bill board)" class="form-control form-control-lg form-control-select2">
                                             @foreach ($frontpagestatuses as $frontpagestatus)                                                                
                                                 <option value="{{$frontpagestatus->id}}" @if ($generalinfo->front_page_status_id == $frontpagestatus->id) selected @endif> {{$frontpagestatus->name}} </option>

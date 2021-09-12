@@ -143,38 +143,126 @@
                                                                 <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                             @else
                                                                 @if ($menu->name != 'เข้าสู่ระบบ')
-                                                                        @if (substr("$menu->url",0,1) == '#')
-                                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                                            @else
-                                                                                <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
-                                                                        @endif    
-                                                                    @else
-                                                                        @if ($shareagent->isPhone() == 1)
-                                                                            <li>
-                                                                                @if (!Auth::check())
-                                                                                    <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
-                                                                                @else
-                                                                                    @if (Auth::user()->user_type_id >= 4)
-                                                                                        <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
-                                                                                    @elseif(Auth::user()->user_type_id == 3)
-                                                                                        <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
-                                                                                    @else
-                                                                                        <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                    @if (substr("$menu->url",0,1) == '#')
+                                                                        @if ($menu->menu_type_id == 2)
+                                                                                <li class="menu-item-has-children"> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                                                    @if (count($directmenus2->where('submenu',$menu->id)) > 0)
+                                                                                        <ul class="sub-menu">
+                                                                                            @foreach ($directmenus2->where('submenu',$menu->id) as $submenu)
+                                                                                                @php
+                                                                                                    $_menuurl = url('').'/'.$submenu->url;
+                                                                                                    if(filter_var($submenu->url, FILTER_VALIDATE_URL) == true){
+                                                                                                        $_menuurl = $submenu->url;
+                                                                                                    }
+                                                                                                @endphp
+                                                                                                <li ><a href="{{$_menuurl}}" style="font-family: kanit; font-weight:200; font-size:18px">{{$submenu->name}}</a> </li>
+                                                                                            @endforeach
+                                                                                        </ul>
                                                                                     @endif
-                                                                                @endif
-                                                                            </li>
+                                                                                </li>
+                                                                            @elseif($menu->menu_type_id != 3)
+                                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
                                                                         @endif
-                                                                @endif                                                      
+                                                                @else
+                                                                    @if ($menu->menu_type_id == 2)
+                                                                        <li class="menu-item-has-children"> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                                            @if (count($directmenus2->where('submenu',$menu->id)) > 0)
+                                                                                <ul class="sub-menu">
+                                                                                    @foreach ($directmenus2->where('submenu',$menu->id) as $submenu)
+                                                                                        @php
+                                                                                            $_menuurl = url('').'/'.$submenu->url;
+                                                                                            if(filter_var($submenu->url, FILTER_VALIDATE_URL) == true){
+                                                                                                $_menuurl = $submenu->url;
+                                                                                            }
+                                                                                        @endphp
+                                                                                        <li ><a href="{{$_menuurl}}" style="font-family: kanit; font-weight:200; font-size:18px">{{$submenu->name}}</a> </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            @endif
+                                                                        </li>
+                                                                    @elseif($menu->menu_type_id != 3)
+                                                                        <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
+                                                                    @endif
+                                                                @endif      
+                                                            @else
+                                                                @if ($shareagent->isPhone() == 1)
+                                                                    <li>
+                                                                        @if (!Auth::check())
+                                                                            <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
+                                                                        @else
+                                                                            @if (Auth::user()->user_type_id >= 4)
+                                                                                <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @elseif(Auth::user()->user_type_id == 3)
+                                                                                <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @else
+                                                                                <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @endif
+                                                                        @endif
+                                                                    </li>
+                                                                @endif
+                                                        @endif                                                      
                                                         @endif
                                                     @else
                                                         @if ($key == 0)
                                                                 <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
-                                                            @else
-                                                            @if ($menu->name != 'เข้าสู่ระบบ')
-                                                                <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                                @else
+                                                                @if ($menu->name != 'เข้าสู่ระบบ')
+                                                                    @if (substr("$menu->url",0,1) == '#')
+                                                                        @if ($menu->menu_type_id == 2)
+                                                                                <li class="menu-item-has-children"> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a>
+                                                                                    @if (count($directmenus2->where('submenu',$menu->id)) > 0)
+                                                                                        <ul class="sub-menu">
+                                                                                            @foreach ($directmenus2->where('submenu',$menu->id) as $submenu)
+                                                                                                @php
+                                                                                                    $_menuurl = url('').'/'.$submenu->url;
+                                                                                                    if(filter_var($submenu->url, FILTER_VALIDATE_URL) == true){
+                                                                                                        $_menuurl = $submenu->url;
+                                                                                                    }
+                                                                                                @endphp
+                                                                                                <li ><a href="{{$_menuurl}}" style="font-family: kanit; font-weight:200; font-size:18px">{{$submenu->engname}}</a> </li>
+                                                                                            @endforeach
+                                                                                        </ul>
+                                                                                    @endif
+                                                                                </li>
+                                                                            @elseif($menu->menu_type_id != 3)
+                                                                                <li> <a href="{{url('').'/'.$menu->url}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                                        @endif
+                                                                @else
+                                                                    @if ($menu->menu_type_id == 2)
+                                                                        <li class="menu-item-has-children"> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a>
+                                                                            @if (count($directmenus2->where('submenu',$menu->id)) > 0)
+                                                                                <ul class="sub-menu">
+                                                                                    @foreach ($directmenus2->where('submenu',$menu->id) as $submenu)
+                                                                                        @php
+                                                                                            $_menuurl = url('').'/'.$submenu->url;
+                                                                                            if(filter_var($submenu->url, FILTER_VALIDATE_URL) == true){
+                                                                                                $_menuurl = $submenu->url;
+                                                                                            }
+                                                                                        @endphp
+                                                                                        <li ><a href="{{$_menuurl}}" style="font-family: kanit; font-weight:200; font-size:18px">{{$submenu->engname}}</a> </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            @endif
+                                                                        </li>
+                                                                    @elseif($menu->menu_type_id != 3)
+                                                                        <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a></li>
+                                                                    @endif
+                                                                @endif      
                                                             @else
                                                                 @if ($shareagent->isPhone() == 1)
-                                                                    <li> <a href="{{$menuurl}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.login')}}</a></li>
+                                                                <li>
+                                                                    @if (!Auth::check())
+                                                                        <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a>
+                                                                    @else
+                                                                        @if (Auth::user()->user_type_id >= 4)
+                                                                            <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                        @elseif(Auth::user()->user_type_id == 3)
+                                                                            <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                        @else
+                                                                            <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                        @endif
+                                                                    @endif
+                                                                </li>
                                                                 @endif
                                                             @endif                                                       
                                                         @endif
@@ -205,9 +293,9 @@
         </div>
         <!--Full width header End-->
         <!-- Breadcrumbs Start -->
-        <div class="rs-breadcrumbs img5 ">
+        <div class="rs-breadcrumbs img4 mt-0" style="height: 450px">
             <div class="breadcrumbs-inner text-center">
-                <h1 class="page-title">
+                <h1 class="page-title mt-50">
                     @if (Config::get('app.locale') == 'th')
                         ข่าวสารและข้อมูล
                     @else
@@ -216,7 +304,8 @@
                 </h1>
                 <ul>
                     <li title="Braintech - IT Solutions and Technology Startup HTML Template">
-                        <a class="active" href="{{url('')}}" style="font-size: 16px"> @if (Config::get('app.locale') == 'th')
+                        <a class="active" href="{{url('')}}" style="font-size: 16px"> 
+                        @if (Config::get('app.locale') == 'th')
                             หน้าแรก
                         @else
                             Home
@@ -239,12 +328,12 @@
                         <div class="row">
                             @foreach ($pages as $page)
                             <div class="col-lg-12 mb-50">
-                                <div class="blog-item">
+                                <div class="blog-item" >
                                     <div class="blog-img">
-                                        <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
-                                        <ul class="post-categories">
+                                        <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset(@$page->newsimage->name)}}" alt=""></a>
+                                        {{-- <ul class="post-categories">
                                             <li><a href="{{route('landing.page',['slug' => $page->slug])}}">{{@$page->pageCategory->name}}</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </div>
                                     <div class="blog-content">
                                         <h3 class="blog-title"><a href="{{route('landing.page',['slug' => $page->slug])}}">{{$page->name}}</a></h3>
@@ -252,7 +341,15 @@
                                             <ul class="btm-cate">
                                                 <li>
                                                     <div class="blog-date">
-                                                        <i class="fa fa-calendar-check-o"></i> โพสต์: {{$page->day}} {{$page->month}} {{$page->year}}                                                        
+                                                        <i class="fa fa-calendar-check-o"></i> @if (Config::get('app.locale') == 'th')
+                                                        โพสต์:
+                                                    @else
+                                                        Post:
+                                                    @endif {{$page->day}}    @if (Config::get('app.locale') == 'th')
+                                                        {{$page->month}} {{$page->year}}
+                                                        @else
+                                                        {{$page->monthen}} {{$page->year-543}}
+                                                        @endif                                                        
                                                     </div>
                                                 </li>
                                                 <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
@@ -262,7 +359,11 @@
                                             {{$page->header}}
                                         </div>
                                         <div class="blog-button inner-blog">
-                                            <a class="blog-btn" href="{{route('landing.page',['slug' => $page->slug])}}" style="font-family: kanit">อ่านต่อ</a>
+                                            <a class="blog-btn" href="{{route('landing.page',['slug' => $page->slug])}}" style="font-family: kanit">@if (Config::get('app.locale') == 'th')
+                                                อ่านต่อ
+                                            @else
+                                                Read More
+                                            @endif</a>
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +383,11 @@
                             </div> --}}
                             <div class="recent-posts mb-50">
                                 <div class="widget-title">
-                                    <h3 class="title">ข่าวสารและข้อมูล</h3>
+                                    <h3 class="title">@if (Config::get('app.locale') == 'th')
+                                        ข่าวสารและข้อมูล
+                                        @else
+                                        News
+                                        @endif </h3>
                                 </div>
                                 @foreach ($pages as $page)
                                     <div class="recent-post-widget">
@@ -296,7 +401,15 @@
                                             </div>
                                             <span class="date">
                                                 <i class="fa fa-calendar"></i>
-                                                โพสต์เมื่อ: {{$page->day}} {{$page->month}} {{$page->year}} 
+                                                @if (Config::get('app.locale') == 'th')
+                                                        โพสต์:
+                                                    @else
+                                                        Post:
+                                                    @endif {{$page->day}} @if (Config::get('app.locale') == 'th')
+                                                    {{$page->month}} {{$page->year}}
+                                                    @else
+                                                    {{$page->monthen}} {{$page->year-543}}
+                                                    @endif  
                                             </span>
                                         </div>
                                     </div>   

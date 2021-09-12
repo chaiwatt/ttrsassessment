@@ -21,17 +21,17 @@ class CreateContactInfoRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email',
-            'subject' => 'required',
+            'phone' => 'required',
             'message' => 'required'
         ];
     }
     public function messages()
     {
       return  [
-            'name.required' => 'ยังไม่ได้กรอกชื่อ-นามสกุล',
+            'name.required' => 'ยังไม่ได้กรอกชื่อ',
             'email.required' => 'ยังไม่ได้กรอกอีเมล์',
             'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
-            'subject.required' => 'ยังไม่ได้กรอกหัวข้อ',
+            'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
             'message.required' => 'ยังไม่ได้กรอกข้อความ'
       ]; 
     }

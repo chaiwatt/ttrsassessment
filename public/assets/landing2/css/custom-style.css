@@ -174,7 +174,8 @@ font-size: 14px;
 }
 
 .bg-transparent{
-  background-image: linear-gradient(90deg, #03228f 10%, #0e73e4 100%) !important; 
+  /* background-image: linear-gradient(90deg, #03228f 10%, #0e73e4 100%) !important;  */
+  background-image: linear-gradient(100deg, #031c7c 34%, #064b9b 100%) !important; 
 }
 
 .pd-140{

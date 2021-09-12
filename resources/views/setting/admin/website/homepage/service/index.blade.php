@@ -10,9 +10,9 @@
                 <h4> <span class="font-weight-semibold">Service</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            {{-- <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.introsection.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Intro section<b><i class="icon-plus3"></i></b></a>
-            </div> --}}
+            <div class="header-elements d-none">
+                <a href="{{route('setting.admin.website.homepage.service.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Service<b><i class="icon-plus3"></i></b></a>
+            </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -53,7 +53,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ภาพสไลด์</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">Service</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -85,6 +85,79 @@
                                 </tbody>
                             </table>      
                         </div>
+                        <form method="POST" action="{{route('setting.admin.website.homepage.service.editsavestatus')}}" >
+                            @csrf
+
+                            <div class="form-group mb-md-2 mt-4">
+                                <div class="form-check form-check-inline">
+                                    @php
+                                        $check = 'checked';
+                                        if(!Empty($homepageserviceurl)  && $homepageserviceurl->url_type == 1){
+                                            $check = '';
+                                        }
+                                    @endphp
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input-styled selectlink" name="selectlink" value="0" {{$check}} data-fouc>
+                                        ลิงค์
+                                    </label>
+                                </div>
+
+                                @php
+                                    $check1 = 'checked';
+                                    if(Empty($homepageserviceurl)  || $homepageserviceurl->url_type == 0){
+                                        $check1 = '';
+                                    }
+                                @endphp
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input-styled selectlink" name="selectlink" {{$check1}} data-fouc>
+                                        หน้าเพจ
+                                    </label>
+                                </div>
+                            </div>
+                            @if (Empty($homepageserviceurl))
+                                <input type="text" id="linktype" name="linktype" value="0" hidden>
+                            @else
+                                <input type="text" id="linktype" name="linktype" value="{{@$homepageserviceurl->url_type}}" hidden>
+                            @endif
+
+
+                            <div class="form-group" style="margin-top:-20px" id="linksource" @if (!Empty($homepageserviceurl) && $homepageserviceurl->url_type == 1) hidden @endif>
+                                <input type="text" name="link" value="{{@$homepageserviceurl->url}}"  placeholder="เช่น https://www.google.co.th" class="form-control form-control-lg stringformat100">
+                            </div>
+
+                            <div class="form-group" style="margin-top:-20px" id="linksourceinternal"
+                                @if (Empty($homepageserviceurl))
+                                        hidden
+                                    @else
+                                        @if ($homepageserviceurl->url_type == 0)
+                                            hidden
+                                        @endif
+                                @endif
+                            >
+								<div class="form-group">
+									<select id="page" name="page" data-placeholder="หน้าเพจ" class="form-control form-control-lg form-control-select2">
+										@foreach ($pages as $page)
+											<option value="{{$page->id}}"
+                                                >{{$page->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label>สถานะการแสดงหน้าแรก</label>
+                                <select name="status" id="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                        <option value="0" @if ($homepagesection->show == 0) selected @endif >ซ่อน</option>
+                                        <option value="1" @if ($homepagesection->show == 1) selected @endif >แสดง</option>
+                                </select>
+
+                                <div class="text-right mt-2">
+                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             <!-- /striped rows -->
@@ -96,11 +169,24 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+        $(document).on('change', '.selectlink', function(e) {
+            if($("input[name='selectlink']:checked").val()=='0'){
+                $("#linksourceinternal").attr("hidden",true);
+                $("#linksource").attr("hidden",false);
+                $('#linktype').val(0);
+            }else{
+                $("#linksourceinternal").attr("hidden",false);
+                $("#linksource").attr("hidden",true);
+                $('#linktype').val(1);
+            }
+        });
     </script>
 @stop

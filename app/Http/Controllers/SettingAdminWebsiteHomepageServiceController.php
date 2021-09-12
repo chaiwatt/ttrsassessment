@@ -2,83 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Page;
+use App\Model\WebPage;
+use App\HomePageSection;
 use App\Model\CardColor;
 use Illuminate\Http\Request;
 use App\Model\HomepageService;
+use App\Model\HomePageServiceUrl;
 use App\Http\Requests\EditHomePageserviceRequest;
 use App\Http\Requests\CreateHomePageserviceRequest;
+use App\Http\Requests\HomePageServiceCreateRequest;
 
 class SettingAdminWebsiteHomepageServiceController extends Controller
 {
-    // public function Index(){
-    //     $homepageservices = HomepageService::get();
-    //     return view('setting.admin.website.homepage.service.index')->withHomepageservices($homepageservices);
-    // }
-    // public function Create(){
-    //     return view('setting.admin.website.homepage.service.create');
-    // }
-
-    // public function CreateSave(CreateHomePageserviceRequest $request){
-    //     $filelocation = '';
-    //     $file = $request->file('iconimg');
-    //     $new_name = str_random(10).".".$file->getClientOriginalExtension();
-    //     $file->move("storage/uploads/service" , $new_name);
-    //     $filelocation = "storage/uploads/service/".$new_name;
-    //     $homepageservice = new HomepageService();
-    //     $homepageservice->titlethai = $request->titlethai;
-    //     $homepageservice->titleeng = $request->titleeng;
-    //     $homepageservice->descriptionthai = $request->descriptionthai;
-    //     $homepageservice->descriptioneng = $request->descriptioneng;
-    //     $homepageservice->icon = $filelocation;
-    //     $homepageservice->link = $request->link;
-    //     $homepageservice->save();
-    //     return redirect()->route('setting.admin.website.homepage.service')->withSuccess('เพิ่ม Service สำเร็จ');
-    // }
-    // public function Edit($id){
-    //     $homepageservice = HomepageService::find($id);
-    //     return view('setting.admin.website.homepage.service.edit')->withHomepageservice($homepageservice);
-    // }
-    // public function EditSave(EditHomePageserviceRequest $request,$id){
-    //     $homepageservice = HomepageService::find($id);
-    //     $filelocation = $homepageservice->icon;
-    //     $file = $request->file('iconimg');
-    //     if(!Empty($file)){
-    //         unlink($homepageservice->icon);
-    //         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-    //         $file->move("storage/uploads/service" , $new_name);
-    //         $filelocation = "storage/uploads/service/".$new_name;
-    //     }
-    
-    //     HomepageService::find($id)->update([
-    //         'titlethai' => $request->titlethai,
-    //         'titleeng' => $request->titleeng,
-    //         'descriptionthai' => $request->descriptionthai,
-    //         'descriptioneng' => $request->descriptioneng,
-    //         'link' => $request->link,
-    //         'icon' => $filelocation
-    //     ]);
-
-    //     return redirect()->route('setting.admin.website.homepage.service')->withSuccess('แก้ไข Service สำเร็จ');
-    // }
-
-    // public function Delete($id){
-    //     HomepageService::find($id)->delete();
-    //     return redirect()->route('setting.admin.website.homepage.service')->withSuccess('ลบ Service สำเร็จ');
-    // }
     public function Index(){
+        $pages = WebPage::get();
+        // return $pages;
+        $homepageserviceurl = HomePageServiceUrl::first();
         $homepageservices = HomepageService::get();
-       return view('setting.admin.website.homepage.service.index')->withHomepageservices($homepageservices);
+        $homepagesection = HomePageSection::where('order_list',1)->first();
+       return view('setting.admin.website.homepage.service.index')->withHomepageservices($homepageservices)
+                                                                ->withHomepagesection($homepagesection)
+                                                                ->withHomepageserviceurl($homepageserviceurl)
+                                                                ->withPages($pages);
     }
-    public function Edit($id){
+
+    public function Create(){
         $cardcolors = CardColor::get();
-        $homepageservice = HomepageService::find($id);
-        //  return $homepageservice;
-       return view('setting.admin.website.homepage.service.edit')->withCardcolors($cardcolors)->withHomepageservice($homepageservice);
+       return view('setting.admin.website.homepage.service.create')->withCardcolors($cardcolors);
     }
 
-    public function EditSave(Request $request,$id){
-
-        $filelocation_iconnormal = HomepageService::find($id)->iconnormal;
+    public function CreateSave(HomePageServiceCreateRequest $request){
+        $filelocation_iconnormal = null;
         $file = $request->file('iconnormal');
         if(!Empty($file)){
             $new_name = str_random(10).".".$file->getClientOriginalExtension();
@@ -86,6 +41,41 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
             $filelocation_iconnormal = "storage/uploads/service/".$new_name;
         }
 
+        $filelocation_iconhover = null;
+        $file = $request->file('iconhover');
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/service" , $new_name);
+            $filelocation_iconhover = "storage/uploads/service/".$new_name;
+        }
+        $homepageservice = new HomepageService();
+        $homepageservice->titlethai = $request->titlethai;
+        $homepageservice->titleeng = $request->titleeng;
+        $homepageservice->descriptionthai = $request->descriptionthai;
+        $homepageservice->descriptioneng = $request->descriptioneng;
+        $homepageservice->iconnormal = $filelocation_iconnormal;
+        $homepageservice->iconhover = $filelocation_iconhover;
+        $homepageservice->cardcolor_id = $request->cardcolor;
+        $homepageservice->link = $request->link;
+        $homepageservice->save();
+
+        return redirect()->route('setting.admin.website.homepage.service')->withSuccess('เพิ่มรายการสำเร็จ');
+    }
+
+    public function Edit($id){
+        $cardcolors = CardColor::get();
+        $homepageservice = HomepageService::find($id);
+       return view('setting.admin.website.homepage.service.edit')->withCardcolors($cardcolors)->withHomepageservice($homepageservice);
+    }
+
+    public function EditSave(Request $request,$id){
+        $filelocation_iconnormal = HomepageService::find($id)->iconnormal;
+        $file = $request->file('iconnormal');
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/service" , $new_name);
+            $filelocation_iconnormal = "storage/uploads/service/".$new_name;
+        }
 
         $filelocation_iconhover = HomepageService::find($id)->iconhover;
         $file = $request->file('iconhover');
@@ -105,7 +95,32 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
             'cardcolor_id' => $request->cardcolor,
             'link' => $request->link
         ]);
-        //  return $homepageservice;
+
        return redirect()->route('setting.admin.website.homepage.service')->withSuccess('แก้ไขรายการสำเร็จ');
+    }
+    
+    public function EditSaveStatus(Request $request){
+        $link = $request->link;
+        if($request->linktype == 1){
+            $link = url('').'/webpage/'.WebPage::find($request->page)->slug;
+        }
+
+        HomePageSection::where('order_list',1)->first()->update([
+            'show' => $request->status
+        ]);
+        $check = HomePageServiceUrl::first();
+        if(Empty($check)){
+            $new = new HomePageServiceUrl();
+            $new->url = $link;
+            $new->url_type = $request->linktype;
+            $new->save();
+        }else{
+            HomePageServiceUrl::first()->update([
+                'url' => $link,
+                'url_type' => $request->linktype
+            ]);
+        }
+
+        return redirect()->route('setting.admin.website.homepage.service')->withSuccess('แก้ไขรายการสำเร็จ');
     }
 }

@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">หน้าเพจ</span></h4>
+                <h4> <span class="font-weight-semibold">หน้าบทความ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.page.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มหน้าเพจ<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.website.page.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มบทความ<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <span class="breadcrumb-item active">หน้าเพจ</span>
+                    <span class="breadcrumb-item active">หน้าบทความ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">หน้าเพจ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">หน้าบทความ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -65,9 +65,8 @@
                             <table class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
-                                        {{-- <th>#</th> --}}
                                         <th style="text-align: center">ชื่อ</th>                               
-                                        <th style="text-align: center">หมวด</th>
+                                        {{-- <th style="text-align: center">หมวด</th> --}}
                                         <th style="text-align: center">จำนวนวิว</th>
                                         <th style="text-align: center">Unique IP</th>
                                         <th style="width:250px;text-align: center">เพิ่มเติม</th>
@@ -76,13 +75,12 @@
                                 <tbody>
                                     @foreach ($pages as $key => $page)
                                     <tr>    
-                                        {{-- <td> {{$key+1}} </td> --}}
                                         <td> {{$page->name}} </td>                                         
-                                        <td> {{$page->pagecategory->name}} </td>  
+                                        {{-- <td> {{$page->pagecategory->name}} </td>   --}}
                                         <td style="text-align: center"> {{$page->pageview->count()}} </td> 
                                         <td style="text-align: center"> {{$page->pageviewunique->count()}} </td> 
                                         <td style="text-align: center"> 
-                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
+                                            <a href="{{route('landing.page',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าบทความ</a>
                                             <a href="{{route('setting.admin.website.page.edit',['id' => $page->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.page.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>
@@ -91,6 +89,20 @@
                                 </tbody>
                             </table>      
                         </div>
+                        <form method="POST" action="{{route('setting.admin.website.page.editsavestatus')}}" >
+                            @csrf
+                            <div class="form-group mt-2">
+                                <label>สถานะการแสดงหน้าแรก</label>
+                                <select name="status" id="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                        <option value="0" @if ($homepagesection->show == 0) selected @endif >ซ่อน</option>
+                                        <option value="1" @if ($homepagesection->show == 1) selected @endif >แสดง</option>
+                                </select>
+
+                                <div class="text-right mt-2">
+                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             <!-- /striped rows -->

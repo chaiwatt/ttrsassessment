@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\WebPage;
+use App\HomePageSection;
 use Illuminate\Http\Request;
 use App\Model\HomepagePillar;
+use App\Model\HomePagePillarUrl;
 use App\Model\HomepagePillarSection;
 use App\Http\Requests\HomePagePillarRequest;
 use App\Http\Requests\EditHomePagePillarRequest;
@@ -11,12 +14,17 @@ use App\Http\Requests\EditHomePagePillarRequest;
 class SettingAdminWebsiteHomepagePillarController extends Controller
 {
     public function Edit(){
+        $homepagepillarurl = HomePagePillarUrl::first();
+        $pages = WebPage::get();
+        $homepagesection = HomePageSection::where('order_list',3)->first();
         $homepagepillar = HomepagePillarSection::first();
-        return view('setting.admin.website.homepage.pillar.edit')->withHomepagepillar($homepagepillar);
+        return view('setting.admin.website.homepage.pillar.edit')->withHomepagepillar($homepagepillar)->withHomepagepillarurl($homepagepillarurl)
+        ->withHomepagesection($homepagesection)
+        ->withPages($pages);
     }
 
     public function EditSave(HomePagePillarRequest $request){
-        
+        // return $request->linktype;
         HomepagePillarSection::first()->update([
             'textth1' =>  $request->textth1,
             'texteng1' =>  $request->texteng1,
@@ -39,57 +47,28 @@ class SettingAdminWebsiteHomepagePillarController extends Controller
             'pillardescth4' =>  $request->pillardescth4,
             'pillardesceng4' =>  $request->pillardesceng4
         ]);
+
+        $link = $request->link;
+        if($request->linktype == 1){
+            $link = url('').'/webpage/'.WebPage::find($request->page)->slug;
+        }
+        $check = HomePagePillarUrl::first();
+        if(Empty($check)){
+            $new = new HomePagePillarUrl();
+            $new->url = $link;
+            $new->url_type = $request->linktype;
+            $new->save();
+        }else{
+            HomePagePillarUrl::first()->update([
+                'url' => $link,
+                'url_type' => $request->linktype
+            ]);
+        }
+
+        HomePageSection::where('order_list',3)->first()->update([
+            'show' => $request->status
+        ]);
         return redirect()->route('setting.admin.website.homepage.pillar')->withSuccess('แก้ไขสำเร็จ');
     }
-
-    // public function EditSave(EditHomePagePillarRequest $request){
-    //     $homepagepillar = HomepagePillar::first();
-    //     $filelocation_pillarimage1 = $homepagepillar->pillarimage1;
-    //     $filelocation_pillarimage2 = $homepagepillar->pillarimage2;
-    //     $filelocation_pillarimage3 = $homepagepillar->pillarimage3;
-    //     $filelocation_pillarimage4 = $homepagepillar->pillarimage4;
-
-    //     $file_pillarimage1 = $request->file('pillarimage1');
-    //     $file_pillarimage2 = $request->file('pillarimage2');
-    //     $file_pillarimage3 = $request->file('pillarimage3');
-    //     $file_pillarimage4 = $request->file('pillarimage4');
-
-    //     if(!Empty($file_pillarimage1)){
-    //         unlink($homepagepillar->pillarimage1);
-    //         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-    //         $file->move("storage/uploads/pillarimage" , $new_name);
-    //         $filelocation_pillarimage1 = "storage/uploads/pillarimage/".$new_name;
-    //     }
-    //     if(!Empty($file_pillarimage2)){
-    //         unlink($homepagepillar->pillarimage2);
-    //         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-    //         $file->move("storage/uploads/pillarimage" , $new_name);
-    //         $filelocation_pillarimage2 = "storage/uploads/pillarimage/".$new_name;
-    //     }
-    //     if(!Empty($file_pillarimage3)){
-    //         unlink($homepagepillar->pillarimage3);
-    //         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-    //         $file->move("storage/uploads/pillarimage" , $new_name);
-    //         $filelocation_pillarimage3 = "storage/uploads/pillarimage/".$new_name;
-    //     }
-    //     if(!Empty($file_pillarimage4)){
-    //         unlink($homepagepillar->pillarimage4);
-    //         $new_name = str_random(10).".".$file->getClientOriginalExtension();
-    //         $file->move("storage/uploads/pillarimage" , $new_name);
-    //         $filelocation_pillarimage4 = "storage/uploads/pillarimage/".$new_name;
-    //     }
-
-    //     $homepagepillar = HomepagePillar::first()->update([
-    //         'headerthai' => $request->headerthai,
-    //         'headereng' => $request->headereng,
-    //         'descriptionthai' => $request->descriptionthai,
-    //         'descriptioneng' => $request->descriptioneng,
-    //         'pillarimage1' => $filelocation_pillarimage1,
-    //         'pillarimage2' => $filelocation_pillarimage2,
-    //         'pillarimage3' => $filelocation_pillarimage3,
-    //         'pillarimage4' => $filelocation_pillarimage4
-    //     ]);
-    //     return redirect()->route('setting.admin.website.homepage.pillar')->withSuccess('แก้ไข Pillar สำเร็จ');
-    // }
     
 }

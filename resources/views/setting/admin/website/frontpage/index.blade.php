@@ -7,7 +7,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">หน้าแรกพิเศษ</span></h4>
+                <h4> <span class="font-weight-semibold">หน้า Billboard</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <span class="breadcrumb-item active">หน้าแรกพิเศษ</span>
+                    <span class="breadcrumb-item active">หน้า Billboard</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -57,30 +57,35 @@
                                             <label>สีพื้น<span class="text-danger">*</span></label>
                                             <input type="text"  name="bgcolor" value="{{$frontpage->bgcolor}}"  placeholder="สีพื้น" class="form-control form-control-lg">
                                         </div>
+
+                                        {{-- <div class="form-group">
+                                            <input type="text" class="form-control colorpicker-show-input" data-preferred-format="hex" value="#f75d1c" data-fouc>
+                                        </div> --}}
+
                                         <div class="form-group">
-                                            <label>เปอร์เซนต์ขนาดรูปพื้น<span class="text-danger">*</span></label>
+                                            <label>เปอร์เซนต์แสดงผล Billboard<span class="text-danger">*</span></label>
                                             <input type="text"  name="percent" value="{{$frontpage->percentimg}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>รูปพื้น (ขนาด 1200x857 px)<span class="text-danger">*</span></label>
+                                            <label>Billboard (ขนาด 1000x720px เพื่อการแสดงผลที่เหมาะสม)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
-                                                <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัปโหลดรูปพื้นหลัง</button>													
+                                                <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัปโหลดรูป Billboard</button>													
                                             </div>
                                             <input type="file" style="display:none;" id="frontimg" name="frontimg" accept="image/*"/>
                                         </div>
                                         <div class="form-group">
                                             <img src="{{asset($frontpage->file)}}" class="img-fluid" alt="Responsive image">
                                         </div>
-                                        {{-- <div class="form-group">
-                                            <label>รูปปุ่มกด (ขนาด 600x128 px)<span class="text-danger">*</span></label>
-                                            <div class="input-group">													
-                                                <button id="_btnimg" class="btn bg-info" type="button" onclick="document.getElementById('btnimg').click();">อัปโหลดรูปปุ่มกด</button>													
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>การแสดง Bill board</label>
+                                                <select name="billboard" data-placeholder="การแสดง Bill board" class="form-control form-control-lg form-control-select2">
+                                                    @foreach ($frontpagestatuses as $frontpagestatus)                                                                
+                                                        <option value="{{$frontpagestatus->id}}" @if ($generalinfo->front_page_status_id == $frontpagestatus->id) selected @endif> {{$frontpagestatus->name}} </option>
+                                                    @endforeach   
+                                                </select>
                                             </div>
-                                            <input type="file" style="display:none;" id="btnimg" name="btnimg" accept="image/*"/>
                                         </div>
-                                        <div class="form-group">
-                                            <img src="{{asset($frontpage->entersitebtn)}}" class="img-fluid" alt="Responsive image">
-                                        </div> --}}
                                     </fieldset>
                                 </div>
                             </div>
@@ -99,18 +104,43 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-
+<script src="{{asset('assets/dashboard/js/plugins/pickers/color/spectrum.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/picker_color.js')}}"></script>
 <script  type="text/javascript">
 	var route = {
         url: "{{ url('/') }}",
         token: $('meta[name="csrf-token"]').attr('content')
     };
 
+    var _URL = window.URL || window.webkitURL;
+
     $("#frontimg").on('change', function() {
-        $("#_frontimg").html('อัปโหลดรูปพื้นหลัง(1)');
+        var file, img;
+        if ((file = this.files[0])) {
+            img = new Image();
+            img.onload = function() {
+                if(this.width <= 1000 || this.height <= 720){
+                    $("#_frontimg").html('อัปโหลดรูปพื้นหลัง(1)');
+                }else{
+                    $('#frontimg').val('');
+                    Swal.fire({
+                    title: 'ผิดพลาด',
+                    text: 'ขนาดไฟล์ เกิน 1000x720px',
+                    });
+                }
+            };
+            img.onerror = function() {
+                Swal.fire({
+                    title: 'ผิดพลาด',
+                    text: 'กรุณาเลือกไฟล์รูปภาพ',
+                    });
+            };
+            img.src = _URL.createObjectURL(file);
+        }
     });
     $("#btnimg").on('change', function() {
         $("#_btnimg").html('อัปโหลดรูปปุ่มกด(1)');
     });
+
 </script>
 @stop

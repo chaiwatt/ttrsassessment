@@ -14,7 +14,7 @@ return [
     'openhour' => 'Open Hour',
     'copyright' => 'Copyright',
     'dashboard' => 'Dashboard',
-    'registrationprocess' => 'Registration process',
+    'registrationprocess' => 'TTRS service procedures',
     'submitanapplication' => 'Submit an application',
     'fillouttheform' => 'Fill out the form',
     'preliminaryconsideration' => 'Preliminary consideration',

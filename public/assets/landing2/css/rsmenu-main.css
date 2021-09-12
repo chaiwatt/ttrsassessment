@@ -673,7 +673,7 @@ Version: 1.0.0
 
 	.rs-menu-close {
     	height: 0;		
-    	overflow: hidden!important;
+    	/* overflow: hidden!important; */
 	}
 	
 	/*Menu Toggle Appearance*/

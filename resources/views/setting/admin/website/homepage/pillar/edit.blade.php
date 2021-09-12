@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">แก้ไข Homepage Pillar</span></h4>
+                <h4> <span class="font-weight-semibold">Pillar</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
-                    <a href="#" class="breadcrumb-item"> Homepage Pillar</a>
-                    {{-- <span class="breadcrumb-item active">แก้ไข Intro section</span> --}}
+                    <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
+                    <span class="breadcrumb-item active">Pillar</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -143,6 +143,73 @@
                                             <input type="text"  name="pillardesceng4" value="{{$homepagepillar->pillardesceng4}}"  placeholder="Description Pillar4 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
                                         </div>
 
+                                        
+                            <div class="form-group mb-md-2 mt-4">
+                                <div class="form-check form-check-inline">
+                                    @php
+                                        $check = 'checked';
+                                        if(!Empty($homepagepillarurl)  && $homepagepillarurl->url_type == 1){
+                                            $check = '';
+                                        }
+                                    @endphp
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input-styled selectlink" name="selectlink" value="0" {{$check}} data-fouc>
+                                        ลิงค์
+                                    </label>
+                                </div>
+
+                                @php
+                                    $check1 = 'checked';
+                                    if(Empty($homepagepillarurl)  || $homepagepillarurl->url_type == 0){
+                                        $check1 = '';
+                                    }
+                                @endphp
+
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input-styled selectlink" name="selectlink" {{$check1}} data-fouc>
+                                        หน้าเพจ
+                                    </label>
+                                </div>
+                            </div>
+                            @if (Empty($homepagepillarurl))
+                                <input type="text" id="linktype" name="linktype" value="0" hidden>
+                            @else
+                                <input type="text" id="linktype" name="linktype" value="{{@$homepagepillarurl->url_type}}" hidden>
+                            @endif
+
+
+                            <div class="form-group" style="margin-top:-20px" id="linksource" @if (!Empty($homepagepillarurl) && $homepagepillarurl->url_type == 1) hidden @endif>
+                                <input type="text" name="link" value="{{@$homepagepillarurl->url}}"  placeholder="เช่น https://www.google.co.th" class="form-control form-control-lg stringformat100">
+                            </div>
+
+                            <div class="form-group" style="margin-top:-20px" id="linksourceinternal"
+                                @if (Empty($homepagepillarurl))
+                                        hidden
+                                    @else
+                                        @if ($homepagepillarurl->url_type == 0)
+                                            hidden
+                                        @endif
+                                @endif
+                            >
+								<div class="form-group">
+									<select id="page" name="page" data-placeholder="หน้าเพจ" class="form-control form-control-lg form-control-select2">
+										@foreach ($pages as $page)
+											<option value="{{$page->id}}"
+                                                >{{$page->name}}</option> 
+										@endforeach
+									</select>
+								</div>
+                            </div>
+
+                                        <div class="form-group">
+                                            <label>สถานะการแสดงหน้าแรก</label>
+                                            <select name="status" id="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                                    <option value="0" @if ($homepagesection->show == 0) selected @endif >ซ่อน</option>
+                                                    <option value="1" @if ($homepagesection->show == 1) selected @endif >แสดง</option>
+                                            </select>
+                                        </div>
+
                                     </fieldset>
                                     
                                 </div>
@@ -163,9 +230,25 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script type="text/javascript">
         $("#file").on('change', function() {
             $("#filename").val(this.value);
+        });
+
+        $(document).on('change', '.selectlink', function(e) {
+            
+            if($("input[name='selectlink']:checked").val()=='0'){
+                $("#linksourceinternal").attr("hidden",true);
+                $("#linksource").attr("hidden",false);
+                $('#linktype').val(0);
+                console.log('a')
+            }else{
+                $("#linksourceinternal").attr("hidden",false);
+                $("#linksource").attr("hidden",true);
+                $('#linktype').val(1);
+                console.log('b')
+            }
         });
     </script>
 @stop

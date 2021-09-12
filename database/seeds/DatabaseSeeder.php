@@ -24,8 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployPositionsTableSeeder::class);
         $this->call(IsnotifiesTableSeeder::class);
         $this->call(StockHoldersTableSeeder::class);
+        $this->call(MenuTypesTableSeeder::class);
         $this->call(BankTypesTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
+        $this->call(HomePageSectionsTableSeeder::class);
         $this->call(CardColorsTableSeeder::class);
         $this->call(EventCalendarAttendeeStatusesTableSeeder::class);
         $this->call(AnnounceCategoryTableSeeder::class);
@@ -114,7 +116,15 @@ class DatabaseSeeder extends Seeder
         $this->call(HeaderTextsTableSeeder::class);
         $this->call(HomepageIndustryGroupTextsSeeder::class);
         $this->call(DirectMenu2sTableSeeder::class);
-        $this->call(PagesTableSeeder::class);
+        // $this->call(PagesTableSeeder::class);
+        $this->call(WebpagesTableSeeder::class);
+
+        $this->call(HomePageIndustryUrlsTableSeeder::class);
+        $this->call(HomePagePillarUrlsTableSeeder::class);
+        $this->call(HomePageServiceUrlsTableSeeder::class);
+        
+
+
         $this->call(ReportListsTableSeeder::class);
         $this->call(ReportTypesTableSeeder::class);
         

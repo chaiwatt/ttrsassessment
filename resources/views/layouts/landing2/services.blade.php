@@ -1,4 +1,4 @@
-<div id="rs-services" class="rs-services style3 pt-110 pb-120 md-pt-75 md-pb-80">
+<div id="rs-services-procedure" class="rs-services style3 pt-110 pb-120 md-pt-75 md-pb-80">
     <div class="container">
         <div class="sec-title2 text-center mb-45">
             <h2 class="title testi-title">
@@ -6,10 +6,9 @@
             </h2>
         </div>
         <div class="row">
-
         @foreach ($homepageservices as $key => $homepageservice)
             <div class="col-lg-4 col-md-6 mb-20" data-aos="fade-up" data-aos-delay="{{($key + 1)*100}}">
-                <div class="services-item {{$homepageservice->cardcolor->name}}">
+                <div class="services-item {{$homepageservice->cardcolor->name}}" style="height:330px">
                     <div class="services-icon">
                         <div class="image-part">
                             <img class="main-img" src="{{asset($homepageservice->iconnormal)}}" alt="">
@@ -36,10 +35,7 @@
                                     </p>
                                 </div>
                         @endif
-
-
                         <div class="serial-number">
-
                              {{sprintf('%02d', $key+1)}}
                          </div>
                     </div>
@@ -50,8 +46,12 @@
     
         </div>
         <div class="getStart text-right" >
-
-            <a class="readon started" href="{{route('landing.servicepage')}}">
+            @if (!Empty($sharehomepageserviceurl))
+                    <a class="readon started" href="{{@$sharehomepageserviceurl->url}}">
+                @else
+                    <a class="readon started" href="#">
+            @endif
+            
                 
                 @if (Config::get('app.locale') == 'th')
                     เพิ่มเติม

@@ -17,31 +17,30 @@ class FeatureController extends Controller
         $img = Image::make($file);  
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),960,540,1);
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1280,800,1);
         $featureimage = new FeatureImage();
         $featureimage->name = $feature;
         $featureimage->save();
 
-        // $fname=str_random(10).".".$file->getClientOriginalExtension();
-        // $feature = "storage/uploads/page/feature/".$fname;
-        // Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),500,330,2);
-        // $featureimagethumbnail_1 = new FeatureImageThumbnail();
-        // $featureimagethumbnail_1->name = $feature;
-        // $featureimagethumbnail_1->save();
+        $fname=str_random(10).".".$file->getClientOriginalExtension();
+        $feature = "storage/uploads/page/feature/".$fname;
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1200,670,2);
+        $featureimagethumbnail_1 = new FeatureImageThumbnail();
+        $featureimagethumbnail_1->name = $feature;
+        $featureimagethumbnail_1->save();
 
         $fname=str_random(10).".".$file->getClientOriginalExtension();
         $feature = "storage/uploads/page/feature/".$fname;
-        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),700,700,2);
+        Crop::crop(true,public_path("storage/uploads/page/feature/"),$fname,Image::make($file),1000,1000,2);
         $featureimagethumbnail_2 = new FeatureImageThumbnail();
         $featureimagethumbnail_2->name = $feature;
         $featureimagethumbnail_2->save();
 
-        // featurethumbnail 
 
         return response()->json(
             array(
                 "feature" => $featureimage,
-                // "blogsidebarimage" => $featureimagethumbnail_1,
+                "bloglistimage" => $featureimagethumbnail_1,
                 "bloghomepageimage" => $featureimagethumbnail_2
                 ));  
     }

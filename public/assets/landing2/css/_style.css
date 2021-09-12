@@ -3106,11 +3106,12 @@ body .search-modal .close:hover {
   background: url(assets/images/breadcrumbs/3.jpg);
 }
 .rs-breadcrumbs.img4 {
-  background: url(../images/breadcrumbs/4.jpg);
+  background: url(../images/breadcrumbs/04.png);
 }
 .rs-breadcrumbs.img5 {
   background:linear-gradient(360deg, #03218f5e 100%, #0e72e4 100%),url(../images/ttrs.png);
 }
+
 /* ------------------------------------
     05. Slider Section CSS
 ---------------------------------------*/

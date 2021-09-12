@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">{{$pillar->name}}</span></h4>
+                <h4> <span class="font-weight-semibold">แก้ไข Pillar</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -16,10 +16,9 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> การประเมิน</a>
-                    <a href="#" class="breadcrumb-item"> Pillar</a>
-                    <a href="{{route('setting.admin.assessment.pillar')}}" class="breadcrumb-item"> รายการ Pillar</a>
-                    <span class="breadcrumb-item active">{{$pillar->name}}</span>
+                    <a href="#" class="breadcrumb-item"> EV</a>
+                    <a href="{{route('setting.admin.assessment.pillar')}}" class="breadcrumb-item"> Pillar</a>
+                    <span class="breadcrumb-item active">แก้ไข Pillar</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
