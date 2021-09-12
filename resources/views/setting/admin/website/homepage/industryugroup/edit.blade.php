@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">กลุ่มอุตสาหกรรม</span></h4>
+                <h4> <span class="font-weight-semibold">ผลการดำเนินงาน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -18,7 +18,7 @@
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
                     <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
-                    <span class="breadcrumb-item active">กลุ่มอุตสาหกรรม</span>
+                    <span class="breadcrumb-item active">ผลการดำเนินงาน</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>

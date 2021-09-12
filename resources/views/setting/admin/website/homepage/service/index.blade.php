@@ -7,11 +7,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">Service</span></h4>
+                <h4> <span class="font-weight-semibold">ขั้นตอนการบริการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.website.homepage.service.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม Service<b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.website.homepage.service.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มขั้นตอนการบริการ<b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
                     <a href="{{route('setting.admin.website.homepage.service')}}" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
-                    <span class="breadcrumb-item active">Service</span>
+                    <span class="breadcrumb-item active">ขั้นตอนการบริการ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

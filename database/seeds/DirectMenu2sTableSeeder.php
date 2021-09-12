@@ -76,15 +76,6 @@ class DirectMenu2sTableSeeder extends Seeder
                 'url' => '#rs-services-procedure',
             ],
             [
-                'name' => 'แนะนำบริการ',
-                'slug' => 'แนะนำบริการ',
-                'menu_type_id' => 3,
-                'submenu' => 3,
-                'engname' => 'TTRS service',
-                'engslug' => 'ttrs-service',
-                'url' => '#rs-services-benefit',
-            ],
-            [
                 'name' => 'ผลการดำเนินงาน',
                 'slug' => 'ผลการดำเนินงาน',
                 'menu_type_id' => 3,
@@ -92,6 +83,15 @@ class DirectMenu2sTableSeeder extends Seeder
                 'engname' => 'Project performance',
                 'engslug' => 'project-performance',
                 'url' => '#rs-performance',
+            ],
+            [
+                'name' => 'แนะนำบริการ',
+                'slug' => 'แนะนำบริการ',
+                'menu_type_id' => 3,
+                'submenu' => 3,
+                'engname' => 'TTRS service',
+                'engslug' => 'ttrs-service',
+                'url' => '#rs-services-benefit',
             ]
         ]);
     }

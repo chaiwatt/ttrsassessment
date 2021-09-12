@@ -385,9 +385,9 @@
                     <a href="#" class="nav-link"><span>หน้าแรก (Homepage)</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.banner')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.banner')?'active':''}}">Banner</a></li>		             
-                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.service')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.service')?'active':''}}">Service</a></li>		             
-                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.industryugroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.industryugroup')?'active':''}}">กลุ่มอุตสาหกรรม</a></li>	
-                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.pillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.pillar')?'active':''}}">Pillar</a></li>	
+                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.service')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.service')?'active':''}}">ขั้นตอนการบริการ</a></li>		             
+                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.industryugroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.industryugroup')?'active':''}}">ผลการดำเนินงาน</a></li>	
+                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.pillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.pillar')?'active':''}}">แนะนำบริการ</a></li>	
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.faq')?'active':''}}">คำถามที่พบบ่อย</a></li>
                         <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><span>Custom Section</span></a>
