@@ -10,7 +10,7 @@
         </div>
         <div class="rs-carousel owl-carousel" data-loop="true" data-items="3" data-margin="30" data-autoplay="true" data-hoverpause="true" data-autoplay-timeout="5000" data-smart-speed="800" data-dots="false" data-nav="false" data-nav-speed="false" data-center-mode="false" data-mobile-device="1" data-mobile-device-nav="false" data-mobile-device-dots="false" data-ipad-device="2" data-ipad-device-nav="false" data-ipad-device-dots="false" data-ipad-device2="2" data-ipad-device-nav2="false" data-ipad-device-dots2="false" data-md-device="3" data-md-device-nav="false" data-md-device-dots="false">
             @foreach ($sharepages as $page)
-                <div class="blog-item" style="height: 740px">
+                <div class="blog-item" style="height: 800px">
                     <div class="image-wrap">
                         <a href="{{route('landing.page',['slug' => $page->slug])}}"><img src="{{asset($page->featureimagethumbnail->name)}}" alt=""></a>
                         {{-- <ul class="post-categories">
