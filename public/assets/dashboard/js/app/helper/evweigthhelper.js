@@ -30,6 +30,7 @@ $(function() {
     getEv($('#evid').val()).then(data => {
 
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
+        $('#float-weight').html(data.sumweigth.toFixed(3));
         $('#extraweight').html('(' + data.sumextraweigth.toFixed(3) + ')');
         RenderWeightTable(data.pillaindexweigths,1);
         if (data.extracriteriatransactions.length != 0) {
@@ -303,10 +304,10 @@ function getEv(evid){
     }
     editWeight($(this).data('id'),$(this).val(),1).then(data => {
         $('#weight').html('(' + data.sumweigth.toFixed(3) + ')');
-        Toast.fire({
-            // icon: 'success',
-            title: 'Weight sum ' + data.sumweigth.toFixed(3)
-          })
+        $('#float-weight').html(data.sumweigth.toFixed(3));
+        // Toast.fire({
+        //     title: 'Weight sum ' + data.sumweigth.toFixed(3)
+        //   })
     }).catch(error => {})
 });
 
@@ -340,10 +341,9 @@ $(document).on('focusin', '.weigthvalue', function(){
     }
     Extra.editExtraWeight($('#evid').val(),$(this).data('id'),$(this).val()).then(data => {
         $('#extraweight').html('(' + parseFloat(data).toFixed(3) + ')');
-        Toast.fire({
-            // icon: 'success',
-            title: 'Weight sum ' + parseFloat(data).toFixed(3)
-          })
+        // Toast.fire({
+        //     title: 'Weight sum ' + parseFloat(data).toFixed(3)
+        //   })
     }).catch(error => {})
 });
 
@@ -777,7 +777,7 @@ function updateEvAdminStatus(id,value){
                 Ev.approveEvStageTwo($(this).data('id')).then(data => {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
-                        title: 'สำเร็จ...',
+                        title: 'สำเร็จ',
                         text: 'EV ได้รับการอนุมัติแล้ว',
                     }).then((result) => {
                         window.location.reload();
@@ -855,7 +855,7 @@ function updateEvAdminStatus(id,value){
                             Ev.clearCommentTab($('#evid').val(),2).then(data => {
                                 $("#spiniconsendjd").attr("hidden",true);
                                 Swal.fire({
-                                    title: 'สำเร็จ...',
+                                    title: 'สำเร็จ',
                                     text: 'นำส่ง Manager สำเร็จ',
                                 }).then((result) => {
                                     window.location.reload();
@@ -870,13 +870,11 @@ function updateEvAdminStatus(id,value){
 		transitionEffect: 'fade',
 		autoFocus: true,
 		onStepChanged:function (event, currentIndex, newIndex) {
-        // if(submitbutton == true){
-        //     $(document).find(".actions ul").append(`
-        //     <li class='libtn'><button type='button' id='previewweight' class='btn btn-info'> Preview <i class='icon-eye ml-2' /></button></li>  
-        // `);
-        // }else{
-        //     $(".actions").find(".libtn").remove();
-        // }
+            if(currentIndex == 1){
+                $("#weightstick").attr("hidden",true);
+            }else{
+                $("#weightstick").attr("hidden",false);
+            }
 		return true;
 		},
 		
@@ -939,12 +937,12 @@ function updateEvAdminStatus(id,value){
     
      
      $("#btnOnExcel").on('click', function() {
-        // if (!$('#evexporttable').DataTable().data().any() ) {
+        if (!$('#evexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "1");
             window.location.reload();
-        // }else{
-        //     $('#evexporttable').DataTable().buttons(0,0).trigger();
-        // }
+        }else{
+            $('#evexporttable').DataTable().buttons(0,0).trigger();
+        }
     
     });
     $(document).on('click', '.preview', function(e) {
@@ -995,34 +993,34 @@ function updateEvAdminStatus(id,value){
 
     
     $("#btnOnPdf").on('click', function() {
-        // if (!$('#evexporttable').DataTable().data().any() ) {
+        if (!$('#evexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "2");
             window.location.reload();
-        // }else{
-        //     $('#evexporttable').DataTable().buttons(0,1).trigger();
-        // }
+        }else{
+            $('#evexporttable').DataTable().buttons(0,1).trigger();
+        }
        
     });
     
     $("#btnOnExcelExtra").on('click', function() {
     
-        // if (!$('#evextraexporttable').DataTable().data().any() ) {
+        if (!$('#evextraexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "3");
             window.location.reload();
-        // }else{
-        //     $('#evextraexporttable').DataTable().buttons(0,0).trigger();
-        // }
+        }else{
+            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+        }
         
     
     });
     
     $("#btnOnPdfExtra").on('click', function() {
-        // if (!$('#evextraexporttable').DataTable().data().any() ) {
+        if (!$('#evextraexporttable').DataTable().data().any() ) {
             setCookie("forcedownload", "4");
             window.location.reload();
-        // }else{
-        //     $('#evextraexporttable').DataTable().buttons(0,1).trigger();
-        // }
+        }else{
+            $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+        }
         
     });
     

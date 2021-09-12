@@ -1413,7 +1413,7 @@
 				$("#spinicon").attr("hidden",true);
 				$("#appceptagreement_wrapper").attr("hidden",true);
 				Swal.fire({
-					title: 'สำเร็จ...',
+					title: 'สำเร็จ',
 					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ',
 				}).then((result) => {
 					window.location.replace(`${route.url}/dashboard/company/report`);

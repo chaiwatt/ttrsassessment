@@ -23,6 +23,7 @@ class SettingAdminWebsiteFrontPageController extends Controller
         $btnimg = $request->btnimg;
         $frontimglocation = $frontpage->file;
         $btnimglocation = $frontpage->entersitebtn;
+        
         if(!Empty($frontimg)){
             @unlink($frontpage->file);
             $new_name = str_random(10).".".$frontimg->getClientOriginalExtension();

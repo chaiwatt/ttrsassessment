@@ -66,8 +66,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
-                                        <th style="text-align: center">เลขที่โครงการ</th>
-                                        <th style="text-align: center">ชื่อโครงการ</th>    
+                                        
+                                        <th style="text-align: center">ชื่อโครงการ</th>  
+                                        <th style="text-align: center">เลขที่โครงการ</th>  
                                         <th style="text-align: center">บริษัท</th>  
                                         <th style="text-align: center">สถานภาพ</th>                             
                                         <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
@@ -78,8 +79,8 @@
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 10)
                                             <tr>    
                                                 <td hidden>{{$fulltbp->updated_at}}</td> 
-                                                <td style="text-align: center"> {{$fulltbp->minitbp->minitbp_code}} </td> 
                                                 <td> {{$fulltbp->minitbp->project}} </td> 
+                                                <td style="white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
                                                 <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                                 <td style="text-align: center">
                                                     @if ($fulltbp->success_objective == 0)

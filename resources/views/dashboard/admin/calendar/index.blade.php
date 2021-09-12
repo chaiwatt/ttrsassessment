@@ -68,6 +68,7 @@
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                         <th style="text-align: center">บริษัท</th> 
                                         <th style="text-align: center">ประเภทกิจกรรม</th>  
                                         <th style="text-align: center">วันที่</th>
@@ -81,6 +82,7 @@
                                     <tr>  
                                         <td hidden>{{$eventcalendar->updated_at}}</td>  
                                         <td> {{$eventcalendar->fulltbp->minitbp->project}} </td> 
+                                        <td style="text-align: center">{{$eventcalendar->fulltbp->minitbp->businessplan->code}}</td> 
                                         <td> {{$eventcalendar->fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                         <td> {{$eventcalendar->calendartype->name}}</td> 
                                         <td style="text-align: center">{{$eventcalendar->eventdateth}}</td> 

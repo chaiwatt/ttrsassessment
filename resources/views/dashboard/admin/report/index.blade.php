@@ -648,7 +648,7 @@
 
         <div class="row">
             <div class="col-lg-12">
- 
+               
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนนแยกตาม Pillar</h6>
@@ -808,14 +808,14 @@
                                         <div class="row">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9"> 
-                                                <h2><span style="font-weight: bold;color:#da462c;font-size:18px;white-space: nowrap; overflow: "> Management</span></h2>
+                                                <h2><span style="font-weight: bold;color:#0680C3;font-size:18px;white-space: nowrap; overflow: "> Management</span></h2>
                                                 <img src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-3">
                                         {{-- <h6 style="font-weight: bold;color:#00804f">Management</h6> --}}
                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar_management"></span></h5>
-                                        <h4 style="font-weight: bold;color:#da462c;font-size:28px"><span id="gradepillar_management"></span></h4>
+                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar_management"></span></h4>
                                        
                                     </div>
                                 </div>
@@ -826,14 +826,14 @@
                                         <div class="row">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-9"> 
-                                                <h2><span style="font-weight: bold;color:#ff9618;font-size:18px;white-space: nowrap; overflow: "> Technology</span></h2>
+                                                <h2><span style="font-weight: bold;color:#D1495B;font-size:18px;white-space: nowrap; overflow: "> Technology</span></h2>
                                                 <img src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-3">
                                         {{-- <h6 class="color-02" style="font-weight: bold;color:#002980">Technology</h6> --}}
                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar_tech"></span></h5>
-                                        <h4 style="font-weight: bold;color:#ff9618;font-size:28px"><span id="gradepillar_tech"></span></h4>
+                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar_tech"></span></h4>
                                        
                                     </div>
                                 </div>
@@ -845,14 +845,14 @@
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9"> 
                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
-                                            <h2><span style="font-weight: bold;color:#ffed44;font-size:18px;white-space: nowrap; overflow: "> Marketability</span></h2>
+                                            <h2><span style="font-weight: bold;color:#07A398;font-size:18px;white-space: nowrap; overflow: "> Marketability</span></h2>
                                             <img src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar_marketability"></span></h5>
-                                    <h4 style="font-weight: bold;color:#ffed44;font-size:28px"><span id="gradepillar_marketability"></span></h4>
+                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar_marketability"></span></h4>
                                    
                                 </div>
                             </div>
@@ -862,14 +862,14 @@
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9"> 
-                                            <h2><span style="font-weight: bold;color:#20ae51;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
+                                            <h2><span style="font-weight: bold;color:#F6AE2D;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
                                             <img src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar_bp"></span></h5>
-                                    <h4 style="font-weight: bold;color:#20ae51;font-size:28px"><span id="gradepillar_bp"></span></h4>
+                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar_bp"></span></h4>
                                    
                                 </div>
                             </div>
@@ -1054,12 +1054,14 @@
                     @endphp
                     {{-- {{$count}} --}}
                     <div class="card-body">
+                        
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align: center">ระยะเวลา</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
@@ -1108,6 +1110,7 @@
                                                             @endif
                                                     @endif     
                                                 </td>   
+                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
                                                 <td style="width:1%;white-space: nowrap;text-align: center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
                                                 <td style="width:1%;white-space: nowrap;text-align: center">
                                                     @if (!Empty($fulltbp->brieftdate))
@@ -1191,6 +1194,7 @@
                                         <tr class="bg-info">
                                             <th hidden>date</th>
                                             <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">Full TBP</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">EV</th> 
@@ -1216,6 +1220,7 @@
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!} </a>  
                                                     </td>  
+                                                    <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
                                                     <td style="width:1%;white-space: nowrap;text-align:center">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                                 {{-- <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span> --}}

@@ -181,14 +181,14 @@
                     <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.3 บทคัดย่อโครงการ :</strong>
                         <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->abtract)!!}</div>
                     </div>
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>
+                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.4 ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ :</strong>
                         <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</div>
                     </div>
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>
+                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ :</strong>
                         <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
                     </div>
-                    {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div> --}}
-                    {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->productdetail)!!}</span></div> --}}
+                    {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div> --}}
+                    {{-- <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ :</strong><span style="text-align:justify">{!!$provider::FixBreak($fulltbp->productdetail)!!}</span></div> --}}
                     {{-- <div style="page-break-inside: avoid;"> --}}
                     <div class="ml30 mt0" style="font-size:13px;margin-buttom:-20px;page-break-inside: avoid;"> <strong>2.6 ข้อมูลเทคโนโลยี</strong>
                         <div class="mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong>
@@ -291,7 +291,7 @@
 
                     {{-- </div> --}}
 
-                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong>
+                    <div class="ml30 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong>
                         <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                     </div>
 

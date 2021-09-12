@@ -100,19 +100,26 @@ import * as Attendee from './eventcalendarattendee.js';
                                 $('#attendeventid').val(data.attendeecalendar.id);
 
                                 var html =``;
-                               
+                                var rejflag =``;
                                 data.eventcalendarattendeestatuses.forEach(function (status,index) {
+                                    if(data.attendeecalendar.rejectflag == '1'){
+                                        rejflag =`disabled`;
+                                    }
                                     var chk = ``;
                                     $('#jointype').val(data.attendeecalendar.eventcalendarattendeestatus['id']);
                                     if(status['id'] == data.attendeecalendar.eventcalendarattendeestatus['id']){
                                         chk = `checked`;
                                     }
                                     html += `
-                                    <input style="vertical-align:middle !important;" type="radio" name="flexRadioDefault" class="confirm" value="${status['id']}" id="chk" ${chk}><label for="chk" style="margin-left:5px;margin-right:10px">${status['name']}</label>
+                                    <input style="vertical-align:middle !important;" type="radio" name="flexRadioDefault" class="confirm" value="${status['id']}" id="chk" ${chk} ${rejflag}><label for="chk" style="margin-left:5px;margin-right:10px">${status['name']}</label>
                                   `
                                   
                                 });
-
+                                if(data.attendeecalendar.rejectflag == '1'){
+                                    $("#btn_modal_get_calendar").attr("hidden",true);
+                                }else{
+                                    $("#btn_modal_get_calendar").attr("hidden",false);
+                                }
                                 $("#attendevent").html(html);
                                 $('#modal_get_calendar').modal('show');
 

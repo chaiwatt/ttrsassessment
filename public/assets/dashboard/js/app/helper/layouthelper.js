@@ -24,7 +24,7 @@ $(document).on('click', '#btnsave', function(e) {
     });
     Layout.editLayout(list,$("#layout").val()).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'บันทึกรายการเลย์เอาต์สำเร็จ',
             }).then((result) => {
 

@@ -1426,7 +1426,7 @@
 										<label for=""><strong>1.8 ประเภทธุรกิจ : </strong> {{@$fulltbp->minitbp->businessplan->company->businesstype->name}}</label>
 									</div>
 									<div class="col-md-12 mt-3">
-										<label><strong>1.9) ประวัติบริษัท (Company Profile)</strong></label>
+										<label><strong>1.9 ประวัติบริษัท (Company Profile)</strong></label>
 										
 										<div class="form-group">
 											<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow: auto;">{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</div>
@@ -1974,7 +1974,7 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<label><strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong></label>
+										<label><strong>2.4 ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ</strong></label>
 
 										<div class="form-group">
 											<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->mainproduct!!}</div>
@@ -1982,7 +1982,7 @@
 									</div>
 									
 									<div class="col-md-12">
-										<label><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong></label>
+										<label><strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ</strong></label>
 										<div class="form-group">
 											<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->productdetail!!}</div>
 										</div>
@@ -2245,7 +2245,7 @@
 											<br>
 
 											<div class="col-md-12">
-												<label for=""><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> </label>
+												<label for=""><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong> </label>
 											</div>
 												<div class="col-md-12">	
 													<div class="form-group">
@@ -2483,7 +2483,7 @@
 										</div>
 										<div class="col-md-12 mt-3">	
 											{{-- <div class="form-group"> --}}
-												<label for=""><strong>3.2) ข้อมูลยอดขายของบริษัท</strong></label>
+												<label for=""><strong>3.2 ข้อมูลยอดขายของบริษัท</strong></label>
 											{{-- </div> --}}
 										</div>
 										<div class="col-md-12 mt-2">	

@@ -64,6 +64,7 @@
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                         <th style="text-align: center">คะแนน</th>
                                         <th style="text-align: center">เกรด</th>     
                                         <th style="width:1%;white-space: nowrap;text-align: center">รายงานผล</th>    
@@ -79,6 +80,7 @@
                                                 <tr>    
                                                     <td hidden>{{$fulltbp->updated_at}}</td> 
                                                     <td> {{$fulltbp->minitbp->project}} </td> 
+                                                    <td style="white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
                                                     <td style="text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                     <td style="text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
                                                     <td style="white-space: nowrap"> 
@@ -269,7 +271,7 @@
         }
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 7) {
+        // if (countitemtable >= 7) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
@@ -286,6 +288,6 @@
                     }
                 }
             });
-        }
+        // }
     </script>
 @stop

@@ -704,7 +704,7 @@ class MiniTbpController extends Controller
    
         // $mpdf->Output();
          $path = public_path("storage/uploads/");
-         $randname = $minitbp->minitbp_code.$company->fullname;
+         $randname = $minitbp->minitbp_code.$company->fullname.'_'.Carbon::now()->timestamp;
          $mpdf->Output($path . $randname.'.pdf');
         return 'storage/uploads/'.$randname.'.pdf' ;
     }

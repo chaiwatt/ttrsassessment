@@ -23,7 +23,7 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
     }).get();
     CompanyProfile.addCompanyProfile(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มประวัติบริษัทสำเร็จ',
             });
     })
@@ -245,7 +245,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
             $("#fulltbp_companyemploy_wrapper").attr("hidden",true);
          }
          Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'แก้ไขข้อมูลบุคลากรสำเร็จ',
             });
     })
@@ -931,7 +931,7 @@ $(document).on('click', '#btnaddprojectabtract', function(e) {
     }).get();
     Project.addAbtract(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มบทคัดย่อสำเร็จ',
             });
     })
@@ -948,7 +948,7 @@ $(document).on('click', '#btnaddmainproduct', function(e) {
     }).get();
     Project.addProduct(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มรายละเอียดผลิตภัณฑ์สำเร็จ',
             });
     })
@@ -965,7 +965,7 @@ $(document).on('click', '#btnaddproductdetails', function(e) {
     }).get();
     Project.addProductDetail(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มจุดเด่นผลิตภัณฑ์สำเร็จ',
             });
     })
@@ -982,7 +982,7 @@ $(document).on('click', '#btnaddprojectechdev', function(e) {
     }).get();
     Project.addTechDev(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มการพัฒนาเทคโนโลยีสำเร็จ',
             });
     })
@@ -1096,7 +1096,7 @@ $(document).on('click', '#btnaddprojectechdevproblem', function(e) {
     }).get();
     Project.addTechDevProblem(lines,$(this).data('id')).then(data => {;
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มปัญหาและอุปสรรคสำเร็จ',
             });
     })
@@ -1216,7 +1216,7 @@ $(document).on('change', '#cer11', function(e) {
 $(document).on('click', '#btnaddprojectcertify', function(e) {
     Project.editProjectCertify($(this).data('id'),$('#cer1').is(':checked'),$('#cer1qty').val(),$('#cer2').is(':checked'),$('#cer2qty').val(),$('#cer3').is(':checked'),$('#cer3qty').val(),$('#cer4').is(':checked'),$('#cer4qty').val(),$('#cer5').is(':checked'),$('#cer5qty').val(),$('#cer6').is(':checked'),$('#cer6qty').val(),$('#cer7').is(':checked'),$('#cer7qty').val(),$('#cer8').is(':checked'),$('#cer8qty').val(),$('#cer9').is(':checked'),$('#cer9qty').val(),$('#cer10').is(':checked'),$('#cer10qty').val(),$('#cer11').is(':checked'),$('#cer11qty').val()).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'อัพเดทสำเร็จ',
             });
     })
@@ -1825,7 +1825,7 @@ $(document).on('click', '#btnaddmarketneed', function(e) {
     }).get();
     Market.addNeed(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่ม Market need สำเร็จ',
             });
     })
@@ -1842,7 +1842,7 @@ $(document).on('click', '#btnaddmarketsize', function(e) {
     }).get();
     Market.addSize(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่ม Market size สำเร็จ',
             });
     })
@@ -1859,7 +1859,7 @@ $(document).on('click', '#btnaddmarketshare', function(e) {
     }).get();
     Market.addShare(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่ม Market share สำเร็จ',
             });
     })
@@ -1876,7 +1876,7 @@ $(document).on('click', '#btnaddmarketcompetitive', function(e) {
     }).get();
     Market.addCompetitive(lines,$(this).data('id')).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่ม Market competitive สำเร็จ',
             });
     })
@@ -2700,7 +2700,7 @@ $(document).on('click', '#btnaddreturnofinvestment', function(e) {
         $('#profit').val(data.profit);
         $('#reduce').val(data.reduce);
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'แก้ไขประมาณการผลตอบแทนจากการลงทุนสำเร็จ',
             });
     })
@@ -2825,7 +2825,7 @@ $(document).on('click', '#btneditquantityemploy', function(e) {
         $('#department4_qty').val(data.department4_qty);
         $('#department5_qty').val(data.department5_qty);
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'แก้ไขจำนวนบุคลากรสำเร็จ',
             });
     })
@@ -3695,14 +3695,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
                 }
         });
     }
-
-
-
     return;
-
-
-
-
 
 });
 

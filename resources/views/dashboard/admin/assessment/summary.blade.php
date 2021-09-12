@@ -213,14 +213,14 @@
                                                         <div class="row">
                                                             <div class="col-sm-3"></div>
                                                             <div class="col-sm-9"> 
-                                                                <h2><span style="font-weight: bold;color:#da462c;font-size:18px"> Management</span></h2>
+                                                                <h2><span style="font-weight: bold;color:#0680C3;font-size:18px"> Management</span></h2>
                                                                 <img src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4  mt-3">
                                                         {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar1" ></span></h5>
-                                                        <h4 style="font-weight: bold;color:#da462c;font-size:28px"><span id="gradepillar1"></span></h4>
+                                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar1"></span></h4>
                                                        
                                                     </div>
                                                 </div>
@@ -232,14 +232,14 @@
                                                             <div class="col-sm-3"></div>
                                                             <div class="col-sm-9"> 
                                                                 {{-- <h2><span style="font-weight: bold"> 02</span></h2> --}}
-                                                                <h2><span style="font-weight: bold;color:#ff9618;font-size:18px"> Technology</span></h2>
+                                                                <h2><span style="font-weight: bold;color:#D1495B;font-size:18px"> Technology</span></h2>
                                                                 <img src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4  mt-3">
                                                         {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar2" ></span></h5>
-                                                        <h4 style="font-weight: bold;color:#ff9618;font-size:28px"><span id="gradepillar2"></span></h4>
+                                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar2"></span></h4>
                                                        
                                                     </div>
                                                 </div>
@@ -251,14 +251,14 @@
                                                         <div class="col-sm-3"></div>
                                                         <div class="col-sm-9"> 
                                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
-                                                            <h2><span style="font-weight: bold;color:#ffed44;font-size:18px"> Marketability</span></h2>
+                                                            <h2><span style="font-weight: bold;color:#07A398;font-size:18px"> Marketability</span></h2>
                                                             <img src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4  mt-3">
                                                     {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar3" ></span></h5>
-                                                    <h4 style="font-weight: bold;color:#ffed44;font-size:28px"><span id="gradepillar3"></span></h4>
+                                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar3"></span></h4>
                                                    
                                                 </div>
                                             </div>
@@ -270,14 +270,14 @@
                                                         <div class="col-sm-3"></div>
                                                         <div class="col-sm-9"> 
                                                             {{-- <h2><span style="font-weight: bold"> 04</span></h2> --}}
-                                                            <h2><span style="font-weight: bold;color:#20ae51;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
+                                                            <h2><span style="font-weight: bold;color:#F6AE2D;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
                                                             <img src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4 mt-3">
                                                     {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar4" ></span></h5>
-                                                    <h4 style="font-weight: bold;color:#20ae51;font-size:28px"><span id="gradepillar4"></span></h4>
+                                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar4"></span></h4>
                                                    
                                                 </div>
                                             </div>

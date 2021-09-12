@@ -50,7 +50,6 @@
             if($check == "(ภายนอก)"){
                 $hidden = "hidden";
             }
-           
         @endphp
         <div class="row">
             <div class="col-md-12" {{$hidden}}>
@@ -194,6 +193,7 @@
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:150px;text-align: center">Mini TBP</th> 
+                                                    <th style="width:150px;text-align: center">เลขที่ Mini TBP</th> 
                                                     <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
                                                     <th style="text-align: center">รายละเอียดการแก้ไข</th>
                                                     <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
@@ -216,10 +216,19 @@
                                                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">Mini TBP</a>
                                                                     @endif
                                                                 </td> 
+                                                                <td rowspan="{{$minitbphistories->count()}}" style="text-align: center">{{$minitbp->minitbp_code}}</td>
                                                             @endif
         
                                                             <td style="width:1%; white-space: nowrap">{{$minitbphistory->submitdateth}}</td> 
-                                                            <td>{{$minitbphistory->message}}</td> 
+                                                            <td>
+                                                                @if (Empty($minitbphistory->message) )
+                                                                ฉบับเริ่มต้น
+                                                                    @else
+                                                                    {{$minitbphistory->message}}
+                                                                @endif
+                                                                
+                                                                
+                                                            </td> 
         
                                                             <td style="white-space: nowrap"> 
                                                                 <a href="{{asset($minitbphistory->path)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
@@ -242,6 +251,7 @@
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="width:150px;text-align: center">Full TBP</th> 
+                                            <th style="width:150px;text-align: center">เลขที่ Full TBP</th> 
                                             <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
                                             <th style="text-align: center">รายละเอียดการแก้ไข</th>
                                             <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
@@ -266,10 +276,18 @@
                                                         @endif
                                                         
                                                     </td> 
+                                                    <td rowspan="{{$fulltbphistories->count()}}" style="text-align: center">{{$fulltbp->fulltbp_code}}</td>
                                                     @endif
  
                                                     <td style="width:1%; white-space: nowrap">{{$fulltbphistory->submitdateth}}</td> 
-                                                    <td>{{$fulltbphistory->message}}</td> 
+                                                    <td>
+                                                        
+                                                        @if (Empty($fulltbphistory->message) )
+                                                        ฉบับเริ่มต้น
+                                                            @else
+                                                            {{$fulltbphistory->message}}
+                                                        @endif
+                                                        </td> 
 
                                                     <td style="white-space: nowrap"> 
                                                         @if (Auth::user()->user_type_id == 3)
@@ -285,7 +303,13 @@
                                                     </td>  
                                                     @if ($key == 0)
                                                     <td rowspan="{{$fulltbphistories->count()}}" style="white-space: nowrap">
-                                                        <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbphistory->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$fulltbphistory->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
+                                                        @if (Auth::user()->user_type_id == 3)
+                                                                @if (Auth::user()->experttype != "(ภายนอก)")
+                                                                    <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbphistory->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$fulltbphistory->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
+                                                                @endif
+                                                            @else
+                                                                <a  href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbphistory->fulltbp->id])}}" data-docname="เอกสารแนบ Full TBP-{{$fulltbphistory->project}}" class="btn btn-sm bg-teal downloadlink" >ดาวน์โหลดเอกสารแนบ</a>
+                                                        @endif
                                                     </td>  
                                                     @endif
                                                 </tr> 

@@ -376,7 +376,7 @@ $(document).on('click', '#sendtojd', function(e) {
       $("#spinicon").attr("hidden",true);
         var html = ``;
           Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'ส่งผู้เชี่ยวชาญให้ Manager พิจารณาสำเร็จ',
         }).then((result) => {
             window.location.reload();

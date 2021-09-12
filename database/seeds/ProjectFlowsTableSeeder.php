@@ -29,7 +29,7 @@ class ProjectFlowsTableSeeder extends Seeder
                 'duration' => 6
             ],
             [
-                'name' => 'การประเมินให้คะแนน และสรุปผล',
+                'name' => 'การประเมินให้คะแนนและสรุปผล',
                 'duration' => 5
             ],
             [

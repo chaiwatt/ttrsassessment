@@ -751,7 +751,7 @@ $('.step-evweight').steps({
                 updateScore(conflictarray,conflictcommentarray,conflictextraarray,conflictextracommentarray,$('#evid').val()).then(data => {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
-                        title: 'สำเร็จ...',
+                        title: 'สำเร็จ',
                         text: 'สรุปคะแนนสำเร็จ',
                         }).then((result) => {
                             window.location.replace(`${route.url}/dashboard/admin/assessment/summary/${$('#fulltbpid').val()}`);

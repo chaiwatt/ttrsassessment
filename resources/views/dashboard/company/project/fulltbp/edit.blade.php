@@ -1750,7 +1750,7 @@ th {
 					<input type="text" id="companyid" value="{{$company->id}}" hidden>
 					<input type="text" id="fulltbpid" value="{{$fulltbp->id}}" hidden>
 						<form class="wizard-form steps-basic" action="#" data-fouc>
-							<h6>1.ข้อมูลทั่วไป</h6>
+							<h6>1. ข้อมูลทั่วไป</h6>
 							<input type="text" id="pdfname" hidden >
 							@if ($fulltbp->minitbp->businessplan->business_plan_status_id !=4 && ($fulltbp->refixstatus == 0 || $fulltbp->refixstatus == 2 ))
 									<input type="text" id="fulltbpstatus" value="2" hidden >
@@ -2310,9 +2310,9 @@ th {
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span></label>
-																	<p><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
-																	<span id="mainproduct_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</span>
+																	<label for=""><strong>2.4) ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ</strong> </label><span class="text-danger">*</span></label>
+																	<p><i>อธิบายลักษณะของผลิตภัณฑ์หลัก สินค้า / บริการ ภายในโครงการ</i></p>
+																	<span id="mainproduct_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ</span>
 																	<textarea name="mainproduct_input" id="mainproduct_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
 																
 																</div>
@@ -2322,9 +2322,9 @@ th {
 	
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span></label>
-																	<p><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i></p>
-																	<span id="productdetails_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ</span>
+																	<label for=""><strong>2.5) จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ</strong> </label><span class="text-danger">*</span> <span class="text-primary" id="productdetailstextlength"></span></label>
+																	<p><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก สินค้า / บริการ ภายในโครงการ</i></p>
+																	<span id="productdetails_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ</span>
 																	<textarea name="productdetails_input" id="productdetails_input" class="form-control form-control-lg summernoteelement" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																	
 																</div>
@@ -2617,7 +2617,7 @@ th {
 																</div>
 															</div>
 															<div class="col-md-12 mt-3">
-																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong> <span class="text-danger">*</span></label>
+																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong> <span class="text-danger">*</span></label>
 																<div class="form-group">
 																	{{-- <span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ --}}
 																	<span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</span>
@@ -2932,7 +2932,7 @@ th {
 												<div class="card-body">
 													<div class="col-md-12">	
 														<div class="form-group">
-															<label for=""><strong>3.1 ข้อมูลด้านการตลาด</strong></label>
+															<label for=""><strong>3.1) ข้อมูลด้านการตลาด</strong></label>
 														</div>
 													</div>
 													<div class="col-md-12">	

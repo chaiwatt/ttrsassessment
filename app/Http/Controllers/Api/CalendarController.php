@@ -184,6 +184,35 @@ class CalendarController extends Controller
                 ]);
             }
             $eventcalendarattendee = EventCalendarAttendee::find($request->id);
+
+            // $eventcalendar = EventCalendar::find($eventcalendarattendee->event_calendar_id);
+
+            // $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+            // $leader = User::find($projectassignment->leader_id);
+    
+            // $notificationbubble = new NotificationBubble();
+            // $notificationbubble->business_plan_id = $businessplan->id;
+            // $notificationbubble->notification_category_id = 1;
+            // $notificationbubble->notification_sub_category_id = 5;
+            // $notificationbubble->user_id = $auth->id;
+            // $notificationbubble->target_user_id = $leader->id;
+            // $notificationbubble->save();
+    
+            // $messagebox = Message::sendMessage('Manager อนุมัติ EV โครงการ' . $minitbp->project .  $fullcompanyname,'Manager ได้อนุมัติ EV โครงการ' . $minitbp->project .  $fullcompanyname.' ขณะนี้อยู่ระหว่าง Admin กำหนด Weight',$auth->id,$leader->id);
+            // $alertmessage = new AlertMessage();
+            // $alertmessage->user_id = $auth->id;
+            // $alertmessage->target_user_id =$leader->id;
+            // $alertmessage->messagebox_id = $messagebox->id;
+            // $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' Manager อนุมัติ EV โครงการ' . $minitbp->project  . $fullcompanyname .' ขณะนี้อยู่ระหว่าง Admin กำหนด Weight';
+            // $alertmessage->save();
+    
+            // MessageBox::find($messagebox->id)->update([
+            //     'alertmessage_id' => $alertmessage->id
+            // ]);
+    
+            // EmailBox::send($leader->email,'','TTRS: Manager อนุมัติ EV โครงการ' . $minitbp->project .  $fullcompanyname,'เรียน Leader<br><br> Manager ได้อนุมัติ EV โครงการ' . $minitbp->project . $fullcompanyname .' ขณะนี้อยู่ระหว่าง Admin กำหนด Weight<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    
+
             return response()->json($eventcalendarattendee);
         }else{
             return null;
@@ -261,6 +290,7 @@ class CalendarController extends Controller
 
         EventCalendarAttendee::where('event_calendar_id',$request->id)->where('id',$request->userid)->first()->update([
                     'joinevent' => '2',
+                    'rejectflag' => '1',
                     'color' => '#088A08',
                     'rejectreason' => ''
                 ]);

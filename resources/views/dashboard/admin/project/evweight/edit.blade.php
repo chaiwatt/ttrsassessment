@@ -180,6 +180,7 @@
         @endif
         <div class="row">
             <div class="col-md-12">
+                <div id="weightstick" style="background-color: #ccc;width 100px;height:35px;position: fixed;z-index:1;right:0 ;margin-right:25px;padding:5px;border-radius:5px">Index weight <span id="float-weight"></span> </div>
                 <div class="card">
                     {{-- {{$ev->refixstatus}} --}}
                     <input type="text" id="projectname" value="{{$ev->fulltbp->minitbp->project}}" hidden>

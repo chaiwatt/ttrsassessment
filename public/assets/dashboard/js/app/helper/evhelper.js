@@ -139,7 +139,7 @@ function AddCheckList(){
          RenderTable(data);
          RowSpan();
          Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มรายการสำเร็จ',
             });
     }).catch(error => {})
@@ -150,7 +150,7 @@ function AddGrading(){
         RenderTable(data);
         RowSpan();
          Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'เพิ่มรายการสำเร็จ',
             });
     }).catch(error => {})
@@ -220,7 +220,7 @@ $(document).on('click', '.deletepillar', function(e) {
                 RenderTable(data);
                 RowSpan();
                  Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     });
             })
@@ -246,7 +246,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
                 RenderTable(data);
                 RowSpan();
                  Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     });
             })
@@ -273,7 +273,7 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
                 RenderTable(data);
                 RowSpan();
                  Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     });
             })

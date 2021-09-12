@@ -784,7 +784,7 @@ function updateScoringStatus(evid,gradescorelist,checkscorelist,commentlist,stat
         }
         $("#spinicon").attr("hidden",true);
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'นำส่งคะแนนสำเร็จ',
         }).then((result) => {
             window.location.reload();
@@ -913,7 +913,7 @@ $('.step-evweight').steps({
                     }
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
-                        title: 'สำเร็จ...',
+                        title: 'สำเร็จ',
                         text: 'นำส่งคะแนนสำเร็จ',
                     }).then((result) => {
                         window.location.reload();

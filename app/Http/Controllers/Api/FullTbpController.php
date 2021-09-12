@@ -203,7 +203,7 @@ class FullTbpController extends Controller
       
         $path = public_path("storage/uploads/");
         // $randname = str_random(10);
-        $randname = $fulltbp->minitbp->businessplan->code.$company->fullname;
+        $randname = $fulltbp->minitbp->businessplan->code.$company->fullname.'_'.Carbon::now()->timestamp;
         $shortpdf->save($path.$randname.'st.pdf');
         $pdf->save($path.$randname.'.pdf');
         FullTbp::find($request->id)->update([

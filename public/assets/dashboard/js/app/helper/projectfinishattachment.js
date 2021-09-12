@@ -49,7 +49,7 @@ $(document).on('change', '#attachmentdoc', function(e) {
                     //  $("#attachment_wrapper_tr").html(html);
                     //  $('#docname').val("");
                     //  Swal.fire({
-                    //     title: 'สำเร็จ...',
+                    //     title: 'สำเร็จ',
                     //     text: 'เพิ่มไฟล์แนบสำเร็จ',
                     //     });
                     // return ;

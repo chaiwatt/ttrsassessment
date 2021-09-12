@@ -1839,8 +1839,8 @@
 														</div>
 														<div class="col-md-12">
 															<div class="form-group">
-																<label for="">ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ </label>
-																<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i> </small></p>
+																<label for="">ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ </label>
+																<p><small><i>อธิบายลักษณะของผลิตภัณฑ์หลัก สินค้า / บริการ ภายในโครงการ</i> </small></p>
 																<textarea name="" id="mainproduct_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->mainproduct!!}</textarea>
 																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>
@@ -1862,8 +1862,8 @@
 
 														<div class="col-md-12">
 															<div class="form-group">
-																<label for="">จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
-																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก (สินค้า / บริการ) ภายในโครงการ</i> </small></p>
+																<label for="">จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ </label> <span class="text-primary" id="productdetailstextlength"></span>
+																<p><small><i>อธิบายจุดเด่นหรือความแตกต่างของผลิตภัณฑ์หลัก สินค้า / บริการ ภายในโครงการ</i> </small></p>
 																<textarea name="" id="productdetails_input" class="form-control form-control-lg" cols="3" rows="5">{!!$fulltbp->productdetail!!}</textarea>
 																{{-- <input type="text" id="productdetails_input" class="form-control form-control-lg productdetailsclass" > --}}
 															</div>

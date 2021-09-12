@@ -109,8 +109,8 @@
                     
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.2 ชื่อโครงการ (ภาษาอังกฤษ) :</strong> {{$fulltbp->minitbp->projecteng}}</div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.3 บทคัดย่อโครงการ :</strong> <span >{!!$provider::FixBreak($fulltbp->abtract)!!}</span></div>
-                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
-                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก (สินค้า / บริการ) ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.4 ผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ :</strong><span >{!!$provider::FixBreak($fulltbp->mainproduct)!!}</span></div>
+                    <div class="ml30 mt0" style="font-size:13px"> <strong>2.5 จุดเด่นของผลิตภัณฑ์หลัก สินค้า / บริการ ของโครงการ :</strong>{!!$provider::FixBreak($fulltbp->productdetail)!!}</div>
                     <div class="ml30 mt0" style="font-size:13px"> <strong>2.6 ข้อมูลเทคโนโลยี
                         <div class="ml30 mt0" style="font-size:13px"> <strong>2.6.1 การพัฒนาเทคโนโลยี  :</strong> {!!$provider::FixBreak($fulltbp->techdev)!!}</div>
                         <div class="mt20" style="font-size:13px;page-break-inside: avoid;"><strong>ระดับของเทคโนโลยีและความใหม่ของผลิตภัณฑ์</strong>
@@ -201,7 +201,7 @@
                             </table>
                         </div>
                         <div style="page-break-inside: avoid;">
-                            <div class="ml30 mt20" style="font-size:13px"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</strong></div>
+                            <div class="ml30 mt20" style="font-size:13px"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong></div>
                             <div class="ml30" style="font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                         </div>
 

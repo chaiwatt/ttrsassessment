@@ -123,6 +123,7 @@
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">Leader</th>
@@ -150,6 +151,7 @@
                                             <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                             <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $projectassignment->businessplan->minitbp->id])}}" class="{{$cogcolor}}" target="_blank">{{$projectassignment->businessplan->minitbp->project}} {!!$latetext!!}</a>
                                         </td> 
+                                        <td style="white-space: nowrap;text-align:center">{{$projectassignment->businessplan->code}}</td> 
                                         <td style="white-space: nowrap"> 
                                             @php
                                                 $company = $projectassignment->businessplan->company;

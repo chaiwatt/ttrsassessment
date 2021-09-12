@@ -743,7 +743,7 @@ function AddCheckList(criterias){
                     $("#similarev").html(html1);
                  $("#spiniconcriteria").attr("hidden",true);
                  Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'เพิ่มรายการสำเร็จ',
                     });
             $("#toggleselect")[0].checked = false;     
@@ -773,7 +773,7 @@ function AddGrading(){
         $("#spiniconcriteria").attr("hidden",true);
         if(data.result == 1){
             Swal.fire({
-               title: 'สำเร็จ...',
+               title: 'สำเร็จ',
                text: 'เพิ่มรายการสำเร็จ',
                });
                $("#toggleselect")[0].checked = false;
@@ -1097,7 +1097,7 @@ $(document).on('click', '.deletepillar', function(e) {
         if (result.value) {
             Pillar.deletePillar($('#evid').val(),$(this).data('pillar')).then(data => {
                 Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
@@ -1162,7 +1162,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
         if (result.value) {
             SubPillar.deleteSubPillar($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar')).then(data => {
                 Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
@@ -1189,7 +1189,7 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
         if (result.value) {
             SubPillar.deleteSubPillarIndex($('#evid').val(),$(this).data('pillar'),$(this).data('subpillar'),$(this).data('subpillarindex')).then(data => {
                 Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
@@ -1320,7 +1320,7 @@ $(document).on('click', '#btn_edit_weight', function(e) {
 $(document).on('click', '#editev', function(e) {
     Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
         Swal.fire({
-            title: 'สำเร็จ...',
+            title: 'สำเร็จ',
             text: 'แก้ไข EV สำเร็จ',
             });
     })
@@ -1435,7 +1435,7 @@ $(document).on('click', '#updateev', function(e) {
                 Ev.clearCommentTab($('#evid').val(),1).then(data => {
                     $("#spinicon").attr("hidden",true);
                     Swal.fire({
-                        title: 'สำเร็จ...',
+                        title: 'สำเร็จ',
                         text: 'นำส่ง EV สำเร็จ',
                     }).then((result) => {
                         window.location.reload();
@@ -1466,7 +1466,7 @@ $(document).on('click', '#approveevstageone', function(e) {
             Ev.approveEvStageOne($(this).data('id')).then(data => {
                 $("#spinicon").attr("hidden",true);
                 Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'Admin สามารถกำหนด Weight ในขั้นตอนถัดไป!',
                 }).then((result) => {
                     window.location.reload();
@@ -1734,7 +1734,7 @@ $(document).on('click', '.deletecategorytransaction', function(e) {
                 // RenderExtraTable(data);
                 // RowSpanExtra("extracriteriatable");
                  Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();
@@ -1764,11 +1764,11 @@ $(document).on('click', '.deletetriteriatransaction', function(e) {
                 // RenderExtraTable(data);
                 // RowSpanExtra("extracriteriatable");
                 //  Swal.fire({
-                //     title: 'สำเร็จ...',
+                //     title: 'สำเร็จ',
                 //     text: 'ลบรายการสำเร็จ',
                 //     });
                 Swal.fire({
-                    title: 'สำเร็จ...',
+                    title: 'สำเร็จ',
                     text: 'ลบรายการสำเร็จ',
                     }).then((result) => {
                         window.location.reload();

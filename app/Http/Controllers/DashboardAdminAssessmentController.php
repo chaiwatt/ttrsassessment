@@ -721,7 +721,7 @@ class DashboardAdminAssessmentController extends Controller
                 }
             }
         }
-        return redirect()->back()->withSuccess('ปลดล็อคเวลาสรุปคะแนน วันนี้สำเร็จ');
+        return redirect()->back()->withSuccess('ปลดล็อคเวลาสรุปคะแนนของโครงการเลยกำหนดสำเร็จ');
 
     }
 
