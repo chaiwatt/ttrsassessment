@@ -169,7 +169,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat200" style="font-size:16px">{{$page->header}}</textarea>
+                                            <textarea type="text"  name="description" rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat120" style="font-size:16px">{{$page->header}}</textarea>
                                         </div>
                                         {{-- <div class="form-group">                                                
                                             <label>หมวดหมู่</label><span class="text-danger">*</span> <a href="" class="icon-cog5 text-info" data-toggle="dropdown"></a>

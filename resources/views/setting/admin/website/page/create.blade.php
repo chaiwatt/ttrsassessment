@@ -169,7 +169,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>คำอธิบายย่อ<span class="text-danger">*</span></label>
-                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat200" style="font-size:16px"></textarea>
+                                            <textarea type="text"  name="description" value="{{old('description')}}"  rows="3" cols="1"  placeholder="คำอธิบายย่อ" class="form-control form-control-lg stringformat120" style="font-size:16px"></textarea>
                                         </div>
                                         {{-- <div class="form-group">
                                             <div class="form-group">                                                
