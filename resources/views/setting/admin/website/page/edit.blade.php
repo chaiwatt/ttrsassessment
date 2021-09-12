@@ -186,7 +186,7 @@
                                             </select>
                                         </div> --}}
                                         <div class="form-group">
-                                            <label>รูป Feature (ขนาด 1280x800 px เพื่อการแสดงผลที่เหมาะสม)<span class="text-danger">*</span></label>
+                                            <label>รูป Feature (ขนาด 1280x800px เพื่อการแสดงผลที่เหมาะสม)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด Feature</button>													
                                             </div>

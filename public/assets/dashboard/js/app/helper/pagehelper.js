@@ -152,8 +152,8 @@ $("#singlefile").on('change', function() {
     if (this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/) == null ){
         return ;
     }
-    if (this.files[0].size/1024/1024*1000 > 250 ){
-        alert('ไฟล์ขนาดมากกว่า 250 KB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     if (this.files[0].name.length > 70 ){
@@ -258,8 +258,8 @@ $("#file").on('change', function() {
     if (this.files[0].name.match(/\.(jpg|jpeg|png|gif)$/) == null ){
         return ;
     }
-    if (this.files[0].size/1024/1024*1000 > 250 ){
-        alert('ไฟล์ขนาดมากกว่า 250 KB');
+    if (this.files[0].size/1024/1024*1000 > 2048 ){
+        alert('ไฟล์ขนาดมากกว่า 2 MB');
         return ;
     }
     if (this.files[0].name.length > 70 ){
