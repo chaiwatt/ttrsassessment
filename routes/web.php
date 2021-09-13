@@ -15,20 +15,20 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Route::get('demojson', 'TestController@DemoJson')->name('demojson');
-Route::get('ccmail', 'TestController@ccMail')->name('ccmail');
+// Route::get('ccmail', 'TestController@ccMail')->name('ccmail');
 
 
 Auth::routes(['verify' => true]);
-Route::get('ttrssitemap.xml','SitemapController@Index')->name('sitemap');     
+// Route::get('ttrssitemap.xml','SitemapController@Index')->name('sitemap');     
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-Route::get('generate','PDFController@Generate')->name('generate');
+// Route::get('generate','PDFController@Generate')->name('generate');
 
 Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
-Route::get('demottrsuser', 'HomeController@DemoTTRSUser')->name('demottrsuser');
-Route::get('demousertest', 'HomeController@DemoUserTEST')->name('demousertest');
+// Route::get('demottrsuser', 'HomeController@DemoTTRSUser')->name('demottrsuser');
+// Route::get('demousertest', 'HomeController@DemoUserTEST')->name('demousertest');
 
 // Route::get('test', 'HomeController@Test')->name('test');
 Route::get('landing', 'HomeController@Index')->name('landing.index');
