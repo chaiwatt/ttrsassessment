@@ -400,7 +400,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="{{route('sitemap')}}" class="nav-link {{starts_with(Route::currentRouteName(),'sitemap')?'active':''}}" target="_blank" >Sitemap</a></li>	
+                <li class="nav-item"><a href="{{route('landing.sitemap')}}" class="nav-link {{starts_with(Route::currentRouteName(),'landing.sitemap')?'active':''}}" target="_blank" >Sitemap</a></li>	
             </ul>
         </li>
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.user')?'nav-item-expanded':''}}">
