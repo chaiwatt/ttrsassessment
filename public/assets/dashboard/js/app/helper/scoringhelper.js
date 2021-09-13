@@ -310,7 +310,7 @@ function RenderTable(data,evtype){
                      var showscore = textvalue;
                      var showcriteria = criteria.subpillarindex['name'];
 
-                    var criterianame = `<div class="form-group"><label>กรอกเกรด (A - F)</label>
+                    var criterianame = `<div class="form-group" id="${criteria.id}"><label>กรอกเกรด (A - F)</label>
                     <input type="text" data-subpillarname="${showcriteria}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-type="score" value="${textvalue}"  class="form-control form-control-lg inpscore gradescore" ${readonly}></div>`;
 
                     if(criteria.criteria != null){
@@ -616,31 +616,6 @@ function RowSpanWeight(tableid){
     }
 }
 
-// $(document).on('change', '.gradescore', function(e) {
-//     if(stepindex == 0){
-//         if($(this).val() !== 'A' && $(this).val() !== 'B' && $(this).val() !== 'C' && $(this).val() !== 'D' && $(this).val() !== 'E' && $(this).val() !== 'F'){
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'กรอกเกรด A-F เท่านั้น!',
-//             })
-//             $(this).val('');
-//             return;
-//         }
-//     }else if(stepindex == 1){
-//         if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'กรอกคะแนน 0-5 เท่านั้น!',
-//             })
-//             $(this).val('');
-//             return;
-//         }  
-//     }
-//     addScore($(this).data('id'),$(this).val(),$(this).data('subpillarindex'),1).then(data => {
-//         $('#weightsum'+$(this).data('subpillarindex')).val(data);
-//     }).catch(error => {})
-// });
-
 $(document).on('change', '.gradescore', function(e) {
     if(stepindex == 0){
        if($(this).val() == 'a'){$(this).val('A')}
@@ -795,6 +770,7 @@ var submitbutton = true;
 if($('#scoringstatus').val() != "" ){
     submitbutton = false;
 }
+
 var form = $('.step-evweight').show();
 $('.step-evweight').steps({
     headerTag: 'h6',
@@ -809,8 +785,25 @@ $('.step-evweight').steps({
     },
     enableFinishButton: submitbutton,
     onFinished: function (event, currentIndex) {
+
+        var blankarrerror = [];
+        $('.gradescore').each(function() {
+            if($(this).val() == ''){
+                blankarrerror.push($(this).data('id'));
+                return;
+            }
+        }); 
+        if(blankarrerror.length > 0){
+            $('html, body').animate({
+                scrollTop: $("#" + blankarrerror[0]).offset().top
+            }, 1000);
+            $("#" + blankarrerror[0]).css({'color':'red'});
+            return false;
+        }
+
+
         Swal.fire({
-            title: 'คำเตือน!',
+            title: 'โปรดยืนยัน!',
             text: `ต้องการนำส่งคะแนน หรือไม่`,
             type: 'warning',
             showCancelButton: true,
@@ -863,7 +856,6 @@ $('.step-evweight').steps({
                     }
                 });
 
-
                 $('.gradescore').each(function() {
                     if($(this).val() == ''){
                         noblank = false;
@@ -874,7 +866,6 @@ $('.step-evweight').steps({
                 if (noblank == false){
                     var errlist ='';
                     arrerror.forEach(function (err,index) {
-                        console.log(err);
                         errlist += err + '<br>'
                     });
 
@@ -882,10 +873,11 @@ $('.step-evweight').steps({
                         title: 'ผิดพลาด...',
                         html: `กรุณากรอกเกรดให้ครบ! ดังนี้ <br><strong>${errlist} </strong>`,
                     })
+
                     return;
                 };
 
-                // inppercentextra
+             
                 var noblank_extra = true;
                 if($("#inppercentextra").val() != ''){
                     $('.extravalue').each(function() {
@@ -926,7 +918,39 @@ $('.step-evweight').steps({
     },
     transitionEffect: 'fade',
     autoFocus: true,
+    onStepChanging: function (event, currentIndex, newIndex) {
+        if(newIndex == 1){
+            var blankarrerror = [];
+            $('.gradescore').each(function() {
+                if($(this).val() == ''){
+                    blankarrerror.push($(this).data('id'));
+                    return;
+                }
+            }); 
+            if(blankarrerror.length > 0){
+                $('html, body').animate({
+                    scrollTop: $("#" + blankarrerror[0]).offset().top
+                }, 1000);
+                $("#" + blankarrerror[0]).css({'color':'red'});
+                return false;
+            }
+        }
+        
+        return true;
+    },
     onStepChanged:function (event, currentIndex, newIndex) {
+        if(currentIndex == 1){
+            var blankarrerror = [];
+            $('.gradescore').each(function() {
+                    blankarrerror.push($(this).data('id'));
+            }); 
+            if(blankarrerror.length>0){
+                for (let i = 0; i < blankarrerror.length; i++) {
+                    $("#" + blankarrerror[i]).css({'color':''});
+                  }
+            }
+            blankarrerror = [];
+        }
         stepindex = currentIndex;
         return true;
     },   

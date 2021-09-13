@@ -257,7 +257,7 @@ class DashboardAdminCalendarController extends Controller
           'fielddate' => DateConversion::thaiToEngDate($request->eventdate)
         ]);
        }else if($request->calendartype == 3){
-        $messageheader = "ประชุมและสรุปผลการประเมิน และลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
+        $messageheader = "ประชุมและสรุปผลการประเมินและลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
         $logname = "ประชุมและสรุปผลการประเมิน";
         FullTbp::find($request->fulltbp)->update([
           'scoringdate' => DateConversion::thaiToEngDate($request->eventdate)

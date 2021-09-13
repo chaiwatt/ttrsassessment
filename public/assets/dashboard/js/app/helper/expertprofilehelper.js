@@ -67,7 +67,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
         array.push($('#expertfieldnum').val());
         if(isSequentials(array) == false){
             Swal.fire({
-                title: 'คำเตือน!',
+                title: 'ผิดพลาด!',
                 text: `ลำดับไม่ถูกต้อง ต้องการดำเนินการต่อไปหรือไม่`,
                 type: 'warning',
                 showCancelButton: true,

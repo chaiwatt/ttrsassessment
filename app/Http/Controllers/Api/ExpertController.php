@@ -145,7 +145,9 @@ class ExpertController extends Controller
                 $routename = route('dashboard.admin.report');
             }
 
-            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.$fullcompanyname,Auth::user()->id,$request->id);
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.$fullcompanyname.
+            "<div class='mt-2 mb-1'><a href=".route('dashboard.expert.report.accept',['id' => $request->fulltbpid])." class='btn btn-sm bg-success mr-1 acceptexpertassignment' >ยอมรับ</a><a href=".route('dashboard.expert.report.reject',['id' => $request->fulltbpid])." class='btn btn-sm bg-warning rejectexpertassignment' data-id=".$request->id.">ปฏิเสธ</a></div>"
+            ,Auth::user()->id,$request->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;

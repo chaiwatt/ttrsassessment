@@ -429,7 +429,7 @@
 
     $(document).on('click', '#jdconfirmteam', function(e) {
         Swal.fire({
-            title: 'คำเตือน!',
+            title: 'โปรดยืนยัน!',
             text: `ต้องการยืนยันทีมผู้เชี่ยวชาญ หรือไม่`,
             type: 'warning',
             showCancelButton: true,

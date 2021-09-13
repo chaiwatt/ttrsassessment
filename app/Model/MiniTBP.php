@@ -215,4 +215,12 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
             }
         }
     } 
+
+    public function getProjectnumberAttribute(){
+        if(!Empty($this->submitdate)){
+            return substr($this->submitdate, 3);
+        }else{
+            return '';
+        }
+    } 
 }

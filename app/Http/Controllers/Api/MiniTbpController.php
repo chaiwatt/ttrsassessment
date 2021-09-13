@@ -44,8 +44,10 @@ class MiniTbpController extends Controller
     public function EditSave(Request $request){  
         $minitbp = MiniTBP::find($request->id);
         $minitbpcode = $minitbp->minitbp_code;
+
         if(Empty($minitbpcode)){
-            $minitbpcode = 'PL-'.Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($request->id),3,0,STR_PAD_LEFT); 
+            $check = MiniTBP::whereMonth('submitdate',Carbon::now()->format('m'))->get();
+            $minitbpcode = 'PL-'.Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($check->count()+1),3,0,STR_PAD_LEFT); 
         }
         if(count(json_decode($request->director)) > 0){
             MinitbpSignature::where('mini_tbp_id',$request->id)->delete();

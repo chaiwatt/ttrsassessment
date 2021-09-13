@@ -510,7 +510,9 @@ class DashboardAdminProjectFullTbpController extends Controller
             $expertassignment = ExpertAssignment::find($request->id);
             $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
             
-            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project,Auth::user()->id,User::find($expertassignment->user_id)->id);
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project
+            // "<div class='mt-2 mb-1'><a href=".route('dashboard.expert.report.accept',['id' => $fulltbp->id])." class='btn btn-sm bg-success mr-1 acceptexpertassignment' >ยอมรับ</a><a href=".route('dashboard.expert.report.reject',['id' => $fulltbp->id])." class='btn btn-sm bg-warning rejectexpertassignment' data-id=".$expertassignment->user_id.">ปฏิเสธ</a></div>"
+            ,Auth::user()->id,User::find($expertassignment->user_id)->id);
 
             $alertmessage = new AlertMessage();
             $alertmessage->user_id = $auth->id;

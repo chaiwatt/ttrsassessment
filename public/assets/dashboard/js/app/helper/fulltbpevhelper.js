@@ -1389,7 +1389,7 @@ $(document).on('keyup', '#percentextra', function(e) {
 
 $(document).on('click', '#updateev', function(e) {
     Swal.fire({
-        title: 'คำเตือน!',
+        title: 'นำส่ง EV!',
         text: `ต้องการนำส่ง EV หรือไม่`,
         type: 'warning',
         showCancelButton: true,

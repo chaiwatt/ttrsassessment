@@ -50,8 +50,10 @@ class FullTbpController extends Controller
         $fulltbpcode = $fulltbp->fulltbp_code;
         if(Empty($fulltbpcode)){
             $fulltbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($request->id),3,0,STR_PAD_LEFT); 
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $_mitbpcode = $minitbp->minitbp_code;
             FullTbp::find($request->id)->update([
-                'fulltbp_code' => $fulltbpcode
+                'fulltbp_code' => substr($_mitbpcode, 3)
             ]);
         }
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);

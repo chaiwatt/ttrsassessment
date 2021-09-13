@@ -41,9 +41,20 @@ class DashboardExpertReportController extends Controller
         return view('dashboard.expert.report.index')->withFulltbps($fulltbps)
                                                     ->withAlertmessages($alertmessages);
     }
-    public function Accept($id){
-        
+    public function Accept($id){ 
         $auth = Auth::user();
+
+        $check = ExpertAssignment::where('full_tbp_id', $id)
+        ->where('user_id',$auth->id)
+        ->first();
+
+        if($check->accepted != 0){
+            if($auth->user_type_id == 3){
+                return redirect()->route('dashboard.expert.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+              }else if($auth->user_type_id > 3){
+                return redirect()->route('dashboard.admin.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+              }
+        }
         
         ExpertAssignment::where('full_tbp_id', $id)
                     ->where('user_id',$auth->id)
@@ -127,13 +138,34 @@ class DashboardExpertReportController extends Controller
 
         return redirect()->route('dashboard.expert.report')->withSuccess('คุณได้ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project);
     }
-    public function Reject($id){
+    public function Reject(Request $request,$id){
+
+        $rejreason = $request->rejmsg;
+        if(Empty($request->rejmsg) || $request->rejmsg == null){
+          $rejreason = '';
+        }
+  
         $auth = Auth::user();
+
+
+        $check = ExpertAssignment::where('full_tbp_id', $id)
+        ->where('user_id',$auth->id)
+        ->first();
+
+        if($check->accepted != 0){
+            if($auth->user_type_id == 3){
+                return redirect()->route('dashboard.expert.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+              }else if($auth->user_type_id > 3){
+                return redirect()->route('dashboard.admin.report')->withError('คุณได้ทำรายการโครงการนี้แล้ว');
+              }
+        }
+
         ExpertAssignment::where('full_tbp_id', $id)
                      ->where('user_id',$auth->id)
                      ->first()
                      ->update([
-                         'accepted' => '2'
+                         'accepted' => '2',
+                         'rejectreason' => $rejreason
                      ]);
 
         $fulltbp = FullTbp::find($id);
@@ -164,28 +196,28 @@ class DashboardExpertReportController extends Controller
         $notificationbubble->target_user_id = $projectassignment->leader_id;
         $notificationbubble->save();
         
-        $messagebox =  Message::sendMessage('คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
+        $messagebox =  Message::sendMessage('คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname.' มีเหตุผลตามรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$rejreason.'</div> โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$projectassignment->leader_id);
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id =  $projectassignment->leader_id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname . ' มีเหตุผลตามรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$rejreason.'</div>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
             'alertmessage_id' => $alertmessage->id
         ]);
         $jduser = User::where('user_type_id',6)->first();
-        EmailBox::send(User::find($projectassignment->leader_id)->email,$jduser->email,'TTRS: คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname. ' โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        EmailBox::send(User::find($projectassignment->leader_id)->email,$jduser->email,'TTRS: คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname. ' มีเหตุผลตามรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$rejreason.'</div><br> โปรดตรวจสอบ <a href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
         
-        $messagebox =  Message::sendMessage('คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname .' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$jduser->id);
+        $messagebox =  Message::sendMessage('คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname,'คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname .' มีเหตุผลตามรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$rejreason.'</div> โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$jduser->id);
         
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id =  $jduser->id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname ;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ปฎิเสธเข้าร่วมโครงการ' . $minitbp->project .$fullcompanyname . ' มีเหตุผลตามรายละเอียด ดังนี้ <br><br><div style="border-style: dashed;border-width: 2px; padding:10px">'.$rejreason.'</div>';
         $alertmessage->save();
 
         MessageBox::find($messagebox->id)->update([
@@ -204,7 +236,7 @@ class DashboardExpertReportController extends Controller
         $projectlog->mini_tbp_id = $minitbp->id;
         $projectlog->user_id = $auth->id;
         $projectlog->viewer = $userarray;
-        $projectlog->action = 'ผู้เชี่ยวชาญปฎิเสธ (รายละเอียด: )';
+        $projectlog->action = 'ผู้เชี่ยวชาญปฎิเสธ (รายละเอียด: '.$rejreason.' )';
         $projectlog->save();
 
         return redirect()->route('dashboard.expert.report')->withSuccess('คุณปฎิเสธเข้าร่วมโครงการแล้ว');

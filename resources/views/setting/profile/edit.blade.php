@@ -518,6 +518,32 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="modal_reject_expertassignment" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เหตุผลการปฏิเสธ</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+		<input type="text" id="linkurl" hidden>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ระบุเหตุผล<span class="text-danger">*</span></label>
+								<textarea style="font-size:16px"  id="reject1" rows="5"  placeholder="ระบุเหตุผล" class="form-control form-control-lg"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_reject_expertassignment" class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spinicon1" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i> บันทึก</button>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- Content area -->
     <div class="content">
 		@if (Session::has('success'))
@@ -593,11 +619,11 @@
 													$f = substr($messagereceive->sender->email, 0, 1);
 													
 												@endphp
-												<td class="table-inbox-image">
+												{{-- <td class="table-inbox-image">
 													<span class="btn bg-pink-400 rounded-circle btn-icon btn-sm">
 														<span class="letter-icon">{{strtoupper($f)}}</span>
 													</span>
-												</td>
+												</td> --}}
 												<td class="table-inbox-name" style="width:25%" >
 													<a href="#" data-id="{{$messagereceive->id}} ">
 														<div class="letter-icon-title text-default">&nbsp; {{$messagereceive->sender->name}} {{$messagereceive->sender->lastname}}</div>

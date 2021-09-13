@@ -266,7 +266,7 @@ import * as Attendee from './eventcalendarattendee.js';
 
     $(document).on("click",".removereject",function(e){
         Swal.fire({
-            title: 'ยืนยัน!',
+            title: 'โปรดยืนยัน!',
             text: `ต้องการเปลี่ยนเป็นให้เข้าร่วม หรือไม่`,
             type: 'warning',
             showCancelButton: true,

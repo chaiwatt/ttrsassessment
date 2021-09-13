@@ -46,7 +46,7 @@ class DashboardAdminReportController extends Controller
         }
         
         $businessplans = BusinessPlan::get();
-        $totalproject = BusinessPlan::get()->count();
+        $totalproject = MiniTBP::whereNotNull('submitdate')->count();
         $totalminitbp = MiniTBP::whereNotNull('submitdate')->count();
         $totalfulltbp = FullTbp::whereNotNull('submitdate')->count();
         $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();

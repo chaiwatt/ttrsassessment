@@ -187,7 +187,7 @@ $(document).on("click",".messagelink",function(e){
                     </div>
                 </li>`
             )
-        console.log(data.message.body);
+        // console.log(data.message.body);
         $("#tablemessage").html(html);
         $("#unreadmessages").html(html2);
         // $("#messagetitle").html(data.message.title);
@@ -1377,24 +1377,34 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
 
     $(document).on('click', '.rejectevent', function(e) {
         e.preventDefault();
-        
         $('#modal_message').modal('hide');
-
         $('#linkurl').val(e.currentTarget.getAttribute('href')) ;// = e.currentTarget.getAttribute('href')+'?rejmsg='+message;
-        // window.location.href = urlToRedirect;
         $('#modal_reject_join').modal('show');
-        // console.log(urlToRedirect);
     });
 
-    
+    $(document).on('click', '.rejectexpertassignment', function(e) {
+        e.preventDefault();
+        $('#modal_message').modal('hide');
+        $('#linkurl').val(e.currentTarget.getAttribute('href')) ;// = e.currentTarget.getAttribute('href')+'?rejmsg='+message;
+        $('#modal_reject_expertassignment').modal('show');
+    });
+
+    $(document).on('click', '#btn_modal_reject_expertassignment', function(e) {
+        var urlToRedirect =  $('#linkurl').val() +'?rejmsg='+$('#reject1').val();
+        // console.log(urlToRedirect);
+            // return;
+            $("#spinicon1").attr("hidden",false);
+            if($('#reject1').val() != ''){
+                window.location.href = urlToRedirect;
+        }
+    });
     $(document).on('click', '#btn_modal_reject_join', function(e) {
        var urlToRedirect =  $('#linkurl').val() +'?rejmsg='+$('#reject').val();
-    //    console.log(rejurl);
-    $("#spinicon").attr("hidden",false);
-    if($('#reject').val() != ''){
-        window.location.href = urlToRedirect;
-    }
-
+            $("#spinicon").attr("hidden",false);
+            if($('#reject').val() != ''){
+                window.location.href = urlToRedirect;
+        }
+    });
     $(document).on('click', '.acceptevent', function(e) {
         e.preventDefault();
         
@@ -1406,7 +1416,7 @@ $(document).on('click', '.editauthorizeddirector', function(e) {
    
     });
        
-    });
+
     
     
     

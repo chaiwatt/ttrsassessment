@@ -244,7 +244,7 @@ function getEv(evid){
         var html =``;
         data.criteriatransactions.forEach((criteria,index) => {
                 var comment = '';
-                var criterianame = `<label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" data-criterianame="${criteria.subpillarindex['name']}" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label>
+                var criterianame = `<div id="${criteria.id}"><label>กรอกเกรด (A - F) <a href="#" data-toggle="modal" data-criterianame="${criteria.subpillarindex['name']}" class="text-grey conflictgrade" data-id="${criteria.id}" ><i class="icon-folder-open3"></i></a> </label></div>
                                 <input type="text" data-subpillarname="${criteria.subpillarindex['name']}" data-id="${criteria.id}" data-subpillarindex="${criteria.subpillarindex['id']}" data-scoretype="1" placeholder="" value="" data-type="score" class="form-control scoring gradescore">
                                     `;
         
@@ -650,8 +650,24 @@ $('.step-evweight').steps({
     },
     enableFinishButton: submitbutton,
     onFinished: function (event, currentIndex) {
+
+        var blankarrerror = [];
+        $('.gradescore').each(function() {
+            if($(this).val() == ''){
+                blankarrerror.push($(this).data('id'));
+                return;
+            }
+        }); 
+        if(blankarrerror.length > 0){
+            $('html, body').animate({
+                scrollTop: $("#" + blankarrerror[0]).offset().top
+            }, 1000);
+            $("#" + blankarrerror[0]).css({'color':'red'});
+            return false;
+        }
+
         Swal.fire({
-            title: 'คำเตือน!',
+            title: 'โปรดยืนยัน!',
             text: `ต้องการบันทึกผลสรุปคะแนน หรือไม่`,
             type: 'warning',
             showCancelButton: true,
@@ -763,7 +779,42 @@ $('.step-evweight').steps({
     },
     transitionEffect: 'fade',
     autoFocus: true,
+    onStepChanging: function (event, currentIndex, newIndex) {
+        if(newIndex == 1){
+            var blankarrerror = [];
+            $('.gradescore').each(function() {
+                if($(this).val() == ''){
+                    blankarrerror.push($(this).data('id'));
+                    return;
+                }
+            }); 
+            if(blankarrerror.length > 0){
+                $('html, body').animate({
+                    scrollTop: $("#" + blankarrerror[0]).offset().top
+                }, 1000);
+                
+
+                $("#" + blankarrerror[0]).css({'color':'red'});
+         
+                return false;
+            }
+        }
+        
+        return true;
+    },
     onStepChanged:function (event, currentIndex, newIndex) {
+        if(currentIndex == 1){
+            var blankarrerror = [];
+            $('.gradescore').each(function() {
+                    blankarrerror.push($(this).data('id'));
+            }); 
+            if(blankarrerror.length>0){
+                for (let i = 0; i < blankarrerror.length; i++) {
+                    $("#" + blankarrerror[i]).css({'color':''});
+                  }
+            }
+            blankarrerror = [];
+        }
         stepindex = currentIndex;
         return true;
     },   

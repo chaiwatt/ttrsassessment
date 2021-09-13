@@ -252,7 +252,7 @@ class CalendarController extends Controller
            $messageheader = "ประชุมนัดหมายประเมิน ณ สถานประกอบการ โครงการ" . $minitbp->project .$fullcompanyname;
 
          }else if($eventcalendar->calendar_type_id == 3){
-          $messageheader = "ประชุมและสรุปผลการประเมิน และลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
+          $messageheader = "ประชุมและสรุปผลการประเมินและลงคะแนนโครงการ" . $minitbp->project .$fullcompanyname;
          }
 
         $_user = User::find($eventcalendarattendee->user_id);

@@ -89,8 +89,6 @@ class DashboardAdminReportExpertController extends Controller
             'alertmessage_id' => $alertmessage->id
         ]);
 
-        // EmailBox::send($jduser->email,'','TTRS: คุณ'.$auth->name . ' '. $auth->lastname .' ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Manager<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname. ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
-
         $arr1 = User::where('id',$auth->id)->pluck('id')->toArray();
         $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
         $arr3 = UserArray::leader($minitbp->business_plan_id);
