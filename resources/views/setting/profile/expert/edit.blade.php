@@ -563,7 +563,7 @@
 																<tbody id="expertfield_wrapper_tr"> 
 																	@foreach ($expertfields as $expertfield)
 																		<tr class="item">                                        
-																			<td> <span>{{$expertfield->order}}</span> </td>                                            
+																			<td style="width:10%;text-align:center"> <span>{{$expertfield->order}}</span> </td>                                            
 																			<td> {{$expertfield->detail}}</td>    
 																			<td style="width:1%;white-space: nowrap"> 
 																				<a href="#" data-id="{{$expertfield->id}}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>  
