@@ -2287,7 +2287,7 @@ class HomeController extends Controller
 
     public function DemoUserTEST(){
 
-        $this->createJd(2,'demo_name','demo_lastname','demoaccount@gmail.com','9848838655100','0894133662');
+        $this->createJd(2,'demo_name','demo_lastname','demoaccount@gmail.com','6295013327790','0894133662');
 
         // $this->createUserTypeCompany(2,'อำไพพรรณ','ผ่องลำพูน','ttrsuser2020@gmail.com','9750815350896','851547196','เกรียงไกรทัวร์');
         // $this->createUserTypeCompany(2,'ตัง','เม','ttrsusertwo2020@gmail.com','2513813143742','942495240','กรีนทีคอฟฟี่');
