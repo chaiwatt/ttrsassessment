@@ -32,16 +32,16 @@ class ReportProjectExportFinishedByMonth implements FromView,ShouldAutoSize,With
     public function view(): View
     {
         if($this->year == 0){
-            if($month == '00'){
-                $fulltbps = FullTbp::whereNotNull('finishdate')->get();
+            if($this->month == '00'){
+                $fulltbps = FullTbp::whereNotNull('finishdate')->orderBy('fulltbp_code','asc')->get();
             }else{
-                $fulltbps = FullTbp::whereMonth('finishdate',$this->month)->whereNotNull('finishdate')->get();
+                $fulltbps = FullTbp::whereMonth('finishdate',$this->month)->whereNotNull('finishdate')->orderBy('fulltbp_code','asc')->get();
             }
         }else{
             if($this->month == '00'){
-                $fulltbps = FullTbp::whereYear('finishdate',$this->year)->whereNotNull('finishdate')->get();
+                $fulltbps = FullTbp::whereYear('finishdate',$this->year)->whereNotNull('finishdate')->orderBy('fulltbp_code','asc')->get();
             }else{
-                $fulltbps = FullTbp::whereMonth('finishdate',$this->month)->whereYear('finishdate',$this->year)->whereNotNull('finishdate')->get();
+                $fulltbps = FullTbp::whereMonth('finishdate',$this->month)->whereYear('finishdate',$this->year)->whereNotNull('finishdate')->orderBy('fulltbp_code','asc')->get();
             }
         }
         

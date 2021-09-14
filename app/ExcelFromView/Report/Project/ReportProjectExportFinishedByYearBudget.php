@@ -33,9 +33,9 @@ class ReportProjectExportFinishedByYearBudget implements FromView,ShouldAutoSize
     public function view(): View
     {
         if($this->year > 0){
-            $fulltbps = FullTbp::whereBetween('finishdate',[$this->startdate, $this->enddate])->whereNotNull('finishdate')->get();
+            $fulltbps = FullTbp::whereBetween('finishdate',[$this->startdate, $this->enddate])->whereNotNull('finishdate')->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('finishdate')->get();
+            $fulltbps = FullTbp::whereNotNull('finishdate')->orderBy('fulltbp_code','asc')->get();
         }
 
  
