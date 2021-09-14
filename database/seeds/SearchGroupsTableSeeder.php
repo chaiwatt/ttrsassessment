@@ -16,7 +16,7 @@ class SearchGroupsTableSeeder extends Seeder
                 'name' => 'ปีของโครงการ'
             ],
             [
-                'name' => 'เลขที่โครงการ/Mini TBP/Full TBP'
+                'name' => 'เลขที่โครงการ'
             ],
             [
                 'name' => 'ชื่อโครงการ'

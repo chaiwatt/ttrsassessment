@@ -1,10 +1,9 @@
 
 
-import * as SearchProject from './searchproject.js';
-import * as Company from './company.js'
+import * as SearchCompany from './searchcompany.js';
 var sounddextype = 1;
+
 $(document).on('change', '#searchgroup', function(e) {
-    
     // if($(this).val() < 12){
         var selectedtedtext = $(this).find("option:selected").text();
         if(selectedtedtext == 'ชื่อโครงการ'){
@@ -56,68 +55,6 @@ $(document).on('change', '#searchgroup', function(e) {
 
 });
 
-// $(document).on('change', '#searchyear', function(e) {
-//     SearchProject.searchYear($(this).val()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });
-
-// $(document).on('keyup', '#searchprojectname', function(e) {
-//     SearchProject.searchProjectname($(this).val()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });
-
-// $(document).on('keyup', '#searchdocno', function(e) {
-//     SearchProject.searchDocno($(this).val()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });
-
-// $(document).on('change', '#searchleader', function(e) {
-//     SearchProject.searchLeader($(this).val()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });
-
-// $(document).on('change', '#searchexpert', function(e) {
-//     SearchProject.searchExpert($(this).val()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });
-
-// $(document).on('change', '#searchgrade', function(e) {
-//     SearchProject.searchGrade($(this).find("option:selected").text()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });
-
-function search(searchid,value){
-    return new Promise((resolve, reject) => {
-        $.ajax({
-          url: `${route.url}/dashboard/admin/report/search/getsearch`,
-          type: 'POST',
-          headers: {"X-CSRF-TOKEN":route.token},
-          data: {
-            searchid : searchid,
-            value : value,
-          },
-          success: function(data) {
-            resolve(data)
-          },
-          error: function(error) {
-            reject(error)
-          },
-        })
-      })
-}
-
 function createTable(data){
     console.log(data);
     var html ='';
@@ -149,7 +86,7 @@ $(document).on('click', '#btnsearch', function(e) {
     if(selectedtedtext == 'ชื่อโครงการ'){
         $("#soundex_res").html('');
         var issounddex = $('#sounddex').is(':checked');
-        SearchProject.searchProjectname($('#searchprojectname').val(),issounddex,sounddextype).then(data => {
+        SearchCompany.searchProjectname($('#searchprojectname').val(),issounddex,sounddextype).then(data => {
             createTable(data);
             if(data.soundex.length > 0){
                 var text = "ค้นหาจากคำใกล้เคียง ";
@@ -165,7 +102,7 @@ $(document).on('click', '#btnsearch', function(e) {
     if(selectedtedtext == 'ชื่อบริษัท'){
         $("#soundex_res").html('');
         var issounddex = $('#sounddex').is(':checked');
-        SearchProject.searchCompanyName($('#searchcompanyname').val(),issounddex,sounddextype).then(data => {
+        SearchCompany.searchCompanyName($('#searchcompanyname').val(),issounddex,sounddextype).then(data => {
             createTable(data);
             if(data.soundex.length > 0){
                 var text = "ค้นหาจากคำใกล้เคียง ";
@@ -180,7 +117,7 @@ $(document).on('click', '#btnsearch', function(e) {
 
     if(selectedtedtext == 'ทุนจดทะเบียน'){
         $("#soundex_res").html('');
-        SearchProject.searchRegisteredCapital($('#searchregisteredcapital').val()).then(data => {
+        SearchCompany.searchRegisteredCapital($('#searchregisteredcapital').val()).then(data => {
             createTable(data);
         })
         .catch(error => {})
@@ -188,7 +125,7 @@ $(document).on('click', '#btnsearch', function(e) {
 
     if(selectedtedtext == 'รหัส ISIC'){
         $("#soundex_res").html('');
-        SearchProject.searchIsic($('#isic').val(),$('#searchisic').val()).then(data => {
+        SearchCompany.searchIsic($('#isic').val(),$('#searchisic').val()).then(data => {
             createTable(data);
         })
         .catch(error => {})
@@ -196,17 +133,10 @@ $(document).on('click', '#btnsearch', function(e) {
 
     if(selectedtedtext == 'กลุ่มอุตสาหกรรม'){
         $("#soundex_res").html('');
-        SearchProject.searchIndustrygroup($('#searchindustrygroup').val()).then(data => {
+        SearchCompany.searchIndustrygroup($('#searchindustrygroup').val()).then(data => {
             createTable(data);
         })
         .catch(error => {})
     } 
 
 });
-
-// $(document).on('keyup', '#searchprojectname', function(e) {
-//     SearchProject.searchProjectname($(this).val()).then(data => {
-//         createTable(data);
-//     })
-//     .catch(error => {})
-// });

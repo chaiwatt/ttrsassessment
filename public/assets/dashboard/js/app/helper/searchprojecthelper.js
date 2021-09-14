@@ -20,7 +20,7 @@ $(document).on('change', '#searchgroup', function(e) {
             // $("#searchdate_wrapper").attr("hidden",true);
             $("#searchdate").val('');
             $("#soundex_res").html('');
-        }else if(selectedtedtext == 'เลขที่โครงการ/Mini TBP/Full TBP'){
+        }else if(selectedtedtext == 'เลขที่โครงการ'){
             $("#registeredcapital_wrapper").attr("hidden",true);
             $("#isic_wrapper").attr("hidden",true);
             $("#searchdocno_wrapper").attr("hidden",false);
@@ -319,7 +319,7 @@ $(document).on('click', '#btnsearch', function(e) {
         .catch(error => {})
     }
 
-    if(selectedtedtext == 'เลขที่โครงการ/Mini TBP/Full TBP'){
+    if(selectedtedtext == 'เลขที่โครงการ'){
         $("#soundex_res").html('');
         SearchProject.searchDocno($('#searchdocno').val()).then(data => {
             createTable(data);

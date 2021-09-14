@@ -123,6 +123,13 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('registeredcapital','Api\SearchProjectController@RegisteredCapital')->name('api.search.project.registeredcapital'); 
             Route::post('text','Api\SearchProjectController@Text')->name('api.search.project.text'); 
         });
+        Route::group(['prefix' => 'company'], function(){
+            Route::post('projectname','Api\SearchCompanyController@ProjectName')->name('api.search.company.projectname');  
+            Route::post('isic','Api\SearchCompanyController@Isic')->name('api.search.company.isic');  
+            Route::post('industrygroup','Api\SearchCompanyController@IndustryGroup')->name('api.search.company.industrygroup');  
+            Route::post('companyname','Api\SearchCompanyController@CompanyName')->name('api.search.company.companyname'); 
+            Route::post('registeredcapital','Api\SearchCompanyController@RegisteredCapital')->name('api.search.company.registeredcapital'); 
+        });
         Route::group(['prefix' => 'expert'], function(){
             Route::post('branch','Api\SearchExpertController@Branch')->name('api.search.expert.branch');            
             Route::post('projectstatus','Api\SearchExpertController@ProjectStatus')->name('api.search.expert.projectstatus');  

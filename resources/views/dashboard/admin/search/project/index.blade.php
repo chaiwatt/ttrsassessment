@@ -64,7 +64,7 @@
                                 <div id="searchyear_wrapper" class="col-md-6">
                                     <label>ปี</label><span class="text-danger">*</span>
                                     <select name="searchyear" id="searchyear" data-placeholder="ปี" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก ปี===</option>
+                                        <option value="0">=== เลือกทั้งหมด ===</option>
                                         @foreach ($years as $year)
                                             <option value="{{$year}}">{{$year}}</option> 
                                         @endforeach
@@ -73,7 +73,7 @@
                                 <div id="searchindustrygroup_wrapper" class="col-md-6" hidden>
                                     <label>กลุ่มอุตสาหกรรม</label><span class="text-danger">*</span>
                                     <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก กลุ่มอุตสาหกรรม===</option>
+                                        <option value="0">=== เลือกทั้งหมด ===</option>
                                         @foreach ($industrygroups as $industrygroup)
                                             <option value="{{$industrygroup->id}}">{{$industrygroup->name}}</option> 
                                         @endforeach
@@ -82,7 +82,7 @@
                                 <div id="grage_wrapper" class="col-md-6" hidden>
                                     <label>เกรด</label><span class="text-danger">*</span>
                                     <select name="searchgrade" id="searchgrade" data-placeholder="เกรด" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก เกรด===</option>
+                                        <option value="0">=== เลือกทั้งหมด ===</option>
                                         @foreach ($grades as $grade)
                                             <option value="{{$grade->id}}">{{$grade->name}}</option> 
                                         @endforeach
@@ -91,7 +91,7 @@
                                 <div id="leader_wrapper" class="col-md-6" hidden>
                                     <label>Leader</label><span class="text-danger">*</span>
                                     <select name="searchleader" id="searchleader" data-placeholder="Leader" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก Leader===</option>
+                                        <option value="0">=== เลือกทั้งหมด ===</option>
                                         @foreach ($leaders as $leader)
                                             <option value="{{$leader->id}}">{{$leader->name}} {{$leader->lastname}}</option> 
                                         @endforeach
@@ -100,7 +100,7 @@
                                 <div id="expert_wrapper" class="col-md-6" hidden>
                                     <label>ผู้เชี่ยวชาญ</label><span class="text-danger">*</span>
                                     <select name="searchexpert" id="searchexpert" data-placeholder="ผู้เชี่ยวชาญ" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก ผู้เชี่ยวชาญ===</option>
+                                        <option value="0">=== เลือกทั้งหมด ===</option>
                                         @foreach ($experts as $expert)
                                             <option value="{{$expert->id}}">{{$expert->name}} {{$expert->lastname}}</option> 
                                         @endforeach
@@ -111,18 +111,18 @@
                                         <div class="col-md-12">
                                             <label>ISIC</label><span class="text-danger">*</span>
                                             <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-lg form-control-select2">
-                                                <option value="0000">===เลือก ISIC===</option>
+                                                <option value="0">=== เลือกทั้งหมด ===</option>
                                                 @foreach ($isics as $isic)
                                                     <option value="{{$isic->id}}">{{$isic->name}}</option> 
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-12 mb-2">
+                                        {{-- <div class="col-md-12 mb-2">
                                             <label class="mt-3">หมวดหมู่ย่อย</label><span class="text-danger">*</span>
                                             <select name="searchisic" id="searchisic" data-placeholder="หมวดหมู่ย่อย" class="form-control form-control-lg form-control-select2">
         
                                             </select>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>                    
 
@@ -139,14 +139,14 @@
                                     <input type="text"  name="searchcompanyname" id="searchcompanyname" value=""  placeholder="ชื่อบริษัท" class="form-control form-control-lg" >
                                 </div>
                                 <div id="searchdocno_wrapper" class="col-md-6" hidden>
-                                    <label>เลขที่โครงการ/Mini TBP/Full TBP</label>
-                                    <input type="text"  name="searchdocno" id="searchdocno" value=""  placeholder="เลขที่โครงการ/Mini TBP/Full TBP" class="form-control form-control-lg" >
+                                    <label>เลขที่โครงการ</label>
+                                    <input type="text"  name="searchdocno" id="searchdocno" value=""  placeholder="เลขที่โครงการ" class="form-control form-control-lg" >
                                 </div>
                                 
                                 <div id="registeredcapital_wrapper" class="col-md-6" hidden>
                                     <label>ทุนจดทะเบียน</label><span class="text-danger">*</span>
                                     <select name="searchregisteredcapital" id="searchregisteredcapital" data-placeholder="ทุนจดทะเบียน" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก ทุนจดทะเบียน===</option>
+                                        <option value="0">=== เลือกทั้งหมด ===</option>
                                         @foreach ($registeredcapitals as $registeredcapital)
                                             <option value="{{$registeredcapital->id}}">{{$registeredcapital->detail}}</option> 
                                         @endforeach
