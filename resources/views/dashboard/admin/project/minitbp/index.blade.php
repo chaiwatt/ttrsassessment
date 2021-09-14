@@ -236,8 +236,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">เลขที่ Mini TBP</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
+                                        
                                         <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
                                         @if (Auth::user()->user_type_id == 4)
@@ -252,11 +253,12 @@
                                         @if (Empty($minitbp->fulltbp->canceldate))
                                             <tr>    
                                                 <td hidden>{{$minitbp->updated_at}}</td> 
+                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$minitbp->minitbp_code}}</td>
                                                 <td style="white-space: nowrap;"> 
                                                     <a href="#" data-toggle="modal" data-id="{{$minitbp->id}}" class="controlflowicon"><i class="icon-cog2 text-info mr-2"></i></a>
                                                     <a href="{{route('dashboard.admin.project.minitbp.view',['id' => $minitbp->id])}}" class="text-info" target="_blank">{{$minitbp->project}}</a>
                                                 </td> 
-                                                <td style="text-align:center">{{$minitbp->minitbp_code}}</td>  
+                                                 
                                                 <td style="white-space: nowrap"> 
                                                     @php
                                                         $company = $minitbp->businessplan->company;

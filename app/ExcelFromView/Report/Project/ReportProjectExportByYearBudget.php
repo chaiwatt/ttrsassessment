@@ -32,11 +32,19 @@ class ReportProjectExportByYearBudget implements FromView,ShouldAutoSize,WithTit
     }
     public function view(): View
     {
-        if($this->year > 0){
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereBetween('submitdate',[$this->startdate, $this->enddate])->get();
+        // if($this->year > 0){
+        //     $fulltbps = FullTbp::whereNotNull('submitdate')->whereBetween('submitdate',[$this->startdate, $this->enddate])->get();
 
+        // }else{
+        //     $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+        // }
+
+        if($this->year > 0){
+            $minitbparray = MiniTbp::whereNotNull('submitdate')->whereBetween('submitdate',[$this->startdate, $this->enddate])->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+            $minitbparray = MiniTbp::whereNotNull('submitdate')->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.downloadallbyyearbudget', [

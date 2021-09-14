@@ -21,16 +21,18 @@ class ReportProjectExportByYear implements FromView,ShouldAutoSize,WithTitle
         if($year == 0){
             $this->projectname = 'โครงการทั้งหมด' ;
         }else{
-            $this->projectname = 'ปี' . (intVal($year) + 543);
+            $this->projectname = 'โครงการ ปี' . (intVal($year) + 543);
         }
         $this->year = $year;
     }
     public function view(): View
     {
         if($this->year == 0){
-            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+            $minitbparray = MiniTbp::whereNotNull('submitdate')->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->get();
+            $minitbparray = MiniTbp::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.downloadallbyyear', [

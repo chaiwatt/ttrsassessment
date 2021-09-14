@@ -321,8 +321,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
+                                        
                                         <th style="width:1%;white-space: nowrap;text-align:center">Full TBP</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">EV</th> 
@@ -335,7 +336,7 @@
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 )
                                             <tr>  
                                                 <td hidden>{{$fulltbp->updated_at}}</td>  
-                                               
+                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td>
                                                 <td style="white-space: nowrap"> 
                                                     @php
                                                         $cogcolor = 'text-info';
@@ -349,7 +350,7 @@
                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                     <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                 </td>  
-                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
+                                                 
                                                 <td style="width:1%;white-space: nowrap;text-align:center">    
                                                     {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id }} --}}
                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )

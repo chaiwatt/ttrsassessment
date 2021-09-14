@@ -25,13 +25,24 @@ class ReportProjectExportByIndustrygroup implements FromView,ShouldAutoSize,With
     }
     public function view(): View
     {
-        if($this->industrygroup != 0){
+        // if($this->industrygroup != 0){
+        //     $companies = Company::where('industry_group_id',$this->industrygroup)->pluck('id')->toArray();
+        //     $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
+        //     $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        //     $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        // }else{
+        //     $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+        // }
+
+        if($this->industrygroup !=0){
             $companies = Company::where('industry_group_id',$this->industrygroup)->pluck('id')->toArray();
             $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
             $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+            // $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+            $minitbparray = MiniTbp::whereNotNull('submitdate')->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.download', [

@@ -86,8 +86,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
-                                        <th style="white-space: nowrap;text-align: center">ชื่อโครงการ</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
+                                        <th style="white-space: nowrap;text-align: center">ชื่อโครงการ</th>
+                                        
                                         <th style="text-align: center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปคะแนน</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>                   
@@ -100,8 +101,9 @@
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                     <tr>  
                                                         <td hidden>{{$fulltbp->updated_at}}</td>   
+                                                        <td style="white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
                                                         <td style="white-space: nowrap"> {{$fulltbp->minitbp->project}} </td>  
-                                                        <td style="white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
+                                                        
                                                         <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td>
                                                         <td style="text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
                                                         <td style="white-space: nowrap">

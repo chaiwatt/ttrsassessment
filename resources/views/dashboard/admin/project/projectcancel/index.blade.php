@@ -64,9 +64,9 @@
                             <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
-                                       
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เลขที่โครงการ</th>  
                                         <th style="white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap;text-align: center">เลขที่โครงการ</th>   
+                                        
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ยกเลิก</th>                             
                                         <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
@@ -75,8 +75,9 @@
                                     @foreach ($fulltbps as $key => $fulltbp)
                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 3)
                                     <tr>    
+                                        <td style="white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td>
                                         <td style="white-space: nowrap"> <a class="text-info" href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}">{{$fulltbp->minitbp->project}} </a> </td> 
-                                        <td style="white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
+                                        
                                         <td style="text-align: center"> {{$fulltbp->canceldateth}} </td> 
                                         {{-- <td>
                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)

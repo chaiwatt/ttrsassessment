@@ -90,7 +90,7 @@
                                             @foreach ($fulltbps as $fulltbp)
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
                                                 <tr>
-                                                    <td style="text-align: center">{{$fulltbp->minitbp->businessplan->code}}</td>
+                                                    <td style="text-align: center;width:1%;white-space: nowrap">{{$fulltbp->fulltbp_code}}</td>
                                                     <td><a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info">{{$fulltbp->minitbp->project}}</a></td>
                                                     <td><a href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info">{{$fulltbp->minitbp->businessplan->company->fullname}}</a> </td>
                                                     <td >{{$fulltbp->projectcapitalname}}</td>

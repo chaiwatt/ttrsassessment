@@ -35,9 +35,9 @@ class ReportProjectExportByBudget implements FromView,ShouldAutoSize,WithTitle
                     array_push($arr,$item);
                 }
             }
-            $fulltbps = FullTbp::whereIn('id',$arr)->whereNotNull('submitdate')->get();
+            $fulltbps = FullTbp::whereIn('id',$arr)->whereNotNull('submitdate')->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.downloadallbyprojectbudget', [

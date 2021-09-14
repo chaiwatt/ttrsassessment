@@ -1060,8 +1060,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
-                                        <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
+                                       
                                         <th style="width:1%;white-space: nowrap;text-align: center">ระยะเวลา</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
@@ -1082,6 +1083,7 @@
                                             @endphp
                                             <tr> 
                                                 <td hidden>{{$fulltbp->minitbp->updated_at}}</td>
+                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
                                                 <td style="white-space: nowrap">
                                                     @php
                                                         $cogcolor = 'text-info';
@@ -1110,7 +1112,7 @@
                                                             @endif
                                                     @endif     
                                                 </td>   
-                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
+                                                
                                                 <td style="width:1%;white-space: nowrap;text-align: center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
                                                 <td style="width:1%;white-space: nowrap;text-align: center">
                                                     @if (!Empty($fulltbp->brieftdate))
@@ -1193,8 +1195,9 @@
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>
-                                            <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align:center">ชื่อโครงการ</th> 
+                                            
                                             <th style="width:1%;white-space: nowrap;text-align:center">Full TBP</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">EV</th> 
@@ -1207,6 +1210,7 @@
                                             @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
                                                 <tr>  
                                                     <td hidden >{{$fulltbp->updated_at}}</td>  
+                                                    <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
                                                     <td style="white-space: nowrap;"> 
                                                         @php
                                                             $cogcolor = 'text-info';
@@ -1220,7 +1224,7 @@
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!} </a>  
                                                     </td>  
-                                                    <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->minitbp->businessplan->code}}</td> 
+                                                    
                                                     <td style="width:1%;white-space: nowrap;text-align:center">    
                                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 5 )
                                                                 {{-- <span class="badge badge-flat border-success text-success-600">ผ่านการอนุมัติ</span> --}}
@@ -1521,6 +1525,7 @@
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>
+                                            <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align: center">คะแนน</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">เกรด</th>     
@@ -1536,6 +1541,7 @@
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                                     <tr>   
                                                         <td hidden>{{$fulltbp->updated_at}}</td> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center">{{$fulltbp->fulltbp_code}}</td> 
                                                         <td style="white-space: nowrap"> {{$fulltbp->minitbp->project}} </td> 
                                                         <td style="width:1%;white-space: nowrap;text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                         <td style="width:1%;white-space: nowrap;text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 

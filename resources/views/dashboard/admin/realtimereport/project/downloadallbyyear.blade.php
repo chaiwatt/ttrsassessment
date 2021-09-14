@@ -87,9 +87,9 @@
                 array_push($nonefinancemessagearr,"อื่นๆ ดังรายละเอียด " . $minitbp->nonefinance6_detail);
             }
         @endphp
-        @if ($businessplan->business_plan_status_id > 2)
+        {{-- @if ($businessplan->business_plan_status_id > 2) --}}
             <tr>
-                <td>{{ $businessplan->code }}</td>
+                <td>{{ $fulltbp->fulltbp_code }}</td>
                 <td>{{ $minitbp->submitdateyearth }}</td>
                 <td>{{ $minitbp->minitbp_code }}</td>
                 <td>{{ $fulltbp->fulltbp_code }}</td>
@@ -193,7 +193,7 @@
                     {{$businessplan->projectduration}}
                 </td>
             </tr>
-        @endif
+        {{-- @endif --}}
 
     @endforeach
     </tbody>
