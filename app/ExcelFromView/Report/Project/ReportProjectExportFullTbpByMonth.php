@@ -37,15 +37,15 @@ class ReportProjectExportFullTbpByMonth implements FromView,ShouldAutoSize,WithT
 
         if($this->year == 0){
             if($this->month == '00'){
-                $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+                $fulltbps = FullTbp::whereNotNull('submitdate')->orderBy('fulltbp_code','asc')->get();
             }else{
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereMonth('submitdate',$this->month)->get();
+                $fulltbps = FullTbp::whereNotNull('submitdate')->whereMonth('submitdate',$this->month)->orderBy('fulltbp_code','asc')->get();
             }
         }else{
             if($this->month == '00'){
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->get();
+                $fulltbps = FullTbp::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->orderBy('fulltbp_code','asc')->get();
             }else{
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereMonth('submitdate',$this->month)->whereYear('submitdate',$this->year)->get();
+                $fulltbps = FullTbp::whereNotNull('submitdate')->whereMonth('submitdate',$this->month)->whereYear('submitdate',$this->year)->orderBy('fulltbp_code','asc')->get();
             }
         }
 

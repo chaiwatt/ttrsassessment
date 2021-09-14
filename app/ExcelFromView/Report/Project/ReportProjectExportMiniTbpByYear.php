@@ -30,10 +30,10 @@ class ReportProjectExportMiniTbpByYear implements FromView,ShouldAutoSize,WithTi
     {
         if($this->year == 0){
             $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbparr)->get();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id',$minitbparr)->orderBy('fulltbp_code','asc')->get();
         }else{
             $minitbparray = MiniTBP::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.download', [

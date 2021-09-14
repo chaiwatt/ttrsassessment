@@ -29,9 +29,9 @@ class ReportProjectExportFullTbpByYear implements FromView,ShouldAutoSize,WithTi
     {
 
         if($this->year == 0){
-            $fulltbps = FullTbp::whereNotNull('submitdate')->get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->get();
+            $fulltbps = FullTbp::whereNotNull('submitdate')->whereYear('submitdate',$this->year)->orderBy('fulltbp_code','asc')->get();
         }
         
         return view('dashboard.admin.realtimereport.project.download', [

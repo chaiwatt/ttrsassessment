@@ -45,18 +45,18 @@ class ReportProjectExportMiniTbpByMonth implements FromView,ShouldAutoSize,WithT
         if($this->year == 0){
             if($this->month == '00'){
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
             }else{
                 $minitbparray = MiniTBP::whereMonth('submitdate',$this->month)->whereNotNull('submitdate')->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
             }
         }else{
             if($this->month == '00'){
                 $minitbparray = MiniTBP::whereYear('submitdate',$this->year)->whereNotNull('submitdate')->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
             }else{
                 $minitbparray = MiniTBP::whereMonth('submitdate',$this->month)->whereYear('submitdate',$this->year)->whereNotNull('submitdate')->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
             }
         }
 
