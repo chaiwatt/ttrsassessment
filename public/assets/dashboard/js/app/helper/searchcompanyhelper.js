@@ -53,102 +53,46 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#soundex_wrapper").attr("hidden",true);
             $("#soundex_res").html('');
         }
-        // else{
-        //     $("#searchdocno_wrapper").attr("hidden",true);
-        //     $("#searchcompanyname_wrapper").attr("hidden",true);
-        //     $("#searchprojectname_wrapper").attr("hidden",true);
-        //     $("#expert_wrapper").attr("hidden",true);
-        //     $("#leader_wrapper").attr("hidden",true);
-        //     $("#grage_wrapper").attr("hidden",true);
-        //     $("#searchyear_wrapper").attr("hidden",true);
-        //     $("#searchword_wrapper").attr("hidden",false);
-        //     $("#searchindustrygroup_wrapper").attr("hidden",true);
-        //     $("#searchdate_wrapper").attr("hidden",true);
-        // }
-    // }else{
-    //     $("#expert_wrapper").attr("hidden",false);
-    //     $("#leader_wrapper").attr("hidden",true);
-    //     $("#grade_wrapper").attr("hidden",true);
-    //     $("#searchyear_wrapper").attr("hidden",true);
-    //     $("#searchword_wrapper").attr("hidden",true);
-    //     $("#searchindustrygroup_wrapper").attr("hidden",true);
-    //     $("#searchdate_wrapper").attr("hidden",false);
-    //     $("#searchword").val('');
-    // }
+
 });
 
-// $('#searchdate').bootstrapMaterialDatePicker({
-//     format: 'DD/MM/YYYY HH:mm',
-//     clearButton: true,
-//     cancelText: "ยกเลิก",
-//     okText: "ตกลง",
-//     clearText: "เคลียร์",
-//     time: false
-// });
-$(document).on('change', '#searchyear', function(e) {
-    SearchProject.searchYear($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
-
-$(document).on('keyup', '#searchprojectname', function(e) {
-    SearchProject.searchProjectname($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
-
-// $(document).on('keyup', '#searchcompanyname', function(e) {
-//     SearchProject.searchCompanyName($(this).val()).then(data => {
+// $(document).on('change', '#searchyear', function(e) {
+//     SearchProject.searchYear($(this).val()).then(data => {
 //         createTable(data);
 //     })
 //     .catch(error => {})
 // });
 
-$(document).on('keyup', '#searchdocno', function(e) {
-    SearchProject.searchDocno($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
-
-// $(document).on('change', '#searchisic', function(e) {
-//     SearchProject.searchIsic($('#isic').val(),$(this).val()).then(data => {
+// $(document).on('keyup', '#searchprojectname', function(e) {
+//     SearchProject.searchProjectname($(this).val()).then(data => {
 //         createTable(data);
 //     })
 //     .catch(error => {})
 // });
 
-// $(document).on('change', '#searchindustrygroup', function(e) {
-//     SearchProject.searchIndustrygroup($(this).val()).then(data => {
+// $(document).on('keyup', '#searchdocno', function(e) {
+//     SearchProject.searchDocno($(this).val()).then(data => {
 //         createTable(data);
 //     })
 //     .catch(error => {})
 // });
 
-$(document).on('change', '#searchleader', function(e) {
-    SearchProject.searchLeader($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchleader', function(e) {
+//     SearchProject.searchLeader($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchexpert', function(e) {
-    SearchProject.searchExpert($(this).val()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
+// $(document).on('change', '#searchexpert', function(e) {
+//     SearchProject.searchExpert($(this).val()).then(data => {
+//         createTable(data);
+//     })
+//     .catch(error => {})
+// });
 
-$(document).on('change', '#searchgrade', function(e) {
-    SearchProject.searchGrade($(this).find("option:selected").text()).then(data => {
-        createTable(data);
-    })
-    .catch(error => {})
-});
-// $(document).on('change', '#searchregisteredcapital', function(e) {
-//     SearchProject.searchRegisteredCapital($(this).val()).then(data => {
+// $(document).on('change', '#searchgrade', function(e) {
+//     SearchProject.searchGrade($(this).find("option:selected").text()).then(data => {
 //         createTable(data);
 //     })
 //     .catch(error => {})
@@ -175,31 +119,30 @@ function search(searchid,value){
 }
 
 function createTable(data){
+    console.log(data);
     var html ='';
-    data.forEach(function (fulltbp,index) {
+    data.companies.forEach(function (company,index) {
+        var companyname = company['fullname'];
+        var html_minitbp ='';
+        if(company.minitbpbelong.length > 0){
+            html_minitbp +=`<ul>`;
+            company.minitbpbelong.forEach(function (minitbp,index) {
+                html_minitbp +=`<li><a href="${route.url}/dashboard/admin/report/detail/view/${minitbp.businessplan['id']}" class="text-info" target="_blank">${minitbp['project']}</a></li>`;
+            }); 
+            html_minitbp +=`</ul>`;
+        }
         html += `<tr >  
-            <td> 
-            <a  href="${route.url}/dashboard/admin/search/company/profile/${fulltbp.minitbp.businessplan.company['id']}" class="text-info" target="_blank">${fulltbp.minitbp.businessplan.company['name']}</a> 
+        <td style="text-align:center;width:10%">${index+1}</td>
+            <td style="width:40%"> 
+            <a  href="${route.url}/dashboard/admin/search/company/profile/${company['id']}" class="text-info" target="_blank">${companyname}</a> 
             </td>                                                          
-            <td>
-            <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
+            <td style="width:50%">
+           ${html_minitbp}
             </td>                         
         </tr>`
         });
      $("#reportsearch_wrapper").html(html);
 }
-
-$(document).on('change', '#isic', function(e) {
-    Company.getSubIsic($(this).val()).then(data => {
-        var html = `<option value="000" >เลือกรายการ</option>`;
-        data.subisics.forEach(function (subisic,index) {
-            html +=`<option value="${subisic['id']}" >${subisic['name']}</option>`
-            });
-         $("#searchisic").html(html);
-    })
-    .catch(error => {})
-});
-
 
 $(document).on('click', '#btnsearch', function(e) {
     var selectedtedtext = $('#searchgroup').find("option:selected").text();
@@ -207,7 +150,7 @@ $(document).on('click', '#btnsearch', function(e) {
         $("#soundex_res").html('');
         var issounddex = $('#sounddex').is(':checked');
         SearchProject.searchProjectname($('#searchprojectname').val(),issounddex,sounddextype).then(data => {
-            createTable(data.fulltbps);
+            createTable(data);
             if(data.soundex.length > 0){
                 var text = "ค้นหาจากคำใกล้เคียง ";
                 data.soundex.forEach(function (_soundex,index) {
@@ -223,7 +166,7 @@ $(document).on('click', '#btnsearch', function(e) {
         $("#soundex_res").html('');
         var issounddex = $('#sounddex').is(':checked');
         SearchProject.searchCompanyName($('#searchcompanyname').val(),issounddex,sounddextype).then(data => {
-            createTable(data.fulltbps);
+            createTable(data);
             if(data.soundex.length > 0){
                 var text = "ค้นหาจากคำใกล้เคียง ";
                 data.soundex.forEach(function (_soundex,index) {

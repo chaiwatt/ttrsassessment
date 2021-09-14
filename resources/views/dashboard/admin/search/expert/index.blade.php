@@ -48,11 +48,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการผู้เชี่ยวชาญ</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ผู้เชี่ยวชาญ</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="experttable">
+                            <table class="table table-bordered table-striped mb-2" id="experttable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">ชื่อ-นามสกุล</th>

@@ -43,15 +43,13 @@ use App\Model\FullTbpCompanyProfileAttachment;
 class FullTbpController extends Controller
 {
     public function GeneratePdf(Request $request){
-        
         require_once (base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));
         $segment = new \Segment();
         $fulltbp = FullTbp::find($request->id);
         $fulltbpcode = $fulltbp->fulltbp_code;
         if(Empty($fulltbpcode)){
-            $fulltbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($request->id),3,0,STR_PAD_LEFT); 
-            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
-            $_mitbpcode = $minitbp->minitbp_code;
+            $check = FullTbp::whereMonth('submitdate',Carbon::now()->format('m'))->get();
+            $fulltbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($check->count()+1),3,0,STR_PAD_LEFT); 
             FullTbp::find($request->id)->update([
                 'fulltbp_code' => substr($_mitbpcode, 3)
             ]);

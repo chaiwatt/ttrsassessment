@@ -6,6 +6,7 @@ use App\User;
 use App\Model\Isic;
 use App\Model\Grade;
 use App\Model\FullTbp;
+use App\Model\MiniTBP;
 use App\Model\SearchGroup;
 use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class DashboardAdminSearchProjectController extends Controller
     public function Index(){
         $searchgroups = SearchGroup::get();
         $grades = Grade::get();
-        $fulltbbs = FullTbp::get();
+        $minitbparr = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbbs = FullTbp::whereIn('mini_tbp_id',$minitbparr)->get();
         $industrygroups = IndustryGroup::get();
         $years = FullTbp::get()->map(function($item){ 
                     return $item['created_at']->year+543; 

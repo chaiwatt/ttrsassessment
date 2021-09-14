@@ -109,15 +109,26 @@ class Company extends Model
         $bussinesstype = $company->business_type_id;
         $fullcompanyname = ' ' . $company_name;
 
-        if($bussinesstype == 1){
-            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
-        }else if($bussinesstype == 2){
-            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
-        }else if($bussinesstype == 3){
-            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
-        }else if($bussinesstype == 4){
-            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+        if(!Empty($company_name)){
+            if($bussinesstype == 1){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
+            return $fullcompanyname;
+        }else{
+            return 'ยังไม่ได้ตั้งค่า Profile';
         }
-        return $fullcompanyname;
+
+    }
+
+    public function getMinitbpbelongAttribute()
+    {
+        $businessplanarr = BusinessPlan::where('company_id',$this->id)->pluck('id')->toArray();
+        return MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarr)->get();
     }
 }

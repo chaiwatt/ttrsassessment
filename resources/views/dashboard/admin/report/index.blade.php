@@ -573,12 +573,12 @@
                 <div class="card bg-teal-400">
                     <div class="card-body">
                         <div class="d-flex">
-                            <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalproject}}</h1></a>  
+                            <a href="{{route('dashboard.admin.search.company')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalcompany}}</h1></a>  
                             
                             
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.realtimereport.project.allbyyear')}}" class="text-white">โครงการทั้งหมด</a>  
+                          <a href="{{route('dashboard.admin.search.company')}}" class="text-white">จำนวนผู้ประกอบการ</a>  
                         </div>
                     </div>
                     <div class="container-fluid">

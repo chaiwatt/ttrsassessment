@@ -2552,7 +2552,6 @@ class HomeController extends Controller
     public function ServicePage(){
         $servicepage = ServicePage::first();
         return view('layouts.landing2.servicepage')->withServicepage($servicepage);
-        // return $servicepage ;
     }
 
     public function Performance(){
@@ -2577,8 +2576,41 @@ class HomeController extends Controller
    }
 
    public function Contact(){
-    return view('layouts.landing2.contact');
-}
+        return view('layouts.landing2.contact');
+    }
+
+    // public function UpdateMiniAndFullCode(){
+    //     MiniTBP::whereNull('submitdate')->update([
+    //         'minitbp_code' => null
+    //     ]);
+    //     FullTbp::whereNull('submitdate')->update([
+    //         'fulltbp_code' => null
+    //     ]);
+    //     for ($x = 1; $x <= 12; $x++) {
+    //         $padmonth = str_pad(($x),2,0,STR_PAD_LEFT);
+    //         $minitbps = MiniTBP::whereNotNull('submitdate')->whereMonth('submitdate',$padmonth)->get();
+     
+    //         if($minitbps->count() > 0){
+    //             foreach ($minitbps as $key => $minitbp) {
+    //                 $minitbpcode = 'PL-'.Carbon::now()->format('y') . $padmonth . str_pad(($key+1),3,0,STR_PAD_LEFT); 
+    //                 $minitbp->update([
+    //                     'minitbp_code' => $minitbpcode
+    //                 ]);
+    //             }
+    //         }
+
+    //         $fulltbps = FullTbp::whereNotNull('submitdate')->whereMonth('submitdate',$padmonth)->get();
+     
+    //         if($fulltbps->count() > 0){
+    //             foreach ($fulltbps as $key => $fulltbp) {
+    //                 $fulltbpcode = Carbon::now()->format('y') . $padmonth . str_pad(($key+1),3,0,STR_PAD_LEFT); 
+    //                 $fulltbp->update([
+    //                     'fulltbp_code' => $fulltbpcode
+    //                 ]);
+    //             }
+    //         }
+    //       }
+    // }
     
 }
 

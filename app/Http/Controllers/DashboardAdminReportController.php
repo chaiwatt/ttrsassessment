@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
@@ -44,7 +45,8 @@ class DashboardAdminReportController extends Controller
             // $fulltbparray = FullTbp::whereIn('id',$uniquefulltbparr)->pluck('id')->toArray();
 
         }
-        
+        $userarr = User::where('user_type_id',1)->pluck('id')->toArray();
+        $totalcompany = Company::whereIn('user_id',$userarr)->count();
         $businessplans = BusinessPlan::get();
         $totalproject = MiniTBP::whereNotNull('submitdate')->count();
         $totalminitbp = MiniTBP::whereNotNull('submitdate')->count();
@@ -151,6 +153,7 @@ class DashboardAdminReportController extends Controller
                                                 ->withProjectindustrycollections($projectindustrycollections)
                                                 ->withObjecttivecollections($objecttivecollections)
                                                 ->withTotalproject($totalproject)
+                                                ->withTotalcompany($totalcompany)
                                                 ->withTotalminitbp($totalminitbp)
                                                 ->withTotalfulltbp($totalfulltbp)
                                                 ->withTotalonprocess($totalonprocess)

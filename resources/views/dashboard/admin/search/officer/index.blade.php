@@ -97,11 +97,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการเจ้าหน้าที่ TTRS</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เจ้าหน้าที่ TTRS</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
-                            <table class="table table-bordered table-striped" id="officertable">
+                            <table class="table table-bordered table-striped mb-2" id="officertable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">ชื่อ-นามสกุล</th>

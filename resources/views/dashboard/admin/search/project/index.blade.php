@@ -181,16 +181,20 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped mb-2" id="projecttable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th style="text-align: center">#</th> 
+                                        <th style="text-align: center">เลขที่โครงการ</th> 
                                         <th style="text-align: center">ชื่อโครงการ</th> 
                                         <th style="text-align: center">บริษัท</th>
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">
-                                    @foreach ($fulltbps as $fulltbp)
+                                    @foreach ($fulltbps as $key => $fulltbp)
                                     <tr>
+                                        <td style="text-align:center">{{$key+1}}</td>
+                                        <td style="text-align:center">{{$fulltbp->fulltbp_code}}</td>
                                         <td>  
                                             <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
                                         </td>  
@@ -220,5 +224,20 @@
             branchid: "{{Auth::user()->branch_id}}"
         };
 
+        $('#projecttable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "zeroRecords": " ",
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
     </script>
 @stop

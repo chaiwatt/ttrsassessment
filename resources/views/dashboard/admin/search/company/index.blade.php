@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">ผู้รับการประเมิน</span></h4>
+                <h4> <span class="font-weight-semibold">ผู้ประกอบการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ค้นหา</a>
-                    <span class="breadcrumb-item active">ผู้รับการประเมิน</span>
+                    <span class="breadcrumb-item active">ผู้ประกอบการ</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -64,7 +64,7 @@
                                 <div id="searchindustrygroup_wrapper" class="col-md-6" hidden>
                                     <label>กลุ่มอุตสาหกรรม</label><span class="text-danger">*</span>
                                     <select name="searchindustrygroup" id="searchindustrygroup" data-placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก กลุ่มอุตสาหกรรม===</option>
+                                        <option value="0">===เลือก กลุ่มอุตสาหกรรม===</option>
                                         @foreach ($industrygroups as $industrygroup)
                                             <option value="{{$industrygroup->id}}">{{$industrygroup->name}}</option> 
                                         @endforeach
@@ -75,18 +75,18 @@
                                         <div class="col-md-12">
                                             <label>ISIC</label><span class="text-danger">*</span>
                                             <select name="isic" id="isic" data-placeholder="ISIC" class="form-control form-control-lg form-control-select2">
-                                                <option value="0000">===เลือก ISIC===</option>
+                                                <option value="0">===เลือก ISIC===</option>
                                                 @foreach ($isics as $isic)
                                                     <option value="{{$isic->id}}">{{$isic->name}}</option> 
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-12 mb-2">
+                                        {{-- <div class="col-md-12 mb-2">
                                             <label class="mt-3">หมวดหมู่ย่อย</label><span class="text-danger">*</span>
                                             <select name="searchisic" id="searchisic" data-placeholder="หมวดหมู่ย่อย" class="form-control form-control-lg form-control-select2 ">
 
                                             </select>
-                                        </div>
+                                        </div> --}}
                                     </div>
                               
                                 </div>                    
@@ -101,7 +101,7 @@
                                 <div id="registeredcapital_wrapper" class="col-md-6" hidden>
                                     <label>ทุนจดทะเบียน</label><span class="text-danger">*</span>
                                     <select name="searchregisteredcapital" id="searchregisteredcapital" data-placeholder="ทุนจดทะเบียน" class="form-control form-control-lg form-control-select2">
-                                        <option value="0000">===เลือก ทุนจดทะเบียน===</option>
+                                        <option value="0">===เลือก ทุนจดทะเบียน===</option>
                                         @foreach ($registeredcapitals as $registeredcapital)
                                             <option value="{{$registeredcapital->id}}">{{$registeredcapital->detail}}</option> 
                                         @endforeach
@@ -135,25 +135,35 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการผู้รับการประเมิน</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ผู้ประกอบการ</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped mb-2" id="companytable">
                                 <thead>
                                     <tr class="bg-info">
-                                        <th style="text-align: center">บริษัท</th>
-                                        <th style="text-align: center">ชื่อโครงการ</th> 
+                                        <th style="text-align: center;width:10%">#</th> 
+                                        <th style="text-align: center;width:40%">บริษัท</th>
+                                        <th style="text-align: center;width:50%">โครงการ</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">
-                                    @foreach ($fulltbps as $fulltbp)
+                                    @foreach ($companies as $key => $company)
                                     <tr>
-                                        <td>
-                                            <a  href="{{route('dashboard.admin.search.company.profile',['id' => $fulltbp->minitbp->businessplan->company->id])}}" class="text-info" target="_blank">{{$fulltbp->minitbp->businessplan->company->fullname}} </a>
+                                        <td style="text-align: center;width:10%">{{$key+1}}</td>
+                                        <td style="width:40%">
+                                            <a  href="{{route('dashboard.admin.search.company.profile',['id' => $company->id])}}" class="text-info" target="_blank">{{$company->fullname}} </a>
                                         </td> 
-                                        <td>
-                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
+                                        <td style="width:50%">
+                                            @if ($company->minitbpbelong->count() > 0)
+                                                
+                                                <ul>
+                                                    @foreach ($company->minitbpbelong as $minitbp)
+                                                        <li><a href="{{route('dashboard.admin.report.detail.view',['id' => $minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$minitbp->project}} </a> </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                            {{-- <a href="{{route('dashboard.admin.report.detail.view',['id' => $company->businessplan->id])}}" class="text-info" target="_blank" >{{$company->businessplan->minitbp->project}} </a>   --}}
                                         </td>  
                                     </tr>  
                                     @endforeach
@@ -176,6 +186,22 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+
+        $('#companytable').DataTable( {
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 50,
+            "language": {
+                "zeroRecords": " ",
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            }
+        });
 
     </script>
 @stop

@@ -29,6 +29,7 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
 // Route::get('demottrsuser', 'HomeController@DemoTTRSUser')->name('demottrsuser');
 // Route::get('demousertest', 'HomeController@DemoUserTEST')->name('demousertest');
+// Route::get('updateminiandfullcode', 'HomeController@UpdateMiniAndFullCode')->name('updateminiandfullcode');
 
 // Route::get('test', 'HomeController@Test')->name('test');
 Route::get('landing', 'HomeController@Index')->name('landing.index');
@@ -529,6 +530,7 @@ Route::group(['middleware' => 'auth'], function(){
                 });
                 Route::group(['prefix' => 'company'], function(){
                     Route::get('','DashboardAdminSearchCompanyController@Index')->name('dashboard.admin.search.company');
+                    Route::get('search','DashboardAdminSearchCompanyController@Search')->name('dashboard.admin.search.company.search');
                     Route::group(['prefix' => 'profile'], function(){
                         Route::get('/{id}','DashboardAdminSearchCompanyProfileController@Index')->name('dashboard.admin.search.company.profile');          
                     });      

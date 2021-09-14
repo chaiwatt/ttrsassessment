@@ -280,7 +280,13 @@ function search(searchid,value){
 function createTable(data){
     var html ='';
     data.forEach(function (fulltbp,index) {
-        html += `<tr >                                                           
+        var code = '';
+        if(fulltbp.fulltbp_code != null){
+            code = fulltbp.fulltbp_code;
+        }
+        html += `<tr > 
+        <td style="text-align:center">${index +1}</td>     
+        <td style="text-align:center">${code}</td>                                                        
             <td>  
                 <a href="${route.url}/dashboard/admin/report/detail/view/${fulltbp.minitbp.businessplan['id']}" class="text-info" target="_blank">${fulltbp.minitbp['project']}</a> 
             </td>                         
