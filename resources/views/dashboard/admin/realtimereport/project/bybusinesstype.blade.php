@@ -81,7 +81,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="searchtable">
+                                    <table class="table table-bordered table-striped" id="searchtable_notuse">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="text-align: center">เลขที่โครงการ</th> 
@@ -254,6 +254,7 @@
             time: false
 		});
         $('#searchtable').DataTable( {
+            "searching": false,
             "paging":   true,
             "ordering": true,
             "order": [[ 0, 'desc' ]],

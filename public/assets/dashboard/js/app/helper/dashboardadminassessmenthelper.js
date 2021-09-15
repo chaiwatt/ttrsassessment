@@ -668,7 +668,7 @@ $('.step-evweight').steps({
 
         Swal.fire({
             title: 'โปรดยืนยัน!',
-            text: `ต้องการบันทึกผลสรุปคะแนน หรือไม่`,
+            text: `ต้องการบันทึกผลสรุปคะแนน `,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

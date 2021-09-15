@@ -1085,7 +1085,7 @@ $(document).on('click', '.deletepillar', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1150,7 +1150,7 @@ $(document).on('click', '.deletesubpillar', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1177,7 +1177,7 @@ $(document).on('click', '.deletesubpillarindex', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1338,9 +1338,9 @@ $(document).on('change', '#version', function(e) {
     }).catch(error => {})
 });
 $(document).on('change', '#percentindex', function(e) {
-    var message = "ต้องการเพิ่ม เปอร์เซนต์ Extra หรือไม่";
+    var message = "ต้องการเพิ่ม เปอร์เซนต์ Extra ";
     if($('#percentindex').val() == 100){
-        message = "ต้องการยกเลิก เปอร์เซนต์ Extra หรือไม่";
+        message = "ต้องการยกเลิก เปอร์เซนต์ Extra ";
     }
     Swal.fire({
         title: 'ยืนยัน',
@@ -1390,7 +1390,7 @@ $(document).on('keyup', '#percentextra', function(e) {
 $(document).on('click', '#updateev', function(e) {
     Swal.fire({
         title: 'นำส่ง EV!',
-        text: `ต้องการนำส่ง EV หรือไม่`,
+        text: `ต้องการนำส่ง EV `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1452,7 +1452,7 @@ $(document).on('click', '#approveevstageone', function(e) {
 
     Swal.fire({
         title: 'ยืนยัน',
-        text: `ต้องการอนุมัติ EV หรือไม่`,
+        text: `ต้องการอนุมัติ EV `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1524,7 +1524,7 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
     }
     Swal.fire({
         title: 'ยืนยัน',
-        text: `ต้องการส่งคืนให้ Leader แก้ไขหรือไม่`,
+        text: `ต้องการส่งคืนให้ Leader แก้ไข`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1556,7 +1556,7 @@ $('.nav-tabs a').on('shown.bs.tab', function (e) {
 $(document).on("click",".deletecomment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1720,7 +1720,7 @@ $(document).on('click', '.deletecategorytransaction', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1750,7 +1750,7 @@ $(document).on('click', '.deletetriteriatransaction', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

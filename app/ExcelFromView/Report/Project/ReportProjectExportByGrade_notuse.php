@@ -29,7 +29,7 @@ class ReportProjectExportByGrade implements FromView,ShouldAutoSize
         $end_date = Carbon::parse($this->enddate)
                 ->toDateTimeString();
         $projectgrades = ProjectGrade::where('grade',$this->grade)->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id', $projectgrades)->whereBetween('created_at', [$this->startdate, $this->enddate])->get();
+        $fulltbps = FullTbp::whereIn('id', $projectgrades)->whereBetween('created_at', [$this->startdate, $this->enddate])->orderBy('fulltbp_code','asc')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

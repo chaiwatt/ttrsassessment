@@ -27,7 +27,7 @@ class ReportProjectExportByLeader implements FromView,ShouldAutoSize,WithTitle
     public function view(): View
     {
         $fulltbparray = ProjectAssignment::where('leader_id',$this->leader)->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id',$fulltbparray)->get();
+        $fulltbps = FullTbp::whereIn('id',$fulltbparray)->orderBy('fulltbp_code','asc')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

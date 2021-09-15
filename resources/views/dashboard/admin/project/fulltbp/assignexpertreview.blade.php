@@ -430,7 +430,7 @@
     $(document).on('click', '#jdconfirmteam', function(e) {
         Swal.fire({
             title: 'โปรดยืนยัน!',
-            text: `ต้องการยืนยันทีมผู้เชี่ยวชาญ หรือไม่`,
+            text: `ต้องการยืนยันทีมผู้เชี่ยวชาญ `,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -484,7 +484,7 @@
             var frm = e.target.form;
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการส่งรายการมอบหมายหรือไม่ `,
+                    text: `ต้องการส่งรายการมอบหมาย`,
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

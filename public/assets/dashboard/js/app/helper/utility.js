@@ -3,7 +3,7 @@ function confirmation(e) {
     var urlToRedirect = e.currentTarget.getAttribute('href');
     Swal.fire({
             title: 'คำเตือน!',
-            text: `ต้องการลบรายการหรือไม่ `,
+            text: `ต้องการลบรายการ`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -23,7 +23,7 @@ function cancelproject(e) {
     var urlToRedirect = e.currentTarget.getAttribute('href');
     Swal.fire({
             title: 'คำเตือน!',
-            text: `ต้องการยกเลิกโครงการหรือไม่ `,
+            text: `ต้องการยกเลิกโครงการ`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -43,7 +43,7 @@ function confirmsubmit(e,data) {
     var frm = e.target.form;
     Swal.fire({
             title: 'บันทึกรายการ',
-            text: `ต้องการบันทึก ${data} หรือไม่ `,
+            text: `ต้องการบันทึก ${data} `,
             type: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

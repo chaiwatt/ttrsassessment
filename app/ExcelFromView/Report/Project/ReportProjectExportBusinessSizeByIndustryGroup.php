@@ -67,7 +67,7 @@ class ReportProjectExportBusinessSizeByIndustryGroup implements FromView,ShouldA
                     array_push($intersec,$f1);
                 } 
             }
-            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            $fulltbps = FullTbp::whereIn('id', $intersec)->orderBy('fulltbp_code','asc')->get();
         }else{
             $companies = Company::where('company_size_id',$this->companysize)->pluck('id')->toArray();
             $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
@@ -86,7 +86,7 @@ class ReportProjectExportBusinessSizeByIndustryGroup implements FromView,ShouldA
                     array_push($intersec,$f1);
                 } 
             }
-            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            $fulltbps = FullTbp::whereIn('id', $intersec)->orderBy('fulltbp_code','asc')->get();
         }
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps

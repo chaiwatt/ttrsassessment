@@ -143,6 +143,35 @@ class DashboardAdminReportController extends Controller
         $projectgradecollections = collect($projectgrades);
         $projectindustrycollections = collect($projectindustrys);
         $objecttivecollections = collect($objectives);
+
+
+        $fulltbparr = FullTbp::pluck('id')->toArray();
+        $projectassignments =  ProjectAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+        $leaderarr = [];
+        foreach($projectassignments as $projectassignment){
+            if(!Empty($projectassignment->leader_id)){
+               array_push($leaderarr,$projectassignment->leader_id)  ;
+            }
+        }
+        if(count($leaderarr) > 0){
+            $leaderarr =array_unique($leaderarr);
+        }
+       
+        $leaders = User::whereIn('id',$leaderarr)->get();
+
+
+        $expertassignments =  ExpertAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+ 
+        $expertarr = [];
+        foreach($expertassignments as $expertassignment){
+            array_push($expertarr,$expertassignment->user_id)  ;
+        }
+
+        if(count($expertarr) > 0){
+            $expertarr =array_unique($expertarr);
+        }
+       
+        $experts = User::whereIn('id',$expertarr)->get();
      
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
@@ -157,7 +186,9 @@ class DashboardAdminReportController extends Controller
                                                 ->withTotalminitbp($totalminitbp)
                                                 ->withTotalfulltbp($totalfulltbp)
                                                 ->withTotalonprocess($totalonprocess)
-                                                ->withTotalfinish($totalfinish);
+                                                ->withTotalfinish($totalfinish)
+                                                ->withLeaders($leaders)
+                                                ->withExperts($experts);
 
 
 

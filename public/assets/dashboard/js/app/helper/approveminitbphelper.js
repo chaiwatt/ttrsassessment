@@ -25,7 +25,7 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
     if(check == 1){
         Swal.fire({
           title: 'ยืนยัน',
-          text: `ต้องการอนุมัติ Mini TBP หรือไม่`,
+          text: `ต้องการอนุมัติ Mini TBP `,
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -45,7 +45,7 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
       }else if(check == 2){
         Swal.fire({
             title: 'ยืนยัน',
-            text: `ต้องการส่งคืน Mini TBP หรือไม่`,
+            text: `ต้องการส่งคืน Mini TBP `,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

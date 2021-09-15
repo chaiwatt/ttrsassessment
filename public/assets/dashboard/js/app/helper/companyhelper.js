@@ -87,7 +87,7 @@ $("#companydoc").on('change', function() {
 $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -155,7 +155,7 @@ function addAuthorizedDirector(id,prefix,name,lastname) {
   $(document).on('click', '.deleteauthorizeddirector', function(e) {
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

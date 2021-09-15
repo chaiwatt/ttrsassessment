@@ -160,7 +160,7 @@
             //console.log(urlToRedirect)
             Swal.fire({
                     title: 'คำเตือน!',
-                    text: `ต้องการยกเลิกโครงการหรือไม่ `,
+                    text: `ต้องการยกเลิกโครงการ`,
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

@@ -824,7 +824,7 @@
 			var frm = e.target.form;
 			Swal.fire({
 					title: 'ยืนยันการบันทึก',
-					text: `ยืนยันการบันทึกหรือไม่ `,
+					text: `ยืนยันการบันทึก`,
 					type: 'info',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',

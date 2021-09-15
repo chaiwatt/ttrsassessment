@@ -168,7 +168,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $companies = Company::where('registeredcapitaltype',$request->regcapital)->pluck('id')->toArray();
             
             $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereBetween('created_at', [$startdate, $enddate])->get();
             return view('dashboard.admin.realtimereport.project.byregcapital')->withFulltbps($fulltbps)->withRegisteredcapitaltypes($registeredcapitaltypes); 
         }
@@ -826,7 +826,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             if($request->businesstype != 0){
                 $companies = Company::where('business_type_id',$businesstype->id)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             }else{
                 $minitbparray = MiniTbp::whereNotNull('submitdate')->pluck('id')->toArray();
@@ -854,7 +854,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             if($request->companysize != 0){
                 $companies = Company::where('company_size_id',$companysize->id)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             }else{
                 // $fulltbps = FullTbp::whereNotNull('submitdate')->get();
@@ -882,7 +882,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             if($request->isic != 0){
                 $companies = Company::where('isic_id',$request->isic)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             }else{
                 // $fulltbps = FullTbp::whereNotNull('submitdate')->get();
@@ -909,7 +909,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             if($request->industrygroup !=0){
                 $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             }else{
                 // $fulltbps = FullTbp::whereNotNull('submitdate')->get();
@@ -942,7 +942,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             if($request->province != 0){
                 $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             }else{
                 // $fulltbps = FullTbp::whereNotNull('submitdate')->get();
@@ -978,7 +978,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                 $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());
                 $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             }else{
                 // $fulltbps = FullTbp::whereNotNull('submitdate')->get();
@@ -993,7 +993,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     public function projectbystatus(Request $request){
         $businessplanstatuses = BusinessPlanStatus::get();
         $businessplanarray = BusinessPlan::where('business_plan_status_id',3)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
         return view('dashboard.admin.realtimereport.project.projectbystatus')->withBusinessplanstatuses($businessplanstatuses)->withFulltbps($fulltbps);
     }
@@ -1004,7 +1004,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             return Excel::download(new ReportProjectExportByBusinessPlanStatus($businessplanstatus->id), 'โครงการแยกตามสถานะของการประเมิน.xlsx');
         }else if($request->btnsubmit == 'search'){
             $businessplanarray = BusinessPlan::where('business_plan_status_id',$businessplanstatus->id)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             return view('dashboard.admin.realtimereport.project.projectbystatus')->withBusinessplanstatuses($businessplanstatuses)->withFulltbps($fulltbps); 
         }
@@ -1050,7 +1050,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbycertificate(Request $request){
         $businessplanarray = BusinessPlan::where('business_plan_status_id',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
         return view('dashboard.admin.realtimereport.project.projectbycertificate')->withFulltbps($fulltbps);
     }
@@ -1063,7 +1063,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByCertificate($request->status), 'โครงการแยกตามที่ได้รับใบรับรอง.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             return view('dashboard.admin.realtimereport.project.projectbycertificate')->withFulltbps($fulltbps); 
         }
@@ -1386,7 +1386,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
         $businessplanstatuses = BusinessPlanStatus::get();
         $businessplanarray = BusinessPlan::where('business_plan_status_id',3)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         $intersec = array();
         foreach($fulltbps1 as $f1) {
@@ -1410,7 +1410,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
         $businessplanstatuses = BusinessPlanStatus::get();
         $businessplanarray = BusinessPlan::where('business_plan_status_id',$request->businessplanstatus)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         $intersec = array();
         foreach($fulltbps1 as $f1) {
@@ -1440,7 +1440,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $industrygroups = IndustryGroup::get();
         $companies = Company::where('industry_group_id',1)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
 
         $intersec = array();
@@ -1465,7 +1465,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $industrygroups = IndustryGroup::get();
         $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
 
         $intersec = array();
@@ -1593,7 +1593,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
          
                 $companies = Company::pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $intersec = array();
@@ -1610,7 +1610,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                
                 $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $intersec = array();
@@ -1631,13 +1631,13 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $companysizes = Companysize::get();
         $companies = Company::where('company_size_id',1)->pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
 
         $industrygroups = IndustryGroup::get();
         $companies = Company::pluck('id')->toArray();
         $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
 
         $intersec = array();
@@ -1660,13 +1660,13 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             if($request->industrygroup == 0){
                 $companies = Company::where('company_size_id',$request->companysize)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 
                 $companies = Company::pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $intersec = array();
@@ -1679,13 +1679,13 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             }else{
                 $companies = Company::where('company_size_id',$request->companysize)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 
                 $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps2 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $intersec = array();
@@ -1859,7 +1859,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                 
                 $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
                 $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 // $fulltbps2 = FullTbp::whereNotNull('submitdate')->pluck('id')->toArray();
@@ -1880,18 +1880,16 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     }
 
     public function projectall(Request $request){
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
         return view('dashboard.admin.realtimereport.project.projectall')->withFulltbps($fulltbps);
     }
     public function getprojectall(Request $request){
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportByProjectAll(), 'โครงการที่อยู่ระหว่างการประเมินทั้งหมด.xlsx');
         }else if($request->btnsubmit == 'search'){
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
             return view('dashboard.admin.realtimereport.project.projectall')->withFulltbps($fulltbps); 
         }
     }
@@ -1900,21 +1898,27 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
         $leaders = User::whereIn('id',$leaderarray)->get();
 
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
         
         return view('dashboard.admin.realtimereport.project.projectstatusbyleader')->withLeaders($leaders)->withFulltbps($fulltbps);
     }
     public function getprojectstatusbyleader(Request $request){
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
 
         $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
         $leaders = User::whereIn('id',$leaderarray)->get();
         $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
-        $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->whereNull('finishdate')->pluck('id')->toArray();
         $intersec = array();
         foreach($fulltbps1 as $f1) {
             if (in_array($f1,$fulltbps2)) {
@@ -1925,11 +1929,13 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             return Excel::download(new ReportProjectExportRatingByLeader($request->leader), 'โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายคน.xlsx');
         }else if($request->btnsubmit == 'search'){
             if($request->leader == 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+                // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+                // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                // $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
             }else{
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereIn('id', $intersec)->whereNull('finishdate')->get();
             }
             
             return view('dashboard.admin.realtimereport.project.projectstatusbyleader')->withLeaders($leaders)->withFulltbps($fulltbps); 
@@ -1941,10 +1947,12 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
         $leaders = User::whereIn('id',$leaderarray)->get();
 
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
 
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
 
         return view('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')->withIndustrygroups($industrygroups)->withLeaders($leaders)->withFulltbps($fulltbps);
     }
@@ -1957,21 +1965,19 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             return Excel::download(new ReportProjectExportRatingLeaderByIndustryGroup($request->leader,$request->industrygroup), 'โครงการที่อยู่ระหว่างการประเมินของ Lead แยกรายอุตสาหกรรม.xlsx');
         }else if($request->btnsubmit == 'search'){
             if($request->leader == 0 && $request->industrygroup == 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
             }else if($request->leader != 0 && $request->industrygroup != 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
         
                 $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
-                $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+                $fulltbps2 = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
                
                 $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $fulltbps3 = FullTbp::whereNull('finishdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $_intersec = array();
                 foreach($fulltbps1 as $f1) {
@@ -1986,19 +1992,18 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                         array_push($intersec,$f1);
                     } 
                 }
-                $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id', $intersec)->get();
             }else if($request->leader == 0 && $request->industrygroup != 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
         
                 $fulltbparray = ProjectAssignment::pluck('full_tbp_id')->toArray();
-                $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+                $fulltbps2 = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
                
                 $companies = Company::where('industry_group_id',$request->industrygroup)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $fulltbps3 = FullTbp::whereNull('finishdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $_intersec = array();
                 foreach($fulltbps1 as $f1) {
@@ -2013,19 +2018,18 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                         array_push($intersec,$f1);
                     } 
                 }
-                $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id', $intersec)->get();
             }else if($request->leader != 0 && $request->industrygroup == 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
         
                 $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
-                $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+                $fulltbps2 = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
                
                 $companies = Company::pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $fulltbps3 = FullTbp::whereNull('finishdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $_intersec = array();
                 foreach($fulltbps1 as $f1) {
@@ -2040,7 +2044,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                         array_push($intersec,$f1);
                     } 
                 }
-                $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id', $intersec)->get();
             }
             
             return view('dashboard.admin.realtimereport.project.leadprojectstatusbyindustrygroup')->withLeaders($leaders)->withIndustrygroups($industrygroups)->withFulltbps($fulltbps); 
@@ -2048,14 +2052,18 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     }
 
     public function leadprojectstatusbysector(Request $request){
+      
         $sectors = Sector::get();
         $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
         $leaders = User::whereIn('id',$leaderarray)->get();
 
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
 
+
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
         return view('dashboard.admin.realtimereport.project.leadprojectstatusbysector')->withSectors($sectors)->withLeaders($leaders)->withFulltbps($fulltbps);
     }
     public function getleadprojectstatusbysector(Request $request){
@@ -2067,23 +2075,24 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             return Excel::download(new ReportProjectExportRatingLeaderBySector($request->leader,$request->sector), 'โครงการที่อยู่ระหว่างการประเมินของ Lead ในแต่ละภูมิภาค.xlsx');
         }else if($request->btnsubmit == 'search'){
             if($request->leader == 0 && $request->sector == 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->get();
             }else if($request->leader != 0 && $request->sector != 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
-        
+                // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+                // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                // $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
+
                 $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
-                $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+                $fulltbps2 = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
                 
                 $provincearray = Province::where('map_code',$request->sector)->pluck('id')->toArray();
                 $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
                 $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $fulltbps3 = FullTbp::whereNull('finishdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $_intersec = array();
                 foreach($fulltbps1 as $f1) {
@@ -2098,21 +2107,24 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                         array_push($intersec,$f1);
                     } 
                 }
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id', $intersec)->get();
             }else if($request->leader == 0 && $request->sector != 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+                // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                // $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
+
                 $fulltbparray = ProjectAssignment::pluck('full_tbp_id')->toArray();
-                $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+                $fulltbps2 = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
                 
                 $provincearray = Province::where('map_code',$request->sector)->pluck('id')->toArray();
                 $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
                 $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $fulltbps3 = FullTbp::whereNull('finishdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $_intersec = array();
                 foreach($fulltbps1 as $f1) {
@@ -2127,22 +2139,25 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                         array_push($intersec,$f1);
                     } 
                 }
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id', $intersec)->get();
 
             }else if($request->leader != 0 && $request->sector == 0){
-                $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-                $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+                // $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+                // $fulltbps1 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
+                $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+                $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
+
                 $fulltbparray = ProjectAssignment::where('leader_id',$request->leader)->pluck('full_tbp_id')->toArray();
-                $fulltbps2 = FullTbp::whereNotNull('submitdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
+                $fulltbps2 = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparray)->pluck('id')->toArray();
                 
                 $provincearray = Province::pluck('id')->toArray();
                 $addressarray = array_unique(CompanyAddress::whereIn('province_id',$provincearray)->whereNull('addresstype')->pluck('company_id')->toArray());           
                 $companies = Company::whereIn('id',$addressarray)->pluck('id')->toArray();
                 $businessplanarray = BusinessPlan::whereIn('company_id',$companies)->pluck('id')->toArray();
                 $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-                $fulltbps3 = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+                $fulltbps3 = FullTbp::whereNull('finishdate')->whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
         
                 $_intersec = array();
                 foreach($fulltbps1 as $f1) {
@@ -2157,7 +2172,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
                         array_push($intersec,$f1);
                     } 
                 }
-                $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+                $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id', $intersec)->get();
             }
             
             return view('dashboard.admin.realtimereport.project.leadprojectstatusbysector')->withLeaders($leaders)->withSectors($sectors)->withFulltbps($fulltbps); 
@@ -2277,7 +2292,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
 
     public function projectbyleadcoleadexpert(Request $request){
         $businessplanarray = BusinessPlan::where('business_plan_status_id','>',3)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
         $fulltbp = FullTbp::first();
         $minitbp = MiniTbp::find($fulltbp->mini_tbp_id);
@@ -2290,7 +2305,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
     }
     public function getprojectbyleadcoleadexpert(Request $request){
         $businessplanarray = BusinessPlan::where('business_plan_status_id','>',3)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
         $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
         $fulltbp = FullTbp::find($request->fulltbp);
         $minitbp = MiniTbp::find($fulltbp->mini_tbp_id);

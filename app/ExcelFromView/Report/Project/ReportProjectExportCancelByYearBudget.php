@@ -36,9 +36,9 @@ class ReportProjectExportCancelByYearBudget implements FromView,ShouldAutoSize,W
         // $fulltbps = FullTbp::whereBetween('canceldate',[$this->startdate, $this->enddate])->whereNotNull('canceldate')->get();
         if($this->year > 0){
         
-            $fulltbps = FullTbp::whereBetween('canceldate',[$this->startdate, $this->enddate])->whereNotNull('canceldate')->get();
+            $fulltbps = FullTbp::whereBetween('canceldate',[$this->startdate, $this->enddate])->whereNotNull('canceldate')->orderBy('fulltbp_code','asc')->get();
            }else{
-            $fulltbps = FullTbp::whereNotNull('canceldate')->get();
+            $fulltbps = FullTbp::whereNotNull('canceldate')->orderBy('fulltbp_code','asc')->get();
            }
         
         return view('dashboard.admin.realtimereport.project.download', [

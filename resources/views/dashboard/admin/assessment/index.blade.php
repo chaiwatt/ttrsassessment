@@ -1,5 +1,16 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+
+<style>
+    
+select.form-control{
+        display: inline;
+        width: 200px;
+        margin-left: 25px;
+        font-size: 16px
+    }
+</style>
+
 @stop
 @section('content')
   {{-- modal_show_conflict --}}
@@ -82,6 +93,25 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            @if ($fulltbps->count() > 0)
+                                <div >
+                                    <select id="leaderFilter_tb1" class="form-control ">
+                                    <option value="">== Leader ==</option>
+                                    @foreach ($leaders as $leader)
+                                        <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                                <div >
+                                    <select id="expertFilter_tb1" class="form-control">
+                                    <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                        @foreach ($experts as $expert)
+                                            <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+
                             <table class="table table-bordered text-nowrap mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
@@ -91,7 +121,12 @@
                                         
                                         <th style="text-align: center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปคะแนน</th>
-                                        <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>                   
+                                        <th style="width:1%;white-space: nowrap;text-align: center">สถานะ</th>  
+                                        
+               <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+               <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+               <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th>   
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,7 +156,12 @@
                                                                 @else   
                                                                         <button data-id="{{$fulltbp->id}}" class="btn btn-sm bg-warning pendinguser">ยังไม่ได้ประเมิน {{$fulltbp->allscoring}} คน</button>
                                                                 @endif 
-                                                        </td>                                
+                                                        </td> 
+                                                        <td hidden>{{@$fulltbp->searchprojectleader}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
+    
+                                   
                                                     </tr>
                                                 @endif
                                             @endif
@@ -167,6 +207,65 @@
                     }
                 }
             });
+
+            var table_tb1 = $('#maintable').DataTable();
+            $("#maintable_filter.dataTables_filter").append($("#leaderFilter_tb1"));
+            $("#maintable_filter.dataTables_filter").append($("#expertFilter_tb1"));
+
+            var leaderindex_tb1 = 0;
+            var expertrindex_tb1 = 0;
+            
+            $("#fulltbptable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex_tb1 = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex_tb1 = i; 
+                }
+            });
+            $("#leaderFilter_tb1").change(function (e) {
+                customSearhExact_tb1("#leaderFilter_tb1",leaderindex_tb1);
+                $("#expertFilter_tb1").prop("selectedIndex", 0);
+            });
+            $("#expertFilter_tb1").change(function (e) {
+                customSearhContain_tb1("#expertFilter_tb1",expertrindex_tb1);
+                $("#leaderFilter_tb1").prop("selectedIndex", 0);
+
+            });
+
+
+            function customSearhContain_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
+            function customSearhExact_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
+
+
+
         }
     </script>
 @stop

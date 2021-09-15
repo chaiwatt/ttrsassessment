@@ -109,7 +109,12 @@
     margin-left: 0;
     margin-right: 0;
   }
-
+  select.form-control{
+        display: inline;
+        width: 200px;
+        margin-left: 25px;
+        font-size: 16px
+    }
 
 </style>
 @stop
@@ -1054,8 +1059,42 @@
                     @endphp
                     {{-- {{$count}} --}}
                     <div class="card-body">
-                        
                         <div class="table-responsive">
+                            @if ($fulltbps->count() > 0)
+                                <div >
+                                    <select id="gradeFilter_tb1" class="form-control">
+                                    <option value="">== เกรด ==</option>
+                                    <option value="AAA">AAA</option>
+                                    <option value="AA">AA</option>
+                                    <option value="A">A</option>
+                                    <option value="BBB">BBB</option>
+                                    <option value="BB">BB</option>
+                                    <option value="B">B</option>
+                                    <option value="CCC">CCC</option>
+                                    <option value="CC">CC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    </select>
+                                </div>
+                                <div >
+                                    <select id="leaderFilter_tb1" class="form-control ">
+                                    <option value="">== Leader ==</option>
+                                    @foreach ($leaders as $leader)
+                                        <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                                <div >
+                                    <select id="expertFilter_tb1" class="form-control">
+                                    <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                        @foreach ($experts as $expert)
+                                            <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            
                             <table class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
@@ -1072,10 +1111,13 @@
                                         @endif
                                         
                                         <th style="width:1%;white-space: nowrap;text-align: center">สถานภาพ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
+
                                     @foreach ($fulltbps as $fulltbp)
                                         @if ($fulltbp->minitbp->businessplan->business_plan_status_id > 2 & ($fulltbp->canceldate == null))
                                             @php
@@ -1155,6 +1197,9 @@
                                                         <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                     @endif
                                                 </td> 
+                                                <td hidden>{{@$fulltbp->searchprojectleader}}</td>
+                                                    <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
+                                                    <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
                                             </tr>
                                         @endif
  
@@ -1166,10 +1211,7 @@
                 </div>
             </div>
         </div>
-        {{-- {{$fulltbp->id}} --}}
-        {{-- @if (Auth::user()->isProjectLeader(@$fulltbp->id) == 1 || Auth::user()->user_type_id >= 5) --}}
-       {{-- {{ Auth::user()->isProjectsLeader(@$fulltbps)}} --}}
-       {{-- {{$fulltbp->minitbp->businessplan->business_plan_status_id}} --}}
+
         @if (Auth::user()->isProjectsLeader(@$fulltbps) != 0 || Auth::user()->user_type_id >= 5)
             <div class="row">
                 <div class="col-md-12">
@@ -1191,6 +1233,42 @@
                         <div class="card-body">
                             <input type="text" id="fulltbpid"  hidden>
                             <div class="table-responsive">
+                                @if ($fulltbps->count() > 0)
+                                    <div >
+                                        <select id="gradeFilter" class="form-control">
+                                        <option value="">== เกรด ==</option>
+                                        <option value="AAA">AAA</option>
+                                        <option value="AA">AA</option>
+                                        <option value="A">A</option>
+                                        <option value="BBB">BBB</option>
+                                        <option value="BB">BB</option>
+                                        <option value="B">B</option>
+                                        <option value="CCC">CCC</option>
+                                        <option value="CC">CC</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        </select>
+                                    </div>
+                                    <div >
+                                        <select id="leaderFilter" class="form-control ">
+                                        <option value="">== Leader ==</option>
+                                        @foreach ($leaders as $leader)
+                                            <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div >
+                                        <select id="expertFilter" class="form-control">
+                                        <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                            @foreach ($experts as $expert)
+                                                <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+        
+
                                 <table class="table table-bordered table-striped mb-2" id="fulltbptable" >
                                     <thead>
                                         <tr class="bg-info">
@@ -1202,7 +1280,10 @@
                                             <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">EV</th> 
                                             <th style="width:1%;white-space: nowrap;text-align:center">BOL</th> 
-                                            <th style="width:1%;white-space: nowrap;text-align:center">สถานภาพ</th>                               
+                                            <th style="width:1%;white-space: nowrap;text-align:center">สถานภาพ</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+                                            <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th>                               
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1476,25 +1557,9 @@
 
                                                     
                                                     </td>
-                                                    {{-- <td> 
-                                                        <button type="button" id="projectmember{{$fulltbp->id}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
-                                                    </td> --}}
-                                                    {{-- <td class="text-right">
-                                                        <div class="list-icons">
-                                                            <div class="list-icons-item dropdown">
-                                                                <a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                                                <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a href="{{asset($fulltbp->attachment)}}" class="dropdown-item"><i class="icon-file-download2"></i> PDF</a>
-                                                                    <a href="{{route('dashboard.admin.project.fulltbp.downloadzip',['id' => $fulltbp->id])}}" data-id="{{$fulltbp->id}}" class="dropdown-item"><i class="icon-file-download2"></i> ดาวน์โหลดเอกสารแนบ</a>
-                                                                    <a href="{{route('dashboard.admin.project.fulltbp.view',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-eye2"></i> รายละเอียด</a>
-                                                                    <a href="{{route('dashboard.admin.project.fulltbp.delete',['id' => $fulltbp->id])}}" class="dropdown-item"><i class="icon-trash"></i> ลบ</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtouser"><i class="icon-mail5"></i> อีเมลถึงผู้ประกอบการ</a>
-                                                                    <a href="#" data-id="{{$fulltbp->id}}" class="dropdown-item mailtomember"><i class="icon-mail5"></i> อีเเมลถึงผู้เชี่ยวชาญ</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>                               --}}
+                                                    <td hidden>{{$fulltbp->searchprojectleader}}</td>
+                                                    <td hidden>{{$fulltbp->searchprojectexpert}}</td>
+                                                    <td hidden>{{$fulltbp->searchprojectgrade}}</td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -1513,14 +1578,46 @@
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">ผลการประเมินโครงการ</h6>
                             <div class="header-elements">
-                                {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                    <span></span>
-                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body">
                             
                             <div class="table-responsive">
+                                @if ($fulltbps->count() > 0)
+                                    <div >
+                                        <select id="gradeFilter_tb2" class="form-control">
+                                        <option value="">== เกรด ==</option>
+                                        <option value="AAA">AAA</option>
+                                        <option value="AA">AA</option>
+                                        <option value="A">A</option>
+                                        <option value="BBB">BBB</option>
+                                        <option value="BB">BB</option>
+                                        <option value="B">B</option>
+                                        <option value="CCC">CCC</option>
+                                        <option value="CC">CC</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        </select>
+                                    </div>
+                                    <div >
+                                        <select id="leaderFilter_tb2" class="form-control ">
+                                        <option value="">== Leader ==</option>
+                                        @foreach ($leaders as $leader)
+                                            <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                    <div >
+                                        <select id="expertFilter_tb2" class="form-control">
+                                        <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                            @foreach ($experts as $expert)
+                                                <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
                                 <table class="table table-bordered text-nowrap mb-2" id="reporttable">
                                     <thead>
                                         <tr class="bg-info">
@@ -1532,7 +1629,10 @@
                                             <th style="width:1%;white-space: nowrap;text-align: center">รายงานผล</th>    
                                             <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผล</th> 
                                             <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผลทางจดหมาย</th>  
-                                            <th style="width:1%;white-space: nowrap;text-align: center">สิ้นสุดโครงการ</th>              
+                                            <th style="width:1%;white-space: nowrap;text-align: center">สิ้นสุดโครงการ</th>    
+                                            <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                            <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+                                            <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th>            
                                         </tr>
                                     </thead>
                                     <tbody style="min-height:300px">
@@ -1613,6 +1713,9 @@
                                                                     <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                             @endif
                                                         </td> 
+                                                        <td hidden>{{$fulltbp->searchprojectleader}}</td>
+                                                        <td hidden>{{$fulltbp->searchprojectexpert}}</td>
+                                                        <td hidden>{{$fulltbp->searchprojectgrade}}</td>
                                                     </tr>
                                                 @endif
                                             @endif
@@ -1627,286 +1730,6 @@
         @endif
 
         
-
-
-
-        {{-- @endif --}}
-
-
-
-        {{-- @if (Auth::user()->user_type_id >= 5)
-        <div class="row">
-            @if ($numprojectcollections->count() > 0)
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการ ปี <span id="currentyear">{{intVal(date("Y"))+543}}</span></h6>
-                            <div class="header-elements">
-                                <div class="list-icons ml-3">
-                                    <div class="list-icons-item dropdown">
-                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                        <div class="dropdown-menu">
-                                            <a href="#" data-toggle="modal" id="numproject_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
-                                            <a href="#" data-toggle="modal" id="numproject_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
-                                            <a href="#" data-toggle="modal" id="numproject_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="{{route('api.adminreport.download.numproject')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="chart-container">
-                                        <div class="chart has-fixed-height" id="participate_chart"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="testtopictable">
-                                            <thead>
-                                                <tr class="bg-info">
-                                                    <th style="width: 25%">ปีโครงการ</th> 
-                                                    <th style="width: 25%">จำนวน Mini TBP</th>
-                                                    <th style="width: 25%">จำนวน Full TBP</th>
-                                                    <th style="width: 25%">ประเมินสำเร็จ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($numprojectcollections->reverse() as $key => $numprojectcollection)
-                                                @if ($key <=5)
-                                                    <tr> 
-                                                        <td> {{$numprojectcollection['year']}} </td>  
-                                                        <td> {{$numprojectcollection['minitpbs']}} </td>  
-                                                        <td> {{$numprojectcollection['fulltbps']}} </td>  
-                                                        <td> {{$numprojectcollection['finished']}} </td>  
-                                                    </tr>
-                                                @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>      
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-            @if ($projectgradecollections->count() > 0)
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการตามเกรดการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
-                        <div class="header-elements">
-                            <div class="list-icons ml-3">
-                                <div class="list-icons-item dropdown">
-                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" data-toggle="modal" id="project_grade_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
-                                        <a href="#" data-toggle="modal" id="project_grade_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
-                                        <a href="#" data-toggle="modal" id="project_grade_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="{{route('api.adminreport.download.projectgrade')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="chart-container">
-                                    <div class="chart has-fixed-height" id="grade_chart"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="testtopictable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th style="width: 10%">ปี</th> 
-                                                <th style="width: 9%">AAA</th> 
-                                                <th style="width: 9%">AA</th>
-                                                <th style="width: 9%">A</th>
-                                                <th style="width: 9%">BBB</th>
-                                                <th style="width: 9%">BB</th>
-                                                <th style="width: 9%">B</th>
-                                                <th style="width: 9%">CCC</th>
-                                                <th style="width: 9%">CC</th>
-                                                <th style="width: 9%">C</th>
-                                                <th style="width: 9%">D</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($projectgradecollections->reverse() as $key => $projectgradecollection)
-                                               @if ($key <=5)
-                                                <tr> 
-                                                    <td> {{$projectgradecollection['year']}} </td>  
-                                                    <td> {{$projectgradecollection['AAA']}} </td>  
-                                                    <td> {{$projectgradecollection['AA']}} </td> 
-                                                    <td> {{$projectgradecollection['A']}} </td> 
-                                                    <td> {{$projectgradecollection['BBB']}} </td> 
-                                                    <td> {{$projectgradecollection['BB']}} </td> 
-                                                    <td> {{$projectgradecollection['B']}} </td> 
-                                                    <td> {{$projectgradecollection['CCC']}} </td> 
-                                                    <td> {{$projectgradecollection['CC']}} </td> 
-                                                    <td> {{$projectgradecollection['C']}} </td> 
-                                                    <td> {{$projectgradecollection['D']}} </td> 
-                                                </tr>
-                                               @endif
-                                            @endforeach
-                                        </tbody>
-                                    </table>      
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-         
-            @if ($projectindustrycollections->count() > 0)
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการตามกลุ่มอุตสาหกรรม ปี {{intVal(date("Y"))+543}}</h6>
-                        <div class="header-elements">
-                            <div class="list-icons ml-3">
-                                <div class="list-icons-item dropdown">
-                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" data-toggle="modal" id="project_industry_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
-                                        <a href="#" data-toggle="modal" id="project_industry_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
-                                        <a href="#" data-toggle="modal" id="project_industry_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="{{route('api.adminreport.download.projectindustry')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="chart-container">
-                                    <div class="chart has-fixed-height" id="industrygroup_chart"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="testtopictable">
-                                        <thead>
-                                            <tr class="bg-info">
-                                                <th style="width: 10%">ปี</th> 
-                                                <th style="width: 9%">Next-generation Automotive</th> 
-                                                <th style="width: 9%">Smart Electronics</th>
-                                                <th style="width: 9%">Affluent, Medical and Wellness Tourism</th>
-                                                <th style="width: 9%">Agriculture and Biotechnology</th>
-                                                <th style="width: 9%">Food for the Future</th>
-                                                <th style="width: 9%">Robotics</th>
-                                                <th style="width: 9%">Aviation and Logistics</th>
-                                                <th style="width: 9%">Biofuels and Biochemicals</th>
-                                                <th style="width: 9%">Digital</th>
-                                                <th style="width: 9%">Medical Hub</th>
-                                                <th style="width: 9%">Defense</th>
-                                                <th style="width: 9%">Education and Skill Development</th>
-                                                <th style="width: 9%">อื่นๆ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($projectindustrycollections->reverse() as $key => $projectindustrycollection)
-                                               @if ($key <=5)
-                                                <tr> 
-                                                    <td> {{$projectindustrycollection['year']}} </td>  
-                                                    <td> {{$projectindustrycollection['automotive']}} </td>  
-                                                    <td> {{$projectindustrycollection['smartelectronic']}} </td> 
-                                                    <td> {{$projectindustrycollection['affluent']}} </td> 
-                                                    <td> {{$projectindustrycollection['agriculture']}} </td> 
-                                                    <td> {{$projectindustrycollection['food']}} </td> 
-                                                    <td> {{$projectindustrycollection['robotic']}} </td> 
-                                                    <td> {{$projectindustrycollection['aviation']}} </td> 
-                                                    <td> {{$projectindustrycollection['biofuel']}} </td> 
-                                                    <td> {{$projectindustrycollection['digital']}} </td> 
-                                                    <td> {{$projectindustrycollection['medical']}} </td> 
-                                                    <td> {{$projectindustrycollection['defense']}} </td> 
-                                                    <td> {{$projectindustrycollection['education']}} </td> 
-                                                    <td> {{$projectindustrycollection['other']}} </td> 
-                                                </tr>
-                                               @endif
-                                            @endforeach
-                                        </tbody>
-                                    </table>      
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-           
-            @if ($objecttivecollections->count() > 0)
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">วัตถุประสงค์ของการขอรับการประเมิน ปี {{intVal(date("Y"))+543}}</h6>
-                            <div class="header-elements">
-                                <div class="list-icons ml-3">
-                                    <div class="list-icons-item dropdown">
-                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
-                                        <div class="dropdown-menu">
-                                            <a href="#" data-toggle="modal" id="project_objective_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
-                                            <a href="#" data-toggle="modal" id="project_objective_donut" class="dropdown-item"><i class="icon-pie-chart3"></i>Donut</a>
-                                            <a href="#" data-toggle="modal" id="project_objective_pie" class="dropdown-item"><i class="icon-pie5"></i>Pie</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="{{route('api.adminreport.download.projectobjective')}}" class="dropdown-item"><i class="icon-floppy-disk"></i> ดาวน์โหลด</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="chart-container">
-                                        <div class="chart has-fixed-height" id="financial_chart"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="testtopictable">
-                                            <thead>
-                                                <tr class="bg-info">
-                                                    <th style="width: 10%">ปี</th> 
-                                                    <th style="width: 25%">ด้านการเงิน</th> 
-                                                    <th style="width: 25%">ไม่ใช่ด้านการเงิน</th>
-                                                    <th style="width: 40%">ด้านการเงินและไม่ใช่ด้านการเงิน</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($objecttivecollections->reverse() as $key => $objecttivecollection)
-                                                @if ($key <=5)
-                                                    <tr> 
-                                                        <td> {{$objecttivecollection['year']}} </td>  
-                                                        <td> {{$objecttivecollection['finance']}} </td>  
-                                                        <td> {{$objecttivecollection['nonfinance']}} </td> 
-                                                        <td> {{$objecttivecollection['bothobjecttive']}} </td> 
-                                                    </tr>
-                                                @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>      
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-        @endif --}}
-
         @if ($fulltbps->count() > 0)
             <div class="row">
                 <div class="col-md-12">
@@ -2034,6 +1857,72 @@
                     }
                 }
             });
+            var table_tb1 = $('#maintable').DataTable();
+            $("#maintable_filter.dataTables_filter").append($("#leaderFilter_tb1"));
+            $("#maintable_filter.dataTables_filter").append($("#expertFilter_tb1"));
+            $("#maintable_filter.dataTables_filter").append($("#gradeFilter_tb1"));
+
+            var leaderindex_tb1 = 0;
+            var expertrindex_tb1 = 0;
+            var gradeindex_tb1 = 0;
+            
+            $("#fulltbptable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex_tb1 = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex_tb1 = i; 
+                }
+                if ($($(this)).html() == "hidden_grade") {
+                    gradeindex_tb1 = i; 
+                }
+            });
+            $("#leaderFilter_tb1").change(function (e) {
+                customSearhExact_tb1("#leaderFilter_tb1",leaderindex_tb1);
+                $("#expertFilter_tb1").prop("selectedIndex", 0);
+                $("#gradeFilter_tb1").prop("selectedIndex", 0);
+            });
+            $("#expertFilter_tb1").change(function (e) {
+                customSearhContain_tb1("#expertFilter_tb1",expertrindex_tb1);
+                $("#leaderFilter_tb1").prop("selectedIndex", 0);
+                $("#gradeFilter_tb1").prop("selectedIndex", 0);
+            });
+            $("#gradeFilter_tb1").change(function (e) {
+                customSearhExact_tb1("#gradeFilter_tb1",gradeindex_tb1);
+                $("#leaderFilter_tb1").prop("selectedIndex", 0);
+                $("#expertFilter_tb1").prop("selectedIndex", 0);
+            });
+
+            function customSearhContain_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
+            function customSearhExact_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
+
         }
 
         if (countitemtable >= 1) {
@@ -2053,6 +1942,75 @@
                     }
                 }
             });
+            var table = $('#fulltbptable').DataTable();
+            $("#fulltbptable_filter.dataTables_filter").append($("#leaderFilter"));
+            $("#fulltbptable_filter.dataTables_filter").append($("#expertFilter"));
+            $("#fulltbptable_filter.dataTables_filter").append($("#gradeFilter"));
+
+            var leaderindex = 0;
+            var expertrindex = 0;
+            var gradeindex = 0;
+            
+            $("#fulltbptable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex = i; 
+                }
+                if ($($(this)).html() == "hidden_grade") {
+                    gradeindex = i; 
+                }
+            });
+
+            $("#leaderFilter").change(function (e) {
+                customSearhExact("#leaderFilter",leaderindex);
+                $("#expertFilter").prop("selectedIndex", 0);
+                $("#gradeFilter").prop("selectedIndex", 0);
+            });
+            $("#expertFilter").change(function (e) {
+                customSearhContain("#expertFilter",expertrindex);
+                $("#leaderFilter").prop("selectedIndex", 0);
+                $("#gradeFilter").prop("selectedIndex", 0);
+            });
+            $("#gradeFilter").change(function (e) {
+                customSearhExact("#gradeFilter",gradeindex);
+                $("#leaderFilter").prop("selectedIndex", 0);
+                $("#expertFilter").prop("selectedIndex", 0);
+            });
+
+            
+            function customSearhContain(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table.draw();
+            }
+            function customSearhExact(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table.draw();
+            }
+
+
         }
 
         if (countitemtable >= 1) {
@@ -2072,6 +2030,77 @@
                     }
                 }
             });
+
+            var table_tb2 = $('#reporttable').DataTable();
+            $("#reporttable_filter.dataTables_filter").append($("#leaderFilter_tb2"));
+            $("#reporttable_filter.dataTables_filter").append($("#expertFilter_tb2"));
+            $("#reporttable_filter.dataTables_filter").append($("#gradeFilter_tb2"));
+
+            var leaderindex_tb2 = 0;
+            var expertrindex_tb2 = 0;
+            var gradeindex_tb2 = 0;
+            
+            $("#reporttable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex_tb2 = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex_tb2 = i; 
+                }
+                if ($($(this)).html() == "hidden_grade") {
+                    gradeindex_tb2 = i; 
+                }
+            });
+            $("#leaderFilter_tb2").change(function (e) {
+                customSearhExact_tb2("#leaderFilter_tb2",leaderindex_tb2);
+                $("#expertFilter_tb2").prop("selectedIndex", 0);
+                $("#gradeFilter_tb2").prop("selectedIndex", 0);
+            });
+            $("#expertFilter_tb2").change(function (e) {
+                customSearhContain_tb2("#expertFilter_tb2",expertrindex_tb2);
+                $("#leaderFilter_tb2").prop("selectedIndex", 0);
+                $("#gradeFilter_tb2").prop("selectedIndex", 0);
+            });
+            $("#gradeFilter_tb2").change(function (e) {
+                console.log('ok');
+                customSearhExact_tb2("#gradeFilter_tb2",gradeindex_tb2);
+                $("#leaderFilter_tb2").prop("selectedIndex", 0);
+                $("#expertFilter_tb2").prop("selectedIndex", 0);
+            });
+
+            function customSearhContain_tb2(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                       
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb2.draw();
+            }
+            function customSearhExact_tb2(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb2.draw();
+            }
+
+
+
         }
 
     $(document).on('click', '.reject', function(e) {
@@ -2146,7 +2175,7 @@
             var urlToRedirect = e.currentTarget.getAttribute('href');
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการสิ้นสุดโครงการหรือไม่ `,
+                    text: `ต้องการสิ้นสุดโครงการ`,
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -2163,7 +2192,7 @@
         $(document).on("click",".confirmsendletter",function(e){
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `ยืนยันการส่งจดหมายแล้ว หรือไม่`,
+                text: `ยืนยันการส่งจดหมายแล้ว `,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -2185,7 +2214,7 @@
         $(document).on("click",".notifyresult",function(e){
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมินหรือไม่`,
+                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมิน`,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

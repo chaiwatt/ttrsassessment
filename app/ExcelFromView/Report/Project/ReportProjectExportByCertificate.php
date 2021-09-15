@@ -31,7 +31,7 @@ class ReportProjectExportByCertificate implements FromView,ShouldAutoSize,WithTi
             $businessplanarray = BusinessPlan::where('business_plan_status_id','!=',10)->pluck('id')->toArray();
         }
         $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         return view('dashboard.admin.realtimereport.project.downloadcertificate', [
             'fulltbps' => $fulltbps
         ]);

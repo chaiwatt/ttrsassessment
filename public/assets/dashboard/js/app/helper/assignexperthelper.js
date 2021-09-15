@@ -137,11 +137,11 @@ function doneAssignement(fulltbpid){
 
 
 $(document).on('change', '.expert', function(e) {
-  var message = "ต้องการลบการเลือกผู้เชี่ยวชาญหรือไม่";
+  var message = "ต้องการลบการเลือกผู้เชี่ยวชาญ";
   var status = 1;
   if($(this).is(":checked")){
       status = 2;
-      message = "ต้องการเพิ่มผู้เชี่ยวชาญหรือไม่";
+      message = "ต้องการเพิ่มผู้เชี่ยวชาญ";
   }
 
   Swal.fire({
@@ -191,7 +191,7 @@ function assignExpert(id,status,fulltbpid){
 $(document).on('click', '.assingexpert', function(e) {
   Swal.fire({
     title: 'ยืนยัน',
-    text: `ต้องการมอบหมายผู้เชี่ยวชาญ หรือไม่`,
+    text: `ต้องการมอบหมายผู้เชี่ยวชาญ `,
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -293,7 +293,7 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
 $(document).on("click",".deleteexpert",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

@@ -32,14 +32,17 @@ class ReportProjectExportRatingByLeader implements FromView,ShouldAutoSize,WithT
     }
     public function view(): View
     {
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+        // $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
+        // $minitbparray = MiniTBP::whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
+        // $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->pluck('id')->toArray();
+
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps1 = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->pluck('id')->toArray();
 
         $leaderarray = ProjectAssignment::whereNotNull('leader_id')->pluck('leader_id')->toArray();
         $leaders = User::whereIn('id',$leaderarray)->get();
         $fulltbparray = ProjectAssignment::where('leader_id',$this->leader)->pluck('full_tbp_id')->toArray();
-        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->pluck('id')->toArray();
+        $fulltbps2 = FullTbp::whereIn('id',$fulltbparray)->whereNull('finishdate')->pluck('id')->toArray();
         $intersec = array();
         foreach($fulltbps1 as $f1) {
             if (in_array($f1,$fulltbps2)) {
@@ -48,11 +51,10 @@ class ReportProjectExportRatingByLeader implements FromView,ShouldAutoSize,WithT
         }
 
         if($this->leader == 0){
-            $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-            $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+            $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->orderBy('fulltbp_code','asc')->get();
         }else{
-            $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('id', $intersec)->get();
+            $fulltbps = FullTbp::whereIn('id', $intersec)->whereNull('finishdate')->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.download', [

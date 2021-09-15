@@ -702,7 +702,7 @@ function updateEvAdminStatus(id,value){
         }
         Swal.fire({
             title: 'ยืนยัน',
-            text: `ต้องการส่งคืนให้ Admin แก้ไขหรือไม่`,
+            text: `ต้องการส่งคืนให้ Admin แก้ไข`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -734,7 +734,7 @@ function updateEvAdminStatus(id,value){
     $(document).on("click",".deletecomment",function(e){
         Swal.fire({
             title: 'คำเตือน!',
-            text: `ต้องการลบรายการ หรือไม่`,
+            text: `ต้องการลบรายการ `,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -763,7 +763,7 @@ function updateEvAdminStatus(id,value){
     $(document).on('click', '#approveevstagetwo', function(e) {
         Swal.fire({
             title: 'อนุมัติ EV!',
-            text: `ต้องการอนุมัติ EV หรือไม่`,
+            text: `ต้องการอนุมัติ EV `,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -807,7 +807,7 @@ function updateEvAdminStatus(id,value){
 		onFinished: function (event, currentIndex) {
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `ต้องการนำส่ง Manager หรือไม่`,
+                text: `ต้องการนำส่ง Manager `,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

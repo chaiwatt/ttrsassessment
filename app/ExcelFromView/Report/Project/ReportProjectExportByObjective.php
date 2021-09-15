@@ -42,7 +42,7 @@ class ReportProjectExportByObjective implements FromView,ShouldAutoSize,WithTitl
                     ->pluck('id')->toArray();
         }
 
-        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->orderBy('fulltbp_code','asc')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

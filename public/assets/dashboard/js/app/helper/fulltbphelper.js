@@ -96,7 +96,7 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
 $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -256,7 +256,7 @@ $(document).on('click', '#btn_edit_employ', function(e) {
 $(document).on("click",".deletecompanyemploy",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -320,7 +320,7 @@ $(document).on("click",".deletecompanyemploy",function(e){
 $(document).on("click",".deletecompanyceo",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -632,7 +632,7 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
 $(document).on("click",".deleteemployeducation",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -672,7 +672,7 @@ $(document).on("click",".deleteemployeducation",function(e){
 $(document).on("click",".deleteemployexperience",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -709,7 +709,7 @@ $(document).on("click",".deleteemployexperience",function(e){
 $(document).on("click",".deleteemploytraining",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -894,7 +894,7 @@ $(document).on('click', '.selectemploy', function(e) {
 $(document).on("click",".deletestockholder",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1023,7 +1023,7 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
 $(document).on("click",".deleteprojectechdevlevel",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1282,7 +1282,7 @@ $(document).on('change', '#certify', function(e) {
 $(document).on("click",".deletefulltbpcertifyattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1369,7 +1369,7 @@ $(document).on('change', '#award', function(e) {
 $(document).on("click",".deletefulltbpawardattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1455,7 +1455,7 @@ $(document).on('change', '#standard', function(e) {
 $(document).on("click",".deletefulltbpstandardattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1732,7 +1732,7 @@ $(document).on("click",".deleteprojectplan",function(e){
     $("#notmatch_wrapper_error").attr("hidden",true);
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1947,7 +1947,7 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
 $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2034,7 +2034,7 @@ $(document).on('change', '#swotfile', function(e) {
 $(document).on("click",".deletefulltbpswotattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2120,7 +2120,7 @@ $(document).on('change', '#financialplan', function(e) {
 $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2183,7 +2183,7 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
 $(document).on("click",".deletesell",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2411,7 +2411,7 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
 $(document).on("click",".deletedebtpartner",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2523,7 +2523,7 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
 $(document).on("click",".deletecreditpartner",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2765,7 +2765,7 @@ $(document).on('change', '#companydoc', function(e) {
 $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2796,7 +2796,7 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
 $(document).on("click","#delete_org_chart",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรูปแผนผังองค์กร หรือไม่`,
+        text: `ต้องการลบรูปแผนผังองค์กร `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3394,7 +3394,7 @@ $(document).on('click', '#btn_modal_add_projectmember', function(e) {
 $(document).on("click",".deleteresearcher",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3433,7 +3433,7 @@ $(document).on("click",".deleteresearcher",function(e){
 $(document).on("click",".deleteprojectmember",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3522,7 +3522,7 @@ $(document).on('change', '#boardattachment', function(e) {
 $(document).on("click",".deleteboardattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -4455,7 +4455,7 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 $(document).on("click",".deletecompanyemploy_research",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -4586,7 +4586,7 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
 $(document).on("click",".deletecompanyemploy_projectmember",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -4678,7 +4678,7 @@ $("#ganttnummonth").on('change', function(e) {
     if(_maxrow > 0){
         Swal.fire({
             title: 'คำเตือน!',
-            html: `การเปลี่ยนจำนวนเดือน รายละเอียดการดำเนินงาน<br>ของโครงการเดิมจะถูกลบ ยืนยันทำรายการหรือไม่`,
+            html: `การเปลี่ยนจำนวนเดือน รายละเอียดการดำเนินงาน<br>ของโครงการเดิมจะถูกลบ ยืนยันทำรายการ`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

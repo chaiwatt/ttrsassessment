@@ -203,7 +203,7 @@ $(document).on("click",".messagelink",function(e){
 $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -237,7 +237,7 @@ $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
 $(document).on("click","#deleteexperteducationclass_editview",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -301,7 +301,7 @@ $(document).on("click","#btn_modal_user",function(e){
 $(document).on("click","#deleterequestfriendclass_editview",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -374,7 +374,7 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
 $(document).on("click","#deletefriendclass_editview",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -669,7 +669,7 @@ $(document).on("click","#getotp",function(e){
     var tmpotp =';'
     Swal.fire({
         title: 'ยืนยันเบอร์โทรศัพท์!',
-        text: `ต้องการยืนยันเบอร์โทรศัพท์ หรือไม่`,
+        text: `ต้องการยืนยันเบอร์โทรศัพท์ `,
         type: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -851,7 +851,7 @@ $(document).on("change","#companydoc",function(e){
 $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -962,7 +962,7 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,othe
   $(document).on('click', '.deleteauthorizeddirector', function(e) {
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1086,7 +1086,7 @@ $(document).on('change', '#tambol', function(e) {
 $(document).on('click', '.deleteaddress', function(e) {
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

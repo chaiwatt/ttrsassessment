@@ -6,6 +6,12 @@
         padding-left:5px !important;
         padding-right:5px !important;
     }
+    select.form-control{
+        display: inline;
+        width: 200px;
+        margin-left: 25px;
+        font-size: 16px
+    }
 </style>
 @stop
 @section('content')
@@ -316,6 +322,41 @@
                     </div>
                     <div class="card-body">
                         <input type="text" id="fulltbpid"  hidden>
+                        @if ($fulltbps->count() > 0)
+                            <div >
+                                <select id="gradeFilter" class="form-control">
+                                <option value="">== เกรด ==</option>
+                                <option value="AAA">AAA</option>
+                                <option value="AA">AA</option>
+                                <option value="A">A</option>
+                                <option value="BBB">BBB</option>
+                                <option value="BB">BB</option>
+                                <option value="B">B</option>
+                                <option value="CCC">CCC</option>
+                                <option value="CC">CC</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                </select>
+                            </div>
+                            <div >
+                                <select id="leaderFilter" class="form-control ">
+                                <option value="">== Leader ==</option>
+                                @foreach ($leaders as $leader)
+                                    <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div >
+                                <select id="expertFilter" class="form-control">
+                                <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                    @foreach ($experts as $expert)
+                                        <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
                         <div class="table-responsive" style="min-height: 230px">
                             <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
@@ -328,7 +369,10 @@
                                         <th style="width:1%;white-space: nowrap;text-align:center">ผู้เชี่ยวชาญ</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">EV</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center">BOL</th> 
-                                        <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>                               
+                                        <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>   
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -570,6 +614,9 @@
                                                         @endif
                                                     @endif
                                                 </td>
+                                                <td hidden>{{$fulltbp->searchprojectleader}}</td>
+                                                <td hidden>{{$fulltbp->searchprojectexpert}}</td>
+                                                <td hidden>{{$fulltbp->searchprojectgrade}}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -627,6 +674,74 @@
                     }
                 }
             });
+
+            var table = $('#maintable').DataTable();
+            $("#maintable_filter.dataTables_filter").append($("#leaderFilter"));
+            $("#maintable_filter.dataTables_filter").append($("#expertFilter"));
+            $("#maintable_filter.dataTables_filter").append($("#gradeFilter"));
+
+            var leaderindex = 0;
+            var expertrindex = 0;
+            var gradeindex = 0;
+            
+            $("#maintable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex = i; 
+                }
+                if ($($(this)).html() == "hidden_grade") {
+                    gradeindex = i; 
+                }
+            });
+
+            $("#leaderFilter").change(function (e) {
+                customSearhExact("#leaderFilter",leaderindex);
+                $("#expertFilter").prop("selectedIndex", 0);
+                $("#gradeFilter").prop("selectedIndex", 0);
+            });
+            $("#expertFilter").change(function (e) {
+                customSearhContain("#expertFilter",expertrindex);
+                $("#leaderFilter").prop("selectedIndex", 0);
+                $("#gradeFilter").prop("selectedIndex", 0);
+            });
+            $("#gradeFilter").change(function (e) {
+                customSearhExact("#gradeFilter",gradeindex);
+                $("#leaderFilter").prop("selectedIndex", 0);
+                $("#expertFilter").prop("selectedIndex", 0);
+            });
+
+            
+            function customSearhContain(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table.draw();
+            }
+            function customSearhExact(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table.draw();
+            }
         }
     </script>
 @stop

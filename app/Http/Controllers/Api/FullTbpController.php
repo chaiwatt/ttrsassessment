@@ -51,7 +51,7 @@ class FullTbpController extends Controller
             $check = FullTbp::whereMonth('submitdate',Carbon::now()->format('m'))->get();
             $fulltbpcode = Carbon::now()->format('y') . Carbon::now()->format('m') . str_pad(($check->count()+1),3,0,STR_PAD_LEFT); 
             FullTbp::find($request->id)->update([
-                'fulltbp_code' => substr($_mitbpcode, 3)
+                'fulltbp_code' => $fulltbpcode
             ]);
         }
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);

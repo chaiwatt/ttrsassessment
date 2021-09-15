@@ -26,7 +26,7 @@ $(document).on("click","#btn_add_performance",function(e){
 $(document).on("click","#deleteperformance",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

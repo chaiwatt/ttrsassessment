@@ -149,6 +149,7 @@ class FullTbp extends Model
         return ProjectAssignment::where('full_tbp_id',$this->id)->first()->leader_id;
     } 
 
+
     public function getExpertCommentAttribute(){
         return ExpertComment::where('full_tbp_id',$this->id)->where('user_id',Auth::user()->id)->first();
     } 
@@ -520,6 +521,39 @@ class FullTbp extends Model
     public function getCancelmonthAttribute(){
         if(!Empty($this->canceldate)){
             return DateConversion::getThaiMonth($this->canceldate);
+        }else{
+            return '';
+        }
+    } 
+
+    public function getSearchprojectleaderAttribute(){
+        $check =  ProjectAssignment::where('full_tbp_id',$this->id)->first();
+        if(!Empty($check)){
+            $user = User::find($check->leader_id);
+            return $user->name .' '.$user->lastname;
+        }else{
+            return '';
+        }
+    } 
+
+    public function getSearchprojectexpertAttribute(){
+        $expertassignments =  ExpertAssignment::where('full_tbp_id',$this->id)->get();
+        if($expertassignments->count() > 0){
+            $apptext = '';
+            foreach ($expertassignments as $key => $expert) {
+                $user = User::find($expert->user_id);
+                $apptext .= $user->name .' '. $user->lastname . ' ';
+            }
+            return $apptext;
+        }else{
+            return '';
+        }
+    } 
+
+    public function getSearchprojectgradeAttribute(){
+        $check =  ProjectGrade::where('full_tbp_id',$this->id)->first();
+        if(!Empty($check)){
+            return $check->grade;
         }else{
             return '';
         }

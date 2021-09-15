@@ -37,9 +37,10 @@ use App\Helper\DateConversion;
 use App\Model\EvaluationMonth;
 use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
+use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
-use App\Model\NotificationBubble;
 
+use App\Model\NotificationBubble;
 use App\Helper\ThaiNumericConverter;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpPresentation\IOFactory;
@@ -64,7 +65,37 @@ class DashboardAdminEvaluationResultController extends Controller
                             ->where('notification_sub_category_id',10)
                             ->where('status',0)->delete();
         $generalinfo = GeneralInfo::first();
-        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)->withGeneralinfo($generalinfo);
+
+        $fulltbparr = FullTbp::pluck('id')->toArray();
+        $projectassignments =  ProjectAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+        $leaderarr = [];
+        foreach($projectassignments as $projectassignment){
+            if(!Empty($projectassignment->leader_id)){
+               array_push($leaderarr,$projectassignment->leader_id)  ;
+            }
+        }
+        if(count($leaderarr) > 0){
+            $leaderarr =array_unique($leaderarr);
+        }
+       
+        $leaders = User::whereIn('id',$leaderarr)->get();
+
+
+        $expertassignments =  ExpertAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+ 
+        $expertarr = [];
+        foreach($expertassignments as $expertassignment){
+            array_push($expertarr,$expertassignment->user_id)  ;
+        }
+
+        if(count($expertarr) > 0){
+            $expertarr =array_unique($expertarr);
+        }
+       
+        $experts = User::whereIn('id',$expertarr)->get();
+
+        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)->withLeaders($leaders)
+        ->withExperts($experts);
     }
     public function Edit($id){
         $evaluationmonths = EvaluationMonth::get();

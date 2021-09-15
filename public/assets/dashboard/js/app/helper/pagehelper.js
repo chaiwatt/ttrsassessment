@@ -42,7 +42,7 @@ $(document).on("click","#deletecategory",function(e){
     }
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ ${$("#pagecategory option:selected").text()} หรือไม่`,
+        text: `ต้องการลบรายการ ${$("#pagecategory option:selected").text()} `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -123,7 +123,7 @@ $(document).on("click","#deletetag",function(e){
     }
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ ${$("#pagetag option:selected").text()} หรือไม่`,
+        text: `ต้องการลบรายการ ${$("#pagetag option:selected").text()} `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

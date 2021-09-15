@@ -49,7 +49,7 @@ class ReportProjectExportGradeByBusinessSize implements FromView,ShouldAutoSize,
                     array_push($intersec,$f1);
                 } 
             }
-            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            $fulltbps = FullTbp::whereIn('id', $intersec)->orderBy('fulltbp_code','asc')->get();
         }else{
             $grade = Grade::find($this->grade);
             $projectgradearray = ProjectGrade::where('grade',$grade->name)->pluck('full_tbp_id')->toArray();
@@ -67,7 +67,7 @@ class ReportProjectExportGradeByBusinessSize implements FromView,ShouldAutoSize,
                     array_push($intersec,$f1);
                 } 
             }
-            $fulltbps = FullTbp::whereIn('id', $intersec)->get();
+            $fulltbps = FullTbp::whereIn('id', $intersec)->orderBy('fulltbp_code','asc')->get();
         }
 
         return view('dashboard.admin.realtimereport.project.download', [

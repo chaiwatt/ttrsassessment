@@ -68,7 +68,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
         if(isSequentials(array) == false){
             Swal.fire({
                 title: 'ผิดพลาด!',
-                text: `ลำดับไม่ถูกต้อง ต้องการดำเนินการต่อไปหรือไม่`,
+                text: `ลำดับไม่ถูกต้อง ต้องการดำเนินการต่อไป`,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -209,7 +209,7 @@ function isSequentials(data) {
 $(document).on("click",".deleteexpertfield",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -365,7 +365,7 @@ $("#expertdoc").on('change', function() {
 $(document).on("click",".deleteexpertdoc",function(e){
     Swal.fire({
         title: 'คำเตือน!',
-        text: `ต้องการลบรายการ หรือไม่`,
+        text: `ต้องการลบรายการ `,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

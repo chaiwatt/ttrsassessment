@@ -27,13 +27,13 @@ class ReportProjectExportCancelByMonth implements FromView,ShouldAutoSize,WithTi
     public function view(): View
     {
         if($this->year == 0 && $this->month == '00'){
-            $fulltbps = FullTbp::whereNotNull('canceldate')->get();
+            $fulltbps = FullTbp::whereNotNull('canceldate')->orderBy('fulltbp_code','asc')->get();
         }else if($this->year != 0 && $this->month != '00'){
-            $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate',$this->month)->whereYear('canceldate',$this->year)->get();
+            $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate',$this->month)->whereYear('canceldate',$this->year)->orderBy('fulltbp_code','asc')->get();
         }else if($this->year == 0 && $this->month != '00'){
-            $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate',$this->month)->get();
+            $fulltbps = FullTbp::whereNotNull('canceldate')->whereMonth('canceldate',$this->month)->orderBy('fulltbp_code','asc')->get();
         }else if($this->year != 0 && $this->month == '00'){
-            $fulltbps = FullTbp::whereNotNull('canceldate')->whereYear('canceldate',$this->year)->get();
+            $fulltbps = FullTbp::whereNotNull('canceldate')->whereYear('canceldate',$this->year)->orderBy('fulltbp_code','asc')->get();
         }
         
 

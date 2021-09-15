@@ -1,5 +1,13 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
+<style>
+      select.form-control{
+        display: inline;
+        width: 200px;
+        margin-left: 25px;
+        font-size: 16px
+    }
+</style>
 @stop
 @section('content')
 
@@ -59,6 +67,41 @@
                     <div class="card-body">
                         
                         <div class="table-responsive">
+                            @if ($fulltbps->count() > 0)
+                                <div >
+                                    <select id="gradeFilter_tb1" class="form-control">
+                                    <option value="">== เกรด ==</option>
+                                    <option value="AAA">AAA</option>
+                                    <option value="AA">AA</option>
+                                    <option value="A">A</option>
+                                    <option value="BBB">BBB</option>
+                                    <option value="BB">BB</option>
+                                    <option value="B">B</option>
+                                    <option value="CCC">CCC</option>
+                                    <option value="CC">CC</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    </select>
+                                </div>
+                                <div >
+                                    <select id="leaderFilter_tb1" class="form-control ">
+                                    <option value="">== Leader ==</option>
+                                    @foreach ($leaders as $leader)
+                                        <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                                <div >
+                                    <select id="expertFilter_tb1" class="form-control">
+                                    <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                        @foreach ($experts as $expert)
+                                            <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+
                             <table class="table table-bordered text-nowrap mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
@@ -71,7 +114,11 @@
                                         <th style="width:1%;white-space: nowrap;text-align: center">รายงานผล</th>    
                                         <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผล</th> 
                                         <th style="width:1%;white-space: nowrap;text-align: center">แจ้งผลทางจดหมาย</th>  
-                                        <th style="width:1%;white-space: nowrap;text-align: center">สิ้นสุดโครงการ</th>              
+                                        <th style="width:1%;white-space: nowrap;text-align: center">สิ้นสุดโครงการ</th>   
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th>   
+           
                                     </tr>
                                 </thead>
                                 <tbody style="min-height:300px">
@@ -146,6 +193,9 @@
                                                                 <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
                                                         @endif
                                                     </td> 
+                                                    <td hidden>{{@$fulltbp->searchprojectleader}}</td>
+                                                    <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
+                                                    <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
                                             </tr>
                                             @endif
                                         @endif
@@ -174,7 +224,7 @@
             var urlToRedirect = e.currentTarget.getAttribute('href');
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการสิ้นสุดโครงการหรือไม่ `,
+                    text: `ต้องการสิ้นสุดโครงการ`,
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -191,7 +241,7 @@
         $(document).on("click",".confirmsendletter",function(e){
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `ยืนยันการส่งจดหมายแล้ว หรือไม่`,
+                text: `ยืนยันการส่งจดหมายแล้ว `,
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -213,7 +263,7 @@
         $(document).on("click",".notifyresult",function(e){
             Swal.fire({
                 title: 'ยืนยัน',
-                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมินหรือไม่`,
+                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมิน`,
                 type: 'warning',
                 showCancelButton: true,
                 showDenyButton: true,
@@ -290,6 +340,72 @@
                     }
                 }
             });
+
+            var table_tb1 = $('#maintable').DataTable();
+            $("#maintable_filter.dataTables_filter").append($("#leaderFilter_tb1"));
+            $("#maintable_filter.dataTables_filter").append($("#expertFilter_tb1"));
+            $("#maintable_filter.dataTables_filter").append($("#gradeFilter_tb1"));
+
+            var leaderindex_tb1 = 0;
+            var expertrindex_tb1 = 0;
+            var gradeindex_tb1 = 0;
+            
+            $("#maintable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex_tb1 = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex_tb1 = i; 
+                }
+                if ($($(this)).html() == "hidden_grade") {
+                    gradeindex_tb1 = i; 
+                }
+            });
+            $("#leaderFilter_tb1").change(function (e) {
+                customSearhExact_tb1("#leaderFilter_tb1",leaderindex_tb1);
+                $("#expertFilter_tb1").prop("selectedIndex", 0);
+                $("#gradeFilter_tb1").prop("selectedIndex", 0);
+            });
+            $("#expertFilter_tb1").change(function (e) {
+                customSearhContain_tb1("#expertFilter_tb1",expertrindex_tb1);
+                $("#leaderFilter_tb1").prop("selectedIndex", 0);
+                $("#gradeFilter_tb1").prop("selectedIndex", 0);
+            });
+            $("#gradeFilter_tb1").change(function (e) {
+                customSearhExact_tb1("#gradeFilter_tb1",gradeindex_tb1);
+                $("#leaderFilter_tb1").prop("selectedIndex", 0);
+                $("#expertFilter_tb1").prop("selectedIndex", 0);
+            });
+
+            function customSearhContain_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
+            function customSearhExact_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
         // }
     </script>
 @stop

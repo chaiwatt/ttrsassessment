@@ -147,6 +147,7 @@
         }
 
         $('#searchtable').DataTable( {
+            "searching": false,
             "paging":   true,
             "ordering": true,
             "order": [[ 4, 'desc' ]],

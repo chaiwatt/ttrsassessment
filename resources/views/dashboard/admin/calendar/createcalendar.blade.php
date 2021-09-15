@@ -263,7 +263,7 @@
             var frm = e.target.form;
             Swal.fire({
                     title: 'ยืนยัน',
-                    text: `ต้องการยืนยันสร้างปฎิทินหรือไม่ `,
+                    text: `ต้องการยืนยันสร้างปฎิทิน`,
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

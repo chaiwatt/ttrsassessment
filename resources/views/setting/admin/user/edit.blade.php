@@ -151,7 +151,7 @@
                 
                 Swal.fire({
                         title: 'ยืนยัน',
-                        text: `ต้องการสลับบัญชีกลุ่มผู้ใช้ระดับ ${username} กับผู้ใช้ ${$('#name').val()} ${$('#lastname').val()} หรือไม่ `,
+                        text: `ต้องการสลับบัญชีกลุ่มผู้ใช้ระดับ ${username} กับผู้ใช้ ${$('#name').val()} ${$('#lastname').val()} `,
                         type: 'info',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',

@@ -29,7 +29,7 @@ class ReportProjectExportByScore implements FromView,ShouldAutoSize,WithTitle
         $score = Grade::find($this->score);
         // $projectgradearray = ProjectGrade::where('percent','>=',$score->min)->where('percent','<',$score->max)->pluck('full_tbp_id')->toArray();
         $projectgradearray = ProjectGrade::whereBetween('percent', [intVal($score->min), intVal($score->max)])->pluck('full_tbp_id')->toArray();
-        $fulltbps = FullTbp::whereIn('id', $projectgradearray)->get();
+        $fulltbps = FullTbp::whereIn('id', $projectgradearray)->orderBy('fulltbp_code','asc')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

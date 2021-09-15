@@ -11,8 +11,8 @@
                 <div class="services-item {{$homepageservice->cardcolor->name}}" style="height:330px">
                     <div class="services-icon">
                         <div class="image-part">
-                            <img class="main-img" src="{{asset($homepageservice->iconnormal)}}" alt="">
-                            <img class="hover-img" src="{{asset($homepageservice->iconhover)}}" alt="">
+                            <img class="main-img" src="{{asset($homepageservice->iconnormal)}}" width="300" height="300">
+                            <img class="hover-img" src="{{asset($homepageservice->iconhover)}}" width="300" height="300">
                         </div>
                     </div>
                     <div class="services-content">

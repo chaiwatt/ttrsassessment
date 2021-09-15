@@ -29,6 +29,7 @@ use App\Helper\CreateUserLog;
 use App\Model\CompanyAddress;
 use App\Model\ProjectScoring;
 use App\Model\CheckListGrading;
+use App\Model\ExpertAssignment;
 use App\Model\PillaIndexWeigth;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
@@ -53,9 +54,36 @@ class DashboardAdminProjectAssessmentController extends Controller
         $projectmemberbackups = ProjectMemberBackup::where('user_id',$auth->id)->pluck('full_tbp_id')->toArray();
         $fulltbpbackups = FullTbp::whereIn('id', $projectmemberbackups)->get();
 
-        // return $fulltbpbackups;
+        $fulltbparr = FullTbp::pluck('id')->toArray();
+        $projectassignments =  ProjectAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+        $leaderarr = [];
+        foreach($projectassignments as $projectassignment){
+            if(!Empty($projectassignment->leader_id)){
+               array_push($leaderarr,$projectassignment->leader_id)  ;
+            }
+        }
+        if(count($leaderarr) > 0){
+            $leaderarr =array_unique($leaderarr);
+        }
+       
+        $leaders = User::whereIn('id',$leaderarr)->get();
 
-        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps)->withFulltbpbackups($fulltbpbackups);
+
+        $expertassignments =  ExpertAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+ 
+        $expertarr = [];
+        foreach($expertassignments as $expertassignment){
+            array_push($expertarr,$expertassignment->user_id)  ;
+        }
+
+        if(count($expertarr) > 0){
+            $expertarr =array_unique($expertarr);
+        }
+       
+        $experts = User::whereIn('id',$expertarr)->get();
+
+        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps)->withFulltbpbackups($fulltbpbackups)->withLeaders($leaders)
+        ->withExperts($experts);
     }
     public function Edit($id,$userid){  
         $fulltbp = FullTbp::find($id);

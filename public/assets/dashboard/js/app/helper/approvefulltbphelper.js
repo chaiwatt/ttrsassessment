@@ -22,7 +22,7 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
     if(check == 1){
       Swal.fire({
         title: 'ยืนยัน',
-        text: `ต้องการอนุมัติ Full TBP หรือไม่`,
+        text: `ต้องการอนุมัติ Full TBP`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -43,7 +43,7 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
     }else if(check == 2){
       Swal.fire({
         title: 'ยืนยัน',
-        text: `ต้องการส่งคืน Full TBP ให้แก้ไขหรือไม่`,
+        text: `ต้องการส่งคืน Full TBP ให้แก้ไข`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -140,7 +140,7 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
 
   Swal.fire({
     title: 'ยืนยัน',
-    text: `ต้องการบันทึก คุณ${$("#usermember option:selected" ).text()} ลงในทีมลงคะแนนหรือไม่`,
+    text: `ต้องการบันทึก คุณ${$("#usermember option:selected" ).text()} ลงในทีมลงคะแนน`,
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -473,7 +473,7 @@ function getApproveLog(fulltbpid){
 $(document).on('click', '.reaction', function(e) {
   Swal.fire({
     title: 'ยืนยัน?',
-    text: "ต้องการทำรายการลงคะแนนหรือไม่!",
+    text: "ต้องการทำรายการลงคะแนน",
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     confirmButtonText: 'ตกลง',

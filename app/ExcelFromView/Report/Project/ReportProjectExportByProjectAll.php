@@ -23,9 +23,9 @@ class ReportProjectExportByProjectAll implements FromView,ShouldAutoSize,WithTit
     }
     public function view(): View
     {
-        $businessplanarray = BusinessPlan::where('business_plan_status_id','<',10)->pluck('id')->toArray();
-        $minitbparray = MiniTBP::whereNotNull('submitdate')->whereIn('business_plan_id',$businessplanarray)->pluck('id')->toArray();
-        $fulltbps = FullTbp::whereNotNull('submitdate')->whereIn('mini_tbp_id', $minitbparray)->get();
+        
+        $minitbparray = MiniTBP::whereNotNull('submitdate')->pluck('id')->toArray();
+        $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->whereNull('finishdate')->orderBy('fulltbp_code','asc')->get();
         return view('dashboard.admin.realtimereport.project.download', [
             'fulltbps' => $fulltbps
         ]);

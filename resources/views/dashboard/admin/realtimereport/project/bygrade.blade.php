@@ -253,6 +253,7 @@
             time: false
 		});
         $('#searchtable').DataTable( {
+            "searching": false,
             "paging":   true,
             "ordering": true,
             "info":     false,

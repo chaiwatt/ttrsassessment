@@ -804,7 +804,7 @@ $('.step-evweight').steps({
 
         Swal.fire({
             title: 'โปรดยืนยัน!',
-            text: `ต้องการนำส่งคะแนน หรือไม่`,
+            text: `ต้องการนำส่งคะแนน `,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

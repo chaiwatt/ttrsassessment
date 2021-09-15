@@ -164,6 +164,7 @@
         }
 
         $('#searchtable').DataTable( {
+            "searching": false,
             "paging":   true,
             "ordering": true,
             "order": [

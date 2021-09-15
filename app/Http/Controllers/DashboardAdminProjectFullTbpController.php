@@ -98,6 +98,7 @@ class DashboardAdminProjectFullTbpController extends Controller
                     ->where('notification_sub_category_id',5) // notification_sub_category_id 5 = Full TBP
                     ->where('status',0)->delete();                  
         $fulltbps = FullTbp::get();
+
         if($auth->user_type_id < 5){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             // ->orWhere('coleader_id',$auth->id)
@@ -105,7 +106,36 @@ class DashboardAdminProjectFullTbpController extends Controller
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
             $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
         }
-        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps) ;
+
+        $fulltbparr = FullTbp::pluck('id')->toArray();
+        $projectassignments =  ProjectAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+        $leaderarr = [];
+        foreach($projectassignments as $projectassignment){
+            if(!Empty($projectassignment->leader_id)){
+               array_push($leaderarr,$projectassignment->leader_id)  ;
+            }
+        }
+        if(count($leaderarr) > 0){
+            $leaderarr =array_unique($leaderarr);
+        }
+       
+        $leaders = User::whereIn('id',$leaderarr)->get();
+
+
+        $expertassignments =  ExpertAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+ 
+        $expertarr = [];
+        foreach($expertassignments as $expertassignment){
+            array_push($expertarr,$expertassignment->user_id)  ;
+        }
+
+        if(count($expertarr) > 0){
+            $expertarr =array_unique($expertarr);
+        }
+       
+        $experts = User::whereIn('id',$expertarr)->get();
+
+        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps)->withLeaders($leaders)->withExperts($experts) ;
     }
 
     public function View($id){
@@ -255,8 +285,6 @@ class DashboardAdminProjectFullTbpController extends Controller
             }
             $allyears = array(count($year1), count($year2), count($year3), count($year4));
         }
-
-        // $fulltbp_employ_activitylogs = Activity::causedBy($user)->where('log_name','Full TBP Employ')->orderBy('id','desc')->get();
 
         $fulltbpgantt = FullTbpGantt::where('full_tbp_id',$fulltbp->id)->first();
         return view('dashboard.admin.project.fulltbp.view')->withFulltbp($fulltbp)
