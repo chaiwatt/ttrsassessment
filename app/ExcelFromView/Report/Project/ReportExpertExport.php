@@ -65,17 +65,6 @@ class ReportExpertExport implements FromView,ShouldAutoSize, WithTitle
             $experts = ExpertDetail::get();
         }
 
-        // $userarray = User::where('name', 'like', '%' . $this->search . '%')
-        //         ->orWhere('lastname', 'like', '%' . $this->search . '%')->pluck('id')->toArray();
-                
-        // $officerdetailarr1 = ExpertDetail::whereIn('user_id',$userarray)->pluck('id')->toArray();
-
-        // $officerdetailarr2 = ExpertDetail::where('position', 'like', '%' . $this->search . '%')
-        //         ->orWhere('organization', 'like', '%' . $this->search . '%')->pluck('id')->toArray();
-
-        // $officerdetailarruniques = array_unique(array_merge($officerdetailarr1,$officerdetailarr2));
-        // $experts = ExpertDetail::whereIn('id',$officerdetailarruniques)->get();
-
         return view('dashboard.admin.realtimereport.expert.download', [
             'experts' => $experts
         ]);

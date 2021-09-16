@@ -278,15 +278,33 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function Province($id)
     {
-        return Province::find($id)->name;
+        $province = Province::find($id);
+        if(!Empty($province)){
+            return $province->name;
+        }else{
+            return '';
+        }
+        
     }
     public function Amphur($id)
     {
-        return Amphur::find($id)->name;
+        $amphur = Amphur::find($id);
+        if(!Empty($amphur)){
+            return $amphur->name;
+        }else{
+            return '';
+        }
+        
     }
     public function Tambol($id)
     {
-        return Tambol::find($id)->name;
+        $tambol = Tambol::find($id);
+        if(!Empty($tambol)){
+            return $tambol->name;
+        }else{
+            return '';
+        }
+        
     }
     public function IsExternalExpert($id)
     {

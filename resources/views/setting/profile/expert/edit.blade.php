@@ -800,7 +800,7 @@
 			e.preventDefault();
 			var frm = e.target.form;
 			Swal.fire({
-					title: 'ยืนยันการบันทึก',
+					title: 'บันทึกข้อมูล',
 					text: `ยืนยันการบันทึก`,
 					type: 'info',
 					showCancelButton: true,

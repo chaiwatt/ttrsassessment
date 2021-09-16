@@ -25,7 +25,7 @@ class DashboardAdminRealtimeReportTTRSExpertController extends Controller
         $expertbranches = ExpertBranch::get();
         $educationlevels = EducationLevel::get();
         if($request->btnsubmit == 'excel'){
-            return Excel::download(new ReportExpertExport($request->search,$request->expertbranch,$request->educationlevel), 'project.xlsx');
+            return Excel::download(new ReportExpertExport($request->search,$request->expertbranch,$request->educationlevel), 'ผู้เชี่ยวชาญ.xlsx');
         }else if($request->btnsubmit == 'search'){
             if(!Empty($request->search) && $request->expertbranch == 0  && $request->educationlevel == 0){
                 $userarray = User::where('name', 'like', '%' . $request->search . '%')
@@ -67,6 +67,6 @@ class DashboardAdminRealtimeReportTTRSExpertController extends Controller
         }
     }
     public function SingleExpertDownload($id){
-        return Excel::download(new ReportSingleExpertExport($id), 'project.xlsx');
+        return Excel::download(new ReportSingleExpertExport($id), 'ผู้เชี่ยวชาญ.xlsx');
     }
 }
