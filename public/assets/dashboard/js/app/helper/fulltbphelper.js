@@ -3575,7 +3575,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
         });
         return;
     }
-    var text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) หรือไม่'
+    var text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)'
     if($('#usersignature').val() == 1){
         text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)'
     }
@@ -3730,7 +3730,7 @@ $(document).on('change', '#fulltbppdf', function(e) {
     }
 
     Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: "ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)",
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

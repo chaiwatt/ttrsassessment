@@ -26,6 +26,7 @@ use App\Model\EvCommentTab;
 use App\Model\ExpertDetail;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
+use App\Model\ProjectGrade;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\CriteriaGroup;
@@ -134,8 +135,15 @@ class DashboardAdminProjectFullTbpController extends Controller
         }
        
         $experts = User::whereIn('id',$expertarr)->get();
+        $gradearr = [];
+        $gradearr =  ProjectGrade::pluck('grade')->toArray();
+        if(count($gradearr) > 0){
+            $gradearr =array_unique($gradearr);
+        }
 
-        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps)->withLeaders($leaders)->withExperts($experts) ;
+        $gradecollection = collect($gradearr);
+
+        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps)->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection) ;
     }
 
     public function View($id){

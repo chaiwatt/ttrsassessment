@@ -59,9 +59,14 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">ผลการประเมินโครงการ</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                <span></span>
-                            </a> --}}
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_maintable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -71,7 +76,10 @@
                                 <div >
                                     <select id="gradeFilter_tb1" class="form-control">
                                     <option value="">== เกรด ==</option>
-                                    <option value="AAA">AAA</option>
+                                    @foreach ($gradecollection->sortDesc()->reverse() as $grade)
+                                        <option value="{{$grade}}">{{$grade}}</option>
+                                    @endforeach
+                                    {{-- <option value="AAA">AAA</option>
                                     <option value="AA">AA</option>
                                     <option value="A">A</option>
                                     <option value="BBB">BBB</option>
@@ -81,7 +89,7 @@
                                     <option value="CC">CC</option>
                                     <option value="C">C</option>
                                     <option value="D">D</option>
-                                    <option value="E">E</option>
+                                    <option value="E">E</option> --}}
                                     </select>
                                 </div>
                                 <div >
@@ -212,6 +220,11 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -223,7 +236,7 @@
             e.preventDefault();
             var urlToRedirect = e.currentTarget.getAttribute('href');
             Swal.fire({
-                    title: 'ยืนยัน',
+                    title: 'โปรดยืนยัน',
                     text: `ต้องการสิ้นสุดโครงการ`,
                     type: 'warning',
                     showCancelButton: true,
@@ -240,7 +253,7 @@
         }
         $(document).on("click",".confirmsendletter",function(e){
             Swal.fire({
-                title: 'ยืนยัน',
+                title: 'โปรดยืนยัน',
                 text: `ยืนยันการส่งจดหมายแล้ว `,
                 type: 'warning',
                 showCancelButton: true,
@@ -262,7 +275,7 @@
 
         $(document).on("click",".notifyresult",function(e){
             Swal.fire({
-                title: 'ยืนยัน',
+                title: 'โปรดยืนยัน',
                 text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมิน`,
                 type: 'warning',
                 showCancelButton: true,
@@ -338,6 +351,29 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "ผลการประเมินโครงการ" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  1,2,3,4, 6,7,8]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','ผลการประเมินโครงการ');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
 
@@ -407,5 +443,9 @@
                 table_tb1.draw();
             }
         // }
+        $(document).on('click', '#select_maintable_excel', function(e) {
+            $('#maintable').DataTable().buttons(0,0).trigger();
+        });
+
     </script>
 @stop

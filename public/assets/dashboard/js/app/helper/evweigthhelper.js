@@ -701,7 +701,7 @@ function updateEvAdminStatus(id,value){
             return;
         }
         Swal.fire({
-            title: 'ยืนยัน',
+            title: 'โปรดยืนยัน',
             text: `ต้องการส่งคืนให้ Admin แก้ไข`,
             type: 'warning',
             showCancelButton: true,
@@ -806,7 +806,7 @@ function updateEvAdminStatus(id,value){
 		enableFinishButton: submitbutton,
 		onFinished: function (event, currentIndex) {
             Swal.fire({
-                title: 'ยืนยัน',
+                title: 'โปรดยืนยัน',
                 text: `ต้องการนำส่ง Manager `,
                 type: 'warning',
                 showCancelButton: true,

@@ -100,4 +100,24 @@ function searchRegisteredCapital(registeredcapital){
     })
 }
 
-export {searchProjectname,searchIsic,searchIndustrygroup,searchCompanyName,searchRegisteredCapital}
+
+function searchProjectNumber(projectnumber){
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${route.url}/api/search/company/projectnumber`,
+        type: 'POST',
+        headers: {"X-CSRF-TOKEN":route.token},
+        data: {
+          projectnumber : projectnumber
+        },
+        success: function(data) {
+          resolve(data)
+        },
+        error: function(error) {
+          reject(error)
+        },
+      })
+    })
+}
+
+export {searchProjectname,searchIsic,searchIndustrygroup,searchCompanyName,searchRegisteredCapital,searchProjectNumber}

@@ -20,6 +20,7 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
+use App\Model\ProjectGrade;
 use App\Helper\GetEvPercent;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
@@ -83,7 +84,23 @@ class DashboardAdminAssessmentController extends Controller
        
         $experts = User::whereIn('id',$expertarr)->get();
 
-        return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps)->withExperts($experts)->withLeaders($leaders);
+        $gradearr = [];
+        $gradearr =  ProjectGrade::pluck('grade')->toArray();
+        if(count($gradearr) > 0){
+            $gradearr =array_unique($gradearr);
+        }
+
+        $gradecollection = collect($gradearr);
+
+        $gradearr = [];
+        $gradearr =  ProjectGrade::pluck('grade')->toArray();
+        if(count($gradearr) > 0){
+            $gradearr =array_unique($gradearr);
+        }
+
+        $gradecollection = collect($gradearr);
+
+        return view('dashboard.admin.assessment.index')->withFulltbps($fulltbps)->withExperts($experts)->withLeaders($leaders)->withGradecollection($gradecollection);
     }
    public function Edit($id){
         $fulltbp = FullTbp::find($id);

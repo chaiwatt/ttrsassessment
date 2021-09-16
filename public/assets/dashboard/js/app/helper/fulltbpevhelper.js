@@ -1343,7 +1343,7 @@ $(document).on('change', '#percentindex', function(e) {
         message = "ต้องการยกเลิก เปอร์เซนต์ Extra ";
     }
     Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: message,
         type: 'warning',
         showCancelButton: true,
@@ -1451,7 +1451,7 @@ function onlyUnique(value, index, self) {
 $(document).on('click', '#approveevstageone', function(e) {
 
     Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: `ต้องการอนุมัติ EV `,
         type: 'warning',
         showCancelButton: true,
@@ -1523,7 +1523,7 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
         return;
     }
     Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: `ต้องการส่งคืนให้ Leader แก้ไข`,
         type: 'warning',
         showCancelButton: true,

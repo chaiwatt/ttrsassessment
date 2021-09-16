@@ -53,10 +53,14 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_maintable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -79,23 +83,7 @@
                                         <td style="white-space: nowrap"> <a class="text-info" href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}">{{$fulltbp->minitbp->project}} </a> </td> 
                                         
                                         <td style="text-align: center"> {{$fulltbp->canceldateth}} </td> 
-                                        {{-- <td>
-                                            @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 5)
-                                                    <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่ง</span>
-                                                @else
-                                                    @if ($fulltbp->refixstatus == 0)
-                                                        @if($fulltbp->minitbp->businessplan->business_plan_status_id == 5)
-                                                                <span class="badge badge-flat border-warning text-warning-600">อยู่ระหว่างพิจารณา Full TBP</span>
-                                                            @elseif($fulltbp->minitbp->businessplan->business_plan_status_id > 5)
-                                                                <span class="badge badge-flat border-success text-success-600">ผ่านอนุมัติแล้ว</span>
-                                                        @endif 
-                                                        @elseif($fulltbp->refixstatus == 1)
-                                                            <span class="badge badge-flat border-warning text-warning-600">ให้มีการแก้ไข</span>
-                                                        @elseif($fulltbp->refixstatus == 2)
-                                                            <span class="badge badge-flat border-warning text-warning-600">ส่งรายการแก้ไขแล้ว</span>
-                                                    @endif
-                                            @endif
-                                        </td>                                         --}}
+
                                         <td style="white-space: nowrap;text-align: center"> 
                                             @if (!Empty($fulltbp->canceldate))
                                                     
@@ -127,6 +115,11 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>\
+
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -151,9 +144,37 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "ยกเลิกโครงการ" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [ 0, 1,2,3]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','ยกเลิกโครงการ');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
         }
+
+        $(document).on('click', '#select_maintable_excel', function(e) {
+            $('#maintable').DataTable().buttons(0,0).trigger();
+        });
+
 
         $(document).on("click",".btncancel",function(e){
             var urlToRedirect = e.currentTarget.getAttribute('href');

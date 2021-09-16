@@ -14,6 +14,7 @@ use App\Model\RegisteredCapitalType;
 class DashboardAdminSearchCompanyController extends Controller
 {
     public function Index(){
+
         $industrygroups = IndustryGroup::get();
         $isics = Isic::get();
         $registeredcapitals = RegisteredCapitalType::get();

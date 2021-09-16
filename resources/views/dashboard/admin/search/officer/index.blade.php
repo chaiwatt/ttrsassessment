@@ -98,6 +98,16 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เจ้าหน้าที่ TTRS</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_officertable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" >
@@ -107,6 +117,9 @@
                                         <th style="text-align: center">ชื่อ-นามสกุล</th>
                                         <th style="text-align: center">ความเชี่ยวชาญ</th>
                                         <th style="text-align: center">โครงการรับผิดชอบ</th> 
+                                        <th style="text-align: center"  hidden>โครงการรับผิดชอบ</th>
+                                        <th style="text-align: center">โครงการเสร็จสิ้น</th> 
+                                        <th style="text-align: center">โครงการกำลังดำเนินการ</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -139,6 +152,31 @@
                                                 @endif
                                             </ul>
                                         </td> 
+                                        <td  hidden>
+                                            
+                                            @php
+                                               $appendtext =''; 
+                                               if($officer->projectbelongofficer->count() == 1){
+                                                        $appendtext = $officer->projectbelongofficer[0]->minitbp->project;
+                                               }else if($officer->projectbelongofficer->count() > 1){
+                                                    foreach ($officer->projectbelongofficer as $key => $fulltbp){
+                                                        $appendtext .= $key+1 . '. ' .$fulltbp->minitbp->project .'  ';
+                                                    }
+                                               }
+                                            @endphp
+                                            {{$appendtext}}
+                             
+                                        </td>
+                                        <td style="text-align: center"> 
+                                            @if ($officer->projectbelongofficer->count() > 0)
+                                                {{$officer->projectbelongofficer->where('status',3)->count()}}
+                                            @endif
+                                        </td>
+                                        <td style="text-align: center">
+                                            @if ($officer->projectbelongofficer->count() > 0)
+                                                {{$officer->projectbelongofficer->where('status','!=',3)->count()}}
+                                            @endif
+                                        </td>
                                         {{-- <td> yyy </td>   --}}
                                     </tr>  
                                     @endforeach
@@ -153,6 +191,10 @@
     </div>
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/searchofficerhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
@@ -174,7 +216,33 @@
                     'previous': 'ก่อนหน้า',
                     'next': 'ถัดไป'
                 }
-            }
+            },
+            buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "เจ้าหน้าที่ TTRS" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [0,1,3,4,5],
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','เจ้าหน้าที่ TTRS');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
+                }
+        });
+        $(document).on('click', '#select_officertable_excel', function(e) {
+            $('#officertable').DataTable().buttons(0,0).trigger();
         });
     </script>
 @stop

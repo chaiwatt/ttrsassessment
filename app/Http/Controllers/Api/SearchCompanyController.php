@@ -277,5 +277,21 @@ class SearchCompanyController extends Controller
 
 
     }
+
+    public function ProjectNumber(Request $request){
+        $fulltbparr = FullTbp::where('fulltbp_code', 'like', '%' . $request->projectnumber . '%')->pluck('id')->toArray();
+        $businessplans = BusinessPlan::whereIn('id',$fulltbparr)->get();
+        $companyarr = array();
+        $companyarr_unique = array();
+        foreach ($businessplans as $key => $businessplan) {
+            array_push($companyarr,$businessplan->company_id);
+        }
+        $companyarr_unique = array_unique($companyarr);
+        $companies = Company::whereIn('id',$companyarr_unique)->get();
+        return response()->json(array(
+            "companies" => $companies->each->append('minitbpbelong')->each->append('fullname')
+        ));
+    }
+    
     
 }

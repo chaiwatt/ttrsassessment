@@ -4,7 +4,7 @@
 <head>
         <!-- meta tag -->
         <meta charset="utf-8">
-        <title>TTRS - Thailand Technology Rating Support and Service (TTRS)</title>
+        <title>TTRS | สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (สวทช.)</title>
         <meta name="description" content="">
         <!-- responsive tag -->
         <meta http-equiv="x-ua-compatible" content="ie=edge">

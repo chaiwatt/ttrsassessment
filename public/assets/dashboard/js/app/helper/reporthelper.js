@@ -171,6 +171,7 @@ import * as Attendee from './eventcalendarattendee.js';
 
             getRadarChartData().then(data => {
                 globaldata = data;
+                console.log(globaldata);
                 callUpdateChart(globaldata);
                 callGenRadarGradeByPillar(globaldata);
                 callGenRadarByBusinessSize(globaldata);
@@ -178,75 +179,596 @@ import * as Attendee from './eventcalendarattendee.js';
                 callGenRadarByBusinessType(globaldata);
                 callGenRadarByIndustryGroup(globaldata);
                 callGenRadarByIsic(globaldata);
-               
-            }).catch(error => {})
-
-            // getChartData().then(data => {
-            //      participatedata = [
-            //         {value: data.numprojects['minitbp'], name: 'Mimi TBP'},
-            //         {value: data.numprojects['fulltbp'], name: 'Full TBP'},
-            //         {value: data.numprojects['finish'], name: 'ประเมินสำเร็จ'},
-            //     ]
-            //     if(data.numprojects['minitbp'] != 0 || data.numprojects['fulltbp'] != 0 || data.numprojects['finish'] != 0){
-            //         genDonutchart(participatedata,participatelegend,'จำนวนโครงการปี ' + $('#currentyear').html(),'จำนวนโครงการปี ' + $('#currentyear').html(),'participate_chart','center');
-            //     }
-    
-            //       gradedata = [
-            //         {value: data.projectgrades['AAA'], name: 'AAA'},
-            //         {value: data.projectgrades['AA'], name: 'AA'},
-            //         {value: data.projectgrades['A'], name: 'A'},
-            //         {value: data.projectgrades['BBB'], name: 'BBB'},
-            //         {value: data.projectgrades['BB'], name: 'BB'},
-            //         {value: data.projectgrades['B'], name: 'B'},
-            //         {value: data.projectgrades['CCC'], name: 'CCC'},
-            //         {value: data.projectgrades['CC'], name: 'CC'},
-            //         {value: data.projectgrades['C'], name: 'C'},
-            //         {value: data.projectgrades['D'], name: 'D'}
-            //     ]
-
-            //     if(data.projectgrades['AAA'] !=0 || data.projectgrades['AA'] !=0 ||data.projectgrades['A'] !=0 ||data.projectgrades['BBB'] !=0 ||data.projectgrades['BB'] !=0 ||
-            //     data.projectgrades['B'] !=0 || data.projectgrades['CCC'] !=0 ||data.projectgrades['CC'] !=0 || data.projectgrades['C'] !=0 || data.projectgrades['D'] !=0){
-            //         genDonutchart(gradedata,dradelegend,'เกรดการประเมิน','จำนวนโครงการตามเกรดการประเมิน','grade_chart','center');
-            //     }        
-
-            //     industrygroupdata = [
-            //         {value: data.projectindustries['automotive'], name: 'Next-generation Automotive'},
-            //         {value: data.projectindustries['smartelectronic'], name: 'Smart Electronics'},
-            //         {value: data.projectindustries['affluent'], name: 'Affluent, Medical and Wellness Tourism'},
-            //         {value: data.projectindustries['agriculture'], name: 'Agriculture and Biotechnology'},
-            //         {value: data.projectindustries['food'], name: 'Food for the Future'},
-            //         {value: data.projectindustries['robotic'], name: 'Robotics'},
-            //         {value: data.projectindustries['aviation'], name: 'Aviation and Logistics'},
-            //         {value: data.projectindustries['biofuel'], name: 'Biofuels and Biochemicals'},
-            //         {value: data.projectindustries['digital'], name: 'Digital'},
-            //         {value: data.projectindustries['medical'], name: 'Medical Hub'},
-            //         {value: data.projectindustries['defense'], name: 'Defense'},
-            //         {value: data.projectindustries['education'], name: 'Education and Skill Development'},
-            //         {value: data.projectindustries['other'], name: 'อื่น'},
-            //     ]
-
-            //     if(data.projectindustries['automotive'] != 0 || data.projectindustries['smartelectronic'] != 0 || data.projectindustries['affluent'] != 0 ||
-            //     data.projectindustries['agriculture'] != 0 || data.projectindustries['food'] != 0 || data.projectindustries['robotic'] != 0 ||
-            //     data.projectindustries['aviation'] != 0 || data.projectindustries['biofuel'] != 0 || data.projectindustries['digital'] != 0 || 
-            //     data.projectindustries['medical'] != 0 || data.projectindustries['defense'] != 0 || data.projectindustries['education'] != 0 || data.projectindustries['other'] != 0){
-            //         genDonutchart(industrygroupdata,industrygrouplegend,'กลุ่มอุตสาหกรรม','จำนวนโครงการตามกลุ่มอุตสาหกรรม','industrygroup_chart','center');
-            //     }
-            
+           
+                createGradebyPillarDataTable(globaldata);
                 
-
-            //     objectivedata = [
-            //         {value: data.objectives['finance'], name: 'ด้านการเงิน'},
-            //         {value: data.objectives['nonfinance'], name: 'ไม่ใช่ด้านการเงิน'},
-            //         {value: data.objectives['bothobjecttive'], name: 'ด้านการเงินและไม่ใช่ด้านการเงิน'}
-            //     ]               
-
-            //     if(data.objectives['finance'] != 0 || data.objectives['nonfinance'] != 0 || data.objectives['bothobjecttive'] != 0){
-            //         genDonutchart(objectivedata,objectivelegend,'วัตถุประสงค์ของการขอรับการประเมิน','วัตถุประสงค์ของการขอรับการประเมิน','financial_chart','center');
-            //     }
-
-            // }).catch(error => {})
-            
+                createGradebyBusinessSizeDataTable(globaldata);
+                createGradebySectorDataTable(globaldata);
+               
+                createGradebyBusinessTypeDataTable(globaldata);
+                createGradebyIndustryGroupDataTable(globaldata);
+                createGradebyIsicDataTable(globaldata);
+            }).catch(error => {})  
         });
+
+        var gradebypillardata = [];   
+function createGradebyPillarDataTable(data){
+
+
+    data.pillars.forEach(function (pillar,index) {
+        var grade_aaa = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'AAA').length;
+        var grade_aa = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'AA').length;
+        var grade_a = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'A').length;
+
+        var grade_bbb = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'BBB').length;
+        var grade_bb = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'BB').length;
+        var grade_b = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'B').length;
+
+        var grade_ccc = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'CCC').length;
+        var grade_cc = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'CC').length;
+        var grade_c = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'C').length;
+
+        var grade_d = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'D').length;
+        var grade_e = data.finalgrades.filter(x => x.pillar_id == pillar.id && x.grade == 'E').length;
+
+        gradebypillardata.push({
+            "item":  pillar.name, 
+            "AAA": grade_aaa, 
+            "AA": grade_aa, 
+            "A": grade_a,
+            "BBB": grade_bbb,
+            "BB": grade_bb,
+            "B": grade_b,
+            "CCC": grade_ccc,
+            "CC": grade_cc,
+            "C": grade_c,
+            "D": grade_d,
+            "E": grade_e
+        });
+    
+    });
+
+    $('#gradebypillar_table').DataTable( {
+        dom: 'Bfrtip',
+        data: gradebypillardata,
+        columns : [
+            { "data" : "item" },
+            { "data" : "AAA" },
+            { "data" : "AA" },
+            { "data" : "A" },
+            { "data" : "BBB" },
+            { "data" : "BB" },
+            { "data" : "B" },
+            { "data" : "CCC" },
+            { "data" : "CC" },
+            { "data" : "C" },
+            { "data" : "D" },
+            { "data" : "E" }
+        ],
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการเกรดแยกตาม Pillar" ;      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4, 5,6,7,8, 9,10,11 ]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','รายการเกรดแยกตาม Pillar');
+                }, 
+            }        
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[0].style.visibility = 'hidden';
+          
+        }
+    } );
+}
+
+
+        
+function createGradebyBusinessSizeDataTable(data){
+    var gradebybusinesssizedata = [];
+
+    data.businesssizes.forEach(function (business_size,index) {
+
+        var grade_aaa = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'AAA').length;
+        var grade_aa = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'AA').length;
+        var grade_a = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'A').length;
+
+        var grade_bbb = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'BBB').length;
+        var grade_bb = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'BB').length;
+        var grade_b = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'B').length;
+
+        var grade_ccc = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'CCC').length;
+        var grade_cc = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'CC').length;
+        var grade_c = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'C').length;
+
+        var grade_d = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'D').length;
+        var grade_e = data.projectgrades.filter(x => x.businesssize == business_size.id && x.grade == 'E').length;
+
+        gradebybusinesssizedata.push({
+            "item":  business_size.name, 
+            "AAA": grade_aaa, 
+            "AA": grade_aa, 
+            "A": grade_a,
+            "BBB": grade_bbb,
+            "BB": grade_bb,
+            "B": grade_b,
+            "CCC": grade_ccc,
+            "CC": grade_cc,
+            "C": grade_c,
+            "D": grade_d,
+            "E": grade_e
+        });
+    });
+
+    $('#gradebybusinesssize_table').DataTable( {
+        dom: 'Bfrtip',
+        data: gradebybusinesssizedata,
+        columns : [
+            { "data" : "item" },
+            { "data" : "AAA" },
+            { "data" : "AA" },
+            { "data" : "A" },
+            { "data" : "BBB" },
+            { "data" : "BB" },
+            { "data" : "B" },
+            { "data" : "CCC" },
+            { "data" : "CC" },
+            { "data" : "C" },
+            { "data" : "D" },
+            { "data" : "E" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการเกรดแยกตามขนาดธุรกิจ" ;      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4, 5,6,7,8, 9,10,11 ]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','รายการเกรดแยกตามขนาดธุรกิจ');
+                }, 
+            }        
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[1].style.visibility = 'hidden'
+          
+            
+        }
+    } );
+}
+
+        
+function createGradebySectorDataTable(data){
+    var gradebysectordata = [];
+
+    data.sectors.forEach(function (sector,index) {
+
+        var grade_aaa = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'AAA').length;
+        var grade_aa = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'AA').length;
+        var grade_a = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'A').length;
+
+        var grade_bbb = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'BBB').length;
+        var grade_bb = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'BB').length;
+        var grade_b = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'B').length;
+
+        var grade_ccc = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'CCC').length;
+        var grade_cc = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'CC').length;
+        var grade_c = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'C').length;
+
+        var grade_d = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'D').length;
+        var grade_e = data.projectgrades.filter(x => x.sector == sector.id && x.grade == 'E').length;
+
+        gradebysectordata.push({
+            "item":  sector.name, 
+            "AAA": grade_aaa, 
+            "AA": grade_aa, 
+            "A": grade_a,
+            "BBB": grade_bbb,
+            "BB": grade_bb,
+            "B": grade_b,
+            "CCC": grade_ccc,
+            "CC": grade_cc,
+            "C": grade_c,
+            "D": grade_d,
+            "E": grade_e
+        });
+    });
+
+    $('#gradebysector_table').DataTable( {
+        dom: 'Bfrtip',
+        data: gradebysectordata,
+        columns : [
+            { "data" : "item" },
+            { "data" : "AAA" },
+            { "data" : "AA" },
+            { "data" : "A" },
+            { "data" : "BBB" },
+            { "data" : "BB" },
+            { "data" : "B" },
+            { "data" : "CCC" },
+            { "data" : "CC" },
+            { "data" : "C" },
+            { "data" : "D" },
+            { "data" : "E" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการเกรดแยกตามภูมิภาค" ;      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4, 5,6,7,8, 9,10,11 ]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','รายการเกรดแยกตามภูมิภาค');
+                }, 
+            }        
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[2].style.visibility = 'hidden'
+        }
+    } );
+}
+
+function createGradebyBusinessTypeDataTable(data){
+    var gradebybusinesstypedata = [];
+
+    data.businesstypes.forEach(function (businesstype,index) {
+
+        var grade_aaa = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'AAA').length;
+        var grade_aa = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'AA').length;
+        var grade_a = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'A').length;
+
+        var grade_bbb = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'BBB').length;
+        var grade_bb = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'BB').length;
+        var grade_b = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'B').length;
+
+        var grade_ccc = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'CCC').length;
+        var grade_cc = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'CC').length;
+        var grade_c = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'C').length;
+
+        var grade_d = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'D').length;
+        var grade_e = data.projectgrades.filter(x => x.businesstype == businesstype.id && x.grade == 'E').length;
+
+        gradebybusinesstypedata.push({
+            "item":  businesstype.name, 
+            "AAA": grade_aaa, 
+            "AA": grade_aa, 
+            "A": grade_a,
+            "BBB": grade_bbb,
+            "BB": grade_bb,
+            "B": grade_b,
+            "CCC": grade_ccc,
+            "CC": grade_cc,
+            "C": grade_c,
+            "D": grade_d,
+            "E": grade_e
+        });
+    });
+
+    console.log(gradebybusinesstypedata);
+
+    $('#gradebybusinesstype_table').DataTable( {
+        dom: 'Bfrtip',
+        data: gradebybusinesstypedata,
+        columns : [
+            { "data" : "item" },
+            { "data" : "AAA" },
+            { "data" : "AA" },
+            { "data" : "A" },
+            { "data" : "BBB" },
+            { "data" : "BB" },
+            { "data" : "B" },
+            { "data" : "CCC" },
+            { "data" : "CC" },
+            { "data" : "C" },
+            { "data" : "D" },
+            { "data" : "E" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการเกรดแยกตามประเภทธุรกิจ" ;      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4, 5,6,7,8, 9,10,11 ]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','รายการเกรดแยกตามประเภทธุรกิจ');
+                }, 
+            }        
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[3].style.visibility = 'hidden'
+        }
+    } );
+}
+
+function createGradebyIndustryGroupDataTable(data){
+    var gradebyindustrygroupdata = [];
+
+    data.industrygroups.forEach(function (industrygroup,index) {
+
+        var grade_aaa = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'AAA').length;
+        var grade_aa = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'AA').length;
+        var grade_a = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'A').length;
+
+        var grade_bbb = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'BBB').length;
+        var grade_bb = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'BB').length;
+        var grade_b = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'B').length;
+
+        var grade_ccc = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'CCC').length;
+        var grade_cc = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'CC').length;
+        var grade_c = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'C').length;
+
+        var grade_d = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'D').length;
+        var grade_e = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == 'E').length;
+
+        gradebyindustrygroupdata.push({
+            "item":  industrygroup.name, 
+            "AAA": grade_aaa, 
+            "AA": grade_aa, 
+            "A": grade_a,
+            "BBB": grade_bbb,
+            "BB": grade_bb,
+            "B": grade_b,
+            "CCC": grade_ccc,
+            "CC": grade_cc,
+            "C": grade_c,
+            "D": grade_d,
+            "E": grade_e
+        });
+    });
+
+    $('#gradebyindustry_table').DataTable( {
+        dom: 'Bfrtip',
+        data: gradebyindustrygroupdata,
+        columns : [
+            { "data" : "item" },
+            { "data" : "AAA" },
+            { "data" : "AA" },
+            { "data" : "A" },
+            { "data" : "BBB" },
+            { "data" : "BB" },
+            { "data" : "B" },
+            { "data" : "CCC" },
+            { "data" : "CC" },
+            { "data" : "C" },
+            { "data" : "D" },
+            { "data" : "E" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการเกรดแยกตามกลุ่มอุตสาหกรรม" ;      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4, 5,6,7,8, 9,10,11 ]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','รายการเกรดแยกตามกลุ่มอุตสาหกรรม');
+                }, 
+            }        
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[4].style.visibility = 'hidden'
+        }
+    } );
+}
+
+function createGradebyIsicDataTable(data){
+    var gradebyisicdata = [];
+
+    data.isics.forEach(function (isic,index) {
+
+        var grade_aaa = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'AAA').length;
+        var grade_aa = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'AA').length;
+        var grade_a = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'A').length;
+
+        var grade_bbb = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'BBB').length;
+        var grade_bb = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'BB').length;
+        var grade_b = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'B').length;
+
+        var grade_ccc = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'CCC').length;
+        var grade_cc = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'CC').length;
+        var grade_c = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'C').length;
+
+        var grade_d = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'D').length;
+        var grade_e = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == 'E').length;
+
+        gradebyisicdata.push({
+            "item":  isic.name, 
+            "AAA": grade_aaa, 
+            "AA": grade_aa, 
+            "A": grade_a,
+            "BBB": grade_bbb,
+            "BB": grade_bb,
+            "B": grade_b,
+            "CCC": grade_ccc,
+            "CC": grade_cc,
+            "C": grade_c,
+            "D": grade_d,
+            "E": grade_e
+        });
+    });
+
+    $('#gradebyisic_table').DataTable( {
+        dom: 'Bfrtip',
+        data: gradebyisicdata,
+        columns : [
+            { "data" : "item" },
+            { "data" : "AAA" },
+            { "data" : "AA" },
+            { "data" : "A" },
+            { "data" : "BBB" },
+            { "data" : "BB" },
+            { "data" : "B" },
+            { "data" : "CCC" },
+            { "data" : "CC" },
+            { "data" : "C" },
+            { "data" : "D" },
+            { "data" : "E" }
+        ],
+        
+        searching: false,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        pageLength : 10,
+        language: {
+            zeroRecords: " ",
+            search: "ค้นหา: ",  
+            sLengthMenu: "จำนวน _MENU_ รายการ",
+            info: "จำนวน _START_ - _END_ จาก _TOTAL_ รายการ",
+            paginate: {
+                previous: 'ก่อนหน้า',
+                next: 'ถัดไป'
+            }
+        },
+        buttons: [
+            { 
+                extend: 'excelHtml5',
+                className: 'btn-primary',
+                text: 'Excel',
+                title: function () { 
+                    return null; 
+                },
+                filename: function() {
+                    return "รายการเกรดแยกตาม Isic" ;      
+                }, 
+                exportOptions: {
+                    columns: [ 0, 1,2,3,4, 5,6,7,8, 9,10,11 ]
+                },
+                customize: function( xlsx ) {
+                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                    source.setAttribute('name','รายการเกรดแยกตาม Isic');
+                }, 
+            }        
+        ],
+        drawCallback: function() {
+            $('.buttons-excel')[5].style.visibility = 'hidden'
+        }
+    } );
+}
+
 
     function getEvents() {
         return new Promise((resolve, reject) => {
@@ -797,8 +1319,8 @@ function callGenRadarBySector(data){
         { name: 'เหนือ', max: maxval},
         { name: 'กลาง', max: maxval},
         { name: 'ตะวันออก', max: maxval},
-        { name: 'ตะวันตก', max: maxval},
         { name: 'ตะวันออกเฉียงเหนือ', max: maxval},
+        { name: 'ตะวันตก', max: maxval},
         { name: 'ใต้', max: maxval}
     ];
 
@@ -823,7 +1345,7 @@ function callGenBarBySector(data){
   
     });
 
-    var xaxis = ['เหนือ', 'กลาง', 'ตะวันออก', 'ตะวันตก', 'ตะวันออกเฉียงเหนือ', 'ใต้']
+    var xaxis = ['เหนือ', 'กลาง', 'ตะวันออก', 'ตะวันออกเฉียงเหนือ', 'ตะวันตก', 'ใต้']
 
     genBar(xaxis ,gradedata , 'gradebysector');
 }
@@ -845,7 +1367,7 @@ function callGenPolarStackBySector(data){
   
     });
 
-    var xaxis = ['เหนือ', 'กลาง', 'ตะวันออก', 'ตะวันตก', 'ตะวันออกเฉียงเหนือ', 'ใต้']
+    var xaxis = ['เหนือ', 'กลาง', 'ตะวันออก', 'ตะวันออกเฉียงเหนือ', 'ตะวันตก', 'ใต้']
 
     // genBar(xaxis ,gradedata , 'gradebysector');
     genPolarStack(xaxis ,gradedata , 'gradebysector');
@@ -1096,7 +1618,7 @@ function callGenRadarByIsic(data){
         { name: 'กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์', max: maxval},
         { name: 'ศิลปะ ความบันเทิง และนันทนาการ', max: maxval},
         { name: 'กิจกรรมบริการด้านอื่นๆ', max: maxval},
-        { name: 'กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเองเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน', max: maxval},
+        { name: 'กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน', max: maxval},
         { name: 'กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก', max: maxval}
         
 
@@ -1143,7 +1665,7 @@ function callGenBarByIsic(data){
     var xaxis = ['เกษตรกรรม การป่าไม้ และการประมง','การทำเหมืองแร่และเหมืองหิน','การผลิต','ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ','การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล',
 'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์','การขนส่งและสถานที่เก็บสินค้า','ที่พักแรมและบริการด้านอาหาร','ข้อมูลข่าวสารและการสื่อสาร','กิจกรรมทางการเงินและการประกันภัย','กิจกรรมอสังหาริมทรัพย์',
 'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
-'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเองเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
+'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
 
     genBar(xaxis ,gradedata , 'gradebyisic');
 }
@@ -1185,7 +1707,7 @@ function callGenPolarStackByIsic(data){
     var xaxis = ['เกษตรกรรม การป่าไม้ และการประมง','การทำเหมืองแร่และเหมืองหิน','การผลิต','ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ','การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล',
 'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์','การขนส่งและสถานที่เก็บสินค้า','ที่พักแรมและบริการด้านอาหาร','ข้อมูลข่าวสารและการสื่อสาร','กิจกรรมทางการเงินและการประกันภัย','กิจกรรมอสังหาริมทรัพย์',
 'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
-'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเองเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
+'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
 
     genPolarStack(xaxis ,gradedata , 'gradebyisic');
 }
@@ -1274,6 +1796,22 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
                     fontSize: 14,
                     color: "#000000",
                 },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; //ใช้ orginal label ที่ไม่ตัด
+                    return o;
+                }
             },
             indicator: indicator
         },
@@ -1576,6 +2114,46 @@ $(document).on('click', '#select_gradebypillar_polar', function(e) {
     callPolarStackGradeByPillar(globaldata);
 });
 
+$(document).on('click', '#select_gradebypillar_excel', function(e) {
+    $('#gradebypillar_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_gradebybusinesssize_excel', function(e) {
+    $('#gradebybusinesssize_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_gradebysector_excel', function(e) {
+    $('#gradebysector_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_gradebybusinesstype_excel', function(e) {
+    $('#gradebybusinesstype_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_gradebyindustry_excel', function(e) {
+    $('#gradebyindustry_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_gradebyisic_excel', function(e) {
+    $('#gradebyisic_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_gradebypillar_excel', function(e) {
+    $('#gradebypillar_table').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_maintable_excel', function(e) {
+    $('#maintable').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_fulltbptable_excel', function(e) {
+    $('#fulltbptable').DataTable().buttons(0,0).trigger();
+});
+
+$(document).on('click', '#select_reporttable_excel', function(e) {
+    $('#reporttable').DataTable().buttons(0,0).trigger();
+});
+
 $(document).on('click', '#select_gradebybusinesssize_pie', function(e) {
     callGenRadarByBusinessSize(globaldata);
 });
@@ -1722,6 +2300,7 @@ $(document).on('click', '#project_objective_bar', function(e) {
     ]
     genNumProject('bar',data,objectivelegend,'วัตถุประสงค์ของการขอรับการประเมิน ' + $('#currentyear').html(),'วัตถุประสงค์ของการขอรับการประเมิน ' + $('#currentyear').html(),'financial_chart','center');
 }); 
+
 
 
 

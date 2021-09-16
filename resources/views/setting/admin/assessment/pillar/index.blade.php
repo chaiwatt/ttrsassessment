@@ -55,19 +55,23 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">Pillar</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_maintable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-2" id="testtopictable">
+                            <table class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">ชื่อรายการ</th>  
-                                        {{-- <th>ร้อยละ</th>                               --}}
                                         <th style="width:200px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
@@ -94,6 +98,10 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -101,5 +109,47 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
+        $('#maintable').DataTable( {
+            "searching":   false,
+            "paging":   true,
+            "ordering": true,
+            "info":     false,
+            "pageLength" : 20,
+            "language": {
+                "zeroRecords": " ",
+                "search": "ค้นหา: ",  
+                "sLengthMenu": "จำนวน _MENU_ รายการ",
+                'paginate': {
+                    'previous': 'ก่อนหน้า',
+                    'next': 'ถัดไป'
+                }
+            },
+            buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "Pillar" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [0]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','Pillar');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
+                }
+        });
+        $(document).on('click', '#select_maintable_excel', function(e) {
+            $('#maintable').DataTable().buttons(0,0).trigger();
+        });
     </script>
 @stop

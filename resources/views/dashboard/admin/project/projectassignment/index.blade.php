@@ -114,6 +114,14 @@
 
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการมอบหมาย {!!$tbdelaymsg!!}</h6>
                         <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_maintable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -127,6 +135,7 @@
                                         
                                         <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>ความเห็น Manager</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">Leader</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>
                                         @if (Auth::user()->user_type_id>=5)
@@ -147,7 +156,7 @@
                                                 if (@$projectassignment->businessplan->minitbp->isintime($projectassignment->businessplan->minitbp->id) < 0) {
                                                     $cogcolor = 'text-danger';
                                                     
-                                                    $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$projectassignment->businessplan->minitbp->isintime($projectassignment->businessplan->minitbp->id)*(-1) .' วัน</span>';
+                                                    $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">(เกินกำหนด '.$projectassignment->businessplan->minitbp->isintime($projectassignment->businessplan->minitbp->id)*(-1) .' วัน)</span>';
                                                 }
                                             @endphp   
                                             <a href="#" data-toggle="modal" data-id="{{$projectassignment->businessplan->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
@@ -187,6 +196,9 @@
                                                     <a data-message="{{$projectassignment->leader_id}}" data-id="{{$projectassignment->businessplan->minitbp->id}}" data-statusid="{{$projectassignment->businessplan->business_plan_status_id}}" data-toggle="modal" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                             @endif
                                         </td>  
+                                        <td hidden>
+                                            {{$projectassignment->businessplan->minitbp->jdmessage}}
+                                        </td>
                                         <td style="white-space: nowrap"> 
                                             @if (!Empty($projectassignment->leader))
                                                 {{$projectassignment->leader->prefix->name}}{{$projectassignment->leader->name}} {{$projectassignment->leader->lastname}}
@@ -236,6 +248,11 @@
 
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
     <script>
@@ -342,9 +359,37 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "รายการมอบหมาย" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  1,2,3, 5,6,7]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','รายการมอบหมาย');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
+
             }); 
         }
+
+        $(document).on('click', '#select_maintable_excel', function(e) {
+            $('#maintable').DataTable().buttons(0,0).trigger();
+        });
 
     </script>
 @stop

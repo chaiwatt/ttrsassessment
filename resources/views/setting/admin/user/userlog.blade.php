@@ -53,6 +53,16 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">Log</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_userlogtable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -91,7 +101,11 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/userhelper.js')}}"></script> --}}
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>
         var route = {
@@ -113,7 +127,35 @@
                     'previous': 'ก่อนหน้า',
                     'next': 'ถัดไป'
                 }
-            }
+            },
+            buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "Log" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  0,1,2]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','Log');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
+                }
+
+        });
+
+        $(document).on('click', '#select_userlogtable_excel', function(e) {
+            $('#userlogtable').DataTable().buttons(0,0).trigger();
         });
     </script>
 @stop

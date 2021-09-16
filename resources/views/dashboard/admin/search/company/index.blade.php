@@ -58,6 +58,7 @@
                                             <option value="3">ทุนจดทะเบียน</option>
                                             <option value="4">กลุ่มอุตสาหกรรม</option>
                                             <option value="5">รหัส ISIC</option>
+                                            <option value="6">เลขที่โครงการ</option>
                                         </select>
                                     </div>
                                 </div>      
@@ -97,7 +98,12 @@
                                 <div id="searchprojectname_wrapper" class="col-md-6" >
                                     <label>ชื่อโครงการ</label>
                                     <input type="text"  name="searchprojectname" id="searchprojectname" value=""  placeholder="ชื่อโครงการ" class="form-control form-control-lg" >
-                                </div>     
+                                </div> 
+                                <div id="searchprojectnumber_wrapper" class="col-md-6" hidden>
+                                    <label>เลขที่โครงการ</label>
+                                    <input type="text"  name="searchprojectnumber" id="searchprojectnumber" value=""  placeholder="เลขที่โครงการ" class="form-control form-control-lg" >
+                                </div> 
+                                    
                                 <div id="registeredcapital_wrapper" class="col-md-6" hidden>
                                     <label>ทุนจดทะเบียน</label><span class="text-danger">*</span>
                                     <select name="searchregisteredcapital" id="searchregisteredcapital" data-placeholder="ทุนจดทะเบียน" class="form-control form-control-lg form-control-select2">
@@ -136,6 +142,16 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">ผู้ประกอบการ</h6>
+                        <div class="header-elements">
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_companytable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -145,6 +161,7 @@
                                         <th style="text-align: center;width:10%">#</th> 
                                         <th style="text-align: center;width:40%">บริษัท</th>
                                         <th style="text-align: center;width:50%">โครงการ</th> 
+                                        <th style="text-align: center;width:50%" hidden>โครงการ</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="reportsearch_wrapper">
@@ -165,6 +182,21 @@
                                             @endif
                                             {{-- <a href="{{route('dashboard.admin.report.detail.view',['id' => $company->businessplan->id])}}" class="text-info" target="_blank" >{{$company->businessplan->minitbp->project}} </a>   --}}
                                         </td>  
+                                        <td hidden>
+                                            
+                                            @php
+                                               $appendtext =''; 
+                                               if($company->minitbpbelong->count() == 1){
+                                                        $appendtext = $company->minitbpbelong[0]->project;
+                                               }else if($company->minitbpbelong->count() > 1){
+                                                    foreach ($company->minitbpbelong as $key => $minitbp){
+                                                        $appendtext .= $key+1 . '. ' .$minitbp->project .'  ';
+                                                    }
+                                               }
+                                            @endphp
+                                            {{$appendtext}}
+                             
+                                        </td>
                                     </tr>  
                                     @endforeach
                                 </tbody>
@@ -178,6 +210,10 @@
     </div>
 @endsection
 @section('pageScript')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/searchcompanyhelper.js')}}"></script>
     <script>
@@ -200,7 +236,33 @@
                     'previous': 'ก่อนหน้า',
                     'next': 'ถัดไป'
                 }
-            }
+            },
+            buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "ผู้ประกอบการ" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [0,1,3],
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','ผู้ประกอบการ');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
+                }
+        });
+        $(document).on('click', '#select_companytable_excel', function(e) {
+            $('#companytable').DataTable().buttons(0,0).trigger();
         });
 
     </script>

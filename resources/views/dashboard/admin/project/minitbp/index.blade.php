@@ -224,10 +224,14 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการขอรับการประเมิน</h6>
                         <div class="header-elements">
-                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                
-                                <span></span>
-                            </a> --}}
+                            <div class="list-icons ml-3">
+                                <div class="list-icons-item dropdown">
+                                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="#" data-toggle="modal" id="select_maintable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -241,6 +245,7 @@
                                         
                                         <th style="width:1%;white-space: nowrap;text-align:center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">ความเห็น Manager</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>ความเห็น Manager</th>
                                         @if (Auth::user()->user_type_id == 4)
                                             <th style="width:1%;white-space: nowrap;text-align:center">การอนุมัติ</th> 
                                         @endif
@@ -291,6 +296,7 @@
                                                             <a data-message="{{$minitbp->businessplan->projectassignment->leader_id}}" href="#" data-id="{{$minitbp->id}}" data-toggle="modal" class="btn btn-sm bg-info jdmessage">ดูความเห็น</a>
                                                     @endif
                                                 </td>  
+                                                <td hidden>{{$minitbp->jdmessage}}</td>
                                                 @if (Auth::user()->user_type_id == 4)
                                                     <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($minitbp->businessplan->business_plan_status_id > 3)
@@ -342,6 +348,12 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approveminitbphelper.js')}}"></script>
@@ -451,8 +463,36 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "รายการขอรับการประเมิน" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  1,2,3, 5]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','รายการขอรับการประเมิน');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
         }
+
+        $(document).on('click', '#select_maintable_excel', function(e) {
+            $('#maintable').DataTable().buttons(0,0).trigger();
+        });
+
     </script>
 @stop

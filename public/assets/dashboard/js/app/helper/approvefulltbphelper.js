@@ -21,7 +21,7 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
   }
     if(check == 1){
       Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: `ต้องการอนุมัติ Full TBP`,
         type: 'warning',
         showCancelButton: true,
@@ -42,7 +42,7 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
       });
     }else if(check == 2){
       Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: `ต้องการส่งคืน Full TBP ให้แก้ไข`,
         type: 'warning',
         showCancelButton: true,
@@ -139,7 +139,7 @@ function getUsers(id){
 $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
 
   Swal.fire({
-    title: 'ยืนยัน',
+    title: 'โปรดยืนยัน',
     text: `ต้องการบันทึก คุณ${$("#usermember option:selected" ).text()} ลงในทีมลงคะแนน`,
     type: 'warning',
     showCancelButton: true,

@@ -40,8 +40,8 @@
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</h6>
                         <div class="header-elements">
-                            <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
-                            </a>
+                            {{-- <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
+                            </a> --}}
                         </div>
                     </div>
                     <div class="card-body">

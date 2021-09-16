@@ -253,7 +253,7 @@
             e.preventDefault();
             var frm = e.target.form;
             Swal.fire({
-                    title: 'ยืนยัน',
+                    title: 'โปรดยืนยัน',
                     text: `ต้องการยืนยันสร้างปฎิทิน`,
                     type: 'info',
                     showCancelButton: true,

@@ -141,7 +141,7 @@
             e.preventDefault();
             var frm = e.target.form;
             Swal.fire({
-                    title: 'ยืนยัน',
+                    title: 'โปรดยืนยัน',
                     text: `ต้องการแจ้งการชำระเงิน`,
                     type: 'info',
                     showCancelButton: true,

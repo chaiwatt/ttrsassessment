@@ -129,6 +129,7 @@ Route::group(['prefix' => 'api'], function(){
             Route::post('industrygroup','Api\SearchCompanyController@IndustryGroup')->name('api.search.company.industrygroup');  
             Route::post('companyname','Api\SearchCompanyController@CompanyName')->name('api.search.company.companyname'); 
             Route::post('registeredcapital','Api\SearchCompanyController@RegisteredCapital')->name('api.search.company.registeredcapital'); 
+            Route::post('projectnumber','Api\SearchCompanyController@ProjectNumber')->name('api.search.company.projectnumber');
         });
         Route::group(['prefix' => 'expert'], function(){
             Route::post('branch','Api\SearchExpertController@Branch')->name('api.search.expert.branch');            

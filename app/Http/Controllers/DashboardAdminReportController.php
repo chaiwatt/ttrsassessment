@@ -173,6 +173,14 @@ class DashboardAdminReportController extends Controller
        
         $experts = User::whereIn('id',$expertarr)->get();
      
+        $gradearr = [];
+        $gradearr =  ProjectGrade::pluck('grade')->toArray();
+        if(count($gradearr) > 0){
+            $gradearr =array_unique($gradearr);
+        }
+
+        $gradecollection = collect($gradearr);
+
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
                                                 ->withAlertmessages($alertmessages)
@@ -188,7 +196,8 @@ class DashboardAdminReportController extends Controller
                                                 ->withTotalonprocess($totalonprocess)
                                                 ->withTotalfinish($totalfinish)
                                                 ->withLeaders($leaders)
-                                                ->withExperts($experts);
+                                                ->withExperts($experts)
+                                                ->withGradecollection($gradecollection);
 
 
 

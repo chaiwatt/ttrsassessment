@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Model\Isic;
 use App\Model\Grade;
+use App\Model\Pillar;
+use App\Model\Sector;
 use App\Model\Company;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\FinalGrade;
+use App\Model\Companysize;
 use App\Model\BusinessPlan;
+use App\Model\BusinessType;
 use App\Model\ProjectGrade;
+use App\Model\IndustryGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,12 +36,22 @@ class ReportChartController extends Controller
         $finalgrades = FinalGrade::get(['full_tbp_id','pillar_id','grade','percent']);
         $grades = Grade::get(['name']);
         $projectgrades = ProjectGrade::get(['businesssize','isiccode','industrygroup','sector','grade','businesstype']);
-
-
+        $pillars = Pillar::get();
+        $businesssizes = Companysize::get();
+        $sectors = Sector::get();
+        $businesstypes = BusinessType::get();
+        $industrygroups = IndustryGroup::get();
+        $isics = Isic::get();
         return response()->json(array(
             "finalgrades" => $finalgrades,
             "grades" => $grades,
-            "projectgrades" => $projectgrades
+            "projectgrades" => $projectgrades,
+            "pillars" => $pillars,
+            "businesssizes" => $businesssizes,
+            "sectors" => $sectors,
+            "businesstypes" => $businesstypes,
+            "industrygroups" => $industrygroups,
+            "isics" => $isics
         ));
     }
 

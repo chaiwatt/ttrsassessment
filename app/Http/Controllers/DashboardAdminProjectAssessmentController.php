@@ -82,8 +82,17 @@ class DashboardAdminProjectAssessmentController extends Controller
        
         $experts = User::whereIn('id',$expertarr)->get();
 
-        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps)->withFulltbpbackups($fulltbpbackups)->withLeaders($leaders)
-        ->withExperts($experts);
+              $gradearr = [];
+        $gradearr =  ProjectGrade::pluck('grade')->toArray();
+        if(count($gradearr) > 0){
+            $gradearr =array_unique($gradearr);
+        }
+
+        $gradecollection = collect($gradearr);
+
+
+        return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps)->withFulltbpbackups($fulltbpbackups)
+        ->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection);
     }
     public function Edit($id,$userid){  
         $fulltbp = FullTbp::find($id);

@@ -897,6 +897,7 @@
                                         <a href="#" data-toggle="modal" id="select_gradebypillar_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebypillar_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebypillar_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebypillar_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
                                     </div>
                                 </div>
                             </div>
@@ -906,8 +907,26 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebypillar"></div>
                         </div>
+                        <table id="gradebypillar_table" hidden >
+                            <thead>
+                                <tr>
+                                    <th>รายการ</th>
+                                    <th>AAA</th>
+                                    <th>AA</th>
+                                    <th>A</th>
+                                    <th>BBB</th>
+                                    <th>BB</th>
+                                    <th>B</th>
+                                    <th>CCC</th>
+                                    <th>CC</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                        </table>
                     </div>
                 </div>
+      
             </div>
             <div class="col-lg-12" @if ($generalinfo->showgradeperbusinesssize != 1) hidden @endif>
                 <div class="card">
@@ -921,6 +940,7 @@
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesssize_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesssize_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesssize_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesssize_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
                                     </div>
                                 </div>
                             </div>
@@ -930,6 +950,23 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebybusinesssize"></div>
                         </div>
+                        <table id="gradebybusinesssize_table" hidden>
+                            <thead>
+                                <tr>
+                                    <th>รายการ</th>
+                                    <th>AAA</th>
+                                    <th>AA</th>
+                                    <th>A</th>
+                                    <th>BBB</th>
+                                    <th>BB</th>
+                                    <th>B</th>
+                                    <th>CCC</th>
+                                    <th>CC</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -947,6 +984,7 @@
                                         <a href="#" data-toggle="modal" id="select_gradebysector_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebysector_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebysector_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebysector_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
                                     </div>
                                 </div>
                             </div>
@@ -956,6 +994,23 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebysector"></div>
                         </div>
+                        <table id="gradebysector_table" hidden >
+                            <thead>
+                                <tr>
+                                    <th>รายการ</th>
+                                    <th>AAA</th>
+                                    <th>AA</th>
+                                    <th>A</th>
+                                    <th>BBB</th>
+                                    <th>BB</th>
+                                    <th>B</th>
+                                    <th>CCC</th>
+                                    <th>CC</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -971,6 +1026,7 @@
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesstype_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesstype_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebybusinesstype_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebybusinesstype_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
                                     </div>
                                 </div>
                             </div>
@@ -980,6 +1036,23 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebybusinesstype"></div>
                         </div>
+                        <table id="gradebybusinesstype_table" hidden >
+                            <thead>
+                                <tr>
+                                    <th>รายการ</th>
+                                    <th>AAA</th>
+                                    <th>AA</th>
+                                    <th>A</th>
+                                    <th>BBB</th>
+                                    <th>BB</th>
+                                    <th>B</th>
+                                    <th>CCC</th>
+                                    <th>CC</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -995,6 +1068,7 @@
                                         <a href="#" data-toggle="modal" id="select_gradebyindustry_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebyindustry_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebyindustry_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebyindustry_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
                                     </div>
                                 </div>
                             </div>
@@ -1004,6 +1078,23 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebyindustry"></div>
                         </div>
+                        <table id="gradebyindustry_table" hidden >
+                            <thead>
+                                <tr>
+                                    <th>รายการ</th>
+                                    <th>AAA</th>
+                                    <th>AA</th>
+                                    <th>A</th>
+                                    <th>BBB</th>
+                                    <th>BB</th>
+                                    <th>B</th>
+                                    <th>CCC</th>
+                                    <th>CC</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -1019,6 +1110,7 @@
                                         <a href="#" data-toggle="modal" id="select_gradebyisic_pie" class="dropdown-item"><i class="icon-pie-chart3"></i>Radar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebyisic_bar" class="dropdown-item"><i class="icon-stats-bars2"></i>Bar</a>
                                         <a href="#" data-toggle="modal" id="select_gradebyisic_polar" class="dropdown-item"><i class="icon-spinner4"></i>Polar</a>
+                                        <a href="#" data-toggle="modal" id="select_gradebyisic_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
                                     </div>
                                 </div>
                             </div>
@@ -1028,6 +1120,23 @@
                         <div class="chart-container">
                             <div class="chart has-fixed-height" style="width: 100%; min-height: 500px" id="gradebyisic"></div>
                         </div>
+                        <table id="gradebyisic_table" hidden >
+                            <thead>
+                                <tr>
+                                    <th>รายการ</th>
+                                    <th>AAA</th>
+                                    <th>AA</th>
+                                    <th>A</th>
+                                    <th>BBB</th>
+                                    <th>BB</th>
+                                    <th>B</th>
+                                    <th>CCC</th>
+                                    <th>CC</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>E</th>
+                                </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -1051,6 +1160,16 @@
                         @endphp
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ {!!$tbdelaymsg!!}</h6>
                         <div class="header-elements">
+                            <div class="header-elements">
+                                <div class="list-icons ml-3">
+                                    <div class="list-icons-item dropdown">
+                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="#" data-toggle="modal" id="select_maintable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @php
@@ -1064,7 +1183,10 @@
                                 <div >
                                     <select id="gradeFilter_tb1" class="form-control">
                                     <option value="">== เกรด ==</option>
-                                    <option value="AAA">AAA</option>
+                                    @foreach ($gradecollection->sortDesc()->reverse() as $grade)
+                                        <option value="{{$grade}}">{{$grade}}</option>
+                                    @endforeach
+                                    {{-- <option value="AAA">AAA</option>
                                     <option value="AA">AA</option>
                                     <option value="A">A</option>
                                     <option value="BBB">BBB</option>
@@ -1074,7 +1196,7 @@
                                     <option value="CC">CC</option>
                                     <option value="C">C</option>
                                     <option value="D">D</option>
-                                    <option value="E">E</option>
+                                    <option value="E">E</option> --}}
                                     </select>
                                 </div>
                                 <div >
@@ -1133,7 +1255,7 @@
                                                         if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
                                                             $cogcolor = 'text-danger';
                                                            
-                                                            $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน</span>';
+                                                            $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">(เกินกำหนด '.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน)</span>';
                                                         }
                                                     @endphp                                           
                                                     @if (Empty($fulltbp->expertassignment))
@@ -1228,6 +1350,14 @@
                             @endphp
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) {!!$tbdelaymsg!!}</h6>
                             <div class="header-elements">
+                                <div class="list-icons ml-3">
+                                    <div class="list-icons-item dropdown">
+                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="#" data-toggle="modal" id="select_fulltbptable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -1237,7 +1367,10 @@
                                     <div >
                                         <select id="gradeFilter" class="form-control">
                                         <option value="">== เกรด ==</option>
-                                        <option value="AAA">AAA</option>
+                                        @foreach ($gradecollection->sortDesc()->reverse() as $grade)
+                                            <option value="{{$grade}}">{{$grade}}</option>
+                                        @endforeach
+                                        {{-- <option value="AAA">AAA</option>
                                         <option value="AA">AA</option>
                                         <option value="A">A</option>
                                         <option value="BBB">BBB</option>
@@ -1247,7 +1380,7 @@
                                         <option value="CC">CC</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                        <option value="E">E</option>
+                                        <option value="E">E</option> --}}
                                         </select>
                                     </div>
                                     <div >
@@ -1299,7 +1432,7 @@
                                                             if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
                                                                 $cogcolor = 'text-danger';
                                                             
-                                                                $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">'.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน</span>';
+                                                                $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">(เกินกำหนด '.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน)</span>';
                                                             }
                                                         @endphp  
                                                         <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
@@ -1578,6 +1711,14 @@
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">ผลการประเมินโครงการ</h6>
                             <div class="header-elements">
+                                <div class="list-icons ml-3">
+                                    <div class="list-icons-item dropdown">
+                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="#" data-toggle="modal" id="select_reporttable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -1587,6 +1728,10 @@
                                     <div >
                                         <select id="gradeFilter_tb2" class="form-control">
                                         <option value="">== เกรด ==</option>
+                                        @foreach ($gradecollection->sortDesc()->reverse() as $grade)
+                                            <option value="{{$grade}}">{{$grade}}</option>
+                                        @endforeach
+{{-- 
                                         <option value="AAA">AAA</option>
                                         <option value="AA">AA</option>
                                         <option value="A">A</option>
@@ -1597,7 +1742,7 @@
                                         <option value="CC">CC</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                        <option value="E">E</option>
+                                        <option value="E">E</option> --}}
                                         </select>
                                     </div>
                                     <div >
@@ -1737,9 +1882,9 @@
                         <div class="card-header header-elements-sm-inline">
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">ปฏิทิน</h6>
                             <div class="header-elements">
-                                <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
+                                {{-- <a class="text-default daterange font-weight-semibold cursor-pointer dropdown-toggle">
                                     <span></span>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -1754,6 +1899,15 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
+
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/main.min.js')}}"></script>
@@ -1855,6 +2009,29 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "รายละเอียดโครงการ" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  1,2,3,4, 5,6]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','รายละเอียดโครงการ');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
             var table_tb1 = $('#maintable').DataTable();
@@ -1940,6 +2117,29 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "รายการแผนธุรกิจเทคโนโลยี" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  1,2,3,4,5,6,7]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','รายการแผนธุรกิจเทคโนโลยี');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
             var table = $('#fulltbptable').DataTable();
@@ -2028,7 +2228,31 @@
                         'previous': 'ก่อนหน้า',
                         'next': 'ถัดไป'
                     }
+                },
+                buttons: [
+                    { 
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        text: 'Excel',
+                        title: function () { 
+                            return null; 
+                        },
+                        filename: function() {
+                            return "ผลการประเมินโครงการ" ;      
+                        }, 
+                        exportOptions: {
+                            columns: [  1,2,3,4, 7,8,9]
+                        },
+                        customize: function( xlsx ) {
+                            var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                            source.setAttribute('name','ผลการประเมินโครงการ');
+                        }, 
+                    }        
+                ],
+                drawCallback: function() {
+                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
+    
             });
 
             var table_tb2 = $('#reporttable').DataTable();
@@ -2174,7 +2398,7 @@
             e.preventDefault();
             var urlToRedirect = e.currentTarget.getAttribute('href');
             Swal.fire({
-                    title: 'ยืนยัน',
+                    title: 'โปรดยืนยัน',
                     text: `ต้องการสิ้นสุดโครงการ`,
                     type: 'warning',
                     showCancelButton: true,
@@ -2191,7 +2415,7 @@
         }
         $(document).on("click",".confirmsendletter",function(e){
             Swal.fire({
-                title: 'ยืนยัน',
+                title: 'โปรดยืนยัน',
                 text: `ยืนยันการส่งจดหมายแล้ว `,
                 type: 'warning',
                 showCancelButton: true,
@@ -2213,7 +2437,7 @@
 
         $(document).on("click",".notifyresult",function(e){
             Swal.fire({
-                title: 'ยืนยัน',
+                title: 'โปรดยืนยัน',
                 text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมิน`,
                 type: 'warning',
                 showCancelButton: true,

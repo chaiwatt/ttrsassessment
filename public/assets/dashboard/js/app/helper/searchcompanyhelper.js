@@ -14,6 +14,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
             $("#soundex_wrapper").attr("hidden",false);
+            $("#searchprojectnumber_wrapper").attr("hidden",true);
             $("#soundex_res").html('');
         }else if(selectedtedtext == 'รหัส ISIC'){
             $("#registeredcapital_wrapper").attr("hidden",true);
@@ -23,6 +24,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
             $("#soundex_wrapper").attr("hidden",true);
+            $("#searchprojectnumber_wrapper").attr("hidden",true);
             $("#soundex_res").html('');
         }else if(selectedtedtext == 'กลุ่มอุตสาหกรรม'){
             $("#registeredcapital_wrapper").attr("hidden",true);
@@ -32,6 +34,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",false);
             $("#searchword_wrapper").attr("hidden",true);
             $("#soundex_wrapper").attr("hidden",true);
+            $("#searchprojectnumber_wrapper").attr("hidden",true);
             $("#soundex_res").html('');
         }else if(selectedtedtext == 'ชื่อบริษัท'){
             $("#registeredcapital_wrapper").attr("hidden",true);
@@ -41,6 +44,7 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
             $("#soundex_wrapper").attr("hidden",false);
+            $("#searchprojectnumber_wrapper").attr("hidden",true);
             $("#soundex_res").html('');
         }else if(selectedtedtext == 'ทุนจดทะเบียน'){
             $("#isic_wrapper").attr("hidden",true);
@@ -50,6 +54,17 @@ $(document).on('change', '#searchgroup', function(e) {
             $("#searchindustrygroup_wrapper").attr("hidden",true);
             $("#searchword_wrapper").attr("hidden",true);
             $("#soundex_wrapper").attr("hidden",true);
+            $("#searchprojectnumber_wrapper").attr("hidden",true);
+            $("#soundex_res").html('');
+        }else if(selectedtedtext == 'เลขที่โครงการ'){
+            $("#isic_wrapper").attr("hidden",true);
+            $("#registeredcapital_wrapper").attr("hidden",true);
+            $("#searchcompanyname_wrapper").attr("hidden",true);
+            $("#searchprojectname_wrapper").attr("hidden",true);
+            $("#searchindustrygroup_wrapper").attr("hidden",true);
+            $("#searchword_wrapper").attr("hidden",true);
+            $("#soundex_wrapper").attr("hidden",true);
+            $("#searchprojectnumber_wrapper").attr("hidden",false);
             $("#soundex_res").html('');
         }
 
@@ -95,6 +110,14 @@ $(document).on('click', '#btnsearch', function(e) {
                 });
                 $("#soundex_res").append(text);
             }
+        })
+        .catch(error => {})
+    }  
+
+    if(selectedtedtext == 'เลขที่โครงการ'){
+        $("#soundex_res").html('');
+        SearchCompany.searchProjectNumber($('#searchprojectnumber').val()).then(data => {
+            createTable(data);
         })
         .catch(error => {})
     }  

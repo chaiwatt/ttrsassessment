@@ -7,7 +7,7 @@ $(document).on('click', '.user', function(e) {
     }
 
     Swal.fire({
-        title: 'ยืนยัน',
+        title: 'โปรดยืนยัน',
         text: `ต้องการยืนยันการใช้งานผู้เชี่ยวชาญ `,
         type: 'warning',
         showCancelButton: true,

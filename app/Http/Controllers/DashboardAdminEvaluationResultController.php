@@ -27,8 +27,9 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 
-use App\Model\UserPosition;
+use App\Model\ProjectGrade;
 
+use App\Model\UserPosition;
 use App\Model\EvaluationDay;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
@@ -38,8 +39,8 @@ use App\Model\EvaluationMonth;
 use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
 use App\Model\ExpertAssignment;
-use App\Model\ProjectAssignment;
 
+use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Helper\ThaiNumericConverter;
 use Illuminate\Support\Facades\Auth;
@@ -94,8 +95,15 @@ class DashboardAdminEvaluationResultController extends Controller
        
         $experts = User::whereIn('id',$expertarr)->get();
 
-        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)->withLeaders($leaders)
-        ->withExperts($experts);
+        $gradearr = [];
+        $gradearr =  ProjectGrade::pluck('grade')->toArray();
+        if(count($gradearr) > 0){
+            $gradearr =array_unique($gradearr);
+        }
+
+        $gradecollection = collect($gradearr);
+
+        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection);
     }
     public function Edit($id){
         $evaluationmonths = EvaluationMonth::get();
