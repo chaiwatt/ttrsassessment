@@ -1137,19 +1137,19 @@ th {
 								<input type="text" id="sellstatus" placeholder="รายการ" class="form-control form-control-lg" readonly>
 							</div>
 							<div class="form-group">
-								<label><span id='selllabel0'>ยอดขาย</span> ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<label><span id='selllabel0'>วงเงินตามสัญญาฯ</span> ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
-								<label><span id='selllabel1'>ยอดขาย</span> ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<label><span id='selllabel1'>วงเงินตามสัญญาฯ</span> ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit1" placeholder="ปี {{$fulltbp->past1}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
-								<label><span id='selllabel2'>ยอดขาย</span> ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<label><span id='selllabel2'>วงเงินตามสัญญาฯ</span> ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit2" placeholder="ปี {{$fulltbp->past2}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
-								<label><span id='selllabel3'>ยอดขาย</span> ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<label><span id='selllabel3'>วงเงินตามสัญญาฯ</span> ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellstatuspastedit3" placeholder="ปี {{$fulltbp->past3}}" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
@@ -1409,7 +1409,7 @@ th {
 							</div>
 							<div class="form-group">
 								<label>ข้อมูลจำเพาะทางเทคนิค (Specification)</label><span class="text-danger">*</span>
-								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg stringformat200"></textarea>
+								<textarea type="text" id="assetspecificationedit" placeholder="ข้อมูลจำเพาะทางเทคนิค (Specification)" rows="4" class="form-control form-control-lg stringformat600"></textarea>
 								<span id="assetspecificationedit_error" class="form-text text-warning "  hidden >กรุณากรอกรูปแบบข้อมูลให้ถูกต้อง</span>
 							</div>
 						</div>
@@ -1787,19 +1787,19 @@ th {
 														<div class="col-md-6">
 															<div class="form-group">
 																<label><strong>1.4) ทุนที่จดทะเบียน</strong></label><span class="text-danger">*</span>
-																<input type="text" value="{{$fulltbp->minitbp->businessplan->company->registeredcapital}}"  placeholder="ทุนที่จดทะเบียน" class="form-control form-control-lg" readonly>
+																<input type="text" value="{{number_format($fulltbp->minitbp->businessplan->company->registeredcapital, 2)}}"  placeholder="ทุนที่จดทะเบียน" class="form-control form-control-lg numeralformat10" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label><strong>1.5) ทุนจดทะเบียนที่เรียกชำระแล้ว</strong></label><span class="text-danger">*</span>
-																<input type="text"  value="{{$fulltbp->minitbp->businessplan->company->paidupcapital}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
+																<input type="text"  value="{{number_format($fulltbp->minitbp->businessplan->company->paidupcapital, 2)}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg numeralformat10" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label><strong>วันที่ชำระทุนจดทะเบียน</strong></label><span class="text-danger">*</span>
-																<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="ทุนจดทะเบียนที่เรียกชำระแล้ว" class="form-control form-control-lg" readonly>
+																<input type="text" value="{{$fulltbp->minitbp->businessplan->company->paidupcapitaldateth}}"  placeholder="วันที่ชำระทุนจดทะเบียน" class="form-control form-control-lg" readonly>
 															</div>
 														</div>
 														<div class="col-md-12">
@@ -3238,7 +3238,6 @@ th {
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for=""><u>เงินลงทุนในสินทรัพย์ถาวรของโครงการ</u></label>
-															{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p> --}}
 														</div>
 														<div class="table-responsive">
 															<table class="table table-bordered table-striped">

@@ -1233,7 +1233,7 @@
                                         @endif
                                         
                                         <th style="width:1%;white-space: nowrap;text-align: center">สถานภาพ</th>
-                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden >hidden_leader</th> 
                                         <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
                                         <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_grade</th> 
                                     </tr>
@@ -2031,7 +2031,6 @@
                     }        
                 ],
                 drawCallback: function() {
-                    // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
             var table_tb1 = $('#maintable').DataTable();
@@ -2043,7 +2042,7 @@
             var expertrindex_tb1 = 0;
             var gradeindex_tb1 = 0;
             
-            $("#fulltbptable th").each(function (i) {
+            $("#maintable th").each(function (i) {
                 if ($($(this)).html() == "hidden_leader") {
                     leaderindex_tb1 = i; 
                 }
@@ -2055,6 +2054,7 @@
                 }
             });
             $("#leaderFilter_tb1").change(function (e) {
+                // console.log(leaderindex_tb1);
                 customSearhExact_tb1("#leaderFilter_tb1",leaderindex_tb1);
                 $("#expertFilter_tb1").prop("selectedIndex", 0);
                 $("#gradeFilter_tb1").prop("selectedIndex", 0);
@@ -2286,7 +2286,7 @@
                 $("#gradeFilter_tb2").prop("selectedIndex", 0);
             });
             $("#gradeFilter_tb2").change(function (e) {
-                console.log('ok');
+                // console.log('ok');
                 customSearhExact_tb2("#gradeFilter_tb2",gradeindex_tb2);
                 $("#leaderFilter_tb2").prop("selectedIndex", 0);
                 $("#expertFilter_tb2").prop("selectedIndex", 0);

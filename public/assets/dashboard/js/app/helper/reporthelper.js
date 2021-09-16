@@ -2138,10 +2138,6 @@ $(document).on('click', '#select_gradebyisic_excel', function(e) {
     $('#gradebyisic_table').DataTable().buttons(0,0).trigger();
 });
 
-$(document).on('click', '#select_gradebypillar_excel', function(e) {
-    $('#gradebypillar_table').DataTable().buttons(0,0).trigger();
-});
-
 $(document).on('click', '#select_maintable_excel', function(e) {
     $('#maintable').DataTable().buttons(0,0).trigger();
 });

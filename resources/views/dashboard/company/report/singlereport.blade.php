@@ -83,10 +83,10 @@
                         <div class="card bg-teal-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0" style="font-size: 32px"><span id="showscore">{{ intVal(@$businessplan->minitbp->fulltbp->projectgrade->percent)}}</span></h1>
+                                    <h1 class="font-weight-semibold mb-0" style="font-size: 36px"><span id="showscore">{{ intVal(@$businessplan->minitbp->fulltbp->projectgrade->percent)}}</span></h1>
                                 </div>
                                 <div>
-                                    คะแนน
+                                  <span style="font-size: 24px">คะแนน</span>  
                                 </div>
                             </div>
                             <div class="container-fluid">
@@ -98,10 +98,11 @@
                         <div class="card bg-blue-400">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h1 class="font-weight-semibold mb-0" style="font-size: 32px"><span id="showgrade">{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}</span></h1>
+                                    <h1 class="font-weight-semibold mb-0" style="font-size: 36px"><span id="showgrade">{{@$businessplan->minitbp->fulltbp->projectgrade->grade}}</span></h1>
                                 </div>
                                 <div>
-                                    ระดับเกรดการประเมิน
+                                    
+                                    <span style="font-size: 24px">ระดับเกรดการประเมิน</span> 
                                 </div>
                             </div>
                             <div id="today-revenue"></div>
@@ -119,11 +120,77 @@
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <div class="chart-container" >
-                                            <div class="chart has-fixed-height" style="margin-top:-40px; " id="progress_chart"></div>
+                                            <div class="chart has-fixed-height" style="height: 500px; " id="progress_chart"></div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
+                            {{-- <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-1 c-20">
+                                    </div>
+                                    <div class="col-md-9 l-40 none">
+                                        <div style="margin-top: 50px;"></div>
+                                        <div class="chart has-fixed-height" style="height: 500px;padding-left:100px"  id="progress_chart"></div>
+                                    </div>
+                                    <div class="col-md-2 c-100">
+                                        <table class="table-score table-7 table-bordered table-dark" style="width: 200px">
+                                            <thead>
+                                                <tr>
+                                                    <td class="bg-01 white" colspan="2">Level Classification</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="bg-02">
+                                                    <td style="width:100px"> 87-100</td>
+                                                    <td>AAA</td>
+                                                </tr>
+                                                <tr class="bg-03">
+                                                    <td>80-86</td>
+                                                    <td>AA</td>
+                                                </tr>
+                                                <tr class="bg-02">
+                                                    <td>74-79</td>
+                                                    <td>A</td>
+                                                </tr>
+                                                <tr class="bg-03">
+                                                    <td>70-73</td>
+                                                    <td>BBB</td>
+                                                </tr>
+                                                <tr class="bg-02">
+                                                    <td>64-69</td>
+                                                    <td>BB</td>
+                                                </tr>
+                                                <tr class="bg-03">
+                                                    <td>56-63</td>
+                                                    <td>B</td>
+                                                </tr>
+                                                <tr class="bg-02">
+                                                    <td>54-55</td>
+                                                    <td>CCC</td>
+                                                </tr>
+                                                <tr class="bg-03">
+                                                    <td>51-52</td>
+                                                    <td>CC</td>
+                                                </tr>
+                                                <tr class="bg-02">
+                                                    <td>48-50</td>
+                                                    <td>C</td>
+                                                </tr>
+                                                <tr class="bg-03">
+                                                    <td>25-47</td>
+                                                    <td>D</td>
+                                                </tr>
+                                                <tr class="bg-02">
+                                                    <td>0-24</td>
+                                                    <td>E</td>
+                                                </tr>
+                                            </tbody>
+                                      </table>
+                                    </div>
+                                </div>
+                            </div> --}}
                         </div>
 
                         @php

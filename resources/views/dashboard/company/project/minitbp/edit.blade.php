@@ -1303,7 +1303,7 @@
 		}else{
 			Swal.fire({
 				title: 'ข้อมูลแก้ไข',
-				text: 'กรุณากรอกรายการ/รายละเอียดที่ท่านได้แก้เอกสาร Mini TBP',
+				text: 'โปรดระบุรายละเอียด/รายการที่ท่านได้แก้ในเอกสาร Mini TBP',
 				input: 'textarea',
 				inputAttributes: {
 				autocapitalize: 'off'

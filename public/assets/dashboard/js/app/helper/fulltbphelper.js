@@ -2274,15 +2274,19 @@ $(document).on('click', '.editsellstatus', function(e) {
 
         let position = data.name.indexOf('Letter of Credit');
         if(position != -1){
-            selllabel0 = 'ยอดขายเปิด LC';
-            selllabel1 = 'ยอดขายเปิด LC';
-            selllabel2 = 'ยอดขายเปิด LC';
-            selllabel3 = 'ยอดขายเปิด LC';
+            selllabel0 = 'ยอดขายเปิด L/C';
+            selllabel1 = 'ยอดขายเปิด L/C';
+            selllabel2 = 'ยอดขายเปิด L/C';
+            selllabel3 = 'ยอดขายเปิด L/C';
         }
 
         position = data.name.indexOf('วงเงินตามสัญญา');
         if(position != -1){
             var modal_header = 'รายการวงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน';
+            selllabel0 = 'วงเงินตามสัญญาฯ';
+            selllabel1 = 'วงเงินตามสัญญาฯ';
+            selllabel2 = 'วงเงินตามสัญญาฯ';
+            selllabel3 = 'วงเงินตามสัญญาฯ';
         }
 
         
@@ -3628,7 +3632,7 @@ $(document).on('click', '#submitfulltbp', function(e) {
     }else{
         Swal.fire({
             title: 'ข้อมูลแก้ไข',
-            text: 'กรุณากรอกรายการ/รายละเอียดที่ท่านได้แก้เอกสาร Full TBP',
+            text: 'โปรดระบุรายละเอียด/รายการที่ท่านได้แก้ในเอกสาร Full TBP',
             input: 'textarea',
             inputAttributes: {
               autocapitalize: 'off'
