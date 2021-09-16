@@ -6,7 +6,6 @@ use App\User;
 use Carbon\Carbon;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
-use App\Model\expertDetail;
 use App\Model\ExpertDetail;
 use App\Model\ProjectMember;
 use Illuminate\Contracts\View\View;
