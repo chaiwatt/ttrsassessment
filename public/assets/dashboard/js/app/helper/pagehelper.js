@@ -41,7 +41,7 @@ $(document).on("click","#deletecategory",function(e){
         return;
     }
     Swal.fire({
-        title: 'คำเตือน!',
+        title: 'คำเตือน',
         text: `ต้องการลบรายการ ${$("#pagecategory option:selected").text()} `,
         type: 'warning',
         showCancelButton: true,
@@ -85,7 +85,7 @@ $(document).on("click","#edittag",function(e){
     var count = $("#pagetag :selected").length;
     if(count == 0 || count > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'เลือกรายการไม่ถูกต้อง!',
             }).then((result) => {
                 // alert(createhospitallink);
@@ -114,7 +114,7 @@ $(document).on("click","#deletetag",function(e){
     var count = $("#pagetag :selected").length;
     if(count == 0 || count > 1){
                Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'เลือกรายการไม่ถูกต้อง!',
                 }).then((result) => {
                     // alert(createhospitallink);
@@ -122,7 +122,7 @@ $(document).on("click","#deletetag",function(e){
         return;
     }
     Swal.fire({
-        title: 'คำเตือน!',
+        title: 'คำเตือน',
         text: `ต้องการลบรายการ ${$("#pagetag option:selected").text()} `,
         type: 'warning',
         showCancelButton: true,
@@ -158,7 +158,7 @@ $("#singlefile").on('change', function() {
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -264,7 +264,7 @@ $("#file").on('change', function() {
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;

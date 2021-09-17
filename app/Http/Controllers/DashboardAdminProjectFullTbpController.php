@@ -26,6 +26,7 @@ use App\Model\EvCommentTab;
 use App\Model\ExpertDetail;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
+use App\Model\PopupMessage;
 use App\Model\ProjectGrade;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
@@ -142,8 +143,13 @@ class DashboardAdminProjectFullTbpController extends Controller
         }
 
         $gradecollection = collect($gradearr);
+        $popupmessages = PopupMessage::get();
 
-        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps)->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection) ;
+        return view('dashboard.admin.project.fulltbp.index')->withFulltbps($fulltbps)
+        ->withLeaders($leaders)
+        ->withExperts($experts)
+        ->withGradecollection($gradecollection)
+        ->withPopupmessages($popupmessages);
     }
 
     public function View($id){
@@ -390,12 +396,13 @@ class DashboardAdminProjectFullTbpController extends Controller
 
         $arr = ExpertRejectAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
         $expertrejectassignmentusers = User::whereIn('id',$arr)->get() ;
-        // return $expertrejectassignments;
-
+        $popupmessages = PopupMessage::get();
+        // return $popupmessages;
         return view('dashboard.admin.project.fulltbp.assignexpertreview')->withExpertassignments($expertassignments)
                                                         ->withExperts($experts)
                                                         ->withFulltbp($fulltbp)
-                                                        ->withExpertrejectassignmentusers($expertrejectassignmentusers);
+                                                        ->withExpertrejectassignmentusers($expertrejectassignmentusers)
+                                                        ->withPopupmessages($popupmessages);
     }
 
     public function AssignExpertReviewSave(AssignExpertRequest $request,$id){
@@ -831,12 +838,15 @@ class DashboardAdminProjectFullTbpController extends Controller
     }
 
     public function EditEv($id){
+        
         $ev = Ev::find($id);
         $evs = Ev::where('full_tbp_id','!=',$ev->full_tbp_id)->orWhereNull('full_tbp_id')->get();
         $evedithistories = EvEditHistory::where('ev_id',$id)->where('historytype',1)->get();
         $evcommenttabs = EvCommentTab::where('ev_id',$id)->where('stage',1)->get();
         $fulltbp = FullTbp::find($ev->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $popupmessages = PopupMessage::get();
+ 
         if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
             if(Auth::user()->user_type_id == 3){
                 if($ev->status < 4){
@@ -847,13 +857,15 @@ class DashboardAdminProjectFullTbpController extends Controller
                     return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
                     ->withEv($ev)
                     ->withEvedithistories($evedithistories)
-                    ->withEvcommenttabs($evcommenttabs);
+                    ->withEvcommenttabs($evcommenttabs)
+                    ->withPopupmessages($popupmessages);
                 }
             }else{
                 return view('dashboard.admin.project.fulltbp.editev')->withEvs($evs)
                 ->withEv($ev)
                 ->withEvedithistories($evedithistories)
-                ->withEvcommenttabs($evcommenttabs);
+                ->withEvcommenttabs($evcommenttabs)
+                ->withPopupmessages($popupmessages);
             }
            
         }else{

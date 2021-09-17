@@ -230,14 +230,19 @@
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            branchid: "{{Auth::user()->branch_id}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
+
+        var popupmessage = null;
+
         function confirmfinish(e) {
             e.preventDefault();
             var urlToRedirect = e.currentTarget.getAttribute('href');
-            Swal.fire({
-                    title: 'โปรดยืนยัน',
-                    text: `ต้องการสิ้นสุดโครงการ`,
+                popupmessage = route.popupmessages.find(x => x.id ==74);
+                Swal.fire({
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -252,9 +257,10 @@
             });
         }
         $(document).on("click",".confirmsendletter",function(e){
+            popupmessage = route.popupmessages.find(x => x.id ==73);
             Swal.fire({
-                title: 'โปรดยืนยัน',
-                text: `ยืนยันการส่งจดหมายแล้ว `,
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -274,9 +280,10 @@
         }); 
 
         $(document).on("click",".notifyresult",function(e){
+            popupmessage = route.popupmessages.find(x => x.id ==72);
             Swal.fire({
-                title: 'โปรดยืนยัน',
-                text: `การแจ้งผลจะแสดงเกรดและผลการประเมินให้ผู้ประกอบการทราบ ยืนยันแจ้งผลการประเมิน`,
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                 type: 'warning',
                 showCancelButton: true,
                 showDenyButton: true,

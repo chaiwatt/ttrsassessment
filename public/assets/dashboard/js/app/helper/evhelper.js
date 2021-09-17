@@ -205,8 +205,8 @@ function RowSpan(){
 
 $(document).on('click', '.deletepillar', function(e) {
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -231,8 +231,8 @@ $(document).on('click', '.deletepillar', function(e) {
 
 $(document).on('click', '.deletesubpillar', function(e) {
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -258,8 +258,8 @@ $(document).on('click', '.deletesubpillar', function(e) {
 
 $(document).on('click', '.deletesubpillarindex', function(e) {
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

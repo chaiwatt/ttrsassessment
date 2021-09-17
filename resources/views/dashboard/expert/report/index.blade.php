@@ -274,11 +274,16 @@
                                                         {{$fulltbp->finalassessmentdate}}
                                                     @endif
                                                 </td> 
-                                                <td style="white-space: nowrap"> 
+                                                <td style="text-align:center"> 
                                                     @if($fulltbp->expertassignment->accepted == 1)
                                                             @if (Empty($fulltbp->expertcomment))
-                                                                    <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-warning">แสดงความเห็น</a> 
-                                                                @else
+                                                                    @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 9)
+                                                                            {{-- <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ความเห็น</a> 
+                                                                        @else --}}
+                                                                            <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" class="btn btn-sm bg-primary">แสดงความเห็น</a> 
+                                                                    @endif
+                                                                    
+                                                            @else
                                                                     <a href="{{route('dashboard.expert.project.comment.edit',['id' => $fulltbp->id])}}" ><span class="badge badge-flat border-success text-success-600">แสดงความเห็นแล้ว</span></a> 
                                                             @endif
                                                     @endif
@@ -296,6 +301,7 @@
                                                 @endif
 
                                                 <td style="white-space: nowrap">  
+                                                    
                                                     <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
                                                 </td>  
                                             </tr>

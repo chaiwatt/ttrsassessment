@@ -1,4 +1,4 @@
-        
+var popupmessage = null;
 
 import * as Attendee from './eventcalendarattendee.js';
        var  participatedata = null;
@@ -171,7 +171,7 @@ import * as Attendee from './eventcalendarattendee.js';
 
             getRadarChartData().then(data => {
                 globaldata = data;
-                console.log(globaldata);
+                // console.log(globaldata);
                 callUpdateChart(globaldata);
                 callGenRadarGradeByPillar(globaldata);
                 callGenRadarByBusinessSize(globaldata);
@@ -518,7 +518,7 @@ function createGradebyBusinessTypeDataTable(data){
         });
     });
 
-    console.log(gradebybusinesstypedata);
+    // console.log(gradebybusinesstypedata);
 
     $('#gradebybusinesstype_table').DataTable( {
         dom: 'Bfrtip',
@@ -787,9 +787,10 @@ function createGradebyIsicDataTable(data){
     }
 
     $(document).on("click",".removereject",function(e){
+        popupmessage = route.popupmessages.find(x => x.id ==64);
         Swal.fire({
-            title: 'โปรดยืนยัน!',
-            text: `ต้องการเปลี่ยนเป็นให้เข้าร่วม `,
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

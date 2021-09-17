@@ -85,7 +85,7 @@ $(document).on('change', '#calendarattachment', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -93,14 +93,14 @@ $(document).on('change', '#calendarattachment', function(e) {
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -143,8 +143,8 @@ $(document).on('change', '#calendarattachment', function(e) {
 
 $(document).on("click",".deleteattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

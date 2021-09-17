@@ -20,6 +20,7 @@ use App\Model\ProjectLog;
 use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
 use App\Model\GradeSummary;
+use App\Model\PopupMessage;
 use App\Model\ProjectGrade;
 use App\Model\ExpertComment;
 use App\Model\ProjectMember;
@@ -105,18 +106,21 @@ class DashboardAdminProjectAssessmentController extends Controller
         $user = User::find($userid);   
         $projectgrade = ProjectGrade::where('full_tbp_id',$fulltbp->id)->where('percent','!=',0)->get();  
         $check = ProjectMember::where('full_tbp_id',$fulltbp->id)->where('user_id',Auth::user()->id)->first();  
-        
+        $popupmessages = PopupMessage::get();
+
         if(!Empty($check)){
             return view('dashboard.admin.project.assessment.edit')->withEv($ev)
             ->withScoringstatus($scoringstatus)
             ->withUser($user)
-            ->withProjectgrade($projectgrade);
+            ->withProjectgrade($projectgrade)
+            ->withPopupmessages($popupmessages);
         }else{
             if($businesspaln->business_plan_status_id >= 8 && Auth::user()->user_type_id > 5 ){
                 return view('dashboard.admin.project.assessment.edit')->withEv($ev)
                 ->withScoringstatus($scoringstatus)
                 ->withUser($user)
-                ->withProjectgrade($projectgrade);
+                ->withProjectgrade($projectgrade)
+                ->withPopupmessages($popupmessages);
             }else{
                 Auth::logout();
                 Session::flush();

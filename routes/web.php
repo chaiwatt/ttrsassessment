@@ -970,6 +970,12 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminDashboardPrefixController@EditSave')->name('setting.admin.dashboard.prefix.editsave'); 
                     Route::get('delete/{id}','SettingAdminDashboardPrefixController@Delete')->name('setting.admin.dashboard.prefix.delete'); 
                 }); 
+                Route::group(['prefix' => 'popup'], function(){
+                    Route::get('','SettingAdminDashboardPopupmessageController@Index')->name('setting.admin.dashboard.popup');           
+                    Route::get('edit/{id}','SettingAdminDashboardPopupmessageController@Edit')->name('setting.admin.dashboard.popup.edit'); 
+                    Route::post('editsave/{id}','SettingAdminDashboardPopupmessageController@EditSave')->name('setting.admin.dashboard.popup.editsave'); 
+                    Route::get('restore','SettingAdminDashboardPopupmessageController@Restore')->name('setting.admin.dashboard.popup.restore'); 
+                }); 
                 Route::group(['prefix' => 'religion'], function(){
                     Route::get('','SettingAdminDashboardReligionController@Index')->name('setting.admin.dashboard.religion');           
                     Route::get('create','SettingAdminDashboardReligionController@Create')->name('setting.admin.dashboard.religion.create'); 

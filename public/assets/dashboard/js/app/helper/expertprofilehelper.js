@@ -15,7 +15,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
         
         if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
             Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'กรุณากรอกข้อมูลให้ครบ!',
             });
             return;
@@ -32,7 +32,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
 
         if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
             Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
             });
             return;
@@ -83,7 +83,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
                 
                         if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
                             Swal.fire({
-                                title: 'ผิดพลาด...',
+                                title: 'ผิดพลาด',
                                 text: 'กรุณากรอกข้อมูลให้ครบ!',
                             });
                             return;
@@ -100,7 +100,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
 
                         if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
                             Swal.fire({
-                                title: 'ผิดพลาด...',
+                                title: 'ผิดพลาด',
                                 text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
                             });
                             return;
@@ -138,7 +138,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
                 
             if($('#expertfieldnum').val() == '' || $('#expertfielddetail').val() == ''){
                 Swal.fire({
-                    title: 'ผิดพลาด...',
+                    title: 'ผิดพลาด',
                     text: 'กรุณากรอกข้อมูลให้ครบ!',
                 });
                 return;
@@ -155,7 +155,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
 
             if(data.indexOf(parseInt($('#expertfieldnum').val())) != -1){
                 Swal.fire({
-                    title: 'ผิดพลาด...',
+                    title: 'ผิดพลาด',
                     text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
                 });
                 return;
@@ -208,8 +208,8 @@ function isSequentials(data) {
 
 $(document).on("click",".deleteexpertfield",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -268,14 +268,14 @@ $(document).on("click",".editexpertfield",function(e){
 $("#btn_modal_edit_expertfield").on('click', function() {
     if($('#expertfieldnum_edit').val() == '' || $('#expertfielddetail_edit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'กรุณากรอกข้อมูลให้ครบ!',
         });
         return;
     }
     if(globaldata.indexOf(parseInt($('#expertfieldnum_edit').val())) != -1 && (parseInt($('#expertfieldnum_edit').val()) != parseInt($('#currentid').val()))){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไม่สามารถใช้ลำดับซ้ำได้!',
         });
         return;
@@ -312,7 +312,7 @@ $("#expertdoc").on('change', function() {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -321,14 +321,14 @@ $("#expertdoc").on('change', function() {
 
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB!',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -364,8 +364,8 @@ $("#expertdoc").on('change', function() {
 
 $(document).on("click",".deleteexpertdoc",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -398,7 +398,7 @@ $("#coverimg").on('change', function() {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -406,14 +406,14 @@ $("#coverimg").on('change', function() {
     }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB!',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -451,7 +451,7 @@ $("#avatarimg").on('change', function() {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -459,14 +459,14 @@ $("#avatarimg").on('change', function() {
     }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB!',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -491,7 +491,7 @@ $("#avatarimg").on('change', function() {
 $("#sameaddress").on('change', function() {
     if($("#province").val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ยังไม่ได้เพิ่มที่อยู่ตามบัตรประจำตัวประชาชน',
             });
         return ;
@@ -522,7 +522,7 @@ $("#sameaddress").on('change', function() {
 // $(document).on("change","#phone",function(e){
 //     if(($("#phone").val().length < 9 || $("#phone").val().length > 10) || $("#phone").val().charAt(0) != '0'){
 //         Swal.fire({
-//             title: 'ผิดพลาด...',
+//             title: 'ผิดพลาด',
 //             text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
 //         });
 //         $('#phone').val('')

@@ -1,12 +1,12 @@
 import * as Bol from './bol.js';
-
+var popupmessage = null;
 $(document).on('change', '#boldoc', function(e) {
         var file = this.files[0];
         var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
         var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
         if(!validExtensions.includes(fextension)){
             Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
                 });
             this.value = "";
@@ -14,14 +14,14 @@ $(document).on('change', '#boldoc', function(e) {
         }
         if (this.files[0].size/1024/1024*1000 > 5120 ){
             Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'ไฟล์ขนาดมากกว่า 5 MB!',
                 });
             return ;
         }
         if (this.files[0].name.length > 70 ){
             Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
                 });
             return ;
@@ -50,9 +50,10 @@ $(document).on('change', '#boldoc', function(e) {
                      $("#fulltbp_bol_wrapper_tr").html(html);
                      $('#docname').val("");
                      $('#modal_add_bol').modal('hide');
+                     popupmessage = route.popupmessages.find(x => x.id ==65);
                      Swal.fire({
-                        title: 'สำเร็จ',
-                        text: 'เพิ่มไฟล์ BOL สำเร็จ',
+                         title: popupmessage['title'],
+                         text: popupmessage['message'],
                         });
                     return ;
             }
@@ -61,8 +62,8 @@ $(document).on('change', '#boldoc', function(e) {
 
     $(document).on("click",".deletebol",function(e){
         Swal.fire({
-            title: 'คำเตือน!',
-            text: `ต้องการลบรายการ `,
+            title: 'คำเตือน',
+            text: `ต้องการลบรายการ`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

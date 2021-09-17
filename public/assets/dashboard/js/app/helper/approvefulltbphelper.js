@@ -1,6 +1,8 @@
 import * as FullTbp from './fulltbp.js'
 import * as Calendar from './calendar.js'
 
+var popupmessage = null;
+
 $(document).on('click', '#editapprove', function(e) {
     $('#fulltbpid').val($(this).data('id'));
     $('#modal_edit_fulltbp').modal('show');
@@ -20,9 +22,10 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
       return ;
   }
     if(check == 1){
+      popupmessage = route.popupmessages.find(x => x.id ==30);
       Swal.fire({
-        title: 'โปรดยืนยัน',
-        text: `ต้องการอนุมัติ Full TBP`,
+        title: popupmessage['title'],
+        text: popupmessage['message'],
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -41,9 +44,10 @@ $(document).on('click', '#btn_modal_edit_fulltbp', function(e) {
         }
       });
     }else if(check == 2){
+      popupmessage = route.popupmessages.find(x => x.id ==31);
       Swal.fire({
-        title: 'โปรดยืนยัน',
-        text: `ต้องการส่งคืน Full TBP ให้แก้ไข`,
+        title: popupmessage['title'],
+        text: popupmessage['message'],
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -161,7 +165,7 @@ $(document).on('click', '#btn_modal_edit_projectmember', function(e) {
           }
           // if(typeof(data.iserror) != "undefined"){
           //   Swal.fire({
-          //     title: 'ผิดพลาด...',
+          //     title: 'ผิดพลาด',
           //     text: 'ไฟล์ขนาดมากกว่า 5 MB!',
           //     });
           // }
@@ -471,9 +475,10 @@ function getApproveLog(fulltbpid){
 
 
 $(document).on('click', '.reaction', function(e) {
+  popupmessage = route.popupmessages.find(x => x.id ==32);
   Swal.fire({
-    title: 'ยืนยัน?',
-    text: "ต้องการทำรายการลงคะแนน",
+    title: popupmessage['title'],
+    text: popupmessage['message'],
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     confirmButtonText: 'ตกลง',

@@ -20,6 +20,7 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExtraScoring;
+use App\Model\PopupMessage;
 use App\Model\ProjectGrade;
 use App\Helper\GetEvPercent;
 use App\Model\EventCalendar;
@@ -105,7 +106,8 @@ class DashboardAdminAssessmentController extends Controller
    public function Edit($id){
         $fulltbp = FullTbp::find($id);
         $ev = Ev::where('full_tbp_id',$fulltbp->id)->first();
-        return view('dashboard.admin.assessment.edit')->withEv($ev);
+        $popupmessages = PopupMessage::get();
+        return view('dashboard.admin.assessment.edit')->withEv($ev)->withPopupmessages($popupmessages);
    }
 
    public function GetEv(Request $request){

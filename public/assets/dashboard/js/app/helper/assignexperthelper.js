@@ -1,3 +1,5 @@
+var popupmessage = null;
+
 $(document).on('change', '#expert', function(e) {
     if($(this).val() == ''){
         $('#assignedproject').html('');
@@ -137,15 +139,17 @@ function doneAssignement(fulltbpid){
 
 
 $(document).on('change', '.expert', function(e) {
-  var message = "ต้องการลบการเลือกผู้เชี่ยวชาญ";
+  popupmessage = route.popupmessages.find(x => x.id ==33);
+  var message = popupmessage['message'];
   var status = 1;
   if($(this).is(":checked")){
+    popupmessage = route.popupmessages.find(x => x.id ==34);
       status = 2;
-      message = "ต้องการเพิ่มผู้เชี่ยวชาญ";
+      message = popupmessage['message'];
   }
 
   Swal.fire({
-    title: 'การมอบหมาย',
+    title: popupmessage['title'],
     html: message,
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -162,8 +166,6 @@ $(document).on('change', '.expert', function(e) {
       location.reload()
     }
   });
-
-
 
 });
 
@@ -189,9 +191,10 @@ function assignExpert(id,status,fulltbpid){
 }
 
 $(document).on('click', '.assingexpert', function(e) {
+  popupmessage = route.popupmessages.find(x => x.id ==35);
   Swal.fire({
-    title: 'โปรดยืนยัน',
-    text: `ต้องการมอบหมายผู้เชี่ยวชาญ `,
+    title: popupmessage['title'],
+    text: popupmessage['message'],
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -292,8 +295,8 @@ $(document).on('click', '#btn_modal_add_expert', function(e) {
 
 $(document).on("click",".deleteexpert",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -375,9 +378,10 @@ $(document).on('click', '#sendtojd', function(e) {
     notifyJD(arr,route.fulltbpid).then(data => {
       $("#spinicon").attr("hidden",true);
         var html = ``;
+        popupmessage = route.popupmessages.find(x => x.id ==36);
           Swal.fire({
-            title: 'สำเร็จ',
-            text: 'ส่งผู้เชี่ยวชาญให้ Manager พิจารณาสำเร็จ',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
         }).then((result) => {
             window.location.reload();
         });

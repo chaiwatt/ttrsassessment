@@ -411,14 +411,13 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             usertypeid: "{{Auth::user()->user_type_id}}",
             refixstatus: "{{$ev->refixstatus}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
 
         $(document).on('click', '#showfulltbp', function(e) {
             PDFObject.embed("{{asset($ev->fulltbp->attachment)}}", "#example1");
             $('#modal_view_fulltbp').modal('show');
         });
-
-
         
     </script>
 @stop

@@ -4,6 +4,8 @@ var commentreadonly =``;
 var evdata = [];
 var evextradata = [];
 
+var popupmessage = null;
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'center-end',
@@ -286,7 +288,7 @@ function getEv(evid){
 
     if(sum.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + sum.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
@@ -295,7 +297,7 @@ function getEv(evid){
 
     if(newval.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + newval.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
@@ -323,7 +325,7 @@ $(document).on('focusin', '.weigthvalue', function(){
     });
     if(sum.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + sum.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
@@ -332,7 +334,7 @@ $(document).on('focusin', '.weigthvalue', function(){
     var newval = check + parseFloat($(this).val()) - parseFloat($(this).data('old'));
     if(newval.toFixed(3) > 1){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ผลรวม Weight มากกว่า 1 (ผลรวม ' + newval.toFixed(3) +')',
             });
             $(this).val($(this).data('old')) 
@@ -340,9 +342,6 @@ $(document).on('focusin', '.weigthvalue', function(){
     }
     Extra.editExtraWeight($('#evid').val(),$(this).data('id'),$(this).val()).then(data => {
         $('#extraweight').html('(' + parseFloat(data).toFixed(3) + ')');
-        // Toast.fire({
-        //     title: 'Weight sum ' + parseFloat(data).toFixed(3)
-        //   })
     }).catch(error => {})
 });
 
@@ -677,9 +676,10 @@ function updateEvAdminStatus(id,value){
         if($('#comment').val() == ''){
             return;
         }
+        popupmessage = route.popupmessages.find(x => x.id ==56);
         Swal.fire({
-            title: 'โปรดยืนยัน',
-            text: `ต้องการส่งคืนให้ Admin แก้ไข`,
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -710,8 +710,8 @@ function updateEvAdminStatus(id,value){
 
     $(document).on("click",".deletecomment",function(e){
         Swal.fire({
-            title: 'คำเตือน!',
-            text: `ต้องการลบรายการ `,
+            title: 'คำเตือน',
+            text: `ต้องการลบรายการ`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -738,9 +738,10 @@ function updateEvAdminStatus(id,value){
     }); 
 
     $(document).on('click', '#approveevstagetwo', function(e) {
+        popupmessage = route.popupmessages.find(x => x.id ==48);
         Swal.fire({
-            title: 'อนุมัติ EV!',
-            text: `ต้องการอนุมัติ EV `,
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -753,9 +754,10 @@ function updateEvAdminStatus(id,value){
                 $("#spinicon").attr("hidden",false);
                 Ev.approveEvStageTwo($(this).data('id')).then(data => {
                     $("#spinicon").attr("hidden",true);
+                    popupmessage = route.popupmessages.find(x => x.id ==57);
                     Swal.fire({
-                        title: 'สำเร็จ',
-                        text: 'EV ได้รับการอนุมัติแล้ว',
+                        title: popupmessage['title'],
+                        text: popupmessage['message'],
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -782,9 +784,10 @@ function updateEvAdminStatus(id,value){
 		},
 		enableFinishButton: submitbutton,
 		onFinished: function (event, currentIndex) {
+            popupmessage = route.popupmessages.find(x => x.id ==58);
             Swal.fire({
-                title: 'โปรดยืนยัน',
-                text: `ต้องการนำส่ง Manager `,
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -798,9 +801,10 @@ function updateEvAdminStatus(id,value){
                         $('.inputweigth').each(function() {
                             if($(this).val() == '' || $(this).val() == 0){
                                 //$(this).val(0);
+                                popupmessage = route.popupmessages.find(x => x.id ==59);
                                 Swal.fire({
-                                    title: 'ผิดพลาด...',
-                                    text: 'กรอก Weight ไม่ครบ หรือกรอกค่า Weight เป็น 0',
+                                    title: popupmessage['title'],
+                                    text: popupmessage['message'],
                                 })
                                 tempchk = 1;
                                 return ;
@@ -812,17 +816,19 @@ function updateEvAdminStatus(id,value){
                         }
                         
                         if(parseFloat($('#weight').html().replace(/[{()}]/g, '')) != 1){
+                            popupmessage = route.popupmessages.find(x => x.id ==60);
                             Swal.fire({
-                                title: 'ผิดพลาด...',
-                                text: 'ผลรวม Index Weight ไม่เท่ากับ 1',
+                                title: popupmessage['title'],
+                                text: popupmessage['message'],
                             })
                             return ;
                         }
                         if($('#percentextra').val() > 0){
                             if(parseFloat($('#extraweight').html().replace(/[{()}]/g, '')) != 1){
+                                popupmessage = route.popupmessages.find(x => x.id ==61);
                                 Swal.fire({
-                                    title: 'ผิดพลาด...',
-                                    text: 'ผลรวม Extra Weight ไม่เท่ากับ 1',
+                                    title: popupmessage['title'],
+                                    text: popupmessage['message'],
                                 })
                                 return ;
                             }
@@ -831,9 +837,10 @@ function updateEvAdminStatus(id,value){
                         sendEditEv($('#evid').val()).then(data => {
                             Ev.clearCommentTab($('#evid').val(),2).then(data => {
                                 $("#spiniconsendjd").attr("hidden",true);
+                                popupmessage = route.popupmessages.find(x => x.id ==62);
                                 Swal.fire({
-                                    title: 'สำเร็จ',
-                                    text: 'นำส่ง Manager สำเร็จ',
+                                    title: popupmessage['title'],
+                                    text: popupmessage['message'],
                                 }).then((result) => {
                                     window.location.reload();
                                 });

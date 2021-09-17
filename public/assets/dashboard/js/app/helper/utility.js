@@ -2,7 +2,7 @@ function confirmation(e) {
     e.preventDefault();
     var urlToRedirect = e.currentTarget.getAttribute('href');
     Swal.fire({
-            title: 'คำเตือน!',
+            title: 'คำเตือน',
             text: `ต้องการลบรายการ`,
             type: 'warning',
             showCancelButton: true,
@@ -22,7 +22,7 @@ function cancelproject(e) {
     e.preventDefault();
     var urlToRedirect = e.currentTarget.getAttribute('href');
     Swal.fire({
-            title: 'คำเตือน!',
+            title: 'คำเตือน',
             text: `ต้องการยกเลิกโครงการ`,
             type: 'warning',
             showCancelButton: true,

@@ -11,7 +11,7 @@ import * as FullTbp from './fulltbp.js';
 var usermessage = '';
 var d = new Date();
 var currentyear = d.getFullYear()+543;
-
+var popupmessage = null;
 
 $(document).on('keyup', '.companyprofileclass', function(e) {
     $('#companyprofiletextlength').html((90-ThaiWord.countCharTh($(this).val())));
@@ -38,22 +38,22 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             }); 
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -95,8 +95,8 @@ $(document).on('click', '#btnaddcompanyprofile', function(e) {
 
 $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -132,21 +132,21 @@ $(document).on("click",".deletefulltbpcompanyprofileattachment",function(e){
 $(document).on('click', '#btn_edit_employ', function(e) {
     if($('#employname_edit').val() == '' || $('#employlastname_edit').val() == '' || $('#employphone_edit').val() == '' || $('#employworkphone_edit').val() == '' || $('#employemail_edit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }else if(($("#employphone_edit").val().length < 9 || $("#employphone_edit").val().length > 10) || $("#employphone_edit").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employphone_edit').val('')
         return;
     }else if(($("#employworkphone_edit").val().length < 9 || $("#employworkphone_edit").val().length > 10) || $("#employworkphone_edit").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง',
         });
         $('#employworkphone_edit').val('')
         return;
@@ -155,8 +155,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_edit').val())== false)
     {
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบอีเมลไม่ถูกต้อง',
             });
         $('#employemail_edit').val('') ;
         return;
@@ -255,8 +255,8 @@ $(document).on('click', '#btn_edit_employ', function(e) {
 
 $(document).on("click",".deletecompanyemploy",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -319,8 +319,8 @@ $(document).on("click",".deletecompanyemploy",function(e){
 
 $(document).on("click",".deletecompanyceo",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -379,119 +379,29 @@ $(document).on("click",".deletecompanyceo",function(e){
 });
 
 
-// $(document).on('change', '#employemail_edit', function(e) {
-//     if($('#employemail_edit').val() != ''){
-
-//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_edit').val())== false)
-//         {
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-//                 });
-//             $('#employemail_edit').val('') ;
-//         }
-//     }
-//  });
-
-//  $(document).on('change', '#employemail_ceo', function(e) {
-//     if($('#employemail_ceo').val() != ''){
-
-//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_ceo').val())== false)
-//         {
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-//                 });
-//             $('#employemail_ceo').val('') ;
-//         }
-//     }
-//  });
-
-//  $(document).on('change', '#employemail', function(e) {
-//     if($('#employemail').val() != ''){
-
-//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail').val())== false)
-//         {
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-//                 });
-//             $('#employemail').val('') ;
-//         }
-//     }
-//  });
-
-//  $(document).on('change', '#employemail_research', function(e) {
-//     if($('#employemail_research').val() != ''){
-
-//         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_research').val())== false)
-//         {
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'รูปแบบอีเมลไม่ถูกต้อง!',
-//                 });
-//             $('#employemail_research').val('') ;
-//         }
-//     }
-//  });
- 
-
-// $(document).on('change', '#employeducationyearstart', function(e) {
-//     if($('#employeducationyearstart').val() != ''){
-//         if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200) || parseInt($('#employeducationyearstart').val()) > parseInt(currentyear)){
-//             Swal.fire({
-//                 title: 'ผิดพลาด...',
-//                 text: 'กรอกปีเริ่มต้นไม่ถูกต้อง!',
-//                 });
-//             $('#employeducationyearstart').val('') ;
-//         }
-//     }
-//  });
-
-//  $(document).on('change', '#employeducationyearend', function(e) {
-//     // if($('#employeducationyearend').val() != ''){
-//     //     if(parseInt($('#employeducationyearend').val()) > parseInt(currentyear)){
-//     //      Swal.fire({
-//     //          title: 'ผิดพลาด...',
-//     //          text: 'กรอกปีสิ้นสุดไม่ถูกต้อง!',
-//     //          });
-//     //      $('#employeducationyearend').val('') ;
-//     //  }
-//     // }
-
-//     if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
-//         Swal.fire({
-//             title: 'ผิดพลาด...',
-//             text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
-//         });
-//         $('#employeducationyearend').val('') ;
-//     }
-//  });
-
-
 $(document).on('click', '#btn_modal_add_employeducation', function(e) {
     if($('#employeducationinstitute').val() == '' || $('#employeducationmajor').val() == '' || $('#employeducationyearstart').val() == '' || $('#employeducationyearend').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }else if(parseInt($('#employeducationyearstart').val()) < (parseInt(currentyear)-200)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'กรอกปีเริ่มต้นไม่ถูกต้อง',
         });
         return;
     }else if(parseInt($('#employeducationyearend').val()) > parseInt(currentyear)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'กรอกปีสิ้นสุดไม่ถูกต้อง',
         });
         return;
     }else if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+            title: 'ผิดพลาด',
+            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด',
         });
         return;
     }
@@ -535,26 +445,26 @@ $(document).on('click', '#btnaddemployee', function(e) {
 $(document).on('click', '#btn_modal_add_employexperience', function(e) {
     if($('#employexperiencestartdate').val() == '' || $('#employexperienceenddate').val() == '' || $('#employexperiencecompany').val() == '' || $('#employexperiencebusinesstype').val() == '' || $('#employexperiencestartposition').val() == '' || $('#employexperienceendposition').val() == '' ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }else if(parseInt($('#employexperiencestartdate').val()) < (parseInt(currentyear)-200)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'กรอกปีเริ่มต้นไม่ถูกต้อง',
         });
         return;
     }else if(parseInt($('#employexperienceenddate').val()) > parseInt(currentyear)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'กรอกปีสิ้นสุดไม่ถูกต้อง',
         });
         return;
     }else if(parseInt($('#employexperiencestartdate').val()) > parseInt($('#employexperienceenddate').val())){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+            title: 'ผิดพลาด',
+            text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด',
         });
         return;
     }
@@ -589,8 +499,8 @@ $(document).on('click', '#btn_modal_add_employexperience', function(e) {
 $(document).on('click', '#btn_modal_add_employtraining', function(e) {
     if($('#employtrainingdate').val() == '' || $('#employtrainingcourse').val() == '' ||$('#employtrainingowner').val() == '' ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -631,8 +541,8 @@ $(document).on('click', '#btn_modal_add_employtraining', function(e) {
 
 $(document).on("click",".deleteemployeducation",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -671,8 +581,8 @@ $(document).on("click",".deleteemployeducation",function(e){
 
 $(document).on("click",".deleteemployexperience",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -708,8 +618,8 @@ $(document).on("click",".deleteemployexperience",function(e){
 
 $(document).on("click",".deleteemploytraining",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -857,8 +767,8 @@ $(document).on('click', '#add_sell', function(e) {
 $(document).on('click', '#btn_modal_add_stockholder', function(e) {
     if($('#employsearch').val() == '' || $('#relationwithceo').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -893,8 +803,8 @@ $(document).on('click', '.selectemploy', function(e) {
 
 $(document).on("click",".deletestockholder",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -993,8 +903,8 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
 
     if($('#tectdevleveltechnology').val() == '' || $('#tectdevleveltechnologypresent').val() == '' ||$('#tectdevleveltechnologyproject').val() == '' ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -1022,8 +932,8 @@ $(document).on('click', '#btn_modal_add_tectdevlevel', function(e) {
 
 $(document).on("click",".deleteprojectechdevlevel",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1110,8 +1020,8 @@ $(document).on('change', '#employeducationyearend', function(e) {
     if($('#employeducationyearstart').val() != ''){
      if(parseInt($('#employeducationyearstart').val()) > parseInt($('#employeducationyearend').val())){
          Swal.fire({
-             title: 'ผิดพลาด...',
-             text: 'ปีที่สิ้นสุดศึกษาน้อยกว่าปีเริ่มต้นศึกษา!',
+             title: 'ผิดพลาด',
+             text: 'ปีที่สิ้นสุดศึกษาน้อยกว่าปีเริ่มต้นศึกษา',
              });
          $('#employeducationyearend').val('') ;
      }
@@ -1228,22 +1138,22 @@ $(document).on('change', '#certify', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -1281,8 +1191,8 @@ $(document).on('change', '#certify', function(e) {
 
 $(document).on("click",".deletefulltbpcertifyattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1315,22 +1225,22 @@ $(document).on('change', '#award', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -1368,8 +1278,8 @@ $(document).on('change', '#award', function(e) {
 
 $(document).on("click",".deletefulltbpawardattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1402,22 +1312,22 @@ $(document).on('change', '#standard', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -1454,8 +1364,8 @@ $(document).on('change', '#standard', function(e) {
 
 $(document).on("click",".deletefulltbpstandardattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1493,8 +1403,8 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
 
     if($('#plandetail').val() == '' || $('#ganttnummonth').val() == '' || $('#ganttyear').val() == '' || data.length == 0){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -1580,8 +1490,8 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
         //  else{
         //     $("#spinicon_add_projectplan").attr("hidden",true);
         //         Swal.fire({
-        //         title: 'ผิดพลาด...',
-        //         text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
+        //         title: 'ผิดพลาด',
+        //         text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด',
         //     });
         //  }
     })
@@ -1717,8 +1627,8 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
         //  else{
         //     $("#spinicon_edit_projectplan").attr("hidden",true);
         //     Swal.fire({
-        //         title: 'ผิดพลาด...',
-        //         text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด!',
+        //         title: 'ผิดพลาด',
+        //         text: 'จำนวนเดือนที่เลือกมากกว่าที่กำหนด',
         //     });
         //  }
       });
@@ -1731,8 +1641,8 @@ $(document).on('click', '#btn_modal_edit_projectplan', function(e) {
 $(document).on("click",".deleteprojectplan",function(e){
     $("#notmatch_wrapper_error").attr("hidden",true);
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1890,8 +1800,8 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
@@ -1899,14 +1809,14 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
 
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'ไฟล์ขนาดมากกว่า 2 MB!',
+            title: 'ผิดพลาด',
+            text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -1946,8 +1856,8 @@ $(document).on('change', '#businessmodelcanvas', function(e) {
 
 $(document).on("click",".deletefulltbpmodelcanvasattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1980,22 +1890,22 @@ $(document).on('change', '#swotfile', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -2033,8 +1943,8 @@ $(document).on('change', '#swotfile', function(e) {
 
 $(document).on("click",".deletefulltbpswotattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2068,8 +1978,8 @@ $(document).on('change', '#financialplan', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
@@ -2077,14 +1987,14 @@ $(document).on('change', '#financialplan', function(e) {
 
     if (this.files[0].size/1024/1024*1000 > 1024 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -2119,8 +2029,8 @@ $(document).on('change', '#financialplan', function(e) {
 
 $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2151,8 +2061,8 @@ $(document).on("click",".deletefulltbpfinancialplanattachment",function(e){
 $(document).on('click', '#btn_modal_add_sell', function(e) {
     if($('#productname').val() == '' || $('#sellpresent').val() == '' || $('#sellpast1').val() == '' || $('#sellpast2').val() == '' || $('#sellpast3').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2182,8 +2092,8 @@ $(document).on('click', '#btn_modal_add_sell', function(e) {
 
 $(document).on("click",".deletesell",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2232,8 +2142,8 @@ $(document).on('click', '.editsell', function(e) {
 $(document).on('click', '#btn_modal_edit_sell', function(e) {
     if($('#productnameedit').val() == '' || $('#sellpresentedit').val() == '' || $('#sellpastedit1').val() == '' || $('#sellpastedit2').val() == '' || $('#sellpastedit3').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2335,8 +2245,8 @@ $(document).on('click', '#btn_modal_edit_sellstatus', function(e) {
 $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
     if($('#debtpartner').val() == '' || $('#numproject').val() == '' || $('#debtpartnertaxid').val() == '' || $('#debttotalyearsell').val() == '' || $('#debtpercenttosale').val() == '' || $('#debtpartneryear').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2382,8 +2292,8 @@ $(document).on('click', '.editdebtpartner', function(e) {
 $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
     if($('#debtpartneredit').val() == '' || $('#numprojectedit').val() == '' || $('#debtpartnertaxidedit').val() == '' || $('#debttotalyearselledit').val() == '' || $('#debtpercenttosaleedit').val() == '' || $('#debtpartneryearedit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2414,8 +2324,8 @@ $(document).on('click', '#btn_modal_edit_debtpartner', function(e) {
 
 $(document).on("click",".deletedebtpartner",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2451,8 +2361,8 @@ $(document).on("click",".deletedebtpartner",function(e){
 $(document).on('click', '#btn_modal_add_creditpartner', function(e) {
     if($('#creditpartner').val() == '' || $('#creditpartnertaxid').val() == '' || $('#credittotalyearsell').val() == '' || $('#creditpercenttosale').val() == '' || $('#creditpartneryear').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2496,8 +2406,8 @@ $(document).on('click', '.editcreditpartner', function(e) {
 $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
     if($('#creditpartneredit').val() == '' || $('#creditpartnertaxidedit').val() == '' || $('#credittotalyearselledit').val() == '' || $('#creditpercenttosaleedit').val() == '' || $('#creditpartneryearedit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2526,8 +2436,8 @@ $(document).on('click', '#btn_modal_edit_creditpartner', function(e) {
 
 $(document).on("click",".deletecreditpartner",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2581,8 +2491,8 @@ $(document).on('click', '.editasset', function(e) {
 $(document).on('click', '#btn_modal_edit_asset', function(e) {
     if($('#assetcostedit').val() == '' || $('#assetquantityedit').val() == '' || $('#assetpriceedit').val() == '' || $('#assetspecificationedit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2625,8 +2535,8 @@ $(document).on('click', '.editinvestment', function(e) {
 $(document).on('click', '#btn_modal_edit_investment', function(e) {
     if($('#investmentcostedit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2667,8 +2577,8 @@ $(document).on('click', '.editcost', function(e) {
 $(document).on('click', '#btn_modal_edit_cost', function(e) {
     if($('#costexistingedit').val() == '' || $('#costneededit').val() == '' || $('#costapprovededit').val() == '' || $('#costplanedit').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -2717,22 +2627,22 @@ $(document).on('change', '#companydoc', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
             Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -2768,8 +2678,8 @@ $(document).on('change', '#companydoc', function(e) {
 
 $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2799,8 +2709,8 @@ $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
 
 $(document).on("click","#delete_org_chart",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรูปแผนผังองค์กร `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรูปแผนผังองค์กร`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2842,22 +2752,22 @@ $(document).on('change', '#organizeimg', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -3229,9 +3139,10 @@ $('.steps-basic').steps({
             }
        }else if(newIndex == 4){
             if($('.chkauthorizeddirector').filter(':checked').length == 0){
+                popupmessage = route.popupmessages.find(x => x.id ==17);
                 Swal.fire({
-                    title: 'ผิดพลาด!',
-                    text: 'ยังไม่ได้เลือกผู้ลงนามในแบบฟอร์มแผนธุรกิจเทคโนโลยี',
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                 });
                 return false; 
             }else{
@@ -3243,18 +3154,20 @@ $('.steps-basic').steps({
                         }
                     });
                     if(iserror == true ){
+                        popupmessage = route.popupmessages.find(x => x.id ==18);
                         Swal.fire({
-                                title: 'ผิดพลาด!',
-                                text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
+                                title: popupmessage['title'],
+                                text: popupmessage['message'],
                             })
                             return false;
                     }
                 }
             }
             if($('#usersignature').val() == 0){
+                popupmessage = route.popupmessages.find(x => x.id ==19);
                 Swal.fire({
-                    title: 'ผิดพลาด!',
-                    text: 'กรุณาเลือกการใช้ลายมือชื่ออิเล็กทรอนิกส์',
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                 });
                 return false;
             }
@@ -3271,9 +3184,10 @@ $('.steps-basic').steps({
 $(document).on('change', '.chkauthorizeddirector', function(e) {
     if($('.chkauthorizeddirector').filter(':checked').length > 6){
         $(this).prop('checked', false);
+        popupmessage = route.popupmessages.find(x => x.id ==20);
         Swal.fire({
-            title: 'ผิดพลาด!',
-            text: 'เลือกผู้ลงนามได้ไม่เกิน 6 คน',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
         });
     }
 });
@@ -3397,8 +3311,8 @@ $(document).on('click', '#btn_modal_add_projectmember', function(e) {
 
 $(document).on("click",".deleteresearcher",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3436,8 +3350,8 @@ $(document).on("click",".deleteresearcher",function(e){
 
 $(document).on("click",".deleteprojectmember",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3473,22 +3387,22 @@ $(document).on('change', '#boardattachment', function(e) {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -3525,8 +3439,8 @@ $(document).on('change', '#boardattachment', function(e) {
 
 $(document).on("click",".deleteboardattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3572,21 +3486,24 @@ $(document).on('change', '#usersignature', function(e) {
 
 $(document).on('click', '#submitfulltbp', function(e) {
     if($('#appceptagreement').is(':checked') === false){
+        popupmessage = route.popupmessages.find(x => x.id ==21);
         Swal.fire({
-            title: 'ผิดพลาด!',
+            title: popupmessage['title'],
             type: 'warning',
-            html: 'โปรดทำเครื่องหมาย <i class="icon-checkbox-checked"></i> เพื่อรับรองข้อมูลก่อนดำเนินการ',
+            html: popupmessage['message'],
         });
         return;
     }
-    var text = 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)'
+    popupmessage = route.popupmessages.find(x => x.id ==22);
+    var text = popupmessage['message'];
     if($('#usersignature').val() == 1){
-        text = 'ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)'
+        popupmessage = route.popupmessages.find(x => x.id ==23);
+        text = popupmessage['message'];
     }
     
     if(route.refixstatus == 0){
         Swal.fire({
-            title: 'โปรดยืนยัน',
+            title: popupmessage['title'],
             text: text,
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -3596,9 +3513,10 @@ $(document).on('click', '#submitfulltbp', function(e) {
             }).then((result) => {
             if (result.value) {
                 if($('#usersignature').val() == 1){
+                    popupmessage = route.popupmessages.find(x => x.id ==24);
                     Swal.fire({
-                        title: 'อัปโหลดไฟล์',
-                        html: "โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อ <br> และประทับตราแล้ว",
+                        title: popupmessage['title'],
+                        html: popupmessage['message'],
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'ตกลง',
@@ -3615,9 +3533,10 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         $("#submitfulltbp").attr("hidden",true);
                         $("#spinicon").attr("hidden",true);
                         $("#appceptagreement_wrapper").attr("hidden",true);
+                            popupmessage = route.popupmessages.find(x => x.id ==25);
                             Swal.fire({
-                                title: 'สำเร็จ',
-                                text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ',
+                                title: popupmessage['title'],
+                                text: popupmessage['message'],
                             }).then(() => {
                                 window.location.replace(`${route.url}/dashboard/company/report`);
                             });
@@ -3630,9 +3549,10 @@ $(document).on('click', '#submitfulltbp', function(e) {
             }
         });
     }else{
+        popupmessage = route.popupmessages.find(x => x.id ==26);
         Swal.fire({
-            title: 'ข้อมูลแก้ไข',
-            text: 'โปรดระบุรายละเอียด/รายการที่ท่านได้แก้ในเอกสาร Full TBP',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             input: 'textarea',
             inputAttributes: {
               autocapitalize: 'off'
@@ -3646,8 +3566,9 @@ $(document).on('click', '#submitfulltbp', function(e) {
 
                 if (result.value) {
                     usermessage = result.value;
+                    popupmessage = route.popupmessages.find(x => x.id ==22);
                     Swal.fire({
-                        title: 'โปรดยืนยัน',
+                        title: popupmessage['title'],
                         text: text,
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -3657,9 +3578,10 @@ $(document).on('click', '#submitfulltbp', function(e) {
                         }).then((result) => {
                         if (result.value) {
                             if($('#usersignature').val() == 1){
+                                popupmessage = route.popupmessages.find(x => x.id ==24);
                                 Swal.fire({
-                                    title: 'อัปโหลดไฟล์',
-                                    html: "โปรดแนบไฟล์แบบฟอร์ม Full TBP ที่ลงลายมือชื่อ <br> และประทับตราแล้ว",
+                                    title: popupmessage['title'],
+                                    html: popupmessage['message'],
                                     showCancelButton: true,
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'ตกลง',
@@ -3676,9 +3598,10 @@ $(document).on('click', '#submitfulltbp', function(e) {
                                     $("#submitfulltbp").attr("hidden",true);
                                     $("#spinicon").attr("hidden",true);
                                     $("#appceptagreement_wrapper").attr("hidden",true);
+                                    popupmessage = route.popupmessages.find(x => x.id ==25);
                                         Swal.fire({
-                                            title: 'สำเร็จ',
-                                            text: 'ส่งแบบแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) สำเร็จ',
+                                            title: popupmessage['title'],
+                                            text: popupmessage['message'],
                                         }).then(() => {
                                             window.location.replace(`${route.url}/dashboard/company/report`);
                                         });                                       
@@ -3691,9 +3614,10 @@ $(document).on('click', '#submitfulltbp', function(e) {
                     });
                 }else{
                     if(route.refixstatus != 0 && usermessage == ''){
+                        popupmessage = route.popupmessages.find(x => x.id ==27);
                         Swal.fire({
-                            title: 'ผิดพลาด...',
-                            text: 'กรุณาระบุข้อมูลที่แก้ไขใน Full TBP',
+                            title: popupmessage['title'],
+                            text: popupmessage['message'],
                             });
                     }
                 }
@@ -3709,8 +3633,8 @@ $(document).on('change', '#fulltbppdf', function(e) {
     var validExtensions = ["pdf"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบไฟล์ไม่ถูกต้อง',
             });
         this.value = "";
         return false;
@@ -3720,22 +3644,22 @@ $(document).on('change', '#fulltbppdf', function(e) {
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
     }
-
+    popupmessage = route.popupmessages.find(x => x.id ==23);
     Swal.fire({
-        title: 'โปรดยืนยัน',
-        text: "ยืนยันส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP)",
+        title: popupmessage['title'],
+        text: popupmessage['message'],
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'ตกลง',
@@ -3761,9 +3685,10 @@ $(document).on('change', '#fulltbppdf', function(e) {
                     $("#submitfulltbp").attr("hidden",true);
                     $("#spinicon").attr("hidden",true);
                     $("#appceptagreement_wrapper").attr("hidden",true);
+                    popupmessage = route.popupmessages.find(x => x.id ==28);
                     Swal.fire({
-                        title: 'เสร็จสิ้น',
-                        html: 'ส่งแบบฟอร์มแผนธุรกิจเทคโนโลยี (Full TBP) เรียบร้อยแล้ว <br> เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งการดำเนินการในลำดับถัดไปให้ท่านทราบทางอีเมล',
+                        title: popupmessage['title'],
+                        html: popupmessage['message'],
                     }).then(() => {
                         window.location.replace(`${route.url}/dashboard/company/report`);
                     });
@@ -4184,16 +4109,16 @@ $(document).on('click', '#btnaddresearch', function(e) {
 $(document).on('click', '#btn_modal_add_employ', function(e) {
     if($('#employname').val() == '' || $('#employlastname').val() == '' || $('#employposition').val() == '' || $('#employphone').val() == '' || $('#employworkphone').val() == '' || $('#employemail').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
 
     if(($("#employphone").val().length < 9 || $("#employphone").val().length > 10) || $("#employphone").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employphone').val('')
         return;
@@ -4201,8 +4126,8 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
 
     if(($("#employworkphone").val().length < 9 || $("#employworkphone").val().length > 10) || $("#employworkphone").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employworkphone').val('')
         return;
@@ -4211,8 +4136,8 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail').val())== false)
     {
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบอีเมลไม่ถูกต้อง',
             });
         $('#employemail').val('') ;
         return;
@@ -4275,16 +4200,16 @@ $(document).on('click', '#btn_modal_add_employ', function(e) {
 $(document).on('click', '#btn_modal_add_ceo', function(e) {
     if($('#employname_ceo').val() == '' || $('#employlastname_ceo').val() == '' || $('#employphone_ceo').val() == '' || $('#employworkphone_ceo').val() == '' || $('#employemail_ceo').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
 
     if(($("#employphone_ceo").val().length < 9 || $("#employphone_ceo").val().length > 10) || $("#employphone_ceo").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employphone_ceo').val('')
         return;
@@ -4292,8 +4217,8 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
 
     if(($("#employworkphone_ceo").val().length < 9 || $("#employworkphone_ceo").val().length > 10) || $("#employworkphone_ceo").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employworkphone_ceo').val('')
         return;
@@ -4304,8 +4229,8 @@ $(document).on('click', '#btn_modal_add_ceo', function(e) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_ceo').val())== false)
     {
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'รูปแบบอีเมลไม่ถูกต้อง',
             });
         $('#employemail_ceo').val('') ;
         return
@@ -4369,31 +4294,31 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 
     if($('#employname_research').val() == '' || $('#employlastname_research').val() == '' || $('#employphone_research').val() == '' || $('#employworkphone_research').val() == '' || $('#employemail_research').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
 
     if(($("#employphone_research").val().length < 9 || $("#employphone_research").val().length > 10) || $("#employphone_research").val().charAt(0) != '0'){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employphone_research').val('')
         return;
     }else if(($("#employworkphone_research").val().length < 9 || $("#employworkphone_research").val().length > 10) || $("#employworkphone_research").val().charAt(0) != '0' ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง',
         });
         $('#employworkphone_research').val('')
         return;
     }else if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('#employemail_research').val())== false)
         {
             Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รูปแบบอีเมลไม่ถูกต้อง!',
+                title: 'ผิดพลาด',
+                text: 'รูปแบบอีเมลไม่ถูกต้อง',
                 });
             $('#employemail_research').val('') ;
             return;
@@ -4458,8 +4383,8 @@ $(document).on('click', '#btn_modal_add_employ_research', function(e) {
 
 $(document).on("click",".deletecompanyemploy_research",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -4538,8 +4463,8 @@ $(document).on('click', '#btnaddprojectmember', function(e) {
 $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
     if($('#employname_projectmember').val() == '' || $('#employlastname_projectmember').val() == '' || $('#employposition_projectmember').val() == '' || $('#employphone_projectmember').val() == '' || $('#employworkphone_projectmember').val() == '' || $('#employemail_projectmember').val() == '' ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรุณากรอกข้อมูลให้ครบ!',
+            title: 'ผิดพลาด',
+            text: 'กรุณากรอกข้อมูลให้ครบ',
         });
         return;
     }
@@ -4589,8 +4514,8 @@ $(document).on('click', '#btn_modal_add_employ_projectmember', function(e) {
 
 $(document).on("click",".deletecompanyemploy_projectmember",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -4680,9 +4605,10 @@ $("#ganttnummonth").on('change', function(e) {
 
     var _maxrow = $('#maxrow').val();
     if(_maxrow > 0){
+        popupmessage = route.popupmessages.find(x => x.id ==5);
         Swal.fire({
-            title: 'คำเตือน!',
-            html: `การเปลี่ยนจำนวนเดือน รายละเอียดการดำเนินงาน<br>ของโครงการเดิมจะถูกลบ ยืนยันทำรายการ`,
+            title: popupmessage['title'],
+            html: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -4779,8 +4705,8 @@ $("#ganttnummonth").on('change', function(e) {
 $(document).on('click', '#btn_add_projectplan', function(e) {
     if($('#ganttnummonth').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'ยังไม่ได้เลือกจำนวนเดือน!',
+            title: 'ผิดพลาด',
+            text: 'ยังไม่ได้เลือกจำนวนเดือน',
             });
         return;
     }
@@ -5119,8 +5045,8 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             }else{
                 if(parseInt($('#employeducationyearstart').val()) > parseInt($(this).val())){
                     Swal.fire({
-                        title: 'ผิดพลาด...',
-                        text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด!',
+                        title: 'ผิดพลาด',
+                        text: 'กรอกปีเริ่มต้นมากกว่าปีสิ้นสุด',
                     });
                     $("#employeducationyearend_format_error").attr("hidden",false);
                     $(this).val('') ;
@@ -5160,8 +5086,8 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
             }else{
                 if(parseInt($('#employexperiencestartdate').val()) > parseInt($(this).val())){
                     Swal.fire({
-                        title: 'ผิดพลาด...',
-                        text: 'ปีที่สิ้นสุดงานน้อยกว่าปีเริ่มทำงาน!',
+                        title: 'ผิดพลาด',
+                        text: 'ปีที่สิ้นสุดงานน้อยกว่าปีเริ่มทำงาน',
                     });
                     $(this).val('') ;
                     $("#employexperienceenddate_format_error").attr("hidden",false);

@@ -180,7 +180,7 @@
             var urlToRedirect = e.currentTarget.getAttribute('href');
             //console.log(urlToRedirect)
             Swal.fire({
-                    title: 'คำเตือน!',
+                    title: 'คำเตือน',
                     text: `ต้องการยกเลิกโครงการ`,
                     type: 'warning',
                     showCancelButton: true,

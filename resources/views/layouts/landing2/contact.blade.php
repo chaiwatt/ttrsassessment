@@ -537,7 +537,7 @@
             $(document).on('change', '#phone', function(e) {
                 if(($(this).val().length < 9 || $(this).val().length > 10) || $(this).val().charAt(0) != '0'){
                     Swal.fire({
-                        title: 'ผิดพลาด...',
+                        title: 'ผิดพลาด',
                         text: 'กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง!',
                     });
                     $(this).val('')
@@ -549,7 +549,7 @@
                 if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($(this).val())== false)
                 {
                     Swal.fire({
-                        title: 'ผิดพลาด...',
+                        title: 'ผิดพลาด',
                         text: 'รูปแบบอีเมลไม่ถูกต้อง!',
                         });
                     $(this).val('') ;

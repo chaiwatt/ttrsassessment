@@ -4,6 +4,7 @@ import * as SubPillar from './subpillar.js';
 import * as PillaIndexWeigth from './pillaindexweigth.js';
 import * as Extra from './extra.js';
 
+var popupmessage = null;
 
 var countchecklist = 0;
 var globalNewIndex = 0;
@@ -246,10 +247,6 @@ function callDataTableExtra(){
 
 $("#btnOnExcel").on('click', function() {
     if (!$('#evexporttable').DataTable().data().any() ) {
-        // Swal.fire({
-        //     title: 'ผิดพลาด...',
-        //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        // });
         setCookie("forcedownload", "1");
         window.location.reload();
     }else{
@@ -260,10 +257,6 @@ $("#btnOnExcel").on('click', function() {
 
 $("#btnOnPdf").on('click', function() {
     if (!$('#evexporttable').DataTable().data().any() ) {
-        // Swal.fire({
-        //     title: 'ผิดพลาด...',
-        //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        // });
         setCookie("forcedownload", "2");
         window.location.reload();
     }else{
@@ -275,10 +268,7 @@ $("#btnOnPdf").on('click', function() {
 $("#btnOnExcelExtra").on('click', function() {
 
     if (!$('#evextraexporttable').DataTable().data().any() ) {
-        // Swal.fire({
-        //     title: 'ผิดพลาด...',
-        //     text: 'กรุณา Refresh เพื่อดาวน์โหลดเอกสาร',
-        // });
+
         setCookie("forcedownload", "3");
         window.location.reload();
     }else{
@@ -710,9 +700,10 @@ $(document).on('click', '#addcriteria', function(e) {
             criterias.push($(this).val());
           });
           if((criterias.length == 0) || (criterias.length < parseInt($("#gradea").val()))){
+            popupmessage = route.popupmessages.find(x => x.id ==40);
             Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'ยังไม่ได้เลือกรายการหรือรายการที่เลือกน้อยกว่าเกรด A !',
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                 });
           }else{
             AddCheckList(criterias);
@@ -742,9 +733,10 @@ function AddCheckList(criterias){
                     });
                     $("#similarev").html(html1);
                  $("#spiniconcriteria").attr("hidden",true);
+                 popupmessage = route.popupmessages.find(x => x.id ==54);
                  Swal.fire({
-                    title: 'สำเร็จ',
-                    text: 'เพิ่มรายการสำเร็จ',
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                     });
             $("#toggleselect")[0].checked = false;     
             $('.subpillarindexcheckbox').each(function(){ 
@@ -753,9 +745,10 @@ function AddCheckList(criterias){
             }).catch(error => {})
          }else{
             $("#spiniconcriteria").attr("hidden",true);
+            popupmessage = route.popupmessages.find(x => x.id ==53);
             Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รายการ Criteria มีใน EV แล้ว!',
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                 });
             
          }
@@ -772,19 +765,21 @@ function AddGrading(){
          RowSpan("criteriatable");
         $("#spiniconcriteria").attr("hidden",true);
         if(data.result == 1){
+            popupmessage = route.popupmessages.find(x => x.id ==54);
             Swal.fire({
-               title: 'สำเร็จ',
-               text: 'เพิ่มรายการสำเร็จ',
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                });
                $("#toggleselect")[0].checked = false;
                $('.subpillarindexcheckbox').each(function(){ 
                     this.checked = false; 
                 });
         }else{
+            popupmessage = route.popupmessages.find(x => x.id ==53);
             Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'รายการ Criteria มีใน EV แล้ว!',
-                });
+                title: popupmessage['title'],
+                text: popupmessage['message'],
+               });
         }
 
     }).catch(error => {})
@@ -1084,8 +1079,8 @@ function RowSpanExtra(tableid){
 $(document).on('click', '.deletepillar', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1149,8 +1144,8 @@ $(document).on('click', '#btn_modal_edititem', function(e) {
 $(document).on('click', '.deletesubpillar', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1176,8 +1171,8 @@ $(document).on('click', '.deletesubpillar', function(e) {
 $(document).on('click', '.deletesubpillarindex', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1319,9 +1314,10 @@ $(document).on('click', '#btn_edit_weight', function(e) {
 
 $(document).on('click', '#editev', function(e) {
     Ev.editEv($('#evid').val(),$('#evname').val(),$('#version').val(),$('#percentindex').val(),$('#percentextra').val()).then(data => {
+        popupmessage = route.popupmessages.find(x => x.id ==55);
         Swal.fire({
-            title: 'สำเร็จ',
-            text: 'แก้ไข EV สำเร็จ',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             });
     })
     .catch(error => {})
@@ -1338,12 +1334,14 @@ $(document).on('change', '#version', function(e) {
     }).catch(error => {})
 });
 $(document).on('change', '#percentindex', function(e) {
-    var message = "ต้องการเพิ่ม เปอร์เซนต์ Extra ";
+    popupmessage = route.popupmessages.find(x => x.id ==41);
+    var message = popupmessage['message'];
     if($('#percentindex').val() == 100){
-        message = "ต้องการยกเลิก เปอร์เซนต์ Extra ";
+        popupmessage = route.popupmessages.find(x => x.id ==42);
+        message = popupmessage['message'];
     }
     Swal.fire({
-        title: 'โปรดยืนยัน',
+        title: popupmessage['title'],
         text: message,
         type: 'warning',
         showCancelButton: true,
@@ -1388,9 +1386,10 @@ $(document).on('keyup', '#percentextra', function(e) {
 });
 
 $(document).on('click', '#updateev', function(e) {
+    popupmessage = route.popupmessages.find(x => x.id ==43);
     Swal.fire({
-        title: 'นำส่ง EV!',
-        text: `ต้องการนำส่ง EV `,
+        title: popupmessage['title'],
+        text: popupmessage['message'],
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1406,25 +1405,28 @@ $(document).on('click', '#updateev', function(e) {
             
             var unique = pillarnames.filter(onlyUnique);
             if(unique.length != 4){
+                popupmessage = route.popupmessages.find(x => x.id ==44);
                 Swal.fire({
-                    title: 'ผิดพลาด...',
-                    text: 'กรุณากรอกข้อมูลให้ครบทุก Pillar!',
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                 });
                 return;
             }
         
             if($("#criteriatable tr").length == 1){
+                popupmessage = route.popupmessages.find(x => x.id ==45);
                 Swal.fire({
-                    title: 'ผิดพลาด...',
-                    text: 'ยังไม่ได้เพิ่ม Criteria!',
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                 })
                 return;
             }else{
                 if($('#percentextra').val() > 0){
                     if($("#extracriteriatable tr").length == 1){
+                        popupmessage = route.popupmessages.find(x => x.id ==46);
                         Swal.fire({
-                            title: 'ผิดพลาด...',
-                            text: 'ยังไม่ได้เพิ่ม Extra Criteria!',
+                            title: popupmessage['title'],
+                            text: popupmessage['message'],
                         })
                         return;
                     }
@@ -1434,9 +1436,10 @@ $(document).on('click', '#updateev', function(e) {
             Ev.updateEvStatus($(this).data('id')).then(data => {
                 Ev.clearCommentTab($('#evid').val(),1).then(data => {
                     $("#spinicon").attr("hidden",true);
+                    popupmessage = route.popupmessages.find(x => x.id ==47);
                     Swal.fire({
-                        title: 'สำเร็จ',
-                        text: 'นำส่ง EV สำเร็จ',
+                        title: popupmessage['title'],
+                        text: popupmessage['message'],
                     }).then((result) => {
                         window.location.reload();
                     });
@@ -1449,10 +1452,10 @@ function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 $(document).on('click', '#approveevstageone', function(e) {
-
+    popupmessage = route.popupmessages.find(x => x.id ==48);
     Swal.fire({
-        title: 'โปรดยืนยัน',
-        text: `ต้องการอนุมัติ EV `,
+        title: popupmessage['title'],
+        text: popupmessage['message'],
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1465,9 +1468,10 @@ $(document).on('click', '#approveevstageone', function(e) {
             $("#spinicon").attr("hidden",false);
             Ev.approveEvStageOne($(this).data('id')).then(data => {
                 $("#spinicon").attr("hidden",true);
+                popupmessage = route.popupmessages.find(x => x.id ==49);
                 Swal.fire({
-                    title: 'สำเร็จ',
-                    text: 'Admin สามารถกำหนด Weight ในขั้นตอนถัดไป!',
+                    title: popupmessage['title'],
+                    text: popupmessage['message'],
                 }).then((result) => {
                     window.location.reload();
                 });
@@ -1478,9 +1482,10 @@ $(document).on('click', '#approveevstageone', function(e) {
 
 $(document).on('click', '#btnaddextracriteria', function(e) {
     if($('#percentextra').val() == 0){
+        popupmessage = route.popupmessages.find(x => x.id ==50);
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'ยังไม่ได้กำหนดเปอร์เซนต์ Extra!',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
         })
         return;
     }
@@ -1522,9 +1527,10 @@ $(document).on('click', '#btn_modal_add_comment', function(e) {
     if($('#comment').val() == ''){
         return;
     }
+    popupmessage = route.popupmessages.find(x => x.id ==51);
     Swal.fire({
-        title: 'โปรดยืนยัน',
-        text: `ต้องการส่งคืนให้ Leader แก้ไข`,
+        title: popupmessage['title'],
+        text: popupmessage['message'],
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1555,8 +1561,8 @@ $('.nav-tabs a').on('shown.bs.tab', function (e) {
 
 $(document).on("click",".deletecomment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1589,9 +1595,10 @@ $("#gradea").on('change', function() {
     var graded = parseInt($("#graded").val());
     var gradee = parseInt($("#gradee").val());
     if(gradea > countchecklist){
+        popupmessage = route.popupmessages.find(x => x.id ==52);
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด A มีจำนวนมากกว่ารายการ Checklist!',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             });
         $("#gradea").val('');
         return;
@@ -1599,8 +1606,8 @@ $("#gradea").on('change', function() {
 
     if((gradea <= gradeb) || (gradea <= gradec) ||(gradea <= graded) ||(gradea <= gradee) ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด A ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'เกรด A ไม่ถูกต้อง',
             });
         $("#gradea").val('');
     }
@@ -1615,8 +1622,8 @@ $("#gradeb").on('change', function() {
     var gradee = parseInt($("#gradee").val());
     if((gradeb >= gradea) || (gradeb <= gradec) ||(gradeb <= graded) ||(gradeb <= gradee) ){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด B ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'เกรด B ไม่ถูกต้อง',
             });
             $("#gradeb").val('');    
     }
@@ -1630,8 +1637,8 @@ $("#gradec").on('change', function() {
     var gradee = parseInt($("#gradee").val());
     if((gradec >= gradea) || (gradec >= gradeb) ||(gradec <= graded) ||(gradec <= gradee)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด C ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'เกรด C ไม่ถูกต้อง',
             });
             $("#gradec").val('');    
     }
@@ -1645,8 +1652,8 @@ $("#graded").on('change', function() {
     var gradee = parseInt($("#gradee").val());
     if((graded >= gradea) || (graded >= gradeb) ||(graded >= gradec) ||(graded <= gradee)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด D ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'เกรด D ไม่ถูกต้อง',
             });
         $("#graded").val('');    
     }
@@ -1660,8 +1667,8 @@ $("#gradee").on('change', function() {
     var gradee = parseInt($("#gradee").val());
     if((gradee >= gradea) || (gradee >= gradeb) ||(gradee >= gradec) ||(gradee >= graded)){
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'เกรด E ไม่ถูกต้อง!',
+            title: 'ผิดพลาด',
+            text: 'เกรด E ไม่ถูกต้อง',
             });
         $("#gradee").val('');    
     }
@@ -1719,8 +1726,8 @@ $(document).on("click","#btn_modal_add_extracriteria",function(e){
 $(document).on('click', '.deletecategorytransaction', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1749,8 +1756,8 @@ $(document).on('click', '.deletecategorytransaction', function(e) {
 $(document).on('click', '.deletetriteriatransaction', function(e) {
     if($('#evstatus').val() > 1)return ;
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

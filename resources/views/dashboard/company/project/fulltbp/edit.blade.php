@@ -3483,8 +3483,11 @@ th {
 		token: $('meta[name="csrf-token"]').attr('content'),
 		branchid: "{{Auth::user()->branch_id}}",
 		submitstatus: "{{$minitbp->businessplan->business_plan_status_id}}",
-		refixstatus: "{{$fulltbp->refixstatus}}"
+		refixstatus: "{{$fulltbp->refixstatus}}",
+		popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
 	};
+
+	// console.log(route.popupmessages);
 
 	$( "#tabs" ).tabs();
 	$( "#dialog-link, #icons li" ).hover(

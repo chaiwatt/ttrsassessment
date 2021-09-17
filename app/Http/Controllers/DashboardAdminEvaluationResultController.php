@@ -27,8 +27,9 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 
-use App\Model\ProjectGrade;
+use App\Model\PopupMessage;
 
+use App\Model\ProjectGrade;
 use App\Model\UserPosition;
 use App\Model\EvaluationDay;
 use Illuminate\Http\Request;
@@ -38,8 +39,8 @@ use App\Helper\DateConversion;
 use App\Model\EvaluationMonth;
 use App\Model\SignatureStatus;
 use App\Model\EvaluationResult;
-use App\Model\ExpertAssignment;
 
+use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\NotificationBubble;
 use App\Helper\ThaiNumericConverter;
@@ -102,8 +103,12 @@ class DashboardAdminEvaluationResultController extends Controller
         }
 
         $gradecollection = collect($gradearr);
-
-        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection);
+        $popupmessages = PopupMessage::get();
+        return view('dashboard.admin.evaluationresult.index')->withFulltbps($fulltbps)
+        ->withLeaders($leaders)
+        ->withExperts($experts)
+        ->withGradecollection($gradecollection)
+        ->withPopupmessages($popupmessages);
     }
     public function Edit($id){
         $evaluationmonths = EvaluationMonth::get();

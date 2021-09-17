@@ -885,6 +885,9 @@
 	var submitstatus = "{{$minitbp->businessplan->business_plan_status_id}}";
 	var refixstatus = "{{$minitbp->refixstatus}}";
 	var usermessage = '';
+	// var rawpopupmessages = {!! json_encode($popupmessages) !!}; 
+	var popupmessages = JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}));
+	var popupmessage = null;
 
 	if(submitstatus == 2 || refixstatus == 1 ){ 
 			$('.form-control-lg').prop("disabled", false);  
@@ -922,9 +925,10 @@
 			}
 			if(newIndex == 3){
 				if($('#usersignature').val() == 0){
+					popupmessage = popupmessages.find(x => x.id ==7);
 					Swal.fire({
-						title: 'ผิดพลาด!',
-						text: 'กรุณาเลือกการใช้ลายมือชื่ออิเล็กทรอนิกส์',
+						title: popupmessage['title'],
+						text: popupmessage['message'],
 					});
 					return false;
 				}
@@ -950,9 +954,10 @@
 				}
 				if($("#finance1").is(":checked") == true){
 					if($('#bank').val() == 0 && $('#bank1').val() == 0 && $('#bank2').val() == 0){
+						popupmessage = popupmessages.find(x => x.id ==8);
 						Swal.fire({
-							title: 'ผิดพลาด!',
-							text: 'กรุณาเลือกธนาคาร',
+							title: popupmessage['title'],
+							text: popupmessage['message'],
 						});
 						return false;
 					}
@@ -961,9 +966,10 @@
 
 			if(currentIndex == 2){
 				if($('.chkauthorizeddirector').filter(':checked').length == 0){
+					popupmessage = popupmessages.find(x => x.id ==9);
 					Swal.fire({
-						title: 'ผิดพลาด!',
-						text: 'ยังไม่ได้เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน',
+						title: popupmessage['title'],
+						text: popupmessage['message'],
 					});
         			return false; 
 				}else{
@@ -975,9 +981,10 @@
 							}
 						});
 						if(iserror == true ){
+							popupmessage = popupmessages.find(x => x.id ==10);
 							Swal.fire({
-									title: 'ผิดพลาด!',
-									text: 'มีผู้ลงนามที่ยังไม่ได้เพิ่มลายมือชื่อ',
+								title: popupmessage['title'],
+								text: popupmessage['message'],
 								})
 
 							return false;
@@ -1221,16 +1228,6 @@
 		$('#modal_signature').modal('show');
 	});
 
-	// $(".chkauthorizeddirector").on('change', function() {
-	// 	if($('.chkauthorizeddirector').filter(':checked').length > 3){
-	// 		$(this).prop('checked', false);
-	// 		Swal.fire({
-	// 			title: 'ผิดพลาด!',
-	// 			text: 'เลือกผู้ลงนามได้ไม่เกิน 3 คน',
-	// 		});
-	// 	}
-	// });
-
 	$("#finance4jointmin").on('keyup', function() {
 		$("#finance4jointmax").val(100-$("#finance4jointmin").val());
 	});
@@ -1255,21 +1252,25 @@
 	}
 
 	$(document).on('click', '#submitminitbp', function(e) {
+		popupmessage = popupmessages.find(x => x.id ==1);
 		if($('#appceptagreement').is(':checked') === false){
 			Swal.fire({
-				title: 'ผิดพลาด',
+				title: popupmessage['title'],
 				type: 'warning',
-				html: 'โปรดทำเครื่องหมาย <i class="icon-checkbox-checked"></i> เพื่อรับรองข้อมูลก่อนดำเนินการ',
+				html: popupmessage['message'],
 			});
 			return;
 		}
-		var text = 'ยืนยันการส่งแบบคำขอรับการประเมิน TTRS'
+		popupmessage = popupmessages.find(x => x.id == 2);
+		var text = popupmessage['message']
 		if($('#usersignature').val() == 1){
-			text = 'ส่งแบบคำขอรับการประเมิน TTRS และเลือกไฟล์ PDF <br>ที่ลงลายมือชื่อเรียบร้อยแล้ว'
+			popupmessage = popupmessages.find(x => x.id == 3);
+			text = popupmessage['message']
 		}
+	
 		if(refixstatus == 0){
 			Swal.fire({
-				title: 'โปรดยืนยัน',
+				title: popupmessage['title'],
 				html: text,
 				type: 'warning',
 				showCancelButton: true,
@@ -1289,9 +1290,10 @@
 							$("#spinicon").attr("hidden",true);
 							$("#appceptagreement_wrapper").attr("hidden",true);
 								var html = ``;
+								popupmessage = popupmessages.find(x => x.id ==11);
 								Swal.fire({
-									title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
-									html: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบทาง<br>อีเมลที่ท่านแจ้งไว้',
+									title: popupmessage['title'],
+									html: popupmessage['message'],
 								}).then((result) => {
 									window.location.replace(`${route.url}/dashboard/company/report`);
 								});
@@ -1301,9 +1303,10 @@
 				}
 			});
 		}else{
+			popupmessage = popupmessages.find(x => x.id == 6);
 			Swal.fire({
-				title: 'ข้อมูลแก้ไข',
-				text: 'โปรดระบุรายละเอียด/รายการที่ท่านได้แก้ในเอกสาร Mini TBP',
+				title: popupmessage['title'],
+				text: popupmessage['message'],
 				input: 'textarea',
 				inputAttributes: {
 				autocapitalize: 'off'
@@ -1321,8 +1324,9 @@
 					}else{
 					if (result.value) {
 						usermessage = result.value;
+						popupmessage = popupmessages.find(x => x.id == 2);
 						Swal.fire({
-							title: 'โปรดยืนยัน',
+							title: popupmessage['title'],
 							html: text,
 							showCancelButton: true,
 							confirmButtonColor: '#3085d6',
@@ -1339,9 +1343,10 @@
 										$("#spinicon").attr("hidden",true);
 										$("#appceptagreement_wrapper").attr("hidden",true);
 											var html = ``;
+											popupmessage = popupmessages.find(x => x.id ==11);
 											Swal.fire({
-												title: 'ส่งแบบคำขอฯ เรียบร้อยแล้ว',
-												html: 'เจ้าหน้าที่ TTRS จะพิจารณาและแจ้งผลการดำเนินการให้ทราบ<br>ทางอีเมลที่ท่านแจ้งไว้',
+												title: popupmessage['title'],
+												html: popupmessage['message'],
 											}).then((result) => {
 												window.location.replace(`${route.url}/dashboard/company/report`);
 											});
@@ -1352,9 +1357,10 @@
 						});
 					}else{
 						if(refixstatus != 0 & usermessage == ''){
+							popupmessage = popupmessages.find(x => x.id ==12);
 							Swal.fire({
-								title: 'ผิดพลาด...',
-								text: 'กรุณาระบุข้อมูลที่แก้ไขใน Mini TBP',
+								title: popupmessage['title'],
+								text: popupmessage['message'],
 								});
 						}
 					}
@@ -1369,9 +1375,10 @@
 		var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
 		var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
 		if(!validExtensions.includes(fextension)){
+			popupmessage = popupmessages.find(x => x.id ==16);
 			Swal.fire({
-				title: 'ผิดพลาด...',
-				text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+				title: popupmessage['title'],
+				text: popupmessage['message'],
 				});
 			this.value = "";
 			return false;
@@ -1381,14 +1388,14 @@
 		}
 		if (this.files[0].size/1024/1024*1000 > 2048 ){
 			Swal.fire({
-				title: 'ผิดพลาด...',
+				title: 'ผิดพลาด',
 				text: 'ไฟล์ขนาดมากกว่า 2 MB',
 				});
 			return ;
 		}
 		if (this.files[0].name.length > 70 ){
 			Swal.fire({
-				title: 'ผิดพลาด...',
+				title: 'ผิดพลาด',
 				text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
 				});
 			return ;
@@ -1412,9 +1419,10 @@
 				$("#submitminitbp").attr("hidden",true);
 				$("#spinicon").attr("hidden",true);
 				$("#appceptagreement_wrapper").attr("hidden",true);
+				popupmessage = popupmessages.find(x => x.id ==13);
 				Swal.fire({
-					title: 'สำเร็จ',
-					text: 'ส่งแบบคำขอรับการประเมิน TTRS สำเร็จ',
+					title: popupmessage['title'],
+					text: popupmessage['message'],
 				}).then((result) => {
 					window.location.replace(`${route.url}/dashboard/company/report`);
 				});
@@ -1473,9 +1481,10 @@
 		var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
 		if(re.test($(this).val()) == false){
 			$(this).val('')
+			popupmessage = popupmessages.find(x => x.id ==14);
 			Swal.fire({
-				title: 'ผิดพลาด...',
-				text: 'กรุณากรอกเป็นภาษาอังกฤษ!',
+				title: popupmessage['title'],
+				text: popupmessage['message'],
 			});
 		}
 
@@ -1570,7 +1579,6 @@ $(document).on('change', '#contactemail', function(e) {
 });
 
 $(document).on('change', '#tambol', function(e) {
-	// console.log($(this).find(':selected').data('id'));
 	$('#postalcode').val($(this).find(':selected').data('id'));
 });
 
@@ -1578,9 +1586,10 @@ $(document).on('change', '#website', function(e) {
 	var patt = /[ก-๙]/g;
 	var res = patt.test($(this).val());
 	if(res == true &&  $(this).val() != ''){
+		popupmessage = popupmessages.find(x => x.id ==15);
 		Swal.fire({
-			title: 'ผิดพลาด...',
-			text: 'กรุณากรอกเว็ปไซต์เป็นภาษาอังกฤษ!',
+			title: popupmessage['title'],
+			text: popupmessage['message'],
 		});
 		$(this).val('');
 	}

@@ -299,7 +299,7 @@
                 if(!$(this).val().match(pattern_eng) && $(this).val() != ''){
                     $(this).val('')
                     Swal.fire({
-                        title: 'ผิดพลาด...',
+                        title: 'ผิดพลาด',
                         text: 'ใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษเท่านั้น รวมกันอย่างน้อย 8 ตัวอักษร',
                     }).then((result) => {});
                     return false;

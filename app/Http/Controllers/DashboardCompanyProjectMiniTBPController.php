@@ -18,6 +18,7 @@ use App\Helper\EmailBox;
 use App\Model\MessageBox;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\PopupMessage;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         return view('dashboard.company.project.minitbp.index')->withMinitbps($minitbps);
     }
     public function Edit($id){
+        
         $prefixes = Prefix::get();
         $user = Auth::user();
         NotificationBubble::where('target_user_id',$user->id)
@@ -64,6 +66,7 @@ class DashboardCompanyProjectMiniTBPController extends Controller
         $tambols = Tambol::where('amphur_id',$companyaddress->amphur_id)->get();
         $authorizeddirectors = CompanyEmploy::where('company_id',$company->id)->where('employ_position_id','<=',5)->where('isdirector',1)->get();
         $employpositions = EmployPosition::where('id', '<=',5)->get();
+        $popupmessages = PopupMessage::get();
         return view('dashboard.company.project.minitbp.edit')->withMinitbp($minitbp)
                                                 ->withBanks($banks)
                                                 ->withCompany($company)
@@ -76,7 +79,8 @@ class DashboardCompanyProjectMiniTBPController extends Controller
                                                 ->withAuthorizeddirectors($authorizeddirectors)
                                                 ->withPrefixes($prefixes)
                                                 ->withEmploypositions($employpositions)
-                                                ->withTambols($tambols);
+                                                ->withTambols($tambols)
+                                                ->withPopupmessages($popupmessages);
     }
     public function Pdf(){
         require_once(base_path('/vendor/notyes/thsplitlib/THSplitLib/segment.php'));

@@ -837,7 +837,7 @@
 					if($('#expertbranch').val() == 19){
 						if($('#other_branch').val() == ''){
 							Swal.fire({
-								title: 'ผิดพลาด...',
+								title: 'ผิดพลาด',
 								text: 'โปรดระบุสาขาผู้เชี่ยวชาญ!',
 								});
 						}else{

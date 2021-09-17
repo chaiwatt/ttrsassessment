@@ -745,8 +745,10 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             usertypeid: "{{Auth::user()->user_type_id}}",
             status: "{{$ev->status}}",
-            refixstatus: "{{$ev->refixstatus}}"
+            refixstatus: "{{$ev->refixstatus}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
+
     // var evdata = [];
 
     // function callDataTable(){

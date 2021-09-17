@@ -111,7 +111,7 @@ $(document).on("change","#file",function(e){
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -122,7 +122,7 @@ $(document).on("change","#file",function(e){
 
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB!',
             });
         this.value = "";
@@ -132,7 +132,7 @@ $(document).on("change","#file",function(e){
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -202,8 +202,8 @@ $(document).on("click",".messagelink",function(e){
 
 $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -236,8 +236,8 @@ $(document).on("click","#deleteexpertexpienceclass_editview",function(e){
 
 $(document).on("click","#deleteexperteducationclass_editview",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -300,8 +300,8 @@ $(document).on("click","#btn_modal_user",function(e){
                              
 $(document).on("click","#deleterequestfriendclass_editview",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -373,8 +373,8 @@ $(document).on("click","#acceptfriendclass_editview",function(e){
 
 $(document).on("click","#deletefriendclass_editview",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -412,7 +412,7 @@ $("#attachment").on('change', function() {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -421,14 +421,14 @@ $("#attachment").on('change', function() {
     if (this.files[0].size/1024/1024*1000 > 1024 ){
         //alert('ไฟล์ขนาดมากกว่า 1 MB');
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB!',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -516,7 +516,7 @@ $("#coverimg").on('change', function() {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -524,14 +524,14 @@ $("#coverimg").on('change', function() {
     }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -559,7 +559,7 @@ $("#avatarimg").on('change', function() {
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -567,14 +567,14 @@ $("#avatarimg").on('change', function() {
     }
     if (this.files[0].size/1024/1024*1000 > 1024 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 1 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -798,7 +798,7 @@ $(document).on("change","#companydoc",function(e){
     var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
     if(!validExtensions.includes(fextension)){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
             });
         this.value = "";
@@ -806,14 +806,14 @@ $(document).on("change","#companydoc",function(e){
     }
     if (this.files[0].size/1024/1024*1000 > 2048 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ไฟล์ขนาดมากกว่า 2 MB',
             });
         return ;
     }
     if (this.files[0].name.length > 70 ){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
             });
         return ;
@@ -850,8 +850,8 @@ $(document).on("change","#companydoc",function(e){
 
 $(document).on("click",".deletefulltbpcompanydocattachment",function(e){
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -961,8 +961,8 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,othe
   }
   $(document).on('click', '.deleteauthorizeddirector', function(e) {
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -1046,7 +1046,7 @@ function addAuthorizedDirector(id,prefix,otherprefix,name,lastname,position,othe
 $(document).on('click', '#btn_modal_add_address', function(e) {
     if($('#addressname').val() == '' || $('#address').val() == '' ||$('#provincemodal').val() == '' ||$('#amphurmodal').val() == '' ||$('#tambolmodal').val() == '' ||$('#postalcode').val() == ''){
         Swal.fire({
-            title: 'ผิดพลาด...',
+            title: 'ผิดพลาด',
             text: 'กรุณากรอกข้อมูลให้ครบ!',
         })
         return;
@@ -1085,8 +1085,8 @@ $(document).on('change', '#tambol', function(e) {
 
 $(document).on('click', '.deleteaddress', function(e) {
     Swal.fire({
-        title: 'คำเตือน!',
-        text: `ต้องการลบรายการ `,
+        title: 'คำเตือน',
+        text: `ต้องการลบรายการ`,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

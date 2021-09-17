@@ -21,6 +21,7 @@ use App\Model\BusinessType;
 use App\Model\CompanyBoard;
 use App\Model\FullTbpAsset;
 use App\Model\FullTbpGantt;
+use App\Model\PopupMessage;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ use App\Model\FullTbpEmployee;
 use App\Model\SignatureStatus;
 use App\Model\TimeLineHistory;
 use App\Model\EmployExperience;
+use App\Model\FullTbpSignature;
 use App\Model\FullTbpCompanyDoc;
 use App\Model\FullTbpInvestment;
 use App\Model\FullTbpMarketNeed;
@@ -65,7 +67,7 @@ use App\Model\FullTbpProjectAwardAttachment;
 use App\Model\FullTbpProjectPlanTransaction;
 use App\Model\FullTbpCompanyProfileAttachment;
 use App\Model\FullTbpProjectCertifyAttachment;
-use App\Model\FullTbpSignature;
+
 class DashboardCompanyProjectFullTbpController extends Controller
 {
     public function Index(){
@@ -79,6 +81,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
         $businessplan = BusinessPlan::where('company_id',$company->id)->first();
         $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
         $fulltpbs = FullTbp::where('mini_tbp_id',$minitbp->id)->get();   
+        
         return view('dashboard.company.project.fulltbp.index')->withFulltbps($fulltpbs);
     }
 
@@ -278,6 +281,7 @@ class DashboardCompanyProjectFullTbpController extends Controller
 
 
        $ganttcollections = collect($ganttarr);
+       $popupmessages = PopupMessage::get();
         return view('dashboard.company.project.fulltbp.edit')->withFulltbp($fulltbp)
                                                 ->withFulltbpemployee($fulltbpemployee)
                                                 ->withBusinesstypes($businesstypes)
@@ -328,7 +332,8 @@ class DashboardCompanyProjectFullTbpController extends Controller
                                                 ->withAuthorizeddirectors($authorizeddirectors)
                                                 ->withEducationlevels($educationlevels)
                                                 ->withFulltbpsignatures($fulltbpsignatures)
-                                                ->withGanttcollections($ganttcollections);
+                                                ->withGanttcollections($ganttcollections)
+                                                ->withPopupmessages($popupmessages);
     }
     public  function invenDescSort($item1,$item2)
     {

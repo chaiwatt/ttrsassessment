@@ -227,6 +227,7 @@
             userid: "{{$user->id}}",
             user: "{{$user->name . ' ' . $user->lastname}}",
             projectname: "{{$ev->fulltbp->minitbp->project}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
             
         };
 

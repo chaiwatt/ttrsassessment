@@ -660,6 +660,7 @@
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
 
         $('#note').summernote({

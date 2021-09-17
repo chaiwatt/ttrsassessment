@@ -20,6 +20,7 @@ use App\Model\MessageBox;
 use App\Model\ProjectLog;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\PopupMessage;
 use App\Model\UserPosition;
 use App\Model\CompanyEmploy;
 use App\Model\ProjectStatus;
@@ -56,7 +57,8 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $businessplans = BusinessPlan::where('business_plan_status_id',3)->pluck('id')->toArray();
         }
         $minitbps = MiniTBP::whereIn('business_plan_id',$businessplans)->get();
-        return view('dashboard.admin.project.minitbp.index')->withMinitbps($minitbps);
+        $popupmessages = PopupMessage::get();
+        return view('dashboard.admin.project.minitbp.index')->withMinitbps($minitbps)->withPopupmessages($popupmessages);
     }
 
     public function View($id){

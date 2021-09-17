@@ -251,7 +251,8 @@
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             usertypeid: "{{Auth::user()->user_type_id}}",
-            ev: "{{$ev}}"
+            ev: "{{$ev}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
 
         $(document).on('click', '#showfulltbp', function(e) {

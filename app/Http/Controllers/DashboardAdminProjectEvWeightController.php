@@ -6,6 +6,7 @@ use App\Model\Ev;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Model\EvCommentTab;
+use App\Model\PopupMessage;
 use App\Model\EvEditHistory;
 use App\Model\ProjectMember;
 use Illuminate\Http\Request;
@@ -57,9 +58,11 @@ class DashboardAdminProjectEvWeightController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         if(OnlyBelongPerson::Admin($minitbp->id) == false){
+            $popupmessages = PopupMessage::get();
             return view('dashboard.admin.project.evweight.edit')->withEv($ev)
                     ->withEvedithistories($evedithistories)
-                    ->withEvcommenttabs($evcommenttabs);
+                    ->withEvcommenttabs($evcommenttabs)
+                    ->withPopupmessages($popupmessages);
         }else{
             Auth::logout();
             Session::flush();

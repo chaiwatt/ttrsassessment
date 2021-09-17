@@ -67,6 +67,7 @@ class DashboardAdminRealtimeReportTTRSExpertController extends Controller
         }
     }
     public function SingleExpertDownload($id){
-        return Excel::download(new ReportSingleExpertExport($id), 'ผู้เชี่ยวชาญ.xlsx');
+        $user = User::find($id);
+        return Excel::download(new ReportSingleExpertExport($id), $user->name.'_'.$user->lastname.'.xlsx');
     }
 }

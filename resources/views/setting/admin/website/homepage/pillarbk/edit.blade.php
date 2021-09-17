@@ -138,7 +138,7 @@ $("#iconimg").on('change', function() {
         }
         if (this.files[0].name.length > 70 ){
             Swal.fire({
-                title: 'ผิดพลาด...',
+                title: 'ผิดพลาด',
                 text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
                 });
             return ;

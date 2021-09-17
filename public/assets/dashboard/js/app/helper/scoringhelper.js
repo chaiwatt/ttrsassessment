@@ -5,6 +5,8 @@ var readonly = "";
 var disabled = "";
 var evdata = [];
 var evextradata = [];
+var popupmessage = null;
+
 $(function() {
 
     pdfMake.fonts = {
@@ -626,18 +628,20 @@ $(document).on('change', '.gradescore', function(e) {
        if($(this).val() == 'f'){$(this).val('F')}
         
         if(($(this).val() !== 'A') && ($(this).val() !== 'B') && ($(this).val() !== 'C') && ($(this).val() !== 'D') && ($(this).val() !== 'E') && ($(this).val() !== 'F' )){
+            popupmessage = route.popupmessages.find(x => x.id ==66);
             Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรอกเกรด A-F เท่านั้น!',
+                title: popupmessage['title'],
+                text: popupmessage['message'],
             })
             $(this).val('');
             return;
         }
     }else if(stepindex == 1){
         if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+            popupmessage = route.popupmessages.find(x => x.id ==67);
             Swal.fire({
-                title: 'ผิดพลาด...',
-                text: 'กรอกคะแนน 0-5 เท่านั้น!',
+                title: popupmessage['title'],
+                text: popupmessage['message'],
             })
             $(this).val('');
             return;
@@ -647,9 +651,10 @@ $(document).on('change', '.gradescore', function(e) {
 
 $(document).on('change', '.inputextrascore', function(e) {
     if($(this).val() != '5' && $(this).val() != '4' && $(this).val() != '3' && $(this).val() != '2' && $(this).val() != '1' && $(this).val() != '0'){
+        popupmessage = route.popupmessages.find(x => x.id ==67);
         Swal.fire({
-            title: 'ผิดพลาด...',
-            text: 'กรอกคะแนน 0-5 เท่านั้น!',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
         })
         $(this).val('');
         return;
@@ -758,9 +763,10 @@ function updateScoringStatus(evid,gradescorelist,checkscorelist,commentlist,stat
             $('.inpscore').prop("disabled", true);
         }
         $("#spinicon").attr("hidden",true);
+        popupmessage = route.popupmessages.find(x => x.id ==68);
         Swal.fire({
-            title: 'สำเร็จ',
-            text: 'นำส่งคะแนนสำเร็จ',
+            title: popupmessage['title'],
+            text: popupmessage['message'],
         }).then((result) => {
             window.location.reload();
         });
@@ -802,9 +808,10 @@ $('.step-evweight').steps({
         }
 
 
+        popupmessage = route.popupmessages.find(x => x.id ==69);
         Swal.fire({
-            title: 'โปรดยืนยัน!',
-            text: `ต้องการนำส่งคะแนน `,
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -870,8 +877,8 @@ $('.step-evweight').steps({
                     });
 
                     Swal.fire({
-                        title: 'ผิดพลาด...',
-                        html: `กรุณากรอกเกรดให้ครบ! ดังนี้ <br><strong>${errlist} </strong>`,
+                        title: 'ผิดพลาด',
+                        html: `กรุณากรอกเกรดให้ครบ ดังนี้ <br><strong>${errlist} </strong>`,
                     })
 
                     return;
@@ -889,8 +896,8 @@ $('.step-evweight').steps({
             
                     if (noblank_extra == false){
                         Swal.fire({
-                            title: 'ผิดพลาด...',
-                            text: 'กรุณาคะแนนให้ครบ!',
+                            title: 'ผิดพลาด',
+                            text: 'กรุณาคะแนนให้ครบ',
                         })
                         return;
                     };
@@ -904,9 +911,11 @@ $('.step-evweight').steps({
                         $('.inpscore').prop("disabled", true);
                     }
                     $("#spinicon").attr("hidden",true);
+
+                    popupmessage = route.popupmessages.find(x => x.id ==68);
                     Swal.fire({
-                        title: 'สำเร็จ',
-                        text: 'นำส่งคะแนนสำเร็จ',
+                        title: popupmessage['title'],
+                        text: popupmessage['message'],
                     }).then((result) => {
                         window.location.reload();
                     });

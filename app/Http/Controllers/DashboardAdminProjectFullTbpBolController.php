@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Bol;
 use App\Model\FullTbp;
 use App\Model\MiniTBP;
+use App\Model\PopupMessage;
 use Illuminate\Http\Request;
 use App\Helper\OnlyBelongPerson;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class DashboardAdminProjectFullTbpBolController extends Controller
         $bols = Bol::where('full_tbp_id',$id)->get();
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         if(OnlyBelongPerson::LeaderAndExpert($minitbp->id) == false){
-            return view('dashboard.admin.project.fulltbp.bol.index')->withBols($bols)->withFulltbp($fulltbp);
+            $popupmessages = PopupMessage::get();
+            return view('dashboard.admin.project.fulltbp.bol.index')->withBols($bols)->withFulltbp($fulltbp)->withPopupmessages($popupmessages);
         }else{
             Auth::logout();
             Session::flush();

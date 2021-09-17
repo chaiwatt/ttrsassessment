@@ -396,8 +396,9 @@
             branchid: "{{Auth::user()->branch_id}}",
             usertypeid: "{{Auth::user()->user_type_id}}",
             fulltbpid: "{{$fulltbp->id}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
-
+        var _popupmessage = null;
         
     $(document).on('click', '.showreject', function(e) {
         showReject($(this).data('id'),$(this).data('fulltbpid')).then(data => {
@@ -428,9 +429,10 @@
     }
 
     $(document).on('click', '#jdconfirmteam', function(e) {
+        _popupmessage = route.popupmessages.find(x => x.id ==37);
         Swal.fire({
-            title: 'โปรดยืนยัน!',
-            text: `ต้องการยืนยันทีมผู้เชี่ยวชาญ `,
+            title: _popupmessage['title'],
+            text: _popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -443,9 +445,10 @@
                 $("#spinicon").attr("hidden",false);
                     jdConfirmExpert("{{$fulltbp->id}}").then(data => {
                         if(data == ''){
+                            _popupmessage = route.popupmessages.find(x => x.id ==38);
                             Swal.fire({
-                            title: 'ผิดพลาด...',
-                            text: 'ไม่พบข้อมูลผู้เชี่ยวชาญที่ตอบรับ',
+                                title: _popupmessage['title'],
+                                text: _popupmessage['message'],
                         }).then((result) => {
                             window.location.reload();
                         });
@@ -482,9 +485,10 @@
     function confirmsubmit(e) {
             e.preventDefault();
             var frm = e.target.form;
+            _popupmessage = route.popupmessages.find(x => x.id ==39);
             Swal.fire({
-                    title: 'โปรดยืนยัน',
-                    text: `ต้องการส่งรายการมอบหมาย`,
+                    title: _popupmessage['title'],
+                    text: _popupmessage['message'],
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

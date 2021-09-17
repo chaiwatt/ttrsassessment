@@ -19,6 +19,7 @@ use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\CalendarType;
 use App\Model\ExpertDetail;
+use App\Model\PopupMessage;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
@@ -90,7 +91,7 @@ class DashboardAdminCalendarController extends Controller
       $fulltbp = FullTbp::find($id);
       $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
       $isnotifies = Isnotify::get();
-      //$CalendarType = CalendarType::get();
+      $popupmessages = PopupMessage::get();
 
       $eventcalendar = EventCalendar::where('full_tbp_id',$fulltbp->id)
                                 ->whereNull('starttime')
@@ -178,7 +179,8 @@ class DashboardAdminCalendarController extends Controller
                                                   ->withCalendartypes($calendartypes)
                                                   ->withIsnotifies($isnotifies)
                                                   ->withProjectmembers($projectmembers)
-                                                  ->withEventcalendar($eventcalendar);
+                                                  ->withEventcalendar($eventcalendar)
+                                                  ->withPopupmessages($popupmessages);
   }
     public function CreateSave(CreateCalendarRequest $request){
       $auth = Auth::user();

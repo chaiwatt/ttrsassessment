@@ -23,9 +23,10 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
     }
 
     if(check == 1){
+        var popupmessage = route.popupmessages.find(x => x.id ==5);
         Swal.fire({
-          title: 'โปรดยืนยัน',
-          text: `ต้องการอนุมัติ Mini TBP `,
+          title: popupmessage['title'],
+          text: popupmessage['message'],
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -43,9 +44,10 @@ $(document).on('click', '#btn_modal_edit_minitbp', function(e) {
           }
       });
       }else if(check == 2){
+        var popupmessage = route.popupmessages.find(x => x.id ==4);
         Swal.fire({
-            title: 'โปรดยืนยัน',
-            text: `ต้องการส่งคืน Mini TBP `,
+            title: popupmessage['title'],
+            text: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

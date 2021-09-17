@@ -10,6 +10,7 @@ use App\Model\GeneralInfo;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\CalendarType;
+use App\Model\PopupMessage;
 use App\Model\ProjectGrade;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
@@ -180,7 +181,7 @@ class DashboardAdminReportController extends Controller
         }
 
         $gradecollection = collect($gradearr);
-
+        $popupmessages = PopupMessage::get();
         return view('dashboard.admin.report.index')->withEventcalendarattendees($eventcalendarattendees)
                                                 ->withFulltbps($fulltbps)
                                                 ->withAlertmessages($alertmessages)
@@ -197,7 +198,8 @@ class DashboardAdminReportController extends Controller
                                                 ->withTotalfinish($totalfinish)
                                                 ->withLeaders($leaders)
                                                 ->withExperts($experts)
-                                                ->withGradecollection($gradecollection);
+                                                ->withGradecollection($gradecollection)
+                                                ->withPopupmessages($popupmessages);
 
 
 

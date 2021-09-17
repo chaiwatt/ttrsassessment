@@ -66,7 +66,8 @@ class DashboardAdminRealtimeReportTTRSofficerController extends Controller
         }
     }
     public function SingleDownload($id){
-        return Excel::download(new ReportTTRSSingleOfficerExport($id), 'เจ้าหน้าที่TTRS.xlsx');
+        $user = User::find($id);
+        return Excel::download(new ReportTTRSSingleOfficerExport($id), $user->name.'_'.$user->lastname.'.xlsx');
     }
     
 

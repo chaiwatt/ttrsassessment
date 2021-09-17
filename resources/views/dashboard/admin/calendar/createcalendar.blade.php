@@ -216,8 +216,11 @@
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
-            branchid: "{{Auth::user()->branch_id}}"
+            branchid: "{{Auth::user()->branch_id}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
+        var popupmessage = null;
+        // console.log(route.popupmessages);
         var startdate = moment();
         if($('#eventstartdate').val() != ''){
             
@@ -236,24 +239,6 @@
             time: false
         });
 
-        // $('#eventtimestart').bootstrapMaterialDatePicker({
-        //     format: 'HH:mm',
-        //     clearButton: true,
-        //     cancelText: "ยกเลิก",
-        //     okText: "ตกลง",
-        //     clearText: "เคลียร์",
-        //     date: false,
-        // });
-        
-        // $('#eventtimeend').bootstrapMaterialDatePicker({
-        //     format: 'HH:mm',
-        //     clearButton: true,
-        //     cancelText: "ยกเลิก",
-        //     okText: "ตกลง",
-        //     clearText: "เคลียร์",
-        //     date: false,
-        // });
-
         $(document).on('click', '#closetoast', function(e) {
             $("#toast").attr("hidden",true);
         });
@@ -261,9 +246,10 @@
         function confirmsubmit(e) {
             e.preventDefault();
             var frm = e.target.form;
+            popupmessage = route.popupmessages.find(x => x.id ==63);
             Swal.fire({
-                    title: 'โปรดยืนยัน',
-                    text: `ต้องการยืนยันสร้างปฎิทิน`,
+                title: popupmessage['title'],
+                text: popupmessage['message'],
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
