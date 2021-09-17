@@ -583,7 +583,7 @@
                             
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.search.company')}}" class="text-white">จำนวนผู้ประกอบการ</a>  
+                          <a href="{{route('dashboard.admin.search.company')}}" class="text-white" ><span style="font-size: 20px">จำนวนผู้ประกอบการ</span></a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -600,7 +600,7 @@
                             
                         </div>
                         <div>
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white">จำนวนยื่น Mini Tbp</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><span style="font-size: 20px">จำนวนยื่น Mini Tbp</span></a>  
                             
                         </div>
                     </div>
@@ -615,7 +615,7 @@
                             <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfulltbp}}</h1></a> 
                         </div>
                         <div>  
-                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white">จำนวนยื่น Full TBP</a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><span style="font-size: 20px">จำนวนยื่น Full TBP</span></a>  
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -629,7 +629,7 @@
                             <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalonprocess}}</h1></a>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white">อยู่ระหว่างการประเมิน</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><span style="font-size: 20px">อยู่ระหว่างการประเมิน</span></a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -643,7 +643,7 @@
                             <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfinish}}</h1></a>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white">ประเมินเสร็จสิ้น</a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><span style="font-size: 20px">ประเมินเสร็จสิ้น</span></a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>

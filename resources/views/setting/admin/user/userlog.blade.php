@@ -69,6 +69,7 @@
                             <table class="table table-bordered mb-2" id="userlogtable">
                                 <thead>
                                     <tr class="bg-info">
+                                        <th hidden>วันที่</th>
                                         <th style="white-space: nowrap;text-align: center">วันที่</th>
                                         <th style="text-align: center">ชื่อ-นามสกุล</th> 
                                         <th style="text-align: center">Log</th>    
@@ -82,7 +83,8 @@
                                             $userprefix = $userlog->user->alter_prefix;
                                         }
                                     @endphp
-                                    <tr>    
+                                    <tr>   
+                                        <td hidden>{{$key+1}}</td> 
                                         <td style="white-space: nowrap">{{$userlog->createdatth}}</td>
                                         <td style="white-space: nowrap"> {{$userprefix}}{{$userlog->user->name}} {{$userlog->user->lastname}} </td>    
                                         <td> {{$userlog->document}} </td> 
