@@ -574,7 +574,7 @@ class DashboardAdminAssessmentController extends Controller
 
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $businessplan->id;
-            $notificationbubble->notification_category_id = 3;
+            $notificationbubble->notification_category_id = 4;
             $notificationbubble->notification_sub_category_id = 10;
             $notificationbubble->user_id = $auth->id;
             $notificationbubble->target_user_id = $projectmember->user_id;

@@ -57,6 +57,8 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
         $homepageservice->iconhover = $filelocation_iconhover;
         $homepageservice->cardcolor_id = $request->cardcolor;
         $homepageservice->link = $request->link;
+        $homepageservice->color = $request->hexcolor;
+        $homepageservice->colortype = $request->colortypeinp;
         $homepageservice->save();
 
         return redirect()->route('setting.admin.website.homepage.service')->withSuccess('เพิ่มรายการสำเร็จ');
@@ -69,6 +71,7 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
     }
 
     public function EditSave(Request $request,$id){
+        
         $filelocation_iconnormal = HomepageService::find($id)->iconnormal;
         $file = $request->file('iconnormal');
         if(!Empty($file)){
@@ -93,7 +96,9 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
             'iconnormal' => $filelocation_iconnormal,
             'iconhover' => $filelocation_iconhover,
             'cardcolor_id' => $request->cardcolor,
-            'link' => $request->link
+            'link' => $request->link,
+            'color' => $request->hexcolor,
+            'colortype' => $request->colortypeinp
         ]);
 
        return redirect()->route('setting.admin.website.homepage.service')->withSuccess('แก้ไขรายการสำเร็จ');

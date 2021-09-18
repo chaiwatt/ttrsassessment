@@ -8,7 +8,12 @@
         <div class="row">
         @foreach ($homepageservices as $key => $homepageservice)
             <div class="col-lg-4 col-md-6 mb-20" data-aos="fade-up" data-aos-delay="{{($key + 1)*100}}">
-                <div class="services-item {{$homepageservice->cardcolor->name}}" style="height:330px">
+                @if ($homepageservice->colortype == 0)
+                        <div class="services-item {{$homepageservice->cardcolor->name}}" style="height:330px">
+                    @else
+                        <div class="services-item" onmouseover="this.style.backgroundColor='{{$homepageservice->color}}'" onmouseout="this.style.backgroundColor=''" style="height:330px;">
+                @endif
+
                     <div class="services-icon">
                         <div class="image-part">
                             <img class="main-img" src="{{asset($homepageservice->iconnormal)}}" width="300" height="300">

@@ -64,6 +64,12 @@
                                                   <a href="tel:{{$generalinfo->phone1}}">{{$generalinfo->phone1}} Ext {{$generalinfo->phone1_ext}}</a>
                                               @endif
                                         </li>
+                                        @if ($generalinfo->showsocialmedia == 1)
+                                            @if (!Empty($generalinfo->facebook)) <a href="{{$generalinfo->facebook}}" class="mr-2"><i class="fa fa-facebook text-white"></i></a> @endif
+                                            @if (!Empty($generalinfo->twitter)) <a href="{{$generalinfo->twitter}}" class="mr-2"><i class="fa fa-twitter text-white"></i></a> @endif
+                                            @if (!Empty($generalinfo->youtube)) <a href="{{$generalinfo->youtube}}" class="mr-2"><i class="fa fa-youtube text-white"></i></a> @endif
+                                            @if (!Empty($generalinfo->instagram)) <a href="{{$generalinfo->instagram}}" class="mr-2"><i class="fa fa-instagram text-white"></i></a>@endif  
+                                        @endif
                                     </ul>
                                  </div>
                             </div>

@@ -73,17 +73,50 @@
                                         </div>
                                         <div class="form-group">
                                             <label>ลิงก์<span class="text-danger">*</span></label>
-                                            <input type="text"  name="link" value=""  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat100">
+                                            <input type="text"  name="link" value=""  placeholder="ลิงก์" class="form-control form-control-lg stringformat100">
                                         </div>
+
+                                        
+                                    <input type="text" id="colortypeinp" name="colortypeinp" value="0"  >
+                                    <input type="text" id="hexcolor" name="hexcolor" value=""  >
                                         <div class="form-group">
+                                            
                                             <label>เลือกสีพื้น<span class="text-danger">*</span></label>
-                                            <select name="cardcolor"  placeholder="เลือกสีพื้น" class="form-control form-control-select2">
-                                              @foreach($cardcolors as $key => $cardcolor)
-                                                  <option value="{{$cardcolor->id}}" >{{$cardcolor->name}}</option>
-                                              @endforeach
-                                          </select>
+                                            <div class="form-group" >
+                                                <div class="form-check form-check-inline">
+                            
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input-styled colortype" name="colortype" value="0" checked data-fouc>
+                                                        เลือกรายการ
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input-styled colortype" name="colortype" value="1" data-fouc>
+                                                        กำหนดเอง
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" style="margin-top: -30px">
+                                                <div class="col-lg-11">
+                                                    <select name="cardcolor" placeholder="เลือกสีพื้น" class="form-control form-control-select2" >
+                                                        @foreach($cardcolors as $key => $cardcolor)
+                                                            <option value="{{$cardcolor->id}}" >{{$cardcolor->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <div class="form-group">
+                                                        <div class="d-inline-block">
+                                                            <input type="text" id="colorpick" class="form-control colorpicker-basic form-control-lg" style="font-size:18px;width:100%;height:200px;" value="" data-fouc>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                        </div>
+                                   
                                          </div>
- 
+                               
 										<div class="form-group">
 											<label>Icon ปกติ<span class="text-danger">*</span></label>
 											<div class="input-group">													
@@ -124,6 +157,9 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
+<script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pickers/color/spectrum.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/demo_pages/picker_color.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
     <script type="text/javascript">
         $("#iconnormal").on('change', function() {
@@ -131,6 +167,19 @@
         });
         $("#iconhover").on('change', function() {
             $("#_iconhover").val(this.value);
+        });
+ 
+
+        $(document).on('change', '.colortype', function(e) {
+            if($("input[name='colortype']:checked").val()=='0'){
+                $('#colortypeinp').val(0);
+            }else{
+                $('#hexcolor').val($('#colorpick').spectrum('get').toHexString());
+                $('#colortypeinp').val(1);
+            }
+        });
+        $("#colorpick").on('change', function() {
+            $('#hexcolor').val($('#colorpick').spectrum('get').toHexString());
         });
     </script>
 @stop

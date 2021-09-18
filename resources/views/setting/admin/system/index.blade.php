@@ -151,6 +151,33 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>Youtube</label>
+                                        <input type="text" name="youtube" value="{{$generalinfo->youtube}}" data-placeholder="Youtube" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Instagram</label>
+                                        <input type="text" name="instagram" value="{{$generalinfo->instagram}}" data-placeholder="Instagram" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Twitter</label>
+                                        <input type="text" name="twitter" value="{{$generalinfo->twitter}}" data-placeholder="Facebook" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>แสดง Social media</label>
+                                        <select name="showsocialmedia" data-placeholder="แสดง Social media" class="form-control form-control-lg form-control-select2">                                                              
+                                            <option value="0" @if ($generalinfo->showsocialmedia == 0) selected @endif> ไม่แสดง </option>
+                                            <option value="1" @if ($generalinfo->showsocialmedia == 1) selected @endif> แสดง </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>สถานภาพเกรดแยกตาม Pillar</label>
                                         <select name="showgradeperpillar" data-placeholder="สถานภาพเกรดแยกตาม Pillar" class="form-control form-control-lg form-control-select2">
                                             @foreach ($showalerts as $showalert)                                                                

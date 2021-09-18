@@ -36,7 +36,7 @@ class HomepagePillarSectionsTableSeeder extends Seeder
                 'pillardescth3' => 'Marketability คำอธิบายภาษาไทย',
                 'pillardesceng3' => 'Marketability description',
                 'pillardescth4' => 'Business Prospect คำอธิบายภาษาไทย',
-                'pillardesceng4' => 'Business Prospect description'
+                'pillardesceng4' => 'Business Prospect description',
             ]
         ]);
     }

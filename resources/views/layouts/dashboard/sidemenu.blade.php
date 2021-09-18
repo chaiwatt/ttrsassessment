@@ -187,7 +187,11 @@
                 </ul>
             </li>
             <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'nav-item-expanded nav-item-open':''}}">
-                <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span></a>
+                <a href="#" class="nav-link"><i class="icon-trophy3"></i> <span>ผลการประเมิน</span>
+                    @if ($sharenotificationbubbles->where('notification_category_id','4')->count() > 0)
+                        <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
+                    @endif
+                </a>
                 <ul class="nav nav-group-sub" data-submenu-title="ประเมิน">
                     <li class="nav-item"><a href="{{route('dashboard.admin.evaluationresult')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.evaluationresult')?'active':''}}">รายงานผลการประเมิน
                         @if ($sharenotificationbubbles->where('notification_sub_category_id',10)->count() > 0)

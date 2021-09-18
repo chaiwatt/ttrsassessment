@@ -23,6 +23,8 @@ class CreateHomepageServicesTable extends Migration
             $table->string('link',250)->nullable();
             $table->string('iconnormal',250)->nullable();
             $table->string('iconhover',250)->nullable();
+            $table->char('colortype',1)->default(0);
+            $table->string('color',100)->nullable();
             $table->unsignedBigInteger('cardcolor_id');
             $table->timestamps();
         });

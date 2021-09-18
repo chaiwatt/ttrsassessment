@@ -43,7 +43,10 @@ class CreateGeneralInfosTable extends Migration
             $table->string('facebook_default',250)->default('https://www.facebook.com/NSTDATHAILAND');
             $table->string('instagram',250)->nullable();
             $table->string('instagram_default',250)->nullable();
-            $table->string('director',250)->nullable();
+            $table->string('youtube',250)->default('https://www.youtube.com/user/nstda');
+            $table->string('twitter',250)->default('https://twitter.com/nstdathailand');
+            $table->char('showsocialmedia',1)->default('0');
+            $table->string('director',250)->default('nstda');
             $table->string('director_default',250)->nullable();
             $table->char('postalcode',5)->default('12120');
             $table->char('postalcode_default',5)->default('12120');

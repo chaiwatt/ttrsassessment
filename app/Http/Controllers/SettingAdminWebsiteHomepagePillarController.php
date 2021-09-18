@@ -45,7 +45,11 @@ class SettingAdminWebsiteHomepagePillarController extends Controller
             'pillardescth3' =>  $request->pillardescth3,
             'pillardesceng3' =>  $request->pillardesceng3,
             'pillardescth4' =>  $request->pillardescth4,
-            'pillardesceng4' =>  $request->pillardesceng4
+            'pillardesceng4' =>  $request->pillardesceng4,
+            'color1' =>  $request->color1,
+            'color2' =>  $request->color2,
+            'color3' =>  $request->color3,
+            'color4' =>  $request->color4
         ]);
 
         $link = $request->link;

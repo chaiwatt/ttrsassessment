@@ -20,6 +20,9 @@ class NotificationCategoriesSeederTable extends Seeder
             ],
             [
                 'name' => 'ประเมิน'
+            ],
+            [
+                'name' => 'รายงานผลการประเมิน'
             ]
         ]);
     }
