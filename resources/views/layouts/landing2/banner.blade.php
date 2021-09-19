@@ -6,16 +6,16 @@
                    {{-- <div class="sub-title">Secure & Clean Code</div> --}}
                    <h1 class="title title-animate">
                         @if (Config::get('app.locale') == 'th')
-                            {{$shareheadertext->titleth}}
+                            {!!$shareheadertext->titleth!!}
                         @else
-                            {{$shareheadertext->titleeng}}
+                            {!!$shareheadertext->titleeng!!}
                         @endif
                    </h1>
                     <p class="desc desc-animate">
                         @if (Config::get('app.locale') == 'th')
-                            {{$shareheadertext->detailth}}
+                            {!!$shareheadertext->detailth!!}
                         @else
-                            {{$shareheadertext->detaileng}}
+                            {!!$shareheadertext->detaileng!!}
                         @endif
                     </p>
                     <ul class="banner-btn">
