@@ -56,7 +56,7 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
         $homepageservice->iconnormal = $filelocation_iconnormal;
         $homepageservice->iconhover = $filelocation_iconhover;
         $homepageservice->cardcolor_id = $request->cardcolor;
-        $homepageservice->link = $request->link;
+        // $homepageservice->link = $request->link;
         $homepageservice->color = $request->hexcolor;
         $homepageservice->colortype = $request->colortypeinp;
         $homepageservice->save();

@@ -71,14 +71,14 @@
                                             <label>ข้อความอธิบาย (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="descriptioneng" value=""  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat100">
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>ลิงก์<span class="text-danger">*</span></label>
                                             <input type="text"  name="link" value=""  placeholder="ลิงก์" class="form-control form-control-lg stringformat100">
-                                        </div>
+                                        </div> --}}
 
                                         
-                                    <input type="text" id="colortypeinp" name="colortypeinp" value="0"  >
-                                    <input type="text" id="hexcolor" name="hexcolor" value=""  >
+                                    <input type="text" id="colortypeinp" name="colortypeinp" value="0" hidden  >
+                                    <input type="text" id="hexcolor" name="hexcolor" value="" hidden >
                                         <div class="form-group">
                                             
                                             <label>เลือกสีพื้น<span class="text-danger">*</span></label>
