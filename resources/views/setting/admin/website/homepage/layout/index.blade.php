@@ -18,7 +18,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">Custom Section</span></h4>
+                <h4> <span class="font-weight-semibold">Layout</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -30,7 +30,7 @@
                     <a href="#" class="breadcrumb-item"> เว็บไซต์</a>
                     <a href="#" class="breadcrumb-item"> หน้าแรก (Homepage)</a>
                     {{-- <a href="#" class="breadcrumb-item"> Custom Section</a> --}}
-                    <span class="breadcrumb-item active">Custom Section</span>
+                    <span class="breadcrumb-item active">Layout</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -61,78 +61,31 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.website.homepage.customsection.editsave',['id' => $customsection->id])}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.website.homepage.layout.save')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">	
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Link ID</label>
-                                        @php
-                                            $sectionid = 'custom-section1';
-                                            if($customsection->id == 7){
-                                                $sectionid = 'custom-section2';
-                                            }else if($customsection->id == 8){
-                                                $sectionid = 'custom-section3';
-                                            }else if($customsection->id == 9){
-                                                $sectionid = 'custom-section4';
-                                            }else if($customsection->id == 10){
-                                                $sectionid = 'custom-section5';
-                                            }
-                                        @endphp
-                                        <input type="text" name="bgcss" value="{{$sectionid}}" class="form-control form-control-lg" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>พื้นหลัง CSS<span class="text-danger">*</span></label>
-                                        <input type="text" name="bgcss" value="{{$customsection->bg}}"  placeholder="ตัวอย่าง เช่น background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)" class="form-control form-control-lg">
-                                        <code>
-                                            <label>ตัวอย่าง CSS</label>
-                                            <div style="padding-left:10px">
-                                                <p>background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)</p>
-                                                <p>background-image: url('https://www.nstda.or.th/home/wp-content/themes/nstda/assets/images/bg_footercontact_03.jpg');height: 100%;background-repeat: no-repeat;background-size: cover;</p>
-                                            </div>
-                                        </code>
-                                    </div>
-                                    <div class="form-group" style="margin-top:-30px">
-                                        <div class="form-group">
-                                            <label>รายละเอียด section<span class="text-danger">*</span></label>
-                                            <textarea name="content" id="content" class="form-control mb-3" rows="7" cols="1" placeholder="บทความ">{{$customsection->content}}</textarea>
-                                        </div>
-                                    </div>
-                                <div class="row"> 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>สถานะการแสดง</label>
-                                            <select name="status" id="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
-                                                    <option value="0" @if ($customsection->show == 0) selected @endif >ซ่อน</option>
-                                                    <option value="1" @if ($customsection->show == 1) selected @endif >แสดง</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="col-md-12" >
                                 {{-- <div class="row"> 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12" style="text-align:center" > --}}
                                         <div id="orderlist_wrapper" hidden >
+                                         
                                             @foreach ($homepagesections as $homepagesection)
-                                               <input value="{{$homepagesection->order_list}}" name="orderlist[]" type="text">
+                                               <input value="{{$homepagesection->order_list}}" name="orderlist[]" type="text" >
                                             @endforeach
                                            </div>
         
-                                           <label for=""><strong>ลำดับการแสดงผล (ลาก วางเพื่อเปลี่ยน)</strong> </label>
+                                           <label for=""><strong>ลำดับการแสดงผล Homepage (ลาก วางเพื่อเปลี่ยน)</strong> </label>
                                             <ul id="sortable">
-                                                @foreach ($homepagesections as $homepagesection)
-                                                @php
-                                                    $color = 'gray';
-                                                    $border = 'solid';
-                                                    if($homepagesection->id == $customsection->order_list){
-                                                        $color = 'green';
-                                                        $border = 'dashed';
-                                                    }
-                                                @endphp
-                                                    <li class="orderitem" data-id="{{$homepagesection->order_list}}" style="margin-bottom:30px"><span style="border-style: {{$border}};width:300px;background-color:{{$color}};padding-left:5px" >{{$homepagesection->aliasname}}</span></li>
+                                                @foreach ($homepagesections->sortBy('order_list') as $homepagesection)
+
+                                                    <li class="orderitem" data-id="{{$homepagesection->id}}" style="margin-bottom:30px">
+                                                        <span style="width:300px;padding-left:10px" class="bg-teal">
+                                                            {{$homepagesection->aliasname}}</span>  
+                                                    </li>
                                                 @endforeach
                                                
                                               </ul>
-                                    </div>
+                                    {{-- </div>
                                 </div> --}}
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
@@ -171,6 +124,8 @@
                     var array = $(".orderitem").map(function() {
                         return $(this).data("id");
                     }).get();
+
+                    console.log(array);
                     var html  = '';
                 var array = $(".orderitem").map(function() {
                     html += `<input type="text" name="orderlist[]" value="${$(this).data("id")}" >`

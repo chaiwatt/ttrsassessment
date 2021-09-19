@@ -9,7 +9,7 @@
     <style>
         body{
             padding: 0;
-            background-color:#{{$sharefrontpage->bgcolor}};
+            background-color:{{$sharefrontpage->bgcolor}};
         }
         .fit { 
             max-width: {{$sharefrontpage->percent}}%;

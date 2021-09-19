@@ -70,10 +70,10 @@
                                             <label>ข้อความที่2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="subtitleeng" value="{{$homepageindustrygroup->subtitleeng}}"  placeholder="ข้อความที่ 2 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat200">
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>ลิงก์</label>
                                             <input type="text"  name="url" value="{{$homepageindustrygroup->url}}"  placeholder="ลิงก์" class="form-control form-control-lg stringformat100">
-                                        </div>
+                                        </div> --}}
 										<div class="form-group">
 											<label>รูป<span class="text-danger">*</span></label>
 											<div class="input-group">													
@@ -100,7 +100,7 @@
                                                 @endphp
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input-styled selectlink" name="selectlink" value="0" {{$check}} data-fouc>
-                                                    ลิงค์
+                                                    ลิงก์ (เช่น https://google.com)
                                                 </label>
                                             </div>
             
@@ -114,7 +114,7 @@
                                             <div class="form-check form-check-inline">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input-styled selectlink" name="selectlink" {{$check1}} data-fouc>
-                                                    หน้าเพจ
+                                                    หน้าเพจ&nbsp;<a href="#" data-toggle="modal" id="editpage"> <i class="icon-pencil5 text-info"></i></a>
                                                 </label>
                                             </div>
                                         </div>
@@ -139,9 +139,15 @@
                                             @endif
                                         >
                                             <div class="form-group">
+                                                @php
+                                                    $lasttext = substr(@$homepageindustryurl->url, strrpos(@$homepageindustryurl->url, '/' )+1)
+                                                @endphp
                                                 <select id="page" name="page" data-placeholder="หน้าเพจ" class="form-control form-control-lg form-control-select2">
                                                     @foreach ($pages as $page)
                                                         <option value="{{$page->id}}"
+                                                            @if ($lasttext == $page->name)
+                                                                selected
+                                                            @endif
                                                             >{{$page->name}}</option> 
                                                     @endforeach
                                                 </select>
@@ -192,6 +198,11 @@
                 $("#linksourceinternal").attr("hidden",false);
                 $("#linksource").attr("hidden",true);
                 $('#linktype').val(1);
+            }
+        });
+        $(document).on('click', '#editpage', function(e) {
+            if($("input[name='selectlink']:checked").val() != '0'){
+                window.location.replace(route.url +'/setting/admin/website/webpage/edit/' + $('select[name=page] option').filter(':selected').val());
             }
         });
     </script>

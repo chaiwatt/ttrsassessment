@@ -21,6 +21,12 @@ class CreateHeaderTextsTable extends Migration
             $table->string('detaileng',250);
             $table->string('imgbanner',250);
             $table->string('youtube',250);
+            $table->string('titleth_default',250);
+            $table->string('titleeng_default',250);
+            $table->string('detailth_default',250);
+            $table->string('detaileng_default',250);
+            $table->string('imgbanner_default',250);
+            $table->string('youtube_default',250);
             $table->timestamps();
         });
     }

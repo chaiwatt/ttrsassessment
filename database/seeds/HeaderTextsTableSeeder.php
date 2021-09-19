@@ -16,9 +16,16 @@ class HeaderTextsTableSeeder extends Seeder
                 'titleth' => 'Thailand Technology Rating Support and Service (TTRS)',
                 'titleeng' => 'Thailand Technology Rating Support and Service (TTRS)',
                 'detailth' => 'ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS',
-                'detaileng' => 'Thailand Technology Rating Support and Service (TTRS), By NSTDA',
+                'detaileng' => 'Thailand Technology Rating Support and Service (TTRS) By NSTDA',
                 'imgbanner' => '/assets/landing2/images/banner/banner-01.png',
                 'youtube' => 'https://www.youtube.com/watch?v=4Lp7YZilTrU',
+
+                'titleth_default' => 'Thailand Technology Rating Support and Service (TTRS)',
+                'titleeng_default' => 'Thailand Technology Rating Support and Service (TTRS)',
+                'detailth_default' => 'ระบบการประเมินเทคโนโลยีของผู้ประกอบการ SMEs สะท้อนระดับเทคโนโลยีเพิ่มโอกาสเข้าถึงแหล่งเงินทุน TTRS',
+                'detaileng_default' => 'Thailand Technology Rating Support and Service (TTRS) By NSTDA',
+                'imgbanner_default' => '/assets/landing2/images/banner/banner-01.png',
+                'youtube_default' => 'https://www.youtube.com/watch?v=4Lp7YZilTrU',
             ]
         ]);
     }

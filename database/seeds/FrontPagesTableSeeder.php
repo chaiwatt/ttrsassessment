@@ -15,7 +15,7 @@ class FrontPagesTableSeeder extends Seeder
             [
                 'file' => '/assets/landing2/images/billboard.png',
                 'entersitebtn' => '/assets/landing2/images/btn.png',
-                'bgcolor' => '60276b',
+                'bgcolor' => '#60276b',
                 'percentimg' => '60'
             ]
         ]);

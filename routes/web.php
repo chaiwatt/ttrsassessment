@@ -1209,6 +1209,11 @@ Route::group(['middleware' => 'auth'], function(){
                         Route::get('','SettingAdminWebsiteHomepageBannerController@Edit')->name('setting.admin.website.homepage.banner'); 
                         Route::post('editsave','SettingAdminWebsiteHomepageBannerController@EditSave')->name('setting.admin.website.homepage.banner.editsave'); 
                     });
+                    Route::group(['prefix' => 'layout'], function(){     
+                        Route::get('','SettingAdminWebsiteHomepageLayoutController@Index')->name('setting.admin.website.homepage.layout'); 
+                        Route::post('save','SettingAdminWebsiteHomepageLayoutController@Save')->name('setting.admin.website.homepage.layout.save'); 
+                        
+                    });
                     Route::group(['prefix' => 'service'], function(){     
                         Route::get('','SettingAdminWebsiteHomepageServiceController@Index')->name('setting.admin.website.homepage.service'); 
                         Route::get('edit/{id}','SettingAdminWebsiteHomepageServiceController@Edit')->name('setting.admin.website.homepage.service.edit'); 
@@ -1218,6 +1223,7 @@ Route::group(['middleware' => 'auth'], function(){
 
                         Route::post('editsave/{id}','SettingAdminWebsiteHomepageServiceController@EditSave')->name('setting.admin.website.homepage.service.editsave'); 
                         Route::post('editsavestatus','SettingAdminWebsiteHomepageServiceController@EditSaveStatus')->name('setting.admin.website.homepage.service.editsavestatus'); 
+                        Route::get('delete/{id}','SettingAdminWebsiteHomepageServiceController@Delete')->name('setting.admin.website.homepage.service.delete'); 
                     });
                     Route::group(['prefix' => 'industryugroup'], function(){     
                         Route::get('','SettingAdminWebsiteHomepageIndustryugroupController@Edit')->name('setting.admin.website.homepage.industryugroup'); 

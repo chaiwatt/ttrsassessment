@@ -15,13 +15,19 @@ class SettingAdminWebsiteHomepageCustomSectionController extends Controller
     }
 
     public function EditSave(Request $request,$id){
-        foreach ($request->orderlist as $key => $order) {
-            // echo($order . '<br>');
-            HomePageSection::find($key+1)->update([
-                'order_list' => $order
-            ]);
-        }
-        // return;
+        // foreach ($request->orderlist as $key => $order) {
+
+        //     HomePageSection::find($key+1)->update([
+        //         'order_list' => $order
+        //     ]);
+        // }
+
+        // foreach ($request->orderlist as $key => $order) {
+        //     HomePageSection::find($order)->update([
+        //         'order_list' => $key+1
+        //     ]);
+        // }
+
         HomePageSection::find($id)->update([
             'content' => $request->content,
             'bg' => $request->bgcss,

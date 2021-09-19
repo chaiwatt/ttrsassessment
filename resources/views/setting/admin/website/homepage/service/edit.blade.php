@@ -71,11 +71,10 @@
                                             <label>ข้อความอธิบาย (ภาษาอังกฤษ)</label>
                                             <input type="text"  name="descriptioneng" value="{{$homepageservice->descriptioneng}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat120">
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>ลิงก์</label>
                                             <input type="text"  name="link" value="{{$homepageservice->link}}"  placeholder="ข้อความอธิบาย (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat100">
-                                        </div>
-
+                                        </div> --}}
       
                                     <input type="text" id="colortypeinp" name="colortypeinp" value="{{$homepageservice->colortype}}" hidden >
                                     <input type="text" id="hexcolor" name="hexcolor" value="{{$homepageservice->color}}" hidden >

@@ -82,7 +82,7 @@
                                         <div class="form-group">
                                             <label>สีพื้น Title Pillar1<span class="text-danger">*</span> </label>
                                             <input type="text"  name="color1" value="{{$homepagepillar->color1}}"  placeholder="สีพื้น Title Pillar1" class="form-control form-control-lg stringformat200">
-                                            <small>default: <strong>background-image: linear-gradient(180deg, #dd4c23 0%, #f27c1e 100%);</strong></small>
+                                            <code>default: background-image: linear-gradient(180deg, #dd4c23 0%, #f27c1e 100%);</code>
                                         </div>
                                         <div class="form-group" hidden>
                                             <label>Description Pillar1 (ภาษาไทย)<span class="text-danger">*</span></label>
@@ -104,7 +104,7 @@
                                         <div class="form-group">
                                             <label>สีพื้น Title Pillar2<span class="text-danger">*</span></label>
                                             <input type="text"  name="color2" value="{{$homepagepillar->color2}}"  placeholder="สีพื้น Title Pillar2" class="form-control form-control-lg stringformat200">
-                                            <small>default: <strong>background-image: linear-gradient(90deg, #a040f3 41%, #a86ae3 100%);</strong></small>
+                                            <code>default: background-image: linear-gradient(90deg, #a040f3 41%, #a86ae3 100%);</code>
                                         </div>
                                         <div class="form-group" hidden>
                                             <label>Description Pillar2 (ภาษาไทย)<span class="text-danger">*</span></label>
@@ -126,7 +126,7 @@
                                         <div class="form-group">
                                             <label>สีพื้น Title Pillar3<span class="text-danger">*</span></label>
                                             <input type="text"  name="color3" value="{{$homepagepillar->color3}}"  placeholder="สีพื้น Title Pillar3" class="form-control form-control-lg stringformat200">
-                                            <small>default: <strong>background-image: linear-gradient(90deg, #559cea 41%, #6ba3cb 100%);</strong></small>
+                                            <code>default: background-image: linear-gradient(90deg, #559cea 41%, #6ba3cb 100%);</code>
                                         </div>
                                         <div class="form-group" hidden>
                                             <label>Description Pillar3 (ภาษาไทย)<span class="text-danger">*</span></label>
@@ -148,7 +148,7 @@
                                         <div class="form-group">
                                             <label>สีพื้น Title Pillar4<span class="text-danger">*</span></label>
                                             <input type="text"  name="color4" value="{{$homepagepillar->color4}}"  placeholder="สีพื้น Title Pillar4" class="form-control form-control-lg stringformat200">
-                                            <small>default: <strong>background-image: linear-gradient(90deg, #f954a1 41%, #f2a1c6 100%);</strong></small>
+                                            <code>default: background-image: linear-gradient(90deg, #f954a1 41%, #f2a1c6 100%);</code>
                                         </div>
                                         <div class="form-group" hidden>
                                             <label>Description Pillar4 (ภาษาไทย)<span class="text-danger">*</span></label>
@@ -161,6 +161,7 @@
 
                                         
                             <div class="form-group mb-md-2 mt-4">
+                                
                                 <div class="form-check form-check-inline">
                                     @php
                                         $check = 'checked';
@@ -170,7 +171,7 @@
                                     @endphp
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input-styled selectlink" name="selectlink" value="0" {{$check}} data-fouc>
-                                        ลิงค์
+                                        ลิงก์ (เช่น https://google.com)
                                     </label>
                                 </div>
 
@@ -184,7 +185,7 @@
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input-styled selectlink" name="selectlink" {{$check1}} data-fouc>
-                                        หน้าเพจ
+                                        หน้าเพจ&nbsp;<a href="#" data-toggle="modal" id="editpage"> <i class="icon-pencil5 text-info"></i></a>
                                     </label>
                                 </div>
                             </div>
@@ -209,9 +210,15 @@
                                 @endif
                             >
 								<div class="form-group">
+                                    @php
+                                        $lasttext = substr(@$homepagepillarurl->url, strrpos(@$homepagepillarurl->url, '/' )+1)
+                                    @endphp
 									<select id="page" name="page" data-placeholder="หน้าเพจ" class="form-control form-control-lg form-control-select2">
 										@foreach ($pages as $page)
 											<option value="{{$page->id}}"
+                                                @if ($lasttext == $page->name)
+                                                    selected
+                                                @endif
                                                 >{{$page->name}}</option> 
 										@endforeach
 									</select>
@@ -264,6 +271,11 @@
                 $("#linksource").attr("hidden",true);
                 $('#linktype').val(1);
                 console.log('b')
+            }
+        });
+        $(document).on('click', '#editpage', function(e) {
+            if($("input[name='selectlink']:checked").val() != '0'){
+                window.location.replace(route.url +'/setting/admin/website/webpage/edit/' + $('select[name=page] option').filter(':selected').val());
             }
         });
     </script>

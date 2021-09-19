@@ -78,7 +78,7 @@
                                         <td> {{$homepageservice->descriptionthai}} </td>                                   
                                         <td style="text-align: center"> 
                                             <a href="{{route('setting.admin.website.homepage.service.edit',['id' => $homepageservice->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                         
+                                            <a href="{{route('setting.admin.website.homepage.service.delete',['id' => $homepageservice->id])}}"  onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -98,7 +98,7 @@
                                     @endphp
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input-styled selectlink" name="selectlink" value="0" {{$check}} data-fouc>
-                                        ลิงค์
+                                        ลิงก์ (เช่น https://google.com)
                                     </label>
                                 </div>
 
@@ -112,7 +112,7 @@
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input type="radio" class="form-check-input-styled selectlink" name="selectlink" {{$check1}} data-fouc>
-                                        หน้าเพจ
+                                        หน้าเพจ&nbsp;<a href="#" data-toggle="modal" id="editpage"> <i class="icon-pencil5 text-info"></i></a>
                                     </label>
                                 </div>
                             </div>
@@ -137,10 +137,17 @@
                                 @endif
                             >
 								<div class="form-group">
+                                    @php
+                                        $lasttext = substr(@$homepageserviceurl->url, strrpos(@$homepageserviceurl->url, '/' )+1)
+                                    @endphp
+                                        {{-- {{$lasttext}} --}}
 									<select id="page" name="page" data-placeholder="หน้าเพจ" class="form-control form-control-lg form-control-select2">
 										@foreach ($pages as $page)
 											<option value="{{$page->id}}"
-                                                >{{$page->name}}</option> 
+                                                @if ($lasttext == $page->name)
+                                                    selected
+                                                @endif
+                                            >{{$page->name}}</option> 
 										@endforeach
 									</select>
 								</div>
@@ -176,7 +183,8 @@
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}"
         };
-
+        
+        var page =  "{{ $lasttext }}"
         $(document).on('change', '.selectlink', function(e) {
             if($("input[name='selectlink']:checked").val()=='0'){
                 $("#linksourceinternal").attr("hidden",true);
@@ -186,6 +194,12 @@
                 $("#linksourceinternal").attr("hidden",false);
                 $("#linksource").attr("hidden",true);
                 $('#linktype').val(1);
+            }
+        });
+
+        $(document).on('click', '#editpage', function(e) {
+            if($("input[name='selectlink']:checked").val() != '0'){
+                window.location.replace(route.url +'/setting/admin/website/webpage/edit/' + $('select[name=page] option').filter(':selected').val());
             }
         });
     </script>

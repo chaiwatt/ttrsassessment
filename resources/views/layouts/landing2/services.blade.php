@@ -23,7 +23,7 @@
                     <div class="services-content">
                         @if (Config::get('app.locale') == 'th')
                                 <div class="services-text">
-                                    <h3 class="title"><a href="{{url('').'/'.$homepageservice->link}}">{{$homepageservice->titlethai}}</a></h3>
+                                    <h3 class="title"><a href="{{@$sharehomepageserviceurl->url}}">{{$homepageservice->titlethai}}</a></h3>
                                 </div>
                                 <div class="services-desc">
                                     <p>
@@ -32,7 +32,7 @@
                                 </div>
                             @else
                                 <div class="services-text">
-                                    <h3 class="title"><a href="{{url('').'/'.$homepageservice->link}}">{{$homepageservice->titleeng}}</a></h3>
+                                    <h3 class="title"><a href="{{@$sharehomepageserviceurl->url}}">{{$homepageservice->titleeng}}</a></h3>
                                 </div>
                                 <div class="services-desc">
                                     <p>

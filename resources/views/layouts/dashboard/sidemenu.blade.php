@@ -389,6 +389,7 @@
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>หน้าแรก (Homepage)</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
+                        <li class="nav-item"><a href="{{route('setting.admin.website.homepage.layout')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.layout')?'active':''}}">Layout</a></li>		             
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.banner')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.banner')?'active':''}}">Banner</a></li>		             
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.service')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.service')?'active':''}}">ขั้นตอนการบริการ</a></li>		             
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.industryugroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.industryugroup')?'active':''}}">ผลการดำเนินงาน</a></li>	

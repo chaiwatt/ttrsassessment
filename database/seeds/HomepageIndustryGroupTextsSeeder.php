@@ -18,7 +18,8 @@ class HomepageIndustryGroupTextsSeeder extends Seeder
                 'subtitleth' => 'ผลการดำเนินงานโครงการตามกลุ่มอุตสาหกรรม',
                 'subtitleeng' => 'Project performance by Industry Group',
                 'picture' => 'assets/landing2/images/about/group.png',
-                'url' => 'performance'
+                'url' => 'performance',
+       
             ]
         ]);
     }

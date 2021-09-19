@@ -65,9 +65,10 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
     }
 
     public function Edit($id){
+        $pages = WebPage::get();
         $cardcolors = CardColor::get();
         $homepageservice = HomepageService::find($id);
-       return view('setting.admin.website.homepage.service.edit')->withCardcolors($cardcolors)->withHomepageservice($homepageservice);
+       return view('setting.admin.website.homepage.service.edit')->withCardcolors($cardcolors)->withHomepageservice($homepageservice)->withPages($pages);
     }
 
     public function EditSave(Request $request,$id){
@@ -96,7 +97,7 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
             'iconnormal' => $filelocation_iconnormal,
             'iconhover' => $filelocation_iconhover,
             'cardcolor_id' => $request->cardcolor,
-            'link' => $request->link,
+            // 'link' => $request->link,
             'color' => $request->hexcolor,
             'colortype' => $request->colortypeinp
         ]);
@@ -127,5 +128,17 @@ class SettingAdminWebsiteHomepageServiceController extends Controller
         }
 
         return redirect()->route('setting.admin.website.homepage.service')->withSuccess('แก้ไขรายการสำเร็จ');
+    }
+
+    public function Delete($id){
+        $homepageservice = HomepageService::find($id);
+        if(!Empty($homepageservice->iconnormal)){
+            @unlink($homepageservice->iconnormal);
+        }
+        if(!Empty($homepageservice->iconhover)){
+            @unlink($homepageservice->iconhover);
+        }
+        $homepageservice->delete();
+        return redirect()->route('setting.admin.website.homepage.service')->withSuccess('ลบรายการสำเร็จ');
     }
 }

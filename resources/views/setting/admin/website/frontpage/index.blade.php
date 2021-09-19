@@ -55,8 +55,17 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>สีพื้น<span class="text-danger">*</span></label>
-                                            <input type="text"  name="bgcolor" value="{{$frontpage->bgcolor}}"  placeholder="สีพื้น" class="form-control form-control-lg">
+                                            <input type="text"  name="bgcolor" id="bgcolor" value="{{$frontpage->bgcolor}}"  placeholder="สีพื้น" class="form-control form-control-lg" hidden>
+                                            <div class="form-group">
+                                                <div class="d-inline-block">
+                                                    <input type="text" id="colorpick" class="form-control colorpicker-basic form-control-lg" style="font-size:18px;width:100%;height:200px;" value="{{$frontpage->bgcolor}}" data-fouc>
+                                                </div>
+                                            </div>
                                         </div>
+
+         
+                    
+                                  
 
                                         {{-- <div class="form-group">
                                             <input type="text" class="form-control colorpicker-show-input" data-preferred-format="hex" value="#f75d1c" data-fouc>
@@ -141,6 +150,10 @@
     $("#btnimg").on('change', function() {
         $("#_btnimg").html('อัปโหลดรูปปุ่มกด(1)');
     });
+
+    $("#colorpick").on('change', function() {
+            $('#bgcolor').val($('#colorpick').spectrum('get').toHexString());
+        });
 
 </script>
 @stop
