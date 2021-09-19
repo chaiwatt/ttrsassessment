@@ -407,7 +407,29 @@
                                     
                                 </span>
                             </div>
-                        
+                        @elseif( Session::has('error') )
+                            <div class="alert alert-warning alert-styled-left alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                {{ Session::get('error') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->has('g-recaptcha-response'))
+                            {{-- <span class="help-block">
+                                <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                            </span> --}}
+
+                            <div class="sec-title2 text-center mb-45">
+                                <span class="sub-text style-bg" style="background-color: red;color:white">
+                                    @if (Config::get('app.locale') == 'th')
+                                                โปรดตรวจสอบว่าคุณได้เลือก 'ฉันไม่ใช่โปรแกรมอัตโนมัติ'
+
+                                                @else
+                                                Please select I'm not robot.
+                                                @endif 
+                                    
+                                </span>
+                            </div>
                         @endif
                    
                         <div class="contact-widget">
@@ -436,20 +458,20 @@
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                            <input class="from-control stringformat30" type="text" id="name" name="name" placeholder="@if(Config::get('app.locale') == 'th') ชื่อ @else name @endif*" required="">
+                                            <input class="from-control stringformat30" type="text" id="name" value="{{old('name')}}" name="name" placeholder="@if(Config::get('app.locale') == 'th') ชื่อ @else name @endif*" required >
                                         </div> 
                                         <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                            <input class="from-control stringformat30" type="text" id="email" name="email" placeholder="@if(Config::get('app.locale') == 'th') อีเมล @else email @endif*" required="">
+                                            <input class="from-control stringformat30" type="text" id="email" value="{{old('email')}}" name="email" placeholder="@if(Config::get('app.locale') == 'th') อีเมล @else email @endif*" required>
                                         </div>   
                                         <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                            <input class="from-control numeralformathphone" type="text" id="phone" name="phone" placeholder="@if(Config::get('app.locale') == 'th') เบอร์โทรศัพท์ @else phone @endif*" required="">
+                                            <input class="from-control numeralformathphone" type="text" id="phone" value="{{old('phone')}}" name="phone" placeholder="@if(Config::get('app.locale') == 'th') เบอร์โทรศัพท์ @else phone @endif*" required >
                                         </div>   
                                         <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                            <input class="from-control stringformat30" type="text" id="Website" name="website" placeholder="@if(Config::get('app.locale') == 'th') เว็บไซต์ @else website @endif">
+                                            <input class="from-control stringformat30" type="text" id="Website" value="{{old('website')}}" name="website" placeholder="@if(Config::get('app.locale') == 'th') เว็บไซต์ @else website @endif">
                                         </div>
                                   
                                         <div class="col-lg-12 mb-30">
-                                            <textarea class="from-control stringformat200" id="message" name="message" placeholder="@if(Config::get('app.locale') == 'th') ข้อความ @else message @endif*" required=""></textarea>
+                                            <textarea class="from-control stringformat200" id="message" name="message" placeholder="@if(Config::get('app.locale') == 'th') ข้อความ @else message @endif*" required>{{old('message')}}</textarea>
                                             <span style="float:right"><i><small>
                                                 @if (Config::get('app.locale') == 'th')
                                                 *ต้องการ
@@ -458,10 +480,19 @@
                                                 @endif 
                                             </small></i> </span>
                                         </div>
+                                        <div class="col-lg-12" style="margin-top: -40px ;margin-bottom:20px">
+                                            {{-- {!! NoCaptcha::renderJs() !!}
+                                             --}}
+                                             {!! NoCaptcha::renderJs('th', false, 'recaptchaCallback') !!}
+                                            {!! NoCaptcha::display() !!}
+                                        </div>
+
+                                       
                                         
                                     </div>
                                     <div class="btn-part">                                            
                                         <div class="form-group mb-0">
+              
                                             <input class="readon learn-more submit" type="submit" value="@if(Config::get('app.locale') == 'th') ส่งข้อความ @else Send @endif ">
                                         </div>
                                     </div> 
@@ -487,7 +518,7 @@
                 </div>
             </div>
             <div class="map-canvas pt-120 md-pt-80">
-                <iframe loading="lazy" class="embed-responsive-item" style="border: 0;" tabindex="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.0036987338754!2d100.59944871595559!3d14.07695879346525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e27f94917b26d3%3A0x5309db1a3574088d!2z4Liq4Liz4LiZ4Lix4LiB4LiH4Liy4LiZ4Lie4Lix4LiS4LiZ4Liy4Lin4Li04LiX4Lii4Liy4Lio4Liy4Liq4LiV4Lij4LmM4LmB4Lil4Liw4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14LmB4Lir4LmI4LiH4LiK4Liy4LiV4Li0!5e0!3m2!1sth!2sth!4v1599718330629!5m2!1sth!2sth" width="600" height="450" frameborder="0" allowfullscreen="allowfullscreen" aria-hidden="false"></iframe>
+                {{-- <iframe loading="lazy" class="embed-responsive-item" style="border: 0;" tabindex="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.0036987338754!2d100.59944871595559!3d14.07695879346525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e27f94917b26d3%3A0x5309db1a3574088d!2z4Liq4Liz4LiZ4Lix4LiB4LiH4Liy4LiZ4Lie4Lix4LiS4LiZ4Liy4Lin4Li04LiX4Lii4Liy4Lio4Liy4Liq4LiV4Lij4LmM4LmB4Lil4Liw4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14LmB4Lir4LmI4LiH4LiK4Liy4LiV4Li0!5e0!3m2!1sth!2sth!4v1599718330629!5m2!1sth!2sth" width="600" height="450" frameborder="0" allowfullscreen="allowfullscreen" aria-hidden="false"></iframe> --}}
             </div> 
         </div>
 {{-- </div>  --}}
@@ -562,6 +593,9 @@
                     return;
                 }
             });
+            var onloadCallback = function() {
+                alert("grecaptcha is ready!");
+            };
         </script>
     </body>
 

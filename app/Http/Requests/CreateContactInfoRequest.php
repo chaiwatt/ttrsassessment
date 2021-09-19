@@ -22,7 +22,8 @@ class CreateContactInfoRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'message' => 'required'
+            'message' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
     public function messages()
@@ -32,7 +33,9 @@ class CreateContactInfoRequest extends FormRequest
             'email.required' => 'ยังไม่ได้กรอกอีเมล์',
             'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
             'phone.required' => 'ยังไม่ได้กรอกเบอร์โทรศัพท์',
-            'message.required' => 'ยังไม่ได้กรอกข้อความ'
+            'message.required' => 'ยังไม่ได้กรอกข้อความ',
+            'g-recaptcha-response.required' => 'โปรดตรวจสอบว่าคุณไม่ใช่หุ่นยนต์',
+            'g-recaptcha-captcha.required' => 'โปรดตรวจสอบว่าคุณไม่ใช่หุ่นยนต์'
       ]; 
     }
 }
