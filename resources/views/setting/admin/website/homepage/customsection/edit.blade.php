@@ -88,7 +88,7 @@
                                             <label>ตัวอย่าง CSS</label>
                                             <div style="padding-left:10px">
                                                 <p>background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)</p>
-                                                <p>background-image: url('https://www.nstda.or.th/home/wp-content/themes/nstda/assets/images/bg_footercontact_03.jpg');height: 100%;background-repeat: no-repeat;background-size: cover;</p>
+                                                <p>background-image: url(assets/landing2/images/bg/about.jpg);height: 100%;background-repeat: no-repeat;background-size: cover;</p>
                                             </div>
                                         </code>
                                     </div>
