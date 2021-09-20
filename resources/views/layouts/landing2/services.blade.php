@@ -9,7 +9,7 @@
         @foreach ($homepageservices as $key => $homepageservice)
             <div class="col-lg-4 col-md-6 mb-20" data-aos="fade-up" data-aos-delay="{{($key + 1)*100}}">
                 @if ($homepageservice->colortype == 0)
-                        <div class="services-item {{$homepageservice->cardcolor->name}}" style="height:330px">
+                        <div class="services-item {{$homepageservice->cardcolor->name}}" style="height:380px">
                     @else
                         <div class="services-item" onmouseover="this.style.backgroundColor='{{$homepageservice->color}}'" onmouseout="this.style.backgroundColor=''" style="height:330px;">
                 @endif
@@ -20,7 +20,7 @@
                             <img class="hover-img" src="{{asset($homepageservice->iconhover)}}" width="300" height="300">
                         </div>
                     </div>
-                    <div class="services-content">
+                    <div class="services-content" style="margin-top: -20px">
                         @if (Config::get('app.locale') == 'th')
                                 <div class="services-text">
                                     <h3 class="title"><a href="{{@$sharehomepageserviceurl->url}}">{{$homepageservice->titlethai}}</a></h3>
