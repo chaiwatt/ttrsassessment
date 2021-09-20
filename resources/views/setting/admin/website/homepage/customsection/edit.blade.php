@@ -83,11 +83,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>พื้นหลัง CSS<span class="text-danger">*</span></label>
-                                        <input type="text" name="bgcss" value="{{$customsection->bg}}"  placeholder="ตัวอย่าง เช่น background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)" class="form-control form-control-lg">
+                                        <input type="text" name="bgcss" value="{{$customsection->bg}}"  placeholder="ตัวอย่าง เช่น background: linear-gradient(to right, #e9eaeb 0%, #c9cbcd 100%)" class="form-control form-control-lg">
                                         <code>
                                             <label>ตัวอย่าง CSS</label>
                                             <div style="padding-left:10px">
-                                                <p>background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)</p>
+                                                <p>background: linear-gradient(to right, #e9eaeb 0%, #c9cbcd 100%)</p>
                                                 <p>background-image: url(assets/landing2/images/bg/about.jpg);height: 100%;background-repeat: no-repeat;background-size: cover;</p>
                                             </div>
                                         </code>
