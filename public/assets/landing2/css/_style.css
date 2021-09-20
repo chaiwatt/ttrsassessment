@@ -5073,12 +5073,12 @@ body .search-modal .close:hover {
   transition: all .3s ease;
 }
 .rs-services.style3 .services-item .services-icon .image-part .main-img {
-  height: 80px;
-  width: 80px;
+  height: 150px;
+  width: 150px;
 }
 .rs-services.style3 .services-item .services-icon .image-part .hover-img {
-  height: 80px;
-  width: 80px;
+  height: 150px;
+  width: 150px;
   position: absolute;
   left: 0;
   top: 0;
