@@ -162,8 +162,8 @@
 											<input type="file" style="display:none;" id="iconhover" name="iconhover" accept="image/*"/>
                                         </div>
                                         <div class="row">	
-                                            <div class="col-md-12">
-                                                <img class="img-responsive" src="{{asset($homepageservice->iconhover)}}" style="width:100px;width:100px" >
+                                            <div class="col-md-12" >
+                                                <img class="img-responsive " src="{{asset($homepageservice->iconhover)}}" style="width:100px;width:100px;background-color:#90A4AE" >
                                             </div>
                                         </div>
                                      
