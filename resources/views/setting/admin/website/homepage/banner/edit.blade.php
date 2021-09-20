@@ -75,7 +75,7 @@
                                             <input type="text"  name="youtube" value="{{$headertext->youtube}}"  placeholder="ลิงก์ Youtube" class="form-control form-control-lg" >
                                         </div>
 										<div class="form-group">
-											<label>รูป Banner<span class="text-danger">*</span></label>
+											<label>รูป Banner (ไฟล์ png ขนาด 2084x2084px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
 											<div class="input-group">													
 												<input type="text" id="filename" class="form-control border-right-0" placeholder="รูป Banner" disabled>
 												<span class="input-group-append">

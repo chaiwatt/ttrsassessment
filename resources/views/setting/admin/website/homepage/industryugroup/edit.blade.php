@@ -75,7 +75,7 @@
                                             <input type="text"  name="url" value="{{$homepageindustrygroup->url}}"  placeholder="ลิงก์" class="form-control form-control-lg stringformat100">
                                         </div> --}}
 										<div class="form-group">
-											<label>รูป<span class="text-danger">*</span></label>
+											<label>รูป  (ไฟล์ png ขนาด 1600x12464px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
 											<div class="input-group">													
 												<input type="text" id="filename" class="form-control border-right-0" placeholder="รูป" disabled>
 												<span class="input-group-append">
