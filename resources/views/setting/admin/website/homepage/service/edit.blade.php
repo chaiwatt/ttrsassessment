@@ -136,7 +136,7 @@
                                         
  
 										<div class="form-group">
-											<label>Icon ปกติ<span class="text-danger">*</span></label>
+											<label>Icon ปกติ (ไฟล์ png ขนาด 150x150px ความละเอียด 7000px/inch)<span class="text-danger">*</span></label>
 											<div class="input-group">													
 												<input type="text" id="_iconnormal" class="form-control border-right-0" placeholder="Icon ปกติ" disabled>
 												<span class="input-group-append">
@@ -147,12 +147,12 @@
                                         </div>
                                         <div class="row">	
                                             <div class="col-md-12">
-                                                <img class="img-responsive" src="{{asset($homepageservice->iconnormal)}}" style="width:100px;width:100px" >
+                                                <img class="img-responsive" src="{{asset($homepageservice->iconnormal)}}" style="width:150px;width:150px" >
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group">
-											<label>Icon Hover<span class="text-danger">*</span></label>
+											<label>Icon Hover (ไฟล์ png ขนาด 150x150px ความละเอียด 7000px/inch)<span class="text-danger">*</span></label>
 											<div class="input-group">													
 												<input type="text" id="_iconhover" class="form-control border-right-0" placeholder="Icon Hover" disabled>
 												<span class="input-group-append">
@@ -163,7 +163,7 @@
                                         </div>
                                         <div class="row">	
                                             <div class="col-md-12" >
-                                                <img class="img-responsive " src="{{asset($homepageservice->iconhover)}}" style="width:100px;width:100px;background-color:#90A4AE" >
+                                                <img class="img-responsive " src="{{asset($homepageservice->iconhover)}}" style="width:150px;width:150px;background-color:#90A4AE" >
                                             </div>
                                         </div>
                                      
