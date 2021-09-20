@@ -77,9 +77,11 @@
                                            <label for=""><strong>ลำดับการแสดงผล Homepage (ลาก วางเพื่อเปลี่ยน)</strong> </label>
                                             <ul id="sortable">
                                                 @foreach ($homepagesections->sortBy('order_list') as $homepagesection)
-                                                    <li class="orderitem" data-id="{{$homepagesection->id}}" style="margin-bottom:30px">
-                                                        <span style="width:300px;padding-left:10px" class="bg-teal">
-                                                            {{$homepagesection->aliasname}}</span>  
+                                                    <li class="orderitem bg-teal" data-id="{{$homepagesection->id}}" style="margin-bottom:10px;height:50px;width:300px;padding-left:50px" >
+                                                        {{-- <span style="width:300px;padding-left:10px;" class="bg-teal"> --}}
+                                                            
+                                                        <a href="{{url('').'/'.$homepagesection->editurl}}" class="text-white"  > <span style="font-size: 20px">{{$homepagesection->aliasname}}</span> </a>
+                                                        {{-- </span>   --}}
                                                     </li>
                                                 @endforeach
                                                

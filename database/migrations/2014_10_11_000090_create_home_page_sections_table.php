@@ -20,6 +20,7 @@ class CreateHomePageSectionsTable extends Migration
             $table->string('bg',250)->nullable();
             $table->string('anchore',100)->nullable();
             $table->string('aliasname',100)->nullable();
+            $table->string('editurl',250)->nullable();
             $table->char('show',1)->default(1);
             $table->longText('content')->nullable();
             $table->timestamps();

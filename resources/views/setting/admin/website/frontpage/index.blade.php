@@ -76,7 +76,7 @@
                                             <input type="text"  name="percent" value="{{$frontpage->percentimg}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>Billboard (ขนาด 1000x720px เพื่อการแสดงผลที่เหมาะสม)<span class="text-danger">*</span></label>
+                                            <label>Billboard (ขนาด 1000x720px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัปโหลดรูป Billboard</button>													
                                             </div>
