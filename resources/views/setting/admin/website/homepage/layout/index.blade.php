@@ -75,7 +75,7 @@
                                            </div>
         
                                            <label for=""><strong>ลำดับการแสดงผล Homepage (ลาก วางเพื่อเปลี่ยน)</strong> </label>
-                                            <ul id="sortable">
+                                            <ul id="sortable" style="margin-top: 10px">
                                                 @foreach ($homepagesections->sortBy('order_list') as $homepagesection)
                                                     <li class="orderitem bg-teal" data-id="{{$homepagesection->id}}" style="margin-bottom:10px;height:50px;width:300px;padding-left:50px" >
                                                         {{-- <span style="width:300px;padding-left:10px;" class="bg-teal"> --}}
