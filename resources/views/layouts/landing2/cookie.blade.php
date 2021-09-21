@@ -16,8 +16,7 @@
                 @endif
                 </b>
                 <p>  @if (Config::get('app.locale') == 'th')
-                    เราใช้คุกกี้เพื่อนำเสนอเนื้อหาและนโยบายที่ท่านอาจสนใจ เพื่อให้ท่านได้รับประสบการณ์ที่ดียิ่งขึ้น <br>คลิกเพื่อดู 
-                 ข้อมูลเพิ่มเติมเกี่ยวกับการใช้คุกกี้ของเราผ่านทาง <a href="{{route('landing.policy').'#cookie_policy'}}" target="_blank"> <u>'นโยบายคุกกี้'</u>
+                    เราใช้คุกกี้เพื่อนำเสนอเนื้อหาและนโยบายที่ท่านอาจสนใจ เพื่อให้ท่านได้รับประสบการณ์ที่ดียิ่งขึ้น <br>คลิกเพื่อดูข้อมูลเพิ่มเติมเกี่ยวกับการใช้คุกกี้ของเราผ่านทาง <a href="{{route('landing.policy').'#cookie_policy'}}" target="_blank"> <u>'นโยบายคุกกี้'</u>
                     @else
                     By clicking "Accept all cookies", you agree TTRS website can store cookies on your device and disclose information in accordance with our <a href="{{route('landing.policy').'#cookie_policy'}}" target="_blank"> <u>'Cookie Policy.'</u>
                     @endif  </a></p>  
