@@ -11,6 +11,7 @@ use App\Model\FullTbp;
 use App\Model\MiniTBP;
 use App\Helper\Message;
 use App\Helper\EmailBox;
+use App\Model\ReviseLog;
 use App\Helper\UserArray;
 use App\Model\MessageBox;
 use App\Model\ProjectLog;
@@ -235,8 +236,17 @@ class FullTbpController extends Controller
         
         $fulltbp = FullTbp::find($request->id);
 
+        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+        $reviselogid = null;
+
+        $checkreviselog = ReviseLog::where('mini_tbp_id',$minitbp->id)->where('doctype',2)->orderBy('id', 'DESC')->first();
+        if(!Empty($checkreviselog)){
+            $reviselogid = $checkreviselog->id;
+        }
+
         $fulltbphistory = new FullTbpHistory();
         $fulltbphistory->full_tbp_id = $request->id;
+        $fulltbphistory->revise_log_id = $reviselogid;
         $fulltbphistory->path = $filelocation;
         $fulltbphistory->message = $request->message;
         $fulltbphistory->save();
@@ -333,9 +343,16 @@ class FullTbpController extends Controller
             $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
         }
 
+        $reviselogid = null;
+
+        $checkreviselog = ReviseLog::where('mini_tbp_id',$minitbp->id)->where('doctype',2)->orderBy('id', 'DESC')->first();
+        if(!Empty($checkreviselog)){
+            $reviselogid = $checkreviselog->id;
+        }
 
         $fulltbphistory = new FullTbpHistory();
         $fulltbphistory->full_tbp_id = $request->id;
+        $fulltbphistory->revise_log_id = $reviselogid;
         $fulltbphistory->path = $filelocation;
         $fulltbphistory->message = $request->message;
         $fulltbphistory->save();

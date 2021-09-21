@@ -230,17 +230,22 @@
 																<div class="col-md-6">
 																	<div class="form-group">
 																		<label for="">เลือกธนาคาร</label>
-																		<select name="bank" id="bank" class="form-control form-control-lg form-control-select2" disabled>
-																			@foreach ($banks as $bank)
-																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_id == $bank->id) selected @endif >{{$bank->name}}</option>
-																			@endforeach
-																		</select>
+																		@if (@$minitbp->bank != 'อื่นๆ โปรดระบุ')
+																			<select name="bank" id="bank" class="form-control form-control-lg form-control-select2" disabled>
+																				@foreach ($banks as $bank)
+																					<option value="{{$bank->id}}" @if($minitbp->thai_bank_id == $bank->id) selected @endif >{{$bank->name}}</option>
+																				@endforeach
+																			</select>
+																		@else
+																			<input type="text" name="otherbank" id="otherbank" value="{{$minitbp->otherbank}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled>
+																		@endif
+
 																	</div>
-																	@if (@$minitbp->bank == 'อื่นๆ โปรดระบุ')
+																	{{-- @if (@$minitbp->bank == 'อื่นๆ โปรดระบุ')
 																			<input type="text" name="otherbank" id="otherbank" value="{{$minitbp->otherbank}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled>
 																		@else
 																			<input type="text" name="otherbank" id="otherbank" value="{{$minitbp->otherbank}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg form-control-lg stringformat60" disabled hidden >
-																	@endif
+																	@endif --}}
 																</div>
 																<div class="col-md-6">
 																	<div class="form-group">
@@ -252,18 +257,23 @@
 																<div class="col-md-6 mt-2">
 																	<div class="form-group">
 																		<label for="">เลือกธนาคาร</label>
-																		<select name="bank1" id="bank1" class="form-control form-control-lg form-control-select2" disabled>
-																			<option value="0">=== โปรดเลือกธนาคาร ===</option>
-																			@foreach ($banks as $bank)
-																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_1_id == $bank->id) selected @endif >{{$bank->name}}</option>
-																			@endforeach
-																		</select>
+																		@if (@$minitbp->bank1 != 'อื่นๆ โปรดระบุ')
+																			<select name="bank1" id="bank1" class="form-control form-control-lg form-control-select2" disabled>
+																				<option value="0">=== โปรดเลือกธนาคาร ===</option>
+																				@foreach ($banks as $bank)
+																					<option value="{{$bank->id}}" @if($minitbp->thai_bank_1_id == $bank->id) selected @endif >{{$bank->name}}</option>
+																				@endforeach
+																			</select>
+																		@else
+																			<input type="text" name="otherbank1" id="otherbank1" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
+																		@endif
+
 																	</div>
-																	@if (@$minitbp->bank1 == 'อื่นๆ โปรดระบุ')
+																	{{-- @if (@$minitbp->bank1 == 'อื่นๆ โปรดระบุ')
 																			<input type="text" name="otherbank1" id="otherbank1" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
 																		@else
 																			<input type="text" name="otherbank1" id="otherbank1" value="{{$minitbp->otherbank1}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled hidden >
-																	@endif
+																	@endif --}}
 																	
 																</div>
 																<div class="col-md-6 mt-2">
@@ -273,24 +283,26 @@
 																	</div>
 																</div>
 
-
-
 																<div class="col-md-6 mt-2">
 																	<div class="form-group">
 																		<label for="">เลือกธนาคาร</label>
-																		<select name="bank2" id="bank2" class="form-control form-control-lg form-control-select2" disabled>
-																			<option value="0">=== โปรดเลือกธนาคาร ===</option>
-																			@foreach ($banks as $bank)
-																				<option value="{{$bank->id}}" @if($minitbp->thai_bank_2_id == $bank->id) selected @endif >{{$bank->name}}</option>
-																			@endforeach
-																		</select>
+																		@if (@$minitbp->bank2 != 'อื่นๆ โปรดระบุ')
+																			<select name="bank2" id="bank2" class="form-control form-control-lg form-control-select2" disabled>
+																				<option value="0">=== โปรดเลือกธนาคาร ===</option>
+																				@foreach ($banks as $bank)
+																					<option value="{{$bank->id}}" @if($minitbp->thai_bank_2_id == $bank->id) selected @endif >{{$bank->name}}</option>
+																				@endforeach
+																			</select>
+																		@else
+																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
+																		@endif
+																	
 																	</div>
-																	@if (@$minitbp->bank2 == 'อื่นๆ โปรดระบุ')
+																	{{-- @if (@$minitbp->bank2 == 'อื่นๆ โปรดระบุ')
 																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled>
 																		@else
 																			<input type="text" name="otherbank2" id="otherbank2" value="{{$minitbp->otherbank2}}" placeholder="ระบุชื่อธนาคาร" class="form-control form-control-lg stringformat60" disabled hidden >
-																	@endif
-																	
+																	@endif --}}
 																</div>
 																<div class="col-md-6 mt-2">
 																	<div class="form-group">

@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\User;
 use App\Model\FullTbp;
+use App\Model\ReviseLog;
 use App\Helper\DateConversion;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +23,16 @@ class FullTbpHistory extends Model
         }else{
            return "" ;
         }
+    } 
+
+    public function getReviselogAttribute(){
+        $reviselog = ReviseLog::find($this->revise_log_id);
+        if(!Empty($reviselog)){
+            $user = User::find($reviselog->user_id);
+            return strip_tags($reviselog->message) . ' ('. $user->name.' '.$user->lastname.')' ;
+        }else{
+            return '';
+        }
+        
     } 
 }

@@ -627,7 +627,7 @@
 								</div>
 								<div class="col-md-12">  
 									<div class="form-group">
-										<label>รูป Avatar (ขนาด 500x500) พิกเซล</label>
+										<label>รูป Profile (ขนาด 500x500) พิกเซล</label>
 										<div class="input-group">													
 											<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
 											<span class="input-group-append">

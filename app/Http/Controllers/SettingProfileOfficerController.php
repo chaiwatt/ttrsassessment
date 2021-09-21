@@ -52,7 +52,6 @@ class SettingProfileOfficerController extends Controller
                                             ->withOfficerdocs($officerdocs);
     }
     public function EditSave(EditOfficerProfile $request, $id){
-       
         $auth = Auth::user();
         
         if(!Empty($request->password)){

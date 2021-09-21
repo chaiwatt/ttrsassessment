@@ -195,6 +195,8 @@
                                                     <th style="width:150px;text-align: center">Mini TBP</th> 
                                                     <th style="width:150px;text-align: center">เลขที่ Mini TBP</th> 
                                                     <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
+                                                    {{-- <th style="text-align: center">รายละเอียดการแก้ไข</th> --}}
+                                                    <th style="text-align: center">รายการแก้ไข</th>
                                                     <th style="text-align: center">รายละเอียดการแก้ไข</th>
                                                     <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
                                                 </tr>
@@ -222,13 +224,23 @@
                                                             <td style="width:1%; white-space: nowrap">{{$minitbphistory->submitdateth}}</td> 
                                                             <td>
                                                                 @if (Empty($minitbphistory->message) )
+                                                                    ฉบับเริ่มต้น
+                                                                    @else
+                                                      
+                                                                            {!!$minitbphistory->reviselog!!}
+                                                                
+                                                                        @endif
+                                                                   
+                                                                                                                        
+                                                            </td>
+                                                            <td>
+                                                                @if (Empty($minitbphistory->message) )
                                                                 ฉบับเริ่มต้น
                                                                     @else
                                                                     {{$minitbphistory->message}}
                                                                 @endif
-                                                                
-                                                                
                                                             </td> 
+                                                          
         
                                                             <td style="white-space: nowrap"> 
                                                                 <a href="{{asset($minitbphistory->path)}}" data-docname="PDF Mini TBP-{{$minitbp->project}}" class="btn btn-sm bg-info downloadlink" target="_blank" >ดาวน์โหลด PDF</a>
@@ -253,6 +265,7 @@
                                             <th style="width:150px;text-align: center">Full TBP</th> 
                                             <th style="width:150px;text-align: center">เลขที่ Full TBP</th> 
                                             <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
+                                            <th style="text-align: center">รายการแก้ไข</th>
                                             <th style="text-align: center">รายละเอียดการแก้ไข</th>
                                             <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
                                             <th style="width:1% ;white-space: nowrap;text-align: center">เอกสารแนบ</th> 
@@ -285,9 +298,17 @@
                                                         @if (Empty($fulltbphistory->message) )
                                                         ฉบับเริ่มต้น
                                                             @else
+                                                            {{$fulltbphistory->reviselog}}
+                                                        @endif
+                                                    </td> 
+                                                    <td>
+                                                        
+                                                        @if (Empty($fulltbphistory->message) )
+                                                        ฉบับเริ่มต้น
+                                                            @else
                                                             {{$fulltbphistory->message}}
                                                         @endif
-                                                        </td> 
+                                                    </td> 
 
                                                     <td style="white-space: nowrap"> 
                                                         @if (Auth::user()->user_type_id == 3)

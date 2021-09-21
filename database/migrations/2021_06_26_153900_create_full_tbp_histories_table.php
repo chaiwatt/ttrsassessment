@@ -17,6 +17,7 @@ class CreateFullTbpHistoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('full_tbp_id');
             $table->foreign('full_tbp_id')->references('id')->on('full_tbps')->onDelete('cascade');
+            $table->unsignedBigInteger('revise_log_id')->nullable();
             $table->string('path',250)->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();

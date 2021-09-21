@@ -735,8 +735,16 @@ class MiniTbpController extends Controller
             ]);
         }
 
+        $reviselogid = null;
+
+        $checkreviselog = ReviseLog::where('mini_tbp_id',$request->id)->where('doctype',1)->orderBy('id', 'DESC')->first();
+        if(!Empty($checkreviselog)){
+            $reviselogid = $checkreviselog->id;
+        }
+
         $minitbphistory = new MiniTbpHistory();
         $minitbphistory->mini_tbp_id = $request->id;
+        $minitbphistory->revise_log_id = $reviselogid;
         $minitbphistory->path = $filelocation;
         $minitbphistory->message = $request->message;
         $minitbphistory->save();
@@ -959,8 +967,16 @@ class MiniTbpController extends Controller
             ]);
         }
 
+        $reviselogid = null;
+
+        $checkreviselog = ReviseLog::where('mini_tbp_id',$request->id)->where('doctype',1)->orderBy('id', 'DESC')->first();
+        if(!Empty($checkreviselog)){
+            $reviselogid = $checkreviselog->id;
+        }
+
         $minitbphistory = new MiniTbpHistory();
         $minitbphistory->mini_tbp_id = $request->id;
+        $minitbphistory->revise_log_id = $reviselogid;
         $minitbphistory->path = $filelocation;
         $minitbphistory->message = $request->message;
         $minitbphistory->save();
@@ -1196,8 +1212,6 @@ class MiniTbpController extends Controller
     }
 
     public function GetReviseLog(Request $request){
-        // mini_tbp_id: 1, user_id: 9, message: "dfgdfg", doctype: "1"
-    //    $revisedocs =  ReviseLog::where('mini_tbp_id',$request->minitbpid)->where('user_id',Auth::user()->id)->where('doctype','1')->get()->each->append('createdatth');
        $revisedocs =  ReviseLog::where('mini_tbp_id',$request->minitbpid)->where('doctype',$request->doctype)->orderBy('id','desc')->get()->each->append('createdatth')->each->append('user');
        return response()->json($revisedocs);
     }

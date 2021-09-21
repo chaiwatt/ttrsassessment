@@ -17,6 +17,7 @@ class CreateMiniTbpHistoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('mini_tbp_id');
             $table->foreign('mini_tbp_id')->references('id')->on('mini_t_b_p_s')->onDelete('cascade');
+            $table->unsignedBigInteger('revise_log_id')->nullable();
             $table->string('path',250)->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();

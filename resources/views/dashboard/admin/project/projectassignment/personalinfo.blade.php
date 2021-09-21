@@ -236,6 +236,29 @@
 				<input name="usergroup" value="{{$user->user_group_id}}" type="text" hidden>
 					<!-- personalinfo -->
 					<div class="card border-top-info rounded-top-1 mb-0">
+
+						<div class="card-header header-elements-sm-inline">
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">Profile: {{$user->name}} {{$user->lastname}}</h6>
+                            <div class="header-elements">
+                                <div class="list-icons ml-3">
+                                    <div class="list-icons-item dropdown">
+                                        <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                        <div class="dropdown-menu">
+                                            {{-- <a href="#" data-toggle="modal" id="select_fulltbptable_excel" class="dropdown-item"><i class="icon-file-excel"></i>Excel</a> --}}
+
+											@if ($user->company->saveprofile != 0)
+													<a href="{{route('dashboard.admin.realtimereport.singledownload',['id' => $user->id])}}"  class="dropdown-item"><i class="icon-file-excel"></i>Excel</a>
+													@else
+													<a href="" data-toggle="modal" class="dropdown-item">ยังไม่ได้ตั้งค่าโปรไฟล์</a>
+											@endif
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 						<div class="card-body">												
 							<div class="row">
 									<div class="col-md-6">
