@@ -129,7 +129,6 @@
         };
 
         var countitemtable =  "{{$fulltbps->count()}}";
-        if (countitemtable >= 10) {
             $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
@@ -157,7 +156,7 @@
                             return "ยกเลิกโครงการ" ;      
                         }, 
                         exportOptions: {
-                            columns: [ 0, 1,2,3]
+                            columns: [ 0, 1,2]
                         },
                         customize: function( xlsx ) {
                             var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
@@ -169,7 +168,6 @@
                     // $('.buttons-excel')[0].style.visibility = 'hidden';
                 }
             });
-        }
 
         $(document).on('click', '#select_maintable_excel', function(e) {
             $('#maintable').DataTable().buttons(0,0).trigger();
