@@ -142,7 +142,7 @@
                             return "Log" ;      
                         }, 
                         exportOptions: {
-                            columns: [  0,1,2]
+                            columns: [  1,2,3]
                         },
                         customize: function( xlsx ) {
                             var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
