@@ -70,7 +70,7 @@ class SettingAdminWebsitePageController extends Controller
         $detail = $dom->savehtml();
 
         $page = new Page();
-        // $page->page_category_id = $request->pagecategory;
+
         $page->page_status_id = $request->status;
         if(!Empty($request->publicdate)){
             $page->publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
