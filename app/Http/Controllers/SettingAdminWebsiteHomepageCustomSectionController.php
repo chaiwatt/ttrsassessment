@@ -22,15 +22,17 @@ class SettingAdminWebsiteHomepageCustomSectionController extends Controller
         $imgarray = array();
         foreach($images as $img){
             $data = $img->getattribute('src');
-            list($type, $data) = explode(';', $data);
-            list(, $data)= explode(',', $data);
-            $data = base64_decode($data);
-            $image_name= str_random(10).'.png';
-            $imgarray[] = URL('')."/storage/uploads/page/images/".$image_name;
-            $path = public_path() .'/storage/uploads/page/images/'. $image_name;
-            file_put_contents($path, $data);
-            $img->removeattribute('src');
-            $img->setattribute('src', URL('')."/storage/uploads/page/images/".$image_name);
+            if(strpos($data, "data:image") !== false){
+                list($type, $data) = explode(';', $data);
+                list(, $data)= explode(',', $data);
+                $data = base64_decode($data);
+                $image_name= str_random(10).'.png';
+                $imgarray[] = URL('')."/storage/uploads/page/images/".$image_name;
+                $path = public_path() .'/storage/uploads/page/images/'. $image_name;
+                file_put_contents($path, $data);
+                $img->removeattribute('src');
+                $img->setattribute('src', URL('')."/storage/uploads/page/images/".$image_name);
+            }
         }
         $content = $dom->savehtml();
 
