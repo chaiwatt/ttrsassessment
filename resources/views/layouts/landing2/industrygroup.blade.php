@@ -3,7 +3,7 @@
        <img src="{{asset($sharehomepageindustrygrouptext->picture)}}" data-aos="fade-right" alt="about"> 
     </div> 
     <div class="container">
-        <div class="row">
+        <div class="row" style="min-height:470px">
             <div class="col-lg-5"></div>
             <div class="col-lg-7 pl-55 md-pl-15 z-index-1">
                 <div class="sec-title mb-30">
