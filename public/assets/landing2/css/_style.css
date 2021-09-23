@@ -2109,7 +2109,7 @@ blockquote cite:before {
   border-right: unset;
 }
 .full-width-header .rs-header .menu-area {
-  transition: all 0.3s ease;
+  transition: all 0.7s ease;
   background-image: linear-gradient(90deg, #03228f 10%, #0e73e4 100%);
 }
 .full-width-header .rs-header .menu-area .logo-area a img {
