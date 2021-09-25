@@ -388,7 +388,15 @@
                                             <li class="post-comment"> <i class="fa fa-eye"></i> {{$page->pageview->count()}}</li>
 
                                             <li class="Post-cate" style="margin-left: 10px;">
-                                                <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a>
+                                                <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)">
+                                                    
+                                                    @if (Config::get('app.locale') == 'th')
+                                                    <img src="{{asset('assets/landing2/images/fbshare.png')}}" alt="">
+                                                    @else
+                                                    <img src="{{asset('assets/landing2/images/fbshareeng.png')}}" alt="">
+                                                    @endif 
+                                                
+                                                </a>
                                                 {{-- <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 'http://goo.gl/dS52U', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a> --}} 
                                             </li>
                                             
