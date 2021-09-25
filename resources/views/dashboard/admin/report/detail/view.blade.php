@@ -196,8 +196,8 @@
                                                     <th style="width:150px;text-align: center">เลขที่ Mini TBP</th> 
                                                     <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
                                                     {{-- <th style="text-align: center">รายละเอียดการแก้ไข</th> --}}
-                                                    <th style="text-align: center">รายการแก้ไข</th>
-                                                    <th style="text-align: center">รายละเอียดการแก้ไข</th>
+                                                    <th style="width:300px;text-align: center">รายการแก้ไข</th>
+                                                    <th style="width:300px;text-align: center">รายละเอียดการแก้ไข</th>
                                                     <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
                                                 </tr>
                                             </thead>
@@ -265,8 +265,8 @@
                                             <th style="width:150px;text-align: center">Full TBP</th> 
                                             <th style="width:150px;text-align: center">เลขที่ Full TBP</th> 
                                             <th style="width:1%; white-space: nowrap;text-align: center">วันที่ส่งเอกสาร</th>
-                                            <th style="text-align: center">รายการแก้ไข</th>
-                                            <th style="text-align: center">รายละเอียดการแก้ไข</th>
+                                            <th style="width:300px;text-align: center">รายการแก้ไข</th>
+                                            <th style="width:300px;text-align: center">รายละเอียดการแก้ไข</th>
                                             <th style="width:1%; white-space: nowrap;text-align: center">PDF</th>
                                             <th style="width:1% ;white-space: nowrap;text-align: center">เอกสารแนบ</th> 
                                         </tr>

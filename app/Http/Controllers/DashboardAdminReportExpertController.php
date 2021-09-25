@@ -75,7 +75,6 @@ class DashboardAdminReportExpertController extends Controller
         $fulltbps = FullTbp::where('id', $id)->get();
         EmailBox::send(User::find($projectassignment->leader_id)->email,$jduser->email,'TTRS: คุณ'.$auth->name . ' '. $auth->lastname .' ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname. ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         
-
         $messagebox = Message::sendMessage('คุณ'.$auth->name . ' '. $auth->lastname .' ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname,'คุณ'.$auth->name . ' '. $auth->lastname .' ตอบรับเป็นผู้เชี่ยวชาญ โครงการ' . $minitbp->project .$fullcompanyname. ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.admin.project.fulltbp.assignexpertreview',['id' => $fulltbp->id]).'>ดำเนินการ</a>',Auth::user()->id,$jduser->id);
         
         $alertmessage = new AlertMessage();
