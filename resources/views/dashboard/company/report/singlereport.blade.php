@@ -385,8 +385,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="testtopictable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">เอกสาร</th> 
@@ -419,8 +419,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="testtopictable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">Pillar (Index)</th> 
@@ -451,8 +451,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>วันที่</th> 

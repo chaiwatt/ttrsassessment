@@ -58,8 +58,8 @@
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายงานสถานะ</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">รายการ</th> 
@@ -123,8 +123,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">วันที่</th> 
@@ -155,7 +155,7 @@
                         </div>
                         <div class="card-body">
                             @if ($minitbphistories->count() == 0)
-                                    <table class="table table-bordered table-striped">
+                                    <table style="width: 100%" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width:150px;text-align: center">Mini TBP</th> 
@@ -188,8 +188,8 @@
                                         </tbody>
                                     </table>
                                 @else
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
+                                    <div class="table-responsive" >
+                                        <table style="width: 100%" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:150px;text-align: center">Mini TBP</th> 
@@ -259,7 +259,7 @@
 
                           
                             <div class="table-responsive mt-4">
-                                <table class="table table-bordered table-striped">
+                                <table style="width: 100%" class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="width:150px;text-align: center">Full TBP</th> 
@@ -350,8 +350,8 @@
                                 <h6 class="card-title" style="font-size:16px;font-weight: bold">Leader และ Co-Leader ของโครงการ</h6>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
+                                <div class="table-responsive" >
+                                    <table style="width: 100%" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width:600px;text-align: center">ตำแหน่งรับผิดชอบ</th> 
@@ -398,8 +398,8 @@
                                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการ EV</h6>
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th style="width:600px;text-align: center">ชื่อ EV</th> 
@@ -454,8 +454,8 @@
                                         </h6>
                                     </div>
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th style="text-align: center">ชื่อเอกสาร</th> 
@@ -490,8 +490,8 @@
                             <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการผู้เชี่ยวชาญ</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="width:600px;text-align: center">ชื่อ-นามสกุล</th> 
@@ -539,7 +539,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" style="min-height: 150px">
-                            <table class="table table-bordered table-striped"  >
+                            <table style="width: 100%" class="table table-bordered table-striped"  >
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">คะแนน</th> 
@@ -624,8 +624,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="testtopictable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">เอกสาร</th> 
@@ -658,8 +658,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped">
                                 <thead >
                                     <tr class="bg-info">
                                         <th style="text-align: center">วันที่</th> 

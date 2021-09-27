@@ -175,8 +175,8 @@
                             <a href="" class="btn btn-info btn-icon ml-2 btn-sm float-right"  data-toggle="modal" data-target="#modal_add_expert"><i class="icon-add"></i></a>
                             <br>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" >
                                 <thead>
                                     <tr>
                                         <th >ชื่อ-นามสกุล</th> 

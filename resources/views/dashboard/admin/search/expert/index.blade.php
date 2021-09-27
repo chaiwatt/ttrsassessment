@@ -61,8 +61,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-2" id="experttable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="experttable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">ชื่อ-นามสกุล</th>

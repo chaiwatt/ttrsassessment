@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for=""> <strong>Index Criteria</strong> </label>
-                            <table class="table table-bordered table-striped" id="subpillarindex">
+                            <table style="width: 100%" class="table table-bordered table-striped" id="subpillarindex">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">Pillar</th>  
@@ -69,7 +69,7 @@
                     <div class="row mt-2" id="extra_preview_wrapper" hidden>
                         <div class="col-md-12" >
                             <label for=""> <strong>Extra Criteria</strong> </label>
-                            <table class="table table-bordered table-striped" id="subpillarindex">
+                            <table style="width: 100%" class="table table-bordered table-striped" id="subpillarindex">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">Category</th>  
@@ -212,7 +212,7 @@
                                             <button type="button" id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button>
                                             <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button>
                                         </div>
-                                        <table class="table table-bordered table-striped" id="subpillarindex">
+                                        <table style="width: 100%" class="table table-bordered table-striped" id="subpillarindex">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th>Pillar</th>  
@@ -244,8 +244,8 @@
                                         </div>
                                         @endif
         
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped"  >
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped"  >
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th style="text-align: center;width:250px">วันที่</th>  
@@ -282,8 +282,8 @@
                                             <button type="button" id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF</button>
                                             <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="extra_subpillarindex">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped" id="extra_subpillarindex" >
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th>Category</th>  

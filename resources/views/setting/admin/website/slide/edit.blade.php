@@ -110,7 +110,7 @@
                                         </div>
                                         <div class="row">	
                                             <div class="col-md-12">
-                                                <img class="img-responsive" src="{{asset($slide->file)}}" style="width: 100%">
+                                                <img class="img-responsive" src="{{asset($slide->file)}}" >
                                             </div>
                                         </div>
                                         <br>

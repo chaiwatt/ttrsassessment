@@ -278,8 +278,8 @@
 									{{-- <div class="form-group">	
 										<a href="" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-toggle="modal" data-target="#modal_add_employeducation"><i class="icon-add"></i></a>
 									</div> --}}
-									<div class="table-responsive">
-										<table class="table table-bordered table-striped">
+									<div class="table-responsive" >
+										<table style="width: 100%" class="table table-bordered table-striped" >
 											<thead>
 												<tr>
 													<th>ระดับ</th>  
@@ -296,8 +296,8 @@
 
 								</div>
 								<div class="tab-pane fade" id="left-icon-employexpereince">
-									<div class="table-responsive">
-										<table class="table table-bordered table-striped">
+									<div class="table-responsive" >
+										<table style="width: 100%" class="table table-bordered table-striped" >
 											<thead>
 												<tr>
 													<th>เริ่มต้น-สิ้นสุด</th>  
@@ -319,8 +319,8 @@
 									</div>
 									<input type="file" style="display:none;" data-id="" id="boardattachment" name="boardattachment" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 
-									<div class="table-responsive">
-										<table class="table table-bordered table-striped">
+									<div class="table-responsive" >
+										<table style="width: 100%" class="table table-bordered table-striped" >
 											<thead>
 												<tr>
 													<th>เอกสารแนบ</th>                                                                                  
@@ -333,8 +333,8 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="left-icon-employtraining">
-									<div class="table-responsive">
-										<table class="table table-bordered table-striped">
+									<div class="table-responsive" >
+										<table style="width: 100%" class="table table-bordered table-striped" >
 											<thead>
 												<tr>
 													<th>วัน เดือน ปี</th>  
@@ -1385,8 +1385,8 @@
 									</div>  
 									<div class="col-md-12">	
 										<label><strong>1.7 รายการบุคลากร</strong></label>
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead>
 													<tr class="bg-info">
 														<th>รายการบุคลากร</th>                                                                                  
@@ -1432,8 +1432,8 @@
 											<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow: auto;">{!!$fulltbp->minitbp->businessplan->company->companyhistory!!}</div>
 										</div>
 										@if ($fulltbpcompanyprofileattachments->count() > 0)
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead>
 													<tr class="bg-info">
 														<th>เอกสารแนบ</th>                                                                                  
@@ -1493,7 +1493,7 @@
 															@if ($companyemploy->employeducation->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการศึกษา</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ระดับ</th>  
@@ -1518,7 +1518,7 @@
 															@if ($companyemploy->employexperience->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการทำงาน</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="text-align: center">เริ่มต้น-สิ้นสุด</th>  
@@ -1545,7 +1545,7 @@
 															@if ($companyemploy->employtraining->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการฝึกอบรม</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>วัน เดือน ปี</th>  
@@ -1568,7 +1568,7 @@
 															@if ($companyemploy->fulltbpboardattachment->count() > 0)
 															<div class="table-responsive mt-1">
 																<label for=""><u>เอกสารแนบ</u></label>
-																<table class="table table-bordered table-striped">
+																<table style="width: 100%" class="table table-bordered table-striped">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
@@ -1639,7 +1639,7 @@
 															@if ($companyemploy->employeducation->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการศึกษา</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ระดับ</th>  
@@ -1670,7 +1670,7 @@
 															@if ($companyemploy->employexperience->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการทำงาน</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="text-align: center">เริ่มต้น-สิ้นสุด</th>  
@@ -1697,7 +1697,7 @@
 															@if ($companyemploy->employtraining->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการฝึกอบรม</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>วัน เดือน ปี</th>  
@@ -1720,7 +1720,7 @@
 															@if ($companyemploy->fulltbpboardattachment->count() > 0)
 															<div class="table-responsive mt-1">
 																<label for=""><u>เอกสารแนบ</u></label>
-																<table class="table table-bordered table-striped">
+																<table style="width: 100%" class="table table-bordered table-striped">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
@@ -1752,8 +1752,8 @@
 
 									<div class="col-md-12 mt-3">	
 										<label><strong>1.12 บัญชีรายชื่อผู้ถือหุ้น</strong></label>
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead>
 													<tr class="bg-info">
 														<th>ชื่อ-นามสกุล</th>  
@@ -1801,7 +1801,7 @@
 															@if ($companyemploy->employeducation->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการศึกษา</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>ระดับ</th>  
@@ -1834,7 +1834,7 @@
 															@if ($companyemploy->employexperience->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการทำงาน</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th style="text-align: center">เริ่มต้น-สิ้นสุด</th>  
@@ -1861,7 +1861,7 @@
 															@if ($companyemploy->employtraining->count() > 0)
 																<div class="table-responsive mt-1">
 																	<label for=""><u>ประวัติการฝึกอบรม</u></label>
-																	<table class="table table-bordered table-striped">
+																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
 																			<tr class="bg-info">
 																				<th>วัน เดือน ปี</th>  
@@ -1884,7 +1884,7 @@
 															@if ($companyemploy->fulltbpboardattachment->count() > 0)
 															<div class="table-responsive mt-1">
 																<label for=""><u>เอกสารแนบ</u></label>
-																<table class="table table-bordered table-striped">
+																<table style="width: 100%" class="table table-bordered table-striped">
 																	<thead>
 																		<tr class="bg-info">
 																			<th>เอกสาร</th>  
@@ -1912,8 +1912,8 @@
 									</div>
 									<div class="col-md-12 mt-3">	
 										<label><strong>1.14 ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong></label>
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead>
 													<tr class="bg-info">
 														<th style="width:200px">รายการ</th>                                                                                  
@@ -2003,8 +2003,8 @@
 												
 											{{-- </div> --}}
 											@if ($fulltbpprojecttechdevlevels->count() > 0)
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" >
 													<thead>
 														<tr class="bg-info">
 															<th>รายการ</th>  
@@ -2216,8 +2216,8 @@
 												@if ($fulltbpprojectcertifyattachments->count() > 0)
 										
 												<div class="col-md-12">	
-													<div class="table-responsive">
-														<table class="table table-bordered table-striped">
+													<div class="table-responsive" >
+														<table style="width: 100%" class="table table-bordered table-striped" >
 															<thead>
 																<tr class="bg-info">
 																	<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
@@ -2254,8 +2254,8 @@
 												</div>
 												@if ($fulltbpprojectawardattachments->count() > 0)
 												<div class="col-md-12">	
-													<div class="table-responsive">
-														<table class="table table-bordered table-striped">
+													<div class="table-responsive" >
+														<table style="width: 100%" class="table table-bordered table-striped" >
 															<thead>
 																<tr class="bg-info">
 																	<th>เอกสารรางวัลด้านเทคโนโลยี/นวัตกรรม</th>                                                                                  
@@ -2292,8 +2292,8 @@
 											@if ($fulltbpprojectstandards->count() > 0)
 											<div class="row">
 												<div class="col-md-12">	
-													<div class="table-responsive">
-														<table class="table table-bordered table-striped">
+													<div class="table-responsive" >
+														<table style="width: 100%" class="table table-bordered table-striped" >
 															<thead>
 																<tr class="bg-info">
 																	<th>เอกสารใบรับรองมาตรฐานต่างๆ ที่ได้รับ</th>                                                                                  
@@ -2401,7 +2401,7 @@
 											</table>
 										</div>
 
-										{{-- <table class="table table-bordered table-striped" style="width: 100%">
+										{{-- <table style="width: 100%" class="table table-bordered table-striped" >
 									
 										</table> --}}
 									</div>
@@ -2429,8 +2429,8 @@
 												<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->fulltbpmarketbusinessmodelcanvas->detail!!}</div>
 											</div>
 											@if ($fullTbpmarketattachmentmodelcanvases->count() > 0)
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" >
 													<thead>
 														<tr class="bg-info">
 															<th>เอกสาร Business Model Canvas</th>                                                                                  
@@ -2460,7 +2460,7 @@
 												<div style="border-style:dashed;border-width:1px;border-radius:5px;padding:10px;height:300px;width:100%;overflow:auto;">{!!@$fulltbp->fulltbpmarketswot->detail!!}</div>
 											</div>
 											@if ($fullTbpmarketattachmentswots->count() > 0)
-											<table class="table table-bordered table-striped">
+											<table style="width: 100%" class="table table-bordered table-striped">
 												<thead>
 													<tr class="bg-info">
 														<th>เอกสาร SWOT Analysis, Five Forces Analysis</th>                                                                                  
@@ -2491,8 +2491,8 @@
 												<label for=""><strong><u>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง)</u></strong></label>
 												{{-- <p><small><i>ข้อมูลยอดขายของแต่ละผลิตภัณฑ์ / บริการ (ยอดขาย 3 ปีย้อนหลัง)</i> </small></p> --}}
 											{{-- </div> --}}
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" >
 													<thead>
 														<tr class="bg-info">
 															<th>ยอดขายแยกตามประเภทผลิตภัณฑ์</th>  
@@ -2526,8 +2526,8 @@
 												<label for=""><strong><u>สถานะยอดขาย (สถานะยอดขาย 3 ปีย้อนหลัง)</u> </strong></label>
 												{{-- <small><i>(สถานะยอดขาย 3 ปีย้อนหลัง)</i> </small> --}}
 											{{-- </div> --}}
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" >
 													<thead>
 														<tr  class="bg-info">
 															<th>ระยะเวลา</th>  
@@ -2557,8 +2557,8 @@
 												{{-- <p><small><i>ลูกหนี้การค้า</i> </small></p> --}}
 											{{-- </div> --}}
 											@if ($fulltbpdebtpartners->count() > 0)
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" >
 													<thead>
 														<tr class="bg-info">
 															<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
@@ -2592,8 +2592,8 @@
 												{{-- <p><small><i>เจ้าหนี้การค้า</i> </small></p> --}}
 											{{-- </div> --}}
 											@if ($fulltbpcreditpartners->count() > 0)
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" >
 													<thead>
 														<tr class="bg-info">
 															<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
@@ -2639,8 +2639,8 @@
 											<label for=""><strong>4.1 เงินลงทุนที่จำเป็นและการจัดหาแหล่งเงินทุนทั้งหมดของโครงการ</strong></label>
 											{{-- <p><small><i>ตารางแสดงรายละเอียดเงินลงทุนในสินทรัพย์ถาวรของโครงการ</i> </small></p> --}}
 										{{-- </div> --}}
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead>
 													<tr class="bg-info">
 														<th colspan="5" style="text-align: center">เงินลงทุนในสินทรัพย์ถาวรของโครงการ</th>   
@@ -2669,8 +2669,8 @@
 									</div>
 									<div class="col-md-12 mt-3">
 										
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead>
 													<tr class="bg-info">
 														<th colspan="2" style="text-align: center">เงินลงทุนสำหรับดำเนินการของโครงการ</th>   
@@ -2696,8 +2696,8 @@
 											<label for=""><u>แหล่งเงินทุนของโครงการ</u></label>
 											<p><small><i>ตารางแสดงรายละเอียดแหล่งเงินทุนของโครงการ</i> </small></p>
 										</div> --}}
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped" >
 												<thead class="bg-info">
 													<tr class="bg-info">
 														<th colspan="5" style="text-align: center">แหล่งเงินทุนของโครงการ</th>   
@@ -2727,7 +2727,7 @@
 									<div class="col-md-12 mt-3">
 										<label><strong>4.2 ประมาณการผลตอบแทนจากการลงทุน</strong></label>
 										<fieldset>	
-											<table class="table table-bordered table-striped">
+											<table style="width: 100%" class="table table-bordered table-striped">
 												<thead class="bg-info">
 													<tr>
 														<th>รายการ</th>  

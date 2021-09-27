@@ -288,8 +288,8 @@
 											<div class="form-group">
 												<hr>
 												<label for="">ที่อยู่อื่นๆ</label>
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
 																<th >ประเภท</th> 
@@ -329,8 +329,8 @@
 												<input type="text" name="authorizeddirector" id="authorizeddirector" value="{{$authorizeddirectors->count()}}" hidden >
 												<label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label>
 												{{-- <a href="#" class="text-primary" data-toggle="modal" data-target="#modal_add_authorized_director">คลิกเพิ่ม</a> --}}
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
 																<th style="width:80%">ชื่อ  นามสกุล</th> 
@@ -360,8 +360,8 @@
 											{{-- <a href="#"  id="btnuploadcompanydoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_companydoc">อัปโหลดเอกสารแนบ</a>  --}}
 											<p><small>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</small></p>
 											
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
 																<th style="width:80%">ไฟล์</th> 
@@ -388,8 +388,8 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="">โครงการที่ขอรับการประเมิน  </label>
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped">
 													<thead>
 														<tr class="bg-info">
 															<th style="width:80%">ชื่อโครงการ</th> 
@@ -467,8 +467,8 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="left-icon-friend">
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -497,8 +497,8 @@
 										<div class="row">
 											<div class="col-md-12">	
 						
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -531,8 +531,8 @@
 										<div class="row">
 											<div class="col-md-12">	
 						
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr>
 																<th>#</th>

@@ -502,8 +502,8 @@
 													<input type="text" name="inpexpertfield" id="inpexpertfield" value="{{($expertfields->count() > 0) ? $expertfields->count() : ''}}" hidden>
 													<label for="">ความเชี่ยวชาญ<span class="text-danger">*</span></label>
 													<a href="#" id="btnexpertfield"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertfield">คลิกเพิ่ม</a>
-														<div class="table-responsive">
-															<table class="table table-bordered table-striped">
+														<div class="table-responsive" >
+															<table style="width: 100%" class="table table-bordered table-striped">
 																<thead>
 																	<tr class="bg-info">
 																		<th style="width:10%">ลำดับ</th> 
@@ -534,8 +534,8 @@
 														<label for="">แนบเอกสาร  </label>
 													<a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertdoc">คลิกเพิ่ม</a>
 													<p><small>(ประวัติย่อ, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่นๆ)</small></p> 
-														<div class="table-responsive">
-															<table class="table table-bordered table-striped">
+														<div class="table-responsive" >
+															<table style="width: 100%" class="table table-bordered table-striped">
 																<thead>
 																	<tr class="bg-info">
 																		<th style="width:80%">ไฟล์</th> 

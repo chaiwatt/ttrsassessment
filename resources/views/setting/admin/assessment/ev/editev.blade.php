@@ -250,8 +250,8 @@
                         <div class="form-group">	
                             <button type="button" class="btn btn-info  btn-icon ml-2 btn-sm float-right" data-id="" id="btnaddclustergroup" ><i class="icon-add"></i></button>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="criteriatable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable">
                                 <thead>
                                     <tr>
                                         <th>Pillar</th>  

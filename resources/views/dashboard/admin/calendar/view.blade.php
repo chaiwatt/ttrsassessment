@@ -133,7 +133,7 @@
                                         <label for="">เอกสารแนบ</label>
                                     </div>
                                     <div class="form-group">
-                                    <table class="table table-bordered table-striped" id="attachmenttable">
+                                    <table style="width: 100%" class="table table-bordered table-striped" id="attachmenttable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="text-align: center">เอกสารแนบ</th> 
@@ -159,7 +159,7 @@
                                     <div class="form-group">
                                         <label>ผู้เข้าร่วม</label>
  
-                                        <table class="table table-bordered table-striped">
+                                        <table style="width: 100%" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="text-align: center;width:150px">#</th> 

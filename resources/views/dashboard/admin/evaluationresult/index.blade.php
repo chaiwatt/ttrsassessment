@@ -71,7 +71,7 @@
                     </div>
                     <div class="card-body">
                         
-                        <div class="table-responsive">
+                        <div class="table-responsive" >
                             @if ($fulltbps->count() > 0)
                                 <div >
                                     <select id="gradeFilter_tb1" class="form-control">
@@ -110,7 +110,7 @@
                                 </div>
                             @endif
 
-                            <table class="table table-bordered text-nowrap mb-2" id="maintable">
+                            <table style="width: 100%" class="table table-bordered text-nowrap mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>

@@ -594,7 +594,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="table-responsive">
+							<div class="table-responsive" >
 								{{--  class="table table-bordered table-striped" --}}
 								<table class="table  table-inbox table-striped">
 									<tbody >										
@@ -845,8 +845,8 @@
 						<!-- Profile info -->
 						<div class="card">
 							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-bordered table-striped" id="testtopictable">
+								<div class="table-responsive" >
+									<table style="width: 100%" class="table table-bordered table-striped" id="testtopictable">
 										<thead>
 											<tr>
 												<th>ชื่อ</th>

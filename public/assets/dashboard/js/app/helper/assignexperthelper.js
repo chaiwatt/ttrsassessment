@@ -11,9 +11,9 @@ $(document).on('change', '#expert', function(e) {
         if(data.length > 0){
           
             html = `
-            <div class="table-responsive">
+            <div class="table-responsive" >
             <strong>Work Load</strong>
-            <table class="table table-bordered table-striped">
+            <table style="width: 100%" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>โครงการ</th>
@@ -447,9 +447,9 @@ function notifyJD(users,fulltbpid){
         if(data.length > 0){
           
             html = `
-            <div class="table-responsive">
+            <div class="table-responsive" >
             <strong>Work Load</strong>
-            <table class="table table-bordered table-striped">
+            <table style="width: 100%" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>โครงการ</th>

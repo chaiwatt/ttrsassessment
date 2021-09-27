@@ -47,8 +47,8 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="criteriatable_modal">
+                    <div class="table-responsive" >
+                        <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable_modal" >
                             <thead>
                                 <tr>
                                     <th style="text-align: center">ชื่อ-นามสกุล</th>                                                                                   
@@ -135,8 +135,8 @@
                                         <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL (Index)</button>
                                         <button type="button"  id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF (Index)</button>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="criteriatable">
+                                    <div class="table-responsive" >
+                                        <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable" >
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="text-align: center">Pillar</th>  
@@ -185,8 +185,8 @@
                                                 <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก EXCEL (Extra)</button>
                                                 <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF (Extra)</button>
                                             </div>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-striped" id="extra_subpillarindex">
+                                            <div class="table-responsive" >
+                                                <table style="width: 100%" class="table table-bordered table-striped" id="extra_subpillarindex" >
                                                     <thead>
                                                         <tr class="bg-info">
                                                             <th>Category</th>  

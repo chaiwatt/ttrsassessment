@@ -467,7 +467,7 @@
 
 
 
-                        <table class="table table-bordered table-striped" id="gradesummary">
+                        <table style="width: 100%" class="table table-bordered table-striped" id="gradesummary">
                             <thead>
                                 <tr class="bg-info">
                                     <th style="text-align: center">Pillar (Index)</th>  
@@ -492,7 +492,7 @@
                                         <button type="button"  id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF (Index)</button>
                                     </div>
                                     <div class="table-responsive mb-3">
-                                        <table class="table table-bordered table-striped" id="criteriatable">
+                                        <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="text-align: center">Pillar</th>  
@@ -531,7 +531,7 @@
                                         <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF (Extra)</button>
                                     </div>
                                     <div class="table-responsive mb-3">
-                                        <table class="table table-bordered table-striped" id="extra_subpillarindex">
+                                        <table style="width: 100%" class="table table-bordered table-striped" id="extra_subpillarindex">
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th>Category</th>  

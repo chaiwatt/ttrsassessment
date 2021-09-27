@@ -125,8 +125,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-2" id="maintable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>

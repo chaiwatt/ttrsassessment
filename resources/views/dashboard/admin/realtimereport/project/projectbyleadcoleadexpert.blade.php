@@ -67,8 +67,8 @@
                         {{-- <hr> --}}
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped" id="searchtable">
+                                <div class="table-responsive" >
+                                    <table style="width: 100%" class="table table-bordered table-striped" id="searchtable">
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="width:600px;text-align:center">ตำแหน่งรับผิดชอบ</th> 

@@ -198,8 +198,8 @@
                     @if ($fulltbp->assignexpert == 2)  <label for=""><strong>ผู้เชี่ยวชาญที่เข้าร่วมโครงการ</strong></label> @endif
                    
                     <div class="form-group">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr class="bg-info">
                                             @if ($fulltbp->assignexpert != 2)
@@ -338,8 +338,8 @@
             <div class="col-md-12">
                 <label for=""><strong>ผู้เชี่ยวชาญที่ปฎิเสธไม่เข้าร่วมโครงการ</strong></label>
                 <div class="form-group">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">ชื่อ-นามสกุล</th>

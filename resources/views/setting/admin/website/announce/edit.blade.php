@@ -141,7 +141,7 @@
                                             <label for="">แนบเอกสาร</label>
                                             <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_add_announce">คลิกเพิ่ม</a> 
                                                 <div class="table-responsive mt-2">
-                                                    <table class="table table-bordered table-striped">
+                                                    <table style="width: 100%" class="table table-bordered table-striped">
                                                         <thead>
                                                             <tr class="bg-info">
                                                                 <th style="width:80%">ไฟล์</th> 

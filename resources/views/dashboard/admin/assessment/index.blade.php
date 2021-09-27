@@ -22,8 +22,8 @@ select.form-control{
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="criteriatable_modal">
+                <div class="table-responsive" >
+                    <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable_modal" >
                         <thead>
                             <tr>
                                 <th>ชื่อ-นามสกุล</th>                                                                                   
@@ -92,7 +92,7 @@ select.form-control{
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" >
                             @if ($fulltbps->count() > 0)
                                 <div >
                                     <select id="leaderFilter_tb1" class="form-control ">
@@ -112,7 +112,7 @@ select.form-control{
                                 </div>
                             @endif
 
-                            <table class="table table-bordered text-nowrap mb-2" id="maintable">
+                            <table style="width: 100%" class="table table-bordered text-nowrap mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>

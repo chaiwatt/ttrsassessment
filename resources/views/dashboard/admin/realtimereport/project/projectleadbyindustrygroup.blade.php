@@ -85,8 +85,8 @@
                         <hr>
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped mb-2" id="searchtable">
+                                <div class="table-responsive" >
+                                    <table style="width: 100%" class="table table-bordered table-striped mb-2" id="searchtable" >
                                         <thead>
                                             <tr class="bg-info">
                                                 <th style="text-align: center;width:1%;white-space: nowrap">เลขที่โครงการ</th> 

@@ -70,8 +70,8 @@
                             <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped"  id="industrygrouptable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped"  id="industrygrouptable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="width:150px;text-align: center">#</th>

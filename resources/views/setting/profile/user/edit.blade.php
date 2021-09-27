@@ -506,8 +506,8 @@
 							
 							<div class="col-md-12">
 								การผลิต
-								<div class="table-responsive">
-									<table class="table table-bordered table-striped">
+								<div class="table-responsive" >
+									<table style="width: 100%" class="table table-bordered table-striped">
 										<thead>
 											<tr class="bg-info">
 												<th >ขนาด</th> 
@@ -540,8 +540,8 @@
 							
 							<div class="col-md-12">
 								การบริการ
-								<div class="table-responsive">
-									<table class="table table-bordered table-striped">
+								<div class="table-responsive" >
+									<table style="width: 100%" class="table table-bordered table-striped">
 										<thead>
 											<tr class="bg-info">
 												<th >ขนาด</th> 
@@ -1004,8 +1004,8 @@
 										<div class="form-group">
 											<hr>
 											<label for="">ที่อยู่อื่นๆ</label>
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped">
 													<thead>
 														<tr class="bg-info">
 															<th style="text-align: center">ประเภท</th> 
@@ -1046,8 +1046,8 @@
 										<input type="text" name="authorizeddirector" id="authorizeddirector" value="{{$authorizeddirectors->count()}}" hidden >
 										<label for="">รายชื่อกรรมการ/ผู้มีอำนาจลงนาม<span class="text-danger">*</span></label>
 										<a href="#" id="btn_add_authorized_director" data-toggle="modal" class="text-primary" >คลิกเพิ่ม</a>
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped">
 												<thead>
 													<tr class="bg-info">
 														<th style="width:35%;text-align:center">ชื่อ นามสกุล</th> 
@@ -1101,8 +1101,8 @@
 										<input type="file" style="display:none;" id="companydoc" data-id="{{$user->company->id}}" name="companydoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 										<p>(หนังสือบริคณห์สนธิ (บอจ.2), สำเนาบัญชีรายชื่อผู้ถือหุ้น (บอจ.5), สำเนาหนังสือรับรองการจดทะเบียนพาณิชย์ หรืออื่นๆ)</p>
 										
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped">
 													<thead>
 														<tr class="bg-info">
 															<th style="width:75%">ไฟล์</th> 

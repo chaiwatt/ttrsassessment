@@ -32,8 +32,8 @@
              
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="text-align: center">ชื่อ</th> 
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" >
                             @if ($fulltbps->count() > 0)
                                 <div >
                                     <select id="leaderFilter_tb1" class="form-control ">
@@ -153,7 +153,7 @@
                                 </div>
                             @endif
 
-                            <table class="table table-bordered table-striped mb-2" id="maintable">
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="maintable" > 
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
@@ -249,8 +249,8 @@
                         </div>
                         <div class="card-body">
                             
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped mb-2" id="maintable_2">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped mb-2" id="maintable_2" >
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>

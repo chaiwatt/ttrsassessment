@@ -65,8 +65,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-2" id="testtopictable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="width:1%;white-space: nowrap;text-align: center">#</th>

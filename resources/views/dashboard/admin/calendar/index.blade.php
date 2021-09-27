@@ -62,8 +62,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-2" id="testtopictable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="testtopictable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
@@ -162,6 +162,7 @@
         });
         
         $('#testtopictable').DataTable( {
+            "autoWidth": true,
             "paging":   true,
             "ordering": true,
             "order": [[ 0, 'desc' ]],

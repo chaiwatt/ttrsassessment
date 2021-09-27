@@ -157,7 +157,7 @@
                                         </div> 
                                         <div class="col-md-12" id="attachmenttable_wrapper" hidden>
                                             <div class="form-group">
-                                            <table class="table table-bordered table-striped" id="attachmenttable">
+                                            <table style="width: 100%" class="table table-bordered table-striped" id="attachmenttable">
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th style="text-align: center">เอกสารแนบ</th> 

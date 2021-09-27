@@ -64,8 +64,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-2" id="maintable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="width:1%;white-space: nowrap;text-align: center">เลขที่โครงการ</th>  

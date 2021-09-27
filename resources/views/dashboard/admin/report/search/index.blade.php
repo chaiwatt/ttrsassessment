@@ -111,8 +111,8 @@
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}

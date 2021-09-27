@@ -749,8 +749,8 @@
 										<div class="form-group">
 											{{-- <div class="col-md-12" > --}}
 												<input type="text" id="authorizeddirectorid" hidden>
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr class="bg-info">
 																<th style="width:50%">เลือกผู้ลงนามในแบบคำขอรับบริการประเมิน TTRS (Mini TBP)</th>

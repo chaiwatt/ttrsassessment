@@ -30,8 +30,8 @@
                                 
                                 <div class="form-group">
                                     <input type="text" id="jointype" hidden>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="attendee_modal">
+                                    <div class="table-responsive" >
+                                        <table style="width: 100%" class="table table-bordered table-striped" id="attendee_modal">
                                                 <tr>
                                                     <td><strong>ประเภท</strong> </td>  
                                                     <td id="eventtype"></td>
@@ -80,8 +80,8 @@
                     </div>
 
                     <div class="tab-pane fade" id="left-icon-tab2">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="attendee_modal">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" id="attendee_modal">
                                 <thead>
                                     <tr>
                                         <th>ชื่อ-นามสกุล</th>    
@@ -219,8 +219,8 @@
                     {{-- {{$count}} --}}
                     <div class="card-body">
                         <input id="attendeventid" type="text" hidden >
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-2" id="testtopictable">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}

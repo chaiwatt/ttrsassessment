@@ -299,8 +299,8 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="criteriatable_modal">
+                    <div class="table-responsive" >
+                        <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable_modal" >
                             <thead>
                                 <tr>
                                     <th>Pillar</th>  
@@ -580,8 +580,8 @@
                                                     @endif
                                             @endif
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="criteriatable">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable" >
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th>Pillar</th>  
@@ -636,8 +636,8 @@
 
 
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="extracriteriatable">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped" id="extracriteriatable" >
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th>Category</th>  
@@ -671,8 +671,8 @@
                                         </div>
                                         @endif
         
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="criteriatable">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable" >
                                                 <thead>
                                                     <tr class="bg-info">
                                                         <th style="text-align: center;width:250px">วันที่</th>  

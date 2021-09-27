@@ -570,8 +570,8 @@
 										<input type="text" name="officerfield" id="inpexpertfield" value="{{($officerfields->count() > 0) ? $officerfields->count() : ''}}" hidden>
 										<label for="">ความเชี่ยวชาญ<span class="text-danger">*</span></label>
 										<a href="#" id="btnexpertfield"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertfield">คลิกเพิ่ม</a>
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped" id="expertfield_wrapper">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped" id="expertfield_wrapper">
 													<thead>
 														<tr class="bg-info">
 															<th style="width:10%;text-align:center">ลำดับ</th> 
@@ -602,8 +602,8 @@
 										<a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" onclick="document.getElementById('expertdoc').click();">คลิกเพิ่ม</a> 
 										<input type="file" style="display:none;" id="expertdoc" data-id="{{$user->company->id}}" name="expertdoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 										<p><i> (ประวัติย่อ, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่นๆ)</i></p> 
-											<div class="table-responsive">
-												<table class="table table-bordered table-striped">
+											<div class="table-responsive" >
+												<table style="width: 100%" class="table table-bordered table-striped">
 													<thead>
 														<tr class="bg-info">
 															<th style="width:80%">ไฟล์</th> 

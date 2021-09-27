@@ -284,8 +284,8 @@
 													{{-- <div class="col-md-12" > --}}
 													<label for="">ความเชี่ยวชาญ<span class="text-danger">*</span></label>
 													{{-- <a href="#" id="btnexpertfield"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertfield">คลิกเพิ่ม</a> --}}
-														<div class="table-responsive">
-															<table class="table table-bordered table-striped">
+														<div class="table-responsive" >
+															<table style="width: 100%" class="table table-bordered table-striped">
 																<thead>
 																	<tr class="bg-info">
 																		<th style="width:10%">ลำดับ</th> 
@@ -317,8 +317,8 @@
 														<label for="">เอกสารแนบ  </label>
 													{{-- <a href="#" id="btnuploadexpertdoc"  class="text-primary" data-toggle="modal" data-target="#modal_add_expertdoc">คลิกเพิ่ม</a>  --}}
 													<p><small>(ประวัติย่อ, วุฒิการศึกษา, ใบรับรองวิชาชีพ, ใบรับรองคุณวุฒิ, อื่นๆ)</small></p> 
-														<div class="table-responsive">
-															<table class="table table-bordered table-striped">
+														<div class="table-responsive" >
+															<table style="width: 100%" class="table table-bordered table-striped">
 																<thead>
 																	<tr class="bg-info">
 																		<th style="width:80%">ไฟล์</th> 
@@ -362,8 +362,8 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane fade show active" id="left-icon-friend">
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped">
+										<div class="table-responsive" >
+											<table style="width: 100%" class="table table-bordered table-striped">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -392,8 +392,8 @@
 										<div class="row">
 											<div class="col-md-12">	
 						
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr>
 																<th>#</th>
@@ -426,8 +426,8 @@
 										<div class="row">
 											<div class="col-md-12">	
 						
-												<div class="table-responsive">
-													<table class="table table-bordered table-striped">
+												<div class="table-responsive" >
+													<table style="width: 100%" class="table table-bordered table-striped">
 														<thead>
 															<tr>
 																<th>#</th>

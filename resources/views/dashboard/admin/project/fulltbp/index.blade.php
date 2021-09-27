@@ -73,8 +73,8 @@
                     ทีมผู้เชี่ยวชาญการประเมิน
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr>
                                             <th>ชื่อ</th> 
@@ -141,8 +141,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped" >
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr>
                                             <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
@@ -239,8 +239,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr>
                                             <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
@@ -369,7 +369,7 @@
                         @endif
 
                         <div class="table-responsive" style="min-height: 230px">
-                            <table class="table table-bordered table-striped mb-2" id="maintable">
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>

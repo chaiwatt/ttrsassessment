@@ -54,8 +54,8 @@
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">รายงานสถานะ</h6>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                        <div class="table-responsive" >
+                            <table style="width: 100%" class="table table-bordered table-striped" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">รายการ</th> 
@@ -110,8 +110,8 @@
                             @endif --}}
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
+                                    <div class="table-responsive" >
+                                        <table style="width: 100%" class="table table-bordered table-striped" >
                                             <thead>
                                                 <tr class="bg-info">
                                                     <th style="width:120px" class="text-center">Leader</th>
@@ -208,8 +208,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="text-align: center">เลขที่โครงการ</th> 

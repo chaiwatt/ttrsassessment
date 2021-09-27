@@ -353,8 +353,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" >
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th style="width:80%">ชื่อ  นามสกุล</th> 
@@ -384,8 +384,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" >
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th style="width:80%">ไฟล์</th> 

@@ -177,8 +177,8 @@
                     ทีมผู้เชี่ยวชาญการประเมิน
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>ชื่อ</th> 
@@ -245,8 +245,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped" >
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" >
                                     <thead>
                                         <tr>
                                             <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
@@ -334,8 +334,8 @@
                                 <div class="col-md-12">
                                     <input type="text" id="jointype" hidden>
                                     <div class="form-group">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="attendee_modal">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped" id="attendee_modal">
                                                     <tr>
                                                         <td><strong>ประเภท</strong> </td>  
                                                         <td id="eventtype"></td>
@@ -383,8 +383,8 @@
                         </div>
 
                         <div class="tab-pane fade" id="left-icon-tab2">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="attendee_modal">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped" id="attendee_modal">
                                     <thead>
                                         <tr>
                                             <th>ชื่อ-นามสกุล</th>    
@@ -418,8 +418,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" >
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th style="white-space: nowrap;text-align: center">รายละเอียด</th> 
@@ -692,7 +692,7 @@
                             </div>
                             </div>
                             <div class="col-md-1 l-75 table-none">
-                                  <table class="table table-bordered table-h table-dark">
+                                  <table style="width: 100%" class="table table-bordered table-h table-dark">
                                 <thead>
                                   <tr>
                                    
@@ -752,7 +752,7 @@
                     <div class="card-footer">
                         <div class="row l-50">
                             <div class="f-table table2-none table-w">
-                                <table class="table table-bordered table-dark" >
+                                <table style="width: 100%" class="table table-bordered table-dark" >
                                     <thead>
                                       <tr>
                                        
@@ -1178,7 +1178,7 @@
                     @endphp
                     {{-- {{$count}} --}}
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" >
                             @if ($fulltbps->count() > 0)
                                 <div >
                                     <select id="gradeFilter_tb1" class="form-control">
@@ -1217,7 +1217,7 @@
                                 </div>
                             @endif
                             
-                            <table class="table table-bordered table-striped mb-2" id="maintable" >
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="maintable" >
                                 <thead>
                                     <tr class="bg-info">
                                         <th hidden>date</th>
@@ -1362,7 +1362,7 @@
                         </div>
                         <div class="card-body">
                             <input type="text" id="fulltbpid"  hidden>
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 @if ($fulltbps->count() > 0)
                                     <div >
                                         <select id="gradeFilter" class="form-control">
@@ -1402,7 +1402,7 @@
                                 @endif
         
 
-                                <table class="table table-bordered table-striped mb-2" id="fulltbptable" >
+                                <table style="width: 100%" class="table table-bordered table-striped mb-2" id="fulltbptable" style="width: 100%" >
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>
@@ -1723,7 +1723,7 @@
                         </div>
                         <div class="card-body">
                             
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 @if ($fulltbps->count() > 0)
                                     <div >
                                         <select id="gradeFilter_tb2" class="form-control">
@@ -1763,7 +1763,7 @@
                                     </div>
                                 @endif
 
-                                <table class="table table-bordered text-nowrap mb-2" id="reporttable">
+                                <table style="width: 100%" class="table table-bordered text-nowrap mb-2" id="reporttable">
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>

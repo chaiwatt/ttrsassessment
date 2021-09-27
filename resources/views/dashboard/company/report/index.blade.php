@@ -114,9 +114,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 @if (@$businessplans->first()->business_plan_status_id > 2)
-                                <table class="table table-bordered table-striped" id="testtopictable">
+                                <table style="width: 100%" class="table table-bordered table-striped" id="testtopictable">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="text-align: center">ชื่อโครงการ</th> 
@@ -202,8 +202,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                            <div class="table-responsive" >
+                                <table style="width: 100%" class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-info">
                                             <th style="text-align: center">วันที่</th> 

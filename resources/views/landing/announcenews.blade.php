@@ -14,7 +14,7 @@
             <div class="blog-content">                
               <p>{!!$announce->content!!}</p>
 
-              <table class="table table-bordered table-striped">
+              <table style="width: 100%" class="table table-bordered table-striped">
                   <thead>
                       <tr class="bg-info text-white">
                           <td >เอกสารแนบประกาศ</td> 
