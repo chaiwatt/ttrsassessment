@@ -83,7 +83,7 @@
                                             @foreach ($fulltbps as $fulltbp)
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >2)
                                                     <tr>
-                                                        <td>{{$fulltbp->minitbp->businessplan->code}}</td>
+                                                        <td>{{$fulltbp->fulltbp_code}}</td>
                                                         <td>{{$fulltbp->minitbp->project}}</td>
                                                         <td>{{$fulltbp->minitbp->businessplan->company->fullname}}</td>
                                                         <td class="text-right">

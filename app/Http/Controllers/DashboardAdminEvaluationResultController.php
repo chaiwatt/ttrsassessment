@@ -224,7 +224,7 @@ class DashboardAdminEvaluationResultController extends Controller
         ];
         $pdf = PDF::loadView('dashboard.admin.evaluationresult.pdf', $data);
         $path = public_path("storage/uploads/fulltbp/");
-        return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf');
+        return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$company->fullname.'.pdf');
     }
     public function Word($id){
         $evaluationresult = EvaluationResult::find($id);
@@ -239,7 +239,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
         $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
         $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
-        $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->minitbp->businessplan->code));
+        $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->fulltbp_code));
         $wordtemplate->setValue('projectname',$fulltbp->minitbp->project);
         $wordtemplate->setValue('score',ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')));
         $wordtemplate->setValue('grade',$fulltbp->projectgrade->grade);
@@ -254,8 +254,8 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
         $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
         $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
-        $wordtemplate->saveAs('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx');
-        return response()->download('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx')->deleteFileAfterSend(true);
+        $wordtemplate->saveAs('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx');
+        return response()->download('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx')->deleteFileAfterSend(true);
     }
 
     public function Ppt($id){
@@ -372,13 +372,13 @@ class DashboardAdminEvaluationResultController extends Controller
         $headertextRun->getFont()->setBold(false)
                 ->setName('PSL-Kittithada')
                 ->setSize(26);
-        $fname = 'ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pptx';
+        $fname = 'ใบรับรองโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$company->fullname.'.pptx';
         header("Content-Type: application/vnd.openxmlformats-officedocument.presentationml.presentation");
         header("Content-Disposition: attachment; filename=$fname");
         $oWriterPPTX = IOFactory::createWriter($objPHPPowerPoint, 'PowerPoint2007');
         $oWriterPPTX->save('php://output');
         //$oWriterPPTX->save("sample.pptx");
-        // 'ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'
+        // 'ใบรับรองโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$company->fullname.'
     }
 
     public function Certificate($id,$type){
@@ -452,8 +452,8 @@ class DashboardAdminEvaluationResultController extends Controller
         $mpdf->WriteFixedPosHTML('<span style="font-size: 18pt;"><strong>ให้ไว้ ณ วันที่ '.ltrim(Carbon::today()->format('d'), '0').' '.$strMonthCut[intval(Carbon::today()->format('m'))].' พ.ศ. '.(Carbon::today()->format('Y')+543).'</strong></span>', 13, 132.5, 200, 90, 'auto');
         $mpdf->WriteFixedPosHTML('<div style="font-size: 26pt;width:350px;heigh:100px;text-align:center;margin-left:20px">('.$generalinfo->director.')</div>', 14,148, 200, 90, 'auto');
         $path = public_path("storage/uploads/minitbp/pdf/");
-        $mpdf->Output('ใบรับรองโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf', 'I');
-        // return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->minitbp->businessplan->code.' '.$company->fullname.'.pdf');
+        $mpdf->Output('ใบรับรองโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$company->fullname.'.pdf', 'I');
+        // return $pdf->stream('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$company->fullname.'.pdf');
     }
     
     public static function FixBreak($data){
