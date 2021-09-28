@@ -144,7 +144,6 @@
                                                             $menuurl = $menu->url;
                                                         }
                                                     @endphp
-
                                                     @if (Config::get('app.locale') == 'th')
                                                         @if ($key == 0)
                                                                 <li> <a href="{{url('')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a></li>
@@ -206,6 +205,15 @@
                                                                             @endif
                                                                         @endif
                                                                     </li>
+                                                                    {{-- @if (Auth::check())
+                                                                        <li>
+                                                                            <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-family: kanit; font-weight:200; font-size:20px"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ
+                                                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                                    @csrf
+                                                                                </form>
+                                                                            </a>   
+                                                                        </li>
+                                                                    @endif --}}
                                                                 @endif
                                                         @endif                                                      
                                                         @endif
@@ -270,12 +278,49 @@
                                                                         @endif
                                                                     @endif
                                                                 </li>
+                                                                {{-- @if (Auth::check())
+                                                                    <li>
+                                                                        
+                                                                            <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-family: kanit; font-weight:200; font-size:20px"><i class="fa fa-sign-out" aria-hidden="true"></i>Sign Out
+                                                                            
+                                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                                @csrf
+                                                                            </form>
+                                                                        
+                                                                    </li>
+                                                                @endif --}}
                                                                 @endif
                                                             @endif                                                       
                                                         @endif
                                                     @endif
                                                 @endforeach
-                                            </ul> 
+                                                @if ($shareagent->isPhone() == 1 && Auth::check())
+        
+                                                    @if (Config::get('app.locale') == 'th')
+                                                        <li> <a href="{{route('logout2')}}" style="font-family: kanit; font-weight:200; font-size:20px">ออกจากระบบ</a></li>
+                                                        <li><a href="{{route('change',['locale' => 'en'])}}" style="font-family: kanit; font-weight:200; font-size:20px"> English</a></li>
+                                                    @else
+                                                        <li> <a href="{{route('logout2')}}" style="font-family: kanit; font-weight:200; font-size:20px">Sign Out</a></li>
+                                                        <li><a href="{{route('change',['locale' => 'th'])}}" style="font-family: kanit; font-weight:200; font-size:20px">ไทย</a></li>
+                                                    @endif 
+        
+                                                    
+                                                
+                                                    
+                                                    {{-- <li>               
+                                                        <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-family: kanit; font-weight:200; font-size:20px">
+                                                            @if (Config::get('app.locale') == 'th')
+                                                            Sign Out demo
+                                                            @else
+                                                            ออกจากระบบ demo
+                                                            @endif 
+                                                            
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                                    </li> --}}
+                                                @endif
+                                            </ul>  
                                         </nav>                                     
                                     </div> <!-- //.main-menu -->                               
                                 </div>

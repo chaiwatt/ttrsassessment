@@ -62,6 +62,8 @@ Route::group(['prefix' => 'email'], function(){
     Route::get('send','MailController@Send')->name('mail.send');
 });
 
+Route::get('logout2', 'Auth\AuthController@Logout2')->name('logout2');
+
 Route::group(['prefix' => 'social'], function(){       
     Route::get('/{provider}', 'Auth\LoginController@Redirect')->name('social.login');
     Route::get('callback/{provider}', 'Auth\LoginController@Callback')->name('social.callback');
