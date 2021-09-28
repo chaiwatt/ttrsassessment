@@ -201,7 +201,7 @@
                             </table>
                         </div>
                         <div style="page-break-inside: avoid;">
-                            <div class="ml30 mt20" style="font-size:13px"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong></div>
+                            <div class="ml30 mt20" style="font-size:13px"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรม ที่ได้รับ</strong></div>
                             <div class="ml30" style="font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                         </div>
 

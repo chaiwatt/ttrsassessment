@@ -92,7 +92,7 @@
                                         <td style="width:1%;white-space: nowrap;text-align:center">
                                             
                                             @if ($eventcalendar->fulltbp->minitbp->businessplan->business_plan_status_id < 8 || !Empty($fulltbp->canceldate))
-                                            
+
                                                 @if ($eventcalendar->calendar_type_id == $eventcalendar->currentcalendartype)
                                                   
                                                         @if ($eventcalendar->isscored == 0)

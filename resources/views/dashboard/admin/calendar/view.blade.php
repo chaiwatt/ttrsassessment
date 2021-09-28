@@ -167,10 +167,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($users as $key => $user)
+                                                @foreach ($eventcalendarattendees as $key => $eventcalendarattendee)
                                                 <tr>    
                                                     <td style="text-align: center"> {{$key+1}} </td> 
-                                                    <td style="white-space: nowrap">คุณ{{$user->name}} {{$user->lastname}}</td> 
+                                                    <td style="white-space: nowrap">คุณ{{$eventcalendarattendee->user->name}} {{$eventcalendarattendee->user->lastname}}</td> 
                                                 </tr>
                                                 @endforeach
                                             </tbody>

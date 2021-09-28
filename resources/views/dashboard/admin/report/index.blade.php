@@ -519,7 +519,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">สรุปสถานะภาพโครงการ</span></h4>
+                <h4> <span class="font-weight-semibold">สรุปสถานภาพโครงการ</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             @if (Auth::user()->company->saveprofile == 0)
@@ -533,7 +533,7 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> แดชบอร์ด</a>
-                    <span class="breadcrumb-item active">สรุปสถานะภาพโครงการ</span>
+                    <span class="breadcrumb-item active">สรุปสถานภาพโครงการ</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

@@ -13,7 +13,7 @@ class ProjectFlowsTableSeeder extends Seeder
     {
         DB::table('project_flows')->insert([
             [
-                'name' => 'การมอบหมาย Leader และ Co-Lead',
+                'name' => 'การมอบหมาย Leader และ Co-Leader',
                 'duration' => 3
             ],
             [

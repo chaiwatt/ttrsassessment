@@ -2276,7 +2276,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $expertassignments = ExpertAssignment::where('full_tbp_id',$fulltbp->id)->get();
 
         if($request->btnsubmit == 'excel'){
-            return Excel::download(new ReportProjectExportByLeadColeadExpert($request->fulltbp), 'จำนวนผู้รับผิดชอบ ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead_Co-lead_Expert (ภายใน-ภายนอก).xlsx');
+            return Excel::download(new ReportProjectExportByLeadColeadExpert($request->fulltbp), 'จำนวนผู้รับผิดชอบ ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead_Co-Leader_Expert (ภายใน-ภายนอก).xlsx');
         }else if($request->btnsubmit == 'search'){
             return view('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')->withFulltbps($fulltbps)
                                                                                     ->withExpertassignments($expertassignments)

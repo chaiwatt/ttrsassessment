@@ -102,7 +102,7 @@ th {
 						<div class="form-group">
 							<label>อีเมล</label><span class="text-danger">*</span>
 							<input type="text" id="employemail_ceo" placeholder="อีเมล" class="form-control form-control-lg stringformat60">
-							<span id="employemail_ceo_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรศัพท์มือถือไม่ถูกต้อง</span>
+							<span id="employemail_ceo_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> อีเมลไม่ถูกต้อง</span>
 						</div>
 					</div>
 				</div>
@@ -807,14 +807,14 @@ th {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</h5>
+				<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เอกสารแนบสิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>ชื่อเอกสาร <small>เช่น เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</small></label><span class="text-danger">*</span>
+							<label>ชื่อเอกสาร <small>เช่น เอกสารแนบสิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร</small></label><span class="text-danger">*</span>
 							<input type="text" id="certifyname" placeholder="โปรดระบุชื่อเอกสาร" class="form-control form-control-lg stringformat60">
 						</div>
 					</div>
@@ -1307,7 +1307,7 @@ th {
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
+								<label>เปรียบเทียบกับยอดซื้อทั้งหมด (%)</label><span class="text-danger">*</span>
 								<input type="text" id="creditpercenttosale" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
@@ -1358,7 +1358,7 @@ th {
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
+								<label>เปรียบเทียบกับยอดซื้อทั้งหมด (%)</label><span class="text-danger">*</span>
 								<input type="text" id="creditpercenttosaleedit" placeholder="" class="form-control form-control-lg numeralformat3">
 							</div>
 						</div>
@@ -1401,7 +1401,7 @@ th {
 							</div>
 							<div class="form-group">
 								<label>จำนวน (<span id="unit">หน่วย</span>)</label><span class="text-danger">*</span>
-								<input type="text" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg numeralformat8digit">
+								<input type="text" id="assetquantityedit" placeholder="จำนวน (หน่วย)" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
 								<label>ราคาต่อหน่วย (บาท)</label><span class="text-danger">*</span>
@@ -2394,7 +2394,7 @@ th {
 															<div class="col-md-12">
 																<label for=""><strong>2.6.2) การจัดการด้านทรัพย์สินทางปัญญา</strong> </label>
 																<div class="form-group mb-3 mb-md-2">
-																	<label class="font-weight-semibold"><u>สิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</u></label>
+																	<label class="font-weight-semibold"><u>สิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร</u></label>
 																	<div class="row">
 																		<div class="col-md-4">
 																			<div class="form-check">
@@ -2495,7 +2495,7 @@ th {
 																</div>
 															</div>
 															<div class="col-md-12">
-																<label class="font-weight-semibold"><u>ลิขสิทธิ์/เครื่องหมายการค้า</u></label>
+																<label class="font-weight-semibold"><u>ลิขสิทธิ์ / เครื่องหมายการค้า</u></label>
 																<div class="row">
 																	<div class="col-md-4">
 																		<div class="form-check">
@@ -2580,7 +2580,7 @@ th {
 																	</div>
 																	<div class="col-md-12 mt-4">	
 																		{{-- <div class="form-group">												 --}}
-																			<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร (ไฟล์ PDF, JPG, PNG ขนาดไม่เกิน 2 MB)
+																			<label for="">เอกสารแนบสิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร (ไฟล์ PDF, JPG, PNG ขนาดไม่เกิน 2 MB)
 																				<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal" onclick="document.getElementById('certify').click();"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																				<input type="file" style="display:none;"  data-id="{{$fulltbpprojectcertify->id}}" id="certify" name="certify" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																		{{-- </div> --}}
@@ -2596,7 +2596,7 @@ th {
 																			<table style="width: 100%" class="table table-bordered table-striped">
 																				<thead>
 																					<tr class="bg-info">
-																						<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
+																						<th>เอกสารแนบสิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร</th>                                                                                  
 																						<th style="width:1%;white-space: nowrap">เพิ่มเติม</th>
 																					</tr>
 																				</thead>
@@ -2617,14 +2617,14 @@ th {
 																</div>
 															</div>
 															<div class="col-md-12 mt-3">
-																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong> <span class="text-danger">*</span></label>
+																<label for=""><strong>2.6.3) รางวัลทางด้านเทคโนโลยี / นวัตกรรม ที่ได้รับ</strong> <span class="text-danger">*</span></label>
 																<div class="form-group">
 																	{{-- <span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ --}}
 																	<span id="projectinnovation_input_error" class="form-text text-danger" hidden ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรายละเอียด รางวัลทางด้านเทคโนโลยี/นวัตกรรม ที่ได้รับ</span>
 																	<textarea name="" id="projectinnovation_input" class="form-control form-control-lg summernoteelement" cols="3" rows="7">{!!$fulltbp->innovation!!}</textarea>
 																</div>	
 																{{-- <div class="form-group">												 --}}
-																	<label for="">ระบุเอกสารแนบรางวัลด้านเทคโนโลยี/นวัตกรรมที่ได้รับ (ไฟล์ขนาดไม่เกิน 2 MB)
+																	<label for="">ระบุเอกสารแนบรางวัลด้านเทคโนโลยี / นวัตกรรม ที่ได้รับ (ไฟล์ขนาดไม่เกิน 2 MB)
 																		<button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" data-toggle="modal"  onclick="document.getElementById('award').click();"><i class="icon-add mr-2"></i>อัปโหลด</button></label>
 																		<input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="award" name="award" accept="image/jpeg,image/gif,image/png,application/pdf"/>
 																{{-- </div> --}}
@@ -3182,7 +3182,7 @@ th {
 																				<th>คู่ค้าหลักของธุรกิจ</th>  
 																				<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
 																				<th>ยอดซื้อต่อปี (บาท)</th>       
-																				<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
+																				<th>เปรียบเทียบกับยอดซื้อทั้งหมด (%)</th>  
 																				<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
 																				<th class="hiddenelement_fulltbp" style="width:1%;white-space: nowrap">เพิ่มเติม</th>    
 																			</tr>
@@ -3256,7 +3256,7 @@ th {
 																		<tr >
 																			<td> {{$fulltbpasset->asset}}</td> 
 																			<td class="text-right"> {{number_format($fulltbpasset->cost, 2)}} </td> 
-																			<td class="text-right"> {{$fulltbpasset->quantity}} </td>                                            															
+																			<td class="text-right"> {{number_format($fulltbpasset->quantity)}}</td>                                            															
 																			<td class="text-right"> {{number_format($fulltbpasset->price, 2)}}</td> 
 																			<td style="max-width: 350px;word-wrap: break-word;"> {{$fulltbpasset->specification}} </td> 
 																			<td  style="text-align: center" class="hiddenelement_fulltbp"> 

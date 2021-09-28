@@ -93,12 +93,7 @@
                     <div class="col-lg-10 text-right"> 
                         <div class="rs-menu-area" >
                             <div class="main-menu">
-                                <nav class="rs-menu" 
-                                    @if ($shareagent->isPhone() == 1)
-                                        {{-- style="height: 0px; display: none;" --}}
-                                    @endif
-                                
-                                >
+                                <nav class="rs-menu">
                                     <ul id="onepage-menu" class="nav-menu">
                                         @foreach($directmenus2 as $key => $menu)
                                             @php

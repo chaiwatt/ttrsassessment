@@ -402,7 +402,7 @@ class ReportListsTableSeeder extends Seeder
             [
                 'order' => 44,
                 'reporttype' => 1,
-                'reportname' => 'จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)',
+                'reportname' => 'จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-Leader / Expert (ภายใน-ภายนอก)',
                 'reportroute' => 'dashboard.admin.realtimereport.project.projectbyleadcoleadexpert',
                 'icon' => 'icon-file-text2',
                 'group_id' => 8,

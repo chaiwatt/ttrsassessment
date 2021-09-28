@@ -154,17 +154,17 @@ class BusinessPlanController extends Controller
 
             $projectmember = ProjectMember::where('full_tbp_id',$fulltbp->id)
                                         ->where('user_id',$auth->id)->first();
-            // if(Empty($projectmember)){
-            //     $projectmember = new ProjectMember();
-            //     $projectmember->full_tbp_id = $fulltbp->id;
-            //     $projectmember->user_id = User::where('user_type_id',5)->first()->id;
-            //     $projectmember->save();
+            if(Empty($projectmember)){
+                $projectmember = new ProjectMember();
+                $projectmember->full_tbp_id = $fulltbp->id;
+                $projectmember->user_id = User::where('user_type_id',5)->first()->id;
+                $projectmember->save();
 
-            //     $projectmember = new ProjectMember();
-            //     $projectmember->full_tbp_id = $fulltbp->id;
-            //     $projectmember->user_id = User::where('user_type_id',6)->first()->id;
-            //     $projectmember->save();
-            // }
+                $projectmember = new ProjectMember();
+                $projectmember->full_tbp_id = $fulltbp->id;
+                $projectmember->user_id = User::where('user_type_id',6)->first()->id;
+                $projectmember->save();
+            }
             
             $sellstatus = array("1. ยอดขายในประเทศ", "2. ยอดขายส่งออก", "  -  ยอดขายเปิด L/C (Letter of Credit) กับสถาบันการเงิน","  -  วงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน");
             foreach ($sellstatus as $status) {

@@ -12,7 +12,7 @@ class FullTbpDebtPartnerController extends Controller
         $fulltbpdebtpartner = new FullTbpDebtPartner();
         $fulltbpdebtpartner->full_tbp_id = $request->id;
         $fulltbpdebtpartner->debtpartner = $request->debtpartner;
-        $fulltbpdebtpartner->numproject = $request->numproject;
+        $fulltbpdebtpartner->numproject = str_replace(',', '', $request->numproject);
         $fulltbpdebtpartner->partnertaxid =$request->partnertaxid;
         $fulltbpdebtpartner->totalyearsell = str_replace(',', '', $request->totalyearsell);
         $fulltbpdebtpartner->percenttosale = $request->percenttosale;
@@ -31,7 +31,7 @@ class FullTbpDebtPartnerController extends Controller
         $fulltbpid = $fulltbpdebtpartner->full_tbp_id;
         $fulltbpdebtpartner->update([
             'debtpartner' => $request->debtpartner,
-            'numproject' => $request->numproject,
+            'numproject' =>  str_replace(',', '', $request->numproject),
             'partnertaxid' => $request->partnertaxid,
             'totalyearsell' => str_replace(',', '', $request->totalyearsell),
             'percenttosale' => $request->percenttosale,

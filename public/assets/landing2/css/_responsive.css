@@ -505,6 +505,37 @@
         font-size: 30px;
         line-height: 1.4;
     }
+
+    .readon.started {
+        padding: 14px 40px 14px 40px;
+        background-image: linear-gradient(220deg, #f27c1e 0%, #dd4c23 79%);
+        border-radius: 30px 30px 30px 30px;
+        max-width: 200px;
+        margin: 10px 10px;
+        /* font-size: 14px; */
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    #scrollUp i {
+
+        height: 30px;
+        font-size: 20px;
+        line-height: 26px;
+        width: 31px;
+
+      }
+
+    .sec-title .desc {
+        font-size: 16px;
+
+      }
+
+    .rs-skillbar.style1 .cl-skill-bar .skillbar-title{
+        font-size: 14px;
+    }
+
+
     .rs-process.modify1 .sec-title .title{
         padding: 0 30px;
     }
@@ -942,10 +973,10 @@
     .rs-banner.style8 .banner-content {
         padding: 180px 0 220px;
     }
-    .readon.started.get-ready3 {
+    /* .readon.started.get-ready3 {
         padding: 12px 35px 12px 35px;
         font-size: 14px;
-    }
+    } */
     .sec-title6 .title.new-title {
         font-size: 26px;
     }
@@ -1535,9 +1566,9 @@
         font-size: 15px;
         margin-bottom: 5px;
     }
-    .readon.started {
+    /* .readon.started {
         padding: 10px 25px;
-    }
+    } */
     .rs-banner.style3.modify2 .banner-content .banner-btn li .rs-videos .animate-border a {
         display: none;
     }
@@ -1566,3 +1597,4 @@
 
 @media only screen and (max-width: 320px) {
 }
+

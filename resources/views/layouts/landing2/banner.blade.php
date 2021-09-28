@@ -28,7 +28,7 @@
                                 @endif
                             </a>
                         </li>
-                        <li><a class="readon started" style="min-width:200px ; margin-left:25px;text-align:center;white-space: nowrap" href="{{route('login')}}">
+                        <li><a class="readon started" style="min-width:200px ;text-align:center;white-space: nowrap" href="{{route('login')}}">
                             
                             @if (Config::get('app.locale') == 'th')
                                 เข้าสู่ระบบ

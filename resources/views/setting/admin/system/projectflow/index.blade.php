@@ -92,11 +92,52 @@
                     </div>
                     <div class="card-body">
                         <div class="row">	
+
                             <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header header-elements-sm-inline">
+                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการเลยกำหนด</h6>
+                                        <div class="header-elements">
+                                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
+                                                <span></span>
+                                            </a> --}}
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive" >
+                                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="testtopictable" >
+                                                <thead>
+                                                    <tr class="bg-info"> 
+                                                        <th style="width:10%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
+                                                        <th style="text-align: center">ชื่อโครงการ</th>  
+                                                        <th style="text-align: center">บริษัท</th>  
+                                                        <th style="width:10%;white-space: nowrap;text-align:center">ปลดล็อค</th>                          
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($fulltbps->reverse() as $key => $fulltbp)
+                                                    <tr>  
+                                                        <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
+                                                        <td> {{$fulltbp->minitbp->project}} </td> 
+                                                        <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
+                                                        <td style="width:10%;white-space: nowrap;text-align:center">
+                                                            <a href="{{route('dashboard.admin.assessment.doaccessment',['id' => $fulltbp->id])}}" onclick="confirmation(event)" class="btn btn-sm bg-primary">ปลดล็อค</a>
+                                                        </td>
+                                                   
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            {{-- <div class="col-md-12">
                                     <div class="form-group">
                                         <a href="{{route('dashboard.admin.assessment.doaccessment')}}" class="btn btn-sm bg-primary">ปลดล็อค</a>
                                     </div>
-                            </div>
+                            </div> --}}
                         </div>
                        
                     </div>
@@ -109,11 +150,31 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+{{-- <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script> --}}
     <script>
         var route = {
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content')
         };
+
+        function confirmation(e) {
+            e.preventDefault();
+            var urlToRedirect = e.currentTarget.getAttribute('href');
+            Swal.fire({
+                    title: 'โปรดยืนยัน',
+                    text: `ต้องการทำรายการ`,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }).then((result) => {
+                if (result.value) {
+                    window.location.href = urlToRedirect;
+                }
+            });
+        }
     </script>
 @stop

@@ -905,6 +905,7 @@ blockquote cite:before {
   padding: 14px 40px 14px 40px;
   background-image: linear-gradient(220deg, #f27c1e 0%, #dd4c23 79%);
   border-radius: 30px 30px 30px 30px;
+  margin-right: 20px;
 }
 .readon.started:hover {
   background-image: linear-gradient(180deg, #dd4c23 19%, #f27c1e 100%);
@@ -4115,7 +4116,7 @@ body .search-modal .close:hover {
 ---------------------------------------*/
 .rs-skillbar.style1 .cl-skill-bar .skillbar-title {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   color: #212121;
 }
 .rs-skillbar.style1 .cl-skill-bar .skillbar {
@@ -9386,3 +9387,4 @@ body .search-modal .close:hover {
     -webkit-transform: translateY(0);
   }
 }
+

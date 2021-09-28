@@ -18,11 +18,12 @@
 <!-- spacing css -->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/rs-spacing.css')}}">
 <!-- style css -->
-<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/style.css')}}"> <!-- This stylesheet dynamically changed from style.less -->
+{{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/style.css')}}"> <!-- This stylesheet dynamically changed from style.less --> --}}
 
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_style.css')}}">
 <!-- responsive css -->
-<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/responsive.css')}}">
+{{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/responsive.css')}}"> --}}
+<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_responsive.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/extend.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/custom-style.css')}}">
 

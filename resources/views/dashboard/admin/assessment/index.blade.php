@@ -133,7 +133,9 @@ select.form-control{
                                     @foreach ($fulltbps as $key => $fulltbp)
                                         @if (Empty($fulltbp->canceldate))
                                             @if (!Empty($fulltbp->finalassessmentdate) && $fulltbp->canceldate == null)
+                                            
                                                 @if (Auth::user()->isProjectLeader($fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
+                                                {{-- {{$fulltbp->id}} --}}
                                                     <tr>  
                                                         <td hidden>{{$fulltbp->updated_at}}</td>   
                                                         <td style="white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 

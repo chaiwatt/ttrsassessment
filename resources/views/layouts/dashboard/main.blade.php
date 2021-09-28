@@ -79,7 +79,7 @@
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
 						<img src="{{asset(Auth::user()->company->logo)}}" class="rounded-circle mr-2" height="34" alt="">
 						<div id="_newmessagecount_wrapper">
-							<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}
+							<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" style="width:22px" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}
 							@if (Auth::user()->user_type_id >= 3)
 								({{Auth::user()->UserType->name}})
 							@endif
@@ -122,7 +122,7 @@
 				<a href="#" class="sidebar-mobile-main-toggle">
 					<i class="icon-arrow-left8"></i>
 				</a>
-				Navigation
+				เมนูหลัก
 				<a href="#" class="sidebar-mobile-expand">
 					<i class="icon-screen-full"></i>
 					<i class="icon-screen-normal"></i>
@@ -154,12 +154,12 @@
 
 			<!-- Footer -->
 			<div class="navbar navbar-expand-lg navbar-light">
-				<div class="text-center d-lg-none w-100">
+				{{-- <div class="text-center d-lg-none w-100">
 					<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
 						<i class="icon-unfold mr-2"></i>
 						Footer
 					</button>
-				</div>
+				</div> --}}
 
 				<div class="navbar-collapse collapse" id="navbar-footer">
 					<span class="navbar-text">

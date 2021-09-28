@@ -317,7 +317,7 @@
                
                 <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbysector')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbysector')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead ในแต่ละภูมิภาค</span></a></li>
                 <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.leadprojectstatusbybusinesssize')?'active':''}}"><span style="font-size: 15px">โครงการที่อยู่ระหว่างการประเมินของ Lead ตามขนาดธุรกิจ</span></a></li>
-                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')?'active':''}}"><span style="font-size: 15px">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-lead / Expert (ภายใน-ภายนอก)</span></a></li> 
+                <li style="margin-left: -5px" class="nav-item"><a href="{{route('dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.realtimereport.project.projectbyleadcoleadexpert')?'active':''}}"><span style="font-size: 15px">จำนวนผู้รับผิดชอบ/ผู้เข้าร่วมประเมินโครงการในแต่ละโครงการ Lead / Co-Leader / Expert (ภายใน-ภายนอก)</span></a></li> 
              
             </ul>
         </li>

@@ -103,8 +103,14 @@ $(document).ready(function () {
 	var window_width = 0;
 	 
 	$(window).on('load', function () {	
+		var menu_height = $('.rs-menu ul').height();
 		window_width = $(window).width();
-		$('.rs-menu').addClass( "rs-menu-close" );
+		// $('.rs-menu').addClass( "rs-menu-close" );
+		
+		$(this).removeClass('rs-menu-toggle-close').addClass('rs-menu-toggle-open');
+		$('.rs-menu').animate({height:menu_height},{queue:false, duration:300}).removeClass('rs-menu-close');
+		$(this).removeClass('rs-menu-toggle-open').addClass('rs-menu-toggle-close');
+		$('.rs-menu').animate({height:'0px'},{queue:false, duration:300}).addClass('rs-menu-close');
 	});
 	
 	$(window).resize( function(){    

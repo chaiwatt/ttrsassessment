@@ -840,7 +840,8 @@
 								<div class="col-md-6">   
 									<div class="form-group">
 										<label>โทรสาร</label>
-										<input type="text"  name="fax" value="{{old('fax') ?? $user->company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathphone">
+										<input type="text"  name="fax" id="fax" value="{{old('fax') ?? $user->company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathphone">
+										<span id="fax_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรสารไม่ถูกต้อง</span>
 									</div>
 								</div>
 								<div class="col-md-6">  
@@ -1340,6 +1341,15 @@ $(".form-control-select2").select2();
 				$(this).val('');
 			}else{
 				$("#phone_format_error").attr("hidden",true);
+			}
+		}); 
+
+		$(document).on("change","#fax",function(e){
+			if(($("#fax").val().length < 9 || $("#fax").val().length > 10) || $("#fax").val().charAt(0) != '0'){
+				$("#fax_format_error").attr("hidden",false);
+				$(this).val('');
+			}else{
+				$("#fax_format_error").attr("hidden",true);
 			}
 		}); 
 

@@ -233,7 +233,7 @@
 
 
         $(document).on('click', '#showfulltbp', function(e) {
-            PDFObject.embed("{{asset($ev->fulltbp->attachment)}}", "#example1");
+            PDFObject.embed("{{asset($ev->fulltbp->attachment)}}", "#example1", {fallbackLink: false});
             $('#modal_view_fulltbp').modal('show');
         });
 

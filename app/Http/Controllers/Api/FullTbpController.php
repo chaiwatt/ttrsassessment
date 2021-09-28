@@ -281,7 +281,9 @@ class FullTbpController extends Controller
 
         $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
         $arr2 = UserArray::leader($minitbp->business_plan_id);
-        $userarray = array_unique(array_merge($arr1,$arr2));
+        // $userarray = array_unique(array_merge($arr1,$arr2));
+        $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $businessplan->id;
@@ -385,7 +387,9 @@ class FullTbpController extends Controller
 
         $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
         $arr2 = UserArray::leader($minitbp->business_plan_id);
-        $userarray = array_unique(array_merge($arr1,$arr2));
+        // $userarray = array_unique(array_merge($arr1,$arr2));
+        $arr3 = User::where('id',Auth::user()->id)->pluck('id')->toArray();
+        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
 
         $timeLinehistory = new TimeLineHistory();
         $timeLinehistory->business_plan_id = $businessplan->id;

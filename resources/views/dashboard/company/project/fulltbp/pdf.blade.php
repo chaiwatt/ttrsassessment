@@ -720,7 +720,7 @@
 
                     {{-- </div> --}}
 
-                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong>
+                    <div class="ml30 mt20" style="font-size:13px;page-break-inside: avoid;"><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรม ที่ได้รับ</strong>
                         <div style="margin-top:-15px;font-size:13px">{!!$provider::FixBreak($fulltbp->innovation)!!}</div>
                     </div>
 
@@ -927,7 +927,7 @@
                                     <th style="width:30%;font-size:12px">ชื่อคู่ค้าหลักของธุรกิจ</th>  
                                     <th style="width:15%;font-size:12px">เลขทะเบียน<pre style="font-family: THSarabunNew">นิติบุคคล</pre></th>                                                                                    
                                     <th style="width:15%;font-size:12px">ยอดซื้อต่อปี<pre style="font-family: THSarabunNew">(บาท)</pre></th>       
-                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดซื้อ (%)</pre></th>  
+                                    <th style="width:15%;font-size:12px">เปรียบเทียบกับ<pre style="font-family: THSarabunNew">ยอดซื้อทั้งหมด (%)</pre></th>  
                                     <th style="width:15%;font-size:12px">จำนวนปีที่ทำ<pre style="font-family: THSarabunNew">ธุรกิจร่วมกัน (ปี)</pre></th> 
                                 <tr>
                             </thead>

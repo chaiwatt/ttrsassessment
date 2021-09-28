@@ -275,7 +275,7 @@
         let targetNode = getTargetElement(selector);
         let fallbackHTML = "";
         let pdfOpenFragment = "";
-        let fallbackHTML_default = "<p>This browser does not support inline PDFs. Please download the PDF to view it: <a href='[url]'>Download PDF</a></p>";
+        let fallbackHTML_default = "<p>จอแสดงผลไม่รองรับการแสดง PDF ผลบนหน้าเว็บไซต์ กรุณาดาวน์โหลดเพื่อดูไฟล์ <a href='[url]'>ดาวน์โหลด PDF</a></p>";
 
         //Ensure URL is available. If not, exit now.
         if(typeof url !== "string"){ return embedError("URL is not valid", suppressConsole); }

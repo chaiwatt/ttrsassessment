@@ -1456,7 +1456,9 @@ $(document).on('click', '#btn_modal_add_projectplan', function(e) {
                  var maxrow = 0;
                  var realactive = [];
                  var _maxactive = 0;
+
                 data.fulltbpprojecplans.forEach(function (plan,index) {
+                 
                     var tdbody =``;
                     var _count = 1;
                     for (var k = minmonth; k <= maxmonth; k++) {
@@ -1698,7 +1700,6 @@ $(document).on("click",".deleteprojectplan",function(e){
                             var _plan = data.fulltbpprojectplantransactions.find(x => x.month == k && x.project_plan_id == plan.id);
                             var x =JSON.parse(JSON.stringify(_plan));
                             $("#max_m").val(x.mindex);
-                            // console.log(x.mindex);
                             realactive.push(parseInt(x.mindex)); 
                             tdbody += `<td style="background-color:grey ;width: 30px !important;font-size:12px;padding:5px;text-align:center">${x.mindex}</td>`;
                         }else{
@@ -1715,7 +1716,7 @@ $(document).on("click",".deleteprojectplan",function(e){
                     
                     </tr>`
                     });
-                    // console.log(realactive);
+
                  $("#maxrow").val(_maxactive);
                  $("#table_gantt_wrapper").html(html);
                  $("#table_gantt_wrapper").tableDnD();
@@ -2130,10 +2131,10 @@ $(document).on('click', '.editsell', function(e) {
     Sell.getSell($(this).data('id')).then(data => {
         $('#sellid').val(data.id);
         $('#productnameedit').val(data.name);
-        $('#sellpresentedit').val(data.present);
-        $('#sellpastedit1').val(data.past1);
-        $('#sellpastedit2').val(data.past2);
-        $('#sellpastedit3').val(data.past3);
+        $('#sellpresentedit').val(data.present.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#sellpastedit1').val(data.past1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#sellpastedit2').val(data.past2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#sellpastedit3').val(data.past3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
     })
     .catch(error => {})
     $('#modal_edit_sell').modal('show');
@@ -2177,10 +2178,6 @@ $(document).on('click', '.editsellstatus', function(e) {
         var selllabel2 = 'ยอดขาย';
         var selllabel3 = 'ยอดขาย';
         var modal_header = 'รายการยอดขาย';
-        console.log(data.name);
-
-
-
 
         let position = data.name.indexOf('Letter of Credit');
         if(position != -1){
@@ -2203,12 +2200,12 @@ $(document).on('click', '.editsellstatus', function(e) {
 
         $('#sellstatusid').val(data.id);
         $('#sellstatus').val(data.name);
-        $('#sellstatuspresentedit').val(data.present);
-        $('#sellstatuspastedit1').val(data.past1);
-        $('#sellstatuspastedit2').val(data.past2);
-        $('#sellstatuspastedit3').val(data.past3);
+        $('#sellstatuspresentedit').val(data.present.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#sellstatuspastedit1').val(data.past1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#sellstatuspastedit2').val(data.past2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#sellstatuspastedit3').val(data.past3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
-        $('#sellstatuspastedit3').val(data.past3);
+        $('#sellstatuspastedit3').val(data.past3.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
         $('#modal_header').html(modal_header);
         $('#selllabel0').html(selllabel0);
@@ -2256,7 +2253,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
-                <td class="text-center"> ${sell.numproject} </td>  
+                <td class="text-center"> ${parseFloat(sell.numproject).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
                 <td class="text-right"> ${sell.partnertaxid} </td>                         
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
@@ -2281,7 +2278,7 @@ $(document).on('click', '.editdebtpartner', function(e) {
         $('#debtpartneredit').val(data.debtpartner);
         $('#numprojectedit').val(data.numproject);
         $('#debtpartnertaxidedit').val(data.partnertaxid);
-        $('#debttotalyearselledit').val(data.totalyearsell);
+        $('#debttotalyearselledit').val(data.totalyearsell.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
         $('#debtpercenttosaleedit').val(data.percenttosale);
         $('#debtpartneryearedit').val(data.businessyear);
     })
@@ -2395,7 +2392,7 @@ $(document).on('click', '.editcreditpartner', function(e) {
         $('#creditpartnerid').val(data.id);
         $('#creditpartneredit').val(data.creditpartner);
         $('#creditpartnertaxidedit').val(data.partnertaxid);
-        $('#credittotalyearselledit').val(data.totalyearpurchase);
+        $('#credittotalyearselledit').val(data.totalyearpurchase.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
         $('#creditpercenttosaleedit').val(data.percenttopurchase);
         $('#creditpartneryearedit').val(data.businessyear);
     })
@@ -2471,20 +2468,23 @@ $(document).on("click",".deletecreditpartner",function(e){
 
 $(document).on('click', '.editasset', function(e) {
     Sell.getAsset($(this).data('id')).then(data => {
-        
+
         $('#assetid').val(data.id);
         $('#asset').val(data.asset);
-        $('#assetcostedit').val(data.cost);
-        $('#assetquantityedit').val(data.quantity);
-        $('#assetpriceedit').val(data.price);
+        $('#assetcostedit').val(data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#assetquantityedit').val(data.quantity.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#assetpriceedit').val(data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
         $('#assetspecificationedit').val(data.specification);
+
+        if(data.asset == 'ค่าที่ดิน'){
+            $('#unit').html('ตารางเมตร');
+        }else{
+            $('#unit').html('หน่วย')
+        }
+
     })
     .catch(error => {})
-    if($(this).data('assetname') == 'ค่าที่ดิน'){
-        $('#unit').html('ตารางเมตร');
-    }else{
-        $('#unit').html('หน่วย')
-    }
+
     $('#modal_edit_asset').modal('show');
 });
 
@@ -2506,9 +2506,9 @@ $(document).on('click', '#btn_modal_edit_asset', function(e) {
             }
             html += `<tr >                                        
                 <td> ${asset.asset} </td>                            
-                <td class="text-right"> ${parseFloat(asset.cost).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>  
-                <td class="text-right"> ${asset.quantity} </td>                         
-                <td class="text-right"> ${parseFloat(asset.price).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td> 
+                <td class="text-right"> ${asset.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>  
+                <td class="text-right"> ${asset.quantity.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} </td>                         
+                <td class="text-right"> ${asset.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td> 
                 <td> ${checkspec} </td> 
                 <td style="width:1%;white-space: nowrap;text-align:center"> 
                     <a  data-id="${asset.id}" class="btn btn-sm bg-info editasset">แก้ไข</a> 
@@ -2526,7 +2526,7 @@ $(document).on('click', '.editinvestment', function(e) {
     Sell.getInvestment($(this).data('id')).then(data => {
         $('#investmentid').val(data.id);
         $('#investment').val(data.investment);
-        $('#investmentcostedit').val(data.cost);
+        $('#investmentcostedit').val(data.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
     })
     .catch(error => {})
     $('#modal_edit_investment').modal('show');
@@ -2563,10 +2563,10 @@ $(document).on('click', '.editcost', function(e) {
     Sell.getCost($(this).data('id')).then(data => {
         $('#costid').val(data.id);
         $('#costnameedit').val(data.costname);
-        $('#costexistingedit').val(data.existing);
-        $('#costneededit').val(data.need);
-        $('#costapprovededit').val(data.approved);
-        $('#costplanedit').val(data.plan);
+        $('#costexistingedit').val(data.existing.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#costneededit').val(data.need.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#costapprovededit').val(data.approved.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#costplanedit').val(data.plan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
     })
     .catch(error => {})
     sourcetitle
@@ -3106,7 +3106,6 @@ $('.steps-basic').steps({
             }
 
             // if(parseInt($("#maxrow").val()) != parseInt($("#ganttnummonth").val())){
-                // console.log($("#maxrow").val());
             if(parseInt($("#ganttnummonth").val()) != parseInt($("#maxrow").val())){
                 $("#notmatch_wrapper_error").attr("hidden",false);
                 // $("#month_added").html(`(เพิ่มแล้ว ${})`);
@@ -3243,20 +3242,18 @@ $(document).on("change","#numprojectedit",function(e){
     $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
 });
 
-$(document).on("change","#credittotalyearsell",function(e){  
-// $("#credittotalyearsell").on('change', function() {
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
-});
+// $(document).on("change","#credittotalyearsell",function(e){  
+//     $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+// });
 
 $(document).on("change","#creditpartneryear",function(e){  
 // $("#creditpartneryear").on('change', function() {
     $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
 });
 
-$(document).on("change","#credittotalyearselledit",function(e){ 
-// $("#credittotalyearselledit").on('change', function() {
-    $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
-});
+// $(document).on("change","#credittotalyearselledit",function(e){ 
+//     $(this).val(parseInt($(this).val().replace(/[^0-9\.]+/g,'')||0));
+// });
 
 $(document).on("change","#creditpartneryearedit",function(e){ 
 // $("#creditpartneryearedit").on('change', function() {
@@ -4674,7 +4671,6 @@ $("#ganttnummonth").on('change', function(e) {
                             _maxactive = Math.max(...realactive);
                             maxrow = _count;
                             _count ++;
-                            
                         }
                         html += `<tr >                                        
                             <td style="max-width:350px;padding:5px"> ${plan.name} <a href="#" data-toggle="modal" data-id="${plan.id}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="${plan.id}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a></td>                                            
@@ -5190,7 +5186,6 @@ $(document).on('click', '#btn_add_projectplan', function(e) {
     $(document).on("change","#assetspecificationedit",function(e){
         
         if(maxRepeating($(this).val()) > 15){
-            console.log('โปรดตรวจสอบรายการ');
             $("#assetspecificationedit_error").attr("hidden",false);
         }else{
             $("#assetspecificationedit_error").attr("hidden",true);

@@ -346,6 +346,7 @@
     $(function() {
             // define container
         var redips = {};
+        var modeilscreen = "{{$shareagent->isPhone()}}"
         
         // append scroll parameter to URL or return scroll value
         redips.scroll = function (url) {

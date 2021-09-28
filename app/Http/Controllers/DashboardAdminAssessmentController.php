@@ -663,19 +663,63 @@ class DashboardAdminAssessmentController extends Controller
         return view('dashboard.admin.assessment.summary')->withEv($ev);
     }
 
-    public function DoAccessment(){
-        $eventcalendars = EventCalendar::whereNotNull('eventdate')
-                                    ->whereNotNull('starttime')
-                                    ->whereNotNull('endtime')
-                                    ->whereNotNull('place')
-                                    ->whereNotNull('summary')
-                                    // ->where('calendar_type_id',3)
-                                    ->get();
+    public function DoAccessment($id){
+        $ev = Ev::where('full_tbp_id',$id)->first();
+        $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
+        if (count($scoringstatuses) == 0) {
+            $_projectmembers = ProjectMember::where('full_tbp_id',$id)->get();
+            foreach ($_projectmembers as $key => $_projectmember) {
+                $new = new ProjectMemberBackup();
+                $new->full_tbp_id = $_projectmember->full_tbp_id;
+                $new->user_id = $_projectmember->user_id;
+                $new->save(); 
+            }
+        }
+        ProjectMember::whereNotIn('user_id',$scoringstatuses)->where('full_tbp_id',$id)->delete();
+        $check = Scoring::where('ev_id',$ev->id)
+                        ->whereNull('user_id')
+                        ->get(); 
+        if($check->count() == 0){
+            $checkscoring = Scoring::where('ev_id',$ev->id)
+                    ->whereNotNull('user_id')
+                    ->first(); 
+            if(!Empty($checkscoring)){    
+                $scorings = Scoring::where('ev_id',$ev->id)
+                    ->where('user_id',$checkscoring->user_id)
+                    ->get(); 
+                foreach ($scorings as $key => $scoring) {
+                    $new = new Scoring();
+                    $new->ev_id = $scoring->ev_id;
+                    $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
+                    $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
+                    $new->scoretype = $scoring->scoretype;
+                    $new->score = $scoring->score;
+                    $new->save();
+                } 
+                $fulltbp = FullTbp::find($id)->update([
+                    'done_assessment' => 1
+                ]); 
+            }        
+        }
+
+        // return ;
+        return redirect()->back()->withSuccess('ปลดล็อคเวลาสรุปคะแนนของโครงการเลยกำหนดสำเร็จ');
+
+        // $eventcalendars = EventCalendar::whereNotNull('eventdate')
+        //                             ->whereDate('eventdate', '>', Carbon::today())
+        //                             ->whereNotNull('starttime')
+        //                             ->whereNotNull('endtime')
+        //                             ->whereNotNull('place')
+        //                             ->whereNotNull('summary')
+        //                             ->where('calendar_type_id',3)
+        //                             ->get();
+        // // return $eventcalendars;
         // foreach ($eventcalendars as $key => $eventcalendar) {
+        //     if($eventcalendar->calendar_type_id == 3){
         //         $ev = Ev::where('full_tbp_id',$eventcalendar->full_tbp_id)->first();
         //         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
         //         $date = Carbon::parse($eventcalendar->eventdate);
-        //         if($date->isToday() == 1){
+        //         // if($date->isToday() == 1){
         //             if (count($scoringstatuses) == 0) {
         //                 $_projectmembers = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->get();
         //                 foreach ($_projectmembers as $key => $_projectmember) {
@@ -690,85 +734,31 @@ class DashboardAdminAssessmentController extends Controller
         //                             ->whereNull('user_id')
         //                             ->get(); 
         //             if($check->count() == 0){
-        //                 $user = Scoring::where('ev_id',$ev->id)
+        //                 $checkscoring = Scoring::where('ev_id',$ev->id)
         //                         ->whereNotNull('user_id')
         //                         ->first(); 
-        //                 if(!Empty($user)){
+        //                 if(!Empty($checkscoring)){    
         //                     $scorings = Scoring::where('ev_id',$ev->id)
-        //                             ->where('user_id',$user->id)
-        //                             ->get(); 
+        //                         ->where('user_id',$checkscoring->user_id)
+        //                         ->get(); 
         //                     foreach ($scorings as $key => $scoring) {
-        //                         $_check = Scoring::where('ev_id',$scoring->ev_id)
-        //                                     ->where('criteria_transaction_id',$scoring->criteria_transaction_id)
-        //                                     ->where('sub_pillar_index_id',$scoring->sub_pillar_index_id)
-        //                                     ->where('scoretype',$scoring->scoretype)
-        //                                     ->whereNull('user_id')
-        //                                     ->where('score',$scoring->score)->first();
-        //                         if(Empty($_check)){
-        //                             $new = new Scoring();
-        //                             $new->ev_id = $scoring->ev_id;
-        //                             $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
-        //                             $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
-        //                             $new->scoretype = $scoring->scoretype;
-        //                             $new->score = $scoring->score;
-        //                             $new->save();
-        //                         } 
+        //                         $new = new Scoring();
+        //                         $new->ev_id = $scoring->ev_id;
+        //                         $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
+        //                         $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
+        //                         $new->scoretype = $scoring->scoretype;
+        //                         $new->score = $scoring->score;
+        //                         $new->save();
         //                     } 
         //                     $fulltbp = FullTbp::find($eventcalendar->full_tbp_id)->update([
         //                         'done_assessment' => 1
         //                     ]); 
-        //                 }
-     
+        //                 }        
         //             }
-        //         }
+        //         // }
+        //     }
         // }
-
-
-        foreach ($eventcalendars as $key => $eventcalendar) {
-            if($eventcalendar->calendar_type_id == 3){
-                $ev = Ev::where('full_tbp_id',$eventcalendar->full_tbp_id)->first();
-                $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
-                $date = Carbon::parse($eventcalendar->eventdate);
-                if($date->isToday() == 1){
-                    if (count($scoringstatuses) == 0) {
-                        $_projectmembers = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->get();
-                        foreach ($_projectmembers as $key => $_projectmember) {
-                            $new = new ProjectMemberBackup();
-                            $new->full_tbp_id = $_projectmember->full_tbp_id;
-                            $new->user_id = $_projectmember->user_id;
-                            $new->save(); 
-                        }
-                    }
-                    ProjectMember::whereNotIn('user_id',$scoringstatuses)->where('full_tbp_id',$eventcalendar->full_tbp_id)->delete();
-                    $check = Scoring::where('ev_id',$ev->id)
-                                    ->whereNull('user_id')
-                                    ->get(); 
-                    if($check->count() == 0){
-                        $checkscoring = Scoring::where('ev_id',$ev->id)
-                                ->whereNotNull('user_id')
-                                ->first(); 
-                        if(!Empty($checkscoring)){    
-                            $scorings = Scoring::where('ev_id',$ev->id)
-                                ->where('user_id',$checkscoring->user_id)
-                                ->get(); 
-                            foreach ($scorings as $key => $scoring) {
-                                $new = new Scoring();
-                                $new->ev_id = $scoring->ev_id;
-                                $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
-                                $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
-                                $new->scoretype = $scoring->scoretype;
-                                $new->score = $scoring->score;
-                                $new->save();
-                            } 
-                            $fulltbp = FullTbp::find($eventcalendar->full_tbp_id)->update([
-                                'done_assessment' => 1
-                            ]); 
-                        }        
-                    }
-                }
-            }
-        }
-        return redirect()->back()->withSuccess('ปลดล็อคเวลาสรุปคะแนนของโครงการเลยกำหนดสำเร็จ');
+        // return redirect()->back()->withSuccess('ปลดล็อคเวลาสรุปคะแนนของโครงการเลยกำหนดสำเร็จ');
 
     }
 

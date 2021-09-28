@@ -43,7 +43,7 @@
                             }
                             $c++;
                         @endphp
-                        <span class="skillbar-title" style="font-size: 16px">
+                        <span class="skillbar-title">
                             @if (Config::get('app.locale') == 'th')
                                 {{$industrygroup['thname']}} ({{$industrygroup['occured']}} โครงการ)
                             @else

@@ -946,8 +946,8 @@
 								<input type="number" id="credittotalyearsell" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpercenttosale" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control form-control-lg">
+								<label>เปรียบเทียบกับยอดซื้อทั้งหมด (%)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpercenttosale" placeholder="เปรียบเทียบกับยอดซื้อทั้งหมด (%)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
@@ -989,8 +989,8 @@
 								<input type="number" id="credittotalyearselledit" placeholder="ยอดซื้อต่อปี (บาท)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
-								<label>เปรียบเทียบกับยอดซื้อ (%)</label><span class="text-danger">*</span>
-								<input type="number" id="creditpercenttosaleedit" placeholder="เปรียบเทียบกับยอดซื้อ (%)" class="form-control form-control-lg">
+								<label>เปรียบเทียบกับยอดซื้อทั้งหมด (%)</label><span class="text-danger">*</span>
+								<input type="number" id="creditpercenttosaleedit" placeholder="เปรียบเทียบกับยอดซื้อทั้งหมด (%)" class="form-control form-control-lg">
 							</div>
 							<div class="form-group">
 								<label>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</label><span class="text-danger">*</span>
@@ -2038,7 +2038,7 @@
 										</div>
 										<div class="col-md-12">
 											<div class="form-group mb-3 mb-md-2">
-												<label class="font-weight-semibold">สิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</label>
+												<label class="font-weight-semibold">สิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร</label>
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-check">
@@ -2136,7 +2136,7 @@
 										<div class="col-md-12">
 											<br>
 											<div class="form-group mb-3 mb-md-2">
-												<label class="font-weight-semibold"> ลิขสิทธิ์/เครื่องหมายการค้า</label>
+												<label class="font-weight-semibold"> ลิขสิทธิ์ / เครื่องหมายการค้า</label>
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-check">
@@ -2220,7 +2220,7 @@
 														<table style="width: 100%" class="table table-bordered table-striped" >
 															<thead>
 																<tr class="bg-info">
-																	<th>เอกสารแนบสิทธิบัตรการประดิษฐ์/การออกแบบ/อนุสิทธิบัตร</th>                                                                                  
+																	<th>เอกสารแนบสิทธิบัตรการประดิษฐ์ / การออกแบบ / อนุสิทธิบัตร</th>                                                                                  
 																	<th style="width:1%;white-space: nowrap">ดาวน์โหลด</th>
 																</tr>
 															</thead>
@@ -2245,7 +2245,7 @@
 											<br>
 
 											<div class="col-md-12">
-												<label for=""><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรมที่ได้รับ</strong> </label>
+												<label for=""><strong>2.6.3 รางวัลทางด้านเทคโนโลยี / นวัตกรรม ที่ได้รับ</strong> </label>
 											</div>
 												<div class="col-md-12">	
 													<div class="form-group">
@@ -2599,7 +2599,7 @@
 															<th>รายชื่อคู่ค้าหลักของธุรกิจ</th>  
 															<th>เลขทะเบียนนิติบุคคล (หนังสือรับรองบริษัท)</th>                                                                                    
 															<th>ยอดซื้อต่อปี (บาท)</th>       
-															<th>เปรียบเทียบกับยอดซื้อ (%)</th>  
+															<th>เปรียบเทียบกับยอดซื้อทั้งหมด (%)</th>  
 															<th>จำนวนปีที่ทำธุรกิจร่วมกัน (ปี)</th> 
 															{{-- <th style="width:120px">เพิ่มเติม</th>     --}}
 														</tr>
