@@ -99,14 +99,14 @@ class DashboardAdminProjectFullTbpController extends Controller
                     ->where('notification_category_id',1) // notification_category_id 1 = โครงการ
                     ->where('notification_sub_category_id',5) // notification_sub_category_id 5 = Full TBP
                     ->where('status',0)->delete();                  
-        $fulltbps = FullTbp::get();
+        $fulltbps = FullTbp::whereNull('finishdate')->get();
 
         if($auth->user_type_id < 5){
             $businessplanids = ProjectAssignment::where('leader_id',$auth->id)
                                             // ->orWhere('coleader_id',$auth->id)
                                             ->pluck('business_plan_id')->toArray();
             $minitbpids = MiniTBP::whereIn('business_plan_id',$businessplanids)->pluck('id')->toArray();
-            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->get();
+            $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbpids)->whereNull('finishdate')->get();
         }
 
         $fulltbparr = FullTbp::pluck('id')->toArray();
