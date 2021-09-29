@@ -21,7 +21,7 @@ class DashboardCompanyReportController extends Controller
     public function __construct() 
     { 
         $this->middleware(['auth', 'verified']);
-        // $this->middleware('role:4,5,6'); 
+        // $this->middleware('role:0,4,5,6'); 
     }
     public function Index(){
         $auth = Auth::user();

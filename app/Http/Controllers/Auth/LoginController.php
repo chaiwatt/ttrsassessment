@@ -53,13 +53,16 @@ class LoginController extends Controller
                 return redirect()->route('dashboard.admin.report'); 
             }else if($user->user_type_id == 3){
                 return redirect()->route('dashboard.expert.report'); 
-            }else if($user->user_type_id <= 2){
+            }else if($user->user_type_id == 1){
                 $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$user->id)->first()->id)->get();
                 return redirect()->route('dashboard.company.report')->withBusinessplans($businessplans); 
+            }else if($user->user_type_id == 0){
+                // return 'ok';
+                return redirect()->route('setting.admin.user'); 
+            }else{
+                return redirect($intendurl);
             }
-         }else{
-            return redirect($intendurl);
-         }
+         }    
     }
 
 

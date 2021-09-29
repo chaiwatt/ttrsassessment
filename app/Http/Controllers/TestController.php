@@ -38,6 +38,12 @@ class TestController extends Controller
         }
     }
 
+    // public function testcode(){
+    //     // return 'ok';
+    //     $users = User::whereBetween('user_type_id', [5, 6])->get();
+    //     return $users;
+    // }
+
     
     public function mailByFlow($minitbpid,$flow,$_enddate){
         $enddate = DateConversion::engToThaiDate($_enddate->format('Y-m-d'));

@@ -127,7 +127,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $projectleaderassingnmentarr = ProjectAssignment::where('leader_id',$this->id)->pluck('full_tbp_id')->toArray();
         $projectcoleaderassingnmentarr = ProjectAssignment::where('coleader_id',$this->id)->pluck('full_tbp_id')->toArray();
        
-        $jdandadmin = User::where('id',$this->id)->where('user_type_id','>=',5)->pluck('id')->toArray();
+        $jdandadmin = User::where('id',$this->id)->whereBetween('user_type_id', [5, 6])->pluck('id')->toArray();
 
         $projectmembers = ProjectMember::whereIn('user_id',$jdandadmin)->pluck('full_tbp_id')->toArray();
 

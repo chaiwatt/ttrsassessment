@@ -81,7 +81,7 @@
 						<div id="_newmessagecount_wrapper">
 							<span>@if ($shareunreadmessages->count()>0) <span class="badge badge-pill bg-warning-400 d-flex align-items-left" style="width:22px" id="_newmessagecount">{{$shareunreadmessages->count()}} @endif </span>{{Auth::user()->name}} {{Auth::user()->lastname}}
 							@if (Auth::user()->user_type_id >= 3)
-								({{Auth::user()->UserType->name}})
+								({{@Auth::user()->UserType->name}})
 							@endif
 						</span>
 						</div>
@@ -141,7 +141,12 @@
 							<span>เว็บไซต์</span>
 							</a>
 						</li> --}}
-						@include('layouts.dashboard.sidemenu')
+						@if (Auth::user()->user_type_id !=0)
+								@include('layouts.dashboard.sidemenu')
+							@else
+								@include('layouts.dashboard.sidemenu2')
+						@endif
+						
 					</ul>
 				</div>
 			</div>			

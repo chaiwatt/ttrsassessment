@@ -24,12 +24,12 @@ class SettingAdminUserController extends Controller
     { 
         $this->middleware('auth'); 
         // 1=admin, 2=expert, 3=company 
-        $this->middleware('role:4,5,6,7,8,9,10'); 
+        $this->middleware('role:0,4,5,6,7,8,9,10'); 
     }
     public function Index(){
         // $users = User::where('id','!=',Auth::user()->id)->get();
         $auth = Auth::user();
-        if($auth->user_type_id < 5){
+        if($auth->user_type_id > 0 && $auth->user_type_id < 5 ){
              Auth::logout();
              Session::flush();
              return redirect()->route('login');

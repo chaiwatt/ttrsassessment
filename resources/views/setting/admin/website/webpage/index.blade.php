@@ -82,7 +82,7 @@
                                             @endif
                                             </td>                                      
                                         <td style="text-align: center"> 
-                                            <a href="{{route('landing.webpage',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าบทความ</a>
+                                            <a href="{{route('landing.webpage',['slug' => $page->slug])}}" class="btn btn-sm bg-info" target="_blank">หน้าเพจ</a>
                                             <a href="{{route('setting.admin.website.webpage.edit',['id' => $page->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
                                             <a href="{{route('setting.admin.website.webpage.delete',['id' => $page->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                         </td>

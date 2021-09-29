@@ -191,7 +191,7 @@
                                                                     @endif
                                                                 @endif      
                                                             @else
-                                                                @if ($shareagent->isPhone() == 1)
+                                                                @if (Empty($shareagent->isDesktop()))
                                                                     <li>
                                                                         @if (!Auth::check())
                                                                             <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->name}}</a>
@@ -200,8 +200,10 @@
                                                                                 <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
                                                                             @elseif(Auth::user()->user_type_id == 3)
                                                                                 <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
-                                                                            @else
+                                                                            @elseif(Auth::user()->user_type_id == 1)
                                                                                 <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                            @elseif(Auth::user()->user_type_id == 0)
+                                                                                <a href="{{route('setting.admin.user')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
                                                                             @endif
                                                                         @endif
                                                                     </li>
@@ -264,7 +266,7 @@
                                                                     @endif
                                                                 @endif      
                                                             @else
-                                                                @if ($shareagent->isPhone() == 1)
+                                                                @if (Empty($shareagent->isDesktop()))
                                                                 <li>
                                                                     @if (!Auth::check())
                                                                         <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{$menu->engname}}</a>
@@ -273,8 +275,10 @@
                                                                             <a href="{{route('dashboard.admin.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
                                                                         @elseif(Auth::user()->user_type_id == 3)
                                                                             <a href="{{route('dashboard.expert.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
-                                                                        @else
+                                                                        @elseif(Auth::user()->user_type_id == 1)
                                                                             <a href="{{route('dashboard.company.report')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
+                                                                        @elseif(Auth::user()->user_type_id == 0)
+                                                                            <a href="{{route('setting.admin.user')}}" style="font-family: kanit; font-weight:200; font-size:20px">{{trans('lang.dashboard')}}</a>
                                                                         @endif
                                                                     @endif
                                                                 </li>
@@ -294,31 +298,27 @@
                                                         @endif
                                                     @endif
                                                 @endforeach
-                                                @if ($shareagent->isPhone() == 1 && Auth::check())
-        
-                                                    @if (Config::get('app.locale') == 'th')
-                                                        <li> <a href="{{route('logout2')}}" style="font-family: kanit; font-weight:200; font-size:20px">ออกจากระบบ</a></li>
-                                                        <li><a href="{{route('change',['locale' => 'en'])}}" style="font-family: kanit; font-weight:200; font-size:20px"> English</a></li>
-                                                    @else
-                                                        <li> <a href="{{route('logout2')}}" style="font-family: kanit; font-weight:200; font-size:20px">Sign Out</a></li>
-                                                        <li><a href="{{route('change',['locale' => 'th'])}}" style="font-family: kanit; font-weight:200; font-size:20px">ไทย</a></li>
-                                                    @endif 
-        
-                                                    
-                                                
-                                                    
-                                                    {{-- <li>               
-                                                        <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="font-family: kanit; font-weight:200; font-size:20px">
+                                   
+                                                @if (Empty($shareagent->isDesktop()))
+                          
+                                                    @if (Auth::check())
                                                             @if (Config::get('app.locale') == 'th')
-                                                            Sign Out demo
+                                                                <li> <a href="{{route('logout2')}}" style="font-family: kanit; font-weight:200; font-size:20px">ออกจากระบบ</a></li>
+                                                                <li><a href="{{route('change',['locale' => 'en'])}}" style="font-family: kanit; font-weight:200; font-size:20px"> English</a></li>
                                                             @else
-                                                            ออกจากระบบ demo
+                                                                <li> <a href="{{route('logout2')}}" style="font-family: kanit; font-weight:200; font-size:20px">Sign Out</a></li>
+                                                                <li><a href="{{route('change',['locale' => 'th'])}}" style="font-family: kanit; font-weight:200; font-size:20px">ไทย</a></li>
                                                             @endif 
-                                                            
-                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                            @csrf
-                                                        </form>
-                                                    </li> --}}
+                                                        {{-- @else
+                                                            @if (Config::get('app.locale') == 'th')
+                                                                <li> <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">เข้าสู่ระบบ</a></li>
+                                                                <li><a href="{{route('change',['locale' => 'en'])}}" style="font-family: kanit; font-weight:200; font-size:20px"> English</a></li>
+                                                            @else
+                                                                <li> <a href="{{route('login')}}" style="font-family: kanit; font-weight:200; font-size:20px">Log In</a></li>
+                                                                <li><a href="{{route('change',['locale' => 'th'])}}" style="font-family: kanit; font-weight:200; font-size:20px">ไทย</a></li>
+                                                            @endif  --}}
+                                                    @endif
+                                                  
                                                 @endif
                                             </ul>  
                                         </nav>                                     

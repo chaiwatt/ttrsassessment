@@ -502,6 +502,7 @@ class DashboardAdminCalendarController extends Controller
   }
 
   public function View($id){
+
     $calendartypes = CalendarType::get();
     $eventcalendar = EventCalendar::find($id);
     $calendarattachments = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();

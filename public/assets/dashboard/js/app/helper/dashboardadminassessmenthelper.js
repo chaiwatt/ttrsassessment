@@ -20,7 +20,6 @@ $(function() {
         $(".loadprogress").attr("hidden",true);
         RowSpan("criteriatable");
         RenderExtraTable(data.extracriteriatransactions);
-        // RowSpan("extra_criteriatable");
         $('#sumofweight').html(data.sumweigth);
 
     }).catch(error => {})

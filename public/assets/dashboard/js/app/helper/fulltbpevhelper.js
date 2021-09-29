@@ -125,8 +125,9 @@ function callDataTable(){
                         columns: [ 0, 1,2,3 ]
                     },
                     customize: function( xlsx ) {
+                        var fname =  $('#projectname').val().length > 20 ? $('#projectname').val().substr(0, 19) + '…' : $('#projectname').val();
                         var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                        source.setAttribute('name','โครงการ' + $('#projectname').val());
+                        source.setAttribute('name',fname);
                     }, 
                 },
                 { 
@@ -205,8 +206,9 @@ function callDataTableExtra(){
                     columns: [ 0, 1,]
                 },
                 customize: function( xlsx ) {
+                    var fname =  $('#projectname').val().length > 20 ? $('#projectname').val().substr(0, 19) + '…' : $('#projectname').val();
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                    source.setAttribute('name','โครงการ' + $('#projectname').val());
+                    source.setAttribute('name',fname);
                 }, 
             },
             { 

@@ -571,7 +571,6 @@ class DashboardAdminProjectAssessmentController extends Controller
         $auth = Auth::user();
         if($request->gradescorelist != null){
             foreach ($request->gradescorelist as $key => $gradescore) {
-
                 $commentid=array_search($gradescore['criteriatransactionid'], array_column(json_decode(json_encode($request->commentlist),TRUE), 'criteriatransactionid'));
                 $check = Scoring::where('ev_id',$gradescore['evid'])
                                 ->where('criteria_transaction_id',$gradescore['criteriatransactionid'])
@@ -579,29 +578,35 @@ class DashboardAdminProjectAssessmentController extends Controller
                                 ->where('scoretype',1)
                                 ->where('user_id',$auth->id)->first();
                 if(Empty($check)){
+                    $scoreval = $gradescore['value'];
+                    if(Empty($gradescore['value'])){
+                        $scoreval = null;
+                    }
+
                     $scoring = new Scoring();
                     $scoring->ev_id = $gradescore['evid'];
                     $scoring->criteria_transaction_id = $gradescore['criteriatransactionid'];
                     $scoring->sub_pillar_index_id =  $gradescore['subpillarindex'];
                     $scoring->scoretype = 1;
-                    $scoring->score = $gradescore['value'];
+                    $scoring->score = $scoreval;
                     $scoring->comment = $request->commentlist[$commentid]['value'];
                     $scoring->user_id = $auth->id;
                     $scoring->save();
                 }else{
+                    $scoreval = $gradescore['value'];
+                    if(Empty($gradescore['value'])){
+                        $scoreval = null;
+                    }
                     $check->update([
-                        'score' => $gradescore['value'],
+                        'score' => $scoreval,
                         'comment' => $request->commentlist[$commentid]['value'],
                     ]);
                 }
-    
             }
         }
 
-
         if($request->checkscorelist != null ){
             foreach ($request->checkscorelist as $key => $checkscore) {
-
                 $commentid=array_search($checkscore['criteriatransactionid'], array_column(json_decode(json_encode($request->commentlist),TRUE), 'criteriatransactionid'));
                 $check = Scoring::where('ev_id',$checkscore['evid'])
                             ->where('criteria_transaction_id',$checkscore['criteriatransactionid'])
@@ -624,10 +629,8 @@ class DashboardAdminProjectAssessmentController extends Controller
                         'comment' => $request->commentlist[$commentid]['value'],
                     ]);
                 }
-    
             }
         }
-
         
         $scoringstatus = ScoringStatus::where('ev_id',$request->evid)
                                     ->where('user_id',$auth->id)
@@ -637,6 +640,8 @@ class DashboardAdminProjectAssessmentController extends Controller
             $scoringstatus->ev_id = $request->evid;
             $scoringstatus->user_id = $auth->id;
             $scoringstatus->save();
+        }else if($request->status == 3){
+            return response()->json($scoringstatus); // save draft
         }else{
             $scoringstatus->delete();
         }     
@@ -647,10 +652,17 @@ class DashboardAdminProjectAssessmentController extends Controller
         $fulltbp = FullTbp::find($ev->full_tbp_id);  
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         
-        $arr1 = User::where('id',$auth->id)->pluck('id')->toArray();
-        $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
-        $arr3 = UserArray::leader($minitbp->business_plan_id);
-        $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+
+        if($auth->user_type_id >= 5){
+            $arr1 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr2 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2)); 
+        }else{
+            $arr1 = User::where('id',$auth->id)->pluck('id')->toArray();
+            $arr2 = UserArray::adminandjd($minitbp->business_plan_id);
+            $arr3 = UserArray::leader($minitbp->business_plan_id);
+            $userarray = array_unique(array_merge($arr1,$arr2,$arr3));
+        }
 
         $projectlog = new ProjectLog();
         $projectlog->mini_tbp_id = $minitbp->id;

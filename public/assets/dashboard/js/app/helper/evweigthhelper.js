@@ -128,8 +128,9 @@ function InitializeDataTable(){
                     columns: [ 0, 1,2,3 ]
                 },
                 customize: function( xlsx ) {
+                    var fname =  $('#projectname').val().length > 20 ? $('#projectname').val().substr(0, 19) + '…' : $('#projectname').val();
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                    source.setAttribute('name','โครงการ' + $('#projectname').val());
+                    source.setAttribute('name',fname);
                 }, 
             },
             { 
@@ -211,8 +212,9 @@ $('#evextraexporttable').DataTable( {
                 columns: [ 0, 1,2]
             },
             customize: function( xlsx ) {
+                var fname =  $('#projectname').val().length > 20 ? $('#projectname').val().substr(0, 19) + '…' : $('#projectname').val();
                 var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                source.setAttribute('name','โครงการ' + $('#projectname').val());
+                source.setAttribute('name',fname);
             }, 
         },
         { 
@@ -926,22 +928,30 @@ function updateEvAdminStatus(id,value){
             evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
         });
 
-        var table = $('#evexporttable').DataTable();
-        if(table!=null){
-            table.clear();
-            table.clear().destroy();
+        if(evdata.length > 0){
+            var table = $('#evexporttable').DataTable();
+            if(table!=null){
+                table.clear();
+                table.clear().destroy();
+            }
+            InitializeDataTable();
+            $('#evexporttable').DataTable().buttons(0,0).trigger();
         }
-        
-        InitializeDataTable();
 
-        $('#evexporttable').DataTable().buttons(0,0).trigger();
+        evextradata = [];
+        $('.inputextraweigth').each(function(){
+             evextradata.push({"category":  $(this).data('category') , "criteria": $(this).data('extracriteria'), "weight": $(this).val()});
+         });
+         if(evextradata.length > 0){
+            var table_extra = $('#evextraexporttable').DataTable();
+            if(table_extra!=null){
+               table_extra.clear();
+               table_extra.clear().destroy();
+            }
+            InitializeDataTableExtra();
+            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+         }
 
-        // if (!$('#evexporttable').DataTable().data().any() ) {
-        //     setCookie("forcedownload", "1");
-        //     window.location.reload();
-        // }else{
-        //     $('#evexporttable').DataTable().buttons(0,0).trigger();
-        // }
     
     });
     $(document).on('click', '.preview', function(e) {
@@ -987,84 +997,102 @@ function updateEvAdminStatus(id,value){
 
     
     $("#btnOnPdf").on('click', function() {
-        evdata = [];
-        $('.inputweigth').each(function(){
-            evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
-        });
+   
+         evdata = [];
+         $('.inputweigth').each(function(){
+             evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
+         });
 
-        var table = $('#evexporttable').DataTable();
-        if(table!=null){
-            table.clear();
-            table.clear().destroy();
-        }
-        
-        InitializeDataTable();
+         if(evdata.length > 0){
+            var table = $('#evexporttable').DataTable();
+            if(table!=null){
+                table.clear();
+                table.clear().destroy();
+            }
+            InitializeDataTable();
+            $('#evexporttable').DataTable().buttons(0,1).trigger();
+         }
 
-        $('#evexporttable').DataTable().buttons(0,1).trigger();
-
-        // if (!$('#evexporttable').DataTable().data().any() ) {
-        //     setCookie("forcedownload", "2");
-        //     window.location.reload();
-        // }else{
-        //     $('#evexporttable').DataTable().buttons(0,1).trigger();
-        // }
+         evextradata = [];
+         $('.inputextraweigth').each(function(){
+              evextradata.push({"category":  $(this).data('category') , "criteria": $(this).data('extracriteria'), "weight": $(this).val()});
+          });
+ 
+          if(evextradata.length > 0){
+             var table_extra = $('#evextraexporttable').DataTable();
+             if(table_extra!=null){
+                table_extra.clear();
+                table_extra.clear().destroy();
+             }
+             InitializeDataTableExtra();
+             $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+          }
+ 
        
     });
     
     $("#btnOnExcelExtra").on('click', function() {
-       
         evextradata = [];
-
         $('.inputextraweigth').each(function(){
              evextradata.push({"category":  $(this).data('category') , "criteria": $(this).data('extracriteria'), "weight": $(this).val()});
-             
          });
-        //  console.log(evextradata);
-         var table_extra = $('#evextraexporttable').DataTable();
-         if(table_extra!=null){
-            table_extra.clear();
-            table_extra.clear().destroy();
+         if(evextradata.length > 0){
+            var table_extra = $('#evextraexporttable').DataTable();
+            if(table_extra!=null){
+               table_extra.clear();
+               table_extra.clear().destroy();
+            }
+            InitializeDataTableExtra();
+            $('#evextraexporttable').DataTable().buttons(0,0).trigger();
          }
-         
-         InitializeDataTableExtra();
- 
-         $('#evextraexporttable').DataTable().buttons(0,0).trigger();
 
-        // if (!$('#evextraexporttable').DataTable().data().any() ) {
-        //     setCookie("forcedownload", "3");
-        //     window.location.reload();
-        // }else{
-        //     $('#evextraexporttable').DataTable().buttons(0,0).trigger();
-        // }
-        
-    
+         evdata = [];
+         $('.inputweigth').each(function(){
+             evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
+         });
+ 
+         if(evdata.length > 0){
+             var table = $('#evexporttable').DataTable();
+             if(table!=null){
+                 table.clear();
+                 table.clear().destroy();
+             }
+             InitializeDataTable();
+             $('#evexporttable').DataTable().buttons(0,0).trigger();
+         }
+
     });
     
     $("#btnOnPdfExtra").on('click', function() {
-
         evextradata = [];
-
         $('.inputextraweigth').each(function(){
              evextradata.push({"category":  $(this).data('category') , "criteria": $(this).data('extracriteria'), "weight": $(this).val()});
-             
          });
-        //  console.log(evextradata);
-         var table_extra = $('#evextraexporttable').DataTable();
-         if(table_extra!=null){
-            table_extra.clear();
-            table_extra.clear().destroy();
-         }
-         
-         InitializeDataTableExtra();
- 
-         $('#evextraexporttable').DataTable().buttons(0,1).trigger();
 
-        // if (!$('#evextraexporttable').DataTable().data().any() ) {
-        //     setCookie("forcedownload", "4");
-        //     window.location.reload();
-        // }else{
-        //     $('#evextraexporttable').DataTable().buttons(0,1).trigger();
-        // }
-        
+         if(evextradata.length > 0){
+            var table_extra = $('#evextraexporttable').DataTable();
+            if(table_extra!=null){
+               table_extra.clear();
+               table_extra.clear().destroy();
+            }
+            InitializeDataTableExtra();
+            $('#evextraexporttable').DataTable().buttons(0,1).trigger();
+         }
+
+         evdata = [];
+         $('.inputweigth').each(function(){
+             evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
+         });
+
+         if(evdata.length > 0){
+            var table = $('#evexporttable').DataTable();
+            if(table!=null){
+                table.clear();
+                table.clear().destroy();
+            }
+            InitializeDataTable();
+            $('#evexporttable').DataTable().buttons(0,1).trigger();
+         }
+ 
     });
     

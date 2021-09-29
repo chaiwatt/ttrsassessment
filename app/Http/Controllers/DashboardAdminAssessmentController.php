@@ -424,24 +424,7 @@ class DashboardAdminAssessmentController extends Controller
                                     ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
                                     ->where('sub_pillar_index_id',$criteria['subpillarindex'])
                                     ->first();  
-                    // if(Empty($score)){
-                    //     if($criteria['value'] == 'true'){
-                    //         $score = new Scoring();
-                    //         $score->ev_id = $criteria['evid'];
-                    //         $score->criteria_transaction_id  = $criteria['criteriatransactionid'];
-                    //         $score->sub_pillar_index_id = $criteria['subpillarindex'];
-                    //         $score->scoretype = 2;
-                    //         $score->score = 1;
-                    //         $score->save();
-                    //     }
-                    // }else{
                         if($criteria['value'] == 0){
-                            // Scoring::where('ev_id',$criteria['evid'])
-                            //         ->whereNull('user_id')
-                            //         ->where('scoretype',2)
-                            //         ->where('criteria_transaction_id',$criteria['criteriatransactionid'])
-                            //         ->where('sub_pillar_index_id',$criteria['subpillarindex'])
-                            //         ->first()->delete(); 
                             $score->update([
                                 'score' => 0
                             ]);

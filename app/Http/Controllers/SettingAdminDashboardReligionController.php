@@ -12,7 +12,7 @@ class SettingAdminDashboardReligionController extends Controller
     { 
         $this->middleware('auth'); 
         // 1=admin, 2=expert, 3=company 
-        $this->middleware('role:4,5,6,7,8,9,10'); 
+        $this->middleware('role:0,4,5,6,7,8,9,10'); 
     }
     
     public function Index(){

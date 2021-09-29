@@ -94,16 +94,8 @@
                         <div class="row">	
 
                             <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header header-elements-sm-inline">
-                                        <h6 class="card-title" style="font-size:16px;font-weight: bold">โครงการเลยกำหนด</h6>
-                                        <div class="header-elements">
-                                            {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
-                                                <span></span>
-                                            </a> --}}
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
+                             
+                                    {{-- <div class="card-body"> --}}
                                         <div class="table-responsive" >
                                             <table style="width: 100%" class="table table-bordered table-striped mb-2" id="testtopictable" >
                                                 <thead>
@@ -129,8 +121,8 @@
                                                 </tbody>
                                             </table>      
                                         </div>
-                                    </div>
-                                </div>
+                                    {{-- </div> --}}
+                                {{-- </div> --}}
                             </div>
                          
                             {{-- <div class="col-md-12">

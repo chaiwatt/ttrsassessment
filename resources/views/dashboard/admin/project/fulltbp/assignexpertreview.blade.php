@@ -268,7 +268,7 @@
                                             @endphp
                                             <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}</td>
                                             <td>
-                                                {{$user->usertype->name}} {{$user->expertType}}
+                                                {{@$user->usertype->name}} {{$user->expertType}}
                                             </td> 
                                             <td style="white-space: nowrap;text-align: center">
                                                 @if (!Empty($check))
@@ -356,7 +356,7 @@
                                         @endphp
                                         <td>{{$userprefix}}{{$user->name}} {{$user->lastname}}
                                         </td>
-                                        <td>{{$user->usertype->name}} {{$user->expertType}}</td> 
+                                        <td>{{@$user->usertype->name}} {{$user->expertType}}</td> 
                                         <td>
                                             
                                             @if (Empty($rejectreason)) 

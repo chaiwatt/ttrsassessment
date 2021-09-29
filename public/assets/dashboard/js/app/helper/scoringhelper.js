@@ -87,7 +87,7 @@ function callDataTable(){
                 },
                 customize: function( xlsx ) {
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                    source.setAttribute('name','โครงการ' + route.projectname);
+                    source.setAttribute('name',route.projectname);
                 }, 
             },
             { 
@@ -176,8 +176,9 @@ function callDataTableExtra(){
                     columns: [ 0, 1,2,3,4,5]
                 },
                 customize: function( xlsx ) {
+                   
                     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                    source.setAttribute('name','โครงการ' + route.projectname);
+                    source.setAttribute('name',route.projectname);
                 }, 
             },
             { 
@@ -301,8 +302,10 @@ function RenderTable(data,evtype){
                     if(typeof(checkscore[0]) != "undefined"){
                         var _scoring = checkscore[0];
                         if(_scoring['comment']){comment = _scoring['comment'];}
-                        if(_scoring['scoretype'] == 1){
-                            textvalue = _scoring['score'];
+                        if(_scoring['scoretype'] == 1 ){
+                            if(_scoring['score'] != null ){
+                                textvalue = _scoring['score'];
+                            }
                         }else if(_scoring['scoretype'] == 2){
                             if(_scoring['score'] == 1){
                                 checkvalue = "checked";
@@ -842,7 +845,6 @@ $('.step-evweight').steps({
                         value: $(this).val()
                       } 
                 }).get();
-                console.log(gradescorelist);
                 
                 var commentlist = $(".comment").map(function () {
                     return {
@@ -1004,4 +1006,49 @@ $('.step-evweight').steps({
                 email: true
             }
         }
+    });
+
+    $(document).on('click', '#savedraft', function(e) {
+        var checkscorelist = $(".checkscore").map(function () {
+            var val = 0;
+            if($(this).is(':checked') == true){
+                val = 1;
+            }
+            return {
+                evid: $('#evid').val(),
+                criteriatransactionid: $(this).data('id'),
+                subpillarindex: $(this).data('subpillarindex'),
+                value: val
+              } 
+        }).get();
+        
+        var gradescorelist = $(".gradescore").map(function () {
+            return {
+                evid: $('#evid').val(),
+                criteriatransactionid: $(this).data('id'),
+                subpillarindex: $(this).data('subpillarindex'),
+                value: $(this).val()
+              } 
+        }).get();
+        
+        var commentlist = $(".comment").map(function () {
+            return {
+                evid: $('#evid').val(),
+                criteriatransactionid: $(this).data('id'),
+                subpillarindex: $(this).data('subpillarindex'),
+                value: $(this).val()
+              } 
+        }).get();
+
+    
+        $("#spinicon_save_draft").attr("hidden",false);
+        updateScoringStatus($('#evid').val(),gradescorelist,checkscorelist,commentlist,3).then(data => {
+            if(jQuery.isEmptyObject(data) ){
+                $('.inpscore').prop("disabled", false);
+            }else{
+                $('.inpscore').prop("disabled", true);
+            }
+            $("#spinicon_save_draft").attr("hidden",true);
+
+        }).catch(error => {})
     });

@@ -2289,37 +2289,14 @@ class HomeController extends Controller
 
         $this->createJd(2,'demo_name','demo_lastname','demoaccount@gmail.com','6295013327790','0894133662');
 
-        // $this->createUserTypeCompany(2,'อำไพพรรณ','ผ่องลำพูน','ttrsuser2020@gmail.com','9750815350896','851547196','เกรียงไกรทัวร์');
-        // $this->createUserTypeCompany(2,'ตัง','เม','ttrsusertwo2020@gmail.com','2513813143742','942495240','กรีนทีคอฟฟี่');
-        // $this->createUserTypeCompany(2,'จินดา','มณีสุข','ttrsuser1@gmail.com','1394623834048','530932544','');
-        // $this->createUserTypeCompany(2,'พชรกร','เกียรติขจรก้องไพศาล','pimpisa@nstda.or.th','7620587386519','811234567','2P Food and Bev');
-        // $this->createUserTypeCompany(2,'ผู้ประกอบการPN','คนงาม','ttrsexpertone2020@gmail.com','1284536706883','819559952','');
-        // $this->createUserTypeCompany(2,'ผู้ประกอบการPN','คนเดิม','nunu12nana12@gmail.com','1428747545181','811111111','บริษัท พีเอ็นPN จำกัด');
-        // $this->createUserTypeCompany(2,'ทีวี','ทีวีจี','tvcompany35@gmail.com','3362365999117','635323995','ทีวี');
-        // $this->createUserTypeCompany(2,'วิลาวัลย์','กลอบอไรเซชั่น','m_u_ka23@yahoo.com','2461647059138','0851547196','Global Seed Growing');
-        // $this->createUserTypeCompany(2,'ตังเม','ไงล่าา','tungmay140@hotmail.com','6073942302437','0942495240','มัทฉะเวอร์ชันอัพเดทจริงเชื่อถือได้');
+
+    }
+
+    public function DemoSystemadmin(){
+
+        $this->createSystemadmin(2,'system_name','system_lastname','systemadmin@gmail.com','3398147239361','0894133662');
 
 
-        // $this->createUserTypePersonal(2,'มาดูกัน เปลี่ยนชื่อนะ','ว่ามินิจะได้มั๊ย','ttrscolead2020@gmail.com','4580278441759','812345678','บ้านรักแมว');
-        // $this->createUserTypePersonal(2,'ใครไม่แอล','แอลแอล กอฮอลิค','pantaree.phu@nstda.or.th','5019338724281','894133661','บริษัท ไอทีบายแอล แอล จำกัด');
-        // $this->createUserTypePersonal(2,'ซอจอง','จิ้มลิ้ม','chamaiporn.sud@nstda.or.th','7723209799505','055555555','C S Innovation');
-        // $this->createUserTypePersonal(2,'Leader CS','โครงการนะจ๊ะ','ttrstrial2021@gmail.com','8948045116371','254444444','ชอบดม นิ NI');
-
-
-        // $this->createOfficer(2,'เจ้าหน้าที่เน่ย','เน้ย','ttrsexpertfive2020@gmail.com','2352009432022','819559951');
-        // $this->createOfficer(2,'ลำธาร','สายน้ำ','ttrsexpertfour2020@gmail.com','6533402990363','0635323995');
-        // $this->createOfficer(2,'Leader CS','TTRS','ttrsleader2020@gmail.com','1473052267358','877878787');
-        // $this->createOfficer(2,'เก่งกาจ','เกษตรกรรม','khemratha@gmail.com','7205095547347','851547196');
-        // $this->createOfficer(2,'เจ้าหน้าที่','KC','kanticha.cha@nstda.or.th','9558745791189','88888888');
-        // $this->createOfficer(2,'เจ้าหน้าที่ PP','TTRS','staffttrs0986@gmail.com','8639226651256','811234567');
-        // $this->createOfficer(2,'ลีดดดดดดด','เดอร์','noramon.int@nstda.or.th','3831605889617','053642546');
-        // $this->createOfficer(2,'เคเค','เปลี่ยนมั่วได้ไง','khemratha@nstda.or.th','8543430945462','0851547196');
-        // $this->createOfficer(2,'ใครไม่เชี่ยวชาญ','ผู้เชี่ยวชาญแอลแอล','sumlong.tn@gmail.com','9848838655100','0894133662');
-
-        // $this->createExpert(2,'ป่าเขา','ลำเนาไพร','ttrsmemberone2020@gmail.com','3024196717858','635323995',1);
-        // $this->createExpert(2,'ฉันคือผู้เชี่ยวชาญ','กลับมายืนที่เดิม','ttrsexperttwo2020@gmail.com','3904383603978','2111111111',2);
-        // $this->createExpert(2,'Expert PP','Three','ttrsexpertthree2020@gmail.com','8364247498269','811234555',1);
-        
     }
 
     public function createUserTypeCompany($prefix,$name,$lastname,$email,$hid,$phone,$companyname){
@@ -2424,6 +2401,37 @@ class HomeController extends Controller
         $user = new User();
         $user->prefix_id = $prefix;
         $user->user_type_id = 6;
+        $user->name = $name;
+        $user->lastname = $lastname;
+        $user->email = $email;
+        $user->hid = $hid;
+        $user->password = Hash::make('11111111');
+        $user->verify_type = 1;
+        $user->email_verified_at = Carbon::now()->toDateString();
+        $user->user_group_id = 2;
+        $user->phone = $phone;
+        $user->save();
+
+        $company = new Company();
+        $company->user_id = $user->id;
+        $company->vatno = $hid;
+        $company->logo = 'assets/dashboard/images/user.png';
+        $company->business_type_id = 5;
+        $company->save();
+
+        $companyaddress = new CompanyAddress();
+        $companyaddress->company_id = $company->id;
+        $companyaddress->save(); 
+
+        $officerdetail = new OfficerDetail();
+        $officerdetail->user_id = $user->id;
+        $officerdetail->save();
+    }
+
+    public function createSystemadmin($prefix,$name,$lastname,$email,$hid,$phone){
+        $user = new User();
+        $user->prefix_id = $prefix;
+        $user->user_type_id = 0;
         $user->name = $name;
         $user->lastname = $lastname;
         $user->email = $email;

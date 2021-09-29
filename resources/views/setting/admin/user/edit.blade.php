@@ -82,7 +82,7 @@
                                                             $mytype = $user->user_type_id;
                                                         }
                                                     @endphp
-                                                    <option value="{{$usertype->id}}" @if($mytype == $usertype->id) selected @endif>{{$usertype->name}}</option> 
+                                                    <option value="{{$usertype->id}}" @if($mytype == $usertype->id) selected @endif>{{@$usertype->name}}</option> 
                                                 @endforeach
                                             </select>
                                         </div>

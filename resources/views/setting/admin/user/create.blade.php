@@ -74,7 +74,7 @@
                                             <label>กลุ่มผู้ใช้งาน<span class="text-danger">*</span></label>
                                             <select name="usertype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
                                                     @foreach ($usertypes as $usertype)
-                                                        <option value="{{$usertype->id}}">{{$usertype->name}}</option> 
+                                                        <option value="{{$usertype->id}}">{{@$usertype->name}}</option> 
                                                     @endforeach
                                             </select>
                                         </div>

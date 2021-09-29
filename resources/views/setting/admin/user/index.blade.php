@@ -100,12 +100,12 @@
                                                 @endif
                                             @elseif($user->user_type_id == 3)
                                                 @if ($user->expertdetail->expert_type_id == 1)
-                                                        {{$user->usertype->name}} (ภายใน)
+                                                        {{@$user->usertype->name}} (ภายใน)
                                                     @else
-                                                        {{$user->usertype->name}} (ภายนอก)
+                                                        {{@$user->usertype->name}} (ภายนอก)
                                                 @endif
                                             @else 
-                                                {{$user->usertype->name}} 
+                                                {{@$user->usertype->name}} 
                                             @endif
                                             
                 
