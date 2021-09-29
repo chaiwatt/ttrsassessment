@@ -1245,84 +1245,89 @@
                                             @php
                                                 $check = Auth::user()->IsExpert($fulltbp->id);
                                             @endphp
-                                            <tr> 
-                                                <td hidden>{{$fulltbp->minitbp->updated_at}}</td>
-                                                <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
-                                                <td style="white-space: nowrap">
-                                                    @php
-                                                        $cogcolor = 'text-info';
-                                                        $latetext = '';
-                                                        if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
-                                                            $cogcolor = 'text-danger';
-                                                           
-                                                            $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">(เกินกำหนด '.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน)</span>';
-                                                        }
-                                                    @endphp                                           
-                                                    @if (Empty($fulltbp->expertassignment))
-                                                            <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
-                                                            <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
-                                                        @else
-                                                            @if ($fulltbp->expertassignment->accepted == 1)
+
+                                            @if (Empty($fulltbp->finishdate))
+                                                <tr> 
+                                                    <td hidden>{{$fulltbp->minitbp->updated_at}}</td>
+                                                    <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
+                                                    <td style="white-space: nowrap">
+                                                        @php
+                                                            $cogcolor = 'text-info';
+                                                            $latetext = '';
+                                                            if (@$fulltbp->minitbp->isintime($fulltbp->minitbp->id) < 0) {
+                                                                $cogcolor = 'text-danger';
+                                                            
+                                                                $latetext =  '<span class="badge badge-flat border-danger-600 text-danger-600">(เกินกำหนด '.$fulltbp->minitbp->isintime($fulltbp->minitbp->id)*(-1) .' วัน)</span>';
+                                                            }
+                                                        @endphp                                           
+                                                        @if (Empty($fulltbp->expertassignment))
                                                                 <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                                 <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                             @else
-                                                            @if (Auth::user()->isProjectCoLeader($fulltbp->id) > 0 )
+                                                                @if ($fulltbp->expertassignment->accepted == 1)
                                                                     <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
                                                                     <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
                                                                 @else
-                                                                    {{$fulltbp->minitbp->project}}
-                                                            @endif
-                                                                
-                                                            @endif
-                                                    @endif     
-                                                </td>   
-                                                
-                                                <td style="width:1%;white-space: nowrap;text-align: center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
-                                                <td style="width:1%;white-space: nowrap;text-align: center">
-                                                    @if (!Empty($fulltbp->brieftdate))
-                                                         {{$fulltbp->brieftdateth}}
-                                                        @else
-                                                         {{$fulltbp->briefingdate}} 
-                                                    @endif 
-                                                </td>  
-                                                <td style="width:1%;white-space: nowrap;text-align: center">
-                                                    @if (!Empty($fulltbp->fielddate))
-                                                        {{$fulltbp->fielddateth}}
-                                                        @else
-                                                        {{$fulltbp->assessmentdate}}
-                                                    @endif
-                                                      </td>  
-                                                <td style="width:1%;white-space: nowrap;text-align: center"> 
-                                                    @if (!Empty($fulltbp->scoringdate))
-                                                            {{$fulltbp->scoringdateth}}
-                                                        @else
-                                                            {{$fulltbp->finalassessmentdate}}
-                                                    @endif
-                                                </td>  
-                                                @if (Auth::user()->user_type_id < 5 && $count > 0)
+                                                                @if (Auth::user()->isProjectCoLeader($fulltbp->id) > 0 )
+                                                                        <a href="#" data-toggle="modal" data-id="{{$fulltbp->minitbp->id}}" class="controlflowicon"><i class="icon-cog2 {{$cogcolor}} mr-2"></i></a>
+                                                                        <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}} {!!$latetext!!}</a>  
+                                                                    @else
+                                                                        {{$fulltbp->minitbp->project}}
+                                                                @endif
+                                                                    
+                                                                @endif
+                                                        @endif     
+                                                    </td>   
+                                                    
+                                                    <td style="width:1%;white-space: nowrap;text-align: center"> {{$fulltbp->minitbp->projectdatediff}} </td>  
+                                                    <td style="width:1%;white-space: nowrap;text-align: center">
+                                                        @if (!Empty($fulltbp->brieftdate))
+                                                            {{$fulltbp->brieftdateth}}
+                                                            @else
+                                                            {{$fulltbp->briefingdate}} 
+                                                        @endif 
+                                                    </td>  
+                                                    <td style="width:1%;white-space: nowrap;text-align: center">
+                                                        @if (!Empty($fulltbp->fielddate))
+                                                            {{$fulltbp->fielddateth}}
+                                                            @else
+                                                            {{$fulltbp->assessmentdate}}
+                                                        @endif
+                                                        </td>  
                                                     <td style="width:1%;white-space: nowrap;text-align: center"> 
-                                                        @if (!Empty($check))
-                                                            @if ($fulltbp->expertassignment->accepted == 0)
-                                                                    <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
-                                                                    <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
-                                                                @elseif($fulltbp->expertassignment->accepted == 2)
-                                                                    <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                        @if (!Empty($fulltbp->scoringdate))
+                                                                {{$fulltbp->scoringdateth}}
+                                                            @else
+                                                                {{$fulltbp->finalassessmentdate}}
+                                                        @endif
+                                                    </td>  
+                                                    @if (Auth::user()->user_type_id < 5 && $count > 0)
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> 
+                                                            @if (!Empty($check))
+                                                                @if ($fulltbp->expertassignment->accepted == 0)
+                                                                        <a href="{{route('dashboard.admin.report.expert.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                                        <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
+                                                                    @elseif($fulltbp->expertassignment->accepted == 2)
+                                                                        <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
+                                                                @endif
                                                             @endif
+                                                        </td> 
+                                                    @endif
+                                                
+                                                    <td style="width:1%;white-space: nowrap;text-align: center"> 
+                                                        @if ($fulltbp->status == 3)
+                                                                <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                            @else
+                                                            <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
                                                         @endif
                                                     </td> 
-                                                @endif
-                                            
-                                                <td style="width:1%;white-space: nowrap;text-align: center"> 
-                                                    @if ($fulltbp->status == 3)
-                                                            <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                        @else
-                                                        <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
-                                                    @endif
-                                                </td> 
-                                                <td hidden>{{@$fulltbp->searchprojectleader}}</td>
-                                                    <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
-                                                    <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
-                                            </tr>
+                                                    <td hidden>{{@$fulltbp->searchprojectleader}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
+                                                </tr>
+                                            @endif
+
+                                          
                                         @endif
  
                                     @endforeach
