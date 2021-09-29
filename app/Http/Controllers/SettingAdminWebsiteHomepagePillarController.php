@@ -24,12 +24,49 @@ class SettingAdminWebsiteHomepagePillarController extends Controller
     }
 
     public function EditSave(HomePagePillarRequest $request){
+        $homepagepillarsection = HomepagePillarSection::first();
+
+        $filelocation_pillaricon1 = $homepagepillarsection->pillaricon1;
+        $file = $request->file('pillaricon1');
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/banner" , $new_name);
+            $filelocation_pillaricon1 = "storage/uploads/banner/".$new_name;
+        }
+
+        $filelocation_pillaricon2 = $homepagepillarsection->pillaricon2;
+        $file = $request->file('pillaricon2');
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/banner" , $new_name);
+            $filelocation_pillaricon2 = "storage/uploads/banner/".$new_name;
+        }
+
+        $filelocation_pillaricon3 = $homepagepillarsection->pillaricon3;
+        $file = $request->file('pillaricon3');
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/banner" , $new_name);
+            $filelocation_pillaricon3 = "storage/uploads/banner/".$new_name;
+        }
+
+        $filelocation_pillaricon4 = $homepagepillarsection->pillaricon4;
+        $file = $request->file('pillaricon4');
+        if(!Empty($file)){
+            $new_name = str_random(10).".".$file->getClientOriginalExtension();
+            $file->move("storage/uploads/banner" , $new_name);
+            $filelocation_pillaricon4 = "storage/uploads/banner/".$new_name;
+        }
         // return $request->linktype;
         HomepagePillarSection::first()->update([
             'textth1' =>  $request->textth1,
             'texteng1' =>  $request->texteng1,
             'textth2' =>  $request->textth2,
             'texteng2' =>  $request->texteng2,
+            'pillaricon1' =>  $filelocation_pillaricon1,
+            'pillaricon2' =>  $filelocation_pillaricon2,
+            'pillaricon3' =>  $filelocation_pillaricon3,
+            'pillaricon4' =>  $filelocation_pillaricon4,
             'pillartitleth1' =>  $request->pillartitleth1,
             'pillartitleeng1' =>  $request->pillartitleeng1,
             'pillartitleth2' =>  $request->pillartitleth2,

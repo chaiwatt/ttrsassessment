@@ -83,13 +83,13 @@
                                     <div class="col-md-12">
                                        <div class="form-group">
                                           <label>เมนูภาษาไทย<span class="text-danger">*</span></label>
-                                          <input type="text" name="menuthai" id="menuthai" class="form-control form-control-lg">   
+                                          <input type="text" name="menuthai" value="{{old('menuthai')}}" id="menuthai" class="form-control form-control-lg">   
                                        </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                            <label>เมนูภาษาอังกฤษ<span class="text-danger">*</span></label>
-                                           <input type="text" name="menuenglish" id="menuenglish" class="form-control form-control-lg">   
+                                           <input type="text" name="menuenglish" value="{{old('menuenglish')}}" id="menuenglish" class="form-control form-control-lg">   
                                         </div>
                                      </div>
                                      <div class="col-md-12">
@@ -161,8 +161,12 @@
         console.log($(this).val());
         if($(this).val() == 3){
             $("#parent_wrapper").attr("hidden",false);
-        }else{
+        }else if($(this).val() == 2){
+            $("#url").val("#");
             $("#parent_wrapper").attr("hidden",true);
+        }else{
+            $("#parent_wrapper").attr("hidden",true); 
+            $("#url").val("");
         }
     });
 </script>

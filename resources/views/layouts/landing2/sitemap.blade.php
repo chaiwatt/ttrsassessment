@@ -450,7 +450,7 @@
                                                                                     $sublink = url('') . '/' . $submenu->url;
                                                                                 }
                                                                             @endphp
-                                                                            <li ><a href="{{$sublink}}" style="font-family: kanit; font-weight:200; ">{{$menuname}}</a> </li>
+                                                                            <li ><a href="{{$sublink}}" style="font-family: kanit; font-weight:200; ">{{$submenuname}}</a> </li>
                                                                         @endforeach
                                                                     
                                                                     </ul>

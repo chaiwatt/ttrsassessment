@@ -2289,13 +2289,11 @@ class HomeController extends Controller
 
         $this->createJd(2,'demo_name','demo_lastname','demoaccount@gmail.com','6295013327790','0894133662');
 
-
     }
 
     public function DemoSystemadmin(){
 
-        $this->createSystemadmin(2,'system_name','system_lastname','systemadmin@gmail.com','3398147239361','0894133662');
-
+        $this->createSystemadmin(2,'system','admin','systemadmin@gmail.com','3398147111111','0894133662');
 
     }
 
@@ -2567,6 +2565,7 @@ class HomeController extends Controller
 
     }
     public function Sitemap(){
+
         $directmenu2s = DirectMenu2::get();
         $blogs = Page::get();
         return view('layouts.landing2.sitemap')->withDirectmenu2s($directmenu2s)->withBlogs($blogs);

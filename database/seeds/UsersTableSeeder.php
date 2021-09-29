@@ -36,6 +36,16 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('11111111'), 
                 'email_verified_at' => Carbon::now()->toDateString(),
                 'verify_type' => 1
+            ],
+            [
+                'prefix_id' => 1,
+                'user_type_id' => 0,
+                'name' => 'system',
+                'lastname' => 'admin',
+                'email' => 'systemadmin@gmail.com',          
+                'password' => Hash::make('11111111'), 
+                'email_verified_at' => Carbon::now()->toDateString(),
+                'verify_type' => 1
             ]
         ]);
         DB::table('officer_details')->insert([
@@ -44,10 +54,14 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
+            ],
+            [
+                'user_id' => 2,
             ]
         ]);
         CreateCompany::createCompany(User::find(1),'สวทช','0994000165668',2);
         CreateCompany::createCompany(User::find(2),'สวทช','0994000165667',2);
+        CreateCompany::createCompany(User::find(3),'สวทช','0994000165666',2);
     }
 
     public function DemoTTRSUser(){

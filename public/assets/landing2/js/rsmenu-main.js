@@ -104,6 +104,7 @@ $(document).ready(function () {
 	 
 	$(window).on('load', function () {	
 		var menu_height = $('.rs-menu ul').height();
+		console.log(menu_height);
 		window_width = $(window).width();
 
 		if(window_width <= 991){

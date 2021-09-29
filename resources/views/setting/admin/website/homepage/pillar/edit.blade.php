@@ -80,6 +80,21 @@
                                             <input type="text"  name="pillartitleeng1" value="{{$homepagepillar->pillartitleeng1}}"  placeholder="Title Pillar1 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
                                         </div>
                                         <div class="form-group">
+											<label>รูป  (ไฟล์ png สีขาวพื้นโปร่งใส ขนาด 500x500px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
+											<div class="input-group">													
+												<input type="text" id="filename_pillaricon1" class="form-control border-right-0" placeholder="รูป" disabled>
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('pillaricon1').click();">อัปโหลด</button>													
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="pillaricon1" name="pillaricon1" accept="image/*"/>
+                                            <div class="row mt-4" >	
+                                                <div class="col-md-12">
+                                                    <img class="img-responsive" src="{{asset($homepagepillar->pillaricon1)}}" style="width:200px;width:200px;background:#000" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label>สีพื้น Title Pillar1<span class="text-danger">*</span> </label>
                                             <input type="text"  name="color1" value="{{$homepagepillar->color1}}"  placeholder="สีพื้น Title Pillar1" class="form-control form-control-lg stringformat200">
                                             <code>default: background-image: linear-gradient(180deg, #dd4c23 0%, #f27c1e 100%);</code>
@@ -100,6 +115,21 @@
                                         <div class="form-group">
                                             <label>Title Pillar2 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="pillartitleeng2" value="{{$homepagepillar->pillartitleeng2}}"  placeholder="Title Pillar2 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
+                                        </div>
+                                        <div class="form-group">
+											<label>รูป  (ไฟล์ png สีขาวพื้นโปร่งใส ขนาด 500x500px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
+											<div class="input-group">													
+												<input type="text" id="filename_pillaricon2" class="form-control border-right-0" placeholder="รูป" disabled>
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('pillaricon2').click();">อัปโหลด</button>													
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="pillaricon2" name="pillaricon2" accept="image/*"/>
+                                            <div class="row mt-4" >	
+                                                <div class="col-md-12">
+                                                    <img class="img-responsive" src="{{asset($homepagepillar->pillaricon2)}}" style="width:200px;width:200px;background:#000" >
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label>สีพื้น Title Pillar2<span class="text-danger">*</span></label>
@@ -124,6 +154,21 @@
                                             <input type="text"  name="pillartitleeng3" value="{{$homepagepillar->pillartitleeng3}}"  placeholder="Title Pillar3 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
                                         </div>
                                         <div class="form-group">
+											<label>รูป  (ไฟล์ png สีขาวพื้นโปร่งใส ขนาด 500x500px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
+											<div class="input-group">													
+												<input type="text" id="filename_pillaricon3" class="form-control border-right-0" placeholder="รูป" disabled>
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('pillaricon3').click();">อัปโหลด</button>													
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="pillaricon3" name="pillaricon3" accept="image/*"/>
+                                            <div class="row mt-4" >	
+                                                <div class="col-md-12">
+                                                    <img class="img-responsive" src="{{asset($homepagepillar->pillaricon3)}}" style="width:200px;width:200px;background:#000" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label>สีพื้น Title Pillar3<span class="text-danger">*</span></label>
                                             <input type="text"  name="color3" value="{{$homepagepillar->color3}}"  placeholder="สีพื้น Title Pillar3" class="form-control form-control-lg stringformat200">
                                             <code>default: background-image: linear-gradient(90deg, #559cea 41%, #6ba3cb 100%);</code>
@@ -136,7 +181,6 @@
                                             <label>Description Pillar3 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="pillardesceng3" value="{{$homepagepillar->pillardesceng3}}"  placeholder="Description Pillar3 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
                                         </div>
-
                                         <div class="form-group">
                                             <label>Title Pillar4 (ภาษาไทย)<span class="text-danger">*</span></label>
                                             <input type="text"  name="pillartitleth4" value="{{$homepagepillar->pillartitleth4}}"  placeholder="Title Pillar4 (ภาษาไทย)" class="form-control form-control-lg stringformat30">
@@ -144,6 +188,21 @@
                                         <div class="form-group">
                                             <label>Title Pillar4 (ภาษาอังกฤษ)<span class="text-danger">*</span></label>
                                             <input type="text"  name="pillartitleeng4" value="{{$homepagepillar->pillartitleeng4}}"  placeholder="Title Pillar4 (ภาษาอังกฤษ)" class="form-control form-control-lg stringformat30">
+                                        </div>
+                                        <div class="form-group">
+											<label>รูป  (ไฟล์ png สีขาวพื้นโปร่งใส ขนาด 500x500px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
+											<div class="input-group">													
+												<input type="text" id="filename_pillaricon4" class="form-control border-right-0" placeholder="รูป" disabled>
+												<span class="input-group-append">
+													<button class="btn bg-info" type="button" onclick="document.getElementById('pillaricon4').click();">อัปโหลด</button>													
+												</span>
+											</div>
+											<input type="file" style="display:none;" id="pillaricon4" name="pillaricon4" accept="image/*"/>
+                                            <div class="row mt-4" >	
+                                                <div class="col-md-12">
+                                                    <img class="img-responsive" src="{{asset($homepagepillar->pillaricon4)}}" style="width:200px;width:200px;background:#000" >
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label>สีพื้น Title Pillar4<span class="text-danger">*</span></label>
@@ -255,8 +314,17 @@
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script type="text/javascript">
-        $("#file").on('change', function() {
-            $("#filename").val(this.value);
+        $("#pillaricon1").on('change', function() {
+            $("#filename_pillaricon1").val(this.value);
+        });
+        $("#pillaricon2").on('change', function() {
+            $("#filename_pillaricon2").val(this.value);
+        });
+        $("#pillaricon3").on('change', function() {
+            $("#filename_pillaricon3").val(this.value);
+        });
+        $("#pillaricon4").on('change', function() {
+            $("#filename_pillaricon4").val(this.value);
         });
 
         $(document).on('change', '.selectlink', function(e) {
