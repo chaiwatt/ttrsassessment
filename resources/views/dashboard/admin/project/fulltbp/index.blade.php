@@ -682,7 +682,7 @@
                 "ordering": true,
                 "order": [[ 0, 'desc' ]],
                 "info":     false,
-                "pageLength" : 20,
+                "pageLength" : 10,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  
