@@ -1422,6 +1422,7 @@
                                     <tbody>
                                         @foreach ($fulltbps as $key => $fulltbp)
                                             @if (($fulltbp->minitbp->businessplan->business_plan_status_id > 4 &&  Auth::user()->isProjectLeader(@$fulltbp->id) == 1) || ($fulltbp->minitbp->businessplan->business_plan_status_id > 4 && Auth::user()->user_type_id >=5))
+                                               @if (Empty($fulltbp->finishdate))
                                                 <tr>  
                                                     <td hidden >{{$fulltbp->updated_at}}</td>  
                                                     <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
@@ -1694,6 +1695,8 @@
                                                     <td hidden>{{$fulltbp->searchprojectexpert}}</td>
                                                     <td hidden>{{$fulltbp->searchprojectgrade}}</td>
                                                 </tr>
+                                               @endif
+                                               
                                             @endif
                                         @endforeach
                                     </tbody>
