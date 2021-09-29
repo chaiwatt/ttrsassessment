@@ -215,14 +215,14 @@
             
             startdate = moment(eventdate, 'YYYY-MM-DD');
         }
-
+        var m = moment();
         $('#eventdate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY',
             clearButton: true,
             cancelText: "ยกเลิก",
             okText: "ตกลง",
             clearText: "เคลียร์",
-			minDate : startdate,
+			minDate : m,
             time: false
 		});
 

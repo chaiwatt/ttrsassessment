@@ -12,7 +12,7 @@ class SettingAdminProjectSystemFlowController extends Controller
 {
     public function Index(){
         $fulltbparr = EventCalendar::whereNotNull('eventdate')
-                                ->whereDate('eventdate', '>', Carbon::today())
+                                ->whereDate('eventdate', '<=', Carbon::today())
                                 ->where('calendar_type_id',3)
                                 ->pluck('full_tbp_id')->toArray();
 

@@ -920,9 +920,7 @@ class DashboardAdminProjectFullTbpController extends Controller
         $projectmemberarray = ProjectMember::where('full_tbp_id',$request->fulltbpid)->pluck('user_id')->toArray();
         $userarray = array_diff($userarray3,$projectmemberarray);
 
-
         // $users = User::whereIn('id',$userarray)->get();
-
 
         $extexperts = ExpertDetail::where('expert_type_id',2)->pluck('user_id')->toArray();
 

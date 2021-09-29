@@ -173,8 +173,8 @@
                                             <div class="form-group">
                                                 <label>ผู้เข้าร่วม</label><span class="text-danger">*</span>
                                                 <select name="users[]" id="user" data-placeholder="ผู้เข้าร่วม" class="form-control form-control-lg form-control-select2" multiple="multiple">
-                                                    @foreach ($projectmembers as $key => $projectmember)
-                                                        <option value="{{$projectmember->user_id}}" selected >{{$projectmember->user->name}} {{$projectmember->user->lastname}}</option> 
+                                                    @foreach ($users as $key => $user)
+                                                        <option value="{{$user->id}}" selected >{{$user->name}} {{$user->lastname}}</option> 
                                                     @endforeach
                                                 </select>
                                             </div>

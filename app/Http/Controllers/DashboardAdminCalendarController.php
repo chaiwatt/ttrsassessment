@@ -171,15 +171,20 @@ class DashboardAdminCalendarController extends Controller
                     ->whereNotNull('summary')->count();
 
       if($checkcalendartype < 2){
-          $projectmembers = ProjectMember::where('full_tbp_id',$id)->get();
+          $arr_1 = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
+          $arr_2 = ProjectMember::where('full_tbp_id',$id)->pluck('user_id')->toArray();
+          $uniquearr = array_unique(array_merge($arr_1,$arr_2));
+          $users = User::whereIn('id',$uniquearr)->get();
       }else if($checkcalendartype >= 2){
           $projectmembers_arr = ProjectMember::where('full_tbp_id',$id)->pluck('user_id')->toArray();
           $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
           $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
           $arrdiff=array_diff($projectmembers_arr,$expertdetailarr);
-          $projectmembers = ProjectMember::where('full_tbp_id',$id)->whereIn('user_id',$arrdiff)->get();
+          $users = User::whereIn('id',$arrdiff)->get();
+          // $projectmembers = ProjectMember::where('full_tbp_id',$id)->whereIn('user_id',$arrdiff)->get();
       }            
 
+      // return $projectmembers;
       // if($id1 != 0){
       //     ProjectMember::find($id1)->delete();
       // }
@@ -194,7 +199,7 @@ class DashboardAdminCalendarController extends Controller
                                                   ->withFulltbps($fulltbps)
                                                   ->withCalendartypes($calendartypes)
                                                   ->withIsnotifies($isnotifies)
-                                                  ->withProjectmembers($projectmembers)
+                                                  ->withUsers($users)
                                                   ->withEventcalendar($eventcalendar)
                                                   ->withPopupmessages($popupmessages);
   }
@@ -459,15 +464,18 @@ class DashboardAdminCalendarController extends Controller
   }
   public function Edit($id){
 
-   
-    
     $calendartypes = CalendarType::get();
     $eventcalendar = EventCalendar::find($id);
     $calendarattachments = CalendarAttachement::where('event_calendar_id',$eventcalendar->id)->get();
     $eventcalendarattendees = EventCalendarAttendee::where('event_calendar_id',$eventcalendar->id)->get();
     $isnotifies = Isnotify::get();
     $tmpmember=array();
-    $tmpmember = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+    // $tmpmember = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+
+    $arr_1 = ExpertAssignment::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+    $arr_2 = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
+    $tmpmember = array_unique(array_merge($arr_1,$arr_2));
+
     // array_push($tmpmember,User::where('user_type_id',5)->first()->id);
     // array_push($tmpmember,User::where('user_type_id',6)->first()->id);
 
@@ -482,16 +490,15 @@ class DashboardAdminCalendarController extends Controller
     //   }
     // }
 
-
     if($eventcalendar->calendar_type_id == 3){
       // $projectmembers_arr = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
       $expertassignmentarr = ExpertAssignment::where('full_tbp_id',$eventcalendar->full_tbp_id)->pluck('user_id')->toArray();
       $expertdetailarr = ExpertDetail::whereIn('user_id',$expertassignmentarr)->where('expert_type_id',2)->pluck('user_id')->toArray();
       $tmpmember=array_diff($tmpmember,$expertdetailarr);
    } 
-
-
    $users = User::whereIn('id',$tmpmember)->get();
+
+   
 
     return view('dashboard.admin.calendar.edit')->withUsers($users)
                                                 ->withEventcalendar($eventcalendar)

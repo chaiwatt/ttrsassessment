@@ -32,7 +32,7 @@ Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
 // Route::get('demousertest', 'HomeController@DemoUserTEST')->name('demousertest');
 // Route::get('updateminiandfullcode', 'HomeController@UpdateMiniAndFullCode')->name('updateminiandfullcode');
 Route::get('demosystemadmin', 'HomeController@DemoSystemadmin')->name('demosystemadmin');
-// Route::get('test', 'HomeController@Test')->name('test');
+
 Route::get('landing', 'HomeController@Index')->name('landing.index');
 Route::get('', 'HomeController@Index2')->name('landing2.index');
 Route::get('front', 'HomeController@Front')->name('landing.front');
