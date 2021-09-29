@@ -662,6 +662,7 @@ class DashboardAdminAssessmentController extends Controller
         $check = Scoring::where('ev_id',$ev->id)
                         ->whereNull('user_id')
                         ->get(); 
+
         if($check->count() == 0){
             $checkscoring = Scoring::where('ev_id',$ev->id)
                     ->whereNotNull('user_id')
@@ -680,7 +681,8 @@ class DashboardAdminAssessmentController extends Controller
                     $new->save();
                 } 
                 $fulltbp = FullTbp::find($id)->update([
-                    'done_assessment' => 1
+                    'done_assessment' => 1,
+                    'unlockoverdue' => 1
                 ]); 
             }        
         }

@@ -49,7 +49,7 @@ class CreateFullTbpsTable extends Migration
             $table->longText('cancel_reason')->nullable();
             $table->longText('approvelog')->nullable();
             $table->string('approveby',250)->nullable();
-
+            $table->char('unlockoverdue',1)->default(0);
             $table->timestamps();
         });
     }

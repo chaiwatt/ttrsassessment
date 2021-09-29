@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 class SettingAdminSystemController extends Controller
 {
     public function Index(){
+
         $generalinfo = GeneralInfo::first();
         $frontpagestatuses = FrontPageStatus::get();
         $auth = Auth::user();
