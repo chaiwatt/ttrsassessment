@@ -19,11 +19,11 @@ class SettingAdminProjectSystemFlowController extends Controller
                                 ->pluck('full_tbp_id')->toArray();
         $fullarr = array();
         if(count($fulltbparr) > 0){
-            $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id',array_unique($fulltbparr))->get();
+            // $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id',array_unique($fulltbparr))->get();
             $fullarr = FullTbp::whereNull('finishdate')->whereIn('id',array_unique($fulltbparr))->pluck('id')->toArray();
         }else{
-            $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparr)->get();
-            if(count($fulltbps) > 0){
+            // $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparr)->get();
+            if(count($fulltbparr) > 0){
                 $fullarr = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparr)->pluck('id')-toArray();
             } 
         }
