@@ -2004,7 +2004,7 @@
                 "ordering": true,
                 "order": [[ 0, 'desc' ]],
                 "info":     false,
-                "pageLength" : 7,
+                "pageLength" : 10,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  
@@ -2112,7 +2112,7 @@
                 "ordering": true,
                 "order": [[ 0, 'desc' ]],
                 "info":     false,
-                "pageLength" : 7,
+                "pageLength" : 10,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  
@@ -2223,7 +2223,7 @@
                 "ordering": true,
                 "order": [[ 0, 'desc' ]],
                 "info":     false,
-                "pageLength" : 5,
+                "pageLength" : 10,
                 "language": {
                     "zeroRecords": " ",
                     "search": "ค้นหา: ",  
