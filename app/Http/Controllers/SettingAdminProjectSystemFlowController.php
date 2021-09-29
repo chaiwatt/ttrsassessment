@@ -17,13 +17,15 @@ class SettingAdminProjectSystemFlowController extends Controller
                                 ->whereDate('eventdate', '<=', Carbon::today())
                                 ->where('calendar_type_id',3)
                                 ->pluck('full_tbp_id')->toArray();
-
+        $fullarr = array();
         if(count($fulltbparr) > 0){
             $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id',array_unique($fulltbparr))->get();
             $fullarr = FullTbp::whereNull('finishdate')->whereIn('id',array_unique($fulltbparr))->pluck('id')->toArray();
         }else{
             $fulltbps = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparr)->get();
-            $fullarr = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparr)->pluck('id')-toArray();
+            if(count($fulltbps) > 0){
+                $fullarr = FullTbp::whereNull('finishdate')->whereIn('id',$fulltbparr)->pluck('id')-toArray();
+            } 
         }
 
         $projectmemberarr = ProjectMember::pluck('full_tbp_id')->toArray();
