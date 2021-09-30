@@ -41,6 +41,7 @@ use App\Model\FullTbpCreditPartner;
 use App\Model\FullTbpMarketAnalysis;
 use App\Model\FullTbpProjectCertify;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProjectFinishAttachment;
 use App\Model\FullTbpResponsiblePerson;
 use App\Model\ProjectStatusTransaction;
 use Illuminate\Database\Eloquent\Model;
@@ -558,6 +559,14 @@ class FullTbp extends Model
             return '';
         }
     } 
+
+    public function getProjectfinishattachmentAttribute(){
+
+        return ProjectFinishAttachment::where('full_tbp_id',$this->id)->count();
+
+    } 
+
+
 
 }
 

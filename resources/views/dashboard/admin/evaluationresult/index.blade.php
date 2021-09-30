@@ -174,6 +174,10 @@
                                                     <td style="white-space: nowrap;text-align: center">
                                                         @if (!Empty($fulltbp->projectstatustransaction(7)))
                                                                 @if ($fulltbp->projectstatustransaction(7)->status == 2)  
+                                                                    @if ($fulltbp->projectfinishattachment > 0)
+                                                                        <a href="{{route('dashboard.admin.evaluationresult.attachment',['id' => $fulltbp->id])}}" data-name="" class="btn btn-sm bg-info">เอกสารแนบ</a>
+                                                                    @endif
+                                                                        
                                                                         <span class="badge badge-flat border-success text-success-600">ส่งจดหมายแล้ว</span>
                                                                     @elseif($fulltbp->projectstatustransaction(7)->status == 1)
                                                                     

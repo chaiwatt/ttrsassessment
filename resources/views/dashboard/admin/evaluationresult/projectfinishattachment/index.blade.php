@@ -76,7 +76,11 @@
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         {{-- @if (Auth::user()->user_type_id == 4) --}}
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารแนบ </h6> @if (Auth::user()->user_type_id == 4)<button type="button" class="btn btn-info btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" onclick="document.getElementById('attachmentdoc').click();"><i class="icon-add mr-2"></i>อัปโหลด</button> @endif
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารแนบ (เอกสารที่ต้องการส่งให้ผู้ขอรับการประเมิน เช่น จดหมายแจ้งผล, ตัวอย่าง Certificate หรืออื่นๆ)</h6> 
+                        @if (Auth::user()->user_type_id == 4 && @$fulltbp->projectstatustransaction(7)->status != 2)
+                            <button type="button" class="btn btn-info btn-icon ml-2 btn-sm hiddenelement" data-toggle="modal" onclick="document.getElementById('attachmentdoc').click();"><i class="icon-add mr-2"></i>อัปโหลด</button> 
+                        @endif
+                        {{-- <p>(เอกสารที่ต้องการส่งให้ผู้ขอรับการประเมิน เช่น จดหมายแจ้งผล, ตัวอย่าง Certificate หรืออื่นๆ)</p> --}}
                         <input type="file" style="display:none;" data-id="{{$fulltbp->id}}" id="attachmentdoc" name="attachmentdoc" accept="image/jpeg,image/gif,image/png,application/pdf"/>
                         
                     
@@ -104,7 +108,7 @@
                                             </td> 
                                             <td style="white-space: nowrap;text-align: center"> 
                                                 <a href="{{asset($projectfinishattachment->path)}}" class="btn btn-sm bg-primary" target="_blank">ดาวน์โหลด</a>
-                                                @if (Auth::user()->user_type_id == 4)
+                                                @if (Auth::user()->user_type_id == 4 && @$fulltbp->projectstatustransaction(7)->status != 2)
                                                 <a  data-id="{{$projectfinishattachment->id}}" class="btn btn-sm bg-danger deleteprojectfinishattachment">ลบ</a>  
                                                 @endif
                                                                                      
