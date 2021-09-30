@@ -91,9 +91,9 @@ class DashboardAdminProjectAssessmentController extends Controller
 
         $gradecollection = collect($gradearr);
 
-
+        $popupmessages = PopupMessage::get();
         return view('dashboard.admin.project.assessment.index')->withFulltbps($fulltbps)->withFulltbpbackups($fulltbpbackups)
-        ->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection);
+        ->withLeaders($leaders)->withExperts($experts)->withGradecollection($gradecollection)->withPopupmessages($popupmessages);
     }
     public function Edit($id,$userid){  
         $fulltbp = FullTbp::find($id);

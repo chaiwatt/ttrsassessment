@@ -224,9 +224,9 @@
                                                             @endif
                                                         </td>                     
                                                         
-  <td hidden>{{@$fulltbp->searchprojectleader}}</td>
-  <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
-  <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectleader}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
+                                                        <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
 
                                                     </tr>
                                                 @endif
@@ -239,6 +239,7 @@
                     </div>
                 </div>
             </div>
+            {{-- {{$fulltbpbackups->count()}} --}}
             @if ($fulltbpbackups->count() > 0 && Auth::user()->user_type_id == 4)
                 <div class="col-md-12">
                     <div class="card">
@@ -271,7 +272,7 @@
                                                             <td hidden>{{$fulltbpbackup->updated_at}}</td> 
                                                             <td style="width:1%;white-space: nowrap"> {{$fulltbpbackup->minitbp->project}} </td>  
                                                             <td> {{$fulltbpbackup->minitbp->businessplan->company->fullname}} </td> 
-                                                            <td style="text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
+                                                            <td style="text-align: center"> {{@$fulltbp->finalassessmentdate}} </td>
                                                             <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                                 @if ($fulltbpbackup->projectmember->count() == 0)
                                                                     <button type="button" data-projectleaderid="{{$fulltbpbackup->projectleader}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbpbackup->id)}}" class="btn btn-sm bg-warning reaction" data-id="{{$fulltbpbackup->id}}">ทำรายการใหม่</button>
@@ -304,6 +305,7 @@
             url: "{{ url('/') }}",
             token: $('meta[name="csrf-token"]').attr('content'),
             branchid: "{{Auth::user()->branch_id}}",
+            popupmessages : JSON.parse(JSON.stringify({!! json_encode($popupmessages) !!}))
         };
 
         var countitemtable =  "{{$fulltbps->count()}}";

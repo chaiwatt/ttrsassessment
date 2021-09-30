@@ -475,6 +475,7 @@ function getApproveLog(fulltbpid){
 
 
 $(document).on('click', '.reaction', function(e) {
+  console.log(route.popupmessages);
   popupmessage = route.popupmessages.find(x => x.id ==32);
   Swal.fire({
     title: popupmessage['title'],

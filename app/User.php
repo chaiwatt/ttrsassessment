@@ -22,6 +22,7 @@ use App\Model\ProjectMember;
 use App\Model\ExpertAssignment;
 use App\Model\ProjectAssignment;
 use App\Model\VerifyExpertStatus;
+use App\Model\ProjectMemberBackup;
 use Illuminate\Support\Facades\Auth;
 use App\Model\ExpertRejectAssignment;
 use Illuminate\Support\Facades\Cache;
@@ -202,6 +203,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isProjectmember()
     {
         $count = ProjectMember::where('user_id',Auth::user()->id)->count();
+        return $count;
+    }
+    public function isProjectmemberBackup()
+    {
+        $count = ProjectMemberBackup::where('user_id',Auth::user()->id)->count();
         return $count;
     }
 

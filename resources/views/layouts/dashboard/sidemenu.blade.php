@@ -138,8 +138,7 @@
                     @endif
                 </a></li>
             @endif
-    
-            @if (Auth::user()->user_type_id == 4 && Auth::user()->isProjectmember() != 0)
+            @if (Auth::user()->user_type_id == 4 && (Auth::user()->isProjectmember() != 0 || Auth::user()->isProjectmemberBackup()))
                 <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
                     @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
