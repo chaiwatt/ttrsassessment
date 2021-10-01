@@ -1795,7 +1795,9 @@
                                                     <tr>   
                                                         <td hidden>{{$fulltbp->updated_at}}</td> 
                                                         <td style="width:1%;white-space: nowrap;text-align: center">{{$fulltbp->fulltbp_code}}</td> 
-                                                        <td style="white-space: nowrap"> {{$fulltbp->minitbp->project}} </td> 
+                                                        {{-- <td style="white-space: nowrap"> {{$fulltbp->minitbp->project}} </td>  --}}
+                                                        <td style="white-space: nowrap"> <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}}</a> </td> 
+                                                        {{-- <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="{{$cogcolor}}" target="_blank" >{{$fulltbp->minitbp->project}}</a>   --}}
                                                         <td style="width:1%;white-space: nowrap;text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                         <td style="width:1%;white-space: nowrap;text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
                                                         <td style="width:1%;white-space: nowrap;text-align: center"> 

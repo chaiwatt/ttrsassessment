@@ -136,8 +136,9 @@
                                                 <tr>    
                                                     <td hidden>{{$fulltbp->updated_at}}</td>
                                                     <td style="white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td>  
-                                                    <td> {{$fulltbp->minitbp->project}} </td> 
-                                                   
+                                                    {{-- <td> {{$fulltbp->minitbp->project}} </td>  --}}
+                                                    <td> <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}}</a> </td> 
+                                                    
                                                     <td style="text-align: center"> {{number_format(@$fulltbp->projectgrade->percent, 2, '.', '')}} </td>  
                                                     <td style="text-align: center"> {{@$fulltbp->projectgrade->grade}} </td> 
                                                     <td style="white-space: nowrap"> 
