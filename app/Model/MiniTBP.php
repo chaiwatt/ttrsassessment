@@ -10,6 +10,7 @@ use App\Model\ThaiBank;
 use App\Model\ReviseLog;
 use App\Helper\LogAction;
 use App\Model\BusinessPlan;
+use App\Model\ExpertDetail;
 use App\Model\ProjectStatus;
 use App\Helper\DateConversion;
 use Illuminate\Support\Facades\Auth;
@@ -223,4 +224,18 @@ protected static $logAttributes = ['project', 'projecteng', 'finance1', 'finance
             return '';
         }
     } 
+
+    public function getIsexternalexpertAttribute()
+    {
+        $expertdetail = ExpertDetail::where('user_id',Auth::user()->id)->first();
+        if(!Empty($expertdetail)){
+            if($expertdetail->expert_type_id == 2){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
 }

@@ -123,10 +123,11 @@ class TestController extends Controller
 
     public  function ccMail()
     {
+        EmailBox::send(User::find(11)->email,'','TTRS: แจ้งเตือนเข้าประเมิน','เรียน ผู้ขอรับการประเมิน <br><br> โครงการ มีนัดประเมิน วันที่ แจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
         // if ($item1['month'] == $item2['month']) return 0;
         // return ($item1['month'] > $item2['month']) ? 1 : -1;
         // $mailto,$mailcc,$title,$message
-        EmailBox::send('ttrsjd@npcsolution.com','ttrsadmin@npcsolution.com','ทดสอบการส่งเมล์และ cc','ทดสอบการส่งเมล์และ cc');
+        // EmailBox::send('ttrsjd@npcsolution.com','ttrsadmin@npcsolution.com','ทดสอบการส่งเมล์และ cc','ทดสอบการส่งเมล์และ cc');
         return ;
     }
 }

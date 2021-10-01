@@ -649,7 +649,15 @@ class DashboardAdminAssessmentController extends Controller
     public function DoAccessment($id){
         $ev = Ev::where('full_tbp_id',$id)->first();
         $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
-        if (count($scoringstatuses) == 0) {
+        if (count($scoringstatuses) <= 1) {
+
+            $scoringstatus = ScoringStatus::where('ev_id',$ev->id)->first();
+            ScoringStatus::where('ev_id',$ev->id)->delete();
+            Scoring::where('ev_id',$ev->id)->delete();
+
+            ExtraScoring::where('ev_id',$ev->id)->delete();
+
+
             $_projectmembers = ProjectMember::where('full_tbp_id',$id)->get();
             foreach ($_projectmembers as $key => $_projectmember) {
                 $new = new ProjectMemberBackup();
@@ -657,6 +665,33 @@ class DashboardAdminAssessmentController extends Controller
                 $new->user_id = $_projectmember->user_id;
                 $new->save(); 
             }
+
+            ProjectMember::where('full_tbp_id',$id)->delete();
+
+            $fulltbp = FullTbp::find($id);
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+            $company = Company::find($businessplan->company_id);
+    
+            $company_name = (!Empty($company->name))?$company->name:'';
+            $bussinesstype = $company->business_type_id;
+            $fullcompanyname = ' ' . $company_name;
+    
+            if($bussinesstype == 1){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
+
+            if(count($scoringstatuses) != 0){
+                $user = User::find($scoringstatus->user_id);
+                EmailBox::send($user->email,'','TTRS: แจ้งเตือนให้ลงคะแนนใหม่(โครงการเลยกำหนด) โครงการ'. $minitbp->project .$fullcompanyname,'เรียน คุณ '.$user->name .' ' . $user->lastname.' <br><br> แจ้งเตือนให้ลงคะแนนใหม่(โครงการเลยกำหนด) โครงการ'. $minitbp->project .$fullcompanyname.' เนื่องจากมีท่านเป็นผู้ลงคะแนนเพียงคนเดียว จึงแจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            }
+            
         }
         ProjectMember::whereNotIn('user_id',$scoringstatuses)->where('full_tbp_id',$id)->delete();
         $check = Scoring::where('ev_id',$ev->id)
@@ -686,6 +721,10 @@ class DashboardAdminAssessmentController extends Controller
                 ]); 
             }        
         }
+
+        FullTbp::find($id)->update([
+            'unlockoverdue' => 1
+        ]); 
 
         // return ;
         return redirect()->back()->withSuccess('ปลดล็อคเวลาสรุปคะแนนของโครงการเลยกำหนดสำเร็จ');
@@ -761,7 +800,8 @@ class DashboardAdminAssessmentController extends Controller
         ]);
 
         FullTbp::find($request->fulltbpid)->update([
-             'scoringdate' => $request->eventdate
+             'scoringdate' => $request->eventdate,
+             'unlockoverdue' => 0,
         ]);
 
         ProjectMemberBackup::where('full_tbp_id',$request->fulltbpid)->delete();

@@ -97,7 +97,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <button type="button" id="showfulltbp" class="btn bg-warning" data-toggle="modal" >Full TBP <i class="icon-eye ml-2"></i></button>
+                            
+                            @if (@$projectgrade->count() ==0)
                             <button type="button" id="savedraft" class="btn bg-info" data-toggle="modal" style="float: right" ><i class="icon-spinner spinner mr-2" id="spinicon_save_draft" hidden></i>Save draft</button>
+                            @endif
+                            
                         </div>
                       
                         <input type="text" id="isfinal" value="{{$projectgrade->count()}}" hidden>

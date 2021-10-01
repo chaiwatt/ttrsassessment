@@ -1076,9 +1076,9 @@ $(document).on('change', '.confirm', function(e) {
 
 
 $(document).on('click', '#btn_modal_get_calendar', function(e) {
-   $("#spinicon").attr("hidden",false);
+   $("#spiniconcalendar").attr("hidden",false);
    Attendee.updateJoinEvent($('#attendeventid').val(),$('#jointype').val(),$('#rej_meeting_note').val()).then(data => {
-       $("#spinicon").attr("hidden",true);
+       $("#spiniconcalendar").attr("hidden",true);
        document.location.reload();
    }).catch(error => {})
 });

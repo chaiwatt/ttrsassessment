@@ -164,6 +164,7 @@ class CalendarController extends Controller
     }
 
     public function UpdateJoinEvent(Request $request){
+        $auth = Auth::user();
         $eventcalendarattendee = EventCalendarAttendee::find($request->id);
         if(!Empty($eventcalendarattendee)){
             if($request->state == '1'){
@@ -183,7 +184,60 @@ class CalendarController extends Controller
                     'rejectreason' => $request->rejreason
                 ]);
             }
+
             $eventcalendarattendee = EventCalendarAttendee::find($request->id);
+            $eventcalendar = EventCalendar::find($eventcalendarattendee->event_calendar_id);
+            $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+            $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+            $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+            $company = Company::find($businessplan->company_id);
+    
+            $company_name = (!Empty($company->name))?$company->name:'';
+            $bussinesstype = $company->business_type_id;
+            $fullcompanyname = ' ' . $company_name;
+    
+            if($bussinesstype == 1){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+            }else if($bussinesstype == 2){
+                $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 3){
+                $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+            }else if($bussinesstype == 4){
+                $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+            }
+            $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
+            if($request->state == '2'){
+
+                $messagebox =  Message::sendMessage('ยืนยันเข้าร่วมประชุม ' . $eventcalendar->subject .' โครงการ' . $minitbp->project ,'คุณ'.$auth->name . ' '. $auth->lastname .' ได้ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname ,Auth::user()->id,$projectassignment->leader_id);
+            
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id =  $projectassignment->leader_id;
+                $alertmessage->messagebox_id = $messagebox->id;
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project ;
+                $alertmessage->save();
+            
+                MessageBox::find($messagebox->id)->update([
+                     'alertmessage_id' => $alertmessage->id
+                 ]);
+                    
+                EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS: ยืนยันเข้าร่วมประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ยืนยันเข้าร่วมประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+
+            }elseif($request->state == '3'){
+                $messagebox =  Message::sendMessage('ปฏิเสธเข้าประชุม ' . $eventcalendar->subject .' โครงการ' . $minitbp->project ,'คุณ'.$auth->name . ' '. $auth->lastname .' ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname ,Auth::user()->id,$projectassignment->leader_id);
+                $alertmessage = new AlertMessage();
+                $alertmessage->user_id = $auth->id;
+                $alertmessage->target_user_id =  $projectassignment->leader_id;
+                $alertmessage->messagebox_id = $messagebox->id;
+                $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString() .' คุณ'.$auth->name . ' '. $auth->lastname .' ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project ;
+                $alertmessage->save();
+            
+                MessageBox::find($messagebox->id)->update([
+                     'alertmessage_id' => $alertmessage->id
+                 ]);
+                             
+                EmailBox::send(User::find($projectassignment->leader_id)->email,'','TTRS: ปฏิเสธเข้าประชุม โครงการ' . $minitbp->project .$fullcompanyname,'เรียน Leader<br><br> คุณ'.$auth->name . ' '. $auth->lastname .' ได้ปฏิเสธเข้าประชุม' . $eventcalendar->subject .' โครงการ' . $minitbp->project .$fullcompanyname . '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());            
+            }
 
             // $eventcalendar = EventCalendar::find($eventcalendarattendee->event_calendar_id);
 

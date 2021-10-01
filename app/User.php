@@ -312,10 +312,5 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         
     }
-    public function IsExternalExpert($id)
-    {
-        $expertdetail = ExpertDetail::where('user_id',Auth::user()->id)->first();
 
-        return Tambol::find($id)->name;
-    }
 }

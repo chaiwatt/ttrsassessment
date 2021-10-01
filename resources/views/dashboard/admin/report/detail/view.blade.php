@@ -8,7 +8,14 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">รายละเอียดโครงการ: {{$minitbp->project}} <a  href="{{route('dashboard.admin.search.company.profile',['id' => $businessplan->company->id])}}" class="text-info" target="_blank">{{$fullcompanyname}}</a></span></h4>
+                <h4> <span class="font-weight-semibold">รายละเอียดโครงการ: {{$minitbp->project}} 
+                    @if ($minitbp->isexternalexpert != 1)
+                            <a  href="{{route('dashboard.admin.search.company.profile',['id' => $businessplan->company->id])}}" class="text-info" target="_blank">{{$fullcompanyname}}</a>
+                        @else
+                            / {{$fullcompanyname}}</span></h4>
+                    @endif
+                    
+
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>

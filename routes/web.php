@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Route::get('demojson', 'TestController@DemoJson')->name('demojson');
-// Route::get('ccmail', 'TestController@ccMail')->name('ccmail');
+Route::get('ccmail', 'TestController@ccMail')->name('ccmail');
 // Route::get('testcode', 'TestController@testcode')->name('testcode');
 
 

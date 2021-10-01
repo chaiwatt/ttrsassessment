@@ -98,7 +98,7 @@
             </div>           
             <div class="modal-footer">
                 <button class="btn btn-link "  data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i>บันทึก</button>
+                <button id="btn_modal_get_calendar"  class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spiniconcalendar" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i>บันทึก</button>
             </div>
         </div>
     </div>
@@ -205,7 +205,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายการประเมิน</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -220,12 +220,14 @@
                     <div class="card-body">
                         <input id="attendeventid" type="text" hidden >
                         <div class="table-responsive" >
+                            
                             <table style="width: 100%" class="table table-bordered table-striped mb-2" id="testtopictable">
                                 <thead>
                                     <tr class="bg-info">
                                         {{-- <th>เลขที่โครงการ</th>  --}}
                                         {{-- <th>ชื่อโครงการ</th>  --}}
                                         <th hidden>date</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                         <th style="text-align:center">โครงการ</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
@@ -242,6 +244,7 @@
                                         @if ($fulltbp->canceldate == null)    
                                             <tr>
                                                 <td hidden >{{$fulltbp->updated_at}}</td>  
+                                                <td style="width:1%;white-space: nowrap;text-align:center">{{@$fulltbp->fulltbp_code}}</td> 
                                                 <td>  
                                                     
                                                     @if ($fulltbp->expertassignment->accepted == 1)

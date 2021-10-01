@@ -401,7 +401,7 @@
                 </div>           
                 <div class="modal-footer">
                     <button class="btn btn-link "  data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-                    <button id="btn_modal_get_calendar"  class="btn bg-primary" data-dismiss="modal"><i class="icon-checkmark3 font-size-base mr-1"></i>บันทึก</button>
+                    <button id="btn_modal_get_calendar"  class="btn bg-primary" ><i class="icon-spinner spinner mr-2" id="spiniconcalendar" hidden></i><i class="icon-checkmark3 font-size-base mr-1"></i>บันทึก</button>
                 </div>
             </div>
         </div>
@@ -1181,25 +1181,6 @@
                         <div class="table-responsive" >
                             @if ($fulltbps->count() > 0)
                                 <div >
-                                    <select id="gradeFilter_tb1" class="form-control">
-                                    <option value="">== เกรด ==</option>
-                                    @foreach ($gradecollection->sortDesc()->reverse() as $grade)
-                                        <option value="{{$grade}}">{{$grade}}</option>
-                                    @endforeach
-                                    {{-- <option value="AAA">AAA</option>
-                                    <option value="AA">AA</option>
-                                    <option value="A">A</option>
-                                    <option value="BBB">BBB</option>
-                                    <option value="BB">BB</option>
-                                    <option value="B">B</option>
-                                    <option value="CCC">CCC</option>
-                                    <option value="CC">CC</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option> --}}
-                                    </select>
-                                </div>
-                                <div >
                                     <select id="leaderFilter_tb1" class="form-control ">
                                     <option value="">== Leader ==</option>
                                     @foreach ($leaders as $leader)
@@ -1246,7 +1227,7 @@
                                                 $check = Auth::user()->IsExpert($fulltbp->id);
                                             @endphp
 
-                                            @if (Empty($fulltbp->finishdate))
+                                            {{-- @if (Empty($fulltbp->finishdate)) --}}
                                                 <tr> 
                                                     <td hidden>{{$fulltbp->minitbp->updated_at}}</td>
                                                     <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
@@ -1325,7 +1306,7 @@
                                                         <td hidden>{{@$fulltbp->searchprojectexpert}}</td>
                                                         <td hidden>{{@$fulltbp->searchprojectgrade}}</td>
                                                 </tr>
-                                            @endif
+                                            {{-- @endif --}}
 
                                           
                                         @endif
@@ -2050,11 +2031,9 @@
             var table_tb1 = $('#maintable').DataTable();
             $("#maintable_filter.dataTables_filter").append($("#leaderFilter_tb1"));
             $("#maintable_filter.dataTables_filter").append($("#expertFilter_tb1"));
-            $("#maintable_filter.dataTables_filter").append($("#gradeFilter_tb1"));
 
             var leaderindex_tb1 = 0;
             var expertrindex_tb1 = 0;
-            var gradeindex_tb1 = 0;
             
             $("#maintable th").each(function (i) {
                 if ($($(this)).html() == "hidden_leader") {
@@ -2063,25 +2042,14 @@
                 if ($($(this)).html() == "hidden_expert") {
                     expertrindex_tb1 = i; 
                 }
-                if ($($(this)).html() == "hidden_grade") {
-                    gradeindex_tb1 = i; 
-                }
             });
             $("#leaderFilter_tb1").change(function (e) {
-                // console.log(leaderindex_tb1);
                 customSearhExact_tb1("#leaderFilter_tb1",leaderindex_tb1);
                 $("#expertFilter_tb1").prop("selectedIndex", 0);
-                $("#gradeFilter_tb1").prop("selectedIndex", 0);
             });
             $("#expertFilter_tb1").change(function (e) {
                 customSearhContain_tb1("#expertFilter_tb1",expertrindex_tb1);
                 $("#leaderFilter_tb1").prop("selectedIndex", 0);
-                $("#gradeFilter_tb1").prop("selectedIndex", 0);
-            });
-            $("#gradeFilter_tb1").change(function (e) {
-                customSearhExact_tb1("#gradeFilter_tb1",gradeindex_tb1);
-                $("#leaderFilter_tb1").prop("selectedIndex", 0);
-                $("#expertFilter_tb1").prop("selectedIndex", 0);
             });
 
             function customSearhContain_tb1(el,elindex){

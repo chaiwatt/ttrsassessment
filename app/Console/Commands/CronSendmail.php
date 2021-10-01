@@ -17,6 +17,7 @@ use App\Model\MessageBox;
 use App\Model\MeetingDate;
 use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
+use App\Model\ExtraScoring;
 use App\Model\EventCalendar;
 use App\Model\ProjectMember;
 use App\Model\ProjectStatus;
@@ -169,7 +170,14 @@ class CronSendmail extends Command
                 $scoringstatuses = ScoringStatus::where('ev_id',$ev->id)->pluck('user_id')->toArray();
                 $date = Carbon::parse($eventcalendar->eventdate);
                 if($date->isToday() == 1){
-                    if (count($scoringstatuses) == 0) {
+                    if (count($scoringstatuses) <= 1) {
+                        $scoringstatus = ScoringStatus::where('ev_id',$ev->id)->first();
+                       
+                        ScoringStatus::where('ev_id',$ev->id)->delete();
+                        Scoring::where('ev_id',$ev->id)->delete();
+
+                        ExtraScoring::where('ev_id',$ev->id)->delete();
+                        
                         $_projectmembers = ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->get();
                         foreach ($_projectmembers as $key => $_projectmember) {
                             $new = new ProjectMemberBackup();
@@ -177,31 +185,38 @@ class CronSendmail extends Command
                             $new->user_id = $_projectmember->user_id;
                             $new->save(); 
                         }
+
+                        ProjectMember::where('full_tbp_id',$eventcalendar->full_tbp_id)->delete();
+
+                        $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
+                        $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
+                        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+                        $company = Company::find($businessplan->company_id);
+                
+                        $company_name = (!Empty($company->name))?$company->name:'';
+                        $bussinesstype = $company->business_type_id;
+                        $fullcompanyname = ' ' . $company_name;
+                
+                        if($bussinesstype == 1){
+                            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด (มหาชน)';
+                        }else if($bussinesstype == 2){
+                            $fullcompanyname = ' บริษัท ' . $company_name . ' จำกัด'; 
+                        }else if($bussinesstype == 3){
+                            $fullcompanyname = ' ห้างหุ้นส่วน ' . $company_name . ' จำกัด'; 
+                        }else if($bussinesstype == 4){
+                            $fullcompanyname = ' ห้างหุ้นส่วนสามัญ ' . $company_name; 
+                        }
+
+                        if (count($scoringstatuses) != 0){
+                            $user = User::find($scoringstatus->user_id);
+                            EmailBox::send($user->email,'','TTRS: แจ้งเตือนไม่สามารถสรุปคะแนนการประเมิน โครงการ'. $minitbp->project .$fullcompanyname,'เรียน คุณ '.$user->name .' ' . $user->lastname.' <br><br> แจ้งเตือนไม่สามารถสรุปคะแนนการประเมิน โครงการ'. $minitbp->project .$fullcompanyname.' เนื่องจากมีท่านเป็นผู้ลงคะแนนเพียงคนเดียว จึงแจ้งมาเพื่อทราบ<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());    
+                        }
+                       
                     }
                     ProjectMember::whereNotIn('user_id',$scoringstatuses)->where('full_tbp_id',$eventcalendar->full_tbp_id)->delete();
                     $check = Scoring::where('ev_id',$ev->id)
                                     ->whereNull('user_id')
                                     ->get(); 
-                    // if($check->count() == 0){
-                    //     $userid = Scoring::where('ev_id',$ev->id)
-                    //             ->whereNotNull('user_id')
-                    //             ->first()->user_id; 
-                    //     $scorings = Scoring::where('ev_id',$ev->id)
-                    //             ->where('user_id',$userid)
-                    //             ->get(); 
-                    //     foreach ($scorings as $key => $scoring) {
-                    //         $new = new Scoring();
-                    //         $new->ev_id = $scoring->ev_id;
-                    //         $new->criteria_transaction_id  = $scoring->criteria_transaction_id ;
-                    //         $new->sub_pillar_index_id = $scoring->sub_pillar_index_id;
-                    //         $new->scoretype = $scoring->scoretype;
-                    //         $new->score = $scoring->score;
-                    //         $new->save();
-                    //     } 
-                    //     $fulltbp = FullTbp::find($eventcalendar->full_tbp_id)->update([
-                    //         'done_assessment' => 1
-                    //     ]);     
-                    // }
                     if($check->count() == 0){
                         $checkscoring = Scoring::where('ev_id',$ev->id)
                                 ->whereNotNull('user_id')
@@ -223,7 +238,7 @@ class CronSendmail extends Command
                                 'done_assessment' => 1
                             ]); 
                         }        
-                    }
+                    }         
                 }
             }
         }                

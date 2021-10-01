@@ -381,7 +381,7 @@
 														</tbody>
 													</table>
 												</div>
-											</div>
+											{{-- </div> --}}
 										</div>
 									</div>
 									
@@ -416,39 +416,7 @@
 													</tbody>
 												</table>      
 											</div>
-										<div class="form-group">
-									</div>
-									{{-- <div class="col-md-6">  
-										<div class="form-group">
-											<label>โลโก้ (ขนาด 500x500) px</label>
-											<div class="input-group">													
-												<input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="โลโก้"  >											
-													<span class="input-group-append">
-														<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>
-													</span>
-											</div>
-											<input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
-											@if (!Empty($user->company->logo))
-											<br>
-												<img src="{{asset($user->company->logo)}}" width="300" height="300" alt="">
-											@endif
 										</div>
-										<div class="form-group">
-											<a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_signature">ลายมือชื่อ</a>
-											<div class="col-md-12">
-												<div id='sigdiv'>
-													@if (!Empty($user->signature))
-													<br>
-													<img src="{{asset($user->signature)}}" style="width: 180px;height:45px" alt="">
-													@endif
-												</div>
-											</div>
-										</div>
-									</div> --}}
-									
-									{{-- <div class="col-md-12 text-right">
-										<button type="submit" name="action" value="personal" class="btn bg-teal">บันทึกข้อมูลส่วนตัว <i class="icon-paperplane ml-2"></i></button>
-									</div> --}}
 							</div>
 						</div>
 		

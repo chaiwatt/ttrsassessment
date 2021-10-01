@@ -83,6 +83,8 @@
                 </div>
             </div>
 
+
+            @if (Auth::user()->user_type_id >= 5)
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
@@ -135,6 +137,9 @@
                     </div>
                 </div>
             </div>
+            @endif
+
+          
             
         </div>
         <!-- /form layouts -->

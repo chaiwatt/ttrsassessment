@@ -38,8 +38,41 @@ class DashboardExpertReportController extends Controller
                                     ->toArray();
         $fulltbps = FullTbp::whereIn('id', $fulltbptids)->get();
         $alertmessages = AlertMessage::where('target_user_id',$auth->id)->get();
+
+
+        $fulltbparr = FullTbp::pluck('id')->toArray();
+        $projectassignments =  ProjectAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+        $leaderarr = [];
+        foreach($projectassignments as $projectassignment){
+            if(!Empty($projectassignment->leader_id)){
+               array_push($leaderarr,$projectassignment->leader_id)  ;
+            }
+        }
+        if(count($leaderarr) > 0){
+            $leaderarr =array_unique($leaderarr);
+        }
+       
+        $leaders = User::whereIn('id',$leaderarr)->get();
+
+
+        $expertassignments =  ExpertAssignment::whereIn('full_tbp_id',$fulltbparr)->get();
+ 
+        $expertarr = [];
+        foreach($expertassignments as $expertassignment){
+            array_push($expertarr,$expertassignment->user_id)  ;
+        }
+
+        if(count($expertarr) > 0){
+            $expertarr =array_unique($expertarr);
+        }
+       
+        $experts = User::whereIn('id',$expertarr)->get();
+
+
         return view('dashboard.expert.report.index')->withFulltbps($fulltbps)
-                                                    ->withAlertmessages($alertmessages);
+                                                    ->withAlertmessages($alertmessages)
+                                                    ->withLeaders($leaders)
+                                                    ->withExperts($experts);
     }
     public function Accept($id){ 
         $auth = Auth::user();
