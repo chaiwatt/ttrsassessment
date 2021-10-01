@@ -5,9 +5,113 @@
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/timegrid/main.css')}}">
 <link href="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/list/main.css')}}">
 <style>
-    textarea{
+   textarea{
         font-size: 16px !important;
     }
+
+    .popper,
+  .tooltip {
+    position: absolute;
+    z-index: 9999;
+    background: #FFC107;
+    color: black;
+    width: 150px;
+    border-radius: 3px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    padding: 10px;
+    text-align: center;
+  }
+  .style5 .tooltip {
+    background: #1E252B;
+    color: #FFFFFF;
+    max-width: 200px;
+    width: auto;
+    font-size: .8rem;
+    padding: .5em 1em;
+  }
+  .popper .popper__arrow,
+  .tooltip .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+  }
+  
+  .tooltip .tooltip-arrow,
+  .popper .popper__arrow {
+    border-color: #FFC107;
+  }
+  .style5 .tooltip .tooltip-arrow {
+    border-color: #1E252B;
+  }
+  .popper[x-placement^="top"],
+  .tooltip[x-placement^="top"] {
+    margin-bottom: 5px;
+  }
+  .popper[x-placement^="top"] .popper__arrow,
+  .tooltip[x-placement^="top"] .tooltip-arrow {
+    border-width: 5px 5px 0 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .popper[x-placement^="bottom"],
+  .tooltip[x-placement^="bottom"] {
+    margin-top: 5px;
+  }
+  .tooltip[x-placement^="bottom"] .tooltip-arrow,
+  .popper[x-placement^="bottom"] .popper__arrow {
+    border-width: 0 5px 5px 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    top: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .tooltip[x-placement^="right"],
+  .popper[x-placement^="right"] {
+    margin-left: 5px;
+  }
+  .popper[x-placement^="right"] .popper__arrow,
+  .tooltip[x-placement^="right"] .tooltip-arrow {
+    border-width: 5px 5px 5px 0;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    left: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .popper[x-placement^="left"],
+  .tooltip[x-placement^="left"] {
+    margin-right: 5px;
+  }
+  .popper[x-placement^="left"] .popper__arrow,
+  .tooltip[x-placement^="left"] .tooltip-arrow {
+    border-width: 5px 0 5px 5px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    right: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+  }
+  select.form-control{
+        display: inline;
+        width: 200px;
+        margin-left: 25px;
+        font-size: 16px
+    }
+
 </style>
 @stop
 @section('content')
@@ -220,12 +324,27 @@
                     <div class="card-body">
                         <input id="attendeventid" type="text" hidden >
                         <div class="table-responsive" >
-                            
-                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="testtopictable">
+                            @if ($fulltbps->count() > 0)
+                                <div >
+                                    <select id="leaderFilter_tb1" class="form-control ">
+                                    <option value="">== Leader ==</option>
+                                    @foreach ($leaders as $leader)
+                                        <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                                <div >
+                                    <select id="expertFilter_tb1" class="form-control">
+                                    <option value="">== ผู้เชี่ยวชาญ ==</option>
+                                        @foreach ($experts as $expert)
+                                            <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            <table style="width: 100%" class="table table-bordered table-striped mb-2" id="maintable">
                                 <thead>
                                     <tr class="bg-info">
-                                        {{-- <th>เลขที่โครงการ</th>  --}}
-                                        {{-- <th>ชื่อโครงการ</th>  --}}
                                         <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
                                         <th style="text-align:center">โครงการ</th>
@@ -236,7 +355,10 @@
                                         @if ($count > 0)
                                             <th style="width:1%;white-space: nowrap;text-align: center">การเข้าร่วม</th>
                                         @endif
-                                        <th style="width:1%;white-space: nowrap;text-align:center">สถานะ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">สถานภาพ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_leader</th> 
+                                        <th style="width:1%;white-space: nowrap;text-align:center" hidden>hidden_expert</th>                             
+                                        {{-- <th style="width:1%;white-space: nowrap;text-align:center" >hidden_grade</th>     --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -304,10 +426,20 @@
                                                 @endif
 
                                                 <td style="white-space: nowrap">  
+
+                                                    @if ($fulltbp->status == 3)
+                                                            <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                        @else
+                                                            <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
+                                                    @endif
                                                     
-                                                    <span class="badge badge-flat border-info text-info-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span>
+                                                    {{-- <span class="badge badge-flat border-grey-600 text-grey-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}}</span> --}}
                                                 </td>  
+                                                <td hidden>{{$fulltbp->searchprojectleader}}</td>
+                                                <td hidden>{{$fulltbp->searchprojectexpert}}</td>
+                                                {{-- <td >{{$fulltbp->searchprojectgrade}}</td> --}}
                                             </tr>
+                                            
                                         @endif
 
                                     @endforeach
@@ -426,7 +558,7 @@
     var countitemtable =  "{{$fulltbps->count()}}";
 
         if (countitemtable >= 1) {
-            $('#testtopictable').DataTable( {
+            $('#maintable').DataTable( {
                 "paging":   true,
                 "ordering": true,
                 "order": [[ 0, 'desc' ]],
@@ -442,6 +574,61 @@
                     }
                 }
             });
+            var table_tb1 = $('#maintable').DataTable();
+            $("#maintable_filter.dataTables_filter").append($("#leaderFilter_tb1"));
+            $("#maintable_filter.dataTables_filter").append($("#expertFilter_tb1"));
+
+            var leaderindex_tb1 = 0;
+            var expertrindex_tb1 = 0;
+            
+            $("#maintable th").each(function (i) {
+                if ($($(this)).html() == "hidden_leader") {
+                    leaderindex_tb1 = i; 
+                }
+                if ($($(this)).html() == "hidden_expert") {
+                    expertrindex_tb1 = i; 
+                }
+            });
+            $("#leaderFilter_tb1").change(function (e) {
+                console.log(leaderindex_tb1);
+                customSearhExact_tb1("#leaderFilter_tb1",leaderindex_tb1);
+                $("#expertFilter_tb1").prop("selectedIndex", 0);
+            });
+            $("#expertFilter_tb1").change(function (e) {
+                console.log(expertrindex_tb1);
+                customSearhContain_tb1("#expertFilter_tb1",expertrindex_tb1);
+                $("#leaderFilter_tb1").prop("selectedIndex", 0);
+            });
+
+            function customSearhContain_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+
+                        var arr = data[elindex];
+                            if (elval === '' || arr.includes(elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
+            function customSearhExact_tb1(el,elindex){
+                $.fn.dataTable.ext.search = [];
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var elval = $(el).val();
+                        var arr = data[elindex];
+                            if (elval === '' || (arr == elval)) {  
+                                return true;
+                            }
+                        return false;
+                    }
+                );
+                table_tb1.draw();
+            }
         }
  
 </script>
