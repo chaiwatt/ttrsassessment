@@ -285,7 +285,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 
 <script  type="text/javascript">

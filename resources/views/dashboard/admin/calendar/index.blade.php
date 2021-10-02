@@ -135,7 +135,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

@@ -282,7 +282,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/evhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/evhelper.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

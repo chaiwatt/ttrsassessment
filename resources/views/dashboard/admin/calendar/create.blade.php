@@ -209,7 +209,7 @@
 
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js?v=1')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
 
     <script>
         var route = {

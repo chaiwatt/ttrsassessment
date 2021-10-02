@@ -652,7 +652,7 @@
 
 
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js?v=1')}}"></script>
     <script>

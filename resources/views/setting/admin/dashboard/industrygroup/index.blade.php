@@ -116,7 +116,7 @@
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> --}}
 <script src="{{asset('assets/dashboard/js/vfs_fonts.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

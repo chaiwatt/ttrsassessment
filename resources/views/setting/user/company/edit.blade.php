@@ -430,7 +430,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/companyhelper.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
     <script>
     	var route = {
 			url: "{{ url('/') }}",

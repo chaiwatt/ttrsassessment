@@ -387,8 +387,8 @@
     <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switchery.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-    <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-    <script src="{{asset('assets/dashboard/js/app/helper/assignexperthelper.js')}}"></script>
+    <script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
+    <script src="{{asset('assets/dashboard/js/app/helper/assignexperthelper.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{url('/')}}",

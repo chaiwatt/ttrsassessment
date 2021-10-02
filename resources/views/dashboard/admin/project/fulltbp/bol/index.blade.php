@@ -115,8 +115,8 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/bolhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/bolhelper.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

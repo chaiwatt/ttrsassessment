@@ -158,7 +158,7 @@
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
-                                        <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
+                                        <th style="text-align: center">ชื่อโครงการ</th> 
                                         
                                         <th style="text-align: center">บริษัท</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปคะแนน</th>
@@ -180,8 +180,8 @@
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                     <tr>    
                                                         <td hidden>{{$fulltbp->updated_at}}</td> 
-                                                        <td style="width:1%;white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
-                                                        <td style="white-space: nowrap"> {{$fulltbp->minitbp->project}} </td>  
+                                                        <td style="white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
+                                                        <td > {{$fulltbp->minitbp->project}} </td>  
                                                       
                                                         <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
                                                         <td style="text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
@@ -255,7 +255,7 @@
                                     <thead>
                                         <tr class="bg-info">
                                             <th hidden>date</th>
-                                            <th style="width:1%;white-space: nowrap;text-align: center">ชื่อโครงการ</th> 
+                                            <th style="text-align: center">ชื่อโครงการ</th> 
                                             <th style="text-align: center">บริษัท</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปคะแนน</th>
                                             <th style="width:1%;white-space: nowrap;text-align: center">ลงคะแนน</th>
@@ -270,7 +270,7 @@
                                                     @if ($fulltbpbackup->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbpbackup->minitbp->businessplan->business_plan_status_id <= 8)
                                                         <tr>    
                                                             <td hidden>{{$fulltbpbackup->updated_at}}</td> 
-                                                            <td style="width:1%;white-space: nowrap"> {{$fulltbpbackup->minitbp->project}} </td>  
+                                                            <td> {{$fulltbpbackup->minitbp->project}} </td>  
                                                             <td> {{$fulltbpbackup->minitbp->businessplan->company->fullname}} </td> 
                                                             <td style="text-align: center"> {{@$fulltbp->finalassessmentdate}} </td>
                                                             <td style="width:1%;white-space: nowrap;text-align: center"> 
@@ -298,7 +298,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js?v=1')}}"></script>
     <script>
         var route = {

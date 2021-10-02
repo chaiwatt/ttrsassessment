@@ -162,8 +162,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/moment/moment.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pickers/daterangepicker.js')}}"></script> --}}
-{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/reportprojecthelper.js')}}"></script> --}}
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
+{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/reportprojecthelper.js?v=1')}}"></script> --}}
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
 <script>
     var route = {
         url: "{{ url('/') }}",

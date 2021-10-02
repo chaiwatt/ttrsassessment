@@ -191,7 +191,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js?v=1')}}"></script>
 
 <script  type="text/javascript">
 	var route = {

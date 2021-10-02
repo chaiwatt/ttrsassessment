@@ -231,7 +231,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/projectassignmenthelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/projectassignmenthelper.js?v=1')}}"></script>
 <script>
     var route = {
             url: "{{ url('/') }}",

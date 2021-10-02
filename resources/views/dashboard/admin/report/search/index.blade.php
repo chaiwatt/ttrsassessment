@@ -156,7 +156,7 @@
     </div>
 @endsection
 @section('pageScript')
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/searchhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/searchhelper.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

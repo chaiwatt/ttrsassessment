@@ -577,7 +577,7 @@
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 
 

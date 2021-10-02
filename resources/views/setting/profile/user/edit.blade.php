@@ -1153,7 +1153,7 @@
 @endsection
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
