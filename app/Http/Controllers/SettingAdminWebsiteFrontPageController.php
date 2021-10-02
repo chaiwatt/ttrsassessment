@@ -43,7 +43,7 @@ class SettingAdminWebsiteFrontPageController extends Controller
             'file' => $frontimglocation,
             'entersitebtn' => $btnimglocation,
             'bgcolor' => $request->bgcolor,
-            'percentimg' => $request->percent,
+            'linkcss' => $request->linkcss,
         ]);
         return redirect()->back()->withSuccess('แก้ไขข้อมูลสำเร็จ');
     }

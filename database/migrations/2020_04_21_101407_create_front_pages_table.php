@@ -18,7 +18,7 @@ class CreateFrontPagesTable extends Migration
             $table->string('file',250);
             $table->string('entersitebtn',250);
             $table->char('bgcolor',20);
-            $table->char('percentimg',10);
+            $table->string('linkcss',250);
             $table->timestamps();
         });
     }

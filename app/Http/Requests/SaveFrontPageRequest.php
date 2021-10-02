@@ -19,15 +19,13 @@ class SaveFrontPageRequest extends FormRequest
     public function rules()
     {
         return [
-            'bgcolor' => 'required',
-            'percent' => 'required'
+            'bgcolor' => 'required'
         ];
     }
     public function messages()
     {
       return  [
-            'bgcolor.required' => 'ยังไม่ได้กรอกสีพื้น',
-            'percent.required' => 'ยังไม่ได้กรอกเปอร์เซนต์'
+            'bgcolor.required' => 'ยังไม่ได้กรอกสีพื้น'
       ]; 
     }
 }

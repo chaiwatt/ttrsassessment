@@ -54,7 +54,7 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>สีพื้น<span class="text-danger">*</span></label>
+                                            <label>สีพื้นหลัง<span class="text-danger">*</span></label>
                                             <input type="text"  name="bgcolor" id="bgcolor" value="{{$frontpage->bgcolor}}"  placeholder="สีพื้น" class="form-control form-control-lg" hidden>
                                             <div class="form-group">
                                                 <div class="d-inline-block">
@@ -72,11 +72,11 @@
                                         </div> --}}
 
                                         <div class="form-group">
-                                            <label>เปอร์เซนต์แสดงผล Billboard<span class="text-danger">*</span></label>
-                                            <input type="text"  name="percent" value="{{$frontpage->percentimg}}"  placeholder="หัวเรื่อง" class="form-control form-control-lg">
+                                            <label>CSS style ลิงก์เข้าเว็บไซต์</label>
+                                            <input type="text"  name="linkcss" value="{{$frontpage->linkcss}}"  placeholder="CSS style ลิงก์เข้าเว็บไซต์" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
-                                            <label>Billboard (ขนาด 1000x720px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
+                                            <label>Billboard (ขนาด 1920x1080px)<span class="text-danger">*</span></label>
                                             <div class="input-group">													
                                                 <button id ="_frontimg" class="btn bg-info" type="button" onclick="document.getElementById('frontimg').click();">อัปโหลดรูป Billboard</button>													
                                             </div>
@@ -128,13 +128,13 @@
         if ((file = this.files[0])) {
             img = new Image();
             img.onload = function() {
-                if(this.width <= 1000 || this.height <= 720){
+                if(this.width <= 1920 || this.height <= 1080){
                     $("#_frontimg").html('อัปโหลดรูปพื้นหลัง(1)');
                 }else{
                     $('#frontimg').val('');
                     Swal.fire({
                     title: 'ผิดพลาด',
-                    text: 'ขนาดไฟล์ เกิน 1000x720px',
+                    text: 'ขนาดไฟล์ น้อยกว่า 1920x1080px',
                     });
                 }
             };
