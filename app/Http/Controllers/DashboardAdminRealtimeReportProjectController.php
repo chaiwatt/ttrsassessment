@@ -449,8 +449,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $_startdate = ($year-1) . '-10-1';
             $_enddate = ($year) . '-9-30';
 
-            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->subDay(1)->format('Y-m-d');
-            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->addDays(1)->format('Y-m-d');
+            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->format('Y-m-d');
+            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->format('Y-m-d');
         }
 
         $alldates = MiniTBP::whereNotNull('submitdate')->pluck('submitdate')->toArray();
@@ -503,8 +503,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $_startdate = ($year-1) . '-10-1';
             $_enddate = ($year) . '-9-30';
 
-            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->subDay(1)->format('Y-m-d');
-            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->addDays(1)->format('Y-m-d');
+            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->format('Y-m-d');
+            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->format('Y-m-d');
         }
 
         $alldates = FullTbp::whereNotNull('submitdate')->pluck('submitdate')->toArray();
@@ -573,8 +573,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $_startdate = ($year-1) . '-10-1';
             $_enddate = ($year) . '-9-30';
 
-            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->subDay(1)->format('Y-m-d');
-            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->addDays(1)->format('Y-m-d');
+            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->format('Y-m-d');
+            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->format('Y-m-d');
         }
 
         $alldates =  FullTbp::whereNotNull('finishdate')->pluck('finishdate')->toArray();
@@ -623,8 +623,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $_startdate = ($year-1) . '-10-1';
             $_enddate = ($year) . '-9-30';
 
-            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->subDay(1)->format('Y-m-d');
-            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->addDays(1)->format('Y-m-d');
+            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->format('Y-m-d');
+            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->format('Y-m-d');
         }
 
         $alldates = FullTbp::whereNotNull('canceldate')->pluck('canceldate')->toArray();
@@ -706,8 +706,8 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             $_startdate = ($year-1) . '-10-1';
             $_enddate = ($year) . '-9-30';
 
-            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->subDay(1)->format('Y-m-d');
-            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->addDays(1)->format('Y-m-d');
+            $startdate = Carbon::createFromFormat('Y-m-d', $_startdate)->format('Y-m-d');
+            $enddate = Carbon::createFromFormat('Y-m-d', $_enddate)->format('Y-m-d');
         }
 
         // $alldates = FullTbp::whereNotNull('submitdate')->pluck('submitdate')->toArray();
@@ -735,6 +735,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
             }else{
                 $minitbparray = MiniTbp::whereNotNull('submitdate')->whereBetween('submitdate',[$startdate, $enddate])->pluck('id')->toArray();
                 $fulltbps = FullTbp::whereIn('mini_tbp_id', $minitbparray)->get();
+                // return $minitbparray;
             }
             return view('dashboard.admin.realtimereport.project.allbyyearbudget')->withFulltbps($fulltbps)->withYears($years);
         }
