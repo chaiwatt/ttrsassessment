@@ -160,7 +160,7 @@
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pickers/color/spectrum.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/picker_color.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
     <script type="text/javascript">
         $("#iconnormal").on('change', function() {
             $("#_iconnormal").val(this.value);

@@ -14,13 +14,13 @@
 <!-- magnific popup css -->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/magnific-popup.css')}}">
 <!-- Main Menu css -->
-<link rel="stylesheet" href="{{asset('assets/landing2/css/rsmenu-main.css')}}">
+<link rel="stylesheet" href="{{asset('assets/landing2/css/rsmenu-main.css?v=1')}}">
 <!-- spacing css -->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/rs-spacing.css')}}">
 <!-- style css -->
 {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/style.css')}}"> <!-- This stylesheet dynamically changed from style.less --> --}}
 
-<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_style.css?v=1')}}">
 <!-- responsive css -->
 {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/responsive.css')}}"> --}}
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_responsive.css')}}">

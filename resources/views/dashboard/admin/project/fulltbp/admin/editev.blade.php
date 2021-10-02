@@ -410,7 +410,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

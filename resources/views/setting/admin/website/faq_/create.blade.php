@@ -94,7 +94,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 <script  type="text/javascript">
 	var route = {
         url: "{{ url('/') }}",

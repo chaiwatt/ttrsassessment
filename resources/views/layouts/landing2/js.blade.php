@@ -4,7 +4,7 @@
 <!-- Bootstrap v4.4.1 js -->
 <script src="{{asset('assets/landing2/js/bootstrap.min.js')}}"></script>
 <!-- Menu js -->
-<script src="{{asset('assets/landing2/js/rsmenu-main.js')}}"></script> 
+<script src="{{asset('assets/landing2/js/rsmenu-main.js?v=1')}}"></script> 
 <!-- op nav js -->
 <script src="{{asset('assets/landing2/js/jquery.nav.js')}}"></script>
 <!-- owl.carousel js -->

@@ -128,6 +128,9 @@ class CalendarController extends Controller
         $attendeecalendar = EventCalendarAttendee::where('event_calendar_id',$request->id)->where('user_id',Auth::user()->id)->first();
         $calendarattachments = CalendarAttachement::where('event_calendar_id',$request->id)->get();
 
+        $eventdate = Carbon::createFromFormat('Y-m-d', $eventcalendar->eventdate);
+        $passedevent = Carbon::parse(Carbon::now())->DiffInDays($eventdate, false);
+
         $fulltbp = FullTbp::find($eventcalendar->full_tbp_id);
         $minitbp = MiniTBP::find($fulltbp->mini_tbp_id);
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
@@ -159,7 +162,8 @@ class CalendarController extends Controller
             "attendeecalendar" => $attendeecalendar,
             "calendarattachments" => $calendarattachments,
             "fullcompanyname" => $fullcompanyname,
-            "leader" => $leader
+            "leader" => $leader,
+            "passedevent" => $passedevent
         ));
     }
 

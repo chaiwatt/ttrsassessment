@@ -2804,8 +2804,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfjs/pdf.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 <script>
 
 	var route = {

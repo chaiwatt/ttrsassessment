@@ -320,7 +320,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฏิทิน</h5>
+                    <h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;รายละเอียดปฏิทิน <span id="passedeventtext" class="text-danger"></span> </h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -1913,11 +1913,11 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/controlflow.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/controlflow.js?v=1')}}"></script>
 
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js?v=1')}}"></script>
 
 <script>
     // AOS.init();

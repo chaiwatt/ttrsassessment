@@ -111,7 +111,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
-{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js')}}"></script> --}}
+{{-- <script type="module" src="{{asset('assets/dashboard/js/app/helper/approvefulltbphelper.js?v=1')}}"></script> --}}
     <script>
         var route = {
             url: "{{ url('/') }}",

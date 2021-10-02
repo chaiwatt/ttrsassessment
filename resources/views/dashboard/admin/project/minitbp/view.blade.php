@@ -542,9 +542,9 @@
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 
-<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js?v=1')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 
 <script>
 	var route = {

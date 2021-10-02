@@ -100,10 +100,10 @@ import * as Attendee from './eventcalendarattendee.js';
                                 $('#attendeventid').val(data.attendeecalendar.id);
 
                                 var html =``;
-                                var rejflag =``;
+                                var disableinp =``;
                                 data.eventcalendarattendeestatuses.forEach(function (status,index) {
-                                    if(data.attendeecalendar.rejectflag == '1'){
-                                        rejflag =`disabled`;
+                                    if(data.attendeecalendar.rejectflag == '1' || data.passedevent < 0){
+                                        disableinp =`disabled`;
                                     }
                                     var chk = ``;
                                     $('#jointype').val(data.attendeecalendar.eventcalendarattendeestatus['id']);
@@ -111,13 +111,16 @@ import * as Attendee from './eventcalendarattendee.js';
                                         chk = `checked`;
                                     }
                                     html += `
-                                    <input style="vertical-align:middle !important;" type="radio" name="flexRadioDefault" class="confirm" value="${status['id']}" id="chk" ${chk} ${rejflag}><label for="chk" style="margin-left:5px;margin-right:10px">${status['name']}</label>
+                                    <input style="vertical-align:middle !important;" type="radio" name="flexRadioDefault" class="confirm" value="${status['id']}" id="chk" ${chk} ${disableinp}><label for="chk" style="margin-left:5px;margin-right:10px">${status['name']}</label>
                                   `
                                   
                                 });
-                                if(data.attendeecalendar.rejectflag == '1'){
+                                if(data.attendeecalendar.rejectflag == '1' || data.passedevent < 0){
+                                    
+                                    $("#passedeventtext").html("(ปฏิทินเกินกำหนด)");
                                     $("#btn_modal_get_calendar").attr("hidden",true);
                                 }else{
+                                    $("#passedeventtext").html("");
                                     $("#btn_modal_get_calendar").attr("hidden",false);
                                 }
                                 $("#attendevent").html(html);

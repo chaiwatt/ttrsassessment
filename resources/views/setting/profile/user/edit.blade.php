@@ -1156,8 +1156,8 @@
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/specialinputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/specialinputformat.js?v=1')}}"></script>
     <script>
 
 $(".form-control-select2").select2();

@@ -182,7 +182,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script type="text/javascript">
         $("#file").on('change', function() {

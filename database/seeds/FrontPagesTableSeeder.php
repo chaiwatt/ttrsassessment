@@ -16,7 +16,7 @@ class FrontPagesTableSeeder extends Seeder
                 'file' => '/assets/landing2/images/billboard.jpg',
                 // 'entersitebtn' => '/assets/landing2/images/btn.png',
                 'bgcolor' => '#60276b',
-                'linkcss' => '60'
+                'linkcss' => 'display: inline-block;margin-top: 5px;padding: 8px 20px;background: #017143;color: #fff;border-radius: 40px;font-weight: 500;letter-spacing: 1px;text-decoration: none;'
             ]
         ]);
     }

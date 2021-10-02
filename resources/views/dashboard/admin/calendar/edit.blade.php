@@ -194,11 +194,11 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/google-calendar/main.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 
 
 
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/calendarhelper.js?v=1')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js')}}"></script>
     <script>

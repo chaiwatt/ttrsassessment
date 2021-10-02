@@ -15,10 +15,10 @@ class CreateFrontPagesTable extends Migration
     {
         Schema::create('front_pages', function (Blueprint $table) {
             $table->id();
-            $table->string('file',250);
-            $table->string('entersitebtn',250);
-            $table->char('bgcolor',20);
-            $table->string('linkcss',250);
+            $table->string('file',250)->nullable();
+            $table->string('entersitebtn',250)->nullable();
+            $table->char('bgcolor',20)->nullable();
+            $table->string('linkcss',250)->nullable();
             $table->timestamps();
         });
     }

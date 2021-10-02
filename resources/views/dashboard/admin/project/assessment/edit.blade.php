@@ -223,8 +223,8 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script> --}}
-<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoringhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js?v=1')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoringhelper.js?v=1')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",

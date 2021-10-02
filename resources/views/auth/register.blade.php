@@ -350,7 +350,7 @@
         <script src="{{asset('assets/dashboard/js/plugins/pwstrength/pwstrength.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
         {{-- <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script> --}}
-        {{-- <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js')}}"></script> --}}
+        {{-- <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script> --}}
         <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
         <script>
                 var route = {
