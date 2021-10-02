@@ -358,7 +358,7 @@ class DashboardAdminRealtimeReportProjectController extends Controller
         $years = array_reverse(FullTbp::whereNotNull('submitdate')->get()->map(function($y){ 
                 return Carbon::createFromFormat('Y-m-d', $y['submitdate'])->year; 
         })->unique()->sort()->toArray());
-        return $request->year;
+        // return $request->year;
         if($request->btnsubmit == 'excel'){
             return Excel::download(new ReportProjectExportFullTbpByYear($year), 'โครงการที่ยื่น Full TBP รายปี.xlsx');
         }else if($request->btnsubmit == 'search'){
