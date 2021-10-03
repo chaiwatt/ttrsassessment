@@ -188,7 +188,10 @@
                     <input type="text" id="evstatus" value="{{$ev->status}}" hidden>
                     <div class="card-body">
                         <div class="form-group">
-                            <button type="button" id="showfulltbp" class="btn bg-warning" data-toggle="modal" >Full TBP <i class="icon-eye ml-2"></i></button>
+                            <button type="button" id="showfulltbp" class="btn bg-warning" data-toggle="modal" >Full TBP </button>
+                            <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button>
+                            <button type="button" class="btn btn-sm bg-info pdfmake">ส่งออก PDF</button>
+                            <button type="button" id="btnOnExcel2" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
                         </div>
                         <input type="text" id="percentextra" value="{{$ev->percentextra}}" hidden>
                         <form id="frmminitbp" method="POST" class="wizard-form step-evweight" action="" data-fouc>
@@ -208,9 +211,11 @@
                                 <div class="tab-content mb-2">
                                     <div class="tab-pane fade show active" id="weighttab">
                                         <div class="float-left mb-2">
-                                            <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
-                                            <button type="button" id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button>
-                                            <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button>
+                                            {{-- <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
+                                            <button type="button" id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button> --}}
+                                            {{-- <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button>
+                                            <button type="button" class="btn btn-sm bg-info pdfmake">PDF Make <i class="icon-eye"></i></button>
+                                            <button type="button" id="btnOnExcel2" class="btn btn-sm bg-info">ส่งออก EXCEL All</button> --}}
                                         </div>
                                         <table style="width: 100%" class="table table-bordered table-striped" id="subpillarindex">
                                             <thead>
@@ -278,9 +283,10 @@
                                 <div class="tab-content mb-2">
                                     <div class="tab-pane fade show active" id="extraweighttab">
                                         <div class="float-left mb-2">
-                                            <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
+                                            {{-- <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
                                             <button type="button" id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF</button>
-                                            <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button>
+                                            <button type="button" class="btn btn-sm bg-info preview">Preview <i class="icon-eye"></i></button> --}}
+                                            
                                         </div>
                                         <div class="table-responsive" >
                                             <table style="width: 100%" class="table table-bordered table-striped" id="extra_subpillarindex" >
@@ -338,7 +344,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js?v=1')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/evweigthhelper.js?v=1')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/evweigthhelper.js?v=2')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
 
 <script>

@@ -2,22 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::get('/login', function () {
-//     return view('temp');
-// });
-
-// Route::get('/register', function () {
-//     return view('temp');
-// });
-
 // Route::get('demojson', 'TestController@DemoJson')->name('demojson');
 Route::get('ccmail', 'TestController@ccMail')->name('ccmail');
 // Route::get('testcode', 'TestController@testcode')->name('testcode');
-
 
 Auth::routes(['verify' => true]);
 // Route::get('ttrssitemap.xml','SitemapController@Index')->name('sitemap');     
@@ -28,10 +15,7 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 // Route::get('generate','PDFController@Generate')->name('generate');
 
 Route::get('demouser', 'HomeController@DemoUser')->name('demouser');
-// Route::get('demottrsuser', 'HomeController@DemoTTRSUser')->name('demottrsuser');
-// Route::get('demousertest', 'HomeController@DemoUserTEST')->name('demousertest');
-// Route::get('updateminiandfullcode', 'HomeController@UpdateMiniAndFullCode')->name('updateminiandfullcode');
-Route::get('demosystemadmin', 'HomeController@DemoSystemadmin')->name('demosystemadmin');
+// Route::get('demosystemadmin', 'HomeController@DemoSystemadmin')->name('demosystemadmin');
 
 Route::get('landing', 'HomeController@Index')->name('landing.index');
 Route::get('', 'HomeController@Index2')->name('landing2.index');

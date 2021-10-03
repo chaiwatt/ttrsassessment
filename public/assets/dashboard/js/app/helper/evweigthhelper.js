@@ -86,6 +86,7 @@ function setCookie(name, value, days) {
     return null;
   }
   
+  var columnheader_extra = ['Category', 'Extra Criteria', 'Weight'] ;
 
 function InitializeDataTable(){
     $('#evexporttable').DataTable( {
@@ -119,7 +120,7 @@ function InitializeDataTable(){
                 className: 'btn-primary',
                 text: 'Excel',
                 title: function () { 
-                    return null; 
+                    return 'Index Criteria'; 
                 },
                 filename: function() {
                     return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val()     
@@ -127,18 +128,24 @@ function InitializeDataTable(){
                 exportOptions: {
                     columns: [ 0, 1,2,3 ]
                 },
-                customize: function( xlsx ) {
-                    var fname =  $('#projectname').val().length > 20 ? $('#projectname').val().substr(0, 19) + '…' : $('#projectname').val();
-                    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-                    source.setAttribute('name',fname);
-                }, 
+                // customize: function( xlsx ) {
+                //     var fname =  $('#projectname').val().length > 20 ? $('#projectname').val().substr(0, 19) + '…' : $('#projectname').val();
+                //     var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+                //     source.setAttribute('name',fname);
+                // }, 
+
+                customize: function(xlsx) {
+                    setSheetName(xlsx, 'Index criteria');
+                    if(evextradata.length > 0){
+                        addSheetJson(xlsx, 'Extra criteria', 'Extra Criteria', '2',columnheader_extra,evextradata);
+                    }
+                    
+                } 
             },
             { 
                 extend: 'pdfHtml5',
-                // pageSize: 'A4',
+                pageSize: 'A4',
                 // orentation: 'landscape',
-                orientation: 'landscape',
-                pageSize: 'LEGAL',
                 customize: function(doc) {
                     doc.defaultStyle = {
                         font:'THSarabun',
@@ -146,24 +153,23 @@ function InitializeDataTable(){
                     };
                     doc.styles.title.alignment = 'left';
                     doc.pageMargins = [30, 30, 30, 30];
-                    doc.content[1].table.widths = ['*','*', '*', '*']
+                    doc.content[1].table.widths = ['*','*','*']
                     var rowCount = doc.content[1].table.body.length;
                     for (var i = 1; i < rowCount; i++) {
-                        doc.content[1].table.body[i][0].alignment = 'left';
-                        doc.content[1].table.body[i][3].alignment = 'center';
+                    doc.content[1].table.body[i][0].alignment = 'left';
+                    doc.content[1].table.body[i][2].alignment = 'center';
                     }
                 },
                 exportOptions: {
-                    columns: [ 0, 1,2,3]
+                    columns: [ 0, 1,2]
                 },
                 title: function () { 
-                    return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val() ; 
+                    return "รายการ EV Weight โครงการ" + $('#projectname') .val(); 
                 },
                 filename: function() {
-                    return "รายการ EV Weight(Index Criteria) โครงการ" + $('#projectname') .val()       
+                    return "รายการ EV Weight โครงการ" + $('#projectname') .val() 
                 }, 
-            }
-            
+            }     
         ],
         drawCallback: function() {
             $('.buttons-excel')[0].style.visibility = 'hidden'
@@ -171,6 +177,118 @@ function InitializeDataTable(){
         }
     } );
 }
+
+function setSheetName(xlsx, name) {
+    if (name.length > 0) {
+    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+        source.setAttribute('name', name);
+    }
+}
+
+function addSheetJson(xlsx, title, name, sheetId,columnheader,dataarray) {
+    var source = xlsx['[Content_Types].xml'].getElementsByTagName('Override')[1];
+    var clone = source.cloneNode(true);
+    clone.setAttribute('PartName','/xl/worksheets/sheet' + sheetId + '.xml');
+    xlsx['[Content_Types].xml'].getElementsByTagName('Types')[0].appendChild(clone);
+    
+    var source = xlsx.xl._rels['workbook.xml.rels'].getElementsByTagName('Relationship')[0];
+    var clone = source.cloneNode(true);
+    clone.setAttribute('Id','rId'+sheetId+1);
+    clone.setAttribute('Target','worksheets/sheet' + sheetId + '.xml');
+    xlsx.xl._rels['workbook.xml.rels'].getElementsByTagName('Relationships')[0].appendChild(clone);
+    
+    var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
+    var clone = source.cloneNode(true);
+    clone.setAttribute('name', name);
+    clone.setAttribute('sheetId', sheetId);
+    clone.setAttribute('r:id','rId'+sheetId+1);
+    xlsx.xl['workbook.xml'].getElementsByTagName('sheets')[0].appendChild(clone);
+
+    var newSheet = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" mc:Ignorable="x14ac">'+
+        getTableDataJson(title, columnheader,dataarray) + '</worksheet>';
+
+    xlsx.xl.worksheets['sheet' + sheetId + '.xml'] = $.parseXML(newSheet);
+}
+function getTableDataJson( title,columnheader,data_array) {  
+    var header = columnheader;
+    var rowNum = 1;
+    var mergeCells = '';
+    var ws = '';
+    ws += buildCols(header);
+    ws += '<sheetData>';
+    
+    if (title.length > 0) {
+    ws += buildRow([title], rowNum, 51);
+    rowNum++;
+    
+   var mergeCol = ((header.length - 1) + 10).toString(36).toUpperCase();
+    
+    mergeCells = '<mergeCells count="1">'+
+        '<mergeCell ref="A1:' + mergeCol + '1"/>' +
+                '</mergeCells>';
+    }
+                    
+    ws += buildRow(header, rowNum, 2);
+    rowNum++;
+    
+    for (let index = 0; index < data_array.length; index++) {
+        var data = data_array[index];
+        ws += buildRowJson(data, rowNum, '');
+        rowNum++;
+    }
+    
+    ws += '</sheetData>' + mergeCells;
+
+    return ws;
+}
+
+function buildCols(data) {
+    var colNum;
+    var cols = '<cols>';
+    for (var i=0; i<data.length; i++) {
+        colNum = i + 1;
+        cols += '<col min="' + colNum + '" max="' + colNum + '" width="20" customWidth="1"/>';
+    }
+    cols += '</cols>';
+    return cols;
+}
+
+function buildRow(data, rowNum, styleNum) { 
+    var colNum;
+    var style = styleNum ? ' s="' + styleNum + '"' : '';
+    var row = '<row r="' + rowNum + '">';
+    for (var i=0; i<data.length; i++) {
+    colNum = (i + 10).toString(36).toUpperCase();  // Convert to alpha
+    var cr = colNum + rowNum;
+    row += '<c t="inlineStr" r="' + cr + '"' + style + '>' +
+            '<is>' +
+                '<t>' + data[i] + '</t>' +
+            '</is>' +
+            '</c>';
+    }     
+    row += '</row>'; 
+    return row;
+}
+
+function buildRowJson(jsondata, rowNum, styleNum) {   
+    var colNum; 
+    const data = Object.values(jsondata);
+    var style = styleNum ? ' s="' + styleNum + '"' : '';
+    var row = '<row r="' + rowNum + '">';
+    for (var i=0; i<data.length; i++) {
+    colNum = (i + 10).toString(36).toUpperCase();  // Convert to alpha
+    var cr = colNum + rowNum;
+    row += '<c t="inlineStr" r="' + cr + '"' + style + '>' +
+            '<is>' +
+                '<t>' + data[i] + '</t>' +
+            '</is>' +
+            '</c>';
+    }
+    row += '</row>';
+    return row;
+}
+
 
 function InitializeDataTableExtra(){
 $('#evextraexporttable').DataTable( {
@@ -923,6 +1041,7 @@ function updateEvAdminStatus(id,value){
     
      
      $("#btnOnExcel").on('click', function() {
+
         evdata = [];
         $('.inputweigth').each(function(){
             evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
@@ -952,8 +1071,191 @@ function updateEvAdminStatus(id,value){
             $('#evextraexporttable').DataTable().buttons(0,0).trigger();
          }
 
-    
     });
+
+         
+    $("#btnOnExcel2").on('click', function() {
+
+        evdata = [];
+        $('.inputweigth').each(function(){
+            evdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
+        });
+
+        evextradata = [];
+        $('.inputextraweigth').each(function(){
+             evextradata.push({"category":  $(this).data('category') , "criteria": $(this).data('extracriteria'), "weight": $(this).val()});
+         });
+
+        if(evdata.length > 0){
+            var table = $('#evexporttable').DataTable();
+            if(table!=null){
+                table.clear();
+                table.clear().destroy();
+            }
+            InitializeDataTable();
+            $('#evexporttable').DataTable().buttons(0,0).trigger();
+        }
+
+        // evextradata = [];
+        // $('.inputextraweigth').each(function(){
+        //      evextradata.push({"category":  $(this).data('category') , "criteria": $(this).data('extracriteria'), "weight": $(this).val()});
+        //  });
+        //  if(evextradata.length > 0){
+        //     var table_extra = $('#evextraexporttable').DataTable();
+        //     if(table_extra!=null){
+        //        table_extra.clear();
+        //        table_extra.clear().destroy();
+        //     }
+        //     InitializeDataTableExtra();
+        //     $('#evextraexporttable').DataTable().buttons(0,0).trigger();
+        //  }
+
+    });
+
+    $(document).on('click', '.pdfmake', function(e) {
+        makePdf();
+    });
+
+    function makePdf(){
+
+
+        var previewdata = []
+        var previewextradata = []
+        $('.inputweigth').each(function(){
+            previewdata.push({"pillar":  $(this).data('pillarname') , "subpillar": $(this).data('subpillarname'), "subpillarindex": $(this).data('subpillarindexname'), "weight": $(this).val()});
+            
+        });
+
+        var data1 = [];
+        // var data_header1 = ["Pillar","Sub Pillar","Sub Pillar Index","Weight"];
+        var data_header1 = [{text: 'Pillar', style: 'tableHeader',alignment: 'center'}, {text: 'Sub Pillar', style: 'tableHeader',alignment: 'center'}, {text: 'Sub Pillar Index', style: 'tableHeader',alignment: 'center'}, {text: 'Weight', style: 'tableHeader',alignment: 'center'}];
+        data1.push(data_header1);
+        for (let index = 0; index < previewdata.length; index++) {
+            // var tmp = [];
+            var tmp = [];
+            var tmpdata = previewdata[index];
+            const _data = Object.values(tmpdata);
+
+            for (var i=0; i<_data.length; i++) {
+                var check = _data.length - i;
+                if(check != 1){
+                    tmp.push(_data[i]);
+                }else{
+                    var lasttxt = {text:_data[i],alignment: 'center'};
+                    tmp.push(lasttxt);
+                }
+            }
+            data1.push(tmp);
+        }
+
+
+        $('.inputextraweigth').each(function(){
+            previewextradata.push({"category":  $(this).data('category') , "extracriteria": $(this).data('extracriteria'), "weight": $(this).val()});
+            
+        });
+        var data2 = [];
+        // var data_header2 = ['Category','Extra Criteria','Weight'];
+        var data_header2 = [{text: 'Category', style: 'tableHeader',alignment: 'center'}, {text: 'Extra Criteria', style: 'tableHeader',alignment: 'center'}, {text: 'Weight', style: 'tableHeader',alignment: 'center'}];
+        data2.push(data_header2);
+        for (let index = 0; index < previewextradata.length; index++) {
+            // var tmp = ['Category','Extra Criteria','Weight'];
+            var tmp = [];
+            var tmpdata = previewextradata[index];
+            const _data = Object.values(tmpdata);
+            for (var i=0; i < _data.length; i++) {
+                var check = _data.length - i;
+                if(check != 1){
+                    tmp.push(_data[i]);
+                }else{
+                    var lasttxt = {text:_data[i],alignment: 'center'};
+                    tmp.push(lasttxt);
+                }
+            }
+            data2.push(tmp);
+        }
+
+        var content = [
+            {
+                text: 'โครงการ' + $('#projectname') .val(), 
+                style: 'topheader',
+                alignment: 'center'
+            },
+            {
+                text: 'รายการ Index', 
+                style: 'header'
+            },
+            {
+                style: 'tableExample',
+                table: {
+                    widths: ['*', '*', '*', '*'],
+                    body: data1
+                }
+            }
+        ];
+
+        
+        if(data2.length > 1 ){
+            content = [
+                {
+                    text: 'โครงการ' + $('#projectname') .val(), 
+                    style: 'topheader',
+                    alignment: 'center'
+                },
+                {
+                    text: 'รายการ Index', 
+                    style: 'header'
+                },
+                {
+                    style: 'tableExample',
+                    table: {
+                        widths: ['*', '*', '*', '*'],
+                        body: data1
+                    }
+                },
+                {
+                    text: 'รายการ Extra', 
+                    style: 'header'
+                },
+                {
+                    style: 'tableExample',
+                    table: {
+                        widths: ['*', '*', '*'],
+                        body: data2
+                    }
+                },
+            ];    
+        }
+
+        var doc = {
+            content: content,
+            defaultStyle: {
+                font:'THSarabun',
+                fontSize:14                                 
+            },
+            styles: {
+                topheader: {
+                    fontSize: 16,
+                    bold: true,
+                    margin: [0, 0, 0, 12]
+                },
+                header: {
+                    fontSize: 16,
+                    bold: true,
+                    margin: [0, 0, 0, 0]
+                },
+                tableExample: {
+                    margin: [0, 5, 0, 15]
+                },
+                tableHeader: {
+                    bold: true,
+                    fontSize: 14,
+                    color: 'black'
+                }
+            }
+        };
+        pdfMake.createPdf(doc).download($('#projectname') .val()+'.pdf');
+    }
+
     $(document).on('click', '.preview', function(e) {
         var previewdata = []
         var previewextradata = []
