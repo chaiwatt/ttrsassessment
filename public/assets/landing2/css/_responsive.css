@@ -494,6 +494,15 @@
         display: none;
     }
 
+    .rs-feature .box-area-size{
+        padding: 30px;
+    }
+
+    .rs-feature .pillar-box-size{
+        margin-top:-38px;
+        padding: 30px;
+    }
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -504,6 +513,15 @@
     .sec-title .title{
         font-size: 30px;
         line-height: 1.4;
+    }
+
+    .rs-feature .box-area-size{
+        padding: 30px;
+    }
+
+    .rs-feature .pillar-box-size{
+        margin-top:-38px;
+        padding: 30px;
     }
 
     .readon.started {
