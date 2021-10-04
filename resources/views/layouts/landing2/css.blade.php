@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_style.css?v=1')}}">
 <!-- responsive css -->
 {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/responsive.css')}}"> --}}
-<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_responsive.css?v=2')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/_responsive.css?v=3')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/extend.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/landing2/css/custom-style.css?v=1')}}">
 
