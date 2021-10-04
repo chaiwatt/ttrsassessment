@@ -379,6 +379,12 @@ border-top: 1px solid #ddd !important;
 
   }
 
+  .dataTables_length
+  {
+    display: none;
+
+  }
+
 }
 
 

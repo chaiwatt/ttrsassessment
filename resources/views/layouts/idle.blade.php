@@ -18,7 +18,7 @@
 	<link href="{{asset('assets/dashboard/css/layout.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/components.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/colors.min.css')}}" rel="stylesheet" type="text/css">
-	<link href="{{asset('assets/dashboard/css/extend.css?v=8')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/dashboard/css/extend.css?v=9')}}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
