@@ -13,7 +13,7 @@ class HomePageServiceUrlsTableSeeder extends Seeder
     {
         DB::table('home_page_service_urls')->insert([
             [
-                'url' => 'http://localhost/ttrsassessment/public/webpage/แนะนำบริการ',
+                'url' => 'http://localhost/ttrsassessment/public/webpage/ขั้นตอนการบริการ',
                 'url_type' => 1,
             ]
         ]);

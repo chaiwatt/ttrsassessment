@@ -13,7 +13,7 @@ class HomePagePillarUrlsTableSeeder extends Seeder
     {
         DB::table('home_page_pillar_urls')->insert([
             [
-                'url' => 'http://localhost/ttrsassessment/public/webpage/ขั้นตอนการบริการ',
+                'url' => 'http://localhost/ttrsassessment/public/webpage/แนะนำบริการ',
                 'url_type' => 1,
             ]
         ]);

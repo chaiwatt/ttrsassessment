@@ -23,10 +23,10 @@
                                         <div class="icon-box-area mb-20" style="min-height:250px;{{$homepagepillar->color1}}">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset($homepagepillar->pillaricon1)}}" width="100" height="100" alt=""></a> 
+                                                   <a href="{{@$sharehomepagepillarurl->url}}"><img src="{{asset($homepagepillar->pillaricon1)}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
-                                                    <h4 class="title"><a href="{{route('landing.pillars')}}">
+                                                    <h4 class="title"><a href="{{@$sharehomepagepillarurl->url}}">
                                                         @if (Config::get('app.locale') == 'th')
                                                             {{$homepagepillar->pillartitleth1}}
                                                         @else
@@ -39,10 +39,10 @@
                                         <div class="icon-box-area box-area-size" style="min-height:250px;{{$homepagepillar->color2}}">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset($homepagepillar->pillaricon2)}}" width="100" height="100" alt=""></a> 
+                                                   <a href="{{@$sharehomepagepillarurl->url}}"><img src="{{asset($homepagepillar->pillaricon2)}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
-                                                    <h4 class="title"><a href="{{route('landing.pillars')}}">
+                                                    <h4 class="title"><a href="{{@$sharehomepagepillarurl->url}}">
                                                         @if (Config::get('app.locale') == 'th')
                                                             {{$homepagepillar->pillartitleth2}}
                                                         @else
@@ -57,10 +57,10 @@
                                         <div class="icon-box-area mb-20 " style="min-height:250px;{{$homepagepillar->color3}}">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset($homepagepillar->pillaricon3)}}" width="100" height="100" alt=""></a> 
+                                                   <a href="{{@$sharehomepagepillarurl->url}}"><img src="{{asset($homepagepillar->pillaricon3)}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
-                                                    <h4 class="title"><a href="{{route('landing.pillars')}}">
+                                                    <h4 class="title"><a href="{{@$sharehomepagepillarurl->url}}">
                                                         @if (Config::get('app.locale') == 'th')
                                                             {{$homepagepillar->pillartitleth3}}
                                                         @else
@@ -73,10 +73,10 @@
                                         <div class="icon-box-area " style="min-height:250px;{{$homepagepillar->color4}}">
                                             <div class="box-inner">
                                                 <div class="icon-area">
-                                                   <a href="{{route('landing.pillars')}}"><img src="{{asset($homepagepillar->pillaricon4)}}" width="100" height="100" alt=""></a> 
+                                                   <a href="{{@$sharehomepagepillarurl->url}}"><img src="{{asset($homepagepillar->pillaricon4)}}" width="100" height="100" alt=""></a> 
                                                 </div>
                                                 <div class="content-part">
-                                                    <h4 class="title"><a href="{{route('landing.pillars')}}">
+                                                    <h4 class="title"><a href="{{@$sharehomepagepillarurl->url}}">
                                                         @if (Config::get('app.locale') == 'th')
                                                             {{$homepagepillar->pillartitleth4}}
                                                         @else
