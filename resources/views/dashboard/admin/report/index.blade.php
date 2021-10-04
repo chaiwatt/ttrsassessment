@@ -819,7 +819,7 @@
                                     </div>
                                     <div class="col-sm-4 mt-3">
                                         <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_management" class="pillarscore"></span></h5>
-                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar_management" class="pillarscore"></span></h4>
+                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar_management" style="white-space: nowrap" class="pillarscore"></span></h4>
                                        
                                     </div>
                                 </div>
@@ -836,7 +836,7 @@
                                     </div>
                                     <div class="col-sm-4 mt-3">
                                         <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_tech" class="pillarscore"></span></h5>
-                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar_tech" class="pillarscore"></span></h4>
+                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar_tech" style="white-space: nowrap" class="pillarscore"></span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -854,7 +854,7 @@
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_marketability" class="pillarscore"></span></h5>
-                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar_marketability" class="pillarscore"></span></h4>
+                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar_marketability" style="white-space: nowrap" class="pillarscore"></span></h4>
                                    
                                 </div>
                             </div>
@@ -872,7 +872,7 @@
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_bp" class="pillarscore"></span></h5>
-                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar_bp" class="pillarscore"></span></h4>
+                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar_bp" style="white-space: nowrap" class="pillarscore"></span></h4>
                                    
                                 </div>
                             </div>
