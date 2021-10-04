@@ -332,26 +332,15 @@
                         <input type="text" id="fulltbpid"  hidden>
                         @if ($fulltbps->count() > 0)
                             <div >
-                                <select id="gradeFilter" class="form-control">
+                                <select id="gradeFilter" class="form-control selectcustomsearch">
                                 <option value="">== เกรด ==</option>
                                 @foreach ($gradecollection->sortDesc()->reverse() as $grade)
                                     <option value="{{$grade}}">{{$grade}}</option>
                                 @endforeach
-                                {{-- <option value="AAA">AAA</option>
-                                <option value="AA">AA</option>
-                                <option value="A">A</option>
-                                <option value="BBB">BBB</option>
-                                <option value="BB">BB</option>
-                                <option value="B">B</option>
-                                <option value="CCC">CCC</option>
-                                <option value="CC">CC</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option> --}}
                                 </select>
                             </div>
                             <div >
-                                <select id="leaderFilter" class="form-control ">
+                                <select id="leaderFilter" class="form-control selectcustomsearch">
                                 <option value="">== Leader ==</option>
                                 @foreach ($leaders as $leader)
                                     <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
@@ -359,7 +348,7 @@
                                 </select>
                             </div>
                             <div >
-                                <select id="expertFilter" class="form-control">
+                                <select id="expertFilter" class="form-control selectcustomsearch">
                                 <option value="">== ผู้เชี่ยวชาญ ==</option>
                                     @foreach ($experts as $expert)
                                         <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>

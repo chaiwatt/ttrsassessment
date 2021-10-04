@@ -136,7 +136,7 @@
                         <div class="table-responsive" >
                             @if ($fulltbps->count() > 0)
                                 <div >
-                                    <select id="leaderFilter_tb1" class="form-control ">
+                                    <select id="leaderFilter_tb1" class="form-control selectcustomsearch">
                                     <option value="">== Leader ==</option>
                                     @foreach ($leaders as $leader)
                                         <option value="{{$leader->name}} {{$leader->lastname}}">{{$leader->name}} {{$leader->lastname}}</option>
@@ -144,7 +144,7 @@
                                     </select>
                                 </div>
                                 <div >
-                                    <select id="expertFilter_tb1" class="form-control">
+                                    <select id="expertFilter_tb1" class="form-control selectcustomsearch">
                                     <option value="">== ผู้เชี่ยวชาญ ==</option>
                                         @foreach ($experts as $expert)
                                             <option value="{{$expert->name}} {{$expert->lastname}}">{{$expert->name}} {{$expert->lastname}}</option>
