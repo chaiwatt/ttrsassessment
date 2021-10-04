@@ -57,11 +57,10 @@ class LoginController extends Controller
                 $businessplans = BusinessPlan::where('company_id',Company::where('user_id',$user->id)->first()->id)->get();
                 return redirect()->route('dashboard.company.report')->withBusinessplans($businessplans); 
             }else if($user->user_type_id == 0){
-                // return 'ok';
                 return redirect()->route('setting.admin.user'); 
-            }else{
-                return redirect($intendurl);
             }
+         }else{
+            return redirect()->intended($intendurl);
          }    
     }
 
