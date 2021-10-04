@@ -304,6 +304,34 @@ border-top: 1px solid #ddd !important;
     padding-bottom: 20px !important;
   }
 }
+@media only screen and (max-width: 414px) {
+
+  .pillarbx
+  {
+    margin: 0px;
+  }
+
+  .top-550
+  {
+ 
+    margin-top: 100px;
+  }
+  .pillarinfo
+  {
+    text-align: center;
+  }
+
+  .dataTables_filter
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+}
+
 
 @media only screen and (max-width: 376px) {
 
@@ -320,6 +348,15 @@ border-top: 1px solid #ddd !important;
   .pillarinfo
   {
     text-align: center;
+  }
+
+  .dataTables_filter
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
   }
 
 }
