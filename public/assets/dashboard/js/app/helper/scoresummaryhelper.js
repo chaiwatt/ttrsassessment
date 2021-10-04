@@ -202,15 +202,11 @@ function callDataTableExtra(){
 $(document).on('click', '#btnOnExcel', function(e) {
     getSummaryEv($('#evid').val(),route.userid).then(data => {
          RenderTable2(data,1);
-         console.log(evdata);
          callDataTable();
-         //console.log('evdata');
        $('#evexporttable').DataTable().buttons(0,0).trigger();
     }).catch(error => {})
 });
 $(document).on('click', '#btnOnPdf', function(e) {
-    // console.log('here');
-
     getSummaryEv($('#evid').val(),route.userid).then(data => {
         RenderTable2(data,1);
         callDataTable();
@@ -219,9 +215,7 @@ $(document).on('click', '#btnOnPdf', function(e) {
 });
 
 $(document).on('click', '#btnOnExcelExtra', function(e) {
-        // RenderExtraTable(data.extracriteriatransactions,data.extrascorings);
     getSummaryEv($('#evid').val(),route.userid).then(data => {
-       // console.log(data);
         RenderExtraTable2(data.extracriteriatransactions,data.extrascoring);
         callDataTableExtra();
        $('#evextraexporttable').DataTable().buttons(0,0).trigger();
@@ -280,8 +274,6 @@ function getSummaryEv(evid){
             pillarpercent1 = grade.percent;
         }
 
-// console.log(pillarpercent1 + ' ' + pillarpercent2 + pillarpercent3 + ' ' + pillarpercent3);
-
         pillarpercent4 = parseInt(pillarpercent4 ) 
         pillarpercent3 = parseInt(pillarpercent3 )
         pillarpercent2 = parseInt(pillarpercent2 ) 
@@ -328,11 +320,6 @@ function getSummaryEv(evid){
         }
 
     });  
-    // var angle = grade.percent*1.8;
-    //console.log(pillarpercent4);
-
-
-
 
     $('.chart-skills4').find('span:nth-child(1)').text(`${parseFloat(pillarpercent4)}`);
     $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
@@ -569,7 +556,6 @@ function RenderTable2(data,evtype){
 
         }
     }); 
-    // console.log(evdata);
 }
 
 
@@ -610,11 +596,8 @@ function RenderExtraTable2(data,scoring){
     data.forEach(function (criteriatransaction,index) {
         var score = $(`input[data-id="${criteriatransaction.id}"][data-type="score"]`).val();
         var comment = $(`input[data-id="${criteriatransaction.id}"][data-type="comment"]`).val();
-
         evextradata.push({"category":  criteriatransaction.extracategory['name'] , "criteria": criteriatransaction.extracriteria['name'], "score": score , "comment" : comment });
-
     });
-console.log(evextradata);
 }
 
 function RowSpanWeight(tableid){

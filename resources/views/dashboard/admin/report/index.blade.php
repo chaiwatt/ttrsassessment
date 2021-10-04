@@ -1908,7 +1908,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/ui/fullcalendar/core/locales/es.js')}}"></script>
 
 <script src="{{asset('assets/dashboard/js/plugins/echart/echarts.min.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js?v=3')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/reporthelper.js?v=4')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/utility.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/controlflow.js?v=1')}}"></script>
 

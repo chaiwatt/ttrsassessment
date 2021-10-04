@@ -6,6 +6,12 @@ import * as Attendee from './eventcalendarattendee.js';
        var  industrygroupdata = null;
        var  objectivedata = null;
        var globaldata = null;
+       var echartpillar;
+       var echartbusinesssize;
+       var echartsector;
+       var echartbusinesstype;
+       var echartindustrygroup;
+       var echartisic;
        
        var  participatelegend = [
             'Mimi TBP',
@@ -174,7 +180,6 @@ import * as Attendee from './eventcalendarattendee.js';
 
             getRadarChartData().then(data => {
                 globaldata = data;
-                // console.log(globaldata);
                 callUpdateChart(globaldata);
                 callGenRadarGradeByPillar(globaldata);
                 callGenRadarByBusinessSize(globaldata);
@@ -182,12 +187,9 @@ import * as Attendee from './eventcalendarattendee.js';
                 callGenRadarByBusinessType(globaldata);
                 callGenRadarByIndustryGroup(globaldata);
                 callGenRadarByIsic(globaldata);
-           
                 createGradebyPillarDataTable(globaldata);
-                
                 createGradebyBusinessSizeDataTable(globaldata);
                 createGradebySectorDataTable(globaldata);
-               
                 createGradebyBusinessTypeDataTable(globaldata);
                 createGradebyIndustryGroupDataTable(globaldata);
                 createGradebyIsicDataTable(globaldata);
@@ -1050,6 +1052,11 @@ function createGradebyIsicDataTable(data){
         if (option && typeof option === "object") {
             donutchart.setOption(option, true);
         }
+        // window.onresize = function() {
+        //     // if (option && typeof option === "object") {
+        //         donutchart.resize();
+        //     // }
+        // };
     }
 
 $('#chkjoinmetting').on('change.bootstrapSwitch', function(e) {
@@ -1195,7 +1202,7 @@ function callGenRadarGradeByPillar(data){
         { name: 'Business Prospect', max: maxval}        
     ];
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
-    genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebypillar');
+    genRadarGradeByPillar('radar',indicator,color,datagradebysector,gradedata,'gradebypillar');
 }
 
 function callBarGradeByPillar(data){
@@ -1263,7 +1270,7 @@ function callGenRadarByBusinessSize(data){
     ];
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
-    genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebybusinesssize');
+    genRadarByBusinessSize('radar',indicator,color,datagradebysector,gradedata,'gradebybusinesssize');
 }
 
 function callGenBarByBusinessSize(data){
@@ -1334,7 +1341,7 @@ function callGenRadarBySector(data){
     ];
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
-    genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebysector');
+    genRadarBySector('radar',indicator,color,datagradebysector,gradedata,'gradebysector');
 }
 
 function callGenBarBySector(data){
@@ -1412,7 +1419,7 @@ function callGenRadarByBusinessType(data){
     ];
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
-    genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebybusinesstype');
+    genRadarByBusinesstype('radar',indicator,color,datagradebysector,gradedata,'gradebybusinesstype');
 }
 
 function callGenBarByBusinessType(data){
@@ -1505,7 +1512,7 @@ function callGenRadarByIndustryGroup(data){
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
 
-    genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebyindustry');
+    genRadarByIndustrygroup('radar',indicator,color,datagradebysector,gradedata,'gradebyindustry');
 }
 
 function callGenBarByIndustryGroup(data){
@@ -1634,7 +1641,7 @@ function callGenRadarByIsic(data){
     ];
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
-    genRadar('radar',indicator,color,datagradebysector,gradedata,'gradebyisic');
+    genRadarByIsic('radar',indicator,color,datagradebysector,gradedata,'gradebyisic');
 }
 
 function callGenBarByIsic(data){
@@ -1776,6 +1783,13 @@ function topLeftChart(_percent,grade){
     if (option && typeof option === "object") {
         echart.setOption(option, true);
     }
+    // window.onresize = function() {
+        
+    //     // if (option && typeof option === "object") {
+    //         echart.resize();
+    //     // }
+    // };
+
 }
 
 function genRadar(charttype,indicator,color,legend,data,eleid){
@@ -1818,7 +1832,7 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
                             o += tw+' ';
                          l += tw.length+1; } 
                     } 
-                    var o = value; //ใช้ orginal label ที่ไม่ตัด
+                    var o = value; 
                     return o;
                 }
             },
@@ -1835,6 +1849,360 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
         echart.setOption(option, true);
     }
 }
+
+function genRadarGradeByPillar(charttype,indicator,color,legend,data,eleid){ 
+    var dom = document.getElementById(eleid);
+    echartpillar = echarts.init(dom);
+    echartpillar.clear();
+    var option = null;
+    option = {
+        color: color,
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
+        tooltip: {},
+        legend: {
+           top: -5,
+           type: 'scroll',
+           orient: 'horizontal',
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
+           legend
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    fontSize: 14,
+                    color: "#000000",
+                },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; 
+                    return o;
+                }
+            },
+            indicator: indicator
+        },
+        series: [{
+            type: charttype,
+            areaStyle: {normal: {}},
+            data: data
+        }]
+    };
+
+    if (option && typeof option === "object") {
+        echartpillar.setOption(option, true);
+    }
+
+
+}
+
+function genRadarByBusinessSize(charttype,indicator,color,legend,data,eleid){
+    var dom = document.getElementById(eleid);
+    echartbusinesssize = echarts.init(dom);
+    echartbusinesssize.clear();
+    var option = null;
+    option = {
+        color: color,
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
+        tooltip: {},
+        legend: {
+           top: -5,
+           type: 'scroll',
+           orient: 'horizontal',
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
+           legend
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    fontSize: 14,
+                    color: "#000000",
+                },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; 
+                    return o;
+                }
+            },
+            indicator: indicator
+        },
+        series: [{
+            type: charttype,
+            areaStyle: {normal: {}},
+            data: data
+        }]
+    };
+
+    if (option && typeof option === "object") {
+        echartbusinesssize.setOption(option, true);
+    }
+}
+
+
+function genRadarBySector(charttype,indicator,color,legend,data,eleid){
+    var dom = document.getElementById(eleid);
+    echartsector = echarts.init(dom);
+    echartsector.clear();
+    var option = null;
+    option = {
+        color: color,
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
+        tooltip: {},
+        legend: {
+           top: -5,
+           type: 'scroll',
+           orient: 'horizontal',
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
+           legend
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    fontSize: 14,
+                    color: "#000000",
+                },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; 
+                    return o;
+                }
+            },
+            indicator: indicator
+        },
+        series: [{
+            type: charttype,
+            areaStyle: {normal: {}},
+            data: data
+        }]
+    };
+
+    if (option && typeof option === "object") {
+        echartsector.setOption(option, true);
+    }
+}
+
+
+function genRadarByBusinesstype(charttype,indicator,color,legend,data,eleid){
+    var dom = document.getElementById(eleid);
+    echartbusinesstype = echarts.init(dom);
+    echartbusinesstype.clear();
+    var option = null;
+    option = {
+        color: color,
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
+        tooltip: {},
+        legend: {
+           top: -5,
+           type: 'scroll',
+           orient: 'horizontal',
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
+           legend
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    fontSize: 14,
+                    color: "#000000",
+                },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; 
+                    return o;
+                }
+            },
+            indicator: indicator
+        },
+        series: [{
+            type: charttype,
+            areaStyle: {normal: {}},
+            data: data
+        }]
+    };
+
+    if (option && typeof option === "object") {
+        echartbusinesstype.setOption(option, true);
+    }
+}
+
+function genRadarByIndustrygroup(charttype,indicator,color,legend,data,eleid){
+    var dom = document.getElementById(eleid);
+    echartindustrygroup = echarts.init(dom);
+    echartindustrygroup.clear();
+    var option = null;
+    option = {
+        color: color,
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
+        tooltip: {},
+        legend: {
+           top: -5,
+           type: 'scroll',
+           orient: 'horizontal',
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
+           legend
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    fontSize: 14,
+                    color: "#000000",
+                },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; 
+                    return o;
+                }
+            },
+            indicator: indicator
+        },
+        series: [{
+            type: charttype,
+            areaStyle: {normal: {}},
+            data: data
+        }]
+    };
+
+    if (option && typeof option === "object") {
+        echartindustrygroup.setOption(option, true);
+    }
+}
+
+function genRadarByIsic(charttype,indicator,color,legend,data,eleid){
+    var dom = document.getElementById(eleid);
+    echartisic = echarts.init(dom);
+    echartisic.clear();
+    var option = null;
+    option = {
+        color: color,
+        textStyle: {
+            fontFamily: 'Kanit',
+        },
+        tooltip: {},
+        legend: {
+           top: -5,
+           type: 'scroll',
+           orient: 'horizontal',
+           textStyle: {
+                fontSize: 16,
+                color: "#000000"
+            },
+           legend
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    fontSize: 14,
+                    color: "#000000",
+                },
+                formatter: function (value, indicator) {
+                     var w=100; 
+                     var t=value.split(' '); 
+                     var l=0; 
+                     var o=''; 
+                     for (var tw of t) { 
+                         if (l+tw.length >= w) { o += (l?'\n':'')+tw+' '; 
+                         l=tw.length+1; 
+                        } 
+                        else { 
+                            o += tw+' ';
+                         l += tw.length+1; } 
+                    } 
+                    var o = value; 
+                    return o;
+                }
+            },
+            indicator: indicator
+        },
+        series: [{
+            type: charttype,
+            areaStyle: {normal: {}},
+            data: data
+        }]
+    };
+
+    if (option && typeof option === "object") {
+        echartisic.setOption(option, true);
+    }
+}
+
+
 
 
  function genBar(xaxis,data,eleid){
@@ -1885,6 +2253,9 @@ function genRadar(charttype,indicator,color,legend,data,eleid){
     if (option && typeof option === "object") {
         echart.setOption(option, true);
     }
+    // window.onresize = function() {
+    //     echart.resize();
+    // };
 }
 
 function genPolarStack(xaxis,data,eleid){
@@ -1931,6 +2302,12 @@ function genPolarStack(xaxis,data,eleid){
     if (option && typeof option === "object") {
         echart.setOption(option, true);
     }
+    // window.onresize = function() {
+    //     // console.log('ok');
+    //     // if (option && typeof option === "object") {
+    //         echart.resize();
+    //     // }
+    // };
 }
 
 function genNumProject(charttype,data,legend,text,sub,eleid,legendalign){
@@ -2087,6 +2464,12 @@ function genNumProject(charttype,data,legend,text,sub,eleid,legendalign){
     if (option && typeof option === "object") {
         echart.setOption(option, true);
     }  
+    // window.onresize = function() {
+        
+    //     // if (option && typeof option === "object") {
+    //         echart.resize();
+    //     // }
+    // };
 }
 
 $(document).on('click', '#download_numproject', function(e) {
@@ -2305,6 +2688,15 @@ $(document).on('click', '#project_objective_bar', function(e) {
     ]
     genNumProject('bar',data,objectivelegend,'วัตถุประสงค์ของการขอรับการประเมิน ' + $('#currentyear').html(),'วัตถุประสงค์ของการขอรับการประเมิน ' + $('#currentyear').html(),'financial_chart','center');
 }); 
+
+window.onresize = function() {
+    echartpillar.resize();
+    echartbusinesssize.resize();
+    echartsector.resize();
+    echartbusinesstype.resize();
+    echartindustrygroup.resize();
+    echartisic.resize();
+};
 
 
 
