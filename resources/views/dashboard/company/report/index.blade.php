@@ -457,15 +457,10 @@
                         pillarpercent1 = grade.percent;
                     }
 
-                    // pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
-                    // pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
-                    // pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
-                    // pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
-
-                    pillarpercent4 = parseInt(pillarpercent4);
-                    pillarpercent3 = parseInt(pillarpercent3);
-                    pillarpercent2 = parseInt(pillarpercent2);
-                    pillarpercent1 = parseInt(pillarpercent1);
+                    pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
+                    pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
+                    pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
+                    pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
 
 
                     if(index < 4){
@@ -510,6 +505,7 @@
 
                 });  
                 // var angle = grade.percent*1.8;
+                
                 $('.chart-skills4').find('span:nth-child(1)').text(`${pillarpercent4}%`);
                 $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
                 $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);

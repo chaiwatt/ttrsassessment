@@ -837,10 +837,15 @@ function createGradebyIsicDataTable(data){
         }
     
 
-        pillar_bp = Math.round(pillar_bp * 100) / 100
-        pillar_marketability = Math.round(pillar_marketability * 100) / 100
-        pillar_tech = Math.round(pillar_tech * 100) / 100
-        pillar_management = Math.round(pillar_management * 100) / 100
+        // pillar_bp = Math.round(pillar_bp * 100) / 100
+        // pillar_marketability = Math.round(pillar_marketability * 100) / 100
+        // pillar_tech = Math.round(pillar_tech * 100) / 100
+        // pillar_management = Math.round(pillar_management * 100) / 100
+
+        pillar_bp = parseInt(pillar_bp)
+        pillar_marketability = parseInt(pillar_marketability)
+        pillar_tech = parseInt(pillar_tech)
+        pillar_management = parseInt(pillar_management)
 
         $('#gradepillar_bp').html(checkPillarGrade(pillar_bp));
         if(pillar_bp == 0){

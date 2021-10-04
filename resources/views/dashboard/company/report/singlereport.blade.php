@@ -376,7 +376,7 @@
         @endif
     
         @if ($projectfinishattachments->count() > 0)
-            <div class="col-md-12">
+            {{-- <div class="col-md-12"> --}}
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
                         <h6 class="card-title" style="font-size:16px;font-weight: bold">เอกสารแนบ</h6>
@@ -406,7 +406,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         @endif
 
         {{-- <div class="row">
