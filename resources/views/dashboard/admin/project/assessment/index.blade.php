@@ -180,22 +180,22 @@
                                                 @if ($fulltbp->minitbp->businessplan->business_plan_status_id >= 6 && $fulltbp->minitbp->businessplan->business_plan_status_id <= 8)
                                                     <tr>    
                                                         <td hidden>{{$fulltbp->updated_at}}</td> 
-                                                        <td style="white-space: nowrap;text-align:center">{{$fulltbp->fulltbp_code}}</td> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center">{{$fulltbp->fulltbp_code}}</td> 
                                                         <td > {{$fulltbp->minitbp->project}} </td>  
                                                       
                                                         <td> {{$fulltbp->minitbp->businessplan->company->fullname}} </td> 
-                                                        <td style="text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
-                                                        <td style="white-space: nowrap;text-align: center">
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> {{$fulltbp->finalassessmentdate}} </td>
+                                                        <td style="width:1%;white-space: nowrap;text-align: center">
                                                             @if ($fulltbp->haveexpertcomment($fulltbp->id) > 0)
                                                             <a href="{{route('dashboard.admin.project.assessment.expertcommentpdf',['id' => $fulltbp->id])}}" class="btn btn-sm bg-teal" target="_blank">รายละเอียด</a>
                                                             @endif
                                                         
                                                         </td>
-                                                        <td style="white-space: nowrap;text-align: center"> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                             <button type="button" id="projectmember{{$fulltbp->id}}" data-projectleaderid="{{$fulltbp->projectleader}}" data-isprojectleader="{{Auth::user()->isProjectLeader($fulltbp->id)}}" class="btn btn-sm bg-info projectmember" data-id="{{$fulltbp->id}}">{{$fulltbp->projectmember->count()}} คน</button>
                                                         </td>  
                                                         
-                                                        <td style="white-space: nowrap;text-align: center"> 
+                                                        <td style="width:1%;white-space: nowrap;text-align: center"> 
                                                             @if (!Empty($fulltbp->finalassessmentdate))
                                                                     @if (!Empty($fulltbp->ev->scoringstatus->count() != 0))
                                                                             <a href="{{route('dashboard.admin.project.assessment.edit',['id' => $fulltbp->id, 'userid' => Auth::user()->id])}}" class="btn btn-sm bg-success">ส่งแล้ว</a>

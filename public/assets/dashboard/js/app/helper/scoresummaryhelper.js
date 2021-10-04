@@ -12,7 +12,7 @@ $(function() {
     }
 
     getSummaryEv($('#evid').val()).then(data => {
-        $('#showpercent').html(parseFloat(data.projectgrade.percent).toFixed(2));
+        $('#showpercent').html(parseFloat(data.projectgrade.percent));
         $('#showgrade').html(data.projectgrade.grade);
         sumGrade(data);
         RenderTable(data,1);
@@ -266,8 +266,8 @@ function getSummaryEv(evid){
     var pillarpercent2 = 0;
     var pillarpercent1 = 0;
     data.finalgrade.forEach((grade,index) => {
-        $('#chartpillar' + (index+1)).html(parseFloat(grade.percent).toFixed(2));
-        $('#pillar' + (index+1)).html(parseFloat(grade.percent).toFixed(2));
+        $('#chartpillar' + (index+1)).html(parseFloat(grade.percent));
+        $('#pillar' + (index+1)).html(parseFloat(grade.percent));
         $('#gradepillar' + (index+1)).html(grade.grade);
  
         if(index == 0){
@@ -282,10 +282,10 @@ function getSummaryEv(evid){
 
 // console.log(pillarpercent1 + ' ' + pillarpercent2 + pillarpercent3 + ' ' + pillarpercent3);
 
-        // pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
-        // pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
-        // pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
-        // pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
+        pillarpercent4 = parseInt(pillarpercent4 ) 
+        pillarpercent3 = parseInt(pillarpercent3 )
+        pillarpercent2 = parseInt(pillarpercent2 ) 
+        pillarpercent1 = parseInt(pillarpercent1 ) 
 
         if(index < 4){
             var basepillar = ``;
@@ -303,7 +303,7 @@ function getSummaryEv(evid){
             }
             html1 += `<tr>
             <td>${basepillar}</td>
-            <td style="text-align: center;">${parseFloat(grade.percent).toFixed(2)}</td>
+            <td style="text-align: center;">${parseFloat(grade.percent)}</td>
             <td style="text-align: center;">${grade.grade}</td>
             <tr>`
         }else{
@@ -322,7 +322,7 @@ function getSummaryEv(evid){
             }
             html2 += `<tr>
             <td>${basepillar}</td>
-            <td style="text-align: center;">${parseFloat(grade.percent).toFixed(2)}</td>
+            <td style="text-align: center;">${parseFloat(grade.percent)}</td>
             <td style="text-align: center;" >${grade.grade}</td>
             <tr>`
         }
@@ -334,28 +334,28 @@ function getSummaryEv(evid){
 
 
 
-    $('.chart-skills4').find('span:nth-child(1)').text(`${parseFloat(pillarpercent4).toFixed(2)}`);
+    $('.chart-skills4').find('span:nth-child(1)').text(`${parseFloat(pillarpercent4)}`);
     $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent4*1.8}deg)`);
     $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent4}deg)`);
     if(pillarpercent4 > 95){
         $('.chart-skills4').find('span:nth-child(1)').css('top', `20px`);
     }
 
-    $('.chart-skills3').find('span:nth-child(1)').text(`${parseFloat(pillarpercent3).toFixed(2)}`);
+    $('.chart-skills3').find('span:nth-child(1)').text(`${parseFloat(pillarpercent3)}`);
     $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent3*1.8}deg)`);
     $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent3}deg)`);
     if(pillarpercent3 > 95){
         $('.chart-skills3').find('span:nth-child(1)').css('top', `20px`);
     }
 
-    $('.chart-skills2').find('span:nth-child(1)').text(`${parseFloat(pillarpercent2).toFixed(2)}`);
+    $('.chart-skills2').find('span:nth-child(1)').text(`${parseFloat(pillarpercent2)}`);
     $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent2*1.8}deg)`);
     $('.chart-skills2').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent2}deg)`);
     if(pillarpercent2 > 95){
         $('.chart-skills2').find('span:nth-child(1)').css('top', `20px`);
     }
 
-    $('.chart-skills').find('span:nth-child(1)').text(`${parseFloat(pillarpercent1).toFixed(2)}`);
+    $('.chart-skills').find('span:nth-child(1)').text(`${parseFloat(pillarpercent1)}`);
     $('.chart-skills').find('li:nth-child(1)').css('transform', `rotate(${pillarpercent1*1.8}deg)`);
     $('.chart-skills').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillarpercent1}deg)`);
     if(pillarpercent1 > 95){

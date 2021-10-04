@@ -846,13 +846,11 @@
                                     <div class="row">
                                         <div class="space-block col-sm-3"></div>
                                         <div class="col-sm-9"> 
-                                            {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
                                             <h2><span class="pillarname" style="color:#07A398"> Marketability</span></h2>
                                             <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
-                                    {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_marketability" class="pillarscore"></span></h5>
                                     <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar_marketability" style="white-space: nowrap" class="pillarscore"></span></h4>
                                    
@@ -870,7 +868,6 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
-                                    {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
                                     <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_bp" class="pillarscore"></span></h5>
                                     <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar_bp" style="white-space: nowrap" class="pillarscore"></span></h4>
                                    

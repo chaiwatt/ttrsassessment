@@ -338,14 +338,26 @@ border-top: 1px solid #ddd !important;
   }
   .chartscore
   {
-    width: 50px;
+    width: 50px !important;
     font-size: 16px !important;
+    padding-bottom: 30px !important;
   }
   .header-elements
   {
     display: none;
   }
 
+  #myChart{
+    display: none;
+  }
+
+  .c-table{
+    display: none;
+  }
+  .centerbtn
+  {
+    text-align: center;
+  }
 }
 
 
@@ -377,6 +389,18 @@ border-top: 1px solid #ddd !important;
   .header-elements
   {
     display: none;
+  }
+
+  .c-table{
+    display: none;
+  }
+
+  #myChart{
+    display: none;
+  }
+  .centerbtn
+  {
+    text-align: center;
   }
 
 }

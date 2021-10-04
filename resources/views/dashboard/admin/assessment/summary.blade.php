@@ -124,22 +124,22 @@
                                               <div id="mainchart">
                                                 <ul class="chart-skills">
                                                     <li>
-                                                      <span id="chartpillar4"></span>
+                                                      <span class="chartscore" id="chartpillar4"></span>
                                                     </li>
                                                   </ul>
                                                   <ul class="chart-skills2"> 
                                                     <li>
-                                                        <span id="chartpillar3"></span>
+                                                        <span class="chartscore" id="chartpillar3"></span>
                                                     </li>
                                                   </ul>
                                                   <ul class="chart-skills3"> 
                                                     <li>
-                                                        <span id="chartpillar2"></span>
+                                                        <span class="chartscore" id="chartpillar2"></span>
                                                     </li>
                                                   </ul>
                                                   <ul class="chart-skills4"> 
                                                     <li>
-                                                        <span id="chartpillar1"></span>
+                                                        <span class="chartscore" id="chartpillar1"></span>
                                                     </li>
                                                   </ul>
                                               </div>
@@ -207,77 +207,77 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="row l-50">
-                                            <div class="col-md-3">
-                                                <div class="row">
+                                            <div class="col-md-3 top-550 pillarbx">
+                                                <div class="row pillarinfo">
                                                     <div class="col-sm-8">
                                                         <div class="row">
                                                             <div class="col-sm-3"></div>
                                                             <div class="col-sm-9"> 
-                                                                <h2><span style="font-weight: bold;color:#0680C3;font-size:18px"> Management</span></h2>
-                                                                <img src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
+                                                                <h2><span class="pillarname" style="color:#0680C3"> Management</span></h2>
+                                                                <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4  mt-3">
                                                         {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar1" ></span></h5>
-                                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar1"></span></h4>
+                                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar1" style="white-space: nowrap" class="pillarscore"></span></h4>
                                                        
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="row">
+                                            <div class="col-md-3 pillarbx">
+                                                <div class="row pillarinfo">
                                                     <div class="col-sm-8">
                                                         <div class="row">
                                                             <div class="col-sm-3"></div>
                                                             <div class="col-sm-9"> 
                                                                 {{-- <h2><span style="font-weight: bold"> 02</span></h2> --}}
-                                                                <h2><span style="font-weight: bold;color:#D1495B;font-size:18px"> Technology</span></h2>
-                                                                <img src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
+                                                                <h2><span class="pillarname" style="color:#D1495B"> Technology</span></h2>
+                                                                <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4  mt-3">
                                                         {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                         <h5 style="font-weight: bold;font-size:28px"><span id="pillar2" ></span></h5>
-                                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar2"></span></h4>
+                                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar2" style="white-space: nowrap" class="pillarscore"></span></h4>
                                                        
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3"> 
-                                                <div class="row">
+                                            <div class="col-md-3 pillarbx"> 
+                                                <div class="row pillarinfo">
                                                 <div class="col-sm-8">
                                                     <div class="row">
                                                         <div class="col-sm-3"></div>
                                                         <div class="col-sm-9"> 
                                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
-                                                            <h2><span style="font-weight: bold;color:#07A398;font-size:18px"> Marketability</span></h2>
-                                                            <img src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
+                                                            <h2><span class="pillarname" style="color:#07A398"> Marketability</span></h2>
+                                                            <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4  mt-3">
                                                     {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar3" ></span></h5>
-                                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar3"></span></h4>
+                                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar3" style="white-space: nowrap" class="pillarscore"></span></h4>
                                                    
                                                 </div>
                                             </div>
                                         </div>
-                                            <div class="col-md-3">  
-                                                <div class="row">
+                                            <div class="col-md-3 pillarbx">  
+                                                <div class="row pillarinfo">
                                                 <div class="col-sm-8">
                                                     <div class="row">
                                                         <div class="col-sm-3"></div>
                                                         <div class="col-sm-9"> 
                                                             {{-- <h2><span style="font-weight: bold"> 04</span></h2> --}}
-                                                            <h2><span style="font-weight: bold;color:#F6AE2D;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
-                                                            <img src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
+                                                            <h2><span class="pillarname" style="color:#F6AE2D;white-space: nowrap;"> Business Prospect</span></h2>
+                                                            <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4 mt-3">
                                                     {{-- <h6 style="font-weight: bold;font-size:18px">คะแนน</h6> --}}
                                                     <h5 style="font-weight: bold;font-size:28px"><span id="pillar4" ></span></h5>
-                                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar4"></span></h4>
+                                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar4" style="white-space: nowrap" class="pillarscore"></span></h4>
                                                    
                                                 </div>
                                             </div>
@@ -487,9 +487,9 @@
                                 @csrf
                                 <h6>Index Criteria</h6>
                                 <fieldset>
-                                    <div class="float-left mb-2">
-                                        <button type="button" id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL (Index)</button>
-                                        <button type="button"  id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF (Index)</button>
+                                    <div class="float-left mb-2 centerbtn" >
+                                        <button type="button" id="btnOnExcel" class="btn btn-sm bg-primary" style="margin:5px">ส่งออก EXCEL (Index)</button>
+                                        <button type="button"  id="btnOnPdf" class="btn btn-sm bg-primary" style="margin:5px">ส่งออก PDF (Index)</button>
                                     </div>
                                     <div class="table-responsive mb-3">
                                         <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable">
@@ -526,9 +526,9 @@
                                 @if ($ev->percentextra > 0)
                                 <h6>Extra Criteria</h6>
                                 <fieldset>
-                                    <div class="float-left mb-2">
-                                        <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-info">ส่งออก EXCEL (Extra)</button>
-                                        <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-info">ส่งออก PDF (Extra)</button>
+                                    <div class="float-left mb-2 centerbtn">
+                                        <button type="button" id="btnOnExcelExtra" class="btn btn-sm bg-primary" style="margin:5px">ส่งออก EXCEL (Extra)</button>
+                                        <button type="button"  id="btnOnPdfExtra" class="btn btn-sm bg-primary" style="margin:5px">ส่งออก PDF (Extra)</button>
                                     </div>
                                     <div class="table-responsive mb-3">
                                         <table style="width: 100%" class="table table-bordered table-striped" id="extra_subpillarindex">
@@ -587,7 +587,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoresummaryhelper.js?v=1')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/scoresummaryhelper.js?v=2')}}"></script>
     <script>
         var route = {
             url: "{{ url('/') }}",
