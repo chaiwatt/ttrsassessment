@@ -848,7 +848,7 @@ function createGradebyIsicDataTable(data){
             $('#pillar_bp').html('');
 
         }else{
-            $('#pillar_bp').html(pillar_bp);
+            $('#pillar_bp').html(parseInt(pillar_bp));
             $('.chart-skills').find('span:nth-child(1)').text(`${pillar_bp}`);
         }
 
@@ -863,7 +863,7 @@ function createGradebyIsicDataTable(data){
             $('.chart-skills2').find('span:nth-child(1)').text(``);
             $('#pillar_marketability').html('');
         }else{
-            $('#pillar_marketability').html(pillar_marketability);
+            $('#pillar_marketability').html(parseInt(pillar_marketability));
             $('.chart-skills2').find('span:nth-child(1)').text(`${pillar_marketability}`);
         }
         $('.chart-skills2').find('li:nth-child(1)').css('transform', `rotate(${pillar_marketability*1.8}deg)`);
@@ -878,7 +878,7 @@ function createGradebyIsicDataTable(data){
             $('#pillar_tech').html('');
         }else{
             $('.chart-skills3').find('span:nth-child(1)').text(`${pillar_tech}`);
-            $('#pillar_tech').html(pillar_tech);
+            $('#pillar_tech').html(parseInt(pillar_tech));
         }
         $('.chart-skills3').find('li:nth-child(1)').css('transform', `rotate(${pillar_tech*1.8}deg)`);
         $('.chart-skills3').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_tech}deg)`);
@@ -893,7 +893,7 @@ function createGradebyIsicDataTable(data){
             $('#pillar_management').html('');
         }else{
             $('.chart-skills4').find('span:nth-child(1)').text(`${pillar_management}`);
-            $('#pillar_management').html(pillar_management);
+            $('#pillar_management').html(parseInt(pillar_management));
         }
         $('.chart-skills4').find('li:nth-child(1)').css('transform', `rotate(${pillar_management*1.8}deg)`);
         $('.chart-skills4').find('span:nth-child(1)').css('transform', `rotate(${(-1.8)*pillar_management}deg)`);
