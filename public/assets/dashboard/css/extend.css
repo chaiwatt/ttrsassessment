@@ -302,6 +302,8 @@ border-top: 1px solid #ddd !important;
   {
     font-size: 16px !important;
     padding-bottom: 20px !important;
+    z-index: 1111;
+    /* width: 100% !important; */
   }
 }
 @media only screen and (max-width: 414px) {
@@ -328,6 +330,20 @@ border-top: 1px solid #ddd !important;
     align-items: center;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .pillarcard
+  {
+    min-height: 162px;
+  }
+  .chartscore
+  {
+    width: 50px;
+    font-size: 16px !important;
+  }
+  .header-elements
+  {
+    display: none;
   }
 
 }
@@ -357,6 +373,10 @@ border-top: 1px solid #ddd !important;
     align-items: center;
     flex-direction: column;
     gap: 10px;
+  }
+  .header-elements
+  {
+    display: none;
   }
 
 }
