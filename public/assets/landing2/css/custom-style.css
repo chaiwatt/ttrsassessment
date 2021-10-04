@@ -229,9 +229,10 @@ font-size: 14px;
 
 @media(max-width:1220px) {
   .flag{
-    width: 45px;
+    /* width: 24px;
     padding-right: 6px;
-    border-radius: 10px;
+    border-radius: 10px; */
+    display:none;
   }
  
   

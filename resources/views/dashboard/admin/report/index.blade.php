@@ -575,15 +575,15 @@
         @if (Auth::user()->user_type_id >= 5)
         <div class="row">
             <div class="col">
-                <div class="card bg-teal-400">
+                <div class="card bg-teal-400 pillarcard">
                     <div class="card-body">
                         <div class="d-flex">
-                            <a href="{{route('dashboard.admin.search.company')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalcompany}}</h1></a>  
+                            <a href="{{route('dashboard.admin.search.company')}}" class="text-white"><h1 class="font-weight-semibold mb-0" class="projectstatnum"><span class="projectstatnum">{{$totalcompany}}</span></h1></a>  
                             
                             
                         </div>
                         <div>
-                          <a href="{{route('dashboard.admin.search.company')}}" class="text-white" ><span style="font-size: 20px">จำนวนผู้ประกอบการ</span></a>  
+                          <a href="{{route('dashboard.admin.search.company')}}" class="text-white" ><span class="projectstat">จำนวนผู้ประกอบการ</span></a>  
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -593,14 +593,14 @@
             </div>
 
             <div class="col">
-                <div class="card bg-blue-400">
-                    <div class="card-body">
+                <div class="card bg-blue-400 pillarcard">
+                    <div class="card-body " >
                         <div class="d-flex">
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalminitbp}}</h1></a> 
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white "><h1 class="font-weight-semibold mb-0" ><span class="projectstatnum">{{$totalminitbp}}</span> </h1></a> 
                             
                         </div>
                         <div>
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><span style="font-size: 20px">จำนวนยื่น Mini Tbp</span></a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><span class="projectstat">จำนวนยื่น Mini Tbp</span></a>  
                             
                         </div>
                     </div>
@@ -608,42 +608,42 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card bg-pink-400">
+                <div class="card bg-pink-400 pillarcard">
                     <div class="card-body">
                         <div class="d-flex">
                             
-                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfulltbp}}</h1></a> 
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" ><span class="projectstatnum">{{$totalfulltbp}}</span></h1></a> 
                         </div>
                         <div>  
-                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><span style="font-size: 20px">จำนวนยื่น Full TBP</span></a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.fulltbpbyyear')}}" class="text-white"><span class="projectstat">จำนวนยื่น Full TBP</span></a>  
                         </div>
                     </div>
                     <div id="today-revenue"></div>
                 </div>
             </div>
             <div class="col">
-                <div class="card bg-orange-400">
+                <div class="card bg-orange-400 pillarcard">
                     <div class="card-body">
                         <div class="d-flex">
                             
-                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalonprocess}}</h1></a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><h1 class="font-weight-semibold mb-0" class="projectstatnum"><span class="projectstatnum">{{$totalonprocess}}</span></h1></a>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><span style="font-size: 20px">อยู่ระหว่างการประเมิน</span></a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.projectall')}}" class="text-white"><span class="projectstat">อยู่ระหว่างการประเมิน</span></a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
                 </div>
             </div>
             <div class="col">
-                <div class="card bg-green-400">
+                <div class="card bg-green-400 pillarcard">
                     <div class="card-body">
                         <div class="d-flex">
                             
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" style="font-size:40px">{{$totalfinish}}</h1></a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><h1 class="font-weight-semibold mb-0" class="projectstatnum"><span class="projectstatnum">{{$totalfinish}}</span></h1></a>
                         </div>
                         <div> 
-                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><span style="font-size: 20px">ประเมินเสร็จสิ้น</span></a>
+                            <a href="{{route('dashboard.admin.realtimereport.project.finishedbyyear')}}" class="text-white"><span class="projectstat">ประเมินเสร็จสิ้น</span></a>
                         </div>
                     </div>
                     <div id="today-revenue"></div>
@@ -668,22 +668,22 @@
                               <div id="mainchart" hidden>
                                 <ul class="chart-skills">
                                     <li>
-                                      <span id="chartpillar4"></span>
+                                      <span class="chartscore" id="chartpillar4"></span>
                                     </li>
                                   </ul>
                                   <ul class="chart-skills2"> 
                                     <li>
-                                        <span id="chartpillar3"></span>
+                                        <span class="chartscore" id="chartpillar3"></span>
                                     </li>
                                   </ul>
                                   <ul class="chart-skills3"> 
                                     <li>
-                                        <span id="chartpillar2"></span>
+                                        <span class="chartscore" id="chartpillar2"></span>
                                     </li>
                                   </ul>
                                   <ul class="chart-skills4"> 
                                     <li>
-                                        <span id="chartpillar1"></span>
+                                        <span class="chartscore" id="chartpillar1"></span>
                                     </li>
                                   </ul>
                               </div>
@@ -807,74 +807,72 @@
                                     </tbody>
                                   </table>
                             </div>
-                            <div class="col-md-3 top-550">
-                                <div class="row">
+                            <div class="col-md-3 top-550 pillarbx">
+                                <div class="row pillarinfo">
                                     <div class="col-sm-8">
                                         <div class="row">
-                                            <div class="col-sm-3"></div>
+                                            <div class="space-block col-sm-3"></div>
                                             <div class="col-sm-9"> 
-                                                <h2><span style="font-weight: bold;color:#0680C3;font-size:18px;white-space: nowrap; overflow: "> Management</span></h2>
-                                                <img src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
+                                                <h2><span class="pillarname" style="color:#0680C3"> Management</span></h2>
+                                                <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-01.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-3">
-                                        {{-- <h6 style="font-weight: bold;color:#00804f">Management</h6> --}}
-                                        <h5 style="font-weight: bold;font-size:28px"><span id="pillar_management"></span></h5>
-                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar_management"></span></h4>
+                                        <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_management" class="pillarscore"></span></h5>
+                                        <h4 style="font-weight: bold;color:#0680C3;font-size:28px"><span id="gradepillar_management" class="pillarscore"></span></h4>
                                        
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="row">
+                            <div class="col-md-3 pillarbx">
+                                <div class="row pillarinfo">
                                     <div class="col-sm-8">
                                         <div class="row">
-                                            <div class="col-sm-3"></div>
+                                            <div class="space-block col-sm-3"></div>
                                             <div class="col-sm-9"> 
-                                                <h2><span style="font-weight: bold;color:#D1495B;font-size:18px;white-space: nowrap; overflow: "> Technology</span></h2>
-                                                <img src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
+                                                <h2><span class="pillarname" style="color:#D1495B"> Technology</span></h2>
+                                                <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-02.png')}}" width="100px" alt=""></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-3">
-                                        {{-- <h6 class="color-02" style="font-weight: bold;color:#002980">Technology</h6> --}}
-                                        <h5 style="font-weight: bold;font-size:28px"><span id="pillar_tech"></span></h5>
-                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar_tech"></span></h4>
-                                       
+                                        <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_tech" class="pillarscore"></span></h5>
+                                        <h4 style="font-weight: bold;color:#D1495B;font-size:28px"><span id="gradepillar_tech" class="pillarscore"></span></h4>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3"> 
-                                <div class="row">
+                            <div class="col-md-3 pillarbx"> 
+                                <div class="row pillarinfo">
                                 <div class="col-sm-8">
                                     <div class="row">
-                                        <div class="col-sm-3"></div>
+                                        <div class="space-block col-sm-3"></div>
                                         <div class="col-sm-9"> 
                                             {{-- <h2><span style="font-weight: bold"> 03</span></h2> --}}
-                                            <h2><span style="font-weight: bold;color:#07A398;font-size:18px;white-space: nowrap; overflow: "> Marketability</span></h2>
-                                            <img src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
+                                            <h2><span class="pillarname" style="color:#07A398"> Marketability</span></h2>
+                                            <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-03.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#cc6301">Marketability</h6> --}}
-                                    <h5 style="font-weight: bold;font-size:28px"><span id="pillar_marketability"></span></h5>
-                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar_marketability"></span></h4>
+                                    <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_marketability" class="pillarscore"></span></h5>
+                                    <h4 style="font-weight: bold;color:#07A398;font-size:28px"><span id="gradepillar_marketability" class="pillarscore"></span></h4>
                                    
                                 </div>
                             </div>
                         </div>
-                            <div class="col-md-3">  <div class="row">
+                            <div class="col-md-3 pillarbx">  
+                                <div class="row pillarinfo">
                                 <div class="col-sm-8">
                                     <div class="row">
-                                        <div class="col-sm-3"></div>
+                                        <div class="space-block col-sm-3"></div>
                                         <div class="col-sm-9"> 
-                                            <h2><span style="font-weight: bold;color:#F6AE2D;font-size:18px;white-space: nowrap; overflow: "> Business Prospect</span></h2>
-                                            <img src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
+                                            <h2><span class="pillarname" style="color:#F6AE2D"> Business Prospect</span></h2>
+                                            <img class="imgpillar" src="{{asset('assets/dashboard/images/chart/ttrs-04.png')}}" width="100px" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mt-3">
                                     {{-- <h6 style="font-weight: bold;color:#34d477">Business Prospect</h6> --}}
-                                    <h5 style="font-weight: bold;font-size:28px"><span id="pillar_bp"></span></h5>
-                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar_bp"></span></h4>
+                                    <h5 style="font-weight: bold;font-size:28px" class="pillarscoreh5"><span id="pillar_bp" class="pillarscore"></span></h5>
+                                    <h4 style="font-weight: bold;color:#F6AE2D;font-size:28px"><span id="gradepillar_bp" class="pillarscore"></span></h4>
                                    
                                 </div>
                             </div>

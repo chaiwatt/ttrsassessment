@@ -347,10 +347,10 @@
                                     <tr class="bg-info">
                                         <th hidden>date</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">เลขที่โครงการ</th> 
-                                        <th style="text-align:center">โครงการ</th>
-                                        <th style="width:1%;white-space: nowrap;text-align: center">วันนัดก่อนลงพื้นที่</th>
+                                        <th style="width:20%;text-align:center">โครงการ</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">วันนัดก่อนลงพื้นที่</th>
                                         <th style="width:1%;white-space: nowrap;text-align: center">วันที่ประเมิน</th>
-                                        <th style="width:1%;white-space: nowrap;text-align: center">วันที่สรุปผลประเมิน</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">วันที่สรุปผลประเมิน</th>
                                         <th style="width:1%;white-space: nowrap;text-align:center">แสดงความเห็น</th>
                                         @if ($count > 0)
                                             <th style="width:1%;white-space: nowrap;text-align: center">การเข้าร่วม</th>
@@ -367,7 +367,7 @@
                                             <tr>
                                                 <td hidden >{{$fulltbp->updated_at}}</td>  
                                                 <td style="width:1%;white-space: nowrap;text-align:center">{{@$fulltbp->fulltbp_code}}</td> 
-                                                <td>  
+                                                <td style="width:20%;">  
                                                     
                                                     @if ($fulltbp->expertassignment->accepted == 1)
                                                         <a href="{{route('dashboard.admin.report.detail.view',['id' => $fulltbp->minitbp->businessplan->id])}}" class="text-info" target="_blank" >{{$fulltbp->minitbp->project}} </a>  
@@ -377,29 +377,28 @@
                                                     
                                                 </td>  
 
-
-                                                <td style="white-space: nowrap;text-align:center">
+                                                <td style="width:1%;white-space: nowrap;text-align:center">
                                                     @if (!Empty($fulltbp->brieftdate))
                                                          {{$fulltbp->brieftdateth}}
                                                         @else
                                                          {{$fulltbp->briefingdate}} 
                                                     @endif 
                                                 </td>  
-                                                <td style="white-space: nowrap;text-align:center">
+                                                <td style="width:1%;white-space: nowrap;text-align:center">
                                                     @if (!Empty($fulltbp->fielddate))
                                                         {{$fulltbp->fielddateth}}
                                                         @else
                                                         {{$fulltbp->assessmentdate}}
                                                     @endif
                                                       </td>  
-                                                <td style="white-space: nowrap;text-align:center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                     @if (!Empty($fulltbp->scoringdate))
                                                     {{$fulltbp->scoringdateth}}
                                                         @else
                                                         {{$fulltbp->finalassessmentdate}}
                                                     @endif
                                                 </td> 
-                                                <td style="text-align:center"> 
+                                                <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                     @if($fulltbp->expertassignment->accepted == 1)
                                                             @if (Empty($fulltbp->expertcomment))
                                                                     @if ($fulltbp->minitbp->businessplan->business_plan_status_id < 9)
@@ -414,7 +413,7 @@
                                                     @endif
                                                 </td> 
                                                 @if ($count > 0)
-                                                    <td style="white-space: nowrap"> 
+                                                    <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($fulltbp->expertassignment->accepted == 0)
                                                                 <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
                                                                 <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
@@ -425,7 +424,7 @@
                                                     </td> 
                                                 @endif
 
-                                                <td style="white-space: nowrap">  
+                                                <td style="width:1%;white-space: nowrap;text-align:center">  
 
                                                     @if ($fulltbp->status == 3)
                                                             <span class="badge badge-flat border-success-600 text-success-600">{{$fulltbp->minitbp->businessplan->businessplanstatus->name}} </span> 
