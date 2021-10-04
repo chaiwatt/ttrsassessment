@@ -177,18 +177,18 @@
                     </div> --}}
                     <div class="tab-pane fade show active" id="login-tab1">
                         
-                        <div class="text-center mb-3 mb-md-2" style="font-size:32px">
+                        <div class="text-center mb-3 mb-md-2 registeruser" >
                             ผู้ขอรับการประเมิน
                         </div>
         
                     </div>
                     <div class="tab-pane fade" id="login-tab2">
-                        <div class="text-center mb-3 mb-md-2" style="font-size:32px">
+                        <div class="text-center mb-3 mb-md-2 registeruser">
                             เจ้าหน้าที่ TTRS
                         </div>
                     </div>
                     <div class="tab-pane fade" id="login-tab3">
-                        <div class="text-center mb-3 mb-md-2" style="font-size:32px">
+                        <div class="text-center mb-3 mb-md-2 registeruser" >
                             ผู้เชี่ยวชาญ
                         </div>
                         <div class="form-group mb-3 mb-md-2">

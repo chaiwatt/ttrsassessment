@@ -20,7 +20,7 @@
 	<link href="{{asset('assets/dashboard/css/layout.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/components.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/colors.min.css')}}" rel="stylesheet" type="text/css">
-	<link href="{{asset('assets/dashboard/css/extend.css?v=12')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('assets/dashboard/css/extend.css?v=13')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/customlogo.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/css-loader.css')}}" rel="stylesheet" type="text/css">
 	{{-- <link href="{{asset('assets/dashboard/css/new.css')}}" rel="stylesheet" type="text/css"> --}}
