@@ -267,6 +267,12 @@ border-top: 1px solid #ddd !important;
     gap: 10px;
   }
   
+  .selectcustomsearch
+  {
+      margin-left: 43px;
+
+  }
+
 
 }
 
@@ -319,6 +325,12 @@ border-top: 1px solid #ddd !important;
     z-index: 1111;
     /* width: 100% !important; */
   }
+  .selectcustomsearch
+  {
+      margin-left: 43px;
+
+  }
+
 }
 @media only screen and (max-width: 414px) {
 
