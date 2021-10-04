@@ -167,7 +167,7 @@
                     <li class="nav-item bg-teal-300" style="margin-right:5px" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-left-0 register" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">เจ้าหน้าที่ TTRS</span></h6></a></li>
                     {{-- <li class="nav-item bg-teal-300" style="margin-right:5px" value="2"><a href="#login-tab2" class="nav-link border-y-0 border-right-0" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">เจ้าหน้าที่ TTRS</h6></a></li> --}}
                     {{-- <li class="nav-item bg-warning-300" style="margin-right:5px" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-right-1" data-toggle="tab"><h6 class="my-1" style="font-size: 18px">ผู้เชี่ยวชาญ</h6></a></li> --}}
-                    <li class="nav-item bg-warning-300" style="margin-right:5px" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-left-0 register" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">ผู้เชี่ยวชาญ</span></h6></a></li>
+                    <li class="nav-item bg-warning-300" style="margin-right:5px" value="3"><a href="#login-tab3" class="nav-link border-y-0 border-left-0 register" data-toggle="tab"><h6 class="my-1"><span style="font-size: 18px">เจ้าหน้าที่ผู้เชี่ยวชาญ</span></h6></a></li>
                 </ul>
                 
                 <div class="tab-content card-body" style="margin-top:-20px">
