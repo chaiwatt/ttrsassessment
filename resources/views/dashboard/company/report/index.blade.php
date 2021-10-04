@@ -457,10 +457,15 @@
                         pillarpercent1 = grade.percent;
                     }
 
-                    pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
-                    pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
-                    pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
-                    pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
+                    // pillarpercent4 = Math.round(pillarpercent4 * 100) / 100
+                    // pillarpercent3 = Math.round(pillarpercent3 * 100) / 100
+                    // pillarpercent2 = Math.round(pillarpercent2 * 100) / 100
+                    // pillarpercent1 = Math.round(pillarpercent1 * 100) / 100
+
+                    pillarpercent4 = parseInt(pillarpercent4);
+                    pillarpercent3 = parseInt(pillarpercent3);
+                    pillarpercent2 = parseInt(pillarpercent2);
+                    pillarpercent1 = parseInt(pillarpercent1);
 
 
                     if(index < 4){
