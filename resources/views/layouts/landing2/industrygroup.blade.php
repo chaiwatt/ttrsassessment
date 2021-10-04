@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row" style="min-height:470px">
             <div class="col-lg-5"></div>
-            <div class="col-lg-7 pl-55 md-pl-15 z-index-1">
+            <div class="col-lg-7 pl-55 md-pl-15 z-index-1 homepageindustry">
                 <div class="sec-title mb-30">
                     {{-- <div class="sub-text style4-bg">About Us</div> --}}
                     <h2 class="title pb-20">

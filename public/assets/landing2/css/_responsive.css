@@ -503,6 +503,11 @@
         padding: 30px;
     }
 
+    .homepageindustry
+    {
+        padding: 0 35px
+    }
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -522,6 +527,11 @@
     .rs-feature .pillar-box-size{
         margin-top:-38px;
         padding: 30px;
+    }
+
+    .homepageindustry
+    {
+        padding: 0 35px
     }
 
     .readon.started {
