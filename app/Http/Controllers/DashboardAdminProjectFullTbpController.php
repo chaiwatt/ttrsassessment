@@ -387,11 +387,11 @@ class DashboardAdminProjectFullTbpController extends Controller
         $unique_array = array_diff($_experts, $leader);
 
         $fulltbp = FullTbp::find($id);
-        $experts = User::whereIn('id',$unique_array)->get() ;
+        $experts = User::whereIn('id',$unique_array)->orderBy('user_type_id','desc')->get() ;
 
         if($fulltbp->assignexpert == 2){
             $expertassignments = ExpertAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
-            $experts = User::whereIn('id',$expertassignments)->get() ;
+            $experts = User::whereIn('id',$expertassignments)->orderBy('user_type_id','desc')->get() ;
         }
 
         $arr = ExpertRejectAssignment::where('full_tbp_id',$id)->pluck('user_id')->toArray();
