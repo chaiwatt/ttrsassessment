@@ -12,7 +12,7 @@ $(function() {
     }
 
     getSummaryEv($('#evid').val()).then(data => {
-        $('#showpercent').html(parseFloat(data.projectgrade.percent));
+        $('#showpercent').html(parseInt(data.projectgrade.percent));
         $('#showgrade').html(data.projectgrade.grade);
         sumGrade(data);
         RenderTable(data,1);
