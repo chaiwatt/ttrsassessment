@@ -205,7 +205,7 @@
                                                     <div class="col-sm-6 col-xl-6">
                                                         <div class="card">
                                                             <div class="card-img-actions mx-1 mt-1">
-                                                                <img id="featureimage" class="card-img img-fluid" src="{{asset('assets/landing2/images/default.png')}}" alt="" width="200">
+                                                                <img id="featureimage" class="card-img img-fluid" src="{{asset('assets/landing2/images/default.png')}}" alt="" style="min-width: 200px">
                                                                 
                                                             </div>
                                                             <div class="card-body">
