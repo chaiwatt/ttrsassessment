@@ -72,7 +72,7 @@
                                         </div> --}}
 
                                         <div class="form-group">
-                                            <label>CSS style ลิงก์เข้าเว็บไซต์ (ปุ่มลิงก์)</label>
+                                            <label>CSS style ปุ่มสำหรับลิงก์เข้าเว็บไซต์</label>
                                             <input type="text"  name="linkcss" value="{{$frontpage->linkcss}}"  placeholder="CSS style ลิงก์เข้าเว็บไซต์" class="form-control form-control-lg">
                                         </div>
                                         <div class="form-group">
