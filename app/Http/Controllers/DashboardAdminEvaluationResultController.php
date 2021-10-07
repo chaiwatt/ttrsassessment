@@ -185,7 +185,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $alertmessage->user_id = $auth->id;
         $alertmessage->target_user_id = $jduser->id;
         $alertmessage->messagebox_id = $messagebox->id;
-        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().'เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' เพิ่ม / แก้ไขบทวิเคราะห์'.$minitbp->project;
         $alertmessage->save();
 
         $notificationbubble = new NotificationBubble();
