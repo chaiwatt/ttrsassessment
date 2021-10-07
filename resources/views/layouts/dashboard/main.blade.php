@@ -23,6 +23,9 @@
 	<link href="{{asset('assets/dashboard/css/extend.css?v=13')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/customlogo.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('assets/dashboard/css/css-loader.css')}}" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+
 	{{-- <link href="{{asset('assets/dashboard/css/new.css')}}" rel="stylesheet" type="text/css"> --}}
 	{{-- <link href="{{asset('assets/dashboard/js/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>  
 	<link href="{{asset('assets/dashboard/js/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"/>   --}}
@@ -199,6 +202,8 @@
 	<script src="{{asset('assets/dashboard/js/app.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/demo_pages/form_layouts.js')}}"></script>
 	<script src="{{asset('assets/dashboard/js/removenextaction.js')}}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
 	
 	<script>
 		var route = {

@@ -654,6 +654,46 @@
             </div>
         </div>
 
+        {{-- Responsive test --}}
+        {{-- <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">คะแนนแยกตาม Pillar Just test</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-2 d-none d-lg-block" style="background:red;height:200px;width:100%;color:#fff">
+                            ชาร์ตวงกรม
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12" style="background:green;height:200px;width:100%;color:#fff">
+                            ชาร์ตครึ่งวงกรม
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-sm-12" style="background:blue;height:200px;width:100%;color:#fff">
+                          ตาราง
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12" style="background:rgb(8, 221, 139);height:200px;width:100%;color:#fff">
+                            Management
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12" style="background:rgb(75, 44, 187);height:200px;width:100%;color:#fff">
+                            Technology
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12" style="background:rgb(202, 63, 81);height:200px;width:100%;color:#fff">
+                            Marketability
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12" style="background:darkblue;height:200px;width:100%;color:#fff">
+                            Business prospect
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
         <div class="row">
             <div class="col-lg-12">
                

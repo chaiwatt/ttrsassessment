@@ -260,8 +260,10 @@ function getSummaryEv(evid){
     var pillarpercent2 = 0;
     var pillarpercent1 = 0;
     data.finalgrade.forEach((grade,index) => {
+        var test = 90.25;
         $('#chartpillar' + (index+1)).html(parseFloat(grade.percent));
-        $('#pillar' + (index+1)).html(parseFloat(grade.percent));
+        // $('#pillar' + (index+1)).html(parseFloat(grade.percent));
+        $('#pillar' + (index+1)).html(parseInt(grade.percent));
         $('#gradepillar' + (index+1)).html(grade.grade);
  
         if(index == 0){
