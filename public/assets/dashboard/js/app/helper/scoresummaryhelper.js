@@ -297,7 +297,7 @@ function getSummaryEv(evid){
             }
             html1 += `<tr>
             <td>${basepillar}</td>
-            <td style="text-align: center;">${parseFloat(grade.percent)}</td>
+            <td style="text-align: center;">${parseInt(grade.percent)}</td>
             <td style="text-align: center;">${grade.grade}</td>
             <tr>`
         }else{
@@ -316,7 +316,7 @@ function getSummaryEv(evid){
             }
             html2 += `<tr>
             <td>${basepillar}</td>
-            <td style="text-align: center;">${parseFloat(grade.percent)}</td>
+            <td style="text-align: center;">${parseInt(grade.percent)}</td>
             <td style="text-align: center;" >${grade.grade}</td>
             <tr>`
         }
