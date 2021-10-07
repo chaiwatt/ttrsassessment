@@ -333,7 +333,7 @@ $(document).on('click', '#deletefeature', function (e) {
         success: function(data){
             $('#featureinp').val('');
             $('#featurethumbnail').val('');
-            $('#featureimage').attr('src',route.url+'/storage/uploads/page/feature/default.png');
+            $('#featureimage').attr('src',route.url+'/assets/landing2/images/default.png');
             //$("div[id='featurediv']").remove();
             // $('#featurethumbnail').html('');
         }
