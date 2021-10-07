@@ -2253,7 +2253,7 @@ $(document).on('click', '#btn_modal_add_debtpartner', function(e) {
         data.forEach(function (sell,index) {
             html += `<tr >                                        
                 <td> ${sell.debtpartner} </td>                            
-                <td class="text-center"> ${parseFloat(sell.numproject).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td>  
+                <td class="text-center"> ${sell.numproject} </td>  
                 <td class="text-right"> ${sell.partnertaxid} </td>                         
                 <td class="text-right"> ${parseFloat(sell.totalyearsell).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </td> 
                 <td class="text-right"> ${parseFloat(sell.percenttosale).toFixed(2)} </td> 
