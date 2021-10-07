@@ -156,7 +156,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
 	<script>
         $('#saleorderdate').bootstrapMaterialDatePicker({
             format: 'DD/MM/YYYY',

@@ -874,7 +874,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.min.js')}}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.5/pdfobject.min.js"></script> --}}
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
 
 <script>
 	var route = {

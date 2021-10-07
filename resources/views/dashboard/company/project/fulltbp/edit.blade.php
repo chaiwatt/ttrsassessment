@@ -3473,7 +3473,7 @@ th {
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js?v=1')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
 {{-- <script src="{{asset('assets/dashboard/js/plugins/jqueryui/jquery-ui.js')}}"></script> --}}
 {{--  --}}
 <script>
