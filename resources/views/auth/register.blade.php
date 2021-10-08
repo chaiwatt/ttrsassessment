@@ -228,33 +228,33 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group form-group-feedback form-group-feedback-left">
+                            <div class="form-group">
                                 <input id="name" type="text" class="form-control form-control-lg stringformat60 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
-                                <div class="form-control-feedback">
+                                {{-- <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
-                                </div>
+                                </div> --}}
                                 @error('name')
                                     <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                                 @enderror
                             </div>  
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group form-group-feedback form-group-feedback-left">
+                            <div class="form-group">
                                 <input id="lastname" type="text" class="form-control form-control-lg stringformat60 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
-                                <div class="form-control-feedback">
+                                {{-- <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
-                                </div>
+                                </div> --}}
                                 @error('lastname')
                                     <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                                 @enderror
                             </div> 
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group form-group-feedback form-group-feedback-left">
+                            <div class="form-group">
                                 <input id="email" type="email" class="form-control form-control-lg stringformat60 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
-                                <div class="form-control-feedback">
+                                {{-- <div class="form-control-feedback">
                                     <i class="icon-mention text-muted"></i>
-                                </div>
+                                </div> --}}
                                 @error('email')
                                     <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                                 @enderror
@@ -262,20 +262,43 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group form-group-feedback form-group-feedback-left">
+                            <div class="form-group">
                                 <input id="phone" type="text" maxlength="10" name="phone" class="form-control form-control-lg allownumericwithoutdecimal @error('phone') is-invalid @enderror"  value="{{ old('phone') }}"  placeholder="เบอร์โทรศัพท์มือถือ">
                                 <span id="phone_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> เบอร์โทรศัพท์ไม่ถูกต้อง</span>
-                                <div class="form-control-feedback">
+                                {{-- <div class="form-control-feedback">
                                     <i class="icon-phone2 text-muted"></i>
-                                </div>
+                                </div> --}}
                                 @error('phone')
                                     <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                                 @enderror
                                 
                             </div>
                         </div>
+
                         <div class="col-md-6">
-                              <div class="input-group form-group form-group-feedback form-group-feedback-left" >
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-eye-blocked text-muted toggle_password"></i></span>
+                                        </span>
+                                        <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่าน">
+
+                                        @error('password')
+                                            <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                        @enderror
+
+                                        <span class="input-group-append">
+                                            <button class="btn btn-light" type="button" id="genpassword" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร">สุ่มรหัสผ่าน</button>
+                                        </span>
+                                        <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- <div class="col-md-6">
+                              <div class="input-group form-group-feedback form-group-feedback-left" >
                                 <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน">
                                 
                                 <div class="form-control-feedback">
@@ -291,12 +314,26 @@
                                 </span>
                                 <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span>
                             </div>
-                        </div>
-                        <div class="col-md-6">
+                        </div> --}}
+
+                        {{-- <div class="col-md-6">
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
                                 <div class="form-control-feedback ">
                                     <i class="icon-eye-blocked text-muted toggle_password"></i>
+                                </div>
+                            </div>
+                        </div> --}}
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-eye-blocked text-muted toggle_password"></i></span>
+                                        </span>
+                                        <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -352,7 +389,7 @@
         <script src="{{asset('assets/dashboard/js/plugins/pwstrength/pwstrength.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
         {{-- <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script> --}}
-        {{-- <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script> --}}
+        {{-- <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=1')}}"></script> --}}
         <script type="module" src="{{asset('assets/dashboard/js/app/helper/registerhelper.js')}}"></script>
         <script>
                 var route = {
