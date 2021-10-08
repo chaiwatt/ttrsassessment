@@ -235,11 +235,13 @@
                 <li class="nav-item"><a href="{{route('dashboard.company.report')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.company.report')?'active':''}}">หน้าแรก</a></li>     
             </ul>
         </li>
+        {{-- {{$sharenotificationbubbles}} --}}
         @if ($generalinfo->use_invoice_status_id != 2)
+          @if ($sharecountinvoice > 0)
             @if (!Empty(Auth::user()->company->businessplan))
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.company.project')?'nav-item-expanded nav-item-open':''}}">
                     <a href="#" class="nav-link"><i class="icon-archive"></i> <span>รายการแจ้งหนี้</span>
-                        @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0)
+                        @if ($sharenotificationbubbles->where('notification_category_id','1')->count() > 0 && $sharenotificationbubbles->where('notification_sub_category_id',3)->count() > 0)
                             <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" style="margin-top:-5px;">ใหม่</span>
                         @endif
                     </a>
@@ -255,6 +257,8 @@
                     </ul>
                 </li>
             @endif
+          @endif
+
         @endif
     @endif
 

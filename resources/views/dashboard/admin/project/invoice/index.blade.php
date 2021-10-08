@@ -66,7 +66,9 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align: center">วันที่</th>
+                                        <th style="text-align: center">เลขที่โครงการ</th>  
                                         <th style="text-align: center">โครงการ</th>  
+                                       
                                         <th style="text-align: center">บริษัท</th>
                                           
                                         <th style="text-align: center">สถานภาพ</th> 
@@ -74,14 +76,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     @foreach ($invoicetransactions as $key => $invoicetransaction)
-                                        @if ($invoicetransaction->company->businessplan->minitbp->fulltbp->canceldate == null)
-                                        @if (Auth::user()->isProjectLeader($invoicetransaction->company->businessplan->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
+                                    {{-- {{$invoicetransaction->minitbp->id}} --}}
+                                        @if ($invoicetransaction->minitbp->fulltbp->canceldate == null)
+                                        @if (Auth::user()->isProjectLeader($invoicetransaction->minitbp->fulltbp->id) == 1 || Auth::user()->user_type_id >= 5)
                                         <tr>    
                                             <td style="text-align: center"> {{$invoicetransaction->issuedateth}} </td> 
-                                            <td> {{$invoicetransaction->company->businessplan->minitbp->project}} </td>  
-                                            <td> {{$invoicetransaction->company->fullname}} </td> 
+                                            <td style="text-align: center"> {{$invoicetransaction->minitbp->fulltbp->fulltbp_code}} </td> 
+                                            <td> {{$invoicetransaction->minitbp->project}} </td>  
                                             
+                                            <td> {{$invoicetransaction->company->fullname}} </td> 
+                                           
                                             <td style="text-align: center"> 
                                                 @if ($invoicetransaction->price != 0)
                                                     @if ($invoicetransaction->status == 3)

@@ -162,6 +162,7 @@
 
                                                     </td>
                                                     <td style="white-space: nowrap;text-align: center">
+                                                        {{-- {{$fulltbp->id}} --}}
                                                         @if (!Empty($fulltbp->projectstatustransaction(7)))
                                                                 @if ($fulltbp->projectstatustransaction(7)->status == 2)  
                                                                     @if ($fulltbp->projectfinishattachment > 0)

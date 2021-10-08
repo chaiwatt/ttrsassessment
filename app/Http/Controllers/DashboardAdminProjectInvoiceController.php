@@ -208,12 +208,12 @@ class DashboardAdminProjectInvoiceController extends Controller
     }
 
     public function PaymentProve(Request $request,$id){
+    
 
         $invoicetransaction = InvoiceTransaction::find($request->id);
         $company = Company::find($invoicetransaction->company_id);
         $minitbp = MiniTBP::find($invoicetransaction->mini_tbp_id);
 
-        
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
        
         $fulltbp = FullTbp::where('mini_tbp_id',$minitbp->id)->first();

@@ -289,13 +289,13 @@ class DashboardAdminProjectMiniTbpController extends Controller
             $timeLinehistory->user_id = $auth->id;
             $timeLinehistory->save();
 
-            $notificationbubble = new NotificationBubble();
-            $notificationbubble->business_plan_id = $minitbp->business_plan_id;
-            $notificationbubble->notification_category_id = 1;
-            $notificationbubble->notification_sub_category_id = 5;
-            $notificationbubble->user_id = $auth->id;
-            $notificationbubble->target_user_id = $_user->id;
-            $notificationbubble->save();
+            // $notificationbubble = new NotificationBubble();
+            // $notificationbubble->business_plan_id = $minitbp->business_plan_id;
+            // $notificationbubble->notification_category_id = 1;
+            // $notificationbubble->notification_sub_category_id = 5;
+            // $notificationbubble->user_id = $auth->id;
+            // $notificationbubble->target_user_id = $_user->id;
+            // $notificationbubble->save();
 
             $projectstatustransaction = ProjectStatusTransaction::where('mini_tbp_id',$minitbp->id)->where('project_flow_id',2)->first();
             if($projectstatustransaction->status == 1){

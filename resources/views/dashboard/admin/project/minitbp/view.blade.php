@@ -169,7 +169,7 @@
 												<tbody >    
 													<tr >                                       
 														<td>ชื่อ-นามสกุล</td>
-														<td>{{@$minitbp->prefix->name}}{{@$minitbp->contactname}} {{@$minitbp->contactlastname }}</td>
+														<td>@if (@$minitbp->prefix->name != 'อื่นๆ'){{@$minitbp->prefix->name}}@endif {{@$minitbp->contactname}} {{@$minitbp->contactlastname }}</td>
 													</tr>       
 													<tr >                                        
 														<td>ตำแหน่ง</td>

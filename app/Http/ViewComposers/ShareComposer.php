@@ -6,6 +6,7 @@ use App\Model\Tag;
 use App\Model\Menu;
 use App\Model\Page;
 use App\Model\Slide;
+use App\Model\Company;
 use App\Model\MiniTBP;
 use App\HomePageSection;
 use App\Model\FrontPage;
@@ -24,6 +25,7 @@ use App\Helper\GoogleCalendar;
 use App\Model\HomepageService;
 use App\Model\HomePagePillarUrl;
 use App\Model\HomePageServiceUrl;
+use App\Model\InvoiceTransaction;
 use App\Model\NotificationBubble;
 use App\Model\HomePageIndustryUrl;
 use App\Model\HomepagePillarSection;
@@ -34,6 +36,7 @@ class ShareComposer
     public function compose (View $view) 
     { 
         $auth = Auth::user();
+        
         $shareunreadmessages = MessageBox::where('receiver_id',@$auth->id)->where('message_read_status_id',1)->get();
         $generalinfo = GeneralInfo::get()->first();
         $directmenus = DirectMenu::get();
@@ -53,6 +56,13 @@ class ShareComposer
         $sharehomepageindustrygrouptext = HomepageIndustryGroupText::first();
         $directmenus2 = DirectMenu2::where('hide',1)->get();
         $shareagent  = new Agent();
+
+        $sharecountinvoice = 0;
+
+        $company = Company::where('user_id',@$auth->id)->first();
+        if(!Empty($company)){
+            $sharecountinvoice = InvoiceTransaction::where('company_id',@$company->id)->count();
+        }
         
         $industrygroups = IndustryGroup::get();
         $industrygrouparray = array();
@@ -76,6 +86,7 @@ class ShareComposer
             ->withTags($tags)
             ->withSharepagecategories($sharepagecategories)
             ->withSharepages($sharepages)
+            ->withSharecountinvoice($sharecountinvoice)
             ->withShareunreadmessages($shareunreadmessages)
             ->withSharenotificationbubbles($sharenotificationbubbles)
             ->withSharefrontpage($sharefrontpage)

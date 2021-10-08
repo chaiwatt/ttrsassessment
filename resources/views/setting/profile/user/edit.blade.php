@@ -638,13 +638,13 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>ชื่อ<span class="text-danger">*</span></label>
-											<input type="text" name="name" value="{{old('name') ?? $user->name}}" data-placeholder="ชื่อ"class=" form-control form-control-lg stringformat60 ">
+											<input type="text" name="name" value="{{old('name') ?? $user->name}}" data-placeholder="ชื่อ"class=" form-control form-control-lg stringformat40 ">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>นามสกุล<span class="text-danger">*</span></label>
-											<input type="text" name="lastname" value="{{old('lastname') ?? $user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat60">
+											<input type="text" name="lastname" value="{{old('lastname') ?? $user->lastname}}" data-placeholder="นามสกุล" class="form-control form-control-lg stringformat40">
 										</div>
 									</div>
 									<div class="col-md-6">

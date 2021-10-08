@@ -500,19 +500,7 @@ class DashboardAdminAssessmentController extends Controller
         $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $company = Company::find($businessplan->company_id);
         $generalinfo = GeneralInfo::first();
-        if($generalinfo->use_invoice_status_id == 2){
-            // $notificationbubble = new NotificationBubble();
-            // $notificationbubble->business_plan_id = $businessplan->id;
-            // $notificationbubble->notification_category_id = 1;
-            // $notificationbubble->notification_sub_category_id = 3;
-            // $notificationbubble->user_id = $auth->id;
-            // $notificationbubble->target_user_id = $projectassignment->leader_id;
-            // $notificationbubble->save();
-            
-            // BusinessPlan::find($minitbp->business_plan_id)->update([
-            //     'business_plan_status_id' => 9
-            // ]);
-        }else{
+        if($generalinfo->use_invoice_status_id == 1){
             $notificationbubble = new NotificationBubble();
             $notificationbubble->business_plan_id = $businessplan->id;
             $notificationbubble->notification_category_id = 1;

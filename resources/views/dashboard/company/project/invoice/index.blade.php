@@ -65,17 +65,19 @@
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="text-align:center">วันที่</th>
-                                        <th style="text-align:center">เลขที่เอกสาร</th>    
+                                        <th style="text-align:center">เลขที่โครงการ</th>    
+                                        <th style="text-align:center">ชื่อโครงการ</th>   
                                         <th style="text-align:center">รายละเอียด</th>   
                                         <th style="text-align:center">สถานภาพ</th>                             
-                                        <th style="text-align: center">เพิ่มเติม</th>
+                                        <th style="width:1%;white-space: nowrap;text-align:center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($invoicetransactions as $key => $invoicetransaction)
                                     <tr>    
                                         <td style="text-align:center"> {{$invoicetransaction->issuedate}} </td> 
-                                        <td style="text-align: center"> {{$invoicetransaction->docno}} </td> 
+                                        <td style="text-align: center"> {{$invoicetransaction->minitbp->fulltbp->fulltbp_code}} </td> 
+                                        <td style="text-align: center"> {{$invoicetransaction->minitbp->project}} </td> 
                                         <td > {{$invoicetransaction->description}} </td>                                      
                                         <td style="text-align: center"> 
                                             @if ($invoicetransaction->status == 3)
@@ -88,11 +90,13 @@
                                                 @else                                       
                                             @endif
                                         </td> 
-                                        <td style="text-align: center">
-                                            @if($invoicetransaction->status == 1)
+                                        <td style="width:1%;white-space: nowrap">
+                                            {{-- @if($invoicetransaction->status == 1) --}}
                                             <a href="{{route('dashboard.company.project.invoice.view',['id' => $invoicetransaction->id])}}" class=" btn btn-sm bg-info" target="_blank" >ดาวน์โหลดใบแจ้งหนี้</a>
+                                            @if ($invoicetransaction->status == 3)
+                                            <a href="{{asset($invoicetransaction->attachment)}}" class=" btn btn-sm bg-success" target="_blank" >หลักฐานการชำระเงิน</a>
                                             @endif
-                                            
+                                            {{-- @endif --}}
                                         </td>
                                     </tr>
                                     @endforeach

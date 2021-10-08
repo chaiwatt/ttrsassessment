@@ -229,7 +229,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="name" type="text" class="form-control form-control-lg stringformat60 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
+                                <input id="name" type="text" class="form-control form-control-lg limit40char @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  placeholder="ชื่อ" autofocus>
                                 {{-- <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
                                 </div> --}}
@@ -240,7 +240,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="lastname" type="text" class="form-control form-control-lg stringformat60 @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
+                                <input id="lastname" type="text" class="form-control form-control-lg limit40char @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}"  placeholder="นามสกุล" autofocus>
                                 {{-- <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
                                 </div> --}}
@@ -251,7 +251,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input id="email" type="email" class="form-control form-control-lg stringformat60 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
+                                <input id="email" type="email" class="form-control form-control-lg  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  placeholder="อีเมล" title="โปรดใช้อีเมลที่สามารถส่งข้อมูล เพื่อยืนยันตัวบุคคลได้">
                                 {{-- <div class="form-control-feedback">
                                     <i class="icon-mention text-muted"></i>
                                 </div> --}}
@@ -546,6 +546,13 @@
                 event.preventDefault();
             }
         });
+        
+        $(".limit40char").on("keypress keyup blur",function (event) {    
+            if($(this).val().length > 17 ){
+                event.preventDefault();
+            }
+        });
+
         
         $(document).on('click', '#genpassword', function(e) {
             var genpass = password_generator(10);
