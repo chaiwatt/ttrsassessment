@@ -168,14 +168,21 @@ class DashboardAdminProjectAssessmentController extends Controller
             $_user = User::find($user);
             $pending .= 'คุณ' . $_user->name . '  ' .  $_user->lastname . ',';
         }
-        
-        EmailBox::send($mails,'','TTRS: มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
-        '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
-        '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
-        '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
 
-        // $ev = Ev::where('full_tbp_id',$id)->first();
-        // return view('dashboard.admin.assessment.summary')->withEv($ev);
+        foreach($users as $user){
+            $_user = User::find($user);
+            // $mails[] = $_user->email;
+            EmailBox::send($_user->email,'','TTRS: มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
+            '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
+            '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
+            '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+        }
+        
+        // EmailBox::send($mails,'','TTRS: มีการลงคะแนนโครงการ','เรียน ผู้เชี่ยวชาญ <br><br> มีการลงคะแนนโครงการ' .MiniTBP::find(FullTbp::find($id)->mini_tbp_id)->project.  '' .
+        // '<br><strong>&nbsp;โดย:</strong> คุณ'.Auth::user()->name. '  ' . Auth::user()->lastname .
+        // '<br><strong>&nbsp;ผู้ที่ยังไม่ได้ลงคะแนน:</strong> '.$pending. 
+        // '<br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+
         return redirect()->route('dashboard.admin.project.assessment')->withSuccess('ลงคะแนนสำเร็จ');
     }
 

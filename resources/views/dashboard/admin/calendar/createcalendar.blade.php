@@ -183,7 +183,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="text-right">
-                                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">บันทึก<i class="icon-paperplane ml-2"></i></button>
+                                                    <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);"><i class="icon-spinner spinner mr-2" id="spinicon" hidden></i>บันทึก<i class="icon-paperplane ml-2"></i></button>
                                                     {{-- <button type="submit" class="btn bg-teal" onclick="confirmsubmit(event);">แจ้งการชำระเงิน<i class="icon-paperplane ml-2"></i></button> --}}
                                                 </div>
                                             </div>
@@ -258,6 +258,7 @@
                     closeOnConfirm: false,
                     closeOnCancel: false
                 }).then((result) => {
+                $("#spinicon").attr("hidden",false);
                 if (result.value) {
                     frm.submit();
                 }

@@ -415,7 +415,7 @@
                                                 @if ($count > 0)
                                                     <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($fulltbp->expertassignment->accepted == 0)
-                                                                <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" class="btn btn-sm bg-info">ยอมรับเข้าร่วม</a>
+                                                                <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" onclick="confirmjoinproject(event)" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info"><i class="icon-spinner spinner mr-2" id="spinjoinproject{{$fulltbp->id}}" hidden></i>ยอมรับเข้าร่วม</a>
                                                                 <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
                                                             @elseif($fulltbp->expertassignment->accepted == 2)
                                                                 <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
@@ -627,6 +627,29 @@
                     }
                 );
                 table_tb1.draw();
+            }
+
+            function confirmjoinproject(e) {
+                e.preventDefault();
+                var dataid = e.currentTarget.dataset.id;
+                var urlToRedirect = e.currentTarget.getAttribute('href');
+                    // popupmessage = route.popupmessages.find(x => x.id ==74);
+                    Swal.fire({
+                        title: 'โปรดยืนยัน',
+                        text: 'เข้าร่วมโครงการ',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'ตกลง',
+                        cancelButtonText: 'ยกเลิก',
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }).then((result) => {
+                        $("#spinjoinproject"+dataid).attr("hidden",false);  
+                    if (result.value) {
+                        window.location.href = urlToRedirect;
+                    }
+                });
             }
         }
  

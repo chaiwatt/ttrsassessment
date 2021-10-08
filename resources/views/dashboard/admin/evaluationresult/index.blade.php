@@ -156,7 +156,7 @@
                                                             <span class="badge badge-flat border-success text-success-600">แจ้งผลแล้ว</span>
                                                         @else
                                                             @if ($fulltbp->minitbp->businessplan->business_plan_status_id == 8 && $generalinfo->use_invoice_status_id == 2)
-                                                                <button class="btn btn-sm bg-warning notifyresult" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinresultnity" hidden></i>แจ้งผล</button>
+                                                                <button class="btn btn-sm bg-warning notifyresult" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinresultnity{{$fulltbp->minitbp->id}}" hidden></i>แจ้งผล</button>
                                                             @endif
                                                         @endif
 
@@ -174,7 +174,7 @@
                                                                         @if (Auth::user()->user_type_id == 4)
                                                                         {{-- dashboard.admin.evaluationresult.attachment --}}
                                                                             <a href="{{route('dashboard.admin.evaluationresult.attachment',['id' => $fulltbp->id])}}" data-name="" class="btn btn-sm bg-info">เอกสารแนบ</a>
-                                                                            <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinlettersent" hidden></i>ยืนยันส่งจดหมาย</button>
+                                                                            <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinlettersent{{$fulltbp->minitbp->id}}" hidden></i>ยืนยันส่งจดหมาย</button>
                                                                         @else 
                                                                             {{-- <button class="btn btn-sm bg-warning confirmsendletter" data-id="{{$fulltbp->minitbp->id}}">ยืนยันส่งจดหมาย</button> --}}
                                                                             <span class="badge badge-flat border-warning text-warning-600">ยังไม่ได้ส่งจดหมายแจ้งผล</span>
@@ -189,7 +189,7 @@
                                                                 @if ($fulltbp->projectstatustransaction(8)->status == 2)
                                                                         <span class="badge badge-flat border-success text-success-600">สิ้นสุดโครงการ</span>
                                                                     @elseif($fulltbp->projectstatustransaction(8)->status == 1)
-                                                                        <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-warning">สิ้นสุดโครงการ</a>
+                                                                        <a href="{{route('dashboard.admin.project.fulltbp.finishproject',['id' => $fulltbp->id])}}" data-name="" onclick="confirmfinish(event)" class="btn btn-sm bg-warning" data-id="{{$fulltbp->minitbp->id}}"><i class="icon-spinner spinner mr-2" id="spinfinishproject{{$fulltbp->minitbp->id}}" hidden></i>สิ้นสุดโครงการ</a>
                                                                 @endif  
                                                             @else
                                                                 <span class="badge badge-flat border-warning text-warning-600">รอการยืนยัน</span>
@@ -232,6 +232,7 @@
 
         function confirmfinish(e) {
             e.preventDefault();
+            var dataid = e.currentTarget.dataset.id;
             var urlToRedirect = e.currentTarget.getAttribute('href');
                 popupmessage = route.popupmessages.find(x => x.id ==74);
                 Swal.fire({
@@ -245,6 +246,7 @@
                     closeOnConfirm: false,
                     closeOnCancel: false
                 }).then((result) => {
+                    $("#spinfinishproject"+dataid).attr("hidden",false);  
                 if (result.value) {
                     window.location.href = urlToRedirect;
                 }
@@ -264,7 +266,8 @@
                 closeOnCancel: false
                 }).then((result) => {
                 if (result.value) {
-                    $("#spinlettersent").attr("hidden",false);
+                    $("#spinlettersent"+$(this).data('id')).attr("hidden",false);  
+                    // $("#spinlettersent").attr("hidden",false);
                     LetterSent($(this).data('id')).then(data => {
                         window.location.reload();
                     })
@@ -289,7 +292,8 @@
                 closeOnCancel: false
                 }).then((result) => {
                 if (result.value) {
-                    $("#spinresultnity").attr("hidden",false);
+                    $("#spinresultnity"+$(this).data('id')).attr("hidden",false);  
+                    // $("#spinresultnity").attr("hidden",false);
                     NotifyResult($(this).data('id')).then(data => {
                         window.location.reload();
                     })
