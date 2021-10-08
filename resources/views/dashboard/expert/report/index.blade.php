@@ -415,7 +415,7 @@
                                                 @if ($count > 0)
                                                     <td style="width:1%;white-space: nowrap;text-align:center"> 
                                                         @if ($fulltbp->expertassignment->accepted == 0)
-                                                                <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" onclick="confirmjoinproject(event)" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info"><i class="icon-spinner spinner mr-2" id="spinjoinproject{{$fulltbp->id}}" hidden></i>ยอมรับเข้าร่วมโครงการ</a>
+                                                                <a href="{{route('dashboard.expert.report.accept',['id' => $fulltbp->id])}}" onclick="confirmjoinproject(event)" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-info"><i class="icon-spinner spinner mr-2" id="spinjoinproject{{$fulltbp->id}}" hidden></i>ยอมรับเข้าร่วม</a>
                                                                 <a href="#" data-id="{{$fulltbp->id}}" data-toggle="modal" class="btn btn-sm bg-danger reject">ปฎิเสธเข้าร่วม</a>
                                                             @elseif($fulltbp->expertassignment->accepted == 2)
                                                                 <a href="" class="btn btn-sm bg-info showreject" data-id="{{$fulltbp->id}}" data-toggle="modal">เหตุผลการไม่เข้าร่วม</a> 
