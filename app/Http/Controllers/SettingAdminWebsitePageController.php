@@ -83,24 +83,9 @@ class SettingAdminWebsitePageController extends Controller
         $page->feature_image_id = $request->featureinp;
         $page->feature_image_thumbnail_id =  $request->featurethumbnail;
         $page->blogsidebarimage_id =  $request->bloglistimage;
-        // $page->bloghomepageimage_id =  $request->bloghomepageimage;
-
 
         $page->user_id = Auth::user()->id;
         $page->save();
-
-        // foreach ($request->pagetag as $key => $tag) {
-        //     $pagetag = new PageTag();
-        //     $pagetag->page_id = $page->id;
-        //     $pagetag->tag_id = $tag;
-        //     $pagetag->save(); 
-        // }
-        // if(!Empty($request->menu)){
-        //     $menu = Menu::find($request->menu)->update([
-        //         'page_id' => $page->id
-        //     ]);
-        // }
-
 
         return redirect()->route('setting.admin.website.page')->withSuccess('เพิ่มบทความสำเร็จ');
     }
@@ -164,7 +149,8 @@ class SettingAdminWebsitePageController extends Controller
             $summernoteimage->save();
         }
 
-        $file = $request->feature; 
+        // $file = $request->feature; 
+
         $page = Page::find($id);
 
         
@@ -176,7 +162,6 @@ class SettingAdminWebsitePageController extends Controller
             $publicdate = DateConversion::thaiToEngDate($request->publicdate) ;
         }
         $page->update([
-            // 'page_category_id' => $request->pagecategory,
             'page_status_id' => $request->status,
             'name' => $request->title,
             'slug' => CreateSlug::createSlug($request->title),
@@ -187,24 +172,6 @@ class SettingAdminWebsitePageController extends Controller
             'feature_image_thumbnail_id' => $request->featurethumbnail,
             'blogsidebarimage_id' =>  $request->bloglistimage
         ]);
-
-        // $comming_array  = Array();
-        // $existing_array  = Array();
-        // $unique_array  = Array();
-        // foreach( $request->pagetag as $key => $tag ){
-        //     $comming_array[] = $tag;
-        // }
-
-        // PageTag::where('page_id',$id)->whereNotIn('tag_id',$comming_array)->delete();
-        // $existing_array = PageTag::where('page_id',$id)->pluck('tag_id')->toArray();
-        // $unique_array = array_diff($comming_array, $existing_array);
-
-        // foreach( $unique_array as $_tag ){
-        //     $pagetag = new PageTag();
-        //     $pagetag->page_id = $id;
-        //     $pagetag->tag_id = $_tag;
-        //     $pagetag->save(); 
-        // }
 
         return redirect()->route('setting.admin.website.page')->withSuccess('แก้ไขหน้าบทความสำเร็จ');
     }
