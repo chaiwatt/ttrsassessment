@@ -22,7 +22,7 @@ class SettingAdminWebsiteWebPageCategoryController extends Controller
     public function CreateSave(Request $request){
         $dom = new \DomDocument();
         $dom->loadHtml('<?xml encoding="UTF-8">'.$request->body);
-        CreateDirectory::CreateDirectory(public_path("storage/uploads/staticpage/images/"));
+        CreateDirectory::CreateDirectory(public_path("storage/uploads/page/images/"));
         $images = $dom->getelementsbytagname('img');
         $imgarray = array();
         foreach($images as $img){
@@ -31,11 +31,11 @@ class SettingAdminWebsiteWebPageCategoryController extends Controller
             list(, $data)= explode(',', $data);
             $data = base64_decode($data);
             $image_name= str_random(10).'.png';
-            $imgarray[] = URL('')."/storage/uploads/staticpage/images/".$image_name;
-            $path = public_path() .'/storage/uploads/staticpage/images/'. $image_name;
+            $imgarray[] = URL('')."/storage/uploads/page/images/".$image_name;
+            $path = public_path() .'/storage/uploads/page/images/'. $image_name;
             file_put_contents($path, $data);
             $img->removeattribute('src');
-            $img->setattribute('src', URL('')."/storage/uploads/staticpage/images/".$image_name);
+            $img->setattribute('src', URL('')."/storage/uploads/page/images/".$image_name);
         }
         $detail = $dom->savehtml();
 
@@ -67,11 +67,11 @@ class SettingAdminWebsiteWebPageCategoryController extends Controller
                 list(, $data)= explode(',', $data);
                 $data = base64_decode($data);
                 $image_name= time().$k.'.png';
-                $path = public_path() .'/storage/uploads/staticpage/images/'. $image_name;
-                $comming_array[] = URL('')."/storage/uploads/staticpage/images/".$image_name;
+                $path = public_path() .'/storage/uploads/page/images/'. $image_name;
+                $comming_array[] = URL('')."/storage/uploads/page/images/".$image_name;
                 file_put_contents($path, $data);
                 $img->removeattribute('src');
-                $img->setattribute('src', URL('')."/storage/uploads/staticpage/images/".$image_name);
+                $img->setattribute('src', URL('')."/storage/uploads/page/images/".$image_name);
             }else{
                 $comming_array[] =  $data ;
             }
