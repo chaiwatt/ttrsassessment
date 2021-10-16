@@ -63,7 +63,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.subpillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.subpillar')?'active':''}}">Sub Pillar</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.subpillarindex')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.subpillarindex')?'active':''}}">Sub Pillar Index</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.assessment.criteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.criteriagroup')?'active':''}}">Criteria</a></li>
-                <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.system')?'nav-item-expanded':''}}">
+                <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.assessment')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>Extra Criteria</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Extra Criteria">
                         <li class="nav-item"><a href="{{route('setting.admin.assessment.extracategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">Criteria Category</a></li>		             
