@@ -117,9 +117,11 @@ class DashboardCompanyInvoiceController extends Controller
         $auth = Auth::user();
         $invoicetransaction = InvoiceTransaction::find($id);
         $company = Company::find($invoicetransaction->company_id);
-        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
+
+        $minitbp = MiniTBP::find($invoicetransaction->mini_tbp_id);
+
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
         $projectassignment = ProjectAssignment::where('business_plan_id',$businessplan->id)->first();
-        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
 
         $file = $request->file;
         $new_name = $minitbp->minitbp_code."_invoice.".$file->getClientOriginalExtension();

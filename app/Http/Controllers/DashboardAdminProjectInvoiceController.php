@@ -92,8 +92,14 @@ class DashboardAdminProjectInvoiceController extends Controller
         // $mpdf->SetCompression(false);
         $invoicetransaction = InvoiceTransaction::find($id);
         $company = Company::find($invoicetransaction->company_id);
-        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
-        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+
+        // $company = Company::find($invoicetransaction->company_id);
+        $minitbp = MiniTBP::find($invoicetransaction->mini_tbp_id);
+
+        // $minitbp = MiniTBP::find($invoicetransaction)->first();
+
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        
         
         $generalinfo = GeneralInfo::first();
         $fileContent = file_get_contents(asset("assets/dashboard/template/invoice.pdf"),'rb');
@@ -167,8 +173,10 @@ class DashboardAdminProjectInvoiceController extends Controller
     public function UpdateStatus(Request $request){
         $invoicetransaction = InvoiceTransaction::find($request->id);
         $company = Company::find($invoicetransaction->company_id);
-        $businessplan = BusinessPlan::where('company_id',$company->id)->first();
-        $minitbp = MiniTBP::where('business_plan_id',$businessplan->id)->first();
+        $minitbp = MiniTBP::find($invoicetransaction->mini_tbp_id);
+
+        $businessplan = BusinessPlan::find($minitbp->business_plan_id);
+        
         $auth = Auth::user();
         $notificationbubble = new NotificationBubble();
         $notificationbubble->business_plan_id = $businessplan->id;
