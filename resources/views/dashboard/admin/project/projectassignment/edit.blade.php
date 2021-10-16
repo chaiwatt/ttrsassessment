@@ -170,7 +170,7 @@
             </div>
         </div>
         <div id="main_wrapper" hidden>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-4">
                     <div class="card card-body border-top-pink-400">
                         <div class="card-body text-center">
@@ -198,12 +198,12 @@
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>     --}}
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header header-elements-sm-inline">
-                            <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการ</h6>
+                            <h6 class="card-title" style="font-size:16px;font-weight: bold">รายละเอียดโครงการที่รับผิดชอบ</h6>
                             <div class="header-elements">
                             </div>
                         </div>
@@ -231,7 +231,7 @@
 @endsection
 @section('pageScript')
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/projectassignmenthelper.js?v=1')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/projectassignmenthelper.js?v=5')}}"></script>
 <script>
     var route = {
             url: "{{ url('/') }}",

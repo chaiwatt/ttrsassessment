@@ -31,6 +31,7 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('company_service_type_id')->default(1); 
             $table->unsignedBigInteger('company_size_id')->deafult(1); 
             $table->string('name',150)->nullable();
+            // $table->string('fullname',150)->nullable();
             $table->string('phone',20)->nullable();
             $table->string('fax',20)->nullable();
             $table->string('email',200)->nullable();

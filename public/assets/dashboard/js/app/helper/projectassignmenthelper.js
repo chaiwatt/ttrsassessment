@@ -17,17 +17,21 @@ $(".leader").on('click', function() {
                 if(fulltbp.minitbp.businessplan.finished == '1'){
                     status = "ปิดโครงการ";
                 }
+                var fulltbpcode = fulltbp.fulltbp_code;
+                if(fulltbpcode == null){
+                    fulltbpcode = '';
+                }
                 html += `<tr >                                        
-                    <td> ${fulltbp.updatedatth} </td>                            
+                    <td style='text-align:center'> ${fulltbpcode} </td>                            
                     <td> ${fulltbp.minitbp['project']} </td>                         
-                    <td> ${fulltbp.minitbp.businessplan.company['name']} </td> 
+                    <td> ${fulltbp.minitbp.businessplan.company['fullname']} </td> 
                     <td> ${status} </td> 
                 </tr>`
                 });
              $("#fulltbp_wrapper_tr").html(html);
-            $("#total").html(data.allprojects.length);
-            $("#finished").html(data.finishedprojects.length);
-            $("#pending").html(data.allprojects.length-data.finishedprojects.length);
+            // $("#total").html(data.allprojects.length);
+            // $("#finished").html(data.finishedprojects.length);
+            // $("#pending").html(data.allprojects.length-data.finishedprojects.length);
        })
        .catch(error => {})
     }else{
@@ -55,7 +59,7 @@ $(".coleader").on('click', function() {
                 html += `<tr >                                        
                     <td> ${fulltbp.updatedatth} </td>                            
                     <td> ${fulltbp.minitbp['project']} </td>                         
-                    <td> ${fulltbp.minitbp.businessplan.company['name']} </td> 
+                    <td> ${fulltbp.minitbp.businessplan.company['fullname']} </td> 
                     <td> ${status} </td> 
                 </tr>`
                 });
