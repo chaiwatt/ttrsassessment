@@ -1251,6 +1251,22 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::get('edit/{id}','SettingAdminAssessmentCriteriaController@Edit')->name('setting.admin.assessment.criteria.edit');           
                     Route::post('editsave/{id}','SettingAdminAssessmentCriteriaController@EditSave')->name('setting.admin.assessment.criteria.editsave'); 
                     Route::get('delete/{id}','SettingAdminAssessmentCriteriaController@Delete')->name('setting.admin.assessment.criteria.delete');  
+                    Route::group(['prefix' => 'extracategory'], function(){
+                        Route::get('','SettingAdminAssessmentExtraCategoryController@Index')->name('setting.admin.assessment.extracategory');           
+                        Route::get('create','SettingAdminAssessmentExtraCategoryController@Create')->name('setting.admin.assessment.extracategory.create'); 
+                        Route::post('createsave','SettingAdminAssessmentExtraCategoryController@CreateSave')->name('setting.admin.assessment.extracategory.createsave'); 
+                        Route::get('edit/{id}','SettingAdminAssessmentExtraCategoryController@Edit')->name('setting.admin.assessment.extracategory.edit'); 
+                        Route::post('editesave/{id}','SettingAdminAssessmentExtraCategoryController@EditSave')->name('setting.admin.assessment.extracategory.editsave'); 
+                        Route::get('delete/{id}','SettingAdminAssessmentExtraCategoryController@Delete')->name('setting.admin.assessment.extracategory.delete'); 
+                    });
+                    Route::group(['prefix' => 'extracriteria'], function(){
+                        Route::get('','SettingAdminAssessmentExtraCriteriaController@Index')->name('setting.admin.assessment.extracriteria');       
+                        Route::get('create','SettingAdminAssessmentExtraCriteriaController@Create')->name('setting.admin.assessment.extracriteria.create'); 
+                        Route::post('createsave','SettingAdminAssessmentExtraCriteriaController@CreateSave')->name('setting.admin.assessment.extracriteria.createsave'); 
+                        Route::get('edit/{id}','SettingAdminAssessmentExtraCriteriaController@Edit')->name('setting.admin.assessment.extracriteria.edit'); 
+                        Route::post('editesave/{id}','SettingAdminAssessmentExtraCriteriaController@EditSave')->name('setting.admin.assessment.extracriteria.editsave'); 
+                        Route::get('delete/{id}','SettingAdminAssessmentExtraCriteriaController@Delete')->name('setting.admin.assessment.extracriteria.delete');     
+                    });
                 });
                 // Route::group(['prefix' => 'cluster'], function(){
                 //     Route::get('','SettingAdminAssessmentClusterController@Index')->name('setting.admin.assessment.cluster');           

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">เพิ่ม Sub Pillar</span></h4>
+                <h4> <span class="font-weight-semibold">เพิ่ม Extra Criteria</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> EV</a>
-                    <a href="{{route('setting.admin.assessment.subpillar')}}" class="breadcrumb-item"> Sub Pillar</a>
-                    <span class="breadcrumb-item active">เพิ่ม Sub Pillar</span>
+                    <a href="{{route('setting.admin.assessment.extracriteria')}}" class="breadcrumb-item"> Extra Criteria</a>
+                    <span class="breadcrumb-item active">เพิ่ม Extra Criteria</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -50,21 +50,24 @@
 				<!-- Multiple selection -->
 				<div class="card">
 					<div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.assessment.subpillar.createsave')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('setting.admin.assessment.extracriteria.editsave',['id' => $extracriteria->id])}}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
-                                    <label>Pillar</label><span class="text-danger">*</span>
-                                        <select name="pillarid" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2">
-                                            <option value="">===เลือก Pillar===</option>
-                                            @foreach ($pillars as $pillar)
-                                                <option value="{{$pillar->id}}">{{$pillar->name}}</option>
+                                    <label>Extra Category</label>
+                                        <select name="extracategory" aria-placeholder="extracategory" class="form-control form-control-lg form-control-select2">
+                                            @foreach ($extracaterories as $extracaterory)
+                                                <option value="{{$extracaterory->id}}" 
+                                                    @if ($extracaterory->id == $extracriteria->extra_category_id )
+                                                        selected
+                                                    @endif
+                                                    >{{$extracaterory->name}}</option>
                                             @endforeach
                                         </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Sub Pillar</label><span class="text-danger">*</span>
-                                    <input type="text" name="subpillar" value="{{old('subpillar')}}"  placeholder="subpillar" class="form-control form-control-lg form-control-lg"  >
+                                    <label>Extra Criteria</label>
+                                    <input type="text" name="extracriteria" value="{{$extracriteria->name}}"  placeholder="Extra Criteria" class="form-control form-control-lg form-control-lg" required >
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

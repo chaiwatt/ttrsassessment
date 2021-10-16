@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Sub Pillar Index</label>
-                                    <input type="text" name="subpillarindex" value="{{$subpillarindex->name}}"  placeholder="subpillar" class="form-control form-control-lg">
+                                    <input type="text" name="subpillarindex" value="{{$subpillarindex->name}}"  placeholder="subpillar" class="form-control form-control-lg" required>
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

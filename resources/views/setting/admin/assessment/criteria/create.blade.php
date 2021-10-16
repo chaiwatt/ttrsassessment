@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Criteria</label>
-                                        <input type="text"  name="criteria" value="{{old('criteria')}}"  placeholder="Criteria" class="form-control form-control-lg">
+                                        <input type="text"  name="criteria" value="{{old('criteria')}}"  placeholder="Criteria" class="form-control form-control-lg" required>
                                     </div>
                                     <div class="text-right">
                                         <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

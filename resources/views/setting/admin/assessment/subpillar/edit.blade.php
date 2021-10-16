@@ -54,7 +54,7 @@
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
-                                    <label>Pillar</label>
+                                    <label>Pillar</label><span class="text-danger">*</span>
                                         <select name="pillarid" id="pillar" aria-placeholder="pillar" class="form-control form-control-lg form-control-select2">
                                             @foreach ($pillars as $pillar)
                                             <option value="{{$pillar->id}}" @if ($subpillar->pillar_id == $pillar->id) selected @endif>{{$pillar->name}}</option>
@@ -62,8 +62,8 @@
                                         </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Sub Pillar</label>
-                                    <input type="text" name="subpillar" value="{{$subpillar->name}}"  placeholder="ร้อยละ" class="form-control form-control-lg">
+                                    <label>Sub Pillar</label><span class="text-danger">*</span>
+                                    <input type="text" name="subpillar" value="{{$subpillar->name}}"  placeholder="Sub Pillar" class="form-control form-control-lg" required>
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>

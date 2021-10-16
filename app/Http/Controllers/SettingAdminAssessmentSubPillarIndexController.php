@@ -18,6 +18,11 @@ class SettingAdminAssessmentSubPillarIndexController extends Controller
         return view('setting.admin.assessment.subpillarindex.create')->withPillars($pillars);
     }
     public function CreateSave(Request $request){
+
+        if(Empty($request->subpillar) || Empty($request->subpillarindex)){
+            return redirect()->back()->withError('กรุณากรอกข้อมูลให้ครบถ้วน');
+        }
+
         $subpillarindex = new SubPillarIndex();
         $subpillarindex->sub_pillar_id = $request->subpillar;
         $subpillarindex->name = $request->subpillarindex;

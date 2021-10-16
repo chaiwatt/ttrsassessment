@@ -19,6 +19,11 @@ class SettingAdminAssessmentCriteriaController extends Controller
         return view('setting.admin.assessment.criteria.create')->withPillars($pillars) ;
     }
     public function CreateSave(Request $request){
+
+        if(Empty($request->criteria) || Empty($request->subpillarindex)){
+            return redirect()->back()->withError('กรุณากรอกข้อมูลให้ครบถ้วน');
+        }
+
         $criteria = new Criteria();
         $criteria->sub_pillar_index_id = $request->subpillarindex;
         $criteria->name = $request->criteria;

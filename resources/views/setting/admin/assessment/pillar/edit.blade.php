@@ -54,8 +54,8 @@
                             @csrf
                             <fieldset>	
                                 <div class="form-group">
-                                    <label>ชื่อ</label>
-                                    <input type="text"  name="name" value="{{$pillar->name}}"  placeholder="ชื่อ Pillar" class="form-control form-control-lg">
+                                    <label>Pillar</label><span class="text-danger">*</span>
+                                    <input type="text"  name="name" value="{{$pillar->name}}"  placeholder="ชื่อ Pillar" class="form-control form-control-lg" required>
                                 </div>
                                 {{-- <div class="form-group">
                                     <label>ร้อยละ</label>
