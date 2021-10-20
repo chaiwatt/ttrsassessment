@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\ExpertDetail;
+use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
 use App\Model\EducationLevel;
+use App\Model\EmployEducation;
 use App\Http\Requests\CreateEducationLevelRequest;
 
 class SettingAdminDashboardEducationLevelController extends Controller
@@ -22,6 +25,10 @@ class SettingAdminDashboardEducationLevelController extends Controller
         return view('setting.admin.dashboard.educationlevel.create');
     }
     public function CreateSave(CreateEducationLevelRequest $request){
+        $check = EducationLevel::where('name',$request->educationlevel)->first();
+        if(!Empty($check)){
+            return redirect()->route('setting.admin.dashboard.educationlevel')->withError('มีการใช้ระดับการศึกษานี้แล้ว');
+        }
         $educationlevel = new EducationLevel();
         $educationlevel->name = $request->educationlevel;
         $educationlevel->save();
@@ -32,12 +39,28 @@ class SettingAdminDashboardEducationLevelController extends Controller
         return view('setting.admin.dashboard.educationlevel.edit')->withEducationlevel($educationlevel);
     }
     public function EditSave(CreateEducationLevelRequest $request,$id){
+
+        $check_expert_detail_educationlevel = ExpertDetail::where('education_level_id',$id)->get();
+        $check_officer_detail_educationlevel = OfficerDetail::where('education_level_id',$id)->get();
+        $check_employ_educationlevel = EmployEducation::where('employeducationlevel',$id)->get();
+
+        if($check_expert_detail_educationlevel->count() != 0 || $check_officer_detail_educationlevel->count() != 0 || $check_employ_educationlevel->count() != 0){
+            return redirect()->route('setting.admin.dashboard.educationlevel')->withError('มีการใช้ระดับการศึกษานี้แล้ว');
+        }
+
         $educationlevel = EducationLevel::find($id)->update([
             'name' => $request->educationlevel
         ]);
         return redirect()->route('setting.admin.dashboard.educationlevel')->withSuccess('แก้ไขระดับการศึกษาสำเร็จ');
     }
     public function Delete($id){
+        $check_expert_detail_educationlevel = ExpertDetail::where('education_level_id',$id)->get();
+        $check_officer_detail_educationlevel = OfficerDetail::where('education_level_id',$id)->get();
+        $check_employ_educationlevel = EmployEducation::where('employeducationlevel',$id)->get();
+
+        if($check_expert_detail_educationlevel->count() != 0 || $check_officer_detail_educationlevel->count() != 0 || $check_employ_educationlevel->count() != 0){
+            return redirect()->route('setting.admin.dashboard.educationlevel')->withError('มีการใช้ระดับการศึกษานี้แล้ว');
+        }
         EducationLevel::find($id)->delete();
         return redirect()->route('setting.admin.dashboard.educationlevel')->withSuccess('ลบระดับการศึกษาสำเร็จ');
     }
