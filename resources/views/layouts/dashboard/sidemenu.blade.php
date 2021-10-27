@@ -438,7 +438,7 @@
                 <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.assessment')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>Extra Criteria</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Extra Criteria">
-                        <li class="nav-item"><a href="{{route('setting.admin.assessment.extracategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">Criteria Category</a></li>		             
+                        <li class="nav-item"><a href="{{route('setting.admin.assessment.extracategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">Extra Category</a></li>		             
                         <li class="nav-item"><a href="{{route('setting.admin.assessment.extracriteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">Extra Criteria</a></li>		             
                     </ul>
                 </li>
