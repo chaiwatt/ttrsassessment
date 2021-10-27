@@ -211,7 +211,7 @@
                         <div class="col-md-6">
                             <div class="form-group form-group-feedback form-group-feedback-left" id="userselect">                    
                                 <select id="usergroup" name="usergroup" data-placeholder="ประเภท" class="form-control form-control-lg form-control-select2">
-                                    @foreach ($usergroups as $usergroup)
+                                    @foreach ($usergroups->take(2) as $usergroup)
                                         <option value="{{$usergroup->id}}" >{{$usergroup->name}}</option> 
                                     @endforeach
                                 </select>
