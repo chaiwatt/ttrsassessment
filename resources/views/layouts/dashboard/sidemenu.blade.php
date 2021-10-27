@@ -398,7 +398,7 @@
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.industryugroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.industryugroup')?'active':''}}">ผลการดำเนินงาน</a></li>	
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.pillar')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.pillar')?'active':''}}">แนะนำบริการ</a></li>	
                         <li class="nav-item"><a href="{{route('setting.admin.website.homepage.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.faq')?'active':''}}">คำถามที่พบบ่อย</a></li>
-                        <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu  {{starts_with(Route::currentRouteName(),'setting.admin.website.homepage.customsection')?'nav-item-expanded':''}}">
                             <a href="#" class="nav-link"><span>Custom Section</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Custom Section">
                                 @for ($i = 6; $i <= 10; $i++)
@@ -435,7 +435,7 @@
                     <li class="nav-item"><a href="{{route('setting.admin.assessment.extracriteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">Criteria Category</a></li>		             
                     <li class="nav-item"><a href="{{route('setting.admin.assessment.extracriteria')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">>Extra Criteria</a></li>		             
                 </ul> --}}
-                <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.system')?'nav-item-expanded':''}}">
+                <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.assessment')?'nav-item-expanded':''}}">
                     <a href="#" class="nav-link"><span>Extra Criteria</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Extra Criteria">
                         <li class="nav-item"><a href="{{route('setting.admin.assessment.extracategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.assessment.extracriteria')?'active':''}}">Criteria Category</a></li>		             
