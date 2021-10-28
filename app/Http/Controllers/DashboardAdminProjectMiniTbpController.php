@@ -143,9 +143,9 @@ class DashboardAdminProjectMiniTbpController extends Controller
 
     public function changekeyname($name){
         if($name == 'project'){
-            return 'ชื่อโครงการ/เทคโนโลยี';
+            return 'ชื่อโครงการ / เทคโนโลยี';
         }elseif($name == 'projecteng'){
-            return 'ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ';
+            return 'ชื่อโครงการ / เทคโนโลยี ภาษาอังกฤษ';
         }elseif($name == 'finance1'){
             return 'ขอสินเชื่อกับธนาคาร';
         }elseif($name == 'finance2'){

@@ -200,16 +200,16 @@
 									<div class="col-md-6">
 										<fieldset>	
 											<div class="form-group">
-												<label>ชื่อโครงการ/เทคโนโลยี<span class="text-danger">*</span></label>
-												<input type="text" id="project" name="project" value="{{old('project') ?? $minitbp->project}}"  placeholder="ชื่อโครงการ/เทคโนโลยี" class="form-control form-control-lg required" readonly >
+												<label>ชื่อโครงการ / เทคโนโลยี<span class="text-danger">*</span></label>
+												<input type="text" id="project" name="project" value="{{old('project') ?? $minitbp->project}}"  placeholder="ชื่อโครงการ / เทคโนโลยี" class="form-control form-control-lg required" readonly >
 											</div>
 										</fieldset>
 									</div>
 									<div class="col-md-6">
 										<fieldset>	
 											<div class="form-group">
-												<label>ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ (ถ้ามี)</label>
-												<input type="text" id="projecteng" name="projecteng" value="{{old('projecteng') ?? $minitbp->projecteng}}"  placeholder="ชื่อโครงการ/เทคโนโลยี ภาษาอังกฤษ" class="form-control form-control-lg" readonly>
+												<label>ชื่อโครงการ / เทคโนโลยี ภาษาอังกฤษ (ถ้ามี)</label>
+												<input type="text" id="projecteng" name="projecteng" value="{{old('projecteng') ?? $minitbp->projecteng}}"  placeholder="ชื่อโครงการ / เทคโนโลยี ภาษาอังกฤษ" class="form-control form-control-lg" readonly>
 											</div>
 										</fieldset>
 									</div>
