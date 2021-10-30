@@ -9,7 +9,7 @@
     {{-- <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'dashboard.expert.report')?'nav-item-expanded nav-item-open':''}}"> --}}
     <a href="{{route('dashboard.expert.report')}}" class="nav-link"><i class="icon-home4"></i> <span>แดชบอร์ด</span></a>
     <ul class="nav nav-group-sub" data-submenu-title="แดชบอร์ด">
-        <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">แดชบอร์ด</a></li>
+        <li class="nav-item"><a href="{{route('dashboard.expert.report')}}" class="nav-link">สรุปสถานภาพโครงการ</a></li>
         @if (Auth::user()->expertdetail->expert_type_id == 1)
             <li class="nav-item"><a href="{{route('dashboard.admin.project.assessment')}}" class="nav-link {{starts_with(Route::currentRouteName(),'dashboard.admin.project.assessment')?'active':''}}">ลงคะแนน
                 @if ($sharenotificationbubbles->where('notification_sub_category_id',7)->count() > 0)
