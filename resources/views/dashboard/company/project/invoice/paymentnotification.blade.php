@@ -93,9 +93,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>เอกสารการชำระเงิน</label>
+                                        <label>หลักฐานการชำระเงิน</label>
                                         <div class="input-group">													
-                                            <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="เอกสารการชำระเงิน"  >
+                                            <input type="text" id="filename" class="form-control form-control-lg border-right-0" placeholder="หลักฐานการชำระเงิน"  >
                                             <span class="input-group-append">
                                                 <button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลด</button>																																						
                                             </span>

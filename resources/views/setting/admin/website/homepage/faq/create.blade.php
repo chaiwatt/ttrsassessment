@@ -56,19 +56,19 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>คำถาม<span class="text-danger">*</span></label>
-                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="คำถาม" class="form-control form-control-lg stringformat120">
+                                            <label>คำถามภาษาไทย<span class="text-danger">*</span></label>
+                                            <input type="text"  name="title" value="{{old('title')}}"  placeholder="คำถามภาษาไทย" class="form-control form-control-lg stringformat120">
                                         </div>
                                         <div class="form-group">
-                                            <label>คำถาม(English)<span class="text-danger">*</span></label>
-                                            <input type="text"  name="titleeng" value="{{old('titleeng')}}"  placeholder="คำถาม" class="form-control form-control-lg stringformat120">
+                                            <label>คำถามภาษาอังกฤษ<span class="text-danger">*</span></label>
+                                            <input type="text"  name="titleeng" value="{{old('titleeng')}}"  placeholder="คำถามภาษาอังกฤษ" class="form-control form-control-lg stringformat120">
                                         </div>
                                         <div class="form-group">
-                                            <label>คำตอบ<span class="text-danger">*</span></label>
+                                            <label>คำตอบภาษาไทย<span class="text-danger">*</span></label>
 											<textarea name="body" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ" style="font-size:16px"></textarea>
                                         </div>      
                                         <div class="form-group">
-                                            <label>คำตอบ(English)<span class="text-danger">*</span></label>
+                                            <label>คำตอบภาษาอังกฤษ<span class="text-danger">*</span></label>
 											<textarea name="bodyeng" class="form-control mb-3 stringformat600" rows="7" cols="1" placeholder="คำตอบ" style="font-size:16px"></textarea>
                                         </div>                           
                                         <div class="form-group">

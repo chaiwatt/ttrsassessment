@@ -2512,9 +2512,11 @@
                         closeOnCancel: false
                     }).then((result) => {
                         $("#spinjoinproject"+dataid).attr("hidden",false);  
-                    if (result.value) {
-                        window.location.href = urlToRedirect;
-                    }
+                        if (result.value) {
+                            window.location.href = urlToRedirect;
+                        }else{
+                            $("#spinjoinproject"+dataid).attr("hidden",true); 
+                        }
                 });
             }
 </script>
