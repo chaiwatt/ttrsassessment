@@ -603,7 +603,7 @@
                             
                         </div>
                         <div>
-                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><span class="projectstat">จำนวนยื่น Mini Tbp</span></a>  
+                            <a href="{{route('dashboard.admin.realtimereport.project.minitbpbyyear')}}" class="text-white"><span class="projectstat">จำนวนยื่น Mini TBP</span></a>  
                             
                         </div>
                     </div>
