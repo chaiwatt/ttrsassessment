@@ -255,7 +255,7 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
         $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
         $wordtemplate->saveAs($fulltbp->fulltbp_code.'.docx');
-        return response()->download($fulltbp->fulltbp_code.'.docx')->deleteFileAfterSend(true);
+        return response()->download($fulltbp->fulltbp_code.'.docx');
     }
 
     public function Ppt($id){
