@@ -243,10 +243,10 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('projectname',$fulltbp->minitbp->project);
         $wordtemplate->setValue('score',ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')));
         $wordtemplate->setValue('grade',$fulltbp->projectgrade->grade);
-        $wordtemplate->setValue('management',strip_tags($evaluationresult->management));
-        $wordtemplate->setValue('technology',strip_tags($evaluationresult->technoandinnovation));
-        $wordtemplate->setValue('marketability',strip_tags($evaluationresult->marketability));
-        $wordtemplate->setValue('prospect',strip_tags($evaluationresult->businessprospect));
+        // $wordtemplate->setValue('management',strip_tags($evaluationresult->management));
+        // $wordtemplate->setValue('technology',strip_tags($evaluationresult->technoandinnovation));
+        // $wordtemplate->setValue('marketability',strip_tags($evaluationresult->marketability));
+        // $wordtemplate->setValue('prospect',strip_tags($evaluationresult->businessprospect));
         // $wordtemplate->setValue('leadername',$evaluationresult->contactname);
         // $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
         // $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
