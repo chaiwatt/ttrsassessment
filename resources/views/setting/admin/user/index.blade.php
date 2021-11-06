@@ -169,7 +169,7 @@
         $('#testtopictable').DataTable( {
             "paging":   true,
             "ordering": true,
-            "order": [[ 3, 'desc' ]],
+            "order": [[ 3, 'asc' ]],
             "info":     false,
             "pageLength" : 20,
             "language": {
