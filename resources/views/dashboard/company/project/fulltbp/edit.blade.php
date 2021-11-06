@@ -2158,7 +2158,7 @@ th {
 															<div class="col-md-12 mt-3">
 																
 																<div class="form-group">
-																	<label for=""><strong>1.14) ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ/หัวหน้าโครงการ)</strong></label><span class="text-danger">*</span>
+																	<label for=""><strong>1.14) ข้อมูลผู้รับผิดชอบหลักในโครงการ (ผู้จัดการโครงการ / หัวหน้าโครงการ)</strong></label><span class="text-danger">*</span>
 																</div>
 															</div>
 															<div class="col-md-6">
