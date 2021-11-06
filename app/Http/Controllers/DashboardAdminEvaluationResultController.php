@@ -234,14 +234,14 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate = new TemplateProcessor(asset("assets/dashboard/template/letter.docx"));
         // $wordtemplate->setValue('headercode',ThaiNumericConverter::toThaiNumeric($evaluationresult->headercode));
         // $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
-        // $wordtemplate->setValue('_month',$evaluationresult->month->name);
+        $wordtemplate->setValue('_month',$evaluationresult->month->name);
         // $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_year));
-        // $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
-        // $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
-        // $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
-        $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->fulltbp_code));
+        $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
+        $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
+        $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
+        // $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->fulltbp_code));
         $wordtemplate->setValue('projectname',$fulltbp->minitbp->project);
-        $wordtemplate->setValue('score',ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')));
+        // $wordtemplate->setValue('score',ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')));
         $wordtemplate->setValue('grade',$fulltbp->projectgrade->grade);
         $wordtemplate->setValue('management',strip_tags($evaluationresult->management));
         $wordtemplate->setValue('technology',strip_tags($evaluationresult->technoandinnovation));
@@ -250,10 +250,10 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('leadername',$evaluationresult->contactname);
         $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
         $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
-        $wordtemplate->setValue('phone',ThaiNumericConverter::toThaiNumeric($generalinfo->phone1));
-        $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
-        $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
-        $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
+        // $wordtemplate->setValue('phone',ThaiNumericConverter::toThaiNumeric($generalinfo->phone1));
+        // $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
+        // $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
+        // $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
         $wordtemplate->saveAs('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx');
         return response()->download('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx')->deleteFileAfterSend(true);
     }
