@@ -247,10 +247,10 @@ class DashboardAdminEvaluationResultController extends Controller
         // $wordtemplate->setValue('technology',strip_tags($evaluationresult->technoandinnovation));
         // $wordtemplate->setValue('marketability',strip_tags($evaluationresult->marketability));
         // $wordtemplate->setValue('prospect',strip_tags($evaluationresult->businessprospect));
-        $wordtemplate->setValue('management',$evaluationresult->management);
-        $wordtemplate->setValue('technology',$evaluationresult->technoandinnovation);
-        $wordtemplate->setValue('marketability',$evaluationresult->marketability);
-        $wordtemplate->setValue('prospect',$evaluationresult->businessprospect);
+        $wordtemplate->setValue('management','aaa');
+        $wordtemplate->setValue('technology','bbb');
+        $wordtemplate->setValue('marketability','ccc');
+        $wordtemplate->setValue('prospect','ddd');
         $wordtemplate->setValue('leadername',$evaluationresult->contactname);
         $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
         $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
