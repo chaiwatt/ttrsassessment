@@ -29,9 +29,26 @@
                                     </span>
                                 @enderror
                             </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <span class="input-group-text"><i class="icon-eye-blocked text-muted toggle_password"></i></span>
+                                            </span>
+                                            <input id="password" type="password" class="form-control form-control-lg" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
+                                            @error('password')
+                                                <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         
-                            <div class="input-group form-group form-group-feedback form-group-feedback-left" >
-                                {{-- <label>รหัสผ่าน:</label> --}}
+                            {{-- <div class="input-group form-group form-group-feedback form-group-feedback-left" >
+                                
                                 <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="รหัสผ่าน" autocomplete="new-password">
                                 
                                 <div class="form-control-feedback">
@@ -42,8 +59,8 @@
                                     <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i>{{ $message }}</span>
                                 @enderror
 
-                                {{-- <span id="password_input_error" class="form-text text-danger" hidden  ><i class="icon-cancel-circle2 text-danger"></i> กรุณากรอกรหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร</span> --}}
-                            </div>
+                             
+                            </div> --}}
             
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" title="ข้อแนะนำ: กรุณาใช้รหัสผ่านภาษาอังกฤษ ตัวเลข และอักขระพิเศษ รวมกันอย่างน้อย 8 ตัวอักษร" placeholder="ยืนยันรหัสผ่าน">
