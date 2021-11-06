@@ -31,7 +31,7 @@
                             </div>
 
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6"> --}}
                                 <div class="form-group row">
                                     <div class="col-lg-12">
                                         <div class="input-group">
@@ -45,7 +45,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                         
                             {{-- <div class="input-group form-group form-group-feedback form-group-feedback-left" >
                                 
