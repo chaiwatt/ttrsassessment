@@ -233,9 +233,9 @@ class DashboardAdminEvaluationResultController extends Controller
         //หนังสือแจ้งผลโครงการเลขที่ 2108002  ห้างหุ้นส่วน ไทยชนะรีสอร์ต จำกัด (1).pdf
         $wordtemplate = new TemplateProcessor(asset("assets/dashboard/template/letter.docx"));
         $wordtemplate->setValue('headercode',ThaiNumericConverter::toThaiNumeric($evaluationresult->headercode));
-        // $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
-        // $wordtemplate->setValue('_month',$evaluationresult->month->name);
-        // $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_year));
+        $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
+        $wordtemplate->setValue('_month',$evaluationresult->month->name);
+        $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_year));
         // $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
         // $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
         // $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
