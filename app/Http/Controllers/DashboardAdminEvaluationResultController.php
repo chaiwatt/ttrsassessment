@@ -236,11 +236,11 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
         $wordtemplate->setValue('_month',$evaluationresult->month->name);
         $wordtemplate->setValue('_year',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_year));
-        // $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
-        // $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
-        // $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
-        // $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->fulltbp_code));
-        // $wordtemplate->setValue('projectname',$fulltbp->minitbp->project);
+        $wordtemplate->setValue('respname',$fulltbp->fulltbpresponsibleperson->name);
+        $wordtemplate->setValue('resplastname',$fulltbp->fulltbpresponsibleperson->lastname);
+        $wordtemplate->setValue('company',$fulltbp->minitbp->businessplan->company->fullname);
+        $wordtemplate->setValue('projectno',ThaiNumericConverter::toThaiNumeric($fulltbp->fulltbp_code));
+        $wordtemplate->setValue('projectname',$fulltbp->minitbp->project);
         // $wordtemplate->setValue('score',ThaiNumericConverter::toThaiNumeric(number_format($fulltbp->projectgrade->percent, 2, '.', '')));
         // $wordtemplate->setValue('grade',$fulltbp->projectgrade->grade);
         // $wordtemplate->setValue('management',strip_tags($evaluationresult->management));
