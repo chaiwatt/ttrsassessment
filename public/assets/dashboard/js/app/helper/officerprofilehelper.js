@@ -495,6 +495,8 @@ $("#sameaddress").on('change', function() {
         
     }else{
          $("#contact_address_wrapper").attr("hidden",false);
+         $("#address1").val('');
+         $("#postalcode1").val('');
     }
 });
 
