@@ -254,8 +254,8 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
         $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
         $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
-        $wordtemplate->saveAs('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.'.docx');
-        return response()->download('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.'.docx')->deleteFileAfterSend(true);
+        $wordtemplate->saveAs($fulltbp->fulltbp_code.'.docx');
+        return response()->download($fulltbp->fulltbp_code.'.docx')->deleteFileAfterSend(true);
     }
 
     public function Ppt($id){
