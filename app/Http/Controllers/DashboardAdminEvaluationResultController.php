@@ -247,13 +247,13 @@ class DashboardAdminEvaluationResultController extends Controller
         // $wordtemplate->setValue('technology',strip_tags($evaluationresult->technoandinnovation));
         // $wordtemplate->setValue('marketability',strip_tags($evaluationresult->marketability));
         // $wordtemplate->setValue('prospect',strip_tags($evaluationresult->businessprospect));
-        // $wordtemplate->setValue('leadername',$evaluationresult->contactname);
-        // $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
-        // $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
-        // $wordtemplate->setValue('phone',ThaiNumericConverter::toThaiNumeric($generalinfo->phone1));
-        // $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
-        // $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
-        // $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
+        $wordtemplate->setValue('leadername',$evaluationresult->contactname);
+        $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
+        $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);
+        $wordtemplate->setValue('phone',ThaiNumericConverter::toThaiNumeric($generalinfo->phone1));
+        $wordtemplate->setValue('phoneext', ThaiNumericConverter::toThaiNumeric($evaluationresult->contactphoneext));
+        $wordtemplate->setValue('leaderemail',$evaluationresult->contactemail);
+        $wordtemplate->setValue('fax',ThaiNumericConverter::toThaiNumeric($evaluationresult->contactfax));
         $wordtemplate->saveAs('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx');
         return response()->download('หนังสือแจ้งผลโครงการเลขที่ '.$fulltbp->fulltbp_code.' '.$fulltbp->minitbp->businessplan->company->fullname.'.docx')->deleteFileAfterSend(true);
     }
