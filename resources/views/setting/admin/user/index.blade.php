@@ -169,6 +169,7 @@
         $('#testtopictable').DataTable( {
             "paging":   true,
             "ordering": true,
+            "order": [[ 3, 'desc' ]],
             "info":     false,
             "pageLength" : 20,
             "language": {
