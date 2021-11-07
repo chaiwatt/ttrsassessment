@@ -54,7 +54,7 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                        
-                                        @if (Auth::user()->user_type_id != 0)
+                                        @if ($user->user_type_id != 0)
                                             <div class="form-group">
                                                 <label>คำนำหน้า<span class="text-danger">*</span></label>
                                                 <select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2" disabled>
