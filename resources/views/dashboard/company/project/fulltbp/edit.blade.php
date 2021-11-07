@@ -2852,7 +2852,7 @@ th {
 																				@foreach ($fulltbpprojectplans as $key => $fulltbpprojectplan)
 																				
 																					<tr id= "{{$fulltbpprojectplan->id}}" >                                        
-																						<td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan"><i class="icon-trash text-danger"></i></a>
+																						<td style="max-width:350px"> {{$fulltbpprojectplan->name}} <a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="editprojectplan hiddenelement_fulltbp"><i class="icon-pencil5 text-info"></i></a> &nbsp;<a href="#" data-toggle="modal" data-id="{{$fulltbpprojectplan->id}}" class="deleteprojectplan hiddenelement_fulltbp"><i class="icon-trash text-danger"></i></a>
 																							 </td> 
 																						@php
 																							$_count = 1;
