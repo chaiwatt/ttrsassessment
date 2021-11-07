@@ -139,10 +139,10 @@
                                         <table style="width: 100%" class="table table-bordered table-striped" id="criteriatable" >
                                             <thead>
                                                 <tr class="bg-info">
-                                                    <th style="text-align: center">Pillar</th>  
-                                                    <th style="text-align: center">Sub Pillar</th>   
-                                                    <th style="text-align: center">Index</th>                                                                                
-                                                    <th style="text-align: center">Grade <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
+                                                    <th style="text-align: center;width:20%">Pillar</th>  
+                                                    <th style="text-align: center;width:20%">Sub Pillar</th>   
+                                                    <th style="text-align: center;width:20%">Index</th>                                                                                
+                                                    <th style="text-align: center;width:20%">Grade <a href="#" class="text-white" id="togglecomment"><i class="icon-comments"></i></a> </th>  
                                                     {{-- <th style="width:250px">Weightsum(Portion*Pillar*Weight*Score)</th>  --}}
                                                 </tr>
                                             </thead>
