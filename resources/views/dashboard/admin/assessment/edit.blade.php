@@ -191,7 +191,7 @@
                                                         <tr class="bg-info">
                                                             <th>Category</th>  
                                                             <th>Extra Criteria</th>   
-                                                            <th>Weight</th>                                                                                
+                                                            <th style="width:20%">Weight</th>                                                                                
                                                         </tr>
                                                     </thead>
                                                     <div class="theme_tail theme_tail_circle loadprogress">
