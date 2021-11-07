@@ -88,6 +88,9 @@
                                                 if($userprefix == 'อื่นๆ'){
                                                 $userprefix = $user->alter_prefix;
                                             }
+                                            if($user->user_type_id == 0){
+                                                $userprefix = '';
+                                            }
                                         @endphp
                                         <td style="white-space: nowrap"> {{$userprefix}}{{$user->name}}   {{$user->lastname}} </td>    
                                         <td> {{$user->email}}</td>    
