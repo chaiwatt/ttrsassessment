@@ -136,7 +136,7 @@
                                             <input type="password"  name="password" value="{{old('password')}}"  placeholder="รหัสผ่าน" class="form-control form-control-lg" readonly>
                                         </div> --}}
 
-                                        @if ($user->user_type_id < 5)
+                                        @if ($user->user_type_id < 5 & $user->user_type_id > 0)
                                             <div class="form-group">
                                                 <label>สถานะการใช้งาน<span class="text-danger">*</span></label>
                                                 <select name="userstatus" data-placeholder="สถานะการใช้งาน" class="form-control form-control-select2" >
