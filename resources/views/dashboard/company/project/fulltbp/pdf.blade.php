@@ -203,7 +203,7 @@
                     </div>
                     <div class="page-break"></div>
                     <div class="ml20 mt0" style="font-size:13px;page-break-inside: avoid;"><strong>1.9 ประวัติของบริษัท (Company Profile)</strong>
-                        <div style="font-size:13px">{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
+                        <div style="margin-top:-8px;font-size:13px">{!!$provider::FixBreak($fulltbp->minitbp->businessplan->company->companyhistory)!!}</div>
                     </div>
                     <div class="ml20 mt0" style="font-size:13px"><strong>1.10 ข้อมูลผู้บริหารระดับสูง (CEO หรือ กรรมการผู้จัดการ)</strong>
                         <div style="page-break-inside: avoid;">
