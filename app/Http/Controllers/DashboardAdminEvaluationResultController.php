@@ -230,7 +230,6 @@ class DashboardAdminEvaluationResultController extends Controller
         $evaluationresult = EvaluationResult::find($id);
         $fulltbp = FullTbp::find($evaluationresult->full_tbp_id);
         $generalinfo = GeneralInfo::first();
-        //หนังสือแจ้งผลโครงการเลขที่ 2108002  ห้างหุ้นส่วน ไทยชนะรีสอร์ต จำกัด (1).pdf
         $wordtemplate = new TemplateProcessor(asset("assets/dashboard/template/letter.docx"));
         $wordtemplate->setValue('headercode',ThaiNumericConverter::toThaiNumeric($evaluationresult->headercode));
         $wordtemplate->setValue('_day',ThaiNumericConverter::toThaiNumeric($evaluationresult->evaluation_day_id));
@@ -247,10 +246,6 @@ class DashboardAdminEvaluationResultController extends Controller
         $wordtemplate->setValue('technology',strip_tags(str_replace('&nbsp;', "", $evaluationresult->technoandinnovation)));
         $wordtemplate->setValue('marketability',strip_tags(str_replace('&nbsp;', "", $evaluationresult->marketability)));
         $wordtemplate->setValue('prospect',strip_tags(str_replace('&nbsp;', "", $evaluationresult->businessprospect)));
-        // $wordtemplate->setValue('management','aaa');
-        // $wordtemplate->setValue('technology','bbb');
-        // $wordtemplate->setValue('marketability','ccc');
-        // $wordtemplate->setValue('prospect','ddd');
         $wordtemplate->setValue('leadername',$evaluationresult->contactname);
         $wordtemplate->setValue('leaderlastname',$evaluationresult->contactlastname);
         $wordtemplate->setValue('leaderposition',$evaluationresult->contactposition);

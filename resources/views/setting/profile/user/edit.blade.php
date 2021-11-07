@@ -665,12 +665,7 @@
 										</div>
 									</div>
 								@endif
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label></span>
-										<input type="text" name="company" value="{{old('company') ?? $user->company->name}}" class="form-control form-control-lg stringformat30">
-									</div>
-								</div>
+
 
 								<div class="col-md-6">                                          
 									<div class="form-group">
@@ -701,6 +696,13 @@
 
 											@endforeach
 										</select>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>@if (Auth::user()->user_group_id == 1) ชื่อนิติบุคคล (กรอกเฉพาะชื่อ)<span class="text-danger">*</span> @else ชื่อสถานประกอบการ @endif</label></span>
+										<input type="text" name="company" value="{{old('company') ?? $user->company->name}}" class="form-control form-control-lg stringformat30">
 									</div>
 								</div>
 
@@ -766,7 +768,7 @@
 								</div>
 								<div class="col-md-6">                                          
 									<div class="form-group">
-										<label>หมวดหมู่ย่อย ISIC {{old('subisic')}} </label>
+										<label>หมวดหมู่ย่อย ISIC</label>
 										<select name="subisic" id="subisic" data-placeholder="หมวดหมู่ย่อย ISIC" class="form-control form-control-select2">
 											@foreach ($isicsubs as $isicsub)
 												<option value="{{$isicsub->id}}" 
