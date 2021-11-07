@@ -4602,14 +4602,14 @@ $("#ganttnummonth").on('change', function(e) {
 
     var _maxrow = $('#maxrow').val();
     if(_maxrow > 0){
-        popupmessage = route.popupmessages.find(x => x.id ==5);
+        popupmessage = route.popupmessages.find(x => x.id == 29);
         Swal.fire({
             title: popupmessage['title'],
             html: popupmessage['message'],
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'ยืนยันลบ',
+            confirmButtonText: 'ยืนยัน',
             cancelButtonText: 'ยกเลิก',
             closeOnConfirm: false,
             closeOnCancel: false
