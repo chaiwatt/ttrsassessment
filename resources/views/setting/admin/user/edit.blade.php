@@ -67,12 +67,11 @@
                                         
                                         @php
                                             $readonly = 'readonly';
-                                            if (Auth::user()->user_type_id >= 5) {
-                                                if ($user->user_type_id != 0) {
+                                            if(Auth::user()->user_type_id == 0){
+                                                if($user->user_type_id == 0){
                                                     $readonly = '';
                                                 }
-                                            }else if(Auth::user()->user_type_id == 0){
-                                                $readonly = '';
+                                                
                                             }
                                         @endphp
                                         <div class="form-group">
