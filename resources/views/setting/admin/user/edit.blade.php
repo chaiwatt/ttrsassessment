@@ -53,39 +53,62 @@
                             <div class="row">	
                                 <div class="col-md-12">
                                     <fieldset>	
-                                        <div class="form-group">
-                                            <label>คำนำหน้า<span class="text-danger">*</span></label>
-                                            <select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2" disabled>
-                                                @foreach ($prefixes as $prefix)
-                                                    <option value="{{$prefix->id}}" @if($user->prefix_id == $prefix->id) selected @endif>{{$prefix->name}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                       
+                                        @if (Auth::user()->user_type_id != 0)
+                                            <div class="form-group">
+                                                <label>คำนำหน้า<span class="text-danger">*</span></label>
+                                                <select name="prefix" data-placeholder="คำนำหน้า" class="form-control form-control-select2" disabled>
+                                                    @foreach ($prefixes as $prefix)
+                                                        <option value="{{$prefix->id}}" @if($user->prefix_id == $prefix->id) selected @endif>{{$prefix->name}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        
+                                        @php
+                                            $readonly = 'readonly';
+                                            if (Auth::user()->user_type_id >= 5) {
+                                                if ($user->user_type_id != 0) {
+                                                    $readonly = '';
+                                                }
+                                            }else if(Auth::user()->user_type_id == 0){
+                                                $readonly = '';
+                                            }
+                                        @endphp
                                         <div class="form-group">
                                             <label>ชื่อ<span class="text-danger">*</span></label>
-                                            <input type="text"  name="name" id="name" value="{{$user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg" readonly>
+                                            <input type="text"  name="name" id="name" value="{{$user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg" 
+                                          
+                                                {{$readonly}}
+                                     
+                                            
+                                            >
                                         </div>
                                         <div class="form-group">
                                             <label>นามสกุล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="lastname" id="lastname" value="{{$user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg" readonly>
+                                            <input type="text"  name="lastname" id="lastname" value="{{$user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg" 
+                                            {{$readonly}}
+                                            >
                                         </div>
-
-                                        <div class="form-group">
-                                            <label>กลุ่มผู้ใช้งาน<span class="text-danger">*</span></label>
-                                            <select name="usertype" id="usertype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
-                                                @foreach ($usertypes as $usertype)
-                                                    @php
-                                                    $mytype = 1;
-                                                        if($user->user_type_id == 1 && $user->user_group_id == 2){
-                                                            $mytype = 2;
-                                                        }else{
-                                                            $mytype = $user->user_type_id;
-                                                        }
-                                                    @endphp
-                                                    <option value="{{$usertype->id}}" @if($mytype == $usertype->id) selected @endif>{{@$usertype->name}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        @if ($user->user_type_id !=0)
+                                            <div class="form-group">
+                                                <label>กลุ่มผู้ใช้งาน<span class="text-danger">*</span></label>
+                                                <select name="usertype" id="usertype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
+                                                    @foreach ($usertypes as $usertype)
+                                                        @php
+                                                        $mytype = 1;
+                                                            if($user->user_type_id == 1 && $user->user_group_id == 2){
+                                                                $mytype = 2;
+                                                            }else{
+                                                                $mytype = $user->user_type_id;
+                                                            }
+                                                        @endphp
+                                                        <option value="{{$usertype->id}}" @if($mytype == $usertype->id) selected @endif>{{@$usertype->name}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        
                                         <div class="form-group" id="experttype_wrapper"  @if ($user->user_type_id != 3 ) hidden @endif >
                                             <label>ประเภทผู้เชี่ยวชาญ</label>
                                             <select name="experttype" id="experttype" data-placeholder="กลุ่มผู้ใช้งาน" class="form-control form-control-select2" >
@@ -93,9 +116,20 @@
                                                 <option value="2" @if ($user->user_type_id == 3  && $user->expertdetail->expert_type_id  == 2) selected @endif  >ผู้เชี่ยวชาญภายนอก</option> 
                                             </select>
                                         </div>
+                                        @php
+                                            $readonly = 'readonly';
+                                            if (Auth::user()->user_type_id >= 5) {
+                                                if ($user->user_type_id == 0) {
+                                                    $readonly = '';
+                                                }
+                                            }
+                                        @endphp
                                         <div class="form-group">
                                             <label>อีเมล<span class="text-danger">*</span></label>
-                                            <input type="text"  name="email" value="{{$user->email}}"  placeholder="อีเมล" class="form-control form-control-lg" readonly>
+                                            <input type="text"  name="email" value="{{$user->email}}"  placeholder="อีเมล" class="form-control form-control-lg" 
+                                       
+                                            {{$readonly}}
+                                            >
                                         </div>
                                         {{-- <div class="form-group">
                                             <label>รหัสผ่าน<span class="text-danger">*</span></label>
@@ -103,14 +137,14 @@
                                         </div> --}}
 
                                         @if ($user->user_type_id < 5)
-                                        <div class="form-group">
-                                            <label>สถานะการใช้งาน<span class="text-danger">*</span></label>
-                                            <select name="userstatus" data-placeholder="สถานะการใช้งาน" class="form-control form-control-select2" >
-                                                @foreach ($userstatuses as $userstatus)
-                                                    <option value="{{$userstatus->id}}" @if($user->user_status_id == $userstatus->id) selected @endif>{{$userstatus->name}}</option> 
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                            <div class="form-group">
+                                                <label>สถานะการใช้งาน<span class="text-danger">*</span></label>
+                                                <select name="userstatus" data-placeholder="สถานะการใช้งาน" class="form-control form-control-select2" >
+                                                    @foreach ($userstatuses as $userstatus)
+                                                        <option value="{{$userstatus->id}}" @if($user->user_status_id == $userstatus->id) selected @endif>{{$userstatus->name}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         @endif
 
                                     </fieldset>

@@ -71,8 +71,8 @@ class SettingAdminUserController extends Controller
                                     ->withUserstatuses($userstatuses)
                                     ->withUser($user);
     }
-    public function EditSave(CreateUserRequest $request,$id){
-        // return $request->userstatus;
+    public function EditSave(Request $request,$id){
+
         $user = User::find($id);
         if($user->user_type_id == 5 && $request->usertype !=5){
             return redirect()->route('setting.admin.user')->withError('ไม่สามารถแก้ไขกลุ่มผู้ใช้งาน Admin');
@@ -82,8 +82,31 @@ class SettingAdminUserController extends Controller
             return redirect()->route('setting.admin.user')->withError('ไม่สามารถแก้ไขกลุ่มผู้ใช้งาน Manager');
         }
 
-       
-        if($user->user_type_id == 1){
+        if($user->user_type_id == 0){
+          
+
+
+            if(Auth::user()->user_type_id == 0){
+                User::find($id)->update([
+                    'name' => $request->name,
+                    'lastname' => $request->lastname,
+                ]);
+            }else{
+                $check = User::where('email',$request->email)->first();
+                if(!Empty($check)){
+                    if($check->email != $user->email){
+                        return redirect()->back()->withError('ไม่สามารถใช้อีเมลนี้ได้');
+                    }
+                }
+    
+                User::find($id)->update([
+                    'email' => $request->email,
+                ]);
+            }
+    
+            CreateUserLog::createLog('แก้ไขข้อมูลผู้ใช้งาน (' . $user->name . ' ' . $user->lastname .')');
+            return redirect()->route('setting.admin.user')->withSuccess('แก้ไขผู้ใช้งานสำเร็จ');
+        }else if($user->user_type_id == 1){
             if($request->usertype < 3){
                 if($request->usertype == 1){ //นิติบุคคล
                     User::find($id)->update([
