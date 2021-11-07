@@ -145,7 +145,7 @@ class ExpertController extends Controller
                 $routename = route('dashboard.admin.report');
             }
 
-            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.$fullcompanyname.
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project . $fullcompanyname,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญ โครงการ'.$minitbp->project.$fullcompanyname.
             "<div class='mt-2 mb-1'><a href=".route('dashboard.expert.report.accept',['id' => $request->fulltbpid])." class='btn btn-sm bg-success mr-1 acceptexpertassignment' >ยอมรับ</a><a href=".route('dashboard.expert.report.reject',['id' => $request->fulltbpid])." class='btn btn-sm bg-warning rejectexpertassignment' data-id=".$request->id.">ปฏิเสธ</a></div>"
             ,Auth::user()->id,$request->id);
 
@@ -153,7 +153,7 @@ class ExpertController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $request->id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project .$fullcompanyname;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname;
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
@@ -174,7 +174,7 @@ class ExpertController extends Controller
             $projectlog->action = 'Manager มอบหมายผู้เชี่ยวชาญ (รายละเอียด: คุณ' . $expert->name . ' ' .$expert->lastname . ')';
             $projectlog->save();
 
-            EmailBox::send($expert->email,'','TTRS: การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send($expert->email,'','TTRS: การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project .$fullcompanyname,'เรียน คุณ'.$expert->name . ' ' .$expert->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญ โครงการ'.$minitbp->project.$fullcompanyname.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.$routename.'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     }
 
     public function ExpertReject(Request $request){

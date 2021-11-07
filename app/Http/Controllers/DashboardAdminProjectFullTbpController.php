@@ -553,7 +553,7 @@ class DashboardAdminProjectFullTbpController extends Controller
             $expertassignment = ExpertAssignment::find($request->id);
             $minitbp = MiniTBP::find(FullTbp::find($request->fulltbpid)->mini_tbp_id);
             
-            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project
+            $messagebox = Message::sendMessage('การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญ โครงการ'.$minitbp->project
             // "<div class='mt-2 mb-1'><a href=".route('dashboard.expert.report.accept',['id' => $fulltbp->id])." class='btn btn-sm bg-success mr-1 acceptexpertassignment' >ยอมรับ</a><a href=".route('dashboard.expert.report.reject',['id' => $fulltbp->id])." class='btn btn-sm bg-warning rejectexpertassignment' data-id=".$expertassignment->user_id.">ปฏิเสธ</a></div>"
             ,Auth::user()->id,User::find($expertassignment->user_id)->id);
 
@@ -561,14 +561,14 @@ class DashboardAdminProjectFullTbpController extends Controller
             $alertmessage->user_id = $auth->id;
             $alertmessage->target_user_id = $expertassignment->user_id;
             $alertmessage->messagebox_id = $messagebox->id;
-            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project;
+            $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString(). ' ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญ โครงการ'.$minitbp->project;
             $alertmessage->save();
 
             MessageBox::find($messagebox->id)->update([
                 'alertmessage_id' => $alertmessage->id
             ]);
 
-            EmailBox::send(User::find($expertassignment->user_id)->email,'','TTRS: การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียน คุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญในโครงการ'.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+            EmailBox::send(User::find($expertassignment->user_id)->email,'','TTRS: การมอบหมายผู้เชี่ยวชาญ โครงการ'.$minitbp->project,'เรียน คุณ'.User::find($expertassignment->user_id)->name . ' ' .User::find($expertassignment->user_id)->lastname.'<br><br> ท่านได้รับมอบหมายให้เป็นผู้เชี่ยวชาญ โครงการ'.$minitbp->project.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('dashboard.expert.report').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
    
         }else{
             FullTbp::find($request->fulltbpid)->update([
