@@ -170,6 +170,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::post('adduserposition','Api\ProfileController@AddUserPosition')->name('api.profile.adduserposition');           
         Route::post('addaddress','Api\ProfileController@AddAddress')->name('api.profile.addaddress'); 
         Route::post('deleteaddress','Api\ProfileController@DeleteAddress')->name('api.profile.deleteaddress'); 
+        Route::post('reorderofficer','Api\ProfileController@ReOrderOfficer')->name('api.profile.reorderofficer'); 
     }); 
 }); 
 
@@ -1232,6 +1233,8 @@ Route::group(['middleware' => 'auth'], function(){
                 Route::get('edit/{id}','SettingAdminUserController@Edit')->name('setting.admin.user.edit'); 
                 Route::post('editsave/{id}','SettingAdminUserController@EditSave')->name('setting.admin.user.editsave'); 
                 Route::get('delete/{id}','SettingAdminUserController@Delete')->name('setting.admin.user.delete'); 
+                Route::get('import','SettingAdminUserController@Import')->name('setting.admin.user.import'); 
+                Route::post('importsave','SettingAdminUserController@ImportSave')->name('setting.admin.user.importsave'); 
             });
             Route::group(['prefix' => 'assessment'], function(){
                 Route::group(['prefix' => 'criteriagroup'], function(){
@@ -1348,6 +1351,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'officer'], function(){
                 Route::get('edit/{userid}','SettingProfileOfficerController@Edit')->name('setting.profile.officer.edit'); 
                 Route::post('editsave/{userid}','SettingProfileOfficerController@EditSave')->name('setting.profile.officer.editsave'); 
+                // Route::get('edit/{userid}','SettingProfileOfficerController@ReOrder')->name('setting.profile.officer.reorder'); 
             });
         });
     });   

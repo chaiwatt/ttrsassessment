@@ -64,25 +64,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>รหัสหน่วยงาน<span class="text-danger">*</span></label>
-                                            <input type="text" name="headercode" id="headercode" value="{{$evaluationresult->headercode}}"  placeholder="รหัสหน่วยงาน" class="form-control form-control-lg required">
+                                            <input type="text" name="headercode" id="headercode" value="{{old('headercode') ?? $evaluationresult->headercode}}"  placeholder="รหัสหน่วยงาน" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>ชื่อ<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactname" id="contactname" value="{{$evaluationresult->contactname ?? $user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg required">
+                                            <input type="text" name="contactname" id="contactname" value="{{old('contactname') ??  $evaluationresult->contactname ?? $user->name}}"  placeholder="ชื่อ" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>นามสกุล<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactlastname" id="contactlastname" value="{{$evaluationresult->contactlastname ?? $user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg required">
+                                            <input type="text" name="contactlastname" id="contactlastname" value="{{old('contactlastname') ??  $evaluationresult->contactlastname ?? $user->lastname}}"  placeholder="นามสกุล" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>ตำแหน่ง<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactposition" id="contactposition" value="{{$evaluationresult->contactposition ?? $user->expertposition}}"  placeholder="ตำแหน่ง" class="form-control form-control-lg required">
+                                            <input type="text" name="contactposition" id="contactposition" value="{{old('contactposition') ?? $evaluationresult->contactposition ?? $user->expertposition}}"  placeholder="ตำแหน่ง" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -94,7 +94,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>เบอร์ต่อ<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactphoneext" id="contactphoneext" value="{{$evaluationresult->contactphoneext}}"  placeholder="เบอร์ต่อ" class="form-control form-control-lg required">
+                                            <input type="text" name="contactphoneext" id="contactphoneext" value="{{old('contactphoneext') ?? $evaluationresult->contactphoneext}}"  placeholder="เบอร์ต่อ" class="form-control form-control-lg required">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

@@ -10,9 +10,9 @@
                 <h4> <span class="font-weight-semibold">ผู้ใช้งาน</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
-            {{-- <div class="header-elements d-none">
-                <a href="{{route('setting.admin.user.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มผู้ใช้งานระบบ<b><i class="icon-plus3"></i></b></a>
-            </div> --}}
+            <div class="header-elements d-none">
+                <a href="{{route('setting.admin.user.import')}}" class="btn btn-labeled btn-labeled-right bg-info">นำเข้าไฟล์ Excel<b><i class="icon-plus3"></i></b></a>
+            </div>
         </div>
 
         <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
@@ -172,7 +172,7 @@
         $('#testtopictable').DataTable( {
             "paging":   true,
             "ordering": true,
-            "order": [[ 3, 'asc' ]],
+            "order": [[ 0, 'asc' ]],
             "info":     false,
             "pageLength" : 20,
             "language": {

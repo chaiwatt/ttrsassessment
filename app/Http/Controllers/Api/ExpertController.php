@@ -48,10 +48,11 @@ class ExpertController extends Controller
         return response()->json($experteducations);  
     }
     public function AddExpertField(Request $request){
+        // $check = ExpertField::where('user_id',$auth->id)->count() + 1;
         $auth = Auth::user();
         $expertfield = new ExpertField();
         $expertfield->user_id = $auth->id;
-        $expertfield->order = $request->expertfieldnum;
+        $expertfield->order = ExpertField::where('user_id',$auth->id)->count() + 1;// $request->expertfieldnum;
         $expertfield->detail = $request->expertfielddetail;
         $expertfield->save();
         $expertfields = ExpertField::where('user_id',$auth->id)->orderBy('order','asc')->get();

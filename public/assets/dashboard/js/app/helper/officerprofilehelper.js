@@ -39,7 +39,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
                     var html ='';
                     data.forEach(function (expertdoc,index) {
                      html += `<tr class="item">                                        
-                         <td> <span>${expertdoc.order}</span>  </td>                                            
+                         <td style="text-align:center"> <span>${expertdoc.order}</span>  </td>                                            
                          <td> ${expertdoc.detail} </td> 
                          <td style="width:1%;white-space: nowrap"> 
                          <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
@@ -103,7 +103,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
                             var html ='';
                             data.forEach(function (expertdoc,index) {
                              html += `<tr class="item">                                        
-                                 <td> <span>${expertdoc.order}</span>  </td>                                            
+                                 <td style="text-align:center"> <span>${expertdoc.order}</span>  </td>                                            
                                  <td> ${expertdoc.detail} </td> 
                                  <td style="width:1%;white-space: nowrap"> 
                                  <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
@@ -152,7 +152,7 @@ $("#btn_modal_add_expertfield").on('click', function() {
                     var html ='';
                     data.forEach(function (expertdoc,index) {
                      html += `<tr class="item">                                        
-                         <td> <span>${expertdoc.order}</span>  </td>                                            
+                         <td style="text-align:center"> <span>${expertdoc.order}</span>  </td>                                            
                          <td> ${expertdoc.detail} </td> 
                          <td style="width:1%;white-space: nowrap"> 
                          <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
@@ -209,7 +209,7 @@ $("#btn_modal_edit_expertfield").on('click', function() {
             var html ='';
             data.forEach(function (expertdoc,index) {
              html += `<tr class="item">                                        
-                 <td> <span>${expertdoc.order}</span> </td>                                            
+                 <td style="text-align:center"> <span>${expertdoc.order}</span> </td>                                            
                  <td> ${expertdoc.detail} </td> 
                  <td style="width:1%;white-space: nowrap"> 
                      <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal">ลบ</a>
@@ -246,7 +246,7 @@ $(document).on("click",".deleteexpertfield",function(e){
                 var html = ``;
                 data.forEach(function (expertdoc,index) {
                     html += `<tr class="item">                                        
-                        <td> <span>${expertdoc.order}</span> </td>                                            
+                        <td style="text-align:center"> <span>${expertdoc.order}</span> </td>                                            
                         <td> ${expertdoc.detail} </td> 
                         <td style="width:1%;white-space: nowrap"> 
                         <a href="#" data-id="${expertdoc.id}" data-name="" class="btn btn-sm bg-danger deleteexpertfield" data-toggle="modal" ">ลบ</a>

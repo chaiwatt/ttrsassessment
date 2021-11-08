@@ -3,14 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Carbon\Carbon;
 use App\Model\Company;
+use App\Helper\Message;
 use App\Helper\EmailBox;
 use App\Model\UserGroup;
+use App\Model\MessageBox;
 use App\Model\GeneralInfo;
+use App\Model\AlertMessage;
 use App\Model\BusinessPlan;
 use App\Model\ExpertDetail;
 use App\Model\OfficerDetail;
 use App\Helper\CreateCompany;
+use App\Helper\DateConversion;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,11 +34,13 @@ class RegisterController extends Controller
             if(Auth::user()->user_type_id <= 2){
                 return 'dashboard/company/report';
             }else if(Auth::user()->user_type_id == 3){
+                $this->notifyadmin(Auth::user(),'ผู้เชี่ยวชาญ');
                 if($generalinfo->verify_expert_status_id == 2){
+                    
                     if(Auth::user()->verify_expert == 1){
                         Auth::logout();
                         Session::flush();
-                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ Admin');
+                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
                     }else{
                         return 'dashboard/expert/report';
                     }
@@ -41,11 +48,14 @@ class RegisterController extends Controller
                     return 'dashboard/expert/report';
                 }
             }else if(Auth::user()->user_type_id >= 4){
+           
+                $this->notifyadmin(Auth::user(),'เจ้าหน้าที่ TTRS');
                 if($generalinfo->verify_expert_status_id == 2){
+                    
                     if(Auth::user()->verify_expert == 1){
                         Auth::logout();
                         Session::flush();
-                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อ Admin');
+                        return redirect()->route('login')->withError('บัญชียังไม่ได้เปิดใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
                     }else{
                         return 'dashboard/admin/report';
                     }
@@ -60,6 +70,58 @@ class RegisterController extends Controller
         }else if($generalinfo->verify_type_id == 4){
             return 'sms';
         }
+    }
+
+    public function notifyadmin($user,$position){
+        $admin = User::where('user_type_id',5)->first();
+        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . 'โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $user->id;
+        $alertmessage->target_user_id = $admin->id;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>';
+        $alertmessage->save();
+        
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
+        
+        EmailBox::send($admin->email,'','TTRS: ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'เรียน คุณ'.$admin->name .' '.$admin->lastname.' <br><br> มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    
+
+        $admin = User::where('user_type_id',6)->first();
+        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . 'โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $user->id;
+        $alertmessage->target_user_id = $admin->id;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>';
+        $alertmessage->save();
+        
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
+        
+        EmailBox::send($admin->email,'','TTRS: ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'เรียน คุณ'.$admin->name .' '.$admin->lastname.' <br><br> มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    
+        $admin = User::where('user_type_id',0)->first();
+        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . 'โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
+
+        $alertmessage = new AlertMessage();
+        $alertmessage->user_id = $user->id;
+        $alertmessage->target_user_id = $admin->id;
+        $alertmessage->messagebox_id = $messagebox->id;
+        $alertmessage->detail = DateConversion::engToThaiDate(Carbon::now()->toDateString()) . ' ' . Carbon::now()->toTimeString().' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>';
+        $alertmessage->save();
+        
+        MessageBox::find($messagebox->id)->update([
+            'alertmessage_id' => $alertmessage->id
+        ]);
+        
+        EmailBox::send($admin->email,'','TTRS: ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'เรียน คุณ'.$admin->name .' '.$admin->lastname.' <br><br> มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
+    
     }
 
     public function __construct()

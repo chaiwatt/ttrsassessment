@@ -10,13 +10,15 @@ use App\Model\UserLog;
 use App\Model\UserType;
 use App\Model\UserStatus;
 use App\Model\ExpertDetail;
+use App\Imports\UsersImport;
 use App\Model\OfficerDetail;
 use Illuminate\Http\Request;
 use App\Helper\CreateUserLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\CreateUserRequest;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CreateUserRequest;
 
 class SettingAdminUserController extends Controller
 {
@@ -285,4 +287,13 @@ class SettingAdminUserController extends Controller
         return view('setting.admin.user.userlog')->withUserlogs($userlogs);
     }
 
+    public function Import(){
+        return view('setting.admin.user.import');
+    }
+
+    public function ImportSave(){
+        Excel::import(new UsersImport,request()->file('file'));
+             
+        return redirect()->route('setting.admin.user')->withSuccess('นำเข้าสำเร็จ');
+    }
 }
