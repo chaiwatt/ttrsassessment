@@ -25,7 +25,7 @@ class EditProfileRequest extends FormRequest
                                 ],
             'registeredcapital' => 'required_if:usergroup,==,1,between:1,100000000000000',
             'paidupcapital' => 'required_if:usergroup,==,1',
-            'phone' => 'required|min:10|max:10',
+            'phone' => 'required',
             'email' => 'required',
             'address' => 'required',
             'province' => 'required',
