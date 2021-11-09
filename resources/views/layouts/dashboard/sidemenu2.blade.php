@@ -20,7 +20,7 @@
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
              
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าบทความ</a></li>		             
-                <li class="nav-item"><a href="{{route('setting.admin.website.webpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.webpage')?'active':''}}">หน้าเพจ</a></li>		             
+                <li class="nav-item"><a href="{{route('setting.admin.website.webpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.webpage')?'active':''}}">หน้าเพจ</a></li>		             
               
                 <li class="nav-item"><a href="{{route('setting.admin.website.menu')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.menu')?'active':''}}">เมนู</a></li>	
              
