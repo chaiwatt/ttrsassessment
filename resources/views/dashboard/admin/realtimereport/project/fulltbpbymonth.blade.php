@@ -170,8 +170,8 @@
             "paging":   true,
             "ordering": true,
             "order": [
-                [ 5, 'desc' ],
-                [ 1, 'asc' ],
+                // [ 5, 'desc' ],
+                [ 0, 'asc' ],
                 ],
             "info":     false,
             "pageLength" : 50,

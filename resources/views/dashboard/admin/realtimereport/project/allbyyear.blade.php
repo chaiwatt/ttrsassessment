@@ -150,7 +150,7 @@
             "searching": false,
             "paging":   true,
             "ordering": true,
-            "order": [[ 4, 'desc' ]],
+            "order": [[ 0, 'asc' ]],
             "info":     false,
             "pageLength" : 20,
             "language": {

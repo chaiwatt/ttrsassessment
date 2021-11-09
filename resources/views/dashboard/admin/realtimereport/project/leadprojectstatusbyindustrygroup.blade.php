@@ -177,7 +177,7 @@
             "paging":   true,
             "ordering": true,
             "order": [
-                [ 1, 'desc' ],
+                [ 0, 'asc' ],
                 ],
             "info":     false,
             "pageLength" : 50,
