@@ -76,13 +76,13 @@
                                     <tr class="bg-info">
                                         <th style="width:150px;text-align: center">#</th>
                                         <th style="text-align: center">กลุ่มอุตสาหกรรม</th>                               
-                                        <th style="text-align: center">เพิ่มเติม</th>
+                                        <th style="width:1%;white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($industrygroups as $key => $industrygroup)
                                     <tr>    
-                                        <td style="text-align: center"> {{$key+1}} </td>
+                                        <td style="text-align: center;white-space: nowrap"> {{$key+1}} </td>
                                         <td> {{$industrygroup->name}} </td>                                         
                                         <td style="text-align: center"> 
                                             <a href="{{route('setting.admin.dashboard.industrygroup.edit',['id' => $industrygroup->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>

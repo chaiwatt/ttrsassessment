@@ -72,7 +72,7 @@
                                         <th style="width:150px;text-align: center">#</th>
                                         <th style="text-align: center">ISIC</th>                               
                                         <th style="width:200px;text-align: center">Code</th> 
-                                        <th style="width:200px;text-align: center">เพิ่มเติม</th>
+                                        <th style="white-space: nowrap;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,9 +81,9 @@
                                         <td style="text-align: center"> {{$key+1}} </td>
                                         <td> {{$isic->name}} </td>                                         
                                         <td style="text-align: center"> {{$isic->code}} </td>   
-                                        <td style="text-align: center"> 
+                                        <td style=";white-space: nowrap;text-align: center"> 
                                             <a href="{{route('setting.admin.dashboard.isic.edit',['id' => $isic->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            @if ($key > 21)
+                                            @if ($key > 20)
                                             <a href="{{route('setting.admin.dashboard.isic.delete',['id' => $isic->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             @endif
                                             
