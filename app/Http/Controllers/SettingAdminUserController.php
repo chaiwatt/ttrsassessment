@@ -292,6 +292,12 @@ class SettingAdminUserController extends Controller
     }
 
     public function ImportSave(){
+
+        $extension = request()->file('file')->getClientOriginalExtension();
+        if($extension != 'xlsx'){
+            return redirect()->back()->withError('กรุณาเลือกไฟล์ .xlsx');
+        }
+
         Excel::import(new UsersImport,request()->file('file'));
              
         return redirect()->route('setting.admin.user')->withSuccess('นำเข้าสำเร็จ');

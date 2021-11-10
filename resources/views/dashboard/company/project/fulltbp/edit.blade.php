@@ -1094,19 +1094,19 @@ th {
 								<input type="text" id="productnameedit" placeholder="ชื่อผลิตภัณฑ์" class="form-control form-control-lg stringformat60">
 							</div>
 							<div class="form-group">
-								<label>ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
+								<label>ยอดขาย ปีปัจจุบัน ({{$fulltbp->presentyear}})</label><span class="text-danger">*</span>
 								<input type="text" id="sellpresentedit" placeholder="ปีปัจจุบัน ({{$fulltbp->presentyear}})" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
-								<label>ปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
+								<label>ยอดขายปี {{$fulltbp->past1}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellpastedit1" placeholder="ปี{{$fulltbp->past1}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
-								<label>ปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
+								<label>ยอดขายปี {{$fulltbp->past2}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellpastedit2" placeholder="ปี{{$fulltbp->past2}}" class="form-control form-control-lg numeralformat9">
 							</div>
 							<div class="form-group">
-								<label>ปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
+								<label>ยอดขายปี {{$fulltbp->past3}}</label><span class="text-danger">*</span>
 								<input type="text" id="sellpastedit3" placeholder="ปี{{$fulltbp->past3}}" class="form-control form-control-lg numeralformat9">
 							</div>
 						</div>
