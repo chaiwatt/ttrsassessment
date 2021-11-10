@@ -1773,7 +1773,7 @@
 									</div>
 
 									<div class="col-md-12 mt-3">	
-										<label><strong>1.13 ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong></label>
+										<label><strong>1.13 ข้อมูลพนักงานด้านการวิจัย  พัฒนา การผลิต และวิศวกรรม</strong></label>
 										@php
 											$count = 0;
 										@endphp

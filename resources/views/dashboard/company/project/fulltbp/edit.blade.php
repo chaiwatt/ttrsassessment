@@ -2076,8 +2076,8 @@ th {
 														
 														{{-- <div class="row"> --}}
 															<div class="col-md-12 mt-3">	
-																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
-																<span id="fulltbp_researcher_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลพนักงานด้านการนักวิจัย พัฒนา การผลิต และวิศวกรรม</span>
+																<label for=""><strong>1.13) ข้อมูลพนักงานด้านการวิจัย  พัฒนา การผลิต และวิศวกรรม</strong><span class="text-danger">*</span><button type="button" class="btn btn-warning btn-icon ml-2 btn-sm hiddenelement_fulltbp" id="btnaddresearch"><i class="icon-add mr-2"></i>เพิ่ม</button></label>
+																<span id="fulltbp_researcher_wrapper_error" class="form-text text-danger"  hidden >*กรุณาเพิ่มข้อมูลพนักงานด้านการวิจัย  พัฒนา การผลิต และวิศวกรรม</span>
 																<div class="table-responsive" id="fulltbp_researcher_wrapper" @if ($companyemploys->where('employ_position_id','>=',6)->count() == 0) hidden @endif>
 																	<table style="width: 100%" class="table table-bordered table-striped">
 																		<thead>
