@@ -82,6 +82,7 @@ class CreateGeneralInfosTable extends Migration
             $table->char('showgradeperbusinesstype',1)->default(1);
             $table->char('showgradeperindustrygroup',1)->default(1);
             $table->char('showgradeperisic',1)->default(1);
+            $table->char('showbanner',1)->default(1);
             $table->timestamps();
         });
     }

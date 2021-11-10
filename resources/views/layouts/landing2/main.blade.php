@@ -26,7 +26,10 @@
         <div class="main-content">
             
             @include('layouts.landing2.header')
-            @include('layouts.landing2.banner')
+            @if ($generalinfo->showbanner == 1)
+                @include('layouts.landing2.banner')
+            @endif
+           
             @foreach ($sharehomepagesections as $sharehomepagesection)
                 @include($sharehomepagesection->name)
             @endforeach

@@ -609,7 +609,7 @@
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
         <script src="{{asset('assets/dashboard/js/plugins/sweetalert2/sweetalert2.js')}}"></script>
         <script src="{{asset('assets/dashboard/js/plugins/cleave/cleave.min.js')}}"></script>
-        <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+        <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
         <script>
             function fbShare(url, title, descr, winWidth, winHeight) {
                 var winTop = (screen.height / 2) - (winHeight / 2);

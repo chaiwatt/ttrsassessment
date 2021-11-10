@@ -58,7 +58,17 @@ class HomeController extends Controller
             return $this->Front();
         }
     }
-    
+        
+    public function SearchNews(Request $request){
+
+        $arr = Page::where('header', 'like', '%' . $request->search . '%')
+                ->orWhere('content', 'like', '%' . $request->search . '%')->pluck('id')->toArray();
+        $uniquearr = array_unique($arr);
+
+        $pages = Page::whereIn('id',$uniquearr)->paginate(5);
+        return view('landing2.news.index')->withPages($pages);   
+    }
+
     public function Index2()
     {
         $generalinfo = GeneralInfo::first();

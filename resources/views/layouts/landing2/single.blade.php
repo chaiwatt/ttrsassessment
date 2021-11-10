@@ -435,16 +435,21 @@
 
                                             <li class="Post-cate" style="margin-left: 10px;">
                                                 <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)">
-                                                    
-                                                    @if (Config::get('app.locale') == 'th')
-                                                    <img src="{{asset('assets/landing2/images/fbshare.png')}}" alt="">
-                                                    @else
-                                                    <img src="{{asset('assets/landing2/images/fbshareeng.png')}}" alt="">
-                                                    @endif 
-                                                
+                                                    <img src="{{asset('assets/landing2/images/facebook.jpg')}}" class="rounded-circle" style="max-width: 35px">
                                                 </a>
-                                                {{-- <a href="javascript:fbShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 'http://goo.gl/dS52U', 520, 350)"><img src="{{asset('assets/landing2/images/fbshare.png')}}" alt=""></a> --}} 
                                             </li>
+                                            <li class="Post-cate" >
+                                                <a href="javascript:lineShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)">
+                                                    <img src="{{asset('assets/landing2/images/line.jpg')}}" class="rounded-circle" style="max-width: 35px">
+                                                </a>
+                                            </li>
+                                            <li class="Post-cate" >
+                                                <a href="javascript:twitterShare('{{Request::url()}}', 'Fb Share', 'Facebook share popup', 520, 350)">
+                                                    <img src="{{asset('assets/landing2/images/twitter.jpg')}}" class="rounded-circle" style="max-width: 35px">
+                                                </a>
+                                            </li>
+
+                                            
                                             
                                         </ul>
                                     </div>
@@ -471,6 +476,15 @@
                                     <button type="submit" value="Search"><i class="flaticon-search"></i></button>
                                 </div>
                             </div> --}}
+
+                            <div class="search-widget mb-50">
+                                <form action="{{ route('landing.searchnews') }}" method="GET">
+                                    <div class="search-wrap">
+                                        <input type="search" placeholder="ค้นหา..." name="search" class="search-input" value="">
+                                        <button type="submit" value="ค้นหา"><i class="flaticon-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="recent-posts mb-50">
                                 <div class="widget-title">
                                     <h3 class="title">@if (Config::get('app.locale') == 'th')
@@ -557,6 +571,16 @@
                 var winTop = (screen.height / 2) - (winHeight / 2);
                 var winLeft = (screen.width / 2) - (winWidth / 2);
                 window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url , 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            }
+            function lineShare(url, title, descr, winWidth, winHeight) {
+                var winTop = (screen.height / 2) - (winHeight / 2);
+                var winLeft = (screen.width / 2) - (winWidth / 2);
+                window.open('https://social-plugins.line.me/lineit/share?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url , 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+            }
+            function twitterShare(url, title, descr, winWidth, winHeight) {
+                var winTop = (screen.height / 2) - (winHeight / 2);
+                var winLeft = (screen.width / 2) - (winWidth / 2);
+                window.open('https://twitter.com/share?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url , 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
             }
         </script>
     </body>

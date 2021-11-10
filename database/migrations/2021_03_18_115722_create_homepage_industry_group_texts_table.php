@@ -21,6 +21,7 @@ class CreateHomepageIndustryGroupTextsTable extends Migration
             $table->string('subtitleeng',250)->nullable();
             $table->string('picture',250)->nullable();
             $table->string('url',250)->nullable();
+            $table->char('shownumproject',1)->default(1);
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">แก้ไข Extra Category</span></h4>
+                <h4> <span class="font-weight-semibold">เพิ่ม ISIC</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -16,9 +16,9 @@
             <div class="d-flex">
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
-                    <a href="#" class="breadcrumb-item"> EV</a>
-                    <a href="{{route('setting.admin.assessment.extracategory')}}" class="breadcrumb-item"> Extra Category</a>
-                    <span class="breadcrumb-item active">แก้ไข Extra Category</span>
+                    <a href="#" class="breadcrumb-item"> ทั่วไป</a>
+                    <a href="{{route('setting.admin.dashboard.isic')}}" class="breadcrumb-item"> ISIC</a>
+                    <span class="breadcrumb-item active">เพิ่ม ISIC</span>
                 </div>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
@@ -47,24 +47,35 @@
         @endif
         <div class="row">
             <div class="col-md-12">
-				<!-- Multiple selection -->
-				<div class="card">
-					<div class="card-body">
-                        <form method="POST" action="{{route('setting.admin.assessment.extracategory.editsave',['id' => $extracaterory->id])}}" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST" action="{{route('setting.admin.dashboard.isic.createsave')}}" enctype="multipart/form-data">
                             @csrf
-                            <fieldset>	
-                                <div class="form-group">
-                                    <label>Extra Category</label>
-                                    <input type="text"  name="name" value="{{$extracaterory->name}}"  placeholder="Extra Category" class="form-control form-control-lg" required>
+                            <div class="row">	
+                                <div class="col-md-12">
+                                    <fieldset>	
+                                        <div class="form-group">
+                                            <label>ISIC</label>
+                                            <input type="text"  name="isic" value="{{old('isic')}}"  placeholder="ISIC" class="form-control form-control-lg" required>
+                                        </div>
+                                    </fieldset>
                                 </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                                <div class="col-md-12">
+                                    <fieldset>	
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            <input type="text"  name="code" value="{{old('code')}}"  placeholder="Code" class="form-control form-control-lg" required>
+                                        </div>
+                                    </fieldset>
                                 </div>
-                            </fieldset>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn bg-teal">บันทึก <i class="icon-paperplane ml-2"></i></button>
+                            </div>
                         </form>
-					</div>
-				</div>
-				<!-- /multiple selection -->
+
+                    </div>
+                </div>
             <!-- /striped rows -->
             </div>
         </div>
@@ -73,5 +84,4 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 @stop

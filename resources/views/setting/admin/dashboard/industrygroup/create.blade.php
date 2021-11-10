@@ -55,8 +55,12 @@
                                 <div class="col-md-12">
                                     <fieldset>	
                                         <div class="form-group">
-                                            <label>กลุ่มอุตสาหกรรม</label>
-                                            <input type="text"  name="industrygroup" value="{{old('industrygroup')}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg">
+                                            <label>กลุ่มอุตสาหกรรมภาษาไทย</label>
+                                            <input type="text"  name="industrygroup" value="{{old('industrygroup')}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>กลุ่มอุตสาหกรรมภาษาอังกฤษ</label>
+                                            <input type="text"  name="industrygroupeng" value="{{old('industrygroupeng')}}"  placeholder="กลุ่มอุตสาหกรรมภาษาอังกฤษ" class="form-control form-control-lg" required>
                                         </div>
                                     </fieldset>
                                 </div>

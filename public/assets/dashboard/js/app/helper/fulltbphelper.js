@@ -2188,7 +2188,9 @@ $(document).on('click', '.editsellstatus', function(e) {
         }
 
         position = data.name.indexOf('วงเงินตามสัญญา');
+       
         if(position != -1){
+            console.log(position);
             var modal_header = 'รายการวงเงินตามสัญญา L/C ที่มีกับสถาบันการเงิน';
             selllabel0 = 'วงเงินตามสัญญาฯ';
             selllabel1 = 'วงเงินตามสัญญาฯ';
@@ -2196,16 +2198,12 @@ $(document).on('click', '.editsellstatus', function(e) {
             selllabel3 = 'วงเงินตามสัญญาฯ';
         }
 
-        
-
         $('#sellstatusid').val(data.id);
         $('#sellstatus').val(data.name);
         $('#sellstatuspresentedit').val(data.present.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
         $('#sellstatuspastedit1').val(data.past1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
         $('#sellstatuspastedit2').val(data.past2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
         $('#sellstatuspastedit3').val(data.past3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
-
-        $('#sellstatuspastedit3').val(data.past3.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
         $('#modal_header').html(modal_header);
         $('#selllabel0').html(selllabel0);

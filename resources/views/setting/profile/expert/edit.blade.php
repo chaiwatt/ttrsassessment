@@ -106,38 +106,38 @@
 		</div>
 	</div>
 
-		{{-- modal add_expertfield --}}
-		<div id="modal_add_expertfield" class="modal fade" style="overflow:hidden;">
+	
+		{{-- modal_change_password --}}
+		<div id="modal_change_password" class="modal fade" style="overflow:hidden;">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเชี่ยวชาญ</h5>
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เปลี่ยนรหัสผ่าน</h5>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>ลำดับ (ให้กรอกตัวเลข เช่น 1)</label><span class="text-danger">*</span>
-									<input type="ลำดับ"  id="expertfieldnum" placeholder="ลำดับ" class="form-control form-control-lg numeralformat2" >
+									<label>รหัสผ่านใหม่</label><span class="text-danger">*</span>
+									<input type="password"  id="newpassword" placeholder="รหัสผ่านใหม่" class="form-control form-control-lg" >
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>ความเชี่ยวชาญ</label><span class="text-danger">*</span>
-									<input type="text" id="expertfielddetail" placeholder="ความเชี่ยวชาญ" class="form-control form-control-lg" >
+									<label>ยืนยันรหัสผ่านใหม่</label><span class="text-danger">*</span>
+									<input type="password"  id="newpassword_confirm" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control form-control-lg" >
 								</div>
 							</div>
 						</div>
 					</div>           
 					<div class="modal-footer">
 						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
-						<button id="btn_modal_add_expertfield" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+						<button id="btn_modal_change_password" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	
 				{{-- modal edit_expertfield --}}
 				<div id="modal_edit_expertfield" class="modal fade" style="overflow:hidden;">
 					<div class="modal-dialog">
@@ -150,7 +150,7 @@
 								<div class="row">
 									<input type="text" id="expertfieldid" hidden>
 									<input type="text" id="currentid" hidden>
-									<div class="col-md-12">
+									<div class="col-md-12" hidden>
 										<div class="form-group">
 											<label>ลำดับ (ให้กรอกตัวเลข เช่น 1)</label><span class="text-danger">*</span>
 											<input type="ลำดับ"  id="expertfieldnum_edit" placeholder="ลำดับ" class="form-control form-control-lg numeralformat2" >
@@ -202,10 +202,53 @@
 				</div>
 			</div>
 		</div>
-	
+		{{-- modal add_expertfield --}}
+		<div id="modal_add_expertfield" class="modal fade" style="overflow:hidden;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;ความเชี่ยวชาญ</h5>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12" hidden>
+								<div class="form-group">
+									<label>ลำดับ (ให้กรอกตัวเลข เช่น 1)</label><span class="text-danger">*</span>
+									<input type="text"  id="expertfieldnum" placeholder="ลำดับ" class="form-control form-control-lg numeralformat2" >
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>ความเชี่ยวชาญ</label><span class="text-danger">*</span>
+									<input type="text" id="expertfielddetail" placeholder="ความเชี่ยวชาญ" value="" class="form-control form-control-lg" autocomplete="off" >
+								</div>
+							</div>
+						</div>
+					</div>           
+					<div class="modal-footer">
+						<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+						<button id="btn_modal_add_expertfield" class="btn bg-primary" ><i class="icon-checkmark3 font-size-base mr-1"></i> เพิ่ม</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	<!-- Cover area -->
+	<div class="page-header page-header-light">
+        
+		<div class="page-header-content header-elements-md-inline">
+			<div class="page-title d-flex">
+				<h4> <span class="font-weight-semibold">Profile {{Auth::user()->name}} {{Auth::user()->lastname}}</span></h4>
+				<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+			</div>
+			<div class="header-elements d-none">
+				<a href="" class="btn btn-labeled btn-labeled-right bg-info" data-toggle="modal"  id="changepassword">เปลี่ยนรหัสผ่าน<b><i class="icon-pencil"></i></b></a>
+			</div>
+		</div>
 
+
+	</div>
 	<!-- /profile navigation -->
 
     <!-- Content area -->
@@ -362,13 +405,15 @@
 														@if (($user->address == $user->address1 && $user->province_id == $user->province1_id && $user->amphur_id == $user->amphur1_id && $user->tambol_id == $user->tambol1_id && $user->postal == $user->postal1 ) && $user->address != '')
 															checked
 														@endif
+
+														{{ (! empty(old('sameaddress')) ? 'checked' : '') }}
 														>
 														ที่อยู่เดียวกับที่อยู่ตามบัตรประจำตัวประชาชน
 													</label>)
 												</div>
 											</legend>	
 
-											<div class="col-md-12" id="contact_address_wrapper"> 
+											<div class="col-md-12" id="contact_address_wrapper" {{ (! empty(old('sameaddress')) ? 'hidden' : '') }}> 
 												<div class="row">
 													<div class="col-md-6">  
 														<div class="form-group">
@@ -378,6 +423,7 @@
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
+															
 															<label>จังหวัด<span class="text-danger">*</span></label>
 															<select name="province1" id="province1" data-placeholder="จังหวัด" class="form-control form-control-lg form-control-select2">
 																<option value="0">===เลือกจังหวัด===</option>
@@ -555,14 +601,14 @@
 															<table style="width: 100%" class="table table-bordered table-striped" id="expertfield_wrapper">
 																<thead>
 																	<tr class="bg-info">
-																		<th style="width:10%;text-align:center">ลำดับ</th> 
+																		<th style="width:10%;text-align:center">ลำดับความเชี่ยวชาญ</th> 
 																		<th style="width:70%;text-align:center">รายละเอียด</th> 
 																		<th style="width:1%;white-space: nowrap;text-align:center">เพิ่มเติม</th>                                                                                     
 																	</tr>
 																</thead>
 																<tbody id="expertfield_wrapper_tr"> 
 																	@foreach ($expertfields as $expertfield)
-																		<tr class="item">                                        
+																		<tr class="item" id="{{$expertfield->id}}">                                        
 																			<td style="width:10%;text-align:center"> <span>{{$expertfield->order}}</span> </td>                                            
 																			<td> {{$expertfield->detail}}</td>    
 																			<td style="width:1%;white-space: nowrap"> 
@@ -610,7 +656,7 @@
 												<div class="form-group">
 													<label>รูป Profile (ขนาด 500x500) พิกเซล</label>
 													<div class="input-group">													
-														<input type="text" id="filename" class="form-control border-right-0" placeholder="โลโก้"  >
+														<input type="text" id="filename" name="filename" class="form-control border-right-0" placeholder="โลโก้"  >
 														<span class="input-group-append">
 															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																																						
 														</span>
@@ -641,14 +687,68 @@
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js?v=2')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js?v=4')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/tablednd/jquery.tablednd.js')}}"></script>
     <script>
     	var route = {
 			url: "{{ url('/') }}",
 			token: $('meta[name="csrf-token"]').attr('content'),
         };
 
+
+		$( document ).ready(function() {
+			var orgrow = [];
+			var newrow = [];
+			table_2 = $("#expertfield_wrapper");
+			table_2.tableDnD({
+				onDrop: function(table, row) {
+					var rows = table.tBodies[0].rows;
+					for (var i=0; i<rows.length; i++) {
+						newrow.push(rows[i].id);
+					}
+					updateExpertFieldOrder(newrow).then(data => {
+
+						 var k =1;
+						$("#expertfield_wrapper_tr td:nth-child(1)").each(function() {
+							var currentItem = $(this);
+								currentItem.closest("td").text(k);
+								k++;
+						});
+						$("#expertfield_wrapper").tableDnDUpdate();
+					})
+					.catch(error => {})
+				},
+				onDragStart: function(table, row) {
+					orgrow = [];
+					newrow = [];
+					var rows = table.tBodies[0].rows;
+					for (var i=0; i<rows.length; i++) {
+						orgrow.push(rows[i].id);
+					}
+				}
+			});
+			
+		function updateExpertFieldOrder(order){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/api/profile/reorderofficer`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					'order': order,
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
+			
+		});
 
 		var oldprovince =  "{{old('province')}}";
 		var oldamphur=  "{{old('amphur')}}";
@@ -825,6 +925,49 @@
 			// console.log($(this).find(':selected').data('id'));
 			$('#postalcode1').val($(this).find(':selected').data('id'));
 		});
+		$(document).on("click","#changepassword",function(e){
+			$("#modal_change_password").modal("show");
+		}); 
+
+		$(document).on("click","#btn_modal_change_password",function(e){
+			if($('#newpassword').val() == '' || $('#newpassword_confirm').val() == ''){
+				alert('กรุณากรอกรหัสผ่านให้ครบ');
+				return;
+			}
+			if($('#newpassword').val() != $('#newpassword_confirm').val()){
+				alert('กรุณากรอกรหัสผ่านให้ตรงกัน');
+				return;
+			}
+
+			changeSavePassword($('#newpassword').val(),$('#newpassword_confirm').val()).then(data => {
+				$("#modal_change_password").modal("hide");
+				Swal.fire({
+					title: 'สำเร็จ',
+					text: 'เปลี่ยนรหัสผ่านใหม่สำเร็จ',
+				});
+			})
+			.catch(error => {})
+		}); 
+
+		function changeSavePassword(pass,cfpass){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/setting/profile/savechangepassword`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					pass : pass,
+					cfpass : cfpass
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
     </script>	
 @stop
 

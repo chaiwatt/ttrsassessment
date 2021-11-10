@@ -874,7 +874,7 @@
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.min.js')}}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.5/pdfobject.min.js"></script> --}}
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 
 <script>
 	var route = {
@@ -1477,9 +1477,22 @@
 		})
 	}
 
+	// $(document).on('change', '#projecteng', function(e) {
+	// 	var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
+	// 	if(re.test($(this).val()) == false){
+	// 		$(this).val('')
+	// 		popupmessage = popupmessages.find(x => x.id ==14);
+	// 		Swal.fire({
+	// 			title: popupmessage['title'],
+	// 			text: popupmessage['message'],
+	// 		});
+	// 	}
+
+	// });
+
 	$(document).on('change', '#projecteng', function(e) {
-		var re = new RegExp("^([a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]|[0-9]|[/]|[\\]|[ ]|[\n]|[.])+$", "g");
-		if(re.test($(this).val()) == false){
+		var reg =/^[a-zA-Z0-9$@$!%*?&#//'"@-^-_. +]+$/;// /^[ก-๏\s]+$/; 
+		if (reg.test($(this).val()) !== true ){
 			$(this).val('')
 			popupmessage = popupmessages.find(x => x.id ==14);
 			Swal.fire({
@@ -1487,7 +1500,7 @@
 				text: popupmessage['message'],
 			});
 		}
-
+		e.preventDefault();    
 	});
 
 	$(document).on('click', '#btn_add_authorized_director', function(e) {

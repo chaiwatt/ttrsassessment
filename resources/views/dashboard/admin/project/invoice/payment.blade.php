@@ -124,7 +124,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 <script>
     // $('#paymentdate').bootstrapMaterialDatePicker({
     //     format: 'DD/MM/YYYY',

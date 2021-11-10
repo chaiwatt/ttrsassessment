@@ -31,7 +31,7 @@
                           $c = 0;
                       @endphp
 
-                    @foreach ($shareindustrygroupcollections->sortByDesc('occured')->take(4) as $key => $industrygroup)
+                    @foreach ($shareindustrygroupcollections->sortByDesc('occured')->take(6) as $key => $industrygroup)
                         @php
                             $bg = '';
                             if($c == 1){
@@ -45,9 +45,17 @@
                         @endphp
                         <span class="skillbar-title">
                             @if (Config::get('app.locale') == 'th')
-                                {{$industrygroup['thname']}} ({{$industrygroup['occured']}} โครงการ)
+                                {{$industrygroup['thname']}}
+                                @if ($sharehomepageindustrygrouptext->shownumproject == 1)
+                                ({{$industrygroup['occured']}} โครงการ)
+                                @endif
+                                
                             @else
-                            {{$industrygroup['engname']}} ({{$industrygroup['occured']}} projects)
+                            {{$industrygroup['engname']}} 
+                            @if ($sharehomepageindustrygrouptext->shownumproject == 1)
+                            ({{$industrygroup['occured']}} projects)
+                            @endif
+                           
                             @endif
                         </span>
                         @php

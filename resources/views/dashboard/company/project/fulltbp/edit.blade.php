@@ -3465,7 +3465,7 @@ th {
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/styling/switch.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js?v=3')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbphelper.js?v=4')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/tablednd/jquery.tablednd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/forms/validation/validate.min.js')}}"></script>
@@ -3473,7 +3473,7 @@ th {
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/pdfobject/pdfobject.js?v=1')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 {{-- <script src="{{asset('assets/dashboard/js/plugins/jqueryui/jquery-ui.js')}}"></script> --}}
 {{--  --}}
 <script>

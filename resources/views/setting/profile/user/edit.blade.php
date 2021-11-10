@@ -111,6 +111,38 @@
 		</div>
 	</div>
 
+	{{-- modal_change_password --}}
+	<div id="modal_change_password" class="modal fade" style="overflow:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="icon-menu7 mr-2"></i> &nbsp;เปลี่ยนรหัสผ่าน</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>รหัสผ่านใหม่</label><span class="text-danger">*</span>
+								<input type="password"  id="newpassword" placeholder="รหัสผ่านใหม่" class="form-control form-control-lg" >
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>ยืนยันรหัสผ่านใหม่</label><span class="text-danger">*</span>
+								<input type="password"  id="newpassword_confirm" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control form-control-lg" >
+							</div>
+						</div>
+					</div>
+				</div>           
+				<div class="modal-footer">
+					<button class="btn btn-link" data-dismiss="modal"><i class="icon-cross2 font-size-base mr-1"></i> ปิด</button>
+					<button id="btn_modal_change_password" class="btn bg-primary" data-dismiss="modal"><i class="icon-floppy-disk font-size-base mr-1"></i> บันทึก</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	{{-- modal add position --}}
 	<div id="modal_add_position" class="modal fade" style="overflow:hidden;">
 		<div class="modal-dialog">
@@ -574,7 +606,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="page-header page-header-light">
+        
+			<div class="page-header-content header-elements-md-inline">
+				<div class="page-title d-flex">
+					<h4> <span class="font-weight-semibold">Profile {{Auth::user()->name}} {{Auth::user()->lastname}}</span></h4>
+					<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+				</div>
+				<div class="header-elements d-none">
+					<a href="" class="btn btn-labeled btn-labeled-right bg-info" data-toggle="modal"  id="changepassword">เปลี่ยนรหัสผ่าน<b><i class="icon-pencil"></i></b></a>
+				</div>
+			</div>
+	
+
+		</div>
     <div class="content">
+		
 		@if (Session::has('success'))
 			<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
@@ -842,7 +889,7 @@
 								<div class="col-md-6">   
 									<div class="form-group">
 										<label>โทรสาร</label>
-										<input type="text"  name="fax" id="fax" value="{{old('fax') ?? $user->company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathphone">
+										<input type="text"  name="fax" id="fax" value="{{old('fax') ?? $user->company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathfax">
 										<span id="fax_format_error" class="form-text text-danger" hidden><i class="icon-cancel-circle2 text-danger"></i> โทรสารไม่ถูกต้อง</span>
 									</div>
 								</div>
@@ -1158,7 +1205,7 @@
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js?v=1')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/specialinputformat.js?v=1')}}"></script>
     <script>
 
@@ -1399,6 +1446,50 @@ $(".form-control-select2").select2();
 				$("#postalcode_format_error").attr("hidden",true);
 			}
 		}); 
+
+		$(document).on("click","#changepassword",function(e){
+			$("#modal_change_password").modal("show");
+		}); 
+
+		$(document).on("click","#btn_modal_change_password",function(e){
+			if($('#newpassword').val() == '' || $('#newpassword_confirm').val() == ''){
+				alert('กรุณากรอกรหัสผ่านให้ครบ');
+				return;
+			}
+			if($('#newpassword').val() != $('#newpassword_confirm').val()){
+				alert('กรุณากรอกรหัสผ่านให้ตรงกัน');
+				return;
+			}
+
+			changeSavePassword($('#newpassword').val(),$('#newpassword_confirm').val()).then(data => {
+				$("#modal_change_password").modal("hide");
+				Swal.fire({
+					title: 'สำเร็จ',
+					text: 'เปลี่ยนรหัสผ่านใหม่สำเร็จ',
+				});
+			})
+			.catch(error => {})
+		}); 
+
+		function changeSavePassword(pass,cfpass){
+			return new Promise((resolve, reject) => {
+				$.ajax({
+				url: `${route.url}/setting/profile/savechangepassword`,
+				type: 'POST',
+				headers: {"X-CSRF-TOKEN":route.token},
+				data: {
+					pass : pass,
+					cfpass : cfpass
+				},
+				success: function(data) {
+					resolve(data)
+				},
+				error: function(error) {
+					reject(error)
+				},
+				})
+			})
+		}
 	
     </script>	
 @stop

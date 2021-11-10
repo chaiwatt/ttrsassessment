@@ -24,7 +24,9 @@ class SettingAdminDashboardIndustryGroupController extends Controller
     }
     public function CreateSave(CrIndustryGroupRequest $request){
         $industrygroup = new IndustryGroup();
-        $industrygroup->name = $request->industrygroup;
+        $industrygroup->name = $request->industrygroup . '('. $request->industrygroupeng . ')';
+        $industrygroup->nameth = $request->industrygroup;
+        $industrygroup->nameeng = $request->industrygroupeng;
         $industrygroup->save();
         return redirect()->route('setting.admin.dashboard.industrygroup')->withSuccess('เพิ่มกลุ่มอุตสาหกรรมสำเร็จ');
     }
@@ -38,7 +40,9 @@ class SettingAdminDashboardIndustryGroupController extends Controller
             return redirect()->route('setting.admin.dashboard.industrygroup')->withError('มีการใช้กลุ่มอุตสาหกรรมนี้แล้ว');
         }
         $industrygroup = IndustryGroup::find($id)->update([
-            'name' => $request->industrygroup
+            'name' => $request->industrygroup . '('. $request->industrygroupeng . ')',
+            'nameth' => $request->industrygroup,
+            'nameeng' => $request->industrygroupeng
         ]);
         return redirect()->route('setting.admin.dashboard.industrygroup')->withSuccess('แก้ไขกลุ่มอุตสาหกรรมสำเร็จ');
     }

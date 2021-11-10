@@ -16,6 +16,8 @@ class CreateHomePageSectionsTable extends Migration
         Schema::create('home_page_sections', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_list')->default(1);
+            $table->string('title')->nullable();
+            $table->string('titlecss')->nullable();
             $table->string('name',250)->nullable();
             $table->string('bg',250)->nullable();
             $table->string('anchore',100)->nullable();

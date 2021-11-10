@@ -728,7 +728,7 @@
 													<div class="row">
 														<div class="col-md-6">
 															<label>แฟ๊กซ์</label>
-															<input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control form-control-lg">
+															<input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control form-control-lg ">
 														</div>
 														<div class="col-md-6">
 															<label>อีเมล</label>

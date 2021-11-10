@@ -82,6 +82,20 @@
                                         <input type="text" name="bgcss" value="{{$sectionid}}" class="form-control form-control-lg" readonly>
                                     </div>
                                     <div class="form-group">
+                                        <label>Header</label>
+                                        <input type="text"  name="header" value="{{$customsection->title}}"  placeholder="Header" class="form-control form-control-lg" >
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: -15px">
+                                        <label>Header css</label>
+                                        <input type="text"  name="headercss" value="{{$customsection->titlecss}}"  placeholder="Header css" class="form-control form-control-lg" >
+                                        <code >
+                                            <label>ตัวอย่าง CSS</label>
+                                            <div style="padding-left:10px">
+                                                <p>font-size: 2.3em;color:#ffffff;text-align:center</p>
+                                            </div>
+                                        </code>
+                                    </div>
+                                    <div class="form-group">
                                         <label>พื้นหลัง CSS<span class="text-danger">*</span></label>
                                         <input type="text" name="bgcss" value="{{$customsection->bg}}"  placeholder="ตัวอย่าง เช่น background: linear-gradient(to right, #e9eaeb 0%, #c9cbcd 100%)" class="form-control form-control-lg">
                                         <code>
@@ -92,6 +106,7 @@
                                             </div>
                                         </code>
                                     </div>
+                                    
                                     <div class="form-group" style="margin-top:-30px">
                                         <div class="form-group">
                                             <label>รายละเอียด section<span class="text-danger">*</span></label>
@@ -156,7 +171,7 @@
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/pagehelper.js?v=1')}}"></script>
 <script src="{{ asset('assets/dashboard/js/plugins/media/fancybox.min.js') }}"></script>
 <script src="{{ asset('assets/dashboard/js/demo_pages/gallery.js') }}"></script>
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 <script  type="text/javascript">
 	var route = {
@@ -183,6 +198,17 @@
         } );
         $('#content').summernote({
             height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],          
             callbacks: {
 				onPaste: function (e) {
 					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');

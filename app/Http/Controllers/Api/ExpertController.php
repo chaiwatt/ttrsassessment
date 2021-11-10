@@ -64,13 +64,21 @@ class ExpertController extends Controller
     }
     public function DeleteExpertField(Request $request){
         $expertdetail = ExpertField::find($request->id)->delete();
+        $_expertfields = ExpertField::where('user_id',Auth::user()->id)->orderBy('order','asc')->get();
+        foreach($_expertfields as $key => $expertfield){
+            $expertfield->update([
+                'order' => $key +1
+            ]);
+
+        }
+  
         $expertfields = ExpertField::where('user_id',Auth::user()->id)->orderBy('order','asc')->get();
         return response()->json($expertfields);  
     }
     public function EditExpertField(Request $request){
         $auth = Auth::user();
         ExpertField::find($request->id)->update([
-            'order' => $request->expertfieldnum,
+            // 'order' => $request->expertfieldnum,
             'detail' => $request->expertfielddetail
         ]);
         $expertfields = ExpertField::where('user_id',$auth->id)->orderBy('order','asc')->get();

@@ -63,6 +63,12 @@ $(function() {
             delimiter: ''
         })
     });
+    $('.stringformat11').toArray().forEach(function(field){
+        new Cleave(field, {
+            blocks: [11],
+            delimiter: ''
+        })
+    });
     $('.stringformat15').toArray().forEach(function(field){
         new Cleave(field, {
             blocks: [15],
@@ -169,6 +175,12 @@ $(function() {
         new Cleave(field, {
             numericOnly: true,
             blocks: [10]
+        })
+    });
+    $('.numeralformathfax').toArray().forEach(function(field){
+        new Cleave(field, {
+            numericOnly: true,
+            blocks: [9]
         })
     });
     $('.numeralformat2').toArray().forEach(function(field){

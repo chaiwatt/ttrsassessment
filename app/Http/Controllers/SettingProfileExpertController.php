@@ -39,7 +39,7 @@ class SettingProfileExpertController extends Controller
         $expertbranches = ExpertBranch::get();
         $educationlevels = EducationLevel::get();
         $expert = ExpertDetail::where('user_id',$userid)->first();
-        $expertfields = ExpertField::where('user_id',$user->id)->get();
+        $expertfields = ExpertField::where('user_id',$user->id)->orderBy('order','asc')->get();
         $expertdocs = ExpertDoc::where('user_id',$user->id)->get();
         return view('setting.profile.expert.edit')->withUser($user)
                                             ->withPrefixes($prefixes)

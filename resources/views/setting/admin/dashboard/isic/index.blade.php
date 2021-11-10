@@ -11,11 +11,11 @@
         
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4> <span class="font-weight-semibold">กลุ่มอุตสาหกรรม</span></h4>
+                <h4> <span class="font-weight-semibold">ISIC</span></h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none">
-                <a href="{{route('setting.admin.dashboard.industrygroup.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่มกลุ่มอุตสาหกรรม <b><i class="icon-plus3"></i></b></a>
+                <a href="{{route('setting.admin.dashboard.isic.create')}}" class="btn btn-labeled btn-labeled-right bg-info">เพิ่ม ISIC <b><i class="icon-plus3"></i></b></a>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                 <div class="breadcrumb">
                     <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> ตั้งค่า</a>
                     <a href="#" class="breadcrumb-item"> ทั่วไป</a>
-                    <span class="breadcrumb-item active">กลุ่มอุตสาหกรรม</span>
+                    <span class="breadcrumb-item active">ISIC</span>
                 </div>
 
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
@@ -56,7 +56,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-sm-inline">
-                        <h6 class="card-title" style="font-size:16px;font-weight: bold">กลุ่มอุตสาหกรรม</h6>
+                        <h6 class="card-title" style="font-size:16px;font-weight: bold">ISIC</h6>
                         <div class="header-elements">
                             {{-- <a class="text-default daterange-ranges font-weight-semibold cursor-pointer dropdown-toggle">
                                 
@@ -65,29 +65,26 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="float-right mb-2">
-                            <button id="btnOnExcel" class="btn btn-sm bg-info">ส่งออก EXCEL</button>
-                            <button id="btnOnPdf" class="btn btn-sm bg-info">ส่งออก PDF</button>
-                        </div>
-
                         <div class="table-responsive" >
                             <table style="width: 100%" class="table table-bordered table-striped mb-2"  id="industrygrouptable">
                                 <thead>
                                     <tr class="bg-info">
                                         <th style="width:150px;text-align: center">#</th>
-                                        <th style="text-align: center">กลุ่มอุตสาหกรรม</th>                               
-                                        <th style="text-align: center">เพิ่มเติม</th>
+                                        <th style="text-align: center">ISIC</th>                               
+                                        <th style="width:200px;text-align: center">Code</th> 
+                                        <th style="width:200px;text-align: center">เพิ่มเติม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($industrygroups as $key => $industrygroup)
+                                    @foreach ($isics as $key => $isic)
                                     <tr>    
                                         <td style="text-align: center"> {{$key+1}} </td>
-                                        <td> {{$industrygroup->name}} </td>                                         
+                                        <td> {{$isic->name}} </td>                                         
+                                        <td style="text-align: center"> {{$isic->code}} </td>   
                                         <td style="text-align: center"> 
-                                            <a href="{{route('setting.admin.dashboard.industrygroup.edit',['id' => $industrygroup->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
-                                            @if ($key > 12)
-                                            <a href="{{route('setting.admin.dashboard.industrygroup.delete',['id' => $industrygroup->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
+                                            <a href="{{route('setting.admin.dashboard.isic.edit',['id' => $isic->id])}}" class="btn btn-sm bg-primary">แก้ไข</a>
+                                            @if ($key > 21)
+                                            <a href="{{route('setting.admin.dashboard.isic.delete',['id' => $isic->id])}}" data-name="" onclick="confirmation(event)" class="btn btn-sm bg-danger">ลบ</a>                                       
                                             @endif
                                             
                                         </td>

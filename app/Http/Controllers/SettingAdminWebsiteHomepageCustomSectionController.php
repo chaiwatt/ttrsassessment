@@ -39,7 +39,9 @@ class SettingAdminWebsiteHomepageCustomSectionController extends Controller
         HomePageSection::find($id)->update([
             'content' => $content,
             'bg' => $request->bgcss,
-            'show' => $request->status
+            'show' => $request->status,
+            'title' => $request->header,
+            'titlecss' => $request->headercss,
         ]);
         return redirect()->back()->withSuccess('เพิ่มข้อมูล Section สำเร็จ');
     }

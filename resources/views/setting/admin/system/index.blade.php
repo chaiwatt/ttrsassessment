@@ -98,31 +98,31 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>รหัสไปรษณีย์</label>
-                                        <input type="text" name="organizationpostalcode" value="{{$generalinfo->postalcode}}" data-placeholder="รหัสไปรษณีย์" class="form-control form-control-lg">
+                                        <input type="text" name="organizationpostalcode" value="{{$generalinfo->postalcode}}" data-placeholder="รหัสไปรษณีย์" class="form-control form-control-lg numeralformatpostal">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>โทรศัพท์1</label>
-                                        <input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล" class="form-control form-control-lg">
+                                        <input type="text" name="phone1" value="{{$generalinfo->phone1}}" data-placeholder="อีเมล" class="form-control form-control-lg stringformat11">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ต่อ</label>
-                                        <input type="text" name="phone1_ext" value="{{$generalinfo->phone1_ext}}" data-placeholder="ต่อ" class="form-control form-control-lg">
+                                        <input type="text" name="phone1_ext" value="{{$generalinfo->phone1_ext}}" data-placeholder="ต่อ" class="form-control form-control-lg stringformat11">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Call Center</label>
-                                        <input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="Call Center" class="form-control form-control-lg">
+                                        <input type="text" name="phone2" value="{{$generalinfo->phone2}}" data-placeholder="Call Center" class="form-control form-control-lg stringformat11">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>โทรสาร</label>
-                                        <input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control form-control-lg">
+                                        <input type="text" name="organizationfax" value="{{$generalinfo->fax}}" data-placeholder="แฟ๊กซ์" class="form-control form-control-lg stringformat11">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -352,6 +352,7 @@
 @section('pageScript')
 <script src="{{asset('assets/dashboard/plugins/summernote/summernote.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 <script>
     var route = {
         url: "{{ url('/') }}",

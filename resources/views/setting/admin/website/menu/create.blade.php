@@ -94,7 +94,7 @@
                                      </div>
                                      <div class="col-md-12">
                                         <div class="form-group">
-                                           <label>ลิงก์<span class="text-danger">*</span></label>
+                                           <label>ลิงก์ (ถ้าเป็นลิงก์ภายในให้ใส่เครื่องหมาย # เช่น #rs-header, #custom-section1 เป็นต้น)<span class="text-danger">*</span></label>
                                            <input type="text" name="url" id="url" class="form-control form-control-lg">   
                                         </div>
                                      </div>

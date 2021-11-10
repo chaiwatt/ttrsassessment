@@ -57,7 +57,11 @@
                                     <fieldset>	
                                         <div class="form-group">
                                             <label>กลุ่มอุตสาหกรรม</label>
-                                            <input type="text"  name="industrygroup" value="{{$industrygroup->name}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg">
+                                            <input type="text"  name="industrygroup" value="{{$industrygroup->nameth}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg" required >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>กลุ่มอุตสาหกรรมภาษาอังกฤษ</label>
+                                            <input type="text"  name="industrygroupeng" value="{{$industrygroup->nameeng}}"  placeholder="กลุ่มอุตสาหกรรม" class="form-control form-control-lg" required >
                                         </div>
                                     </fieldset>
                                 </div>

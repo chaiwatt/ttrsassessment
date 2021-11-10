@@ -31,21 +31,24 @@ import * as Attendee from './eventcalendarattendee.js';
             'D'
         ]
 
-        var  industrygrouplegend = [
-            'Next-generation Automotive',
-            'Smart Electronics',
-            'Affluent, Medical and Wellness Tourism',
-            'Agriculture and Biotechnology',
-            'Food for the Future',
-            'Robotics',
-            'Aviation and Logistics',
-            'Biofuels and Biochemicals',
-            'Digital',
-            'Medical Hub',
-            'Defense',
-            'Education and Skill Development',
-            'อื่นๆ'
-        ]
+        var  industrygrouplegend = []
+
+        
+        // var  industrygrouplegend = [
+        //     'Next-generation Automotive',
+        //     'Smart Electronics',
+        //     'Affluent, Medical and Wellness Tourism',
+        //     'Agriculture and Biotechnology',
+        //     'Food for the Future',
+        //     'Robotics',
+        //     'Aviation and Logistics',
+        //     'Biofuels and Biochemicals',
+        //     'Digital',
+        //     'Medical Hub',
+        //     'Defense',
+        //     'Education and Skill Development',
+        //     'อื่นๆ'
+        // ]
 
         var  objectivelegend = [
             'ด้านการเงิน',
@@ -180,6 +183,9 @@ import * as Attendee from './eventcalendarattendee.js';
 
             getRadarChartData().then(data => {
                 globaldata = data;
+                data.industrygroups.forEach(function (industrygroup,index) {
+                    industrygrouplegend.push(industrygroup.nameeng);
+                });
                 callUpdateChart(globaldata);
                 callGenRadarGradeByPillar(globaldata);
                 callGenRadarByBusinessSize(globaldata);
@@ -1468,24 +1474,43 @@ function callGenPolarStackByBusinessType(data){
 function callGenRadarByIndustryGroup(data){
     var numgrade = [];
     var gradedata = []
-    var rgbcolor = [ 'rgba(194, 53, 49, 0.2)', 'rgba(47, 69, 84, 0.2)', 'rgba(97, 160, 168, 0.2)', 'rgba(212, 130, 101, 0.2)', 'rgba(145, 199, 174, 0.2)', 'rgba(116, 159, 131, 0.2)', 'rgba(202, 134, 34, 0.2)','rgba(189, 162, 154, 0.2)', 'rgba(110, 112, 116, 0.2)', 'rgba(84, 101, 112, 0.2)','rgba(196, 204, 211, 0.2)'];
+    var rgbcolor = [ 
+        'rgba(194, 53, 49, 0.2)', 
+        'rgba(47, 69, 84, 0.2)', 
+        'rgba(97, 160, 168, 0.2)', 
+        'rgba(212, 130, 101, 0.2)', 
+        'rgba(145, 199, 174, 0.2)', 
+        'rgba(116, 159, 131, 0.2)', 
+        'rgba(202, 134, 34, 0.2)',
+        'rgba(189, 162, 154, 0.2)', 
+        'rgba(110, 112, 116, 0.2)', 
+        'rgba(84, 101, 112, 0.2)',
+        'rgba(196, 204, 211, 0.2)'
+    ];
     data.grades.forEach(function (grade,index) {
         var industrygrouparr = [];
-        var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
-        var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
-        var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
-        var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
-        var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
-        var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
-        var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
-        var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
-        var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
-        var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
-        var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
-        var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
-        var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
-        industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
-        ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
+
+        data.industrygroups.forEach(function (industrygroup,index) {
+            var check = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == grade.name); 
+            industrygrouparr.push(check.length);
+        });
+
+        // var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
+        // var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
+        // var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
+        // var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
+        // var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
+        // var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
+        // var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
+        // var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
+        // var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
+        // var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
+        // var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
+        // var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
+        // var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
+
+        // industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
+        // ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
         var max = Math.max.apply(null, industrygrouparr);
         numgrade.push(max);
         var tmp = {value: industrygrouparr, name: grade.name, areaStyle: {color:rgbcolor[index]}};
@@ -1493,22 +1518,30 @@ function callGenRadarByIndustryGroup(data){
   
     });
     var maxval = Math.max.apply(null, numgrade);
+    var indicator = [];
 
-    var indicator =  [
-        { name: 'Next-generation Automotive', max: maxval},
-        { name: 'Smart Electronics', max: maxval},
-        { name: 'Affluent, Medical and Wellness Tourism', max: maxval},
-        { name: 'Agriculture and Biotechnology', max: maxval},
-        { name: 'Food for the Future', max: maxval},
-        { name: 'Robotics', max: maxval},
-        { name: 'Aviation and Logistics', max: maxval},
-        { name: 'Biofuels and Biochemicals', max: maxval},
-        { name: 'Digital', max: maxval},
-        { name: 'Medical Hub', max: maxval},
-        { name: 'Defense', max: maxval},
-        { name: 'Education and Skill Development', max: maxval},
-        { name: 'Other', max: maxval}
-    ];
+    // var indicator =  [
+    //     { name: 'Next-generation Automotive', max: maxval},
+    //     { name: 'Smart Electronics', max: maxval},
+    //     { name: 'Affluent, Medical and Wellness Tourism', max: maxval},
+    //     { name: 'Agriculture and Biotechnology', max: maxval},
+    //     { name: 'Food for the Future', max: maxval},
+    //     { name: 'Robotics', max: maxval},
+    //     { name: 'Aviation and Logistics', max: maxval},
+    //     { name: 'Biofuels and Biochemicals', max: maxval},
+    //     { name: 'Digital', max: maxval},
+    //     { name: 'Medical Hub', max: maxval},
+    //     { name: 'Defense', max: maxval},
+    //     { name: 'Education and Skill Development', max: maxval},
+    //     { name: 'Other', max: maxval}
+    // ];
+
+    data.industrygroups.forEach(function (industrygroup,index) {
+        indicator[index] = {
+            name: industrygroup.nameeng,
+            max: maxval
+        };
+    });
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
 
@@ -1516,65 +1549,83 @@ function callGenRadarByIndustryGroup(data){
 }
 
 function callGenBarByIndustryGroup(data){
-    var gradedata = []
+    var gradedata = [];
+    var xaxis = [];
     data.grades.forEach(function (grade,index) {
         var industrygrouparr = [];
-        var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
-        var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
-        var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
-        var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
-        var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
-        var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
-        var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
-        var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
-        var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
-        var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
-        var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
-        var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
-        var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
-        industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
-        ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
+        data.industrygroups.forEach(function (industrygroup,index) {
+            var check = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == grade.name); 
+            industrygrouparr.push(check.length);
+        });
+
+        // var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
+        // var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
+        // var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
+        // var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
+        // var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
+        // var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
+        // var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
+        // var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
+        // var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
+        // var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
+        // var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
+        // var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
+        // var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
+        // industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
+        // ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
 
         var tmp = {name: grade.name, type: 'bar', stack: 'single', data: industrygrouparr};
         gradedata.push(tmp);
   
     });
 
-    var xaxis = ['Next-generation Automotive', 'Smart Electronics', 'Affluent, Medical and Wellness Tourism', 'Agriculture and Biotechnology', 'Food for the Future', 'Robotics',
-'Aviation and Logistics','Biofuels and Biochemicals','Digital','Medical Hub','Defense','Education and Skill Development','Other']
-
+//     var xaxis = ['Next-generation Automotive', 'Smart Electronics', 'Affluent, Medical and Wellness Tourism', 'Agriculture and Biotechnology', 'Food for the Future', 'Robotics',
+// 'Aviation and Logistics','Biofuels and Biochemicals','Digital','Medical Hub','Defense','Education and Skill Development','Other']
+    data.industrygroups.forEach(function (industrygroup,index) {
+        xaxis.push(industrygroup.nameeng);
+    });
     genBar(xaxis ,gradedata , 'gradebyindustry');
 }
 
 function callGenPolarStackByIndustryGroup(data){
-    var gradedata = []
+    var gradedata = [];
+    var xaxis = [];
     data.grades.forEach(function (grade,index) {
         var industrygrouparr = [];
-        var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
-        var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
-        var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
-        var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
-        var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
-        var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
-        var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
-        var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
-        var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
-        var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
-        var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
-        var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
-        var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
-        industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
-        ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
+        
+
+        data.industrygroups.forEach(function (industrygroup,index) {
+            var check = data.projectgrades.filter(x => x.industrygroup == industrygroup.id && x.grade == grade.name); 
+            industrygrouparr.push(check.length);
+        });
+
+        // var industrygroup1 = data.projectgrades.filter(x => x.industrygroup == 1 && x.grade == grade.name); 
+        // var industrygroup2 = data.projectgrades.filter(x => x.industrygroup == 2 && x.grade == grade.name); 
+        // var industrygroup3 = data.projectgrades.filter(x => x.industrygroup == 3 && x.grade == grade.name); 
+        // var industrygroup4 = data.projectgrades.filter(x => x.industrygroup == 4 && x.grade == grade.name); 
+        // var industrygroup5 = data.projectgrades.filter(x => x.industrygroup == 5 && x.grade == grade.name); 
+        // var industrygroup6 = data.projectgrades.filter(x => x.industrygroup == 6 && x.grade == grade.name); 
+        // var industrygroup7 = data.projectgrades.filter(x => x.industrygroup == 7 && x.grade == grade.name); 
+        // var industrygroup8 = data.projectgrades.filter(x => x.industrygroup == 8 && x.grade == grade.name); 
+        // var industrygroup9 = data.projectgrades.filter(x => x.industrygroup == 9 && x.grade == grade.name); 
+        // var industrygroup10 = data.projectgrades.filter(x => x.industrygroup == 10 && x.grade == grade.name); 
+        // var industrygroup11 = data.projectgrades.filter(x => x.industrygroup == 11 && x.grade == grade.name); 
+        // var industrygroup12 = data.projectgrades.filter(x => x.industrygroup == 12 && x.grade == grade.name); 
+        // var industrygroup13 = data.projectgrades.filter(x => x.industrygroup == 13 && x.grade == grade.name); 
+        // industrygrouparr = [industrygroup1.length,industrygroup2.length,industrygroup3.length,industrygroup4.length,industrygroup5.length,industrygroup6.length
+        // ,industrygroup7.length,industrygroup8.length,industrygroup9.length,industrygroup10.length,industrygroup11.length,industrygroup12.length,industrygroup13.length];
 
         var tmp = {name: grade.name, type: 'bar', stack: 'a', data: industrygrouparr,coordinateSystem: 'polar',emphasis: { focus: 'series'}};
         gradedata.push(tmp);
   
     });
 
-    var xaxis = ['Next-generation Automotive', 'Smart Electronics', 'Affluent, Medical and Wellness Tourism', 'Agriculture and Biotechnology', 'Food for the Future', 'Robotics',
-'Aviation and Logistics','Biofuels and Biochemicals','Digital','Medical Hub','Defense','Education and Skill Development','Other']
+//     var xaxis = ['Next-generation Automotive', 'Smart Electronics', 'Affluent, Medical and Wellness Tourism', 'Agriculture and Biotechnology', 'Food for the Future', 'Robotics',
+// 'Aviation and Logistics','Biofuels and Biochemicals','Digital','Medical Hub','Defense','Education and Skill Development','Other']
+    data.industrygroups.forEach(function (industrygroup,index) {
+        xaxis.push(industrygroup.nameeng);
+    });
 
-    // genBar(xaxis ,gradedata , 'gradebyindustry');
     genPolarStack(xaxis ,gradedata , 'gradebyindustry');
 }
 
@@ -1584,30 +1635,36 @@ function callGenRadarByIsic(data){
     var rgbcolor = [ 'rgba(194, 53, 49, 0.2)', 'rgba(47, 69, 84, 0.2)', 'rgba(97, 160, 168, 0.2)', 'rgba(212, 130, 101, 0.2)', 'rgba(145, 199, 174, 0.2)', 'rgba(116, 159, 131, 0.2)', 'rgba(202, 134, 34, 0.2)','rgba(189, 162, 154, 0.2)', 'rgba(110, 112, 116, 0.2)', 'rgba(84, 101, 112, 0.2)','rgba(196, 204, 211, 0.2)'];
     data.grades.forEach(function (grade,index) {
         var isicarray = [];
-        var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
-        var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
-        var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
-        var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
-        var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
-        var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
-        var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
-        var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
-        var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
-        var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
-        var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
-        var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
-        var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
-        var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
-        var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
-        var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
-        var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
-        var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
-        var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
-        var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
 
-        isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
-        ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
-        ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
+        data.isics.forEach(function (isic,index) {
+            var check = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == grade.name); 
+            isicarray.push(check.length);
+        });
+
+        // var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
+        // var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
+        // var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
+        // var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
+        // var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
+        // var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
+        // var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
+        // var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
+        // var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
+        // var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
+        // var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
+        // var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
+        // var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
+        // var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
+        // var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
+        // var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
+        // var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
+        // var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
+        // var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
+        // var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
+
+        // isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
+        // ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
+        // ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
         var max = Math.max.apply(null, isicarray);
         numgrade.push(max);
         var tmp = {value: isicarray, name: grade.name, areaStyle: {color:rgbcolor[index]}};
@@ -1615,116 +1672,135 @@ function callGenRadarByIsic(data){
   
     });
     var maxval = Math.max.apply(null, numgrade);
-    var indicator =  [
-        { name: 'เกษตรกรรม การป่าไม้ และการประมง', max: maxval},
-        { name: 'การทำเหมืองแร่และเหมืองหิน', max: maxval},
-        { name: 'การผลิต', max: maxval},
-        { name: 'ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ', max: maxval},
-        { name: 'การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล', max: maxval},
-        { name: 'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์', max: maxval},
-        { name: 'การขนส่งและสถานที่เก็บสินค้า', max: maxval},
-        { name: 'ที่พักแรมและบริการด้านอาหาร', max: maxval},
-        { name: 'ข้อมูลข่าวสารและการสื่อสาร', max: maxval},
-        { name: 'กิจกรรมทางการเงินและการประกันภัย', max: maxval},
-        { name: 'กิจกรรมอสังหาริมทรัพย์', max: maxval},
-        { name: 'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค', max: maxval},
-        { name: 'กิจกรรมการบริหารและการบริการสนับสนุน', max: 10},
-        { name: 'การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ', max: maxval},
-        { name: 'การศึกษา', max: maxval},
-        { name: 'กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์', max: maxval},
-        { name: 'ศิลปะ ความบันเทิง และนันทนาการ', max: maxval},
-        { name: 'กิจกรรมบริการด้านอื่นๆ', max: maxval},
-        { name: 'กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน', max: maxval},
-        { name: 'กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก', max: maxval}
+    var indicator =  [];
+    // var indicator =  [
+    //     { name: 'เกษตรกรรม การป่าไม้ และการประมง', max: maxval},
+    //     { name: 'การทำเหมืองแร่และเหมืองหิน', max: maxval},
+    //     { name: 'การผลิต', max: maxval},
+    //     { name: 'ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ', max: maxval},
+    //     { name: 'การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล', max: maxval},
+    //     { name: 'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์', max: maxval},
+    //     { name: 'การขนส่งและสถานที่เก็บสินค้า', max: maxval},
+    //     { name: 'ที่พักแรมและบริการด้านอาหาร', max: maxval},
+    //     { name: 'ข้อมูลข่าวสารและการสื่อสาร', max: maxval},
+    //     { name: 'กิจกรรมทางการเงินและการประกันภัย', max: maxval},
+    //     { name: 'กิจกรรมอสังหาริมทรัพย์', max: maxval},
+    //     { name: 'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค', max: maxval},
+    //     { name: 'กิจกรรมการบริหารและการบริการสนับสนุน', max: 10},
+    //     { name: 'การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ', max: maxval},
+    //     { name: 'การศึกษา', max: maxval},
+    //     { name: 'กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์', max: maxval},
+    //     { name: 'ศิลปะ ความบันเทิง และนันทนาการ', max: maxval},
+    //     { name: 'กิจกรรมบริการด้านอื่นๆ', max: maxval},
+    //     { name: 'กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน', max: maxval},
+    //     { name: 'กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก', max: maxval}
         
 
-    ];
+    // ];
+
+    data.isics.forEach(function (isic,index) {
+        indicator[index] = {
+            name: isic.name,
+            max: maxval
+        };
+    });
 
     var color = [ '#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622','#bda29a', '#6e7074', '#546570','#c4ccd3'];
     genRadarByIsic('radar',indicator,color,datagradebysector,gradedata,'gradebyisic');
 }
 
 function callGenBarByIsic(data){
-    var gradedata = []
+    var gradedata = [];
+    var xaxis = [];
     data.grades.forEach(function (grade,index) {
         var isicarray = [];
-        var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
-        var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
-        var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
-        var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
-        var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
-        var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
-        var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
-        var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
-        var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
-        var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
-        var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
-        var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
-        var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
-        var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
-        var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
-        var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
-        var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
-        var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
-        var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
-        var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
 
-        isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
-        ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
-        ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
+        data.isics.forEach(function (isic,index) {
+            var check = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == grade.name); 
+            isicarray.push(check.length);
+        });
+
+        // var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
+        // var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
+        // var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
+        // var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
+        // var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
+        // var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
+        // var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
+        // var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
+        // var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
+        // var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
+        // var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
+        // var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
+        // var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
+        // var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
+        // var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
+        // var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
+        // var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
+        // var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
+        // var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
+        // var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
+
+        // isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
+        // ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
+        // ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
 
         var tmp = {name: grade.name, type: 'bar', stack: 'single', data: isicarray};
         gradedata.push(tmp);
   
     });
 
-    var xaxis = ['เกษตรกรรม การป่าไม้ และการประมง','การทำเหมืองแร่และเหมืองหิน','การผลิต','ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ','การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล',
-'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์','การขนส่งและสถานที่เก็บสินค้า','ที่พักแรมและบริการด้านอาหาร','ข้อมูลข่าวสารและการสื่อสาร','กิจกรรมทางการเงินและการประกันภัย','กิจกรรมอสังหาริมทรัพย์',
-'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
-'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
-
+//     var xaxis = ['เกษตรกรรม การป่าไม้ และการประมง','การทำเหมืองแร่และเหมืองหิน','การผลิต','ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ','การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล',
+// 'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์','การขนส่งและสถานที่เก็บสินค้า','ที่พักแรมและบริการด้านอาหาร','ข้อมูลข่าวสารและการสื่อสาร','กิจกรรมทางการเงินและการประกันภัย','กิจกรรมอสังหาริมทรัพย์',
+// 'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
+// 'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
+data.isics.forEach(function (isic,index) {
+    xaxis.push(isic.name);
+});
     genBar(xaxis ,gradedata , 'gradebyisic');
 }
 
 function callGenPolarStackByIsic(data){
-    var gradedata = []
+    var gradedata = [];
+    var xaxis = [];
     data.grades.forEach(function (grade,index) {
         var isicarray = [];
-        var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
-        var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
-        var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
-        var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
-        var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
-        var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
-        var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
-        var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
-        var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
-        var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
-        var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
-        var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
-        var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
-        var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
-        var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
-        var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
-        var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
-        var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
-        var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
-        var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
+        data.isics.forEach(function (isic,index) {
+            var check = data.projectgrades.filter(x => x.isiccode == isic.id && x.grade == grade.name); 
+            isicarray.push(check.length);
+        });
+        // var isic1 = data.projectgrades.filter(x => x.isiccode == 1 && x.grade == grade.name); 
+        // var isic2 = data.projectgrades.filter(x => x.isiccode == 2 && x.grade == grade.name); 
+        // var isic3 = data.projectgrades.filter(x => x.isiccode == 3 && x.grade == grade.name); 
+        // var isic4 = data.projectgrades.filter(x => x.isiccode == 4 && x.grade == grade.name); 
+        // var isic5 = data.projectgrades.filter(x => x.isiccode == 5 && x.grade == grade.name); 
+        // var isic6 = data.projectgrades.filter(x => x.isiccode == 6 && x.grade == grade.name); 
+        // var isic7 = data.projectgrades.filter(x => x.isiccode == 7 && x.grade == grade.name); 
+        // var isic8 = data.projectgrades.filter(x => x.isiccode == 8 && x.grade == grade.name); 
+        // var isic9 = data.projectgrades.filter(x => x.isiccode == 9 && x.grade == grade.name); 
+        // var isic10 = data.projectgrades.filter(x => x.isiccode == 10 && x.grade == grade.name); 
+        // var isic11 = data.projectgrades.filter(x => x.isiccode == 11 && x.grade == grade.name); 
+        // var isic12 = data.projectgrades.filter(x => x.isiccode == 12 && x.grade == grade.name); 
+        // var isic13 = data.projectgrades.filter(x => x.isiccode == 13 && x.grade == grade.name); 
+        // var isic14 = data.projectgrades.filter(x => x.isiccode == 14 && x.grade == grade.name);
+        // var isic15 = data.projectgrades.filter(x => x.isiccode == 15 && x.grade == grade.name);
+        // var isic16 = data.projectgrades.filter(x => x.isiccode == 16 && x.grade == grade.name);
+        // var isic17 = data.projectgrades.filter(x => x.isiccode == 17 && x.grade == grade.name);
+        // var isic18 = data.projectgrades.filter(x => x.isiccode == 18 && x.grade == grade.name);
+        // var isic19 = data.projectgrades.filter(x => x.isiccode == 19 && x.grade == grade.name);
+        // var isic20 = data.projectgrades.filter(x => x.isiccode == 20 && x.grade == grade.name);
 
-        isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
-        ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
-        ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
+        // isicarray = [isic1.length,isic2.length,isic3.length,isic4.length,isic5.length,isic6.length
+        // ,isic7.length,isic8.length,isic9.length,isic10.length,isic11.length,isic12.length,isic13.length
+        // ,isic14.length,isic15.length,isic16.length,isic17.length,isic18.length,isic19.length,isic20.length];
 
         var tmp = {name: grade.name, type: 'bar', stack: 'a', data: isicarray,coordinateSystem: 'polar',emphasis: { focus: 'series'}};
         gradedata.push(tmp);
   
     });
-
-    var xaxis = ['เกษตรกรรม การป่าไม้ และการประมง','การทำเหมืองแร่และเหมืองหิน','การผลิต','ไฟฟ้า ก๊าซ ไอน้ำ และระบบปรับอากาศ','การจัดหาน้ำ การจัดการ และการบำบัดน้ำเสีย ของเสีย และสิ่งปฏิกูล',
-'การขายส่งและการขายปลีก การซ่อมยานยนต์และจักรยานยนต์','การขนส่งและสถานที่เก็บสินค้า','ที่พักแรมและบริการด้านอาหาร','ข้อมูลข่าวสารและการสื่อสาร','กิจกรรมทางการเงินและการประกันภัย','กิจกรรมอสังหาริมทรัพย์',
-'กิจกรรมทางวิชาชีพ วิทยาศาสตร์ และเทคนิค','กิจกรรมการบริหารและการบริการสนับสนุน','การบริหารราชการ การป้องกันประเทศ และการประกันสังคมภาคบังคับ','การศึกษา','กิจกรรมด้านสุขภาพและงานสังคมสงเคราะห์',
-'ศิลปะ ความบันเทิง และนันทนาการ','กิจกรรมบริการด้านอื่นๆ','กิจกรรมการจ้างงานในครัวเรือนส่วนบุคคล กิจกรรมการผลิตสินค้าและบริการที่ทำขึ้นเอง\nเพื่อใช้ในครัวเรือน ซึ่งไม่สามารถจำแนกกิจกรรมได้อย่างชัดเจน','กิจกรรมขององค์การระหว่างประเทศและภาคีสมาชิก']
-
+    data.isics.forEach(function (isic,index) {
+        xaxis.push(isic.name);
+    });
     genPolarStack(xaxis ,gradedata , 'gradebyisic');
 }
 

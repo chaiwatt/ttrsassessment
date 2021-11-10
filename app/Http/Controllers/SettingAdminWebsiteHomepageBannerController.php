@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\HeaderText;
+use App\Model\GeneralInfo;
 use Illuminate\Http\Request;
 use App\Http\Requests\HomePageBannerRequest;
 
@@ -10,7 +11,8 @@ class SettingAdminWebsiteHomepageBannerController extends Controller
 {
     public function Edit(){
         $headertext = HeaderText::first();
-        return view('setting.admin.website.homepage.banner.edit')->withHeadertext($headertext);
+        $generalinfos = GeneralInfo::first();
+        return view('setting.admin.website.homepage.banner.edit')->withHeadertext($headertext)->withGeneralinfos($generalinfos);
 
         // return view('setting.admin.website.layout.index')->withLayoutstyles($layoutstyles)
         // ->withWebsitelayouts($websitelayouts)
@@ -32,6 +34,9 @@ class SettingAdminWebsiteHomepageBannerController extends Controller
             'detaileng' => $request->detaileng,
             'imgbanner' => $filelocation,
             'youtube' => $request->youtube
+        ]);
+        GeneralInfo::first()->update([
+            'showbanner' => $request->showbanner
         ]);
 
         return redirect()->route('setting.admin.website.homepage.banner')->withSuccess('แก้ไขสำเร็จ');

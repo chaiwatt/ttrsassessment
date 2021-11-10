@@ -155,6 +155,14 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label>แสดงจำนวนโครงการ</label>
+                                            <select name="shownumproject" id="shownumproject" placeholder="แสดงจำนวนโครงการ" class="form-control form-control-select2">
+                                                    <option value="1" @if ($homepageindustrygroup->shownumproject == 1) selected @endif >แสดง</option>
+                                                    <option value="2" @if ($homepageindustrygroup->shownumproject == 2) selected @endif >ซ่อน</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
                                             <label>สถานะการแสดงหน้าแรก</label>
                                             <select name="status" id="status" placeholder="สถานะการแสดง" class="form-control form-control-select2">
                                                     <option value="0" @if ($homepagesection->show == 0) selected @endif >ซ่อน</option>
@@ -182,7 +190,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
     <script type="text/javascript">
         $("#file").on('change', function() {

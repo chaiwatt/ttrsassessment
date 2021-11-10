@@ -9,6 +9,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.educationlevel')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.educationlevel')?'active':''}}">ระดับการศึกษา</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businesstype')?'active':''}}">ประเภทธุรกิจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.industrygroup')?'active':''}}">กลุ่มอุตสาหกรรม</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.isic')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.isic')?'active':''}}">ISIC</a></li>
                
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businessplanstatus')?'active':''}}">สถานะโครงการ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.popup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.popup')?'active':''}}">ข้อความ Popup</a></li>

@@ -364,6 +364,7 @@
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.educationlevel')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.educationlevel')?'active':''}}">ระดับการศึกษา</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businesstype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businesstype')?'active':''}}">ประเภทธุรกิจ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.industrygroup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.industrygroup')?'active':''}}">กลุ่มอุตสาหกรรม</a></li>
+                <li class="nav-item"><a href="{{route('setting.admin.dashboard.isic')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.isic')?'active':''}}">ISIC</a></li>
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.dashboard.registeredcapitaltype')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.registeredcapitaltype')?'active':''}}">การจดทะเบียน</a></li> --}}
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.businessplanstatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.businessplanstatus')?'active':''}}">สถานะโครงการ</a></li>
                 <li class="nav-item"><a href="{{route('setting.admin.dashboard.popup')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.dashboard.popup')?'active':''}}">ข้อความ Popup</a></li>
@@ -376,13 +377,6 @@
         <li class="nav-item nav-item-submenu {{starts_with(Route::currentRouteName(),'setting.admin.website')?'nav-item-expanded':''}}">
             <a href="#" class="nav-link"><span>เว็บไซต์</span></a>
             <ul class="nav nav-group-sub" data-submenu-title="เว็บไซต์">
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.pagestatus')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagestatus')?'active':''}}">สถานะเพจ</a></li>	 --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.pagecategory.create')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.pagecategory')?'active':''}}">หมวดหมู่เพจ</a></li> --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.faqcategory')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faqcategory')?'active':''}}">หมวดหมู่คำถามที่พบบ่อย</a></li> --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.faq')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.faq')?'active':''}}">คำถามที่พบบ่อย</a></li> --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.tag')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.tag')?'active':''}}">ป้ายกำกับ</a></li>		              --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.slide')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.slide')?'active':''}}">ภาพสไลด์</a></li>		              --}}
-                {{-- <li class="nav-item"><a href="{{route('setting.admin.website.introsection')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.introsection')?'active':''}}">Intro section</a></li>		              --}}
                 <li class="nav-item"><a href="{{route('setting.admin.website.page')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.page')?'active':''}}">หน้าบทความ</a></li>		             
                 <li class="nav-item"><a href="{{route('setting.admin.website.webpage')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.webpage')?'active':''}}">หน้าเพจ</a></li>		             
                 {{-- <li class="nav-item"><a href="{{route('setting.admin.website.announce')}}" class="nav-link {{starts_with(Route::currentRouteName(),'setting.admin.website.announce')?'active':''}}">ประกาศ</a></li>	 --}}

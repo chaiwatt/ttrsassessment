@@ -216,7 +216,7 @@
                                 <div class="col-md-6">   
                                     <div class="form-group">
                                         <label>โทรสาร</label>
-                                        <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg">
+                                        <input type="text"  name="fax" value="{{$company->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathfax">
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-6">   

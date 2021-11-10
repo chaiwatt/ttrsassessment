@@ -735,7 +735,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script> --}}
 <script src="{{asset('assets/dashboard/js/plugins/forms/wizards/steps.min.js')}}"></script>
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/fulltbpevhelper.js?v=1')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
 
 
 

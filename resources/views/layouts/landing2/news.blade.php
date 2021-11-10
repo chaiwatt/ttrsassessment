@@ -378,6 +378,9 @@
                 <div class="row">
                     <div class="col-lg-8 pr-35 md-pr-15">
                         <div class="row">
+                            @if ($pages->count() == 0)
+                                ไม่พบผลการค้นหา
+                            @endif
                             @foreach ($pages as $page)
                             <div class="col-lg-12 mb-50">
                                 <div class="blog-item" >
@@ -427,12 +430,14 @@
                     </div>
                     <div class="col-lg-4 col-md-12 order-last">
                         <div class="widget-area">
-                            {{-- <div class="search-widget mb-50">
-                                <div class="search-wrap">
-                                    <input type="search" placeholder="ค้นหา..." name="s" class="search-input" value="">
-                                    <button type="submit" value="Search"><i class="flaticon-search"></i></button>
-                                </div>
-                            </div> --}}
+                            <div class="search-widget mb-50">
+                                <form action="{{ route('landing.searchnews') }}" method="GET">
+                                    <div class="search-wrap">
+                                        <input type="search" placeholder="ค้นหา..." name="search" class="search-input" value="">
+                                        <button type="submit" value="ค้นหา"><i class="flaticon-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="recent-posts mb-50">
                                 <div class="widget-title">
                                     <h3 class="title">@if (Config::get('app.locale') == 'th')

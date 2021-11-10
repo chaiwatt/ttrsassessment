@@ -100,7 +100,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>โทรสาร<span class="text-danger">*</span></label>
-                                            <input type="text" name="contactfax" id="contactfax" value="{{$evaluationresult->contactfax ?? $generalinfo->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg required" readonly>
+                                            <input type="text" name="contactfax" id="contactfax" value="{{$evaluationresult->contactfax ?? $generalinfo->fax}}"  placeholder="โทรสาร" class="form-control form-control-lg numeralformathfax required" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

@@ -74,6 +74,13 @@
                                             <label>Youtube</label>
                                             <input type="text"  name="youtube" value="{{$headertext->youtube}}"  placeholder="ลิงก์ Youtube" class="form-control form-control-lg" >
                                         </div>
+                                        <div class="form-group">
+                                            <label>สถานะการแสดงหน้าแรก</label>
+                                            <select name="showbanner" id="showbanner" placeholder="สถานะการแสดง" class="form-control form-control-select2">
+                                                    <option value="0" @if ($generalinfos->showbanner == 0) selected @endif >ซ่อน</option>
+                                                    <option value="1" @if ($generalinfos->showbanner == 1) selected @endif >แสดง</option>
+                                            </select>
+                                        </div>
 										<div class="form-group">
 											<label>รูป Banner (ไฟล์ png ขนาด 2084x2084px ความละเอียด 300px/inch)<span class="text-danger">*</span></label>
 											<div class="input-group">													
@@ -109,7 +116,7 @@
     <!-- /content area -->
 @endsection
 @section('pageScript')
-<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=2')}}"></script>
+<script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
     <script type="text/javascript">
         $("#file").on('change', function() {
             $("#filename").val(this.value);

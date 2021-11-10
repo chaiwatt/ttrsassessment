@@ -98,26 +98,30 @@ class ProfileController extends Controller
 
     public function ReOrderOfficer(Request $request){
         $authid = Auth::user()->id;
-        // dd($request->order);
+        //  dd($request->order);
    
 
-              ExpertField::where('user_id',$authid)->delete();
+        // ExpertField::where('user_id',$authid)->delete();
         foreach($request->order as $key => $item){
 
-            $arr = explode("-",$item);
+            // $arr = explode("-",$item);
             // preg_match_all("/[[^]]*]/", $arr[2], $matches);
             // var_dump($matches[0]);
-            $temp = str_replace("[","",$arr[2]);
-            $temp = str_replace("]","",$temp);
+            // $temp = str_replace("[","",$arr[2]);
+            // $temp = str_replace("]","",$temp);
             //  echo( $authid  . ' ' . $arr[0] . ' ' . $arr[1]   . ' ' . $temp  . ' ' .($key+1).  '<br>');
             // ExpertField::where('user_id',$authid)->where('order',$arr[0])->where('id',$arr[1])->update([
             //     'order' => $key+1
             // ]);
-            $new = new ExpertField();
-            $new->user_id = $authid;
-            $new->order = $key+1;
-            $new->detail = @$temp;
-            $new->save();
+            // $new = new ExpertField();
+            // $new->user_id = $authid;
+            // $new->order = $key+1;
+            // $new->detail = @$item;
+            // $new->save();
+            ExpertField::find($item)->update([
+                'order' => $key+1
+            ]);
+
         }
         // dd();
 

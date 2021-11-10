@@ -37,7 +37,8 @@ class SettingAdminWebsiteHomepageIndustryugroupController extends Controller
             'subtitleth' => $request->subtitleth,
             'subtitleeng' => $request->subtitleeng,
             'picture' => $filelocation,
-            'url' => $request->url
+            'url' => $request->url,
+            'shownumproject' => $request->shownumproject
         ]);
 
 

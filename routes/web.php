@@ -30,6 +30,7 @@ Route::get('contact', 'HomeController@Contact')->name('landing.contact');
 Route::get('policy', 'HomeController@Policy')->name('landing.policy');
 Route::get('pillars', 'HomeController@Pillars')->name('landing.pillars');
 Route::get('news', 'HomeController@News')->name('landing.news');
+Route::get('searchnews', 'HomeController@SearchNews')->name('landing.searchnews');
 Route::get('announce', 'HomeController@announce')->name('landing.announce');
 Route::get('announcenews/{slug}', 'HomeController@announcenews')->name('landing.announcenews');
 Route::post('showannounce', 'HomeController@showannounce')->name('landing.showannounce');
@@ -1012,6 +1013,14 @@ Route::group(['middleware' => 'auth'], function(){
                     Route::post('editsave/{id}','SettingAdminDashboardIndustryGroupController@EditSave')->name('setting.admin.dashboard.industrygroup.editsave'); 
                     Route::get('delete/{id}','SettingAdminDashboardIndustryGroupController@Delete')->name('setting.admin.dashboard.industrygroup.delete'); 
                 });
+                Route::group(['prefix' => 'isic'], function(){
+                    Route::get('','SettingAdminDashboardIsicController@Index')->name('setting.admin.dashboard.isic');           
+                    Route::get('create','SettingAdminDashboardIsicController@Create')->name('setting.admin.dashboard.isic.create'); 
+                    Route::post('createsave','SettingAdminDashboardIsicController@CreateSave')->name('setting.admin.dashboard.isic.createsave'); 
+                    Route::get('edit/{id}','SettingAdminDashboardIsicController@Edit')->name('setting.admin.dashboard.isic.edit'); 
+                    Route::post('editsave/{id}','SettingAdminDashboardIsicController@EditSave')->name('setting.admin.dashboard.isic.editsave'); 
+                    Route::get('delete/{id}','SettingAdminDashboardIsicController@Delete')->name('setting.admin.dashboard.isic.delete'); 
+                });
                 Route::group(['prefix' => 'registeredcapitaltype'], function(){
                     Route::get('','SettingAdminDashboardRegisteredCapitalTypeController@Index')->name('setting.admin.dashboard.registeredcapitaltype');           
                     Route::get('create','SettingAdminDashboardRegisteredCapitalTypeController@Create')->name('setting.admin.dashboard.registeredcapitaltype.create'); 
@@ -1340,6 +1349,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'profile'], function(){
             Route::get('edit/{userid}','SettingProfileController@Edit')->name('setting.profile.edit'); 
             Route::post('editsave/{userid}','SettingProfileController@EditSave')->name('setting.profile.editsave'); 
+            Route::post('savechangepassword','SettingProfileController@SaveChangePassword')->name('setting.profile.savechangepassword'); 
             Route::group(['prefix' => 'user'], function(){
                 Route::get('edit/{userid}','SettingProfileUserController@Edit')->name('setting.profile.user.edit'); 
                 Route::post('editsave/{userid}','SettingProfileUserController@EditSave')->name('setting.profile.user.editsave'); 

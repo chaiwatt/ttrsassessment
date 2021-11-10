@@ -370,4 +370,11 @@ class SettingProfileController extends Controller
         }
         return;
     }
+    public function SaveChangePassword(Request $request){
+        
+        Auth::user()->update([
+            'password' => Hash::make($request->pass)
+        ]);
+        return;
+    }
 }
