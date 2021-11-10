@@ -74,7 +74,7 @@ class RegisterController extends Controller
 
     public function notifyadmin($user,$position){
         $admin = User::where('user_type_id',5)->first();
-        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . 'โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
+        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $user->id;
@@ -91,7 +91,7 @@ class RegisterController extends Controller
     
 
         $admin = User::where('user_type_id',6)->first();
-        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . 'โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
+        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $user->id;
@@ -107,7 +107,7 @@ class RegisterController extends Controller
         EmailBox::send($admin->email,'','TTRS: ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'เรียน คุณ'.$admin->name .' '.$admin->lastname.' <br><br> มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position.' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>คลิกที่นี่</a><br><br>ด้วยความนับถือ<br>TTRS' . EmailBox::emailSignature());
     
         $admin = User::where('user_type_id',0)->first();
-        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . 'โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
+        $messagebox = Message::sendMessage(' ผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position,'มีผู้สมัครใหม่ (คุณ'.$user->name .' '.$user->lastname.') ตำแหน่ง'.$position . ' โปรดตรวจสอบ <a class="btn btn-sm bg-success" href='.route('setting.admin.user').'>ดำเนินการ</a>',$user->id,$admin->id);
 
         $alertmessage = new AlertMessage();
         $alertmessage->user_id = $user->id;
