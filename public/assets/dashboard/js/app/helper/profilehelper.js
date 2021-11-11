@@ -105,39 +105,7 @@ $(document).on("click",".deleteexperteducationclass",function(e){
     $("."+$(this).data('id')).remove();
 }); 
 
-$(document).on("change","#file",function(e){
-    var file = this.files[0];
-    var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
-    var validExtensions = ["jpg","pdf","jpeg","gif","png","bmp"];
-    if(!validExtensions.includes(fextension)){
-        Swal.fire({
-            title: 'ผิดพลาด',
-            text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
-            });
-        this.value = "";
-        $this.files[0].val(''); 
-        $('#filename').val('');
-        return false;
-    }
 
-    if (this.files[0].size/1024/1024*1000 > 2048 ){
-        Swal.fire({
-            title: 'ผิดพลาด',
-            text: 'ไฟล์ขนาดมากกว่า 2 MB!',
-            });
-        this.value = "";
-        $this.files[0].val(''); 
-        $('#filename').val('');
-        return ;
-    }
-    if (this.files[0].name.length > 70 ){
-        Swal.fire({
-            title: 'ผิดพลาด',
-            text: 'ชื่อไฟล์ยาวมากกว่า 70 ตัวอักษร',
-            });
-        return ;
-    }
-}); 
 
 $(document).on("click",".messagelink",function(e){
     $(this).removeClass("unread")

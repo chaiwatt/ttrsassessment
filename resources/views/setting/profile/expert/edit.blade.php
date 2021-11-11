@@ -1,6 +1,22 @@
 @extends('layouts.dashboard.main')
 @section('pageCss')
-
+<link href="{{asset('assets/dashboard/js/plugins/cropper/cropper.css')}}" rel="stylesheet" type="text/css">
+<style>
+	img {
+        display: block;
+        max-width: 100%;
+      }
+      .preview {
+        overflow: hidden;
+        width: 160px; 
+        height: 160px;
+        margin: 10px;
+        border: 1px solid red;
+      }
+      .modal-lg{
+        max-width: 1000px !important;
+      }
+</style>
 @stop
 
 @section('content')
@@ -233,6 +249,35 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="modal fade" id="uploadimagemodal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+			   <div class="modal-content">
+				  <div class="modal-header">
+					 <h5 class="modal-title" id="modalLabel">รูป Profile</h5>
+					 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					 <span aria-hidden="true">×</span>
+					 </button>
+				  </div>
+				  <div class="modal-body">
+					 <div class="img-container">
+						<div class="row">
+						   <div class="col-md-8">
+							  <img id="image" src="">
+						   </div>
+						   <div class="col-md-4">
+							  <div class="preview"></div>
+						   </div>
+						</div>
+					 </div>
+				  </div>
+				  <div class="modal-footer">
+					 <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+					 <button type="button" class="btn btn-primary" id="crop">บันทึก</button>
+				  </div>
+			   </div>
+			</div>
+		 </div>
 
 	<!-- Cover area -->
 	<div class="page-header page-header-light">
@@ -654,17 +699,17 @@
 											</div>
 											<div class="col-md-12">  
 												<div class="form-group">
-													<label>รูป Profile (ขนาด 500x500) พิกเซล</label>
+													<label>รูป Profile (ขนาด 300x300) พิกเซล</label>
 													<div class="input-group">													
-														<input type="text" id="filename" name="filename" class="form-control border-right-0" placeholder="โลโก้"  >
-														<span class="input-group-append">
+														{{-- <input type="text" id="filename" name="filename" class="form-control border-right-0" placeholder="โลโก้"  > --}}
+														{{-- <span class="input-group-append"> --}}
 															<button class="btn bg-info" type="button" onclick="document.getElementById('file').click();">อัปโหลดรูป</button>																																						
-														</span>
+														{{-- </span> --}}
 													</div>
 													<input type="file" style="display:none;" id="file" name="picture" accept="image/*"/>
 													@if (!Empty($user->company->logo))
 													<br>
-														<img src="{{asset($user->company->logo)}}" width="300" height="300" alt="">
+														<img  id="profileimage" src="{{asset($user->company->logo)}}" width="300" height="300" alt="">
 													@endif
 												</div>
 											</div>
@@ -687,8 +732,9 @@
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/demo_pages/form_checkboxes_radios.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js?v=4')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/expertprofilehelper.js?v=5')}}"></script>
 <script src="{{asset('assets/dashboard/js/app/helper/inputformat.js?v=3')}}"></script>
+<script src="{{asset('assets/dashboard/js/plugins/cropper/cropper.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/tablednd/jquery.tablednd.js')}}"></script>
     <script>
     	var route = {
@@ -696,6 +742,90 @@
 			token: $('meta[name="csrf-token"]').attr('content'),
         };
 
+		var $modal = $('#uploadimagemodal');
+	var image = document.getElementById('image');
+	$(document).on("change","#file",function(e){
+		var file = this.files[0];
+		// console.log(file);
+		var fextension = file.name.substring(file.name.lastIndexOf('.')+1);
+		var validExtensions = ["jpg","jpeg","png"];
+		if(!validExtensions.includes(fextension)){
+			Swal.fire({
+				title: 'ผิดพลาด',
+				text: 'รูปแบบไฟล์ไม่ถูกต้อง!',
+				});
+			this.value = "";
+			$this.files[0].val(''); 
+			// $('#filename').val('');
+			return false;
+		}
+
+		if (this.files[0].size/1024/1024*1000 > 2048 ){
+			Swal.fire({
+				title: 'ผิดพลาด',
+				text: 'ไฟล์ขนาดมากกว่า 2 MB!',
+				});
+			this.value = "";
+			$this.files[0].val(''); 
+			// $('#filename').val('');
+			return ;
+		}
+		var done = function (url) {
+			// console.log(url);
+				image.src = url;
+				$modal.modal('show');
+			};
+		var reader;
+		if (URL) {
+			done(URL.createObjectURL(file));
+		} else if (FileReader) {
+			reader = new FileReader();
+			reader.onload = function (e) {
+				done(reader.result);
+			};
+			reader.readAsDataURL(file);
+		}
+	}); 
+
+	$modal.on('shown.bs.modal', function () {
+		cropper = new Cropper(image, {
+			aspectRatio: 1,
+			viewMode: 3,
+			preview: '.preview'
+		});
+	}).on('hidden.bs.modal', function () {
+		cropper.destroy();
+		cropper = null;
+	});
+	$(document).on("click","#crop",function(e){
+		canvas = cropper.getCroppedCanvas({
+			width: 300,
+			height: 300,
+		});
+		canvas.toBlob(function(blob) {
+			url = URL.createObjectURL(blob);
+			var reader = new FileReader();
+			reader.readAsDataURL(blob); 
+			reader.onloadend = function() {
+				var base64data = reader.result; 
+				// console.log(route.token);
+				$.ajax({
+					type: "POST",
+					dataType: "json",
+					url: `${route.url}/setting/profile/user/uploadprofileimage`,
+					data: {
+						'_token': route.token, 
+						'image': base64data
+					},
+					success: function(data){
+						$modal.modal('hide');
+						$("#profileimage").attr("src",route.url +'/'+ data.logo);
+					}
+				});
+				
+			}
+		});
+	});
 
 		$( document ).ready(function() {
 			var orgrow = [];

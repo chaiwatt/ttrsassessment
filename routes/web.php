@@ -1353,6 +1353,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::group(['prefix' => 'user'], function(){
                 Route::get('edit/{userid}','SettingProfileUserController@Edit')->name('setting.profile.user.edit'); 
                 Route::post('editsave/{userid}','SettingProfileUserController@EditSave')->name('setting.profile.user.editsave'); 
+                Route::post('uploadprofileimage','SettingProfileUserController@uploadProfileImage')->name('setting.profile.user.uploadprofileimage'); 
+                
             });
             Route::group(['prefix' => 'expert'], function(){
                 Route::get('edit/{userid}','SettingProfileExpertController@Edit')->name('setting.profile.expert.edit'); 

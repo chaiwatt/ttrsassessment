@@ -60,21 +60,21 @@ class SettingProfileOfficerController extends Controller
             ]);
         }
         $user = User::find($auth->id);
-        $file = $request->picture; 
-        $filelocation = $auth->company->logo;
-        if(!Empty($file)){         
-            if(!Empty($auth->company->logo)){
-                if(strpos($auth->company->logo, 'assets/dashboard/images/user.png') != false){
-                    @unlink($auth->company->logo);
-                }
-            }
-            $name = $file->getClientOriginalName();
-            $file = $request->picture;
-            $img = Image::make($file);  
-            $fname=str_random(10).".".$file->getClientOriginalExtension();
-            $filelocation = "storage/uploads/company/".$fname;
-            Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
-        }
+        // $file = $request->picture; 
+        // $filelocation = $auth->company->logo;
+        // if(!Empty($file)){         
+        //     if(!Empty($auth->company->logo)){
+        //         if(strpos($auth->company->logo, 'assets/dashboard/images/user.png') != false){
+        //             @unlink($auth->company->logo);
+        //         }
+        //     }
+        //     $name = $file->getClientOriginalName();
+        //     $file = $request->picture;
+        //     $img = Image::make($file);  
+        //     $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //     $filelocation = "storage/uploads/company/".$fname;
+        //     Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+        // }
         if(Empty($request->sameaddress)){
             $user->update([
                 'prefix_id' => $request->prefix,
@@ -82,7 +82,7 @@ class SettingProfileOfficerController extends Controller
                 'name' => $request->name,
                 'hid' => $request->hid,
                 'lastname' => $request->lastname,
-                'picture' => $filelocation,
+                // 'picture' => $filelocation,
                 'address' => $request->address,
                 'province_id' => $request->province,
                 'amphur_id' => $request->amphur,
@@ -106,7 +106,7 @@ class SettingProfileOfficerController extends Controller
                 'name' => $request->name,
                 'hid' => $request->hid,
                 'lastname' => $request->lastname,
-                'picture' => $filelocation,
+                // 'picture' => $filelocation,
                 'address' => $request->address,
                 'province_id' => $request->province,
                 'amphur_id' => $request->amphur,
@@ -136,7 +136,7 @@ class SettingProfileOfficerController extends Controller
         ]);
         Company::where('user_id',$auth->id)->first()->update([
             'saveprofile' => 1,
-            'logo' => $filelocation,
+            // 'logo' => $filelocation,
         ]);
         CreateUserLog::createLog('แก้ไขข้อมูลProfile');
         return redirect()->back()->withSuccess('แก้ไขข้อมูลส่วนตัวสำเร็จ'); 

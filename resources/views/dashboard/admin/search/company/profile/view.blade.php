@@ -609,7 +609,7 @@
 @endsection
 @section('pageScript')
 <script type="module" src="{{asset('assets/dashboard/js/app/helper/locationhelper.js')}}"></script>
-<script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js?v=1')}}"></script>
+<script type="module" src="{{asset('assets/dashboard/js/app/helper/profilehelper.js?v=3')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signature_pad.umd.js')}}"></script>
 <script src="{{asset('assets/dashboard/js/plugins/signaturepad/signaturecontrol.js')}}"></script>
     <script>

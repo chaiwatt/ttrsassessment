@@ -41,7 +41,7 @@ class ProjectFlowsTableSeeder extends Seeder
                 'duration' => 6
             ],
             [
-                'name' => ' โครงการประเมินแล้วเสร็จสิ้น/ระบุรายละเอียด',
+                'name' => ' โครงการประเมินแล้วเสร็จสิ้น / ระบุรายละเอียด',
                 'duration' => 2
             ]
         ]);

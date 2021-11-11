@@ -86,23 +86,50 @@ class SettingProfileUserController extends Controller
                                             ->withCompanyservicetypes($companyservicetypes)
                                             ->withBusinesstypes($businesstypes);
     }
+
+    public function uploadProfileImage(Request $request){
+        $auth = Auth::user();
+        $file = $request->image; 
+        $filelocation = $auth->company->logo;
+        $folderPath = public_path() .'/storage/uploads/company/';
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $fname=str_random(10). '.png';//.$file->getClientOriginalExtension();
+        $filelocation = "storage/uploads/company/".$fname;
+ 
+        $imageFullPath = $folderPath.$fname;
+ 
+        file_put_contents($imageFullPath, $image_base64);
+ 
+        $auth->company->update([
+            'logo' => $filelocation,
+        ]);
+
+        $company = $auth->company;
+        return response()->json($company); 
+        
+    }
+
     public function EditSave(EditProfileRequest $request, $id){
         $auth = Auth::user();
-        $file = $request->picture; 
-        $filelocation = $auth->company->logo;
-        if(!Empty($file)){         
-            if(!Empty($auth->company->logo)){
-                if(strpos($auth->company->logo, 'assets\dashboard\images') !== true){
-                    @unlink($auth->company->logo);
-                }
-            }
-            $name = $file->getClientOriginalName();
-            $file = $request->picture;
-            $img = Image::make($file);  
-            $fname=str_random(10).".".$file->getClientOriginalExtension();
-            $filelocation = "storage/uploads/company/".$fname;
-            Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
-        }
+        // $file = $request->picture; 
+        // $filelocation = $auth->company->logo;
+        // if(!Empty($file)){         
+        //     if(!Empty($auth->company->logo)){
+        //         if(strpos($auth->company->logo, 'assets\dashboard\images') !== true){
+        //             @unlink($auth->company->logo);
+        //         }
+        //     }
+        //     $name = $file->getClientOriginalName();
+        //     $file = $request->picture;
+        //     $img = Image::make($file);  
+        //     $fname=str_random(10).".".$file->getClientOriginalExtension();
+        //     $filelocation = "storage/uploads/company/".$fname;
+        //     Crop::crop(true,public_path("storage/uploads/company/"),$fname,Image::make($file),500,500,1);
+        // }
         
         if($request->registeredcapital == 0 && $auth->user_group_id == 1){
             return redirect()->back()->withError('ทุนจดทะเบียนไม่ถูกต้อง');  
@@ -166,7 +193,7 @@ class SettingProfileUserController extends Controller
             'website' => $request->website,
             'fax' => $request->fax,
             'email' => $request->email,
-            'logo' => $filelocation,
+            // 'logo' => $filelocation,
             'saveprofile' => 1
         ]);
 
