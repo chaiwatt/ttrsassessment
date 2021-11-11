@@ -644,7 +644,7 @@
 				  </div>
 				  <div class="modal-footer">
 					 <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-					 <button type="button" class="btn btn-primary" id="crop">บันทึก</button>
+					 <button type="button" class="btn btn-primary" id="crop"><i class="icon-spinner spinner mr-2" id="spinicon_upload" hidden></i> บันทึก</button>
 				  </div>
 			   </div>
 			</div>
@@ -1324,23 +1324,49 @@
 			reader.onloadend = function() {
 				var base64data = reader.result; 
 				// console.log(route.token);
-				$.ajax({
-					type: "POST",
-					dataType: "json",
-					url: `${route.url}/setting/profile/user/uploadprofileimage`,
-					data: {
-						'_token': route.token, 
-						'image': base64data
-					},
-					success: function(data){
-						$modal.modal('hide');
-						$("#profileimage").attr("src",route.url +'/'+ data.logo);
-					}
-				});
-				
+				// $.ajax({
+				// 	type: "POST",
+				// 	dataType: "json",
+				// 	url: `${route.url}/setting/profile/user/uploadprofileimage`,
+				// 	data: {
+				// 		'_token': route.token, 
+				// 		'image': base64data
+				// 	},
+				// 	success: function(data){
+				// 		$modal.modal('hide');
+				// 		$("#profileimage").attr("src",route.url +'/'+ data.logo);
+				// 	}
+				// });
+				// 
+				$("#spinicon_upload").attr("hidden",false);
+				uploadProfileImage(base64data).then(data => {
+					$("#spinicon_upload").attr("hidden",true);
+					$modal.modal('hide');
+					$("#profileimage").attr("src",route.url +'/'+ data.logo);
+				}).catch(error => {});
 			}
 		});
 	});
+
+	function uploadProfileImage(image) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+              url: `${route.url}/setting/profile/user/uploadprofileimage`,
+              type: 'POST',
+              dataType: "json",
+              headers: {"X-CSRF-TOKEN":route.token},
+              data: {
+                image : image
+              },
+              success: function(data) {
+                resolve(data)
+              },
+              error: function(error) {
+                reject(error)
+              },
+            })
+          })
+      }
 
 $(".form-control-select2").select2();
 		$("#isic").select2({ dropdownCssClass: "myFont" });
